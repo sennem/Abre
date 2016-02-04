@@ -1,0 +1,360 @@
+/* Created by: Infogrid Pacific */ 
+/* Copyright 2007-2012 Infogrid Pacific Pte. Ltd. All rights reserved */
+p.cover-rw{ text-indent: 0; text-align: center; }
+.blank-page-rw p{ font-weight: normal; text-align: center; margin-top: 4em; }
+.footnotes-rw{ margin: 1em 0 1em 0; padding: 0; }
+.media-rw{ margin: 1.27em 0 1.27em 0; page-break-inside: avoid; }
+div.table-rw{ font-size: 0.9em; line-height: 1.2em; text-align: left; margin-top: 1em; margin-bottom: 1em; }
+div.table-rw h4{ font-size: 1em; margin: 0 0 0.5em 0; }
+div.table-rw p{ text-indent: 0; padding: 0 0 0.5em 0; }
+.classic-rw table{ border-collapse: collapse; font-size: 1em; line-height: 1.2em; margin-top: 0.5em; margin-bottom: 0.5em; border-top: 1px solid rgb(0,0,0); border-bottom: 1px solid rgb(0,0,0); }
+.classic-rw table th{ font-weight: bold; vertical-align: top; padding: 0.25em 0.5em 0.25em 0.5em; border-bottom: 1px solid rgb(0,0,0); }
+.classic-rw table td{ vertical-align: top; padding: 0 0.5em 0 0.5em; }
+.classic-rw table tfoot td{ font-size: 0.8em; line-height: 1em; font-style: italic; padding-top: 0.5em; border-top: 0.1pt solid rgb(0,0,0); }
+.classic-rw tfoot td p{ text-indent: 0; padding-bottom: 0.5em; }
+.modern-rw table{ border-collapse: collapse; font-family: sans-serif; font-size: 0.9em; line-height: 1.2em; margin-top: 0.5em; margin-bottom: 0.5em; border-top: 1px solid #00008b; border-bottom: 1px solid #00008b; }
+.modern-rw table th{ font-weight: bold; font-style: normal; background: #d3d3ff; border-bottom: 1pt solid white; padding: 0.2em 0.2em 0.2em 0.2em; margin: 0; }
+.modern-rw table td{ vertical-align: top; text-align: left; border-bottom: 1pt solid #d3d3ff; margin: 0; padding: 0.2em 0.2em 0.2em 0.2em; }
+.modern-rw table tfoot td{ font-size: 0.8em; line-height: 1em; font-style: italic; text-align: left; padding: 0.5em; border-top: 1px solid #00008b; }
+.modern-rw table tfoot td p{ text-indent: 0; padding-bottom: 0.5em; }
+.grid-rw table{ border-collapse: collapse; font-family: sans-serif; font-size: 0.9em; line-height: 1.2em; margin-top: 0.5em; margin-bottom: 0.5em; border: 1px solid rgb(128,128,128); }
+.grid-rw table th{ font-weight: bold; font-style: normal; vertical-align: top; padding: 0.25em 0.5em 0.25em 0.5em; border: 1px solid rgb(128,128,128); }
+.grid-rw table td{ vertical-align: top; margin: 0; padding: 0.25em 0.5em 0.25em 0.5em; border: 1px solid rgb(128,128,128); }
+.grid-rw table tfoot td{ font-size: 0.8em; line-height: 1em; font-style: italic; padding: 0.5em; border-top: 1px solid rgb(128,128,128); }
+.grid-rw table tfoot td p{ text-indent: 0; padding-bottom: 0.5em; }
+.layout-rw table{ border-collapse: collapse; margin-top: 0.5em; margin-bottom: 0.5em; }
+.layout-rw table td, .layout-rw table th{ font-size: 1.1em; line-height: 1.2em; vertical-align: top; font-weight: normal; padding: 0 0.5em 0 0; }
+.layout-rw table th + th, .layout-rw table td + td{ padding: 0 0 0 0.5em; }
+.cols-rw{ column-count: 2; column-gap: 12pt; column-fill: balance; margin: 1em 0 1em 0; }
+.col-2-rw{ column-count: 2; column-gap: 12pt; column-fill: balance; margin: 1em 0 1em 0; }
+.col-3-rw{ column-count: 3; column-gap: 12pt; column-fill: balance; margin: 1em 0 1em 0; }
+.col-4-rw{ column-count: 4; column-gap: 12pt; column-fill: balance; margin: 1em 0 1em 0; }
+.col-5-rw{ column-count: 5; column-gap: 12pt; column-fill: balance; margin: 1em 0 1em 0; }
+.col-6-rw{ column-count: 6; column-gap: 12pt; column-fill: balance; margin: 1em 0 1em 0; }
+.width-10-rw{ width: 10%; }
+.width-20-rw{ width: 20%; }
+.width-30-rw{ width: 30%; }
+.width-40-rw{ width: 40%; }
+.width-50-rw{ width: 50%; }
+.width-60-rw{ width: 60%; }
+.width-70-rw{ width: 70%; }
+.width-80-rw{ width: 80%; }
+.width-90-rw{ width: 90%; }
+.width-auto-rw .pc-rw{ width: auto; }
+.width-fixed-rw .pc-rw{ width: auto; }
+.width-fixed-rw .pc-rw img{ width: auto; }
+div.align-left-rw{ display: block; text-align: left; margin-right: auto; }
+.align-left-rw table{ margin: 0 auto 0 0; }
+.align-left-rw .pc-rw{ margin: 0 auto 0 0; }
+.align-left-rw .pc-rw img{ margin: 0 auto 0 0; }
+.align-left-rw .pc-rw object{ margin: 0 auto 0 0; }
+div.align-right-rw{ display: block; text-align:right; margin-left: auto; }
+.align-right-rw table{ margin: 0 0 0 auto; }
+.align-right-rw .pc-rw{ margin: 0 0 0 auto; }
+.align-right-rw .pc-rw img{ margin: 0 0 0 auto; }
+.align-right-rw .pc-rw object{ margin: 0 0 0 auto; }
+div.align-center-rw{ display: block; text-align:center; margin-left: auto; margin-right: auto; }
+.align-center-rw table{ margin: 0 auto 0 auto; }
+.align-center-rw .pc-rw{ margin: 0 auto 0 auto; }
+.align-center-rw .pc-rw img{ margin: 0 auto 0 auto; }
+.align-center-rw .pc-rw object{ margin: 0 auto 0 auto; }
+.pc-rw{ margin: 0; padding: 0; }
+.pc-rw img{ width: 100%; margin: 0; padding: 0; }
+.pc-rw table{ width: 100%; margin: 0; padding: 0; }
+.pc-rw p{ text-align: left; }
+div.pc-rw > :first-child{ margin-top: 0; padding-top: 0; }
+div.pc-rw > :last-child{ margin-bottom: 0; padding-top: 0; }
+div.floatgalley-left-rw{ float: left; text-align: left; margin: 0.5em 1.5em 0.5em 0 !important; padding: 0; }
+div.floatgalley-left-rw .pc img{ width: 100%; margin-bottom: 0; }
+div.floatgalley-right-rw{ float: right; text-align: left; margin: 0.5em 0 0.5em 1em !important; padding: 0; }
+div.floatgalley-right-rw .pc img{ width: 100%; margin-bottom: 0; }
+div.floatgalley-outside-rw{ float: right; }
+div.floatgalley-outside-rw img{ width: 100% !important; }
+div.floatgalley-outside-rw{ float: left; }
+div.floatgalley-inside-rw img{ width: 100% !important; }
+div.poem-normal-rw, div.poem-annotated-rw{ width: 100%; padding: 0; margin: 0 auto 0 auto; }
+div.poem-annotated-rw{ width: 100%; padding: 0 0 0 0; margin: 0 auto 0 0; }
+div.poem-normal-rw .poem-body-rw{ margin: 0 auto 1em auto !important; padding: 0; display: table; }
+div.poem-normal-rw .poem-body-rw, div.poem-annotated-rw .poem-body-rw{ margin: 0 auto 1em auto; padding: 0; display: table; }
+div.poem-normal-rw div + p, div.poem-annotated-rw div + p{ text-indent: 0 !important; margin-left: 0; }
+div.poem-normal-rw p + p, div.poem-annotated-rw p + p{ text-indent: 1.3em; margin-left: 0; }
+div.poem-normal-rw .title-block-rw{ padding: 0; margin: 0 0 1em 1em; display: block; }
+div.poem-title-block-rw{ padding: 0; margin: 0 0 1em 1em; display: block; }
+div.poem-annotated-rw .title-block-rw{ padding: 0; margin: 0 auto 1em auto; display: block; }
+div.poem-title-block-rw{ padding: 0; margin: 0 auto 1em auto; display: block; }
+div.poem-rw .title-block-rw h1{ color: black; font-family: serif; font-weight: normal; font-style: normal; font-size: 1.5em; text-align: center; padding-bottom: 0.5em; }
+div.poem-title-block-rw h1{ color: black; font-family: serif; font-weight: normal; font-style: normal; font-size: 1.5em; text-align: center; padding-bottom: 0.5em; }
+div.poem-normal-rw .title-block-rw .title-sub-rw, 
+div.poem-annotated-rw .title-block-rw .title-sub-rw{ font-family: serif; font-weight: normal; font-style: normal; text-align: center; font-size: 1.25em; padding: 0 0 1em 0; }
+div.poem-title-block-rw .title-sub-rw{ font-family: serif; font-weight: normal; font-style: normal; text-align: center; font-size: 1.25em; padding: 0 0 1em 0; text-indent: 0; }
+div.poem-normal-rw .title-block-rw .title-other-rw, 
+div.poem-annotated-rw .title-block-rw .title-other-rw{ font-family: serif; text-align: center; font-style: normal; }
+div.poem-title-block-rw .title-other-rw{ font-family: serif; text-align: center; font-style: normal; }
+div.poem-normal-rw .title-block-rw .epigraph-rw, 
+.poem-annotated-rw .title-block-rw .epigraph-rw{ font-size: 0.9em; margin: 0 auto 0 auto; padding: 0; text-indent: 0; font-style: normal; }
+div.poem-title-block-rw .epigraph-rw{ font-size: 0.9em; margin: 0 auto 0 auto; padding: 0; text-indent: 0; font-style: normal; display: table; }
+div.poem-normal-rw .title-block-rw .epigraph-rw p, 
+div.poem-annotated-rw .title-block-rw .epigraph-rw p{ text-indent: 0; }
+div.poem-title-block-rw .epigraph-rw p{ text-indent: 0; }
+div.poem-normal-rw .title-block-rw .title-num-rw, 
+div.poem-annotated-rw .title-block-rw .title-num-rw{ font-weight: bold; text-align: center; }
+div.poem-title-block-rw .title-num-rw{ font-weight: bold; text-align: center; }
+div.poem-normal-rw div.decoration-rw, div.poem-annotated-rw div.decoration-rw{ text-align: center; margin: 0 !important; padding: 0 0 0.5em 0 !important; }
+div.poem-rw .decoration-rw p{ text-align: center; }
+div.poem-rw h2, div.poem-rw h3, div.poem-rw h4, div.poem-rw h5{ font-weight: normal; font-style: normal; font-size: inherit; line-height: 1em; text-align: center; padding: 0.5em 0 0.5em 0; margin: 0; }
+div.poem-rw h2{ font-weight: normal; font-style: inherit; text-transform: uppercase; }
+div.poem-rw h3{ font-weight: normal; font-style: inherit; }
+div.poem-rw h5{ font-weight: bold; font-style: italic; }
+div.poem-rw div.stanza-rw h4{ font-weight: normal; font-style: normal; font-size: inherit; line-height: 1em; text-align: center; padding: 0em 0 1em 0 !important; margin: 0 !important; }
+div.poem-rw .poem-body-rw div.stanza-rw{ margin: 0 0 1em 0 !important; padding: 0; }
+div.stanza-rw p, div.stanza-rw p + p{ text-indent: -1.3em; margin-left: 1.3em; padding-bottom: 0; margin-bottom: 0; }
+div.stanza-rw .speaker-rw{ margin-left: -1em; }
+div.stanza-rw span.linenumber-rw{ display: block; float: left; text-align: right; margin-left: -2em; font-size: 0.9em; }
+div.poem-rw .poem-notes-rw{ display: block; margin-bottom: 0.5em; margin-top: 0.5em; padding: 6pt; }
+div.poem-rw .poem-notes-rw h2, div.poem-rw .poem-notes-rw h3{ text-align: center; font-size: 1em; line-height: 14pt; padding: 1em 0 1em 0; font-style: normal; font-weight: normal; }
+div.poem-rw .poem-notes-rw h2{ text-transform: uppercase; font-style: normal; }
+div.poem-rw .poem-notes-rw h3{ text-transform: none; font-style: normal; padding: 0.5em 0 0.5em 0; }
+div.poem-annotated-rw .poem-notes-rw .list-linenotes-rw{ margin: 1em 0 1em 0; padding: 0; }
+div.poem-rw .poem-notes-rw .list-notes-rw h3{ text-align: center; font-weight: normal; font-size: 12pt; margin: 0; padding: 0; }
+div.poem-rw .poem-notes-rw p.poem-commentary-rw{ text-indent: 0 !important; margin-left: 0 !important; }
+div.margin-rw{ margin-left: 1.3em; }
+div.stanza-rw line-left-rw p{ text-align: left; }
+div.stanza-rw line-center-rw p{ text-align: center; }
+div.stanza-rw line-right-rw p{ text-align: right; }
+span.margin-note-rw{ color: purple; font-style: italic; }
+div.list-linenotes-rw p, div.list-linenotes-rw p + p{ text-align: left !important; text-indent: 0em !important; margin-left: 2em !important; }
+div.list-linenotes-rw span.num-note-rw{ display: inline-block; width: 2em; text-align: right; margin: 0 0 0 -2.8em; padding: 0 0.5em 0 0; }
+div.CastList-rw, div.Performance-rw, div.Programme-rw, div.TitleCredits-rw, div.ClosingCredits-rw{ font-size: 0.9em; }
+div.Performance-rw .drama-title-block-rw{ margin: 0; padding: 1em 0 1em 0; }
+div.CastList-rw .drama-title-block-rw{ margin: 0; padding: 1em 0 1em 0; }
+div.Programme-rw .drama-title-block-rw{ margin: 0; padding: 1em 0 1em 0; }
+div.TitleCredits-rw .drama-title-block-rw{ margin: 0; padding: 1em 0 1em 0; }
+div.ClosingCredits-rw .drama-title-block-rw{ margin: 0; padding: 1em 0 1em 0; }
+div.list-cast-rw{ margin: 1em auto 1em auto; }
+div.list-credits-rw{ margin: 1em auto 1em auto; }
+div.list-crew-rw{ margin: 1em auto 1em auto; }
+div.Performance-rw div.list-cast-rw p + p, div.Performance-rw div.list-crew-rw p + p{ text-indent: 0 !important; margin: 0; }
+div.Performance-rw p, div.Performance-rw p + p{ text-indent: 0 !important; }
+div.Performance-rw div.list-cast-rw .character-rw{ font-weight: normal; margin: 0 0 0.25em 0; display: inline-block; width: 10em; }
+div.Performance-rw div.list-cast-rw .actor-rw{ font-weight: normal; margin: 0 0 0.25em 0; }
+div.Performance-rw div.list-cast-rw .person-rw{ font-weight: normal; font-style: italic; margin: 0 0 0.5em 0; }
+div.CastList-rw .list-cast-rw{ text-align: center; }
+div.CastList-rw p, div.CastList-rw p + p{ text-indent: 0 !important; margin: 0 0 0.25em 0; }
+div.CastList-rw div.list-cast-rw  .character-rw{ font-weight: bold; margin: 0 0 0.25em 0; }
+div.Performance-rw div.list-crew-rw .role-rw{ font-style: italic; display: inline-block; width: 10em; margin: 0 0 0.25em 0; }
+div.Drama-rw{ font-family: "Times New Roman", Serif; font-size: 0.9em; }
+.drama-title-block-rw h1{ font-size: 1.5em; font-weight: normal; text-transform: none; text-align: center; margin: 0; padding: 0.5em 0 0.5em 0; }
+div.Drama-rw .Act-rw, div.Drama-rw .Scene-rw{ margin: 0.5em 0 0.5em 0; font-family: Serif; }
+div.Drama-rw div.drama-title-block-rw h1{ font-size: 1.5em; font-weight: normal; text-transform: uppercase; text-align: center; margin: 0; padding: 0.5em 0 0.5em 0; }
+div.Drama-rw div.Act-rw .drama-title-block-rw h1{ font-size: 1.5em; font-weight: normal; text-transform: none; text-align: center; margin: 0; padding: 0.5em 0 0.5em 0; }
+div.Drama-rw div.Scene-rw .drama-title-block-rw h2{ font-weight: normal; margin: 0; padding: 0.5em 0 0.5em 0; }
+div.Drama-rw h3{ font-weight: normal; margin: 0; padding: 0; }
+div.Drama-rw p, div.Drama-rw p + p{ text-indent: -2em !important; margin: 0 0 0.5em 2em !important; }
+div.Drama-rw .Speech-rw{ padding: 0; margin: 0 0 0.5em 0; }
+div.Drama-rw .Speech-rw p{ text-indent: 0 !important; margin: 0 !important; padding: 0 !important; }
+div.Drama-rw .Speech-rw p + p{ text-indent: 0 !important; margin: 0 0 0 2em!important; padding: 0 !important; }
+div.Drama-rw span.speaker-rw{ font-weight: bold; margin: 0 0.5em 0 0; }
+div.Drama-rw p.speaker-rw{ font-weight: normal; text-align: center !important; margin: 0 0.5em 0 0; }
+.Drama-rw p.set-rw{ font-style: normal; text-indent: 0 !important; margin: 0 0 0.5em 2em; }
+div.Drama-rw p.direction-rw{ font-style: italic; text-indent: 0 !important; margin: 0 0 0.5em 2em; }
+div.Drama-rw span.direction-rw{ font-style: italic; font-weight: normal; }
+div.Drama-rw p.speaker-rw{ text-align: left; margin-left: 30%; }
+div.DramaScreen-rw{ font-family: "Lucida Sans Typewriter", "Courier New", "Courier", monospace; font-size: 0.8em; text-align: left; }
+div.DramaScreen-rw .Act-rw, div.DramaScreen-rw .Scene-rw{ border: 1px dotted red; }
+div.DramaScreen-rw .Act-rw, div.DramaScreen-rw .Scene-rw{ margin: 1em 0 1em 0; }
+div.DramaScreen-rw .Act-rw h1, div.DramaScreen-rw h1, div.DramaScreen-rw .Act-rw .drama-title-block-rw h1{ font-weight: normal !important; text-align: center !important; margin: 0 !important; padding: 1em 0 1em 0 !important; }
+div.DramaScreen-rw .Scene-rw h2, div.DramaScreen-rw h2, div.DramaScreen-rw .Scene-rw .drama-title-block-rw h2{ font-weight: normal !important; text-align: left !important; margin: 0 !important; padding: 1em 0 1em 0 !important; }
+div.DramaScreen-rw h3{ font-weight: normal !important; text-align: left !important; margin: 0 !important; padding: 1em 0 1em 0 !important; }
+div.DramaScreen-rw p, div.DramaScreen-rw p + p{ margin: 0em 10% 1em 10% !important; text-indent: 0 !important; padding: 0; }
+div.DramaScreen-rw span.speaker-rw{ display: block; float: left; font-weight: bold; margin: 0 0 0 30%; padding: 0 0 0 0; }
+div.DramaScreen-rw p.speaker-rw{ font-weight: normal; margin: 0em 0 0 30% !important; padding: 0em 0 0 0; }
+div.DramaScreen-rw p.speaker-rw + div.DramaScreen-rw p.direction-rw{ margin-bottom: 0 !important; }
+div.DramaScreen-rw p.direction-rw{ font-style: normal; font-weight: normal; margin-bottom: 0 !important; margin-left: 20% !important; }
+div.DramaScreen-rw p.set-rw{ font-style: normal; font-weight: normal; margin-left: 0 !important; margin-right: 0 !important; }
+div.DramaRadio-rw{ font-family: Arial, Sans-serif; font-size: 0.9em; text-align: left; }
+div.DramaRadio-rw .Act-rw, div.DramaRadio-rw .Scene-rw{ margin: 1em; }
+div.DramaRadio-rw .Act-rw h1, div.DramaRadio-rw div.Act-rw .drama-title-block-rw h1{ font-weight: normal; text-align: center; text-transform: uppercase; margin: 0; padding: 1em 0 1em 0; }
+div.DramaRadio-rw .Scene-rw h2, div.DramaRadio-rw .Scene-rw .drama-title-block-rw h2{ font-weight: normal; text-align: center; margin: 0; padding: 1em 0 1em 0; }
+div.DramaRadio-rw p, div.DramaRadio-rw p + p{ margin: 0 0 1em 30%; text-indent: 0 !important; }
+div.DramaRadio-rw span.speaker-rw{ display: inline-block; float: left; font-weight: normal; margin: 0 0 0 -41%; }
+div.DramaRadio-rw p.speaker-rw{ font-weight: normal; margin: 0 0 0 -41%; text-align: center; }
+div.DramaRadio-rw p.direction-rw, div.DramaRadio-rw p.set-rw{ font-style: normal; font-weight: normal; }
+div.DramaRadio-rw p.set-rw{ margin-bottom: 1em; }
+div.DramaRadio-rw span.direction-rw{ font-style: italic; }
+.list-cast-rw{ display: table; margin-left: auto !important; margin-right: auto !important; }
+.list-crew-rw{ display: table; margin-left: auto !important; margin-right: auto !important; }
+.list-credits-rw{ display: table; margin-left: auto !important; margin-right: auto !important; }
+.galley-rw{ color: rgb(0, 0, 0); font-size: 1em; font-weight: normal; letter-spacing: 0; line-height: 1.2em; margin: 0 0 0 0; orphans: 1; padding: 0 0 0 0; text-align: justify; widows: 1; word-spacing: 0; }
+p{ margin: 0 0 0 0; }
+p + p{ text-indent: 1.20em; }
+.hanging-rw p{ margin-left: 1.20em; text-indent: -1.20em; }
+.hanging-rw p + p{ margin-left: 1.20em; text-indent: -1.20em; }
+div.indent-rw{ margin: 0 0 0 1.20em; }
+p.indent-rw{ text-indent: 1.20em; }
+.alt-rw p{ font-family: sans-serif; }
+.leading-line-rw{ height: 1.20em; margin: 0 0 0 0; padding: 0 0 0 0; }
+.decoration-rw{ font-family: inherit; margin: 1.20em 0 1.20em 0; text-align: center; text-indent: 0; vertical-align: middle; }
+span.pb-rw{ display: none; }
+span.pagebreak-rw{ display: none; }
+p.bts-rw{ font-size: x-small; }
+p.btl-rw{ font-size: large; }
+p.fp-rw{ text-indent: 0; }
+.middle-rw{ text-align: center; text-indent: 0; }
+.right-rw{ text-align: right; }
+p.hang-rw{ margin-left: 1.20em; text-indent: -1.20em; }
+p.hanging-rw{ margin-left: 1.20em; text-indent: -1.20em; }
+p.attribution-rw{ font-style: italic; text-align: right; }
+p.caption-rw{ font-size: 0.90em; font-style: italic; line-height: 1.2em; margin: 0.30em 0 0.30em 0; padding: 0 0 0 0; text-indent: 0; }
+.copyright-rw{ display: block; font-size: 0.80em; font-weight: normal; line-height: 1.2em; padding: 2.00em 2.00em 0 0; text-align: left; }
+.copyright-center-rw{ display: block; font-size: 0.80em; font-weight: normal; line-height: 1.2em; padding: 2.00em 1.20em 0 1.20em; text-align: center; }
+.copyright-rw p{ margin: 0 0 0.50em 0; text-indent: 0; }
+.copyright-center-rw p{ margin: 0 0 0.50em 0; text-align: center; text-indent: 0; }
+.dedication-rw{ display: block; font-size: 1.20em; line-height: 1.2em; margin-left: auto; margin-right: auto; padding: 2.00em 2.00em 0 2.00em; text-align: center; }
+.dedication-rw p{ text-indent: 0; }
+.dedication-rw p + p{ text-indent: 0; }
+span.sc-rw{ font-variant: small-caps; }
+span.lc-rw{ text-transform: lowercase; }
+span.uc-rw{ text-transform: uppercase; }
+span.tc-rw{ text-transform: capitalize; }
+span.sc-tc-rw{ font-variant: small-caps; text-transform: capitalize; }
+span.code-rw{ font-family: monospace; font-size: 0.9em; line-height: 1.2em; }
+span.serif-rw{ font-family: serif; }
+span.sans-serif-rw{ font-family: sans-serif; }
+span.raisedcap-rw{ font-family: inherit; font-size: 2.00em; line-height: 1.2em; }
+span.dropcap-rw{ float: left; font-family: inherit; font-size: 2.5em; line-height: 1em; margin: 0 0 -0.2em 0; padding: 0 0 0 0; text-indent: 0; }
+.media-inline-rw img{ height: 1em; vertical-align: middle; }
+.ref-note-rw{ __font-size: 75%; __line-height: 1.2em; __vertical-align: super; font-weight: bold; }
+.ref-footnote-rw{ font-size: 75%; line-height: 1.2em; vertical-align: super; }
+.galley-rw h2{ color: rgb(0,0,128); font-family: sans-serif; font-size: 1.00em; font-weight: bold; line-height: 1.2em; margin: 2.00em 2em 1.20em 0; padding: 0; page-break-after: avoid; text-align: left; }
+.galley-rw h3{ color: rgb(0,0,128); font-family: sans-serif; font-size: 1.00em; font-style: italic; font-weight: bold; line-height: 1.2em; margin: 1.80em 2em 0.60em 0; padding: 0; page-break-after: avoid; text-align: left; }
+.galley-rw h4{ font-family: sans-serif; font-size: 1.00em; font-weight: bold; line-height: 1.2em; margin: 0.90em 2em 0.30em 0; padding: 0; page-break-after: avoid; text-align: left; }
+.galley-rw h5{ font-family: sans-serif; font-size: 1.00em; font-style: italic; font-weight: bold; line-height: 1.2em; margin: 0.90em 2.00em 0.30em 0; padding: 0; page-break-after: avoid; text-align: left; }
+.galley-rw h6{ font-family: sans-serif; font-size: 0.90em; font-style: italic; font-weight: normal; line-height: 1.2em; margin: 0.90em 2.00em 0.30em 0; padding: 0; page-break-after: avoid; text-align: left; }
+.galley-rw h2 + h3{ margin-top: 0; }
+.galley-rw h2 + div{ margin-top: 0; }
+.galley-rw h3 + h4{ margin-top: 0; }
+.galley-rw h3 + div{ margin-top: 0; }
+.galley-rw h4 + h5{ margin-top: 0; }
+.galley-rw h4 + div{ margin-top: 0; }
+.galley-rw h5 + h6{ margin-top: 0; }
+.galley-rw h5 + div{ margin-top: 0; }
+.title-block-rw{ border-bottom: 1px solid black; border-top: 1px solid black; margin: 1.20em 0 1.20em 0; min-height: 2.00em; padding: 1.80em 2.00em 1.80em 0; }
+.flow-elastic-rw{ max-height: 100%; min-height: 1.20em; }
+.title-block-rw h1{ color: rgb(0, 0, 128); font-family: sans-serif; font-size: 1.60em; font-weight: bold; line-height: 1.2em; margin: 0 0 0 0; padding: 0.60em 0 0.60em 0; text-align: left; text-indent: 0; text-transform: none; }
+.title-block-rw .title-sub-rw{ font-family: sans-serif; font-size: 1.40em; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 1.20em 0; text-align: left; text-indent: 0; text-transform: none; }
+.title-block-rw .title-num-rw{ color: rgb(128, 128, 128); font-family: sans-serif; font-size: 1.60em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0.60em 0 0.60em 0; text-align: left; text-indent: 0; text-transform: none; }
+.title-block-rw .title-author-rw{ font-family: sans-serif; font-size: 1.40em; font-style: italic; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 0.60em 0; text-align: left; text-indent: 0; text-transform: none; }
+.title-block-rw .title-contributor-rw{ font-family: sans-serif; font-size: 1.40em; font-style: italic; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 0.60em 0; text-align: left; text-indent: 0; text-transform: none; }
+.title-block-rw .title-other-rw{ font-family: sans-serif; font-size: 1.00em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 1.20em 0 0.60em 0; text-align: left; text-indent: 0; }
+.title-block-book-rw{ margin: 0 0 0 0; min-height: 2.00em; padding: 2.00em 0 0 0; }
+.title-block-book-rw h1{ color: rgb(0, 0, 128); font-family: sans-serif; font-size: 2.00em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 2.00em 0; text-align: left; text-indent: 0; }
+.title-block-book-rw .title-sub-rw{ font-family: sans-serif; font-size: 1.60em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 2.00em 0; text-align: left; text-indent: 0; }
+.title-block-book-rw .title-author-rw{ color: rgb(0, 0, 128); font-family: sans-serif; font-size: 1.80em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 2.00em 0; text-align: left; text-indent: 0; }
+.title-block-book-rw .title-contributor-rw{ font-family: sans-serif; font-size: 1.80em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 2.00em 0; text-align: left; text-indent: 0; }
+.title-block-book-rw .title-other-rw{ font-family: sans-serif; font-size: 1.00em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 0.60em 0; text-align: left; text-indent: 0; }
+.title-block-book-rw p{ font-family: sans-serif; font-size: 1.00em; font-style: normal; font-weight: normal; line-height: 1.2em; margin: 0 0 0 0; padding: 0 0 0.60em 0; text-align: left; text-indent: 0; }
+.imprint-rw{ border-bottom: 1px solid rgb(0, 0, 0); border-top: 1px solid rgb(0, 0, 0); float: bottom; font-size: 0.90em; line-height: 1.2em; margin: 2.00em 0 0 0; padding: 1.20em 0 0.60em 0; text-align: center; }
+.imprint-rw p{ margin: 0 0 0 0; padding: 0 0 0.60em 0; text-indent: 0; }
+.galley-rw ol{ margin: 1.20em 0 1.20em 1.80em; padding: 0 0 0 0; }
+.galley-rw li{ margin: 0 0 0 0; padding-bottom: 0; padding-top: 0; }
+.galley-rw ol li{ list-style: decimal; }
+.galley-rw ol ol li{ list-style: lower-alpha; margin-left: 1.80em; }
+.galley-rw ol ol ol li{ list-style: lower-roman; margin-left: 1.80em; }
+.galley-rw ol * ol{ margin: 0.60em 0 0.60em 0; }
+.galley-rw ul{ margin: 1.20em 0 1.20em 1.20em; padding: 0 0 0 0; }
+.galley-rw ul li{ list-style: disc; }
+.galley-rw ul ul li{ list-style: square; }
+.galley-rw ul ul ul li{ list-style: circle; }
+.galley-rw ul * ul{ margin: 0.60em 0 0.60em 0; }
+dl{ margin: 1.20em 0 1.20em 0; }
+dt{ float: left; font-style: italic; font-weight: bold; margin-right: 0.60em; }
+dd{ margin-bottom: 0.60em; margin-left: 1.80em; }
+.list-glossary-rw{ margin: 1.20em 0 1.20em 0; }
+.list-glossary-rw p{ margin-left: 1.80em; text-indent: -1.80em; }
+.list-glossary-rw p + p{ margin-left: 1.80em; text-indent: -1.80em; }
+.list-references-rw{ font-size: 0.90em; line-height: 1.2em; margin: 0 0 0 0; }
+.list-references-rw p{ margin-left: 1.80em; text-indent: -1.80em; }
+.list-references-rw p + p{ margin-left: 1.80em; text-indent: -1.80em; }
+.list-notes-rw{ font-size: 0.90em; line-height: 1.2em; margin: 1.20em 0 1.20em 0; padding: 0 0 0 0; text-indent: 0; }
+.list-notes-rw p{ margin-left: 1.80em; text-indent: -1.80em; }
+.list-notes-rw p + p{ margin-left: 1.80em; text-indent: -1.80em; }
+span.num-note-rw{ display: inline-block; padding-right: 0.60em; text-align: right; width: 1.20em; }
+div.note-rw{ margin: 0; }
+.index-rw{ column-count: 2; column-gap: 1.20em; }
+.list-index-rw{ font-size: 0.90em; line-height: 1.2em; margin: 0 0 0.60em 0; padding: 0 0 0 0; text-align: left; }
+.list-index-rw p{ margin-left: 1.20em; text-align: left; text-indent: -1.20em; }
+.list-index-rw p + p{ margin-left: 1.20em; text-align: left; text-indent: -1.20em; }
+.index-rw h2{ font-size: 0.90em; font-weight: bold; line-height: 1.2em; margin: 1.20em 0 0 0; }
+.list-index-rw ul{ margin: 0 0 0 0; }
+.list-index-rw ul li{ list-style: none; margin-left: 0; }
+.list-index-rw ul ul li{ list-style: none; margin-left: 1.20em; }
+.list-index-rw ul ul ul li{ list-style: none; margin-left: 1.20em; }
+ul.list-toc-rw{ margin: 0 0 0 0; }
+ul.list-toc-rw li{ list-style-type: none; margin: 0 0 0.60em 1.80em; }
+ul.list-toc-rw li.step2{ margin-bottom: 0; }
+li.step2 + li.step1{ margin-top: 1.20em; }
+ul.list-lof-rw{ margin: 0 0 0 0; }
+ul.list-lof-rw li{ list-style-type: none; margin: 0 1.80em 0 1.80em; text-align: left; }
+ul.list-lot-rw{ margin: 0 0 0 0; }
+ul.list-lot-rw li{ list-style-type: none; margin: 0 1.80em 0 1.80em; text-align: left; }
+.footnotes-rw{ display: prince-footnote; margin: 0 !important; padding: 0 !important; }
+div.footnotes-rw p{ font-size: 0.80em; line-height: 1.2em; margin-bottom: 0; margin-left: 1.20em; text-indent: -1.20em; }
+div.footnote-rw{ float: left; line-height: 1.2em; }
+span.num-footnote-rw{ }
+div.footnote-text-rw{ display: prince-footnote; font-size: 0.80em; line-height: 1.2em; margin: 0 0 0 0; }
+div.footnote-text-rw p{ margin-left: 1.20em; }
+div.footnote-text-rw p + p{ text-indent: 1.20em; }
+div.footnote-rw ol{ margin: 0.60em 0 0.60em 2.00em; }
+.block-rw{ margin: 1.20em 0 1.20em 0; }
+.block-rw h4{ font-size: 1.00em; font-style: normal; font-weight: bold; line-height: 1.2em; margin: 0 0 1.20em 0; padding: 0 0 0 0; text-align: left; text-indent: 0; }
+.block-rw h5{ font-size: 1.00em; font-style: italic; font-weight: bold; line-height: 1.2em; margin: 1.20em 0 0 0; padding: 0 0 0 0; text-align: left; text-indent: 0; }
+.block-rw h6{ font-size: 1.00em; font-style: italic; line-height: 1.2em; margin: 0.60em 0 0 0; padding: 0 0 0 0; text-align: left; text-indent: 0; }
+.general-rw{ margin: 1.20em 0 1.20em 0; padding: 0 0 0 0; }
+.notebox-rw{ background: #cccccc; margin: 1.20em 0 1.20em 0; padding: 0.60em 1.20em 0.60em 1.20em; }
+.notebox-rw h4{ border-bottom: 1px solid #000000; margin-top: 1.10em; }
+.boxed-rw{ border: 1px solid #000000; margin: 1.15em 0 1.15em 0; padding: 0.60em 1.20em 0.60em 1.20em; }
+.epigraph-rw{ display: block; font-size: 0.90em; line-height: 1.2em; margin: 1.20em 2.00em 1.20em 2.00em; }
+.epigraph-verse-rw{ display: table; margin: 1.20em auto 1.20em auto; }
+.epigraph-verse-rw p{ text-indent: 0; }
+.epigraph-verse-rw p + p{ text-indent: 0; }
+.pullquote-rw{ display: block; font-size: 0.90em; line-height: 1.2em; margin: 1.20em 2.00em 1.20em 2.00em; }
+.extract-rw{ margin: 1.20em 0 1.20em 0; padding: 0 1.20em 0 1.20em; }
+.extract-verse-rw{ display: table; margin: 1.20em auto 1.20em auto; }
+.extract-verse-rw p{ text-indent: 0; }
+.extract-verse-rw p + p{ text-indent: 0; }
+.abstract-rw{ margin: 1.20em 2.00em 1.20em 2.00em; padding: 0 0 0 0; }
+.letter-rw{ margin: 1.20em 1.20em 1.20em 1.20em; padding: 0 0 0 0; }
+.address-rw{ margin: 0 0 1.20em 0; text-indent: 0; }
+.subject-rw{ margin: 1.20em 0 1.20em 0; text-indent: 0; }
+.salute-rw{ margin-top: 1.20em; text-indent: 0; }
+.sender-rw{ margin-bottom: 1.20em; text-indent: 0; }
+.signature-rw{ margin-top: 1.20em; text-indent: 0; }
+.signature-rw + .signature-rw{ margin-top: 0; }
+.letter-rw .postscript-rw{ font-size: 0.85em; margin: 1.20em 0 1.20em 0; }
+.speech-rw{ text-align: left; }
+.speech-rw p{ margin-left: 2.00em; text-indent: -2.40em; }
+span.speaker-rw{ font-weight: bold; padding-right: 0.60em; }
+.sidebar-rw{ background: #ffffb5; font-size: 1.00em; line-height: 1.2em; margin: 1.20em 0 1.20em 0; padding: 0.60em !important; text-align: left; text-indent: 0; }
+span.marginnote-rw{ background-color: rgb(255, 255, 204); clear: both; float: outside; font-size: 0.85em; line-height: 1.2em; margin: 0 0 0 0; padding: 0.60em; text-align: left; text-indent: 0; width: 1in; }
+div.code-rw{ background: rgb(255, 255, 204); margin: 1.20em 0 1.20em 0; padding: 0.60em 0.60em 0.60em 0.60em; }
+div.codelist-rw{ margin: 1.20em 0 1.20em 0; }
+pre{ background: rgb(255, 255, 204); font-family: monospace; font-size: 0.80em; line-height: 1.2em; margin: 0 0 0 0; padding: 0 1.20em 0 1.20em; }
+pre + p{ margin-top: 1.20em; text-indent: 0; }
+p + pre{ margin-top: 1.20em; }
+.codelist-rw p.caption-rw + pre{ margin-top: 0; }
+div.icon-rw{ border: 1px solid rgb(0, 0, 0); height: auto; margin: 1.20em 0 1.20em 0; max-height: 100%; min-height: 2.00em; padding: 0.55em 0.90em 0.55em 0.90em; }
+div.icon-rw h4{ display: run-in; margin-right: 0.60em; }
+div.icon-rw p{ margin-left: 2.00em; }
+div.icon-rw div.pc-rw{ float: left; height: 2.00em; width: 2.00em; }
+div.icon-rw div.pc-rw img{ width: 100%; }
+.media-rw{ page-break-inside: avoid; }
+.media-rw h4{ font-size: 1.00em; font-weight: bold; padding: 1.20em 0 0.60em 0; text-align: left; }
+.media-rw h5{ font-size: 1.00em; font-weight: bold; padding: 1.20em 0 0.60em 0; }
+.media-rw h6{ font-size: 1.00em; font-style: italic; padding: 1.20em 0 0.60em 0; }
+.figure-rw{ font-size: 0.90em; margin: 0 0 0 0; padding: 0 0 0 0; page-break-inside: avoid; text-align: left; text-indent: 0; }
+.figure-rw p{ text-indent: 0; }
+.image-rw{ font-size: 0.90em; margin: 0 0 0 0; padding: 0 0 0 0; page-break-inside: avoid; text-align: left; text-indent: 0; }
+.image-rw p{ text-indent: 0; }
+.list-notes-rw{ margin-top: 3em !important; }
+.list-notes-rw p{ margin-left: 2em !important; text-indent: -2.2em !important; }
+.list-notes-rw p + p{ margin-left: 2em !important; text-indent: -2.2em !important; }
