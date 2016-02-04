@@ -1,6 +1,6 @@
 # Abre
 
-Abre is an open platform that helps school districts provide easily authenticated, role-based access to web-based systems.
+Abre is an open platform for schools who want to have a creative portal for their staff and students. Abre holds a collection of web apps. It also provides a framework for developers to create standalone web applications. Abre is licensed under a GNU General Public License (Version 3). Contributors welcomed.
 
 ## Documentation
 
