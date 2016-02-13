@@ -17,14 +17,14 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../configuration.php');
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 
 	$bookslug=htmlspecialchars($_GET["id"], ENT_QUOTES);
 	
 	//Get book id given slug
-	include "../../core/portal_dbconnect.php";
 	$sql = "SELECT * FROM books where Slug='$bookslug'";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc())
@@ -34,7 +34,6 @@
 	}
 	
 	//Check to see if you user has access to book
-	include "../../core/portal_dbconnect.php";
 	$userid=finduseridcore($_SESSION['useremail']);
 	$sql = "SELECT * FROM books_libraries where Book_ID='$bookid' and User_ID='$userid'";
 	$result = $db->query($sql);

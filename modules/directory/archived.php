@@ -21,21 +21,21 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 	
 	//Display Search Results
-	if($superadmin==1)
+	if($pageaccess==1)
 	{
 		
-		require_once('../../core/portal_functions.php');
+		require_once('../../core/abre_functions.php');
 					
 		//Display Recent Searches		
 		echo "<div class='row'><div class='col s12'>";
 			echo "<br><h6>Archived Employees</h6>";
 						
-			include "../../core/portal_dbconnect.php";
+			include "../../core/abre_dbconnect.php";
 			$sql = "SELECT *  FROM directory where archived=1";
 			$result=mysqli_query($db,$sql);
 			$rowcount=mysqli_num_rows($result);
@@ -54,7 +54,7 @@
 						echo "</tr>";
 					echo "</thead>";
 					echo "<tbody>";
-						include "../../core/portal_dbconnect.php";
+						include "../../core/abre_dbconnect.php";
 						$sql = "SELECT *  FROM directory where archived=1 order by updatedtime DESC";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc())
@@ -93,7 +93,10 @@
 								echo "<td class='hide-on-small-only'>$email</td>";
 								echo "<td class='hide-on-med-and-down'>$title</td>";
 								echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon tooltipped restoreuser' data-position='top' data-tooltip='Restore'><a href='modules/directory/restoreuser.php?id=$id'></a><i class='material-icons'>cached</i></button></td>";	
-								echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon tooltipped deleteuser' data-position='top' data-tooltip='Delete'><a href='modules/directory/permdeleteuser.php?id=$id'></a><i class='material-icons'>delete</i></button></td>";
+								if($superadmin==1)
+								{
+									echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon tooltipped deleteuser' data-position='top' data-tooltip='Delete'><a href='modules/directory/permdeleteuser.php?id=$id'></a><i class='material-icons'>delete</i></button></td>";
+								}
 							echo "</tr>";
 											
 						}

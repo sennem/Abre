@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 		
@@ -33,7 +33,7 @@
 		
 		
 		//Delete the File
-		include "../../core/portal_dbconnect.php";	
+		include "../../core/abre_dbconnect.php";	
 		$sql = "SELECT *  FROM directory_discipline where id=$id";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc())
@@ -48,7 +48,7 @@
 		
 		
 		//Delete the Record
-		include "../../core/portal_dbconnect.php";			
+		include "../../core/abre_dbconnect.php";			
 		$stmt = $db->prepare("DELETE from directory_discipline where id = ? LIMIT 1");
 		$stmt->bind_param("i",$id);	
 		$stmt->execute();

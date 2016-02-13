@@ -18,10 +18,10 @@
     */
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 			
 	//Delete the Records
-	include "../../core/portal_dbconnect.php";		
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
 		
 	$librarybookid=mysqli_real_escape_string($db, $_GET["librarybookid"]);
 	$stmtrecord = $db->prepare("DELETE from books_libraries where ID = ?");

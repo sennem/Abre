@@ -21,8 +21,8 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 		
 	include "feeds.php";
 		

@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 
@@ -31,7 +31,7 @@
 		$id=mysqli_real_escape_string($db, $_GET["id"]);
 		
 		//Delete Picture
-		include "../../core/portal_dbconnect.php";	
+		include "../../core/abre_dbconnect.php";	
 		$sql = "SELECT *  FROM directory where id=$id";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc())
@@ -45,7 +45,7 @@
 		}
 		
 		//Delete Discipline Files
-		include "../../core/portal_dbconnect.php";	
+		include "../../core/abre_dbconnect.php";	
 		$sql = "SELECT *  FROM directory_discipline where UserID=$id";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc())
@@ -59,7 +59,7 @@
 		}
 		
 		//Delete the Records
-		include "../../core/portal_dbconnect.php";			
+		include "../../core/abre_dbconnect.php";			
 		$stmtrecord = $db->prepare("DELETE from directory_discipline where UserID = ?");
 		$stmtrecord->bind_param("i",$id);	
 		$stmtrecord->execute();
@@ -67,7 +67,7 @@
 		$db->close();
 		
 		//Remove from Database
-		include "../../core/portal_dbconnect.php";	
+		include "../../core/abre_dbconnect.php";	
 		$stmt = $db->stmt_init();
 		$sql = "Delete from directory where id='$id' LIMIT 1";
 		$stmt->prepare($sql);

@@ -17,7 +17,7 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	require_once('portal_verification.php');
+	require_once('abre_verification.php');
 	
 	//Create the Modules Array
 	$modules = array();
@@ -43,7 +43,7 @@
 			$access=strpos($pagerestrictions, $_SESSION['usertype']);
 			if($access === false)
 			{
-				array_push($modules, array("$pageorder","$pagetitle","$pageview","$pageicon","$pagepath","$drawerhidden","$subpages"));
+				array_push($modules, array($pageorder,$pagetitle,$pageview,$pageicon,$pagepath,$drawerhidden,$subpages));
 				$modulecount++;
 			}
 		}  

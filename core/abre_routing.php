@@ -17,8 +17,6 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//require_once('portal_verification.php');
-	
 ?>
 
 <script>
@@ -60,7 +58,7 @@ routie({
 	    $( "#loader" ).show();
 	    $( "#titletext" ).text("404");
 	    document.title = 'HCSD Portal';
-		$( "#content_holder" ).load( "core/portal_404.php", function() { init_page(); });
+		$( "#content_holder" ).load( "core/abre_404.php", function() { init_page(); });
     }
 });
 

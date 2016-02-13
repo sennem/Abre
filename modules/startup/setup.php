@@ -18,10 +18,10 @@
     */
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	//Insert/Update Profile
-	require_once(dirname(__FILE__) . '/../../core/portal_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	
 	$profileupdatecount=0;
 	$sql = "SELECT *  FROM profiles where email='".$_SESSION['useremail']."'";

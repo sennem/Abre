@@ -21,12 +21,12 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 
-	require_once(dirname(__FILE__) . '/../../core/portal_google_login.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
 	
 	//Insert/Update Profile
-	include "../../core/portal_dbconnect.php";
+	include "../../core/abre_dbconnect.php";
 	$sql = "SELECT *  FROM profiles where email='".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$profileupdatecount=0;
@@ -34,10 +34,14 @@
 	$departmentcount=mysqli_real_escape_string($db, $_POST["departmentcount"]);
 	if($_SESSION['usertype']!="student")
 	{
-		$card_mail=mysqli_real_escape_string($db, $_POST["card_mail"]);
-		$card_drive=mysqli_real_escape_string($db, $_POST["card_drive"]);
-		$card_calendar=mysqli_real_escape_string($db, $_POST["card_calendar"]);
-		$card_classroom=mysqli_real_escape_string($db, $_POST["card_classroom"]);
+		$card_mail=0;
+		$card_drive=0;
+		$card_calendar=0;
+		$card_classroom=0;
+		if (!empty($_POST["card_mail"])){ $card_mail=mysqli_real_escape_string($db, $_POST["card_mail"]); }
+		if (!empty($_POST["card_drive"])){ $card_drive=mysqli_real_escape_string($db, $_POST["card_drive"]); }
+		if (!empty($_POST["card_calendar"])){ $card_calendar=mysqli_real_escape_string($db, $_POST["card_calendar"]); }
+		if (!empty($_POST["card_classroom"])){ $card_classroom=mysqli_real_escape_string($db, $_POST["card_classroom"]); }
 	}
 	else
 	{
@@ -50,8 +54,8 @@
 	{
 		$profileupdatecount=1;
 		for ($x = 0; $x <= $departmentcount; $x++) {
-	    	$message=mysqli_real_escape_string($db, $_POST["checkbox_$x"]);
-	    	if($message!=""){ array_push($stack, $message); }
+	    	if (!empty($_POST["checkbox_$x"])){ $message=mysqli_real_escape_string($db, $_POST["checkbox_$x"]); }
+	    	if(!empty($message)){ array_push($stack, $message); }
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();

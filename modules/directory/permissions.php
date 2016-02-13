@@ -21,16 +21,16 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	//Check Authentication for Directory
-	require_once('../../core/portal_functions.php');
+	require_once('../../core/abre_functions.php');
 	
 	//Check for Admin Authentication
 	$userEmailencrypt=encrypt($_SESSION['useremail'], "");
 	$pageaccess=0;
 	$superadmin=0;
-	include "../../core/portal_dbconnect.php";
+	include "../../core/abre_dbconnect.php";
 	$sql = "SELECT *  FROM directory where email='$userEmailencrypt' and admin=1 and archived=0";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc())

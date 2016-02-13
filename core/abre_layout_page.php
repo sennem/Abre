@@ -1,5 +1,5 @@
 <?php
-
+	
 	/*
 	* Copyright 2015 Hamilton City School District	
 	* 		
@@ -17,19 +17,19 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-?>
+	//Check Authentication
+	require_once('abre_verification.php');
+	
+	require_once('abre_feedback.php');
 
-<!-- Display the Login -->
-<div class="mdl-layout mdl-js-layout mdl-color--blue-800">
-	<div class="login_wrapper">	  	
-		
-		<div class="login-card-square mdl-card mdl-shadow--2dp animated fadeIn">
-			<div class="mdl-card__title mdl-card--expand"></div>
-			<div class="mdl-card-text">Student and Staff Portal</div>
-	  		<div class="mdl-card__actions mdl-card--border">	  		
-	  		<?php echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$authUrl' style='margin: 0 auto;'>Sign In</a>"; ?>
-	  		</div>
-		</div>
-		
-	</div>      	
-</div>
+	//Display the Page Content
+	echo "<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>";
+	  		
+		require_once('abre_navigation_top.php'); 
+		require_once('abre_navigation_drawer.php');
+		require_once('abre_layout_page_content.php');
+	    	
+	echo "</div>";
+	
+	
+?>

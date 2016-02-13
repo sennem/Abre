@@ -21,8 +21,8 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	
 	$list = $_POST['list'];
 	
@@ -30,7 +30,7 @@
 	$list = parse_str($list, $output);
 	$a = implode(',', $output['item']);
 
-	include "../../core/portal_dbconnect.php";
+	include "../../core/abre_dbconnect.php";
 	$stmt = $db->stmt_init();
 	$sql = "Update profiles set apps_order='$a' where email='".$_SESSION['useremail']."'";
 	$stmt->prepare($sql);

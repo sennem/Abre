@@ -21,10 +21,10 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
-	require_once('../../core/portal_functions.php');
+	require_once('../../core/abre_functions.php');
 	
 	//Predict Email
 	function emailPrediction($first, $last)
@@ -39,7 +39,7 @@
 		
 		//Check to make sure email doesn't already exist
 		include "../../configuration.php";
-		include "../../core/portal_dbconnect.php";
+		include "../../core/abre_dbconnect.php";
 		$sql = "SELECT *  FROM directory where email='$predictedemailencrypted'";
 		$result = $db->query($sql);
 		$count=0;
@@ -55,7 +55,7 @@
 			$count=0;
 			$predictedemailencrypted=encrypt($predictedemail, "");
 			include "../../configuration.php";
-			include "../../core/portal_dbconnect.php";
+			include "../../core/abre_dbconnect.php";
 			$sql = "SELECT *  FROM directory where email='$predictedemailencrypted'";
 			$result = $db->query($sql);
 			$count=mysqli_num_rows($result);

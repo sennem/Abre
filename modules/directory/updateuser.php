@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 	require_once('functions.php');
@@ -30,9 +30,9 @@
 	if($pageaccess==1)
 	{	
 		
-		require_once('../../core/portal_functions.php');
+		require_once('../../core/abre_functions.php');
 		
-		include "../../core/portal_dbconnect.php";
+		include "../../core/abre_dbconnect.php";
 		$stack = array();
 		$id=mysqli_real_escape_string($db, $_POST["id"]);
 		$email=mysqli_real_escape_string($db, $_POST["email"]);
@@ -184,7 +184,7 @@
 		        $newImage = $manipulator->crop($x1, $y1, $x2, $y2);
 		        // saving file to uploads folder
 		        $picturefilename=$newNamePrefix . $_FILES['picture']['name'];
-		        $manipulator->save(dirname(__FILE__).'/../../../../private/directory/images/employees/' . $picturefilename);
+		        $manipulator->save($portal_path_root.'/../private/directory/images/employees/' . $picturefilename);
 		    }
 		}
 		else
@@ -204,12 +204,12 @@
 			    {
 				    $newNamePrefix = time() . '$_$';
 				    $disfilename=$newNamePrefix . $_FILES['discipline']['name'];
-					if(!move_uploaded_file($_FILES['discipline']['tmp_name'], dirname(__FILE__) . '/../../../../private/directory/discipline/' . $disfilename)){
+					if(!move_uploaded_file($_FILES['discipline']['tmp_name'], $portal_path_root . '/../private/directory/discipline/' . $disfilename)){
 						echo "The file was not uploaded";
 					}
 					
 					//Add Record to Database
-				    include "../../core/portal_dbconnect.php";
+				    include "../../core/abre_dbconnect.php";
 				    $stmtdiscipline = $db->stmt_init();
 				    $sqldiscipline = "INSERT INTO directory_discipline (UserID,Filename) VALUES ('$id','$disfilename');";
 				    $stmtdiscipline->prepare($sqldiscipline);

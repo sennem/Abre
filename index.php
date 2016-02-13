@@ -24,23 +24,25 @@
 	if(session_id() == ''){ session_start(); }
 
 	//Authentication
-	require_once('core/portal_google_login.php');
+	require_once('core/abre_google_login.php');
 	
 	//Header
-	require_once('core/portal_header.php');
+	require_once('core/abre_header.php');
 
-	//Content
+	//Page Content
 	if(isset($authUrl))
 	{
-		require_once('core/portal_login.php');
+		//User is NOT logged in
+		require_once('core/abre_login.php');
 	}
 	else
 	{
-		require_once('core/portal_load_modules.php');
-		require_once('core/portal_layout_page.php');
+		//User is LOGGED in
+		require_once('core/abre_load_modules.php');
+		require_once('core/abre_layout_page.php');
 	}
 
 	//Footer
-	require_once('core/portal_footer.php');
+	require_once('core/abre_footer.php');
 	
 ?>

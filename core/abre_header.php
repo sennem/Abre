@@ -45,14 +45,15 @@ echo "<html lang='en'>";
 		//Windows Icon
 		$site_windows_icon=constant("SITE_WINDOWS_ICON");
 		echo "<meta name='msapplication-TileImage' content='$site_windows_icon'>";
-		echo "<meta name='msapplication-TileColor' content='#2B2B2B'>";
+		$site_windows_icon_color=constant("SITE_WINDOWS_ICON_COLOR");
+		echo "<meta name='msapplication-TileColor' content='$site_windows_icon_color'>";
 
 		//CSS Styles
 	    echo "<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>";
 	    echo "<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>";
 	    echo "<link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>";
 	    echo "<link rel='stylesheet' href='core/css/material.1.0.6.min.css'>";
-	    echo "<link rel='stylesheet' href='core/css/style.css'>";
+	    echo "<link rel='stylesheet' href='core/css/abre.css'>";
 	    echo "<link rel='stylesheet' href='core/css/animate.min.css'>";
 	    echo "<link rel='stylesheet' href='core/css/owl.carousel.min.css'>";
 	    echo "<link rel='stylesheet' href='core/css/timepicker.min.css'>";

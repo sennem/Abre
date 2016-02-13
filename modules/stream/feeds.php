@@ -21,11 +21,11 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 	
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
 	
 	
 	//Find what streams to display
-	include "../../core/portal_dbconnect.php";
 	$sql3 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 	$result3 = $db->query($sql3);
 	while($row3 = $result3->fetch_assoc()) {
@@ -39,7 +39,6 @@
 	//Get Feeds
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();				
-	include "../../core/portal_dbconnect.php";
 	if($userstreams!=NULL)
 	{
 		$sql = "SELECT * FROM streams where (required=1 and `group`='".$_SESSION['usertype']."') or id in ($userstreams)";

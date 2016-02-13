@@ -21,14 +21,14 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 
 	if($superadmin==1)
 	{
 		
-		include "../../core/portal_dbconnect.php";		
+		include "../../core/abre_dbconnect.php";		
 		$id=mysqli_real_escape_string($db, $_GET["id"]);
 		$stmt = $db->stmt_init();
 		$sql = "UPDATE directory set archived=0 where id='$id' LIMIT 1";

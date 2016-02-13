@@ -16,13 +16,23 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-	
-	//Start PHP Session
-	if(session_id() == ''){ session_start(); }
-	
-	//If Cookie Was Set and the Session is Not Set
-	if (isset($_COOKIE["HCSD_Portal_V1"]) && !isset($_SESSION['access_token'])){
-		include "portal_google_login.php";
-	}
-	
+    
 ?>
+
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	
+	  <?php
+		  $analytics_id=constant("GOOGLE_ANALYTICS");
+		  echo "ga('create', '$analytics_id', 'auto');";
+	  ?>
+	  ga('send', 'pageview');
+	</script>
+
+	<?php require_once('abre_routing.php'); ?>
+	
+</body>
+</html>

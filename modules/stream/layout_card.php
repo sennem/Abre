@@ -18,7 +18,7 @@
     */
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 		echo "<div class='mdl-card mdl-shadow--2dp card_stream'>";
 	

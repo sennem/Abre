@@ -18,15 +18,14 @@
     */
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 			
 	header('Pragma: public');
 	header('Cache-Control: max-age=31536000');
 	header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 31536000));	
 	header('Content-type: application/epub+zip');
  	$book=$_GET['book'];
-	$file=dirname(__FILE__).'/../../../../private/books/'.$book.'.epub';	
-	
+	$file=$portal_path_root.'/../private/books/'.$book.'.epub';
 	header('Content-Disposition: attachment; filename="'.$book.'.epub"');
 	readfile($file);
 	

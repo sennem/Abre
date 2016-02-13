@@ -18,19 +18,15 @@
     */
 
 	//Require the Google Configuration Settings
-	require_once('portal_google_authentication.php');
+	require_once('abre_google_authentication.php');
+	
+	$cookie_name=constant("PORTAL_COOKIE_NAME");
+	$site_domain=constant("SITE_GAFE_DOMAIN");
 
 	//Signout the User
 	if (isset($_REQUEST['signout'])){
-		$_SESSION = array();
-		if (ini_get("session.use_cookies")) {
-    		$params = session_get_cookie_params();
-			setcookie(session_name(), '', time() - 42000,
-        	$params["path"], $params["domain"],
-        	$params["secure"], $params["httponly"]
-		);
-		}		
-		//Remove All Cookies
+		
+		// unset cookies
 		if (isset($_SERVER['HTTP_COOKIE'])) {
 		    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
 		    foreach($cookies as $cookie) {
@@ -39,19 +35,21 @@
 		        setcookie($name, '', time()-1000);
 		        setcookie($name, '', time()-1000, '/');
 		    }
-		}	
-		//Destroy the Session	
+		}
+		
+		//Destroy the OAuth & PHP Session	
 		session_destroy();
 		$client->revokeToken();
-		unset($_COOKIE["HCSD_Portal_V1"]);
-		setcookie("HCSD_Portal_V1", '', time() - 3600);		
+		
+		//Redirect User to Login`	
 		header("Location: $portal_root");
 	}
 
 	//If Cookie Was Set and the Session is Not Set
-	if (isset($_COOKIE["HCSD_Portal_V1"]) && !isset($_SESSION['access_token'])){
-		include "portal_dbconnect.php";
-		$HCSDOHcookievalue=$_COOKIE["HCSD_Portal_V1"];
+	if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token']))
+	{
+		include "abre_dbconnect.php";
+		$HCSDOHcookievalue=$_COOKIE[$cookie_name];
 		if($result=$db->query("SELECT * from users where cookie_token='$HCSDOHcookievalue'"))
 		{	
 			$getRefreshToken2=mysqli_fetch_assoc(mysqli_query($db,"SELECT refresh_token from users where cookie_token='$HCSDOHcookievalue'"));
@@ -60,25 +58,28 @@
 			$_SESSION['access_token']=$refreshtoken2;
 			
 			//Set Cookie for 7 Days
-			setcookie("HCSD_Portal_V1",$HCSDOHcookievalue, time()+86400 * 7);
+			setcookie($cookie_name,$HCSDOHcookievalue, time()+86400 * 7);
 		}
 		$db->close();
 	}
 	
 	//Login the User
-	if (isset($_GET['code'])){
+	if (isset($_GET['code']))
+	{
 		$client->authenticate($_GET['code']);  
 		$_SESSION['access_token'] = $client->getAccessToken();  
 		header("Location: $portal_root");
 	}     
 
 	//Set Access Token to Make Request
-	if (isset($_SESSION['access_token'])){
+	if (isset($_SESSION['access_token']))
+	{
 		$client->setAccessToken($_SESSION['access_token']);
 	}
 
 	//If Logged In Get Basic User Information
-	if(isset($_SESSION['access_token']) && $client->getAccessToken()){
+	if(isset($_SESSION['access_token']) && $client->getAccessToken())
+	{
 		if(!isset($_SESSION['useremail']))
 		{
 			$client->setAccessToken($_SESSION['access_token']);
@@ -88,7 +89,7 @@
 			$userPicture=$userData['picture'];
 			$_SESSION['picture']=$userPicture;
 			$_SESSION['usertype']="staff";
-				if (strpos($_SESSION['useremail'],'@example.org') == false) { header("Location: $portal_root?signout");	}
+				if (strpos($_SESSION['useremail'],$site_domain) == false) { header("Location: $portal_root?signout");	}
 				if (strcspn($_SESSION['useremail'], '0123456789') != strlen($_SESSION['useremail'])){ $_SESSION['usertype']="student"; }
 			$me = $Service_Plus->people->get('me');
 			$displayName = $me['displayName'];
@@ -99,9 +100,10 @@
 	}
 
 	//Save the Reset Token if Not Previously Saved
-	if (isset($_SESSION['access_token'])) {
-		if (strpos($_SESSION['useremail'],'@hcsdoh.org') != false){	
-			include "portal_dbconnect.php";
+	if (isset($_SESSION['access_token']))
+	{
+		if (strpos($_SESSION['useremail'],$site_domain) != false){	
+			include "abre_dbconnect.php";
 			if($result=$db->query("SELECT * from users where email='".$_SESSION['useremail']."'"))
 			{	
 				$count=$result->num_rows;
@@ -131,7 +133,7 @@
 						$cookiekey=constant("PORTAL_COOKIE_KEY");
 						$hash=sha1($cookiekey);
 						$storetoken=$sha1useremail.$hash;
-						setcookie("HCSD_Portal_V1",$storetoken, time()+86400 * 7);	
+						setcookie($cookie_name,$storetoken, time()+86400 * 7);	
 						
 						//Mark that they have logged in
 						$_SESSION['loggedin']="yes";
@@ -147,12 +149,11 @@
 					mysqli_query($db, "Insert into users (email, refresh_token, cookie_token) VALUES ('".$_SESSION['useremail']."', '" . $_SESSION['access_token'] . "', '$storetoken')") or die (mysqli_error($db));
 				
 					//Set Cookie for 7 Days
-					setcookie("HCSD_Portal_V1",$storetoken, time()+86400 * 7);
+					setcookie($cookie_name,$storetoken, time()+86400 * 7);
 				}
 		
 			}
 			$db->close();
 		}
 	}
-	
 ?>

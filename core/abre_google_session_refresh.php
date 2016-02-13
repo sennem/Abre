@@ -17,17 +17,17 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
-
-	header('Pragma: public');
-	header('Cache-Control: max-age=31536000');
-	header('Expires: '. gmdate('D, d M Y H:i:s \G\M\T', time() + 31536000));
-	header('Content-Type: image/jpeg');
- 	$cover=$_GET['cover'];
-	$file=dirname(__FILE__).'/../../../../private/books/'.$cover;	
+	//Start PHP Session
+	if(session_id() == ''){ session_start(); }
 	
-	header('Content-Disposition: attachment; filename="'.$cover.'"');
-	readfile($file);
+	require(dirname(__FILE__) . '/../configuration.php'); 
+	
+	$cookie_name=constant("PORTAL_COOKIE_NAME");
+	
+	//If Cookie Was Set and the Session is Not Set
+	if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token']))
+	{
+		include "abre_google_login.php";
+	}
 	
 ?>

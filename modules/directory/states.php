@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 	if($state!=""){ echo "<option value='$state' selected>$state</option>"; }else{ echo "<option value='$state' selected>Choose</option>"; }

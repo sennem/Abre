@@ -17,7 +17,8 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 
 	$pageview=1;
 	$drawerhidden=0;
@@ -27,8 +28,6 @@
 	$pagepath="books";
 	$pagerestrictions="staff, students";
 	
-	
-	include "core/portal_dbconnect.php";
 	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and (superadmin='1' or superadmin='2')";
 	$result = $db->query($sql);
 	$superadmin=0;

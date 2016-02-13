@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 	
@@ -29,7 +29,7 @@
 	{
 		if($_GET["id"]!=""){ $id=$_GET["id"]; }
 		
-			include "../../core/portal_dbconnect.php";
+			include "../../core/abre_dbconnect.php";
 			$sqlcount="SELECT *  FROM directory_discipline where UserID=$id and archived=0";
 			$rowcount=0;
 			if ($resultcount=mysqli_query($db,$sqlcount)){ $rowcount=mysqli_num_rows($resultcount); }
@@ -47,7 +47,7 @@
 					echo "</thead>";
 				echo "<tbody>";
 				
-				include "../../core/portal_dbconnect.php";
+				include "../../core/abre_dbconnect.php";
 				$sql = "SELECT *  FROM directory_discipline where UserID=$id and archived=0";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc())

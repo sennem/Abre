@@ -16,10 +16,15 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-    
-?>
-
-	<?php require_once('portal_routing.php'); ?>
 	
-</body>
-</html>
+	//Start PHP Session
+	if(session_id() == ''){ session_start(); }
+	
+	require_once('abre_google_session_refresh.php');
+	
+	include(dirname(__FILE__) . '/../configuration.php'); 
+	
+	//Login Check
+	if(!(isset($_SESSION['useremail']) && $_SESSION['useremail'] != "")){ header("Location: $portal_root/?signout"); };
+
+?>

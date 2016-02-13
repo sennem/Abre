@@ -21,10 +21,10 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	
 	if($pageaccess==1)
 	{	
@@ -35,7 +35,7 @@
 		$output = fopen('php://output', 'w');
 		
 		fputcsv($output, array('Picture', 'First Name', 'Last Name', 'Middle Name', 'SSN', 'Date of Birth', 'Address', 'City', 'State', 'Zip', 'Phone', 'Email', 'Title', 'Classification', 'Location', 'Date of Hire', 'Seniority Date', 'Effective Date', 'Step', 'Salary', 'Hours' , 'Probation Report Date', 'State Background Check' , 'Federal Background Check', 'State Educator ID', 'License 1 Type', 'License 1 Issue Date', 'License 1 Expiration Date', 'License 1 Term', 'License 2 Type', 'License 2 Issue Date', 'License 2 Expiration Date', 'License 2 Term', 'License 3 Type', 'License 3 Issue Date', 'License 3 Expiration Date', 'License 3 Term', 'License 4 Type', 'License 4 Issue Date', 'License 4 Expiration Date', 'License 4 Term', 'License 5 Type', 'License 5 Issue Date', 'License 5 Expiration Date', 'License 5 Term', 'License 6 Type', 'License 6 Issue Date', 'License 6 Expiration Date', 'License 6 Term'));
-		include "../../core/portal_dbconnect.php";
+		include "../../core/abre_dbconnect.php";
 		$rows = mysqli_query($db, 'SELECT * FROM directory order by lastname');
 		
 		while ($row = mysqli_fetch_assoc($rows)) {

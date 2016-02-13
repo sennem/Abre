@@ -18,19 +18,17 @@
     */
 	
 	//Check Authentication
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');  
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');  
+
+
+	echo "<div class='fixed-action-btn buttonpin'>";
+		echo "<a class='modal-addbook btn-floating btn-large waves-effect waves-light blue darken-3 tooltipped' data-position='left' data-tooltip='Enter Book Coupon' href='#addbook'><i class='large material-icons'>add</i></a>"; 
+		echo "<ul>";
+		    echo "<li><a class='btn-floating btn-large waves-effect waves-light blue darken-3 tooltipped' data-position='left' data-tooltip='Inventory' href='$portal_root/#books/inventory'><i class='large material-icons'>book</i></a></li>";
+		echo "</ul>";
+	echo "</div>";
+	
 ?>
-
-
-	<!-- Display Profile Buttons -->
-	<div class="fixed-action-btn buttonpin">
-		<?php 
-			echo "<a class='modal-addbook btn-floating btn-large waves-effect waves-light blue darken-3 tooltipped' data-position='left' data-tooltip='Enter Book Coupon' href='#addbook'><i class='large material-icons'>add</i></a>"; 
-			echo "<ul>";
-		    	echo "<li><a class='btn-floating btn-large waves-effect waves-light blue darken-3 tooltipped' data-position='left' data-tooltip='Inventory' href='$portal_root/#books/inventory'><i class='large material-icons'>book</i></a></li>";
-			echo "</ul>";
-		?>
-	</div>
 
 
 <script>

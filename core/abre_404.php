@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright 2015 Hamilton City School District	
 	* 		
@@ -17,23 +17,6 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Check Authentication
-	require_once('portal_verification.php');
-	
-	$textarea=$_POST["textarea"];
-	
-	if($textarea!="")
-	{
-		$to = "";
-		$subject = "Portal Feedback";
-		$message = "From: ".$_SESSION['useremail']."\r\n\r\n".$_SESSION['displayName']."\r\n\r\n$textarea";
-		$headers = "From: ". $_SESSION['useremail'];
-		mail($to,$subject,$message,$headers);
-			
-		echo "Your feedback has been sent!";
-	}
-	else
-	{
-		echo "Whoops...please fill in a message.";
-	}
 ?>
+
+<div class="center-align">Sorry. That page does not exist.</div>

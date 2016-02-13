@@ -21,10 +21,10 @@
 
 	$pageview=1;
 	$drawerhidden=0;
-	$pageorder=3;
-	$pagetitle="Curriculum";
-	$pageicon="view_agenda";
-	$pagepath="curriculum";
+	$pageorder=4;
+	$pagetitle="Assessments";
+	$pageicon="assessment";
+	$pagepath="assessments";
 	$pagerestrictions="staff, students";
 	
 	
@@ -39,41 +39,19 @@
 	
 ?>
 
-	<!-- Book Code Modal -->
-	<div id="addcourse" class="modal">
-		<form class="col s12" id="form-addcourse" method="post" action="modules/curriculum/addcourse_process.php">
-		<div class="modal-content">
-			<h4>Search Courses</h4>
-			<?php
-			//Search
-			echo "<form id='course-search' method='post' action='modules/directory/searchresults.php'>";
-
-					echo "<div class='input-field col s12'>";
-						echo "<input placeholder='Search' id='coursesearch' name='coursesearch' type='text'>";
-					echo "</div>";
- 
-			echo "</form>";	
-			?>
-    	</div>
-	    <div class="modal-footer">
-
-		</div>
-		</form>
-	</div>
-
 <script>
 
 //Page Locations
 routie({
-    'curriculum': function(name) {
+    'assessments': function(name) {
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Curriculum");
-	    document.title = 'HCSD Portal - Curriculum';
-		$( "#content_holder" ).load( 'modules/curriculum/curriculum.php', function() { init_page(); });
+	    $( "#titletext" ).text("Assessments");
+	    document.title = 'HCSD Portal - Assessments';
+		$( "#content_holder" ).load( 'modules/assessments/assessments.php', function() { init_page(); });
     },
-    'curriculum/?:name': function(name) {
+    'assessments/?:name': function(name) {
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
@@ -87,14 +65,6 @@ routie({
 			content.stop().animate({ scrollTop: $(".active").offset().top - 150 }, 500);
 		
 		});
-    },
-    'curriculum/lesson/?:name': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Curriculum");
-	    document.title = 'HCSD Portal - Lesson';
-		$( "#content_holder" ).load( 'modules/curriculum/lesson.php?id='+name, function() { init_page(); });
     }
 });
 

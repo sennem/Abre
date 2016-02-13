@@ -22,7 +22,7 @@
  
 	//Create Client Request to Access Google API
 	$client = new Google_Client();
-	$client->setApplicationName("Portal");
+	$client->setApplicationName("Abre");
 	$client_id=constant("GOOGLE_CLIENT_ID");
 	$client->setClientId($client_id);
 	$client_secret=constant("GOOGLE_CLIENT_SECRET");
@@ -32,7 +32,8 @@
 	$simple_api_key=constant("GOOGLE_API_KEY");
 	$client->setDeveloperKey($simple_api_key);
 	$client->setAccessType("offline");
-	$client->setScopes(array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/gmail.modify', 'https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.rosters.readonly'));
+	$scopes=unserialize(constant("GOOGLE_SCOPES"));
+	$client->setScopes($scopes);
 	$hd=constant("GOOGLE_HD");
 	$client->setHostedDomain($hd);
 

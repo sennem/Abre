@@ -17,14 +17,14 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../configuration.php');
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 
 	$Course_ID=htmlspecialchars($_GET["id"], ENT_QUOTES);
 
 	//Get Course Information
-	include "../../core/portal_dbconnect.php";
+	include "../../core/abre_dbconnect.php";
 	$sqllookup = "SELECT * FROM curriculum_course where ID='$Course_ID'";
 	$result2 = $db->query($sqllookup);
 	$setting_preferences=mysqli_num_rows($result2);
@@ -43,14 +43,14 @@
 		while($row2 = $result3->fetch_assoc())
 		{
 	
-			$Unit_Title=stripslashes($row2["Title"]);
-			$Unit_Start_Time=stripslashes($row2["Start_Time"]);
-			$Unit_Length=stripslashes($row2["Length"]);
-			$Unit_Description=stripslashes($row2["Description"]);
-			$Unit_Standards=stripslashes($row2["Standards"]);	
-			$Unit_Resources=stripslashes($row2["Resources"]);
-			$Unit_Assessments=stripslashes($row2["Assessments"]);	
-			$Unit_Lessons=stripslashes($row2["Lessons"]);
+			if (!empty($row2["Title"])){ $Unit_Title=stripslashes($row2["Title"]); }
+			if (!empty($row2["Start_Time"])){ $Unit_Start_Time=stripslashes($row2["Start_Time"]); }
+			if (!empty($row2["Length"])){ $Unit_Length=stripslashes($row2["Length"]); }
+			if (!empty($row2["Description"])){ $Unit_Description=stripslashes($row2["Description"]); }
+			if (!empty($row2["Standards"])){ $Unit_Standards=stripslashes($row2["Standards"]); }	
+			if (!empty($row2["Resources"])){ $Unit_Resources=stripslashes($row2["Resources"]); }
+			if (!empty($row2["Assessments"])){ $Unit_Assessments=stripslashes($row2["Assessments"]); }	
+			if (!empty($row2["Lessons"])){ $Unit_Lessons=stripslashes($row2["Lessons"]); }
 			$Current_Month = date('F');
 			$Previous_Month = date('F', strtotime('-1 month'));
 			
@@ -96,66 +96,72 @@
 						echo "<b>Resources</b>:<br>";
 
 						//List Attached Resources
-						if($Unit_Resources==""){  $Unit_Resources="0"; }
-						$sqllookup6 = "SELECT *  FROM curriculum_resources WHERE ID IN ($Unit_Resources)";
-						$result7 = $db->query($sqllookup6);
-						while($row8 = $result7->fetch_assoc())
-						{
-							echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
-								$Unit_Resource_Title=stripslashes($row8["Title"]);
-								$Unit_Resource_Link=stripslashes($row8["Link"]);
-								echo "<a href='$Unit_Resource_Link' target='_blank' class='mdl-color-text--blue-800'>$Unit_Resource_Title</a>";
-							echo"</span>";
-						}
-						if($Unit_Resources==0)
+						if(empty($Unit_Resources))
 						{ 
 							echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
 								echo "No available resources."; 
 							echo"</span>";
+						}
+						else
+						{
+							$sqllookup6 = "SELECT *  FROM curriculum_resources WHERE ID IN ($Unit_Resources)";
+							$result7 = $db->query($sqllookup6);
+							while($row8 = $result7->fetch_assoc())
+							{
+								echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
+									$Unit_Resource_Title=stripslashes($row8["Title"]);
+									$Unit_Resource_Link=stripslashes($row8["Link"]);
+									echo "<a href='$Unit_Resource_Link' target='_blank' class='mdl-color-text--blue-800'>$Unit_Resource_Title</a>";
+								echo"</span>";
+							}
 						}
 						echo"</span><br>";
 						
 						echo "<b>Assessments</b>:<br><br>";
 						
 						//List Attached Resources
-						if($Unit_Assessments==""){  $Unit_Assessments="0"; }
-						$sqllookup6 = "SELECT *  FROM curriculum_assessments WHERE ID IN ($Unit_Assessments)";
-						$result7 = $db->query($sqllookup6);
-						while($row8 = $result7->fetch_assoc())
-						{
-							echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
-								$Unit_Assessment_Title=stripslashes($row8["Title"]);
-								$Unit_Assessment_Link=stripslashes($row8["Link"]);
-								echo "<a href='$Unit_Assessment_Link' target='_blank' class='mdl-color-text--blue-800'>$Unit_Assessment_Title</a>";
-							echo"</span>";
-						}
-						if($Unit_Assessments==0)
+						if(empty($Unit_Assessments))
 						{ 
 							echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
 								echo "No available assessments."; 
 							echo"</span>";
+						}
+						else
+						{
+							$sqllookup6 = "SELECT *  FROM curriculum_assessments WHERE ID IN ($Unit_Assessments)";
+							$result7 = $db->query($sqllookup6);
+							while($row8 = $result7->fetch_assoc())
+							{
+								echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
+									$Unit_Assessment_Title=stripslashes($row8["Title"]);
+									$Unit_Assessment_Link=stripslashes($row8["Link"]);
+									echo "<a href='$Unit_Assessment_Link' target='_blank' class='mdl-color-text--blue-800'>$Unit_Assessment_Title</a>";
+								echo"</span>";
+							}
 						}
 						echo"</span><br>";
 						
 						echo "<b>Model Lessons</b>:<br><br>";
 						
 						//List Lessons
-						if($Unit_Lessons==""){  $Unit_Lessons="0"; }
-						$sqllookup9 = "SELECT *  FROM curriculum_lesson WHERE ID IN ($Unit_Lessons)";
-						$result11 = $db->query($sqllookup9);
-						while($row12 = $result11->fetch_assoc())
+						if(empty($Unit_Lessons))
 						{
-							echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
-								$Unit_Lessons_Title=stripslashes($row12["Title"]);
-								$Unit_Lessons_Link=stripslashes($row12["Link"]);
-								echo "<a href='$Unit_Lessons_Link' class='mdl-color-text--blue-800'>$Unit_Lessons_Title</a>";
-							echo"</span>";
-						}
-						if($Unit_Lessons==0)
-						{ 
 							echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
 								echo "No model lessons available."; 
 							echo"</span>";
+						}
+						else
+						{
+							$sqllookup9 = "SELECT *  FROM curriculum_lesson WHERE ID IN ($Unit_Lessons)";
+							$result11 = $db->query($sqllookup9);
+							while($row12 = $result11->fetch_assoc())
+							{
+								echo "<span style='display:block; width:100%; background-color:#F5F5F5; border:1px solid #ccc; padding:20px;'>";
+									$Unit_Lessons_Title=stripslashes($row12["Title"]);
+									$Unit_Lessons_Link=stripslashes($row12["Link"]);
+									echo "<a href='$Unit_Lessons_Link' class='mdl-color-text--blue-800'>$Unit_Lessons_Title</a>";
+								echo"</span>";
+							}
 						}
 						echo"</span><br>";
 						

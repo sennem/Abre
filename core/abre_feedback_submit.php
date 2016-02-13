@@ -17,14 +17,23 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Start PHP Session
-	if(session_id() == ''){ session_start(); }
+	//Check Authentication
+	require_once('abre_verification.php');
 	
-	require_once('portal_google_session_refresh.php');
+	$textarea=$_POST["textarea"];
 	
-	include(dirname(__FILE__) . '/../configuration.php'); 
-	
-	//Login Check
-	if(!(isset($_SESSION['useremail']) && $_SESSION['useremail'] != "")){ header("Location: $portal_root/?signout"); };
-
+	if($textarea!="")
+	{
+		$to=constant("FEEDBACK_EMAIL");
+		$subject = "Abre Feedback";
+		$message = "From: ".$_SESSION['useremail']."\r\n\r\n".$_SESSION['displayName']."\r\n\r\n$textarea";
+		$headers = "From: ". $_SESSION['useremail'];
+		mail($to,$subject,$message,$headers);
+			
+		echo "Your feedback has been sent!";
+	}
+	else
+	{
+		echo "Whoops...please fill in a message.";
+	}
 ?>

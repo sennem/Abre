@@ -48,8 +48,8 @@
 -->	
 <?php
 	
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require(dirname(__FILE__) . '/../../configuration.php');
 	
 	echo "<div class='page_container'>";
@@ -59,7 +59,7 @@
 	echo "<div class='row'>";
 	
 	$userid=finduseridcore($_SESSION['useremail']);
-	include "../../core/portal_dbconnect.php";
+	include "../../core/abre_dbconnect.php";
 	$sql = "SELECT * FROM curriculum_libraries where User_ID='$userid'";
 	$result = $db->query($sql);
 	$numrows = $result->num_rows;

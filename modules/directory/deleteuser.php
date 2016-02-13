@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 		
@@ -29,7 +29,7 @@
 	if($pageaccess==1)
 	{		
 		$id=mysqli_real_escape_string($db, $_POST["id"]);
-		include "../../core/portal_dbconnect.php";			
+		include "../../core/abre_dbconnect.php";			
 		$stmt = $db->prepare("UPDATE directory set archived='1' where id = ? LIMIT 1");
 		$stmt->bind_param("i",$id);	
 		$stmt->execute();

@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 	
@@ -29,11 +29,11 @@
 	if($pageaccess==1 or $_SESSION['usertype']=="staff")
 	{
 		
-		require_once('../../core/portal_functions.php');
+		require_once('../../core/abre_functions.php');
 		
 		echo "<div class='row'><div class='col s12'>";
 		
-		include "../../core/portal_dbconnect.php";
+		include "../../core/abre_dbconnect.php";
 		$searchquery=mysqli_real_escape_string($db, $_POST["searchquery"]);
 		if($searchquery!=""){ $searchqueryuppercase=encrypt(ucwords($searchquery), ""); $searchquerylowercase=encrypt(strtolower($searchquery), ""); }
 		
@@ -70,7 +70,7 @@
 		}
 	
 	
-		include "../../core/portal_dbconnect.php";
+		include "../../core/abre_dbconnect.php";
 		if($searchquery=="")
 		{
 			$sql = "SELECT *  FROM directory where archived=0 order by firstname";

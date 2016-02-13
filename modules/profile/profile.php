@@ -21,12 +21,11 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
-	
-	require_once(dirname(__FILE__) . '/../../core/portal_google_login.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 	
+	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
 	
 	//See if startup is required
-	include(dirname(__FILE__) . '/../../core/portal_dbconnect.php');
 	$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$setting_startup_count=mysqli_num_rows($result);
@@ -35,7 +34,6 @@
 	}
 	
 	//Get Profile Information
-	include "../../core/portal_dbconnect.php";
 	$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$setting_preferences=mysqli_num_rows($result);
@@ -57,7 +55,6 @@
 				echo "<div class='col s12'><p>Decide which information is relevant to you. Please choose from the options below to customize your stream information. Additional Streams will soon be added.</p></div>";
 			echo "</div>";
 			echo "<div class='row'>";
-				include "../../core/portal_dbconnect.php";
 				$sql = "SELECT *  FROM streams WHERE `group` = '".$_SESSION['usertype']."' AND `required` != 1 ORDER BY type, title";
 				$result = $db->query($sql);
 				$resultcount = mysqli_num_rows($result);
@@ -70,10 +67,10 @@
 						$result2 = $db->query($sql2);
 						$returncount=0;
 						while($row2 = $result2->fetch_assoc()) {
-							echo "<input type='checkbox' class='formclick' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount'>$title</label>";
+							echo "<input type='checkbox' class='formclick filled-in' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount'>$title</label>";
 							$returncount=1;
 						}
-						if($returncount==0){ echo "<input type='checkbox' class='formclick' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount'>$title</label>"; }
+						if($returncount==0){ echo "<input type='checkbox' class='formclick filled-in' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount'>$title</label>"; }
 					echo "</div>";
 					$dcount++;
 	    		}
@@ -156,7 +153,6 @@
 							$required=array();
 						
 							//Get App preference settings (if they exist)
-							include "../../core/portal_dbconnect.php";
 							$sql2 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 							$result2 = $db->query($sql2);
 							while($row2 = $result2->fetch_assoc()) {
@@ -167,11 +163,9 @@
 							$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
 							$result = $db->query($sql);
 							while($row = $result->fetch_assoc())
-							{
-									
+							{	
 								$id=htmlspecialchars($row["id"], ENT_QUOTES);									
 								array_push($required, $id);
-									
 							}
 						
 							//Display default order, unless they have saved prefrences
@@ -187,9 +181,7 @@
 							//Compare 
 							foreach($required as $key => $requiredvalue)
 							{
-								
 								$hit=NULL;
-								
 								foreach($order as $key => $ordervalue)
 								{
 									if($requiredvalue==$ordervalue)
@@ -202,7 +194,6 @@
 								{
 									array_push($order, $requiredvalue);
 								}
-								
 							}
 							
 							foreach($order as $key => $value)

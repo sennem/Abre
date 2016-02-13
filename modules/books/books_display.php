@@ -16,10 +16,11 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */	
-	
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/portal_functions.php');
+    
 	require(dirname(__FILE__) . '/../../configuration.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 	
 	echo "<div class='page_container'>";
 	
@@ -28,7 +29,6 @@
 	echo "<div class='row'>";
 	
 	$userid=finduseridcore($_SESSION['useremail']);
-	include "../../core/portal_dbconnect.php";
 	$sql = "SELECT * FROM books_libraries where User_ID='$userid'";
 	$result = $db->query($sql);
 	$numrows = $result->num_rows;

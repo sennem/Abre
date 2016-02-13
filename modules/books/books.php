@@ -17,82 +17,80 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	echo "<div id='displaylibrary'>"; include "books_display.php"; echo "</div>";	
 
 ?>
 												
-			<script>
+<script>
 				
-				$(function() {					
+	$(function() {					
 					
-					//Save Form Data
-					var form = $('#form-addbook');
-					var formMessages = $('#form-messages');
+		//Save Form Data
+		var form = $('#form-addbook');
+		var formMessages = $('#form-messages');
 					
-					$(form).submit(function(event) {
-					    event.preventDefault();
-					    $('#addbook').closeModal();
-					    $(formMessages).text('Adding Book...');	
-					    $( ".notification" ).slideDown();	
-						var formData = $(form).serialize();
-						$.ajax({
-						    type: 'POST',
-						    url: $(form).attr('action'),
-						    data: formData
-						})
+		$(form).submit(function(event) {
+			event.preventDefault();
+			$('#addbook').closeModal();
+			$(formMessages).text('Adding Book...');	
+			$( ".notification" ).slideDown();	
+			var formData = $(form).serialize();
+			$.ajax({
+				type: 'POST',
+				url: $(form).attr('action'),
+				data: formData
+			})
 						
-						//Show the notification
-						.done(function(response) {
-							
-							$( "#displaylibrary" ).load( "modules/books/books_display.php", function() {
-
-								//Register MDL Components
-								var html = document.createElement('content_wrapper');
-								$(document.body).append(html);      
-								componentHandler.upgradeAllRegistered();
-
-								$("input").val('');
-								$('#form-messages').text(response);
-								$( ".notification" ).slideDown( "fast", function() {
-									$( ".notification" ).delay( 2000 ).slideUp();	
-								});
-							});			
-						})
+			//Show the notification
+			.done(function(response) {
 						
-					});
-					
-					//Remove Book from Library
-					$('#displaylibrary').on('click','.removebook',function(){
-						event.preventDefault();
-						var address = $(this).find("a").attr("href");
-						$('#form-messages').text( "Removing Book..." );
-						$( ".notification" ).slideDown();	
-						$.ajax({
-							type: 'POST',
-							url: address,
-							data: '',
-						})
-															
-						//Show the notification
-						.done(function(response) {
-							$( "#displaylibrary" ).load( "modules/books/books_display.php", function() {
-																	
-							//Register MDL Components
-							var html = document.createElement('content_wrapper');
-							$(document.body).append(html);      
-							componentHandler.upgradeAllRegistered();
-																	
-							$('#form-messages').text(response);	
-							$( ".notification" ).slideDown( "fast", function() {
-								$( ".notification" ).delay( 2000 ).slideUp();	
-							});		
-						});	
-						})
-					});    
-					    								
+				$( "#displaylibrary" ).load( "modules/books/books_display.php", function() {
+
+				//Register MDL Components
+				var html = document.createElement('content_wrapper');
+				$(document.body).append(html);      
+				componentHandler.upgradeAllRegistered();
+
+				$("input").val('');
+				$('#form-messages').text(response);
+				$( ".notification" ).slideDown( "fast", function() {
+					$( ".notification" ).delay( 2000 ).slideUp();	
 				});
-
-				
-			</script>
+			});			
+		})						
+		});
+					
+		//Remove Book from Library
+		$('#displaylibrary').on('click','.removebook',function(){
+			event.preventDefault();
+			var address = $(this).find("a").attr("href");
+			$('#form-messages').text( "Removing Book..." );
+			$( ".notification" ).slideDown();	
+			$.ajax({
+				type: 'POST',
+				url: address,
+				data: '',
+			})
+															
+			//Show the notification
+			.done(function(response) {
+				$( "#displaylibrary" ).load( "modules/books/books_display.php", function() {
+																	
+					//Register MDL Components
+					var html = document.createElement('content_wrapper');
+					$(document.body).append(html);      
+					componentHandler.upgradeAllRegistered();
+																	
+					$('#form-messages').text(response);	
+					$( ".notification" ).slideDown( "fast", function() {
+						$( ".notification" ).delay( 2000 ).slideUp();	
+					});		
+				});	
+				})
+			});    
+					    								
+	});
+	
+</script>

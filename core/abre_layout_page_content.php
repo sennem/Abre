@@ -18,18 +18,23 @@
     */
 	
 	//Check Authentication
-	require_once('portal_verification.php');
-	
-	require_once('portal_feedback.php');
+	require_once('abre_verification.php');
 
-	//Display the Page Content
-	echo "<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>";
-	  		
-		require_once('portal_navigation_top.php'); 
-		require_once('portal_navigation_drawer.php');
-		require_once('portal_layout_page_content.php');
-	    	
-	echo "</div>";
+	//Display the Page
+	echo "<main class='mdl-layout__content'>";
 	
+		echo "<div id='navigation_top'></div>";
+
+		echo "<div class='content'>";	
+			echo "<div id='loader'>";
+				include "abre_loader_spinner.php";
+			echo "</div>";
+	
+			echo "<div id='content_holder'></div>";
+			echo "<div class='notification'><div id='form-messages'></div></div>";			
+		echo "</div>";
+		
+	echo "</main>";
 	
 ?>
+

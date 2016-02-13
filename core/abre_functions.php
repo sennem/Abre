@@ -18,7 +18,7 @@
     */
 	
 	
-	require_once('portal_verification.php');
+	require_once('abre_verification.php');
 	require_once(dirname(__FILE__) . '/../configuration.php'); 
 	
 	function encrypt($string, $encryption_key){
@@ -45,7 +45,7 @@
 	}
 	
 	function finduseridcore($email){
-		include "portal_dbconnect.php";
+		include "abre_dbconnect.php";
 		$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."'";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc())

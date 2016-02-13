@@ -18,9 +18,9 @@
     */
 	
 	//Check Authentication and Get Google Information
-	require_once('portal_verification.php');
-	require_once('portal_google_login.php');
-	require_once('portal_functions.php');
+	require_once('abre_verification.php');
+	require_once('abre_google_login.php');
+	require_once('abre_functions.php');
 
 	//Display the Drawer
 	echo "<div class='drawer mdl-layout__drawer' id='drawer' style='border:none;'>";

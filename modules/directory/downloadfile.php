@@ -21,14 +21,14 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 	
 	if($pageaccess==1)
 	{
 		$filename=$_GET["file"];
-		$file = dirname(__FILE__) . '/../../../../private/directory/discipline/' . $filename;
+		$file=$portal_path_root.'/../private/directory/discipline/' . $filename;
 		$fileext = pathinfo($filename, PATHINFO_EXTENSION);
 	
 		if (file_exists($file)) {

@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	require_once('permissions.php');
 
@@ -29,7 +29,7 @@
 	if($pageaccess==1 or $_SESSION['usertype']=="staff")
 	{
 		
-		require_once('../../core/portal_functions.php');
+		require_once('../../core/abre_functions.php');
 		echo "<div class='page_container mdl-shadow--4dp'>";
 		echo "<div class='page'>";
 				
@@ -60,7 +60,7 @@
 						echo "</thead>";
 						echo "<tbody>";
 						
-						include "../../core/portal_dbconnect.php";
+						include "../../core/abre_dbconnect.php";
 						$sql = "SELECT *  FROM directory where archived=0 order by updatedtime DESC limit 10";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc())

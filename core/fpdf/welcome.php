@@ -48,7 +48,7 @@
 			$pdf->AddPage();
 			
 			$todaysdate=date("F d, Y");
-			$content="\n\n\n\n\n\n\n\n$todaysdate\n\n\n\nDear $firstname,\n\nCongratulations! You have been appointed to the position of $title at $location for the Insert School District effective $effectivedate. I am confident that you will make a fine contribution to our school system.\n\nPlease contact the Treasurer's Office to complete the necessary forms for fringe benefits, such as medical insurance, life insurance, etc. within thirty (30) days of the effective date of your appointment. Life insurance is at no cost, as it is paid by the Board of Education.\n\nPlease feel free to contact me if you have any questions, now or in the future.\n\nSincerely,\n\n\n\nDr. Your Name\nAssistant Superintendent for Human Resources\n\nCK: lf\n\ncc: Your Name, Treasurer";
+			$content="\n\n\n\n\n\n\n\n$todaysdate\n\n\n\nDear $firstname,\n\nCongratulations! You have been appointed to the position of $title at $location for the Hamilton City School District effective $effectivedate. I am confident that you will make a fine contribution to our school system.\n\nPlease contact the Treasurer's Office to complete the necessary forms for fridge benefits, such as medical insurance, life insurance, etc. within thirty (30) days of the effective date of your appointment. Life insurance is at no cost, as it is paid by the Board of Education.\n\nPlease feel free to contact me if you have any questions, now or in the future.\n\nSincerely,\n\n\n\nDr. Chad Konkle\nAssistant Superintendent for Human Resources\n\nCK: lf\n\ncc: Robert Hancock, Treasurer";
 			$pdf->SetFont("Arial", "", "");
 			$pdf->SetLeftMargin(20); 
 			$pdf->SetRightMargin(20); 

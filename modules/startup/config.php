@@ -21,10 +21,11 @@
 	$drawerhidden=1;
 	
 	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/portal_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	
 	//Check to see if user needs startup screen
-	include(dirname(__FILE__) . '/../../core/portal_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
+	
 	$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$setting_startup_count=mysqli_num_rows($result);

@@ -17,24 +17,13 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Check Authentication
-	require_once('portal_verification.php');
+	//Configuration
+	require(dirname(__FILE__) . '/../../configuration.php'); 
+	
+	//Login Validation
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 
-	//Display the Page
-	echo "<main class='mdl-layout__content'>";
-	
-		echo "<div id='navigation_top'></div>";
 
-		echo "<div class='content'>";	
-			echo "<div id='loader'>";
-				include "portal_loader_spinner.php";
-			echo "</div>";
-	
-			echo "<div id='content_holder'></div>";
-			echo "<div class='notification'><div id='form-messages'></div></div>";			
-		echo "</div>";
-		
-	echo "</main>";
-	
 ?>
-
