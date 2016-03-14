@@ -17,35 +17,37 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
     
+    //Required configuration files
     require_once('abre_verification.php');
 	
-	if($_SESSION['usertype']!="student")
+	//Display feedback modal for staff
+	if($_SESSION['usertype']=="staff")
 	{	
-		
-		//Feedback Icon
-		echo "<a class='modal-trigger mdl-button mdl-js-button mdl-button--icon feedbackbutton mdl-cell--hide-phone' href='#feedback'><i class='material-icons'>help</i></a>";
+	?>
+		<!--Feedback icon-->
+		<a class='modal-trigger mdl-button mdl-js-button mdl-button--icon feedbackbutton mdl-cell--hide-phone' href='#feedback'><i class='material-icons'>help</i></a>
 	
-		//Feedback Modal
-		echo "<div id='feedback' class='modal modal-fixed-footer'>";
-			echo "<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>";
-				echo "<div class='modal-content'>";
-					echo "<div class='row'>";
-						echo "<div class='col s12'>";
-							echo "<h4>Feedback</h4>";
-							echo "<p>We welcome problem reports, feature ideas and general comments.</p><br>";
-						echo "</div>";
-						echo "<div class='input-field col s12'>";
-							echo "<textarea id='textarea' name='textarea' class='materialize-textarea'></textarea>";
-							echo "<label for='textarea'>Write a brief description:</label>";
-					    echo "</div>";
-					echo "</div>";
-			    echo "</div>";
-			    echo "<div class='modal-footer'>";
-					echo "<button type='submit' class='modal-action waves-effect btn-flat blue darken-3 white-text'>Submit</button>";
-				echo "</div>";
-			echo "</form>";
-		echo "</div>";
-	
+		<!--Feedback modal-->
+		<div id='feedback' class='modal modal-fixed-footer'>
+			<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>
+				<div class='modal-content'>
+					<div class='row'>
+						<div class='col s12'>
+							<h4>Feedback</h4>
+							<p>We welcome problem reports, feature ideas and general comments.</p><br>
+						</div>
+						<div class='input-field col s12'>
+							<textarea id='textarea' name='textarea' class='materialize-textarea'></textarea>
+							<label for='textarea'>Write a brief description:</label>
+					    </div>
+					</div>
+			    </div>
+			    <div class='modal-footer'>
+					<button type='submit' class='modal-action waves-effect btn-flat blue darken-3 white-text'>Submit</button>
+				</div>
+			</form>
+		</div>
+	<?php
 	}
 ?>
 	          
@@ -53,7 +55,11 @@
 <script>
 	
 	$(document).ready(function(){
-    	$('.modal-trigger').leanModal();
+    	
+    	$('.modal-trigger').leanModal({
+	    	ready: function() { $("#textarea").focus(); }
+	   	}
+	   	);
     	
     	
 		//Save Form Data
@@ -63,8 +69,6 @@
 		$(form).submit(function(event) {
 		    event.preventDefault();
 		    $('#feedback').closeModal();
-		    $(formMessages).text('Submitting feedback...');	
-		    $( ".notification" ).slideDown();	
 			var formData = $(form).serialize();
 			$.ajax({
 			    type: 'POST',

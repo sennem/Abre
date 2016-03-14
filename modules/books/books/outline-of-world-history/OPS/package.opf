@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package xmlns="http://www.idpf.org/2007/opf" version="3.0" xml:lang="en" unique-identifier="pub-id">
+<metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:title id="title">A Comprehensive Outline of World History (Organized by Region)</dc:title>
+    <dc:creator id="creator">Jack E. Maxfield</dc:creator>
+    <dc:language>en</dc:language>
+    <dc:identifier id="pub-id">urn:isbn:world-history</dc:identifier>
+    <dc:source>urn:isbn:world-history</dc:source>
+    <meta property="dcterms:modified">2012-02-22T03:40:36Z</meta>
+    <dc:date>2012-02-17</dc:date>
+    <dc:publisher>Infogrid Pacific</dc:publisher>
+    <dc:type>Document</dc:type>
+</metadata>
+<manifest>
+    <item id="toc" properties="nav" href="TOC.xhtml" media-type="application/xhtml+xml"/>
+    <item id="cover" href="cover.xhtml" media-type="application/xhtml+xml"/>
+    <item id="cover-image" properties="cover-image" href="images/world-history.jpg" media-type="image/jpeg"/>
+    <item id="s001" href="s001-BookTitlePage-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s002" href="s002-Copyright-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s003" href="s003-TableOfContents-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s004" href="s004-Foreword-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s005" href="s005-Foreword-02.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s006" href="s006-Introduction-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s007" href="s007-Preface-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s008" href="s008-Part-001.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s009" href="s009-Topic-001.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s010" href="s010-Topic-002.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s011" href="s011-Topic-003.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s012" href="s012-Topic-004.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s013" href="s013-Topic-005.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s014" href="s014-Topic-006.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s015" href="s015-Topic-007.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s016" href="s016-Topic-008.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s017" href="s017-Topic-009.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s018" href="s018-Topic-010.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s019" href="s019-Topic-011.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s020" href="s020-Topic-012.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s021" href="s021-Topic-013.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s022" href="s022-Topic-014.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s023" href="s023-Topic-015.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s024" href="s024-Topic-016.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s025" href="s025-Topic-017.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s026" href="s026-Topic-018.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s027" href="s027-Topic-019.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s028" href="s028-Topic-020.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s029" href="s029-Topic-021.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s030" href="s030-Topic-022.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s031" href="s031-Topic-023.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s032" href="s032-Topic-024.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s033" href="s033-Topic-025.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s034" href="s034-Topic-026.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s035" href="s035-Topic-027.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s036" href="s036-Topic-028.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s037" href="s037-Topic-029.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s038" href="s038-Topic-030.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s039" href="s039-Topic-031.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s040" href="s040-Topic-032.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s041" href="s041-Topic-033.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s042" href="s042-Part-002.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s043" href="s043-Topic-034.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s044" href="s044-Topic-035.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s045" href="s045-Topic-036.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s046" href="s046-Topic-037.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s047" href="s047-Topic-038.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s048" href="s048-Topic-039.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s049" href="s049-Topic-040.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s050" href="s050-Topic-041.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s051" href="s051-Topic-042.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s052" href="s052-Topic-043.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s053" href="s053-Topic-044.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s054" href="s054-Topic-045.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s055" href="s055-Topic-046.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s056" href="s056-Topic-047.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s057" href="s057-Topic-048.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s058" href="s058-Topic-049.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s059" href="s059-Topic-050.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s060" href="s060-Topic-051.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s061" href="s061-Topic-052.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s062" href="s062-Topic-053.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s063" href="s063-Topic-054.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s064" href="s064-Topic-055.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s065" href="s065-Topic-056.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s066" href="s066-Topic-057.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s067" href="s067-Topic-058.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s068" href="s068-Topic-059.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s069" href="s069-Topic-060.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s070" href="s070-Topic-061.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s071" href="s071-Topic-062.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s072" href="s072-Topic-063.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s073" href="s073-Topic-064.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s074" href="s074-Topic-065.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s075" href="s075-Topic-066.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s076" href="s076-Part-003.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s077" href="s077-Topic-067.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s078" href="s078-Topic-068.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s079" href="s079-Topic-069.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s080" href="s080-Topic-070.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s081" href="s081-Topic-071.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s082" href="s082-Topic-072.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s083" href="s083-Topic-073.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s084" href="s084-Topic-074.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s085" href="s085-Topic-075.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s086" href="s086-Topic-076.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s087" href="s087-Topic-077.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s088" href="s088-Topic-078.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s089" href="s089-Topic-079.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s090" href="s090-Topic-080.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s091" href="s091-Topic-081.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s092" href="s092-Topic-082.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s093" href="s093-Topic-083.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s094" href="s094-Topic-084.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s095" href="s095-Topic-085.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s096" href="s096-Topic-086.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s097" href="s097-Topic-087.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s098" href="s098-Topic-088.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s099" href="s099-Topic-089.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s100" href="s100-Topic-090.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s101" href="s101-Topic-091.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s102" href="s102-Topic-092.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s103" href="s103-Topic-093.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s104" href="s104-Topic-094.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s105" href="s105-Topic-095.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s106" href="s106-Topic-096.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s107" href="s107-Topic-097.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s108" href="s108-Topic-098.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s109" href="s109-Topic-099.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s110" href="s110-Part-004.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s111" href="s111-Topic-100.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s112" href="s112-Topic-101.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s113" href="s113-Topic-102.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s114" href="s114-Topic-103.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s115" href="s115-Topic-104.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s116" href="s116-Topic-105.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s117" href="s117-Topic-106.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s118" href="s118-Topic-107.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s119" href="s119-Topic-108.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s120" href="s120-Topic-109.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s121" href="s121-Topic-110.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s122" href="s122-Topic-111.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s123" href="s123-Topic-112.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s124" href="s124-Topic-113.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s125" href="s125-Topic-114.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s126" href="s126-Topic-115.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s127" href="s127-Topic-116.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s128" href="s128-Topic-117.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s129" href="s129-Topic-118.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s130" href="s130-Topic-119.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s131" href="s131-Topic-120.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s132" href="s132-Topic-121.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s133" href="s133-Topic-122.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s134" href="s134-Topic-123.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s135" href="s135-Topic-124.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s136" href="s136-Topic-125.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s137" href="s137-Topic-126.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s138" href="s138-Topic-127.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s139" href="s139-Topic-128.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s140" href="s140-Topic-129.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s141" href="s141-Topic-130.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s142" href="s142-Topic-131.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s143" href="s143-Topic-132.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s144" href="s144-Part-005.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s145" href="s145-Topic-133.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s146" href="s146-Topic-134.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s147" href="s147-Topic-135.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s148" href="s148-Topic-136.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s149" href="s149-Topic-137.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s150" href="s150-Topic-138.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s151" href="s151-Topic-139.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s152" href="s152-Topic-140.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s153" href="s153-Topic-141.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s154" href="s154-Topic-142.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s155" href="s155-Topic-143.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s156" href="s156-Topic-144.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s157" href="s157-Topic-145.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s158" href="s158-Topic-146.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s159" href="s159-Topic-147.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s160" href="s160-Topic-148.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s161" href="s161-Topic-149.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s162" href="s162-Topic-150.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s163" href="s163-Topic-151.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s164" href="s164-Topic-152.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s165" href="s165-Topic-153.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s166" href="s166-Topic-154.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s167" href="s167-Topic-155.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s168" href="s168-Topic-156.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s169" href="s169-Topic-157.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s170" href="s170-Topic-158.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s171" href="s171-Topic-159.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s172" href="s172-Topic-160.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s173" href="s173-Topic-161.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s174" href="s174-Topic-162.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s175" href="s175-Topic-163.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s176" href="s176-Topic-164.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s177" href="s177-Topic-165.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s178" href="s178-Part-006.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s179" href="s179-Topic-166.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s180" href="s180-Topic-167.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s181" href="s181-Topic-168.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s182" href="s182-Topic-169.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s183" href="s183-Topic-170.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s184" href="s184-Topic-171.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s185" href="s185-Topic-172.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s186" href="s186-Topic-173.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s187" href="s187-Topic-174.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s188" href="s188-Topic-175.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s189" href="s189-Topic-176.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s190" href="s190-Topic-177.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s191" href="s191-Topic-178.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s192" href="s192-Topic-179.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s193" href="s193-Topic-180.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s194" href="s194-Topic-181.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s195" href="s195-Topic-182.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s196" href="s196-Topic-183.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s197" href="s197-Topic-184.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s198" href="s198-Topic-185.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s199" href="s199-Topic-186.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s200" href="s200-Topic-187.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s201" href="s201-Topic-188.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s202" href="s202-Topic-189.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s203" href="s203-Topic-190.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s204" href="s204-Topic-191.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s205" href="s205-Topic-192.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s206" href="s206-Topic-193.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s207" href="s207-Topic-194.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s208" href="s208-Topic-195.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s209" href="s209-Topic-196.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s210" href="s210-Topic-197.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s211" href="s211-Topic-198.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s212" href="s212-Part-007.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s213" href="s213-Topic-199.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s214" href="s214-Topic-200.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s215" href="s215-Topic-201.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s216" href="s216-Topic-202.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s217" href="s217-Topic-203.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s218" href="s218-Topic-204.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s219" href="s219-Topic-205.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s220" href="s220-Topic-206.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s221" href="s221-Topic-207.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s222" href="s222-Topic-208.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s223" href="s223-Topic-209.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s224" href="s224-Topic-210.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s225" href="s225-Topic-211.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s226" href="s226-Topic-212.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s227" href="s227-Topic-213.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s228" href="s228-Topic-214.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s229" href="s229-Topic-215.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s230" href="s230-Topic-216.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s231" href="s231-Topic-217.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s232" href="s232-Topic-218.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s233" href="s233-Topic-219.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s234" href="s234-Topic-220.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s235" href="s235-Topic-221.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s236" href="s236-Topic-222.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s237" href="s237-Topic-223.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s238" href="s238-Topic-224.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s239" href="s239-Topic-225.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s240" href="s240-Topic-226.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s241" href="s241-Topic-227.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s242" href="s242-Topic-228.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s243" href="s243-Topic-229.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s244" href="s244-Topic-230.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s245" href="s245-Topic-231.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s246" href="s246-Part-008.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s247" href="s247-Topic-232.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s248" href="s248-Topic-233.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s249" href="s249-Topic-234.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s250" href="s250-Topic-235.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s251" href="s251-Topic-236.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s252" href="s252-Topic-237.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s253" href="s253-Topic-238.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s254" href="s254-Topic-239.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s255" href="s255-Topic-240.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s256" href="s256-Topic-241.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s257" href="s257-Topic-242.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s258" href="s258-Topic-243.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s259" href="s259-Topic-244.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s260" href="s260-Topic-245.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s261" href="s261-Topic-246.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s262" href="s262-Topic-247.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s263" href="s263-Topic-248.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s264" href="s264-Topic-249.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s265" href="s265-Topic-250.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s266" href="s266-Topic-251.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s267" href="s267-Topic-252.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s268" href="s268-Topic-253.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s269" href="s269-Topic-254.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s270" href="s270-Topic-255.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s271" href="s271-Topic-256.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s272" href="s272-Topic-257.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s273" href="s273-Topic-258.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s274" href="s274-Topic-259.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s275" href="s275-Topic-260.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s276" href="s276-Topic-261.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s277" href="s277-Topic-262.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s278" href="s278-Topic-263.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s279" href="s279-Topic-264.xhtml" media-type="application/xhtml+xml"/>
+    <item id="s280" href="s280-Bibliography-01.xhtml" media-type="application/xhtml+xml"/>
+    <item id="images-001" href="images/northern-asia.jpg" media-type="image/jpeg"/>
+    <item id="images-002" href="images/europe.jpg" media-type="image/jpeg"/>
+    <item id="images-003" href="images/Oer-logo-300dpi.png" media-type="image/png"/>
+    <item id="images-004" href="images/north-america.jpg" media-type="image/jpeg"/>
+    <item id="images-005" href="images/near-east.jpg" media-type="image/jpeg"/>
+    <item id="images-006" href="images/africa-map.jpg" media-type="image/jpeg"/>
+    <item id="images-007" href="images/mexico.jpg" media-type="image/jpeg"/>
+    <item id="images-008" href="images/india.jpg" media-type="image/jpeg"/>
+    <item id="images-009" href="images/far-east.jpg" media-type="image/jpeg"/>
+    <item id="css-001" href="css/world-history.css" media-type="text/css"/>
+</manifest>
+<spine page-progression-direction="ltr">
+    <itemref idref="s001" linear="yes"/>
+    <itemref idref="toc" linear="yes"/>
+    <itemref idref="s002" linear="yes"/>
+    <itemref idref="s003" linear="yes"/>
+    <itemref idref="s004" linear="yes"/>
+    <itemref idref="s005" linear="yes"/>
+    <itemref idref="s006" linear="yes"/>
+    <itemref idref="s007" linear="yes"/>
+    <itemref idref="s008" linear="yes"/>
+    <itemref idref="s009" linear="yes"/>
+    <itemref idref="s010" linear="yes"/>
+    <itemref idref="s011" linear="yes"/>
+    <itemref idref="s012" linear="yes"/>
+    <itemref idref="s013" linear="yes"/>
+    <itemref idref="s014" linear="yes"/>
+    <itemref idref="s015" linear="yes"/>
+    <itemref idref="s016" linear="yes"/>
+    <itemref idref="s017" linear="yes"/>
+    <itemref idref="s018" linear="yes"/>
+    <itemref idref="s019" linear="yes"/>
+    <itemref idref="s020" linear="yes"/>
+    <itemref idref="s021" linear="yes"/>
+    <itemref idref="s022" linear="yes"/>
+    <itemref idref="s023" linear="yes"/>
+    <itemref idref="s024" linear="yes"/>
+    <itemref idref="s025" linear="yes"/>
+    <itemref idref="s026" linear="yes"/>
+    <itemref idref="s027" linear="yes"/>
+    <itemref idref="s028" linear="yes"/>
+    <itemref idref="s029" linear="yes"/>
+    <itemref idref="s030" linear="yes"/>
+    <itemref idref="s031" linear="yes"/>
+    <itemref idref="s032" linear="yes"/>
+    <itemref idref="s033" linear="yes"/>
+    <itemref idref="s034" linear="yes"/>
+    <itemref idref="s035" linear="yes"/>
+    <itemref idref="s036" linear="yes"/>
+    <itemref idref="s037" linear="yes"/>
+    <itemref idref="s038" linear="yes"/>
+    <itemref idref="s039" linear="yes"/>
+    <itemref idref="s040" linear="yes"/>
+    <itemref idref="s041" linear="yes"/>
+    <itemref idref="s042" linear="yes"/>
+    <itemref idref="s043" linear="yes"/>
+    <itemref idref="s044" linear="yes"/>
+    <itemref idref="s045" linear="yes"/>
+    <itemref idref="s046" linear="yes"/>
+    <itemref idref="s047" linear="yes"/>
+    <itemref idref="s048" linear="yes"/>
+    <itemref idref="s049" linear="yes"/>
+    <itemref idref="s050" linear="yes"/>
+    <itemref idref="s051" linear="yes"/>
+    <itemref idref="s052" linear="yes"/>
+    <itemref idref="s053" linear="yes"/>
+    <itemref idref="s054" linear="yes"/>
+    <itemref idref="s055" linear="yes"/>
+    <itemref idref="s056" linear="yes"/>
+    <itemref idref="s057" linear="yes"/>
+    <itemref idref="s058" linear="yes"/>
+    <itemref idref="s059" linear="yes"/>
+    <itemref idref="s060" linear="yes"/>
+    <itemref idref="s061" linear="yes"/>
+    <itemref idref="s062" linear="yes"/>
+    <itemref idref="s063" linear="yes"/>
+    <itemref idref="s064" linear="yes"/>
+    <itemref idref="s065" linear="yes"/>
+    <itemref idref="s066" linear="yes"/>
+    <itemref idref="s067" linear="yes"/>
+    <itemref idref="s068" linear="yes"/>
+    <itemref idref="s069" linear="yes"/>
+    <itemref idref="s070" linear="yes"/>
+    <itemref idref="s071" linear="yes"/>
+    <itemref idref="s072" linear="yes"/>
+    <itemref idref="s073" linear="yes"/>
+    <itemref idref="s074" linear="yes"/>
+    <itemref idref="s075" linear="yes"/>
+    <itemref idref="s076" linear="yes"/>
+    <itemref idref="s077" linear="yes"/>
+    <itemref idref="s078" linear="yes"/>
+    <itemref idref="s079" linear="yes"/>
+    <itemref idref="s080" linear="yes"/>
+    <itemref idref="s081" linear="yes"/>
+    <itemref idref="s082" linear="yes"/>
+    <itemref idref="s083" linear="yes"/>
+    <itemref idref="s084" linear="yes"/>
+    <itemref idref="s085" linear="yes"/>
+    <itemref idref="s086" linear="yes"/>
+    <itemref idref="s087" linear="yes"/>
+    <itemref idref="s088" linear="yes"/>
+    <itemref idref="s089" linear="yes"/>
+    <itemref idref="s090" linear="yes"/>
+    <itemref idref="s091" linear="yes"/>
+    <itemref idref="s092" linear="yes"/>
+    <itemref idref="s093" linear="yes"/>
+    <itemref idref="s094" linear="yes"/>
+    <itemref idref="s095" linear="yes"/>
+    <itemref idref="s096" linear="yes"/>
+    <itemref idref="s097" linear="yes"/>
+    <itemref idref="s098" linear="yes"/>
+    <itemref idref="s099" linear="yes"/>
+    <itemref idref="s100" linear="yes"/>
+    <itemref idref="s101" linear="yes"/>
+    <itemref idref="s102" linear="yes"/>
+    <itemref idref="s103" linear="yes"/>
+    <itemref idref="s104" linear="yes"/>
+    <itemref idref="s105" linear="yes"/>
+    <itemref idref="s106" linear="yes"/>
+    <itemref idref="s107" linear="yes"/>
+    <itemref idref="s108" linear="yes"/>
+    <itemref idref="s109" linear="yes"/>
+    <itemref idref="s110" linear="yes"/>
+    <itemref idref="s111" linear="yes"/>
+    <itemref idref="s112" linear="yes"/>
+    <itemref idref="s113" linear="yes"/>
+    <itemref idref="s114" linear="yes"/>
+    <itemref idref="s115" linear="yes"/>
+    <itemref idref="s116" linear="yes"/>
+    <itemref idref="s117" linear="yes"/>
+    <itemref idref="s118" linear="yes"/>
+    <itemref idref="s119" linear="yes"/>
+    <itemref idref="s120" linear="yes"/>
+    <itemref idref="s121" linear="yes"/>
+    <itemref idref="s122" linear="yes"/>
+    <itemref idref="s123" linear="yes"/>
+    <itemref idref="s124" linear="yes"/>
+    <itemref idref="s125" linear="yes"/>
+    <itemref idref="s126" linear="yes"/>
+    <itemref idref="s127" linear="yes"/>
+    <itemref idref="s128" linear="yes"/>
+    <itemref idref="s129" linear="yes"/>
+    <itemref idref="s130" linear="yes"/>
+    <itemref idref="s131" linear="yes"/>
+    <itemref idref="s132" linear="yes"/>
+    <itemref idref="s133" linear="yes"/>
+    <itemref idref="s134" linear="yes"/>
+    <itemref idref="s135" linear="yes"/>
+    <itemref idref="s136" linear="yes"/>
+    <itemref idref="s137" linear="yes"/>
+    <itemref idref="s138" linear="yes"/>
+    <itemref idref="s139" linear="yes"/>
+    <itemref idref="s140" linear="yes"/>
+    <itemref idref="s141" linear="yes"/>
+    <itemref idref="s142" linear="yes"/>
+    <itemref idref="s143" linear="yes"/>
+    <itemref idref="s144" linear="yes"/>
+    <itemref idref="s145" linear="yes"/>
+    <itemref idref="s146" linear="yes"/>
+    <itemref idref="s147" linear="yes"/>
+    <itemref idref="s148" linear="yes"/>
+    <itemref idref="s149" linear="yes"/>
+    <itemref idref="s150" linear="yes"/>
+    <itemref idref="s151" linear="yes"/>
+    <itemref idref="s152" linear="yes"/>
+    <itemref idref="s153" linear="yes"/>
+    <itemref idref="s154" linear="yes"/>
+    <itemref idref="s155" linear="yes"/>
+    <itemref idref="s156" linear="yes"/>
+    <itemref idref="s157" linear="yes"/>
+    <itemref idref="s158" linear="yes"/>
+    <itemref idref="s159" linear="yes"/>
+    <itemref idref="s160" linear="yes"/>
+    <itemref idref="s161" linear="yes"/>
+    <itemref idref="s162" linear="yes"/>
+    <itemref idref="s163" linear="yes"/>
+    <itemref idref="s164" linear="yes"/>
+    <itemref idref="s165" linear="yes"/>
+    <itemref idref="s166" linear="yes"/>
+    <itemref idref="s167" linear="yes"/>
+    <itemref idref="s168" linear="yes"/>
+    <itemref idref="s169" linear="yes"/>
+    <itemref idref="s170" linear="yes"/>
+    <itemref idref="s171" linear="yes"/>
+    <itemref idref="s172" linear="yes"/>
+    <itemref idref="s173" linear="yes"/>
+    <itemref idref="s174" linear="yes"/>
+    <itemref idref="s175" linear="yes"/>
+    <itemref idref="s176" linear="yes"/>
+    <itemref idref="s177" linear="yes"/>
+    <itemref idref="s178" linear="yes"/>
+    <itemref idref="s179" linear="yes"/>
+    <itemref idref="s180" linear="yes"/>
+    <itemref idref="s181" linear="yes"/>
+    <itemref idref="s182" linear="yes"/>
+    <itemref idref="s183" linear="yes"/>
+    <itemref idref="s184" linear="yes"/>
+    <itemref idref="s185" linear="yes"/>
+    <itemref idref="s186" linear="yes"/>
+    <itemref idref="s187" linear="yes"/>
+    <itemref idref="s188" linear="yes"/>
+    <itemref idref="s189" linear="yes"/>
+    <itemref idref="s190" linear="yes"/>
+    <itemref idref="s191" linear="yes"/>
+    <itemref idref="s192" linear="yes"/>
+    <itemref idref="s193" linear="yes"/>
+    <itemref idref="s194" linear="yes"/>
+    <itemref idref="s195" linear="yes"/>
+    <itemref idref="s196" linear="yes"/>
+    <itemref idref="s197" linear="yes"/>
+    <itemref idref="s198" linear="yes"/>
+    <itemref idref="s199" linear="yes"/>
+    <itemref idref="s200" linear="yes"/>
+    <itemref idref="s201" linear="yes"/>
+    <itemref idref="s202" linear="yes"/>
+    <itemref idref="s203" linear="yes"/>
+    <itemref idref="s204" linear="yes"/>
+    <itemref idref="s205" linear="yes"/>
+    <itemref idref="s206" linear="yes"/>
+    <itemref idref="s207" linear="yes"/>
+    <itemref idref="s208" linear="yes"/>
+    <itemref idref="s209" linear="yes"/>
+    <itemref idref="s210" linear="yes"/>
+    <itemref idref="s211" linear="yes"/>
+    <itemref idref="s212" linear="yes"/>
+    <itemref idref="s213" linear="yes"/>
+    <itemref idref="s214" linear="yes"/>
+    <itemref idref="s215" linear="yes"/>
+    <itemref idref="s216" linear="yes"/>
+    <itemref idref="s217" linear="yes"/>
+    <itemref idref="s218" linear="yes"/>
+    <itemref idref="s219" linear="yes"/>
+    <itemref idref="s220" linear="yes"/>
+    <itemref idref="s221" linear="yes"/>
+    <itemref idref="s222" linear="yes"/>
+    <itemref idref="s223" linear="yes"/>
+    <itemref idref="s224" linear="yes"/>
+    <itemref idref="s225" linear="yes"/>
+    <itemref idref="s226" linear="yes"/>
+    <itemref idref="s227" linear="yes"/>
+    <itemref idref="s228" linear="yes"/>
+    <itemref idref="s229" linear="yes"/>
+    <itemref idref="s230" linear="yes"/>
+    <itemref idref="s231" linear="yes"/>
+    <itemref idref="s232" linear="yes"/>
+    <itemref idref="s233" linear="yes"/>
+    <itemref idref="s234" linear="yes"/>
+    <itemref idref="s235" linear="yes"/>
+    <itemref idref="s236" linear="yes"/>
+    <itemref idref="s237" linear="yes"/>
+    <itemref idref="s238" linear="yes"/>
+    <itemref idref="s239" linear="yes"/>
+    <itemref idref="s240" linear="yes"/>
+    <itemref idref="s241" linear="yes"/>
+    <itemref idref="s242" linear="yes"/>
+    <itemref idref="s243" linear="yes"/>
+    <itemref idref="s244" linear="yes"/>
+    <itemref idref="s245" linear="yes"/>
+    <itemref idref="s246" linear="yes"/>
+    <itemref idref="s247" linear="yes"/>
+    <itemref idref="s248" linear="yes"/>
+    <itemref idref="s249" linear="yes"/>
+    <itemref idref="s250" linear="yes"/>
+    <itemref idref="s251" linear="yes"/>
+    <itemref idref="s252" linear="yes"/>
+    <itemref idref="s253" linear="yes"/>
+    <itemref idref="s254" linear="yes"/>
+    <itemref idref="s255" linear="yes"/>
+    <itemref idref="s256" linear="yes"/>
+    <itemref idref="s257" linear="yes"/>
+    <itemref idref="s258" linear="yes"/>
+    <itemref idref="s259" linear="yes"/>
+    <itemref idref="s260" linear="yes"/>
+    <itemref idref="s261" linear="yes"/>
+    <itemref idref="s262" linear="yes"/>
+    <itemref idref="s263" linear="yes"/>
+    <itemref idref="s264" linear="yes"/>
+    <itemref idref="s265" linear="yes"/>
+    <itemref idref="s266" linear="yes"/>
+    <itemref idref="s267" linear="yes"/>
+    <itemref idref="s268" linear="yes"/>
+    <itemref idref="s269" linear="yes"/>
+    <itemref idref="s270" linear="yes"/>
+    <itemref idref="s271" linear="yes"/>
+    <itemref idref="s272" linear="yes"/>
+    <itemref idref="s273" linear="yes"/>
+    <itemref idref="s274" linear="yes"/>
+    <itemref idref="s275" linear="yes"/>
+    <itemref idref="s276" linear="yes"/>
+    <itemref idref="s277" linear="yes"/>
+    <itemref idref="s278" linear="yes"/>
+    <itemref idref="s279" linear="yes"/>
+    <itemref idref="s280" linear="yes"/></spine>
+</package>
+
+
+

@@ -17,11 +17,11 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Check Authentication
+	//Required configuration files
 	require_once('abre_verification.php');
 	
+	//Send the feedback email
 	$textarea=$_POST["textarea"];
-	
 	if($textarea!="")
 	{
 		$to=constant("FEEDBACK_EMAIL");
@@ -29,11 +29,11 @@
 		$message = "From: ".$_SESSION['useremail']."\r\n\r\n".$_SESSION['displayName']."\r\n\r\n$textarea";
 		$headers = "From: ". $_SESSION['useremail'];
 		mail($to,$subject,$message,$headers);
-			
 		echo "Your feedback has been sent!";
 	}
 	else
 	{
 		echo "Whoops...please fill in a message.";
 	}
+	
 ?>

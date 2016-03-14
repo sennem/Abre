@@ -17,6 +17,9 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
+	//Required configuration files
+	require_once(dirname(__FILE__) . '/../configuration.php'); 
+	
 ?>
 
 <!-- Display the Login -->
@@ -30,7 +33,9 @@
 				echo "<div class='mdl-card-text'>$site_login_text</div>";
 			?>
 	  		<div class="mdl-card__actions mdl-card--border">	  		
-	  		<?php echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$authUrl' style='margin: 0 auto;'>Sign In</a>"; ?>
+	  		<?php 
+		  		echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$authUrl' style='margin: 0 auto;'>Sign In</a>"; 
+		  	?>
 	  		</div>
 		</div>
 		

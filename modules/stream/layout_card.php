@@ -17,7 +17,7 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Login Validation
+	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 		echo "<div class='mdl-card mdl-shadow--2dp card_stream'>";
@@ -27,9 +27,25 @@
 			}; 
 		
 			echo "<div class='mdl-card__title'><div class='mdl-card__title-text'>$title</div></div>";
-			echo "<div class='mdl-card__supporting-text-subtitle'>$feedtitle</div>";
+			echo "<div class='mdl-card__supporting-text-subtitle'><a href='$feedlink' class='mdl-color-text--blue-800' target='_blank'>$feedtitle</a></div>";
 			if($excerpt!=""){ echo "<div class='mdl-card__supporting-text'>$excerpt</div>"; }
-			echo "<div class='mdl-card__actions'><a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$link' target='_blank'>$linklabel</a></div>";
+			echo "<div class='mdl-card__actions'>";
+				echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$link' target='_blank'>$linklabel</a>";
+			
+			if($_SESSION['usertype']=='staff')
+			{
+				echo "<div class='mdl-layout-spacer'></div>";
+				if($num_rows_comment==0)
+				{
+					echo "<a class='material-icons mdl-color-text--grey-400 modal-addstreamcomment' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$link' title='Add this item' href='#addstreamcomment'>insert_comment</a>";
+				}
+				else
+				{
+					echo "<a class='material-icons mdl-badge mdl-badge--no-background mdl-badge--overlap mdl-color-text--grey-400 modal-addstreamcomment' data-badge='$num_rows_comment' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$link' title='Add this item' href='#addstreamcomment'>insert_comment</a>";
+				}
+			}
+			
+			echo "</div>";
 			
 		echo "</div>";
 		

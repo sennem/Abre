@@ -17,13 +17,10 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Configuration
+	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 	
-	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
-	
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	
 	//Find what streams to display
 	$sql3 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
@@ -65,7 +62,8 @@
 	$feed_flipboard->enable_cache($streamcachesetting);
 	$feed_flipboard->set_item_limit(10);
 	$feed_flipboard->init();
-	$feed_flipboard->handle_content_type();		
+	$feed_flipboard->handle_content_type();	
+
 	
 	foreach ($feed_flipboard->get_items() as $item)
 	{
@@ -73,6 +71,7 @@
 		$link=$item->get_link();
 		$date=$item->get_date();
 		$feedtitle = $item->get_feed()->get_title();
+		$feedlink = $item->get_feed()->get_link();
 		$date=strtotime($date);
 		$linklabel="Read Post";
 		$excerpt=$item->get_description();
@@ -80,7 +79,7 @@
 		{
 			$image=$enclosure->get_link();
 		}
-		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$linklabel","$feedtitle"));
+		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$linklabel","$feedtitle","$feedlink"));
 		$totalcount++;
 	}
 		
@@ -90,17 +89,27 @@
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){		
 		$date=$feeds[$cardcountloop][0];
 		$title=$feeds[$cardcountloop][1];
+		$title = str_replace("<p>", " ", $title);
+		$title=strip_tags(html_entity_decode($title));
+		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
 		$excerpt=$feeds[$cardcountloop][2];
 		$excerpt = str_replace("<p>", " ", $excerpt);
-		$excerpt=strip_tags($excerpt);
+		$excerpt=strip_tags(html_entity_decode($excerpt));
 		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
 		$link=$feeds[$cardcountloop][3];
 		$image=$feeds[$cardcountloop][4];
 			
 		include "imageproxy.php";
+		
+		//Comment Count
+		include(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
+		$resultcomment = $db->query("SELECT * FROM streams_comments where url='$link'");
+		$num_rows_comment = mysqli_num_rows($resultcomment);	
+		if($num_rows_comment==""){ $num_rows_comment=0; }
 				
 		$linklabel=$feeds[$cardcountloop][5];
 		$feedtitle=$feeds[$cardcountloop][6];
+		$feedlink=$feeds[$cardcountloop][7];
 		
 		$cardcountloopaction=$cardcountloop+4;
 	
@@ -110,3 +119,25 @@
 		}	
 	}	
 ?>
+
+<script>
+	
+	$(document).ready(function(){    	
+    	$('.modal-addstreamcomment').leanModal({
+	    	ready: function() { $("#streamComment").focus(); }
+	   	});
+  	});
+  	
+	$(document).on("click", ".modal-addstreamcomment", function () {
+		$("#commentloader").show();
+		$("#streamComments").empty();
+	    var Stream_Title = $(this).data('title');
+	    $(".modal-content #streamTitle").text(Stream_Title);
+	    var Stream_Url = $(this).data('url');
+	    $(".modal-content #streamUrl").val(Stream_Url);
+	    $( "#streamComments" ).load( "modules/stream/listcomments.php?url="+Stream_Url, function() {		
+			$("#commentloader").hide();
+		});	
+	});
+  	
+</script>

@@ -17,10 +17,10 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Google API PHP Library Files
+	//Google API PHP library files
 	require_once 'google-api-php-client-master/Google/autoload.php';
  
-	//Create Client Request to Access Google API
+	//Create Client request to access Google API
 	$client = new Google_Client();
 	$client->setApplicationName("Abre");
 	$client_id=constant("GOOGLE_CLIENT_ID");
@@ -32,12 +32,13 @@
 	$simple_api_key=constant("GOOGLE_API_KEY");
 	$client->setDeveloperKey($simple_api_key);
 	$client->setAccessType("offline");
+	$client->setApprovalPrompt("force");
 	$scopes=unserialize(constant("GOOGLE_SCOPES"));
 	$client->setScopes($scopes);
 	$hd=constant("GOOGLE_HD");
 	$client->setHostedDomain($hd);
 
-	//Send Client Requests
+	//Send client requests
 	$Service_Oauth2 = new Google_Service_Oauth2($client);
 	$Service_Plus = new Google_Service_Plus($client);
 	$Service_Gmail = new Google_Service_Gmail($client);

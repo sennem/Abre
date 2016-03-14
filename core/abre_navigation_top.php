@@ -17,18 +17,20 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Login Validation
+	//Required configuration files
 	require_once('abre_verification.php');
-
-	//Display Top Navigation
-	echo "<header class='mdl-layout__header mdl-color--blue-800 mdl-color-text--white'>";
-		echo "<div class='mdl-layout__header-row'>";
-			echo "<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>";
-			echo "<div class='mdl-layout-spacer'></div>";
-			echo "<a href='#apps' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><i class='material-icons'>apps</i></a>";
-			echo "<div class='navspace'></div>";
-			echo "<a href='#profile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
-		echo "</div>";
-	echo "</header>";
-
+	
 ?>
+
+	<!--Display top navigation-->
+	<header class='mdl-layout__header mdl-color--blue-800 mdl-color-text--white'>
+		<div class='mdl-layout__header-row'>
+			<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
+			<div class='mdl-layout-spacer'></div>
+			<a href='#apps' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><i class='material-icons'>apps</i></a>
+			<div class='navspace'></div>
+			<?php
+				echo "<a href='#profile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+			?>
+		</div>
+	</header>

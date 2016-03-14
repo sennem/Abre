@@ -17,14 +17,12 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
+	//Required configuration files
 	require_once('abre_verification.php');
 	
-	//Create the Modules Array
+	//Load modules based on permissions
 	$modules = array();
 	$modulecount=0;
-	
-	
-	//Display Available Modules Based On Module Permissions
 	$moduledirectory = dirname(__FILE__) . '/../modules';
 	$modulefolders = scandir($moduledirectory);
 	foreach ($modulefolders as $result) {	
@@ -49,6 +47,5 @@
 		}  
 	}
 	sort($modules, SORT_DESC);
-
 	
 ?>

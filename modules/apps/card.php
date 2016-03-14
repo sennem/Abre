@@ -17,15 +17,16 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 
-	//Configuration
+	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
-	
-	echo "<div id='appslider' class='mdl-shadow--2dp'>";	
+
+?>
+	<!--Display apps on stream-->
+	<div id='appslider' class='mdl-shadow--2dp'>
+		<?php
 		$sql = "SELECT * FROM apps WHERE $_SESSION[usertype] = 1 AND required = 1  order by sort";
 		$result = $db->query($sql);
 		if($result)
@@ -104,10 +105,8 @@
 		}
 		$db->close();
 		
-		
-	echo "</div>";
-
-?>
+	?>
+	</div>
 
 <script>
 

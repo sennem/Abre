@@ -16,12 +16,16 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
+    
+    //Required configuration files
+	require(dirname(__FILE__) . '/../../configuration.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 
 	$pageview=1;
 	$drawerhidden=0;
 	$pageorder=6;
 	$pagetitle="Profile";
-	$pageicon="person";
+	$pageicon="account_circle";
 	$pagepath="profile";
 	$pagerestrictions="";
 	

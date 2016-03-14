@@ -17,22 +17,25 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	
+	//Required configuration files
 	require_once('abre_verification.php');
 	require_once(dirname(__FILE__) . '/../configuration.php'); 
 	
+	//Encryption function
 	function encrypt($string, $encryption_key){
 		$encryption_key=constant("DB_KEY");
 		$string = rtrim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $encryption_key, $string, MCRYPT_MODE_ECB)));
 		return $string;
 	}
 	
+	//Decryption function
 	function decrypt($string, $encryption_key){
 		$encryption_key=constant("DB_KEY");
 		$string = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $encryption_key, base64_decode($string), MCRYPT_MODE_ECB));
 		return $string;
 	}
 	
+	//Find user ID in directory module given an email
 	function finduserid($email){
 		$email=encrypt($email, "");
 		$sql = "SELECT *  FROM directory where email='$email'";
@@ -44,6 +47,7 @@
 		}
 	}
 	
+	//Find user ID given an email
 	function finduseridcore($email){
 		include "abre_dbconnect.php";
 		$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."'";
@@ -55,6 +59,7 @@
 		}
 	}
 	
+	//Determine the grades that students do not have email access
 	function studentaccess(){
 		$email = $_SESSION['useremail'];
 		if(preg_replace('/[^0-9]+/', '', $email))

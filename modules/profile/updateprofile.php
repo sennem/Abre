@@ -17,12 +17,9 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Configuration
+	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
 	
 	//Insert/Update Profile

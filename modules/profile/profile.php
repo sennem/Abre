@@ -17,10 +17,8 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Configuration
+	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 	
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
@@ -246,8 +244,6 @@
 		var formMessages = $('#form-messages');
 		
 		$(".formclick").click(function() {
-		    $(formMessages).text('Saving your profile...');	
-		    $( ".notification" ).slideDown();	
 			var formData = $('#form-profile').serialize();
 			$.ajax({
 			    type: 'POST',

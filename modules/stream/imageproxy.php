@@ -17,7 +17,7 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	 
-	//Login Validation
+	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	//Check for Image

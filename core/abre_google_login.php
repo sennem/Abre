@@ -17,16 +17,19 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 
-	//Require the Google Configuration Settings
+//Try to login the user, if they have revoke Google access, request access
+try
+{
+
+	//Required configuration files
 	require_once('abre_google_authentication.php');
-	
 	$cookie_name=constant("PORTAL_COOKIE_NAME");
 	$site_domain=constant("SITE_GAFE_DOMAIN");
 
-	//Signout the User
+	//Signout the user
 	if (isset($_REQUEST['signout'])){
 		
-		// unset cookies
+		//Remove cookies and destroy session
 		if (isset($_SERVER['HTTP_COOKIE'])) {
 		    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
 		    foreach($cookies as $cookie) {
@@ -36,16 +39,15 @@
 		        setcookie($name, '', time()-1000, '/');
 		    }
 		}
-		
-		//Destroy the OAuth & PHP Session	
 		session_destroy();
 		$client->revokeToken();
 		
-		//Redirect User to Login`	
+		//Redirect user
 		header("Location: $portal_root");
+		
 	}
 
-	//If Cookie Was Set and the Session is Not Set
+	//User is returning from closed browser that was logged in
 	if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token']))
 	{
 		include "abre_dbconnect.php";
@@ -54,6 +56,7 @@
 		{	
 			$getRefreshToken2=mysqli_fetch_assoc(mysqli_query($db,"SELECT refresh_token from users where cookie_token='$HCSDOHcookievalue'"));
 			$refreshtoken2=$getRefreshToken2['refresh_token'];
+			
 			$client->setAccessToken($refreshtoken2); 
 			$_SESSION['access_token']=$refreshtoken2;
 			
@@ -63,7 +66,7 @@
 		$db->close();
 	}
 	
-	//Login the User
+	//Login the user
 	if (isset($_GET['code']))
 	{
 		$client->authenticate($_GET['code']);  
@@ -71,13 +74,13 @@
 		header("Location: $portal_root");
 	}     
 
-	//Set Access Token to Make Request
+	//Set access token to make request
 	if (isset($_SESSION['access_token']))
 	{
 		$client->setAccessToken($_SESSION['access_token']);
 	}
 
-	//If Logged In Get Basic User Information
+	//Get basic user information if they are logged in
 	if(isset($_SESSION['access_token']) && $client->getAccessToken())
 	{
 		if(!isset($_SESSION['useremail']))
@@ -89,7 +92,7 @@
 			$userPicture=$userData['picture'];
 			$_SESSION['picture']=$userPicture;
 			$_SESSION['usertype']="staff";
-				if (strpos($_SESSION['useremail'],$site_domain) == false) { header("Location: $portal_root?signout");	}
+				if ((strpos($_SESSION['useremail'],$site_domain) == false) && ($site_domain!="")) { header("Location: $portal_root?signout");	}
 				if (strcspn($_SESSION['useremail'], '0123456789') != strlen($_SESSION['useremail'])){ $_SESSION['usertype']="student"; }
 			$me = $Service_Plus->people->get('me');
 			$displayName = $me['displayName'];
@@ -99,17 +102,17 @@
 		$authUrl = $client->createAuthUrl();
 	}
 
-	//Save the Reset Token if Not Previously Saved
+	//Save the user information to Abre users database
 	if (isset($_SESSION['access_token']))
 	{
-		if (strpos($_SESSION['useremail'],$site_domain) != false){	
+		if ((strpos($_SESSION['useremail'],$site_domain) != false) or ($site_domain=="")){	
 			include "abre_dbconnect.php";
 			if($result=$db->query("SELECT * from users where email='".$_SESSION['useremail']."'"))
 			{	
 				$count=$result->num_rows;
 				if($count=='1')
 				{
-					//If not already logged in, check and get a refresh token.
+					//If not already logged in, check and get a refresh token
 					if (!isset($_SESSION['loggedin'])) { $_SESSION['loggedin']=""; } 
 					if($_SESSION['loggedin']!="yes")
 					{
@@ -122,13 +125,13 @@
 							mysqli_query($db, "UPDATE users SET refresh_token='" . $_SESSION['access_token'] . "' WHERE email='".$_SESSION['useremail']."'") or die (mysqli_error($db));
 						}
 						
-						//Get the Token from the Database
+						//Get the token from the database
 						$getRefreshToken=mysqli_fetch_assoc(mysqli_query($db,"SELECT refresh_token from users where email='".$_SESSION['useremail']."'"));
 						$refreshtoken=$getRefreshToken['refresh_token'];
 						$client->setAccessToken($refreshtoken); 
 						$_SESSION['access_token']=$refreshtoken;
 					
-						//Set Cookie for 7 Days
+						//Set cookie for 7 days
 						$sha1useremail=sha1($_SESSION['useremail']);
 						$cookiekey=constant("PORTAL_COOKIE_KEY");
 						$hash=sha1($cookiekey);
@@ -148,12 +151,62 @@
 					$storetoken=$sha1useremail.$hash;
 					mysqli_query($db, "Insert into users (email, refresh_token, cookie_token) VALUES ('".$_SESSION['useremail']."', '" . $_SESSION['access_token'] . "', '$storetoken')") or die (mysqli_error($db));
 				
-					//Set Cookie for 7 Days
+					//Set cookie for 7 days
 					setcookie($cookie_name,$storetoken, time()+86400 * 7);
 				}
 		
 			}
+			
+			//Abre setup - set first login to admin
+			mysqli_query($db, "UPDATE users SET superadmin = 1 WHERE id = 1") or die (mysqli_error($db));
+			
 			$db->close();
 		}
 	}
+}
+catch (Exception $x)
+{
+	
+	if(strpos($x->getMessage(), 'Invalid Credentials'))
+	{	
+		//Remove cookies and destroy session
+		if (isset($_SERVER['HTTP_COOKIE'])) {
+		    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+		    foreach($cookies as $cookie) {
+		        $parts = explode('=', $cookie);
+		        $name = trim($parts[0]);
+		        setcookie($name, '', time()-1000);
+		        setcookie($name, '', time()-1000, '/');
+		    }
+		}
+		session_destroy();
+		$client->revokeToken();
+		
+		//Redirect user
+		header("Location: $portal_root");
+		
+	}	
+	
+	if(strpos($x->getMessage(), 'Invalid Credentials'))
+	{	
+		//Remove cookies and destroy session
+		if (isset($_SERVER['HTTP_COOKIE'])) {
+		    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+		    foreach($cookies as $cookie) {
+		        $parts = explode('=', $cookie);
+		        $name = trim($parts[0]);
+		        setcookie($name, '', time()-1000);
+		        setcookie($name, '', time()-1000, '/');
+		    }
+		}
+		
+		//Destroy the OAuth & PHP session	
+		session_destroy();
+		$client->revokeToken();
+		
+		//Redirect user
+		header("Location: $portal_root");
+	}
+	
+}
 ?>

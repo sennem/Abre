@@ -17,22 +17,28 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Check Authentication and Get Google Information
+	//Required configuration files
 	require_once('abre_verification.php');
 	require_once('abre_google_login.php');
 	require_once('abre_functions.php');
 
-	//Display the Drawer
-	echo "<div class='drawer mdl-layout__drawer' id='drawer' style='border:none;'>";
-		echo "<header class='drawer-header mdl-color--blue-800'>";
-			echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar'>";
-			echo "<span class='mdl-color-text--white'>".$_SESSION['displayName']."</span>";
-			echo "<span class='mdl-color-text--white'>".$_SESSION['useremail']."</span>";
-		echo "</header>";
+?>
+
+	<!--Display the drawer-->
+	<div class='drawer mdl-layout__drawer' id='drawer' style='border:none;'>
+		<header class='drawer-header mdl-color--blue-800'>
+			<?php
+				echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar'>";
+				echo "<span class='mdl-color-text--white'>".$_SESSION['displayName']."</span>";
+				echo "<span class='mdl-color-text--white'>".$_SESSION['useremail']."</span>";
+			?>
+		</header>
 		
-		echo "<nav class='navigation mdl-navigation mdl-color--white'>";
+		<nav class='navigation mdl-navigation mdl-color--white'>
+			<?php	
 				
-				for($modulecountloop = 0; $modulecountloop < $modulecount; $modulecountloop++){	
+				for($modulecountloop = 0; $modulecountloop < $modulecount; $modulecountloop++)
+				{	
 					$pagetitle=$modules[$modulecountloop][1];
 					$pageview=$modules[$modulecountloop][2];
 					$pageicon=$modules[$modulecountloop][3];
@@ -41,13 +47,10 @@
 
 					if($pageview==1 && $drawerhidden!=1)
 					{
-						echo "<a class='mdl-navigation__link' href='#$pagepath' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons' role='presentation'>$pageicon</i>$pagetitle</a>";
+						echo "<a class='mdl-navigation__link' href='#$pagepath' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>$pageicon</i>$pagetitle</a>";
 					}
-
 				}
+			?>
 
-
-		echo "</nav>";
-	echo "</div>";
-
-?>
+		</nav>
+	</div>

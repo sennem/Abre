@@ -17,24 +17,17 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Check Authentication
+	//Required configuration files
 	require_once('abre_verification.php');
 
-	//Display the Page
-	echo "<main class='mdl-layout__content'>";
-	
-		echo "<div id='navigation_top'></div>";
-
-		echo "<div class='content'>";	
-			echo "<div id='loader'>";
-				include "abre_loader_spinner.php";
-			echo "</div>";
-	
-			echo "<div id='content_holder'></div>";
-			echo "<div class='notification'><div id='form-messages'></div></div>";			
-		echo "</div>";
-		
-	echo "</main>";
-	
 ?>
 
+	<!--Display page content-->
+	<main class='mdl-layout__content'>
+		<div id='navigation_top'></div>
+		<div class='content'>
+			<div id='loader'><?php include "abre_loader_spinner.php"; ?></div>
+			<div id='content_holder'></div>
+			<div class='notification'><div id='form-messages'></div></div>		
+		</div>
+	</main>

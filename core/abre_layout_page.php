@@ -17,19 +17,17 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Check Authentication
+	//Required configuration files
 	require_once('abre_verification.php');
-	
 	require_once('abre_feedback.php');
 
-	//Display the Page Content
-	echo "<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>";
-	  		
+?>
+	
+	<!--Display page content-->
+	<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>
+	  	<?php
 		require_once('abre_navigation_top.php'); 
 		require_once('abre_navigation_drawer.php');
 		require_once('abre_layout_page_content.php');
-	    	
-	echo "</div>";
-	
-	
-?>
+	    ?>
+	</div>

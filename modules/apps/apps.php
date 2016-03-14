@@ -17,19 +17,20 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Configuration
+	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 	
-	//Display the Apps for the User
-	echo "<div class='page_container'>";
-		echo "<div class='row'>";
+?>
+
+	<!--Display relivant apps for user-->
+	<div class='page_container'>
+		<div class='row'>
 		
-			//Staff View
+			<?php
+			//Display both staff and student apps for staff
 			if (!empty($_GET["mode"])){ $mode=htmlspecialchars($_GET["mode"], ENT_QUOTES); }else{ $mode=""; }
 			if($mode=="")
 			{
@@ -136,13 +137,10 @@
 					echo "</div>";
 				}
 			}
+			?>
 	
-		echo "</div>";
-	echo "</div>";
-	
-
-	
-?>
+		</div>
+	</div>
 
 <script>
 	

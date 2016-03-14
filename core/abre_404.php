@@ -19,4 +19,5 @@
 	
 ?>
 
+<!--Display 404 Message-->
 <div class="center-align">Sorry. That page does not exist.</div>

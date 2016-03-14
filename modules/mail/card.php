@@ -17,13 +17,14 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
+	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php'); 
 
 	//Set Access Token
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']){ $client->setAccessToken($_SESSION['access_token']); }
 	
-	//Get Gmail Content
+	//Get Gmail content
 	if ($client->getAccessToken())
 	{
 		

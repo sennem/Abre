@@ -17,17 +17,14 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Configuration
+	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 ?>
 
 <div class='grid-item'>
 	<div class='demo-card-event mdl-card mdl-shadow--2dp card_stream'>
-
 		<div id='calendar'>
 			<div class='mdl-card__title'>
 				<div class="valign-wrapper">
@@ -37,6 +34,5 @@
 			</div>
 			<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
 		</div>
-		
 	</div>
 </div>

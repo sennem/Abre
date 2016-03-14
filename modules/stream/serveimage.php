@@ -17,10 +17,8 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Configuration
-	require(dirname(__FILE__) . '/../../configuration.php'); 
-	
-	//Login Validation
+	//Required configuration files
+	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	
 	$fileextention=$_GET['ext'];

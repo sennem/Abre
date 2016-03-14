@@ -17,25 +17,27 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
+	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php'); 
 
-	//Set Access Token
+	//Set access token
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']){	$client->setAccessToken($_SESSION['access_token']); }
 	
-	//Get Gmail Content
+	//Get Gmail content
 	if ($client->getAccessToken()){
 		
 		$_SESSION['access_token'] = $client->getAccessToken();
+		?>
 		
-		//Card Title
-		echo "<div class='mdl-card__title'>";
-			echo "<div class='valign-wrapper'>";
-				echo "<a href='https://drive.google.com' target='_blank'><img src='core/images/icon_drive.png' class='icon_small'></a>";
-				echo "<div><div class='mdl-card__title-text'>Drive</div><div class='card-text-small'>Your Recent Files</div></div>";
-			echo "</div>";
-		echo "</div>";
+		<div class='mdl-card__title'>
+			<div class='valign-wrapper'>
+				<a href='https://drive.google.com' target='_blank'><img src='core/images/icon_drive.png' class='icon_small'></a>
+				<div><div class='mdl-card__title-text'>Drive</div><div class='card-text-small'>Your Recent Files</div></div>
+			</div>
+		</div>
 		
+		<?php
 		$userData = $Service_Oauth2->userinfo->get();
 		$lastWeek=date("c",strtotime("-1 week"));
 		$parameters['q'] = "trashed = false and mimeType != 'application/vnd.google-apps.folder' and '".$_SESSION['useremail']."' in owners and modifiedDate > '$lastWeek'";
@@ -44,10 +46,12 @@
 		$parameters['maxResults'] = "3";
 		$parameters['q'] = "trashed = false and mimeType != 'application/vnd.google-apps.folder' and '".$_SESSION['useremail']."' in owners";
 		$Drive_Results = $Service_Drive->files->listFiles($parameters);
+		?>
 		
-		echo "<div class='hide-on-small-only'>";
-		echo "<div class='row' style='margin-bottom:0;'>";
+		<div class='hide-on-small-only'>
+		<div class='row' style='margin-bottom:0;'>
 		
+			<?php
 			foreach ($Drive_Results->getItems() as $event)
 			{
 				
@@ -69,11 +73,13 @@
 						echo "<a href='$drivelink' target='_blank'><i class='material-icons mdl-color-text--grey-400'>play_circle_filled</i></a>";
 					echo "</div>";
 				echo "</div>";
-			}	
+			}
+			?>	
 		
-		echo "</div>";
-		echo "</div>";
-		
+		</div>
+		</div>
+	
+	<?php	
 	}
 	
 ?>

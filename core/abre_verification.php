@@ -17,14 +17,24 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Start PHP Session
-	if(session_id() == ''){ session_start(); }
+	if (!headers_sent()) {
 	
-	require_once('abre_google_session_refresh.php');
+		//Start PHP session
+		if(session_id() == ''){ session_start(); }
+		
+		include(dirname(__FILE__) . '/../configuration.php'); 
+		
+		$cookie_name=constant("PORTAL_COOKIE_NAME");
+		
+		//Require login script if there is a cookie but not session
+		if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token']))
+		{
+			require_once 'abre_google_login.php';
+		}
+		
+		//Check to make sure they are logged in
+		if(!(isset($_SESSION['useremail']) && $_SESSION['useremail'] != "")){ header("Location: $portal_root/?signout"); };
 	
-	include(dirname(__FILE__) . '/../configuration.php'); 
-	
-	//Login Check
-	if(!(isset($_SESSION['useremail']) && $_SESSION['useremail'] != "")){ header("Location: $portal_root/?signout"); };
+	}
 
 ?>

@@ -17,30 +17,33 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 
+	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php'); 
 	
-	//Set Access Token
+	//Set access token
 	if (isset($_SESSION['access_token']) && $_SESSION['access_token']){ $client->setAccessToken($_SESSION['access_token']); }
 	
-	//Get Classroom Information
-	if ($client->getAccessToken()){
+	//Get classroom information
+	if ($client->getAccessToken())
+	{
 
 		$_SESSION['access_token'] = $client->getAccessToken();
+		?>
 
-		//Card Title
-		echo "<div class='mdl-card__title'>";
-			echo "<div class='valign-wrapper'>";
-				echo "<a href='https://classroom.google.com' target='_blank'><img src='core/images/icon_classroom.png' class='icon_small'></a>";
-				if($_SESSION['usertype']=="staff"){ echo "<div><div class='mdl-card__title-text'>Classroom</div><div class='card-text-small'>Classes You Teach</div></div>"; }
-				if($_SESSION['usertype']=="student"){ echo "<div><div class='mdl-card__title-text'>Classroom</div><div class='card-text-small'>Classes You Are Taking</div></div>"; }
-			echo "</div>";
-		echo "</div>";			
+		<div class='mdl-card__title'>
+			<div class='valign-wrapper'>
+				<a href='https://classroom.google.com' target='_blank'><img src='core/images/icon_classroom.png' class='icon_small'></a>
+				<?php
+					if($_SESSION['usertype']=="staff"){ echo "<div><div class='mdl-card__title-text'>Classroom</div><div class='card-text-small'>Classes You Teach</div></div>"; }
+					if($_SESSION['usertype']=="student"){ echo "<div><div class='mdl-card__title-text'>Classroom</div><div class='card-text-small'>Classes You Are Taking</div></div>"; }
+				?>
+			</div>
+		</div>		
 	
-		//Display Classes
-		echo "<div class='hide-on-small-only'>";
-		echo "<div class='row' style='margin-bottom:0;'>";
-		
+		<div class='hide-on-small-only'>
+		<div class='row' style='margin-bottom:0;'>
+			<?php
 			if($_SESSION['usertype']=="staff")
 			{ 
 				$optParams = array('pageSize' => 7, 'teacherId' => 'me');
@@ -77,10 +80,11 @@
 					}
 				}
 			}
+			?>
 		
-		echo "</div>";
-		echo "</div>";
-		
+		</div>
+		</div>
+	<?php	
 	}
 
 ?>
