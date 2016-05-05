@@ -274,21 +274,88 @@
 			if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
 			$sql = "CREATE DATABASE Abre;";
 			$sql .= "USE Abre;";
-			$sql .= "CREATE TABLE apps (id int(11) NOT NULL,icon text NOT NULL,student int(11) NOT NULL,staff int(11) NOT NULL,title text NOT NULL,image text NOT NULL,link text NOT NULL,required int(11) NOT NULL,sort int(11) NOT NULL,minor_disabled int(11) NOT NULL DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-			$sql .= "CREATE TABLE `profiles` (`id` int(11) NOT NULL,`email` text NOT NULL,`startup` int(11) NOT NULL DEFAULT '1',`streams` text NOT NULL,`card_mail` int(11) NOT NULL DEFAULT '1',`card_drive` int(11) NOT NULL DEFAULT '1',`card_calendar` int(11) DEFAULT '1',`card_classroom` int(11) NOT NULL DEFAULT '1',`apps_order` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-			$sql .= "CREATE TABLE `streams` (`id` int(11) NOT NULL,`group` text NOT NULL,`title` text NOT NULL,`slug` text NOT NULL,`type` text NOT NULL,`url` text NOT NULL,`required` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-			$sql .= "CREATE TABLE `streams_comments` (`id` int(11) NOT NULL,`url` text NOT NULL,`user` text NOT NULL,`comment` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 			$sql .= "CREATE TABLE `users` (`id` int(11) NOT NULL,`email` text NOT NULL,`superadmin` int(11) NOT NULL DEFAULT '0',`refresh_token` text NOT NULL,`cookie_token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-			$sql .= "ALTER TABLE `apps` ADD PRIMARY KEY (`id`);";
-  			$sql .= "ALTER TABLE `profiles` ADD PRIMARY KEY (`id`);";
-  			$sql .= "ALTER TABLE `streams` ADD PRIMARY KEY (`id`);";
-  			$sql .= "ALTER TABLE `streams_comments` ADD PRIMARY KEY (`id`);";
   			$sql .= "ALTER TABLE `users` ADD PRIMARY KEY (`id`);";
-  			$sql .= "ALTER TABLE `apps` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-  			$sql .= "ALTER TABLE `profiles` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-  			$sql .= "ALTER TABLE `streams` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-  			$sql .= "ALTER TABLE `streams_comments` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
   			$sql .= "ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+$sql .= "CREATE TABLE `directory` (
+  `id` int(11) NOT NULL,
+  `updatedtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `superadmin` int(11) NOT NULL,
+  `admin` int(11) NOT NULL,
+  `archived` int(11) NOT NULL,
+  `picture` text NOT NULL,
+  `firstname` text NOT NULL,
+  `lastname` text NOT NULL,
+  `middlename` text NOT NULL,
+  `title` text NOT NULL,
+  `address` text NOT NULL,
+  `city` text NOT NULL,
+  `state` text NOT NULL,
+  `zip` text NOT NULL,
+  `email` text NOT NULL,
+  `phone` text NOT NULL,
+  `cellphone` text NOT NULL,
+  `gender` text NOT NULL,
+  `ethnicity` text NOT NULL,
+  `contract` text NOT NULL,
+  `grade` text NOT NULL,
+  `subject` text NOT NULL,
+  `ss` text NOT NULL,
+  `dob` text NOT NULL,
+  `classification` text NOT NULL,
+  `location` text NOT NULL,
+  `doh` text NOT NULL,
+  `senioritydate` text NOT NULL,
+  `effectivedate` text NOT NULL,
+  `step` text NOT NULL,
+  `salary` text NOT NULL,
+  `hours` text NOT NULL,
+  `stateeducatorid` text NOT NULL,
+  `licensetype1` text NOT NULL,
+  `licenseissuedate1` text NOT NULL,
+  `licenseexpirationdate1` text NOT NULL,
+  `licenseterm1` text NOT NULL,
+  `licensetype2` text NOT NULL,
+  `licenseissuedate2` text NOT NULL,
+  `licenseexpirationdate2` text NOT NULL,
+  `licenseterm2` text NOT NULL,
+  `licensetype3` text NOT NULL,
+  `licenseissuedate3` text NOT NULL,
+  `licenseexpirationdate3` text NOT NULL,
+  `licenseterm3` text NOT NULL,
+  `licensetype4` text NOT NULL,
+  `licenseissuedate4` text NOT NULL,
+  `licenseexpirationdate4` text NOT NULL,
+  `licenseterm4` text NOT NULL,
+  `licensetype5` text NOT NULL,
+  `licenseissuedate5` text NOT NULL,
+  `licenseexpirationdate5` text NOT NULL,
+  `licenseterm5` text NOT NULL,
+  `licensetype6` text NOT NULL,
+  `licenseissuedate6` text NOT NULL,
+  `licenseexpirationdate6` text NOT NULL,
+  `licenseterm6` text NOT NULL,
+  `probationreportdate` text NOT NULL,
+  `statebackgroundcheck` text NOT NULL,
+  `federalbackgroundcheck` text NOT NULL,
+  `permissions` text NOT NULL,
+  `contractdays` text NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;";
+
+		$sql .= "CREATE TABLE `directory_discipline` (
+  `id` int(11) NOT NULL,
+  `archived` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `Filename` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+		$sql .= "ALTER TABLE `directory`
+  ADD PRIMARY KEY (`id`);";
+  		$sql .= "ALTER TABLE `directory_discipline`
+  ADD PRIMARY KEY (`id`);";
+   		$sql .= "ALTER TABLE `directory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;";
+  		$sql .= "ALTER TABLE `directory_discipline`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
 			$conn->multi_query($sql);
 			$conn->close();
 			
