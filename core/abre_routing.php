@@ -16,10 +16,24 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
+    
+	//Required configuration files
+	require_once('abre_verification.php');
 	
 ?>
 
 <script>
+	
+	//Register Material Design Lite Elements
+	function mdlregister() {
+		componentHandler.upgradeAllRegistered();	
+	}
+	
+	//Redirect to profile if staff do not have streams
+	function streamCheck() {
+		$.ajax({ type: 'POST', url: 'modules/profile/check.php' })
+		.done(function(html){ if(html=='no'){ window.location.href = '#profile'; } })	
+	}
 
 	//Toggle slide navigation drawer
 	function toggle_drawer() {
@@ -31,6 +45,9 @@
 	
 	//Start the page
 	function init_page(loader) {
+		
+		//Redirect to profile if staff do not have streams
+		streamCheck();
 		//Hide Loader
 		if (loader === undefined){ $( "#loader" ).hide(); }	
 		//Scroll to Top
@@ -42,9 +59,7 @@
 		$( "#content_holder" ).css({marginTop: '100px'});
 		$( "#content_holder" ).animate({ opacity: 1, marginTop: "0" }, 500, "swing");
 		//Register MDL elements
-		var html = document.createElement('content_holder');
-		$(document.body).append(html);      
-		componentHandler.upgradeAllRegistered();
+		mdlregister();
 		//Make sure top nav is present
 		$("header").show();	
 	}
@@ -55,7 +70,7 @@
 		    $( "#navigation_top" ).hide();
 		    $( "#content_holder" ).hide();
 		    $( "#loader" ).show();
-		    $( "#titletext" ).text("404");
+		    $( "#titletext" ).text("Not Found");
 		    document.title = 'HCSD Portal';
 			$( "#content_holder" ).load( "core/abre_404.php", function() { init_page(); });
 	    }

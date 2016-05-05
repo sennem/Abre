@@ -26,6 +26,7 @@
 
 	<!--Display the drawer-->
 	<div class='drawer mdl-layout__drawer' id='drawer' style='border:none;'>
+		
 		<header class='drawer-header mdl-color--blue-800'>
 			<?php
 				echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar'>";
@@ -51,6 +52,6 @@
 					}
 				}
 			?>
-
 		</nav>
+		
 	</div>

@@ -61,23 +61,20 @@ if (file_exists('configuration.php'))
 		    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
 		    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 		    <link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>
-		    <link rel='stylesheet' href='core/css/material.1.1.1.min.css'>
-		    <link rel='stylesheet' href='core/css/abre.1.0.9.css'>
+		    <link rel='stylesheet' href='core/css/material.1.1.3.min.css'>
+		    <link rel='stylesheet' href='core/css/abre.1.1.4.css'>
 		    <link rel='stylesheet' href='core/css/animate.min.css'>
-		    <link rel='stylesheet' href='core/css/owl.carousel.min.css'>
 		    <link rel='stylesheet' href='core/css/timepicker.min.css'>
 		    <link rel='stylesheet' href='modules/books/css/main.css'>
 	    
 		    <script src='core/js/jquery-2.1.4.min.js'></script>
 		    <script src='core/js/jquery-ui.min.js'></script>
 		    <script src='core/js/materialize.0.97.5.min.js'></script>
-		    <script src='core/js/material.1.1.1.min.js'></script>
+		    <script src='core/js/material.1.1.3.min.js'></script>
 		    <script src='core/js/routie.min.js'></script>
 		    <script src='core/js/masonry-4.0.0.pkgd.min.js'></script>
 		    <script src='core/js/jquery.tablesorter.min.js'></script>
-		    <script src='core/js/owl.carousel.min.js'></script>
 		    <script src='core/js/jquery.timepicker.min.js'></script>
-			    
 		</head>
 		<body>
 
@@ -97,20 +94,19 @@ else
 		    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
 		    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 		    <link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>
-		    <link rel='stylesheet' href='core/css/material.1.1.1.min.css'>
-		    <link rel='stylesheet' href='core/css/abre.1.0.9.css'>
+		    <link rel='stylesheet' href='core/css/material.1.1.3.min.css'>
+		    <link rel='stylesheet' href='core/css/abre.1.1.4.css'>
 	    
 		    <script src='core/js/jquery-2.1.4.min.js'></script>
 		    <script src='core/js/jquery-ui.min.js'></script>
 		    <script src='core/js/materialize.0.97.5.min.js'></script>
-			<script src='core/js/material.1.1.1.min.js'></script>
+			<script src='core/js/material.1.1.3.min.js'></script>
 			    
 		</head>
 		<body>	 
 <?php
 }
 ?>
-
 <script>
 	//$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {
 		//options.async = false;

@@ -74,7 +74,7 @@
 								echo "<br>Code: $courseEnrollmentCode</div>";
 							echo "</div>";
 							echo "<div class='col s2'>";
-								echo "<a href='$courseAlternateLink' target='_blank'><i class='material-icons mdl-color-text--grey-400'>play_circle_filled</i></a>";
+								echo "<a href='$courseAlternateLink' target='_blank'><i class='material-icons mdl-color-text--grey-600'>play_circle_filled</i></a>";
 							echo "</div>";
 						echo "</div>";
 					}

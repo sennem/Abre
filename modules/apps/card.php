@@ -18,107 +18,88 @@
     */
 
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
+	
+	//Set access token
+	if (isset($_SESSION['access_token']) && $_SESSION['access_token']){ $client->setAccessToken($_SESSION['access_token']); }
+		
+	?>
+	
+		
+		<div class='mdl-card__title'>
+			<div class='valign-wrapper'>
+				<img src='core/images/icons_apps.png' class='icon_small'>
+				<div><div class='mdl-card__title-text'>Apps</div><div class='card-text-small'>Your Top 6 Apps</div></div>
+			</div>
+		</div>
+	
+		<div class='row' style='margin-bottom:0;'>
+			
+			<?php
 
-?>
-	<!--Display apps on stream-->
-	<div id='appslider' class='mdl-shadow--2dp'>
-		<?php
-		$sql = "SELECT * FROM apps WHERE $_SESSION[usertype] = 1 AND required = 1  order by sort";
-		$result = $db->query($sql);
-		if($result)
-		{ 
-			while($row = $result->fetch_assoc())
-			{
-				$title=htmlspecialchars($row["title"], ENT_QUOTES);
-				$image=htmlspecialchars($row["image"], ENT_QUOTES);
-				$link=htmlspecialchars($row["link"], ENT_QUOTES);
-				$icon=htmlspecialchars($row["icon"], ENT_QUOTES);
-				$minor_disabled=htmlspecialchars($row["minor_disabled"], ENT_QUOTES);
-				if((studentaccess()!=false) or ($minor_disabled!=1))
+				$query = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
+				$gafecards = databasequery($query);
+				foreach ($gafecards as $value)
 				{
-					$required=array();
-						
-					//Get App preference settings (if they exist)
-					$sql2 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
-					$result2 = $db->query($sql2);
-					while($row2 = $result2->fetch_assoc()) {
-						$apps_order=htmlspecialchars($row2["apps_order"], ENT_QUOTES);
-					}
-							
-					//Build Array of Required Apps
-					$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
-					$result = $db->query($sql);
-					while($row = $result->fetch_assoc())
+					$apps_order=htmlspecialchars($value["apps_order"], ENT_QUOTES);
+				}
+				
+				//Display default order, unless they have saved prefrences
+				if($apps_order!=NULL)
+				{
+					$order = explode(',', $apps_order);
+				}
+				else
+				{
+					$order=array();
+				}
+				
+				//print_r($order);
+				if (!empty($order))
+				{
+					//Display customized list of apps
+					$appcount=0;
+					foreach($order as $key => $value) if ($appcount++ < 6)
 					{
-						$id=htmlspecialchars($row["id"], ENT_QUOTES);									
-						array_push($required, $id);
-					}
-						
-					//Display default order, unless they have saved prefrences
-					if($apps_order!=NULL)
-					{
-						$order = explode(',', $apps_order);
-					}
-					else
-					{
-						$order=array();
-					}
-							
-					//Compare 
-					foreach($required as $key => $requiredvalue)
-					{
-						$hit=NULL;
-								
-						foreach($order as $key => $ordervalue)
-						{
-							if($requiredvalue==$ordervalue)
-							{
-								$hit="yes";
-							}
-						}
-								
-						if($hit==NULL)
-						{
-							array_push($order, $requiredvalue);
-						}
-					}
-							
-					foreach($order as $key => $value)
-					{
+						include(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 						$sql = "SELECT * FROM apps WHERE id='$value'";
 						$result = $db->query($sql);
+	
 						while($row = $result->fetch_assoc())
 						{
 							$id=htmlspecialchars($row["id"], ENT_QUOTES);
 							$title=htmlspecialchars($row["title"], ENT_QUOTES);
-							$icon=htmlspecialchars($row["image"], ENT_QUOTES);
+							$image=htmlspecialchars($row["image"], ENT_QUOTES);
 							$link=htmlspecialchars($row["link"], ENT_QUOTES);
-							echo "<div class='hud_card app'><img src='$portal_root/core/images/$icon' class='icon'><div><a href='$link' class='applink icon_text'>$title</a></div></div>";
+							echo "<div class='app col s4'>";
+								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+								echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
+							echo "</div>";
 						}
 					}	
 				}
-			}
-		}
-		$db->close();
-		
-	?>
-	</div>
-
-<script>
-
-		
-	//App Slider
-	var owl = $("#appslider");		 
-	owl.owlCarousel({ pagination: false, scrollPerPage: true, navigation: true, mouseDrag: false, navigationText: ["<i class='material-icons'>chevron_left</i>","<i class='material-icons'>chevron_right</i>"], itemsCustom : [[0, 4],[450, 5],[600, 6],[700, 7],[1000, 8],[1200, 9],[1400, 10],[1600, 12],[1800, 14],] }); 
-		
-		
-	//Make the Icons Clickable
-	$(".app").click(function() {
-		window.open($(this).find("a").attr("href"), '_blank');
-	});
+				else
+				{
+					include(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
+					$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 LIMIT 6";
+					$result = $db->query($sql);
 	
-</script>
+					while($row = $result->fetch_assoc())
+					{
+						$id=htmlspecialchars($row["id"], ENT_QUOTES);
+						$title=htmlspecialchars($row["title"], ENT_QUOTES);
+						$image=htmlspecialchars($row["image"], ENT_QUOTES);
+						$link=htmlspecialchars($row["link"], ENT_QUOTES);
+						echo "<div class='app col s4'>";
+							echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+							echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
+						echo "</div>";
+					}
+				}
+
+			?>
+		
+	</div>

@@ -25,7 +25,7 @@
 	{	
 	?>
 		<!--Feedback icon-->
-		<a class='modal-trigger mdl-button mdl-js-button mdl-button--icon feedbackbutton mdl-cell--hide-phone' href='#feedback'><i class='material-icons'>help</i></a>
+		<a class='modal-trigger mdl-button mdl-js-button mdl-button--icon feedbackbutton mdl-cell--hide-phone mdl-color-text--grey-600' href='#feedback'><i class='material-icons'>help</i></a>
 	
 		<!--Feedback modal-->
 		<div id='feedback' class='modal modal-fixed-footer'>
@@ -34,11 +34,8 @@
 					<div class='row'>
 						<div class='col s12'>
 							<h4>Feedback</h4>
-							<p>We welcome problem reports, feature ideas and general comments.</p><br>
-						</div>
-						<div class='input-field col s12'>
-							<textarea id='textarea' name='textarea' class='materialize-textarea'></textarea>
-							<label for='textarea'>Write a brief description:</label>
+							<p>We welcome problem reports, feature ideas and general comments.</p>
+							<textarea id='textarea' name='textarea' class='materialize-textarea' placeholder="Write a brief description" required></textarea>
 					    </div>
 					</div>
 			    </div>
@@ -57,6 +54,8 @@
 	$(document).ready(function(){
     	
     	$('.modal-trigger').leanModal({
+	    	in_duration: 0,
+			out_duration: 0,
 	    	ready: function() { $("#textarea").focus(); }
 	   	}
 	   	);
@@ -68,7 +67,10 @@
 		
 		$(form).submit(function(event) {
 		    event.preventDefault();
-		    $('#feedback').closeModal();
+		    $('#feedback').closeModal({
+			    in_duration: 0,
+				out_duration: 0,
+		    });
 			var formData = $(form).serialize();
 			$.ajax({
 			    type: 'POST',
@@ -78,11 +80,10 @@
 			
 			//Show the notification
 			.done(function(response) {
-				$(formMessages).text(response);	
 				$("#textarea").val('');
-				$( ".notification" ).slideDown( "fast", function() {
-					$( ".notification" ).delay( 2000 ).slideUp();	
-				});			
+				var notification = document.querySelector('.mdl-js-snackbar');
+				var data = { message: response };
+				notification.MaterialSnackbar.showSnackbar(data);	
 			})
 			
 		});

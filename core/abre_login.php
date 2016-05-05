@@ -23,21 +23,42 @@
 ?>
 
 <!-- Display the Login -->
-<div class="mdl-layout mdl-js-layout mdl-color--blue-800">
+<div class="mdl-layout mdl-js-layout login-card">
 	<div class="login_wrapper">	  	
 		
-		<div class="login-card-square mdl-card mdl-shadow--2dp animated fadeIn">
+		<div class="login-card-square mdl-card animated fadeIn">
 			<div class="mdl-card__title mdl-card--expand"></div>
 			<?php
 				$site_login_text=constant("SITE_LOGIN_TEXT");
-				echo "<div class='mdl-card-text'>$site_login_text</div>";
+				echo "<div class='mdl-card-text mdl-color-text--grey-600'>$site_login_text</div>";
 			?>
-	  		<div class="mdl-card__actions mdl-card--border">	  		
+	  		<div class="mdl-card__actions">	  		
 	  		<?php 
-		  		echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$authUrl' style='margin: 0 auto;'>Sign In</a>"; 
+		  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; background-color:#145bab; text-transform:none;'>Sign in with Google</a>"; 
 		  	?>
 	  		</div>
 		</div>
 		
 	</div>      	
 </div>
+
+<script>
+	
+	//Responsive login view
+	function loginWidthCheck()
+	{
+		if ($(window).width() < 600) {
+			$( ".login-card-square" ).removeClass( "mdl-shadow--2dp" );
+			$( ".login-card" ).addClass( "mdl-color--white" );
+		}
+		else
+		{
+			$( ".login-card-square" ).addClass( "mdl-shadow--2dp" );
+			$( ".login-card" ).removeClass( "mdl-color--white" );
+		}
+	}
+	
+	loginWidthCheck();
+	$(window).resize(loginWidthCheck);
+
+</script>

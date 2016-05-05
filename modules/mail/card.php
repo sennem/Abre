@@ -81,14 +81,14 @@
         		}
         
 					echo "<hr>";
-					echo "<div class='valign-wrapper'>";
+					echo "<div class='valign-wrapper emailwrapper'>";
 						echo "<div class='col s10'>";
 							echo "<div class='mdl-card__supporting-text subtext truncate'><b>$subjecttext</b>";
 							if($sendertext!="Google"){ echo "<br>$sendertext"; }
 							if($sendertext!=""){ echo "<br>$snippet</div>"; }
 						echo "</div>";
 						echo "<div class='col s2'>";
-							echo "<a href='https://mail.google.com/mail/u/0/#inbox/$message_id' target='_blank' class='emailclick'><i class='material-icons mdl-color-text--grey-400'>play_circle_filled</i></a>";
+							echo "<a href='https://mail.google.com/mail/u/0/#inbox/$message_id' target='_blank' class='emailclick'><i class='material-icons mdl-color-text--grey-600'>play_circle_filled</i></a>";
 						echo "</div>";
 					echo "</div>";	
 

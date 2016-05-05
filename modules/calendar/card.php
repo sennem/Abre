@@ -34,6 +34,21 @@
 		$inTwoDays = date('c', strtotime('+2 days'));
 		$params = array('singleEvents' => 'true', 'orderBy' => 'startTime', 'timeMin' => $rightNow, 'timeMax' => $inOneDay);
 		$events = $Service_Calendar->events->listEvents('primary', $params);
+		
+		
+		/*
+		 $channel =  new Google_Service_Calendar_Channel($Service_Calendar);
+		 $channel->setId('2345234523452345');
+		 $channel->setType('web_hook');
+		 $channel->setAddress('http://localhost/HCSDPortal/');
+		
+		 $timetoExpire = time()+3600000;
+		 $optParams = array('ttl' => $timetoExpire);
+		 $channel->setParams($optParams);
+		
+		 $watchEvent = $Service_Calendar->events->watch('me', $channel);
+		 */
+		
 		?>
 	
 		
@@ -79,7 +94,7 @@
 							echo "<br>$timeofevent</div>";
 						echo "</div>";
 						echo "<div class='col s2'>";
-							echo "<a href='$eventlink' target='_blank'><i class='material-icons mdl-color-text--grey-400'>play_circle_filled</i></a>";
+							echo "<a href='$eventlink' target='_blank'><i class='material-icons mdl-color-text--grey-600'>play_circle_filled</i></a>";
 						echo "</div>";
 						echo "</div>";
 	

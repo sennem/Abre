@@ -27,10 +27,7 @@
 		$cookie_name=constant("PORTAL_COOKIE_NAME");
 		
 		//Require login script if there is a cookie but not session
-		if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token']))
-		{
-			require_once 'abre_google_login.php';
-		}
+		if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token'])){ require_once 'abre_google_login.php'; }
 		
 		//Check to make sure they are logged in
 		if(!(isset($_SESSION['useremail']) && $_SESSION['useremail'] != "")){ header("Location: $portal_root/?signout"); };

@@ -31,9 +31,5 @@
 		mail($to,$subject,$message,$headers);
 		echo "Your feedback has been sent!";
 	}
-	else
-	{
-		echo "Whoops...please fill in a message.";
-	}
 	
 ?>

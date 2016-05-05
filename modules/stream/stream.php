@@ -22,94 +22,170 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
-	
-	require_once('button_scrolltop.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
 	
 	//Get User Settings
-	$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
-	$result = $db->query($sql);
-	$setting_preferences=mysqli_num_rows($result);
-	while($row = $result->fetch_assoc()) {
-		$setting_card_mail=htmlspecialchars($row['card_mail'], ENT_QUOTES);
-		$setting_card_drive=htmlspecialchars($row['card_drive'], ENT_QUOTES);
-		$setting_card_calendar=htmlspecialchars($row['card_calendar'], ENT_QUOTES);
-		$setting_card_classroom=htmlspecialchars($row['card_classroom'], ENT_QUOTES);
+	$query = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
+	$gafecards = databasequery($query);
+	foreach ($gafecards as $value) {
+		$setting_card_mail=htmlspecialchars($value['card_mail'], ENT_QUOTES);
+		$setting_card_drive=htmlspecialchars($value['card_drive'], ENT_QUOTES);
+		$setting_card_calendar=htmlspecialchars($value['card_calendar'], ENT_QUOTES);
+		$setting_card_classroom=htmlspecialchars($value['card_classroom'], ENT_QUOTES);
+		$setting_card_apps=htmlspecialchars($value['card_apps'], ENT_QUOTES);
 	}
-	mysqli_close($db);
 
 	//Display the Stream
 	echo "<div class='grid'>";
-		if(studentaccess()==true){ if($setting_card_mail==1 or $setting_preferences==0){ echo "<div id='streammail'>"; include "../mail/load.php"; echo "</div>"; }}
-		if($setting_card_drive==1 or $setting_preferences==0){ echo "<div class='hide-on-small-only'><div id='streamdrive'>"; include "../drive/load.php"; echo "</div></div>"; }
-		if($setting_card_calendar==1 or $setting_preferences==0){ echo "<div id='streamcalendar'>"; include "../calendar/load.php"; echo "</div>"; }
-		if($setting_card_classroom==1 or $setting_preferences==0){ echo "<div class='hide-on-small-only'><div id='streamclassroom'>"; include "../classroom/load.php"; echo "</div></div>"; }
+		if(studentaccess()==true){ if(!empty($setting_card_mail)==1 or empty($gafecards)){ echo "<div id='streammail'>"; include "../mail/load.php"; echo "</div>"; }}
+		if(!empty($setting_card_drive)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamdrive'>"; include "../drive/load.php"; echo "</div></div>"; }
+		if(!empty($setting_card_calendar)==1 or empty($gafecards)){ echo "<div id='streamcalendar'>"; include "../calendar/load.php"; echo "</div>"; }
+		if(!empty($setting_card_classroom)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamclassroom'>"; include "../classroom/load.php"; echo "</div></div>"; }
+		if(!empty($setting_card_apps)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamapps'>"; include "../apps/load.php"; echo "</div></div>"; }
 		echo "<div id='streamcards'></div>";
 	echo "</div>";
-	
+
 ?>
 
 <script>
 	
 	//Hide Mail Until Streams Load
-	<?php
-		if(studentaccess()==true){ 
-			echo "$('#streammail').hide();";
-		}
-	?>
+	$("#streammail").hide();
 	$("#streamdrive").hide();
 	$("#streamcalendar").hide();
 	$("#streamclassroom").hide();
+	$("#streamapps").hide();
 
 	//Load Masonry
-	$('.grid').masonry({
-		itemSelector: '.grid-item',
-		isFitWidth: true,
-		transitionDuration: 0,
-		gutter: 15
-	});	
-	
-	//Register Material Design Lite Elements
-	function mdlregister() {
-		var html = document.createElement('content_holder');
-		$(document.body).append(html);      
-		componentHandler.upgradeAllRegistered();	
-	}
-	
-	//Load the Stream Cards Into Page
-	counter=0;
-	function loadCards() {
-		if(counter===0)
-		{
-			counter=1;
-			$('#streamcards').load("modules/stream/stream_cards.php", function () {	
-				$( "#loader" ).hide();
-				
-				<?php
-					if(studentaccess()==true)
-					{ 
-						echo "$( '#streammail' ).show();"; 
-					}
-				?>
-				
-				$( "#streamdrive" ).show();
-				$( "#streamcalendar" ).show();
-				$( "#streamclassroom" ).show();
-				$('.grid').masonry( 'reloadItems' );
-				$('.grid').masonry( 'layout' );
-				mdlregister();
-			});
+	function checkWidth()
+	{
+		if ($(window).width() > 600) {
+			$('.grid').masonry({ itemSelector: '.grid-item', isFitWidth: true, transitionDuration: 0, gutter: 15 });
 		}
 		else
 		{
-			$('#streamcards').load("modules/stream/stream_cards.php", function () {	
-				$('.grid').masonry( 'reloadItems' );
-				$('.grid').masonry( 'layout' );
-				mdlregister();
-			});
+			$('.grid').masonry( 'destroy' );
 		}
-		//Reload every 5 minutes
+	}
+	checkWidth();
+	$(window).resize(checkWidth);
+	
+	//Load Streams
+	var loopcounter=0;
+	function loadCards()
+	{
+		$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+			if(loopcounter==0)
+			{
+				init_page();
+				loadOtherCards();
+				loadOtherCardsApps();
+				loopcounter=1;
+			}
+			<?php if(studentaccess()==true){ echo "$( '#streammail' ).show();"; } ?>
+			$( "#streamdrive" ).show();
+			$( "#streamcalendar" ).show();
+			$( "#streamclassroom" ).show();
+			$( "#streamapps" ).show();
+			$('.grid').masonry( 'reloadItems' );
+			$('.grid').masonry( 'layout' );
+			mdlregister();
+		});			
 		setTimeout(loadCards, 300000);
 	}
 	loadCards();
+	
+	function loadOtherCards()
+	{
+			//Google Classroom
+			<?php if(!empty($setting_card_classroom)==1 or empty($gafecards)){ ?>
+				function loadClassroom() {
+					$('#classroom').load("modules/classroom/card.php", function () {	
+						$('.grid').masonry( 'reloadItems' );
+						$('.grid').masonry( 'layout' );
+					});
+				}
+				loadClassroom();
+			<? } ?>
+			
+			//Google Drive
+			<?php if(!empty($setting_card_drive)==1 or empty($gafecards)){ ?>
+				function loadDrive() {
+					$('#drive').load("modules/drive/card.php", function () {	
+						$('.grid').masonry( 'reloadItems' );
+						$('.grid').masonry( 'layout' );
+					});
+					setTimeout(loadDrive, 600000);
+				}
+				loadDrive();
+			<? } ?>
+				
+			//Google Calendar
+			<?php if(!empty($setting_card_calendar)==1 or empty($gafecards)){ ?>
+				function loadCalendar() {
+					$('#calendar').load("modules/calendar/card.php", function () {	
+						$('.grid').masonry( 'reloadItems' );
+						$('.grid').masonry( 'layout' );
+					});
+					setTimeout(loadCalendar, 600000);
+				}
+				loadCalendar();
+			<? } ?>
+				
+			//Google Mail
+			<?php if(studentaccess()==true){ if(!empty($setting_card_mail)==1 or empty($gafecards)){ ?>
+				function loadMail() {
+					$('#mail').load("modules/mail/card.php", function () {	
+						$('.grid').masonry( 'reloadItems' );
+						$('.grid').masonry( 'layout' );
+		
+					});
+					setTimeout(loadMail, 120000);
+				}
+				loadMail();
+				<?php
+				}
+				}
+			?>
+		
+	}
+	
+	function loadOtherCardsApps()
+	{
+		//Apps Card
+		<?php if(!empty($setting_card_apps)==1 or empty($gafecards)){ ?>
+			function loadApps() {
+				$('#apps').load("modules/apps/card.php", function () {	
+					$('.grid').masonry( 'reloadItems' );
+					$('.grid').masonry( 'layout' );
+				});
+			}
+			loadApps();
+		<? } ?>
+	}
+	
+	//Sortable settings
+	$( ".appssort" ).sortable({
+		cursorAt: { top: 25, left: 45 },
+		update: function(event, ui){
+			var postData = $(this).sortable('serialize');
+			<?php 
+				echo "$.post('$portal_root/modules/apps/apps_save_order.php', {list: postData})";
+			?>
+			.done(function()
+			{
+				loadOtherCardsApps();
+			});
+		}
+	});
+
+	//Check card for updates once email clicked
+	$(document).on("click", ".emailclick", function ()
+	{
+		setTimeout(function()
+		{
+        	loadOtherCards();
+        }, 5000);
+	});
 	
 </script>

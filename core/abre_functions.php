@@ -18,7 +18,6 @@
     */
 	
 	//Required configuration files
-	require_once('abre_verification.php');
 	require_once(dirname(__FILE__) . '/../configuration.php'); 
 	
 	//Encryption function
@@ -79,6 +78,83 @@
 		{
 			return true;
 		}
+	}
+	
+	//Query the database
+	function databasequery($query){
+		include "abre_dbconnect.php";
+		$result = $db->query($query);
+		$rowarray = array();
+		while($row = $result->fetch_assoc())
+		{
+			array_push($rowarray, $row);	
+		}
+		return $rowarray;
+		$db->close();
+	}
+	
+	//Insert into the database
+	function databaseexecute($query){
+		include "abre_dbconnect.php";
+		$stmt = $db->stmt_init();
+		$stmt->prepare($query);
+		$stmt->execute();
+		$newcommentid = $stmt->insert_id;
+		$stmt->close();
+		return $newcommentid;
+		$db->close();
+	}
+	
+	function linkify($value, $protocols = array('http', 'mail'), array $attributes = array())
+    {
+        // Link attributes
+        $attr = '';
+        foreach ($attributes as $key => $val) {
+            $attr = ' ' . $key . '="' . htmlentities($val) . '"';
+        }
+        
+        $links = array();
+        
+        // Extract existing links and tags
+        $value = preg_replace_callback('~(<a .*?>.*?</a>|<.*?>)~i', function ($match) use (&$links) { return '<' . array_push($links, $match[1]) . '>'; }, $value);
+        
+        // Extract text links for each protocol
+        foreach ((array)$protocols as $protocol) {
+            switch ($protocol) {
+                case 'http':
+                case 'https':   $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { if ($match[1]) $protocol = $match[1]; $link = $match[2] ?: $match[3]; return '<' . array_push($links, "<a $attr href=\"$protocol://$link\" target=\"_blank\" class='mdl-color-text--blue-800'>$link</a>") . '>'; }, $value); break;
+                case 'mail':    $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"mailto:{$match[1]}\" target=\"_blank\" class='mdl-color-text--blue-800'>{$match[1]}</a>") . '>'; }, $value); break;
+                case 'twitter': $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1]  . "\" target=\"_blank\" class='mdl-color-text--blue-800'>{$match[0]}</a>") . '>'; }, $value); break;
+                default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\" target=\"_blank\" class='mdl-color-text--blue-800'>{$match[1]}</a>") . '>'; }, $value); break;
+            }
+        }
+        
+        // Insert all link
+        return preg_replace_callback('/<(\d+)>/', function ($match) use (&$links) { return $links[$match[1] - 1]; }, $value);
+    }
+    
+	//Insert into the database
+	function vendorLinkGet($call){
+		$vendorIdentifier="hamilton";
+		$vendorKey = "mnNdJeZosRS2FHQfi82pJ2QZAMmXnV62xZAwO2pc5PHRaxUD7s/i92pVhcVQU93w";
+		$district = "OH";
+		$userID = "";
+		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
+		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
+		$password = $vendorIdentifier.$userID.$requestDate.$vendorKey;
+		$hmacData = $vendorIdentifier.$userID.$requestDate.$vendorKey;
+		$hmacSignature = base64_encode(pack("H*", sha1($hmacData)));
+		$vlauthheader = $vendorIdentifier."||".$hmacSignature;
+		$url = $call;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('VL-Authorization: '.$vlauthheader, 'Date: '.$requestDate));
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch);
+		$json = json_decode($result,true);
+		return $json;
 	}
 	
 ?>

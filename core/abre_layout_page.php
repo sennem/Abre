@@ -25,9 +25,10 @@
 	
 	<!--Display page content-->
 	<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>
+		
 	  	<?php
-		require_once('abre_navigation_top.php'); 
-		require_once('abre_navigation_drawer.php');
-		require_once('abre_layout_page_content.php');
+			require_once('abre_navigation_top.php'); 
+			require_once('abre_navigation_drawer.php');
+			require_once('abre_layout_page_content.php');
 	    ?>
 	</div>

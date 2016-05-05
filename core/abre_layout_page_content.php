@@ -25,9 +25,12 @@
 	<!--Display page content-->
 	<main class='mdl-layout__content'>
 		<div id='navigation_top'></div>
-		<div class='content'>
+		<div class='content' id='content'>
 			<div id='loader'><?php include "abre_loader_spinner.php"; ?></div>
 			<div id='content_holder'></div>
-			<div class='notification'><div id='form-messages'></div></div>		
+			<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
+			    <div class="mdl-snackbar__text"></div>
+			    <button type="button" class="mdl-snackbar__action"></button>
+			</div>
 		</div>
 	</main>

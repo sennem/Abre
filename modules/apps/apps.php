@@ -23,134 +23,110 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 	
-?>
-
-	<!--Display relivant apps for user-->
-	<div class='page_container'>
-		<div class='row'>
-		
-			<?php
-			//Display both staff and student apps for staff
-			if (!empty($_GET["mode"])){ $mode=htmlspecialchars($_GET["mode"], ENT_QUOTES); }else{ $mode=""; }
-			if($mode=="")
+	//Display customized apps for staff	
+	if($_SESSION['usertype']=="staff")
+	{
+		echo "<div class='row'><p style='text-align:center; font-weight:600;'>Staff Apps</p><hr style='margin-bottom:20px;'>";
+		$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 order by sort";
+		$result = $db->query($sql);
+		$item=array();
+		while($row = $result->fetch_assoc())
+		{
+			$title=htmlspecialchars($row["title"], ENT_QUOTES);
+			$image=htmlspecialchars($row["image"], ENT_QUOTES);
+			$link=htmlspecialchars($row["link"], ENT_QUOTES);
+			$minor_disabled=htmlspecialchars($row["minor_disabled"], ENT_QUOTES);
+			echo "<ul class='appssort'>";
+			if((studentaccess()!=false) or ($minor_disabled!=1))
 			{
-				//Customized View
-				$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 order by sort";
+				$required=array();
+							
+				//Get App preference settings (if they exist)
+				$sql2 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
+				$result2 = $db->query($sql2);
+				while($row2 = $result2->fetch_assoc()) {
+					$apps_order=htmlspecialchars($row2["apps_order"], ENT_QUOTES);
+				}
+								
+				//Build Array of Required Apps
+				$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
 				$result = $db->query($sql);
-				$item=array();
 				while($row = $result->fetch_assoc())
 				{
-					$title=htmlspecialchars($row["title"], ENT_QUOTES);
-					$image=htmlspecialchars($row["image"], ENT_QUOTES);
-					$link=htmlspecialchars($row["link"], ENT_QUOTES);
-					$minor_disabled=htmlspecialchars($row["minor_disabled"], ENT_QUOTES);
-					if((studentaccess()!=false) or ($minor_disabled!=1))
-					{
-						$required=array();
+					$id=htmlspecialchars($row["id"], ENT_QUOTES);									
+					array_push($required, $id);
+				}
 							
-						//Get App preference settings (if they exist)
-						$sql2 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
-						$result2 = $db->query($sql2);
-						while($row2 = $result2->fetch_assoc()) {
-							$apps_order=htmlspecialchars($row2["apps_order"], ENT_QUOTES);
-						}
+				//Display default order, unless they have saved prefrences
+				if($apps_order!=NULL)
+				{
+					$order = explode(',', $apps_order);
+				}
+				else
+				{
+					$order=array();
+				}
 								
-						//Build Array of Required Apps
-						$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
-						$result = $db->query($sql);
+				//Compare 
+				foreach($required as $key => $requiredvalue)
+				{
+					$hit=NULL;	
+					foreach($order as $key => $ordervalue)
+					{
+						if($requiredvalue==$ordervalue)
+						{
+							$hit="yes";
+						}
+					}
+									
+					if($hit==NULL)
+					{
+						array_push($order, $requiredvalue);
+					}
+				}
+								
+				foreach($order as $key => $value)
+				{
+					$sql = "SELECT * FROM apps WHERE id='$value'";
+					$result = $db->query($sql);
+
 						while($row = $result->fetch_assoc())
 						{
-							$id=htmlspecialchars($row["id"], ENT_QUOTES);									
-							array_push($required, $id);
+							$id=htmlspecialchars($row["id"], ENT_QUOTES);
+							$title=htmlspecialchars($row["title"], ENT_QUOTES);
+							$image=htmlspecialchars($row["image"], ENT_QUOTES);
+							$link=htmlspecialchars($row["link"], ENT_QUOTES);
+							echo "<li id='item_$id' class='app col s4'>";
+								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+								echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
+							echo "</li>";
 						}
-							
-						//Display default order, unless they have saved prefrences
-						if($apps_order!=NULL)
-						{
-							$order = explode(',', $apps_order);
-						}
-						else
-						{
-							$order=array();
-						}
-								
-						//Compare 
-						foreach($required as $key => $requiredvalue)
-						{
-							$hit=NULL;	
-							foreach($order as $key => $ordervalue)
-							{
-								if($requiredvalue==$ordervalue)
-								{
-									$hit="yes";
-								}
-							}
-									
-							if($hit==NULL)
-							{
-								array_push($order, $requiredvalue);
-							}
-						}
-								
-						foreach($order as $key => $value)
-						{
-							$sql = "SELECT * FROM apps WHERE id='$value'";
-							$result = $db->query($sql);
-							while($row = $result->fetch_assoc())
-							{
-								$id=htmlspecialchars($row["id"], ENT_QUOTES);
-								$title=htmlspecialchars($row["title"], ENT_QUOTES);
-								$image=htmlspecialchars($row["image"], ENT_QUOTES);
-								$link=htmlspecialchars($row["link"], ENT_QUOTES);
-								echo "<div class='col l2 m3 s6 app'><div><img src='$portal_root/core/images/$image' class='appicon'></div><span><a href='$link' class='applink truncate'>$title</a></span></div>";
-							}
-						}	
-					}
-	    		}
-				$db->close();
-				
-				//Toggle Mode Button
-				if($_SESSION['usertype']=="staff")
-				{
-					echo "<div class='fixed-action-btn buttonpin'>";
-						echo "<a class='btn-floating btn-large waves-effect waves-light blue darken-3' href='#apps/student'><i class='large material-icons'>autorenew</i></a>"; 
-					echo "</div>";
-				}
+
+				}	
 			}
-			else
-			{
-				$sql2 = "SELECT * FROM apps WHERE student = 1 AND required = 1";
-				$result2 = $db->query($sql2);
-				while($row2 = $result2->fetch_assoc())
-				{
-					$id=htmlspecialchars($row2["id"], ENT_QUOTES);
-					$title=htmlspecialchars($row2["title"], ENT_QUOTES);
-					$image=htmlspecialchars($row2["image"], ENT_QUOTES);
-					$link=htmlspecialchars($row2["link"], ENT_QUOTES);
-					echo "<div class='col l2 m3 s6 app'><div><img src='$portal_root/core/images/$image' class='appicon'></div><span><a href='$link' class='applink truncate'>$title</a></span></div>";
-				}
-				
-				if($_SESSION['usertype']=="staff")
-				{
-					echo "<div class='fixed-action-btn buttonpin'>";
-						echo "<a class='btn-floating btn-large waves-effect waves-light blue darken-3' href='#apps'><i class='large material-icons'>autorenew</i></a>"; 
-					echo "</div>";
-				}
-			}
-			?>
-	
-		</div>
-	</div>
+	    }
+	    echo "</ul>";
+	    echo "</div>";
+	}
+
+	//Display student apps			
+	echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
+	$sql2 = "SELECT * FROM apps WHERE student = 1 AND required = 1";
+	$result2 = $db->query($sql2);
+	while($row2 = $result2->fetch_assoc())
+	{
+		$id=htmlspecialchars($row2["id"], ENT_QUOTES);
+		$title=htmlspecialchars($row2["title"], ENT_QUOTES);
+		$image=htmlspecialchars($row2["image"], ENT_QUOTES);
+		$link=htmlspecialchars($row2["link"], ENT_QUOTES);
+		echo "<div class='col s4 app'><div><img src='$portal_root/core/images/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate'>$title</a></span></div>";
+	}
+	echo "</div>";
+
+?>
 
 <script>
 	
-	$(document).ready(function(){	
-		
-		//Make the Icons Clickable
-		$(".app").click(function() {
-			 window.open($(this).find("a").attr("href"), '_blank');
-		});
-		
-	});
-	
+
+
 </script>

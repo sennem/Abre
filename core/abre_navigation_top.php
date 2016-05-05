@@ -27,10 +27,24 @@
 		<div class='mdl-layout__header-row'>
 			<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
 			<div class='mdl-layout-spacer'></div>
-			<a href='#apps' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><i class='material-icons'>apps</i></a>
-			<div class='navspace'></div>
-			<?php
-				echo "<a href='#profile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
-			?>
+				<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>
+				<div class='navspace'></div>
+				<?php
+					echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+				?>
 		</div>
 	</header>
+	
+<script>
+			
+	//Scroll to top
+	$('.mdl-layout__header-row').click(function(e)
+	{
+		if(e.target == e.currentTarget)
+		{
+			$(".mdl-layout__content").animate({ scrollTop: $(".page-content").height() }, "fast");
+			return false;
+		}
+	});
+	
+</script>

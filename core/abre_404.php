@@ -20,4 +20,4 @@
 ?>
 
 <!--Display 404 Message-->
-<div class="center-align">Sorry. That page does not exist.</div>
+<div class="center-align">Sorry. The page you are looking for does not exist.</div>
