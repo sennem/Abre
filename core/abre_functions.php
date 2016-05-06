@@ -132,29 +132,5 @@
         // Insert all link
         return preg_replace_callback('/<(\d+)>/', function ($match) use (&$links) { return $links[$match[1] - 1]; }, $value);
     }
-    
-	//Insert into the database
-	function vendorLinkGet($call){
-		$vendorIdentifier="hamilton";
-		$vendorKey = "mnNdJeZosRS2FHQfi82pJ2QZAMmXnV62xZAwO2pc5PHRaxUD7s/i92pVhcVQU93w";
-		$district = "OH";
-		$userID = "";
-		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
-		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
-		$password = $vendorIdentifier.$userID.$requestDate.$vendorKey;
-		$hmacData = $vendorIdentifier.$userID.$requestDate.$vendorKey;
-		$hmacSignature = base64_encode(pack("H*", sha1($hmacData)));
-		$vlauthheader = $vendorIdentifier."||".$hmacSignature;
-		$url = $call;
-		$ch = curl_init();
-		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('VL-Authorization: '.$vlauthheader, 'Date: '.$requestDate));
-		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($ch);
-		$json = json_decode($result,true);
-		return $json;
-	}
 	
 ?>
