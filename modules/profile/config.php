@@ -67,13 +67,20 @@
 		<script type="text/javascript" src="/core/js/jquery-ui.multidatespicker.js"></script>
 
 		<!--Work Schedule-->
-		<div id="viewschedule" class="modal modal-fixed-footer modal-mobile-full">
+		<div id="viewschedule" class="modal modal-fixed-footer modal-mobile-full" style='width: 80%'>
 	    	<div class="modal-content">
 				<h4>Set Your Work Schedule</h4>
-				<?php echo "<form id='form-calendar' method='post'>"; ?>
-					<input id="saveddates" type="hidden"></input>
-				</form>
-				<div id="workcalendardisplay"></div>
+				<div class='row'>
+					<div class='col m3 hide-on-small-only'>
+						<?php include "calendarsidebar.php"; ?>
+					</div>
+					<div class='col m9 s12'>
+						<?php echo "<form id='form-calendar' method='post'>"; ?>
+							<input id="saveddates" type="hidden"></input>
+						</form>
+						<div id="workcalendardisplay"></div>
+					</div>
+				</div>
 	    	</div>
 			<div class="modal-footer">
 				<button class="modal-close waves-effect btn-flat blue darken-3 white-text">Close</button>

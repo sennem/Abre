@@ -106,7 +106,7 @@
 					});
 				}
 				loadClassroom();
-			<? } ?>
+			<?php } ?>
 			
 			//Google Drive
 			<?php if(!empty($setting_card_drive)==1 or empty($gafecards)){ ?>
@@ -118,7 +118,7 @@
 					setTimeout(loadDrive, 600000);
 				}
 				loadDrive();
-			<? } ?>
+			<?php } ?>
 				
 			//Google Calendar
 			<?php if(!empty($setting_card_calendar)==1 or empty($gafecards)){ ?>
@@ -130,7 +130,7 @@
 					setTimeout(loadCalendar, 600000);
 				}
 				loadCalendar();
-			<? } ?>
+			<?php } ?>
 				
 			//Google Mail
 			<?php if(studentaccess()==true){ if(!empty($setting_card_mail)==1 or empty($gafecards)){ ?>
@@ -161,7 +161,7 @@
 				});
 			}
 			loadApps();
-		<? } ?>
+		<?php } ?>
 	}
 	
 	//Sortable settings
