@@ -165,7 +165,7 @@ input[type=text]:disabled+label,input[type=text][readonly="readonly"]+label,inpu
 	.appssort li{ width:50% !important;  }
 	.notification{ border-top-left-radius: 0; border-top-right-radius: 0; }
 	.modal{ overflow-y: scroll; -webkit-overflow-scrolling: touch;}
-	.modal-mobile-full{max-height:100%;width:100%;margin:0;border-radius:0;top:0 !important;height:100% !important; }
+	.modal-mobile-full{max-height:100%;width:100%;margin:0;border-radius:0;top:0 !important;height:100% !important; width:100% !important; }
 	.apps_modal{ right:0 !important; }
 }
 

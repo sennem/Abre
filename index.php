@@ -43,7 +43,7 @@
 	else
 	{
 	    if(
-	    	$_POST["site_title"]!="" &&
+	    	isset($_POST["site_title"])!="" &&
 	    	$_POST["db_host"]!="" &&
 	    	$_POST["db_user"]!="" &&
 	    	$_POST["db_password"]!="" &&
@@ -52,7 +52,6 @@
 	    	$_POST["google_api_key"]!=""
 	    )
 		{
-			
 			$site_title=$_POST["site_title"];
 			$domain_name=$_POST["domain_name"];
 			$db_host=$_POST["db_host"];
@@ -359,6 +358,18 @@ $sql .= "CREATE TABLE `directory` (
 			$conn->multi_query($sql);
 			$conn->close();
 			
+			//Create Private Folders
+			mkdir("../private", 0700);
+			mkdir("../private/books", 0700);
+			mkdir("../private/directory", 0700);
+			mkdir("../private/directory/discipline", 0700);
+			mkdir("../private/directory/images", 0700);
+			mkdir("../private/directory/images/employees", 0700);
+			mkdir("../private/stream", 0700);
+			mkdir("../private/stream/cache", 0700);
+			mkdir("../private/stream/cache/feed", 0700);
+			mkdir("../private/stream/cache/images", 0700);
+			
 			//Redirect
 			header("Location: $currenturl");
 
@@ -378,7 +389,7 @@ $sql .= "CREATE TABLE `directory` (
 				<div class='col s12'><h3>Welcome</h3></div>
 				<div class='col s12'><p>Welcome to the 5 minute Abre installation process! You may want to browse the documentation available at <a href='https://abre.io/documentation' target='_blank' class='deep-orange-text text-darken-3'>abre.io/documentation</a>. Otherwise, just fill in the information below and you'll be on your way to using the Abre Platform.</p></div>
 				<?php
-				if($_POST["site_title"]=="")
+				if(isset($_POST["site_title"])=="")
 				{
 				?>
 					<form id='form-abresetup' method='post' action='index.php'>

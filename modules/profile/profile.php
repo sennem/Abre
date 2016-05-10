@@ -161,7 +161,40 @@
 			
 			echo "</div>";
 			echo "</div>";
-		}	
+		}
+		
+
+		//Work Calendar
+		if($_SESSION['useremail']=="zvanderveen@hcsdoh.org" or $_SESSION['useremail']=="crose@hcsdoh.org" or $_SESSION['useremail']=="mholbrook@hcsdoh.org" or $_SESSION['useremail']=="ckonkle@hcsdoh.org" or $_SESSION['useremail']=="webmaster@hcsdoh.org")
+		{
+			echo "<div class='row'>";
+			echo "<div class='page_container page_container_limit'>";
+			echo "<hr style='margin-bottom:20px;'>";
+			
+				//Card settings
+				echo "<div class='col l6 s12' style='padding-right:50px;'>";
+						echo "<h3 style='margin-top:5px;'>Work Calendar</h3><p>Review your work calendar for the upcoming school year. Your calendar will automatically be shared with Human Resources.<br><br></p>";
+				echo "</div>";				
+				echo "<div class='page col l6 s12 mdl-shadow--4dp'>";
+					echo "<div style='margin:30px 20px 20px 20px;'>";
+						if($contractdays!=NULL)
+						{
+							echo "<p>According to Human Resources, you are contracted to work <b>$contractdays</b> days.</p>";
+						}
+						else
+						{
+							echo "<p>You can use the calendar below to choose your work schedule.</p>";
+						}
+						echo "<a href='#viewschedule' class='mdl-color-text--blue-800 modal-viewschedule' style='line-height:40px;'>SET CALENDAR</a>";
+
+					echo "</div>";
+				echo "</div>";		
+
+			
+			
+			echo "</div>";
+			echo "</div>";
+		}		
 	
 	echo "</form>";
 	
@@ -175,7 +208,7 @@
 //Work Schedule Modal
 $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
 
-<? if($setting_streams=="" && $_SESSION['usertype']=="staff"){ echo "$('.modal-viewapps').hide();"; } ?>
+<?php if($setting_streams=="" && $_SESSION['usertype']=="staff"){ echo "$('.modal-viewapps').hide();"; } ?>
 	
 <?php if($_SESSION['usertype']=="staff"){ ?>
 	if ($('.streamtopic:checked').length < 3)
