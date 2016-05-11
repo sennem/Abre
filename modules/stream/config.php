@@ -38,9 +38,7 @@
 	//Setup tables if new module
 	if(!$resultstreamscomments = $db->query("SELECT *  FROM streams_comments"))
 	{
-		$sql = "CREATE TABLE `streams_comments` (`id` int(11) NOT NULL,`url` text NOT NULL,`title` text NOT NULL,`user` text NOT NULL,`comment` text NOT NULL,`creationtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,`liked` int(11) NOT NULL DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-  		$sql .= "ALTER TABLE `streams_comments` ADD PRIMARY KEY (`id`);";
-  		$sql .= "ALTER TABLE `streams_comments` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+		$sql = "CREATE TABLE IF NOT EXISTS `streams_comments` (`id` int(11) NOT NULL AUTO_INCREMENT,`url` text NOT NULL,`title` text NOT NULL,`user` text NOT NULL,`comment` text NOT NULL,`creationtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,`liked` int(11) NOT NULL DEFAULT '0', PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=latin1";
   		if ($db->multi_query($sql) === TRUE) { }
 	}
 
