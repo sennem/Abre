@@ -163,21 +163,6 @@
 			loadApps();
 		<?php } ?>
 	}
-	
-	//Sortable settings
-	$( ".appssort" ).sortable({
-		cursorAt: { top: 25, left: 45 },
-		update: function(event, ui){
-			var postData = $(this).sortable('serialize');
-			<?php 
-				echo "$.post('$portal_root/modules/apps/apps_save_order.php', {list: postData})";
-			?>
-			.done(function()
-			{
-				loadOtherCardsApps();
-			});
-		}
-	});
 
 	//Check card for updates once email clicked
 	$(document).on("click", ".emailclick", function ()
