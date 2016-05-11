@@ -70,8 +70,7 @@
 					
 			echo "<tr class='commentwrapper'>";
 				if(empty($picture)){ 
-					$picture='user.png'; 
-					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=.png";
+					$picture=$portal_root."/modules/directory/images/user.png";
 				}
 				else
 				{
