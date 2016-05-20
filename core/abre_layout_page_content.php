@@ -23,6 +23,7 @@
 ?>
 
 	<!--Display page content-->
+	<div id='modal_holder'></div>
 	<main class='mdl-layout__content'>
 		<div id='navigation_top'></div>
 		<div class='content' id='content'>

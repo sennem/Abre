@@ -98,6 +98,7 @@
 		$title=strip_tags(html_entity_decode($title));
 		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
 		$title=str_replace("'",'"',$title);
+		$title=str_replace('"',"'",$title);
 		$excerpt=$feeds[$cardcountloop][2];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt=strip_tags(html_entity_decode($excerpt));

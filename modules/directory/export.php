@@ -48,7 +48,6 @@
 					//Restore the User
 					$('#archivedemployees').on('click','.restoreuser',function(){
 						var address = $(this).find("a").attr("href");
-						$('.tooltipped').tooltip('remove');
 						$.ajax({
 							type: 'POST',
 							url: address,
@@ -73,7 +72,6 @@
 					//Permanently Delete User
 					$('#archivedemployees').on('click','.deleteuser',function(){
 						var address = $(this).find("a").attr("href");
-						$('.tooltipped').tooltip('remove');
 						$.ajax({
 							type: 'POST',
 							url: address,

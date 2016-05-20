@@ -534,7 +534,6 @@
 					
 					//Show the notification
 					.done(function(response) {
-						$('.tooltipped').tooltip('remove');
 						<?php echo "$( '#disciplinediv' ).load( 'modules/directory/profile_disciplinereport.php?userid=$id' );"; ?>
 							var notification = document.querySelector('.mdl-js-snackbar');
 							var data = { message: response };

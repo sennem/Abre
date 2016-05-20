@@ -46,6 +46,8 @@
 	//Start the page
 	function init_page(loader) {
 		
+		//Clear everything in Modal Div
+		//$( "#modal_holder" ).empty();
 		//Redirect to profile if staff do not have streams
 		streamCheck();
 		//Hide Loader

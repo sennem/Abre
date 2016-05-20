@@ -47,7 +47,6 @@
 					//Restore the User
 					$('#archivedemployees').on('click','.restoreuser',function(){
 						var address = $(this).find("a").attr("href");
-						$('.tooltipped').tooltip('remove');
 						$.ajax({
 							type: 'POST',
 							url: address,
@@ -76,7 +75,6 @@
 						if (result) 
 						{
 							var address = $(this).find("a").attr("href");
-							$('.tooltipped').tooltip('remove');
 							$.ajax({
 								type: 'POST',
 								url: address,

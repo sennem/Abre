@@ -27,34 +27,34 @@ if (file_exists('configuration.php'))
 			<meta charset='utf-8'>
 			<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 			<?php 
-			$site_description=constant("SITE_DESCRIPTION");
+			if(defined('SITE_DESCRIPTION')){ $site_description=constant("SITE_DESCRIPTION"); }else{ $site_description=""; }
 			echo "<meta name='description' content='$site_description'>";
 			?>
 			<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
 			<?php
 				
 			//Site title
-			$site_title=constant("SITE_TITLE");
+			if(defined('SITE_TITLE')){ $site_title=constant("SITE_TITLE"); }else{ $site_title=""; }
 			echo "<title>$site_title</title>";
 			
 			//Site favicon
-			$site_favicon=constant("SITE_FAVICON");
+			if(defined('SITE_FAVICON')){ $site_favicon=constant("SITE_FAVICON"); }else{ $site_favicon=""; }
 			echo "<link rel='icon' type='image/png' href='$site_favicon'>";
 	
 			//Chrome icon
-			$site_chrome_icon=constant("SITE_CHROME_ICON");
+			if(defined('SITE_CHROME_ICON')){ $site_chrome_icon=constant("SITE_CHROME_ICON"); }else{ $site_chrome_icon=""; }
 			echo "<meta name='mobile-web-app-capable' content='yes'>";
 			echo "<link rel='icon' sizes='192x192' href='$site_chrome_icon'>";
 	
 			//iOS icon
-			$site_safari_icon=constant("SITE_SAFARI_ICON");
+			if(defined('SITE_SAFARI_ICON')){ $site_safari_icon=constant("SITE_SAFARI_ICON"); }else{ $site_safari_icon=""; }
 			echo "<meta name='apple-mobile-web-app-title' content='$site_title'>";
 			echo "<link rel='apple-touch-icon' href='$site_safari_icon'>";
 	
 			//Windows icon
-			$site_windows_icon=constant("SITE_WINDOWS_ICON");
+			if(defined('SITE_WINDOWS_ICON')){ $site_windows_icon=constant("SITE_WINDOWS_ICON"); }else{ $site_windows_icon=""; }
 			echo "<meta name='msapplication-TileImage' content='$site_windows_icon'>";
-			$site_windows_icon_color=constant("SITE_WINDOWS_ICON_COLOR");
+			if(defined('SITE_WINDOWS_ICON_COLOR')){ $site_windows_icon_color=constant("SITE_WINDOWS_ICON_COLOR"); }else{ $site_windows_icon_color=""; }
 			echo "<meta name='msapplication-TileColor' content='$site_windows_icon_color'>";
 			?>
 	

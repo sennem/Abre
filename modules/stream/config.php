@@ -49,92 +49,9 @@
 	$pagepath="";
 	$pagerestrictions="";
 	
+?>
 	
-	//Check for variable in url
-	if(isset($_GET['discussion'])){ 
-		$discussionid=$_GET['discussion']; 
-		$discussionid=preg_replace("/[^0-9]/","",$discussionid);
-	}
-	
-	?>
-	
-	<!-- Commenting Modal -->
-	<?php
-	if($_SESSION['usertype']=='staff')
-	{
-	?>
-	<div id="addstreamcomment" class="modal modal-fixed-footer modal-mobile-full">
-		<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
-		<div class="modal-content" id="modal-content-section">
-			<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
-			<div name="streamComments" id="streamComments"></div>
-			<div class="input-field col s12">
-				<h4 name="streamTitle" id="streamTitle"></h4>
-				<b class="mdl-color-text--blue-800" id="commentstatustext">Write a comment</b>
-				<textarea id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
-			</div>
-			<input type="hidden" name="streamUrl" id="streamUrl">
-			<input type="hidden" name="streamTitleValue" id="streamTitleValue">
-    	</div>
-	    <div class="modal-footer">
-			<button class="btn waves-effect btn-flat blue darken-3 white-text" type="submit" name="action" style="margin-left:5px;">Post</button>
-			<button class="modal-action modal-close waves-effect btn-flat blue darken-3 white-text">Close</button>
-		</div>
-		</form>
-	</div>
-	<?php
-	}
-	?>
 <script>
-	
-//Save comment
-var form = $('#form-addstreamcomment');			
-$(form).submit(function(event) {
-	event.preventDefault();
-	$("#commentstatustext").text("Posting comment...");
-	var formData = $(form).serialize();
-	$.ajax({
-		type: 'POST',
-		url: $(form).attr('action'),
-		data: formData
-	})
-						
-	//Show the notification
-	.done(function(response) {
-		$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+response, function() {
-			$("textarea").val('');
-			$("#commentstatustext").text("Write a comment");
-			$(".modal-content #streamUrl").val(response);
-			var element = document.getElementById("commentthreadbox");
-			element.scrollTop = element.scrollHeight;
-			$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
-				$('.grid').masonry( 'reloadItems' );
-				$('.grid').masonry( 'layout' );
-				mdlregister();
-			});
-		});			
-	})						
-});
-
-//Add color to like on click
-$(document).on("click", ".likeicon", function (event) {
-	event.preventDefault();
-		
-	//Toggle icon color
-	$(this).toggleClass("mdl-color-text--grey-600");
-	$(this).toggleClass("mdl-color-text--red");
-		
-	var Stream_Title = $(this).data('title');
-	var Stream_Url = $(this).data('url');
-
-	$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title, function() {
-		$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
-			$('.grid').masonry( 'reloadItems' );
-			$('.grid').masonry( 'layout' );
-			mdlregister();
-		});
-	});
-});
 
 //Page locations
 routie({
@@ -145,8 +62,8 @@ routie({
 	    $( "#loader" ).show();
 	    $( "#titletext" ).text("Stream");
 	    document.title = 'HCSD Portal - Stream';
-		$( "#content_holder" ).load( "modules/stream/stream.php", function() {
-		});
+		$( "#content_holder" ).load( "modules/stream/stream.php", function() { });
+		$( "#modal_holder" ).load( "modules/stream/modals.php" );
 		
     },
     'apps': function() {
@@ -156,8 +73,8 @@ routie({
 	    $( "#loader" ).show();
 	    $( "#titletext" ).text("Stream");
 	    document.title = 'HCSD Portal - Stream';
-		$( "#content_holder" ).load( "modules/stream/stream.php", function() {
-		});
+		$( "#content_holder" ).load( "modules/stream/stream.php", function() { });
+		$( "#modal_holder" ).load( "modules/stream/modals.php" );
 		
     },
     'discussion/?:name': function(discussionid){
@@ -190,10 +107,30 @@ routie({
 				$("#commentloader").hide();
 			});
 			
-		});		
+		});	
+		$( "#modal_holder" ).load( "modules/stream/modals.php" );	
 		
     }
 });
 
+	//Add color to like on click
+	$(document).on("click", ".likeicon", function (event) {
+		event.preventDefault();
+			
+		//Toggle icon color
+		$(this).toggleClass("mdl-color-text--grey-600");
+		$(this).toggleClass("mdl-color-text--red");
+			
+		var Stream_Title = $(this).data('title');
+		var Stream_Url = $(this).data('url');
+	
+		$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title, function() {
+			$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+				$('.grid').masonry( 'reloadItems' );
+				$('.grid').masonry( 'layout' );
+				mdlregister();
+			});
+		});
+	});
 
 </script>

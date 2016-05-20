@@ -51,7 +51,6 @@
 			<a class="modal-close black-text hide-on-med-and-up" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 			<?php
 				echo "<div class='row' style='margin-bottom:0;'>";
-
 					echo "<p style='text-align:center; font-weight:600; margin-bottom:0;' class='truncate'>".$_SESSION['displayName']."</p>";
 					echo "<p style='text-align:center;' class='truncate'>".$_SESSION['useremail']."</p>";
 					echo "<hr style='margin-bottom:20px;'>";
@@ -62,101 +61,6 @@
     	</div>
 	</div>
 	
-	
-	
-		<link rel="stylesheet" type="text/css" href="/core/css/mdp.css">
-		<script type="text/javascript" src="/core/js/jquery-ui.multidatespicker.js"></script>
-
-		<!--Work Schedule-->
-		<div id="viewschedule" class="modal modal-fixed-footer modal-mobile-full" style='width: 80%'>
-	    	<div class="modal-content">
-				<h4>Set Your Work Schedule</h4>
-				<div class='row'>
-					<div class='col m3 hide-on-small-only'>
-						<?php include "calendarsidebar.php"; ?>
-					</div>
-					<div class='col m9 s12'>
-						<?php echo "<form id='form-calendar' method='post'>"; ?>
-							<input id="saveddates" type="hidden"></input>
-						</form>
-						<div id="workcalendardisplay"></div>
-					</div>
-				</div>
-	    	</div>
-			<div class="modal-footer">
-				<button class="modal-close waves-effect btn-flat blue darken-3 white-text">Close</button>
-				<div id="selecteddays" style='margin:12px 0 0 20px; font-weight:500; font-size:16px;'></div>
-	    	</div>
-	  	</div>
-  	
-  	
- 		<script>
-			
-
-				var today = new Date();
-				var y = today.getFullYear();			
-				$('#workcalendardisplay').multiDatesPicker({
-					<?php
-						if($_SESSION['usertype']!="student")
-						{
-							$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
-							$dbreturn = databasequery($sql);
-							foreach ($dbreturn as $row)
-							{
-								$work_calendar_saved=htmlspecialchars($row['work_calendar'], ENT_QUOTES);
-								if($work_calendar_saved!=NULL)
-								{
-									$work_calendar_saved = str_replace(' ', '', $work_calendar_saved);
-									$work_calendar_saved=explode(",", $work_calendar_saved);
-									$work_calendar_saved=implode("','", $work_calendar_saved);
-									$work_calendar_saved="'".$work_calendar_saved."'";
-									echo "addDates: [$work_calendar_saved],";
-									//echo "addDisabledDates:['12/04/2016','12/03/2016'],";
-								}
-								else
-								{
-									include "calendar_default_dates.php";
-									echo "addDates: [$work_calendar_saved],";
-									//echo "addDisabledDates:['12/04/2016','12/03/2016'],";
-								}
-							}
-						}
-					?>
-					numberOfMonths: [6,2],
-					defaultDate: '8/1/'+y,
-					altField: '#saveddates',
-					dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-					onSelect: function (date) {
-
-				        var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
-						$("#selecteddays").text(dates + " Days Selected");
-						
-						
-						
-						var datestosave = $( "#saveddates" ).val();
-						$.ajax({
-							type: 'POST',
-							url: '/modules/profile/calendar_update.php',
-							data: { calendardaystosave : datestosave },
-						})
-								
-						//Show the notification
-						.done(function(response) {
-							//var notification = document.querySelector('.mdl-js-snackbar');
-							//var data = { message: response };
-							//notification.MaterialSnackbar.showSnackbar(data);
-						})
-						
-						
-						
-				    }
-				});
-				
-	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
-				$("#selecteddays").text(dates + " Days Selected");
-				
-		</script>
-
 
 <script>
 
@@ -168,16 +72,9 @@ routie({
 	    $( "#loader" ).show();
 	    $( "#titletext" ).text("Profile");
 	    document.title = 'HCSD Portal - Profile';
+	    $( "#modal_holder" ).load( "modules/profile/modals.php" );
 		$( "#content_holder" ).load( 'modules/profile/profile.php', function() { init_page(); });
-    },
-    'profile/calendar': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Personal Calendar");
-	    document.title = 'HCSD Portal - Personal Calendar';
-		$( "#content_holder" ).load( 'modules/profile/personalcalendar.php', function() { init_page(); $("#datePick").focus(); });
-    }    
+    }   
 });
 
 	$(document).ready(function(){

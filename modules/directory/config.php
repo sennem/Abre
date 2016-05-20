@@ -20,7 +20,7 @@
     //Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	$pageview=1;
 	$drawerhidden=0;
@@ -42,7 +42,6 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $('.tooltipped').tooltip('remove');
 	    $( "#titletext" ).text("Directory");
 	    document.title = 'HCSD Portal - Directory';
 		$( "#content_holder" ).load( 'modules/directory/directory.php', function() { init_page(); $("#searchquery").focus(); });
@@ -61,7 +60,6 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $('.tooltipped').tooltip('remove');
 	    $( "#titletext" ).text("Directory");
 	    document.title = 'HCSD Portal - Directory';
 		$( "#content_holder" ).load( 'modules/directory/archieved.php', function() { init_page(); });
@@ -79,7 +77,6 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $('.tooltipped').tooltip('remove');
 	    $( "#titletext" ).text("Directory");
 	    document.title = 'HCSD Portal - Directory';
 		$( "#content_holder" ).load( 'modules/directory/export.php', function() { init_page(); });
@@ -97,7 +94,6 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $('.tooltipped').tooltip('remove');
 	    $( "#titletext" ).text("Directory");
 	    document.title = 'HCSD Portal - Directory';
 		$( "#content_holder" ).load( 'modules/directory/profile.php?id='+name, function() { init_page(); $("#firstname").focus(); });

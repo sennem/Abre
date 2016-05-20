@@ -54,8 +54,8 @@
 						$filename=substr(strstr($filenamereal, '$_$'), 3);
 						echo "<tr>";
 						echo "<td>$filename</td>";
-						echo "<td width='30px'><a href='$portal_root/modules/directory/downloadfile.php?file=$filenamereal' class='mdl-button mdl-js-button mdl-button--icon tooltipped' data-position='top' data-tooltip='Download'><i class='material-icons'>file_download</i></a></td>";
-						echo "<td width='30px'><button class='mdl-button mdl-js-button mdl-button--icon tooltipped deletedisciplinerecord' data-position='top' data-tooltip='Delete'><a href='$fileid'></a><i class='material-icons'>delete</i></button></td>";
+						echo "<td width='30px'><a href='$portal_root/modules/directory/downloadfile.php?file=$filenamereal' class='mdl-button mdl-js-button mdl-button--icon'><i class='material-icons'>file_download</i></a></td>";
+						echo "<td width='30px'><button class='mdl-button mdl-js-button mdl-button--icon deletedisciplinerecord'><a href='$fileid'></a><i class='material-icons'>delete</i></button></td>";
 						echo "</tr>";
 				}
 				echo "</tbody>";
