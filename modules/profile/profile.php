@@ -254,10 +254,7 @@ $(".formclick").click(function() {
 });
 
 	
-</script>
 
-
- 		<script>
 			
  			$(document).ready(function()
  			{

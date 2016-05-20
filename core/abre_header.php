@@ -27,34 +27,34 @@ if (file_exists('configuration.php'))
 			<meta charset='utf-8'>
 			<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 			<?php 
-			if(defined('SITE_DESCRIPTION')){ $site_description=constant("SITE_DESCRIPTION"); }else{ $site_description=""; }
+			$site_description=constant("SITE_DESCRIPTION");
 			echo "<meta name='description' content='$site_description'>";
 			?>
 			<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
 			<?php
 				
 			//Site title
-			if(defined('SITE_TITLE')){ $site_title=constant("SITE_TITLE"); }else{ $site_title=""; }
+			$site_title=constant("SITE_TITLE");
 			echo "<title>$site_title</title>";
 			
 			//Site favicon
-			if(defined('SITE_FAVICON')){ $site_favicon=constant("SITE_FAVICON"); }else{ $site_favicon=""; }
+			$site_favicon=constant("SITE_FAVICON");
 			echo "<link rel='icon' type='image/png' href='$site_favicon'>";
 	
 			//Chrome icon
-			if(defined('SITE_CHROME_ICON')){ $site_chrome_icon=constant("SITE_CHROME_ICON"); }else{ $site_chrome_icon=""; }
+			$site_chrome_icon=constant("SITE_CHROME_ICON");
 			echo "<meta name='mobile-web-app-capable' content='yes'>";
 			echo "<link rel='icon' sizes='192x192' href='$site_chrome_icon'>";
 	
 			//iOS icon
-			if(defined('SITE_SAFARI_ICON')){ $site_safari_icon=constant("SITE_SAFARI_ICON"); }else{ $site_safari_icon=""; }
+			$site_safari_icon=constant("SITE_SAFARI_ICON");
 			echo "<meta name='apple-mobile-web-app-title' content='$site_title'>";
 			echo "<link rel='apple-touch-icon' href='$site_safari_icon'>";
 	
 			//Windows icon
-			if(defined('SITE_WINDOWS_ICON')){ $site_windows_icon=constant("SITE_WINDOWS_ICON"); }else{ $site_windows_icon=""; }
+			$site_windows_icon=constant("SITE_WINDOWS_ICON");
 			echo "<meta name='msapplication-TileImage' content='$site_windows_icon'>";
-			if(defined('SITE_WINDOWS_ICON_COLOR')){ $site_windows_icon_color=constant("SITE_WINDOWS_ICON_COLOR"); }else{ $site_windows_icon_color=""; }
+			$site_windows_icon_color=constant("SITE_WINDOWS_ICON_COLOR");
 			echo "<meta name='msapplication-TileColor' content='$site_windows_icon_color'>";
 			?>
 	
@@ -66,6 +66,7 @@ if (file_exists('configuration.php'))
 		    <link rel='stylesheet' href='core/css/animate.min.css'>
 		    <link rel='stylesheet' href='core/css/timepicker.min.css'>
 		    <link rel='stylesheet' href='modules/books/css/main.css'>
+		    <link rel="stylesheet" href='modules/profile/css/calendar.css'>
 	    
 		    <script src='core/js/jquery-2.1.4.min.js'></script>
 		    <script src='core/js/jquery-ui.min.js'></script>
@@ -75,6 +76,8 @@ if (file_exists('configuration.php'))
 		    <script src='core/js/masonry-4.0.0.pkgd.min.js'></script>
 		    <script src='core/js/jquery.tablesorter.min.js'></script>
 		    <script src='core/js/jquery.timepicker.min.js'></script>
+		    <script src='modules/profile/js/jquery-ui.multidatespicker.js'></script>
+		    
 		</head>
 		<body>
 
