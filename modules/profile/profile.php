@@ -165,7 +165,7 @@
 		
 
 		//Work Calendar
-		if($_SESSION['useremail']=="zvanderveen@hcsdoh.org" or $_SESSION['useremail']=="crose@hcsdoh.org" or $_SESSION['useremail']=="mholbrook@hcsdoh.org" or $_SESSION['useremail']=="ckonkle@hcsdoh.org" or $_SESSION['useremail']=="webmaster@hcsdoh.org")
+		if($_SESSION['usertype']=="staff")
 		{
 			echo "<div class='row'>";
 			echo "<div class='page_container page_container_limit'>";
