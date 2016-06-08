@@ -19,28 +19,28 @@
     
     //Required configuration files
     require_once('abre_verification.php');
+    require_once('abre_functions.php');
 	
 	//Display feedback modal for staff
 	if($_SESSION['usertype']=="staff")
 	{	
 	?>
-		<!--Feedback icon-->
-		<a class='modal-trigger mdl-button mdl-js-button mdl-button--icon feedbackbutton mdl-cell--hide-phone mdl-color-text--grey-600' href='#feedback'><i class='material-icons'>help</i></a>
 	
 		<!--Feedback modal-->
-		<div id='feedback' class='modal modal-fixed-footer'>
+		<div id='feedback' class='modal modal-fixed-footer modal-mobile-full'>
 			<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>
 				<div class='modal-content'>
+					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 					<div class='row'>
 						<div class='col s12'>
-							<h4>Feedback</h4>
+							<h4>Send Feedback</h4>
 							<p>We welcome problem reports, feature ideas and general comments.</p>
 							<textarea id='textarea' name='textarea' class='materialize-textarea' placeholder="Write a brief description" required></textarea>
 					    </div>
 					</div>
 			    </div>
 			    <div class='modal-footer'>
-					<button type='submit' class='modal-action waves-effect btn-flat blue darken-3 white-text'>Submit</button>
+					<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Submit</button>
 				</div>
 			</form>
 		</div>

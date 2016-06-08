@@ -42,8 +42,7 @@
 			//Show the Results	
 			echo "<div id='searchresults'>";
 						
-				//Display Recent Searches
-				echo "<div class='row'><div class='col s12'><h4>Recent Updates</h4></div></div>";			
+				//Display Recent Searches			
 				echo "<div class='row'><div class='col s12'>";
 					echo "<table id='myTable' class='tablesorter'>";
 						echo "<thead>";

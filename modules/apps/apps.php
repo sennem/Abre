@@ -96,7 +96,7 @@
 							$title=htmlspecialchars($row["title"], ENT_QUOTES);
 							$image=htmlspecialchars($row["image"], ENT_QUOTES);
 							$link=htmlspecialchars($row["link"], ENT_QUOTES);
-							echo "<li id='item_$id' class='app col s4'>";
+							echo "<li id='item_$id' class='col s4 app'>";
 								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
 								echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
 							echo "</li>";

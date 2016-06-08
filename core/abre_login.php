@@ -19,6 +19,7 @@
 	
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../configuration.php'); 
+	require_once('abre_functions.php'); 
 	
 ?>
 
@@ -27,14 +28,13 @@
 	<div class="login_wrapper">	  	
 		
 		<div class="login-card-square mdl-card animated fadeIn">
-			<div class="mdl-card__title mdl-card--expand"></div>
+			<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(/core/images/<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; margin-left:20px; margin-bottom:5px;'></div>
 			<?php
-				$site_login_text=constant("SITE_LOGIN_TEXT");
-				echo "<div class='mdl-card-text mdl-color-text--grey-600'>$site_login_text</div>";
+				echo "<div class='mdl-card-text mdl-color-text--grey-600'>".sitesettings('sitelogintext')."</div>";
 			?>
 	  		<div class="mdl-card__actions">	  		
 	  		<?php 
-		  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; background-color:#145bab; text-transform:none;'>Sign in with Google</a>"; 
+		  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Sign in with Google</a>"; 
 		  	?>
 	  		</div>
 		</div>

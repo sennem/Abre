@@ -19,9 +19,11 @@
 	
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
 	
 	$linkbase=base64_encode($link);
-	$displaydate=date("F jS", $date);
+	$imagebase=base64_encode($image);
+	$displaydate=date("F jS, Y", $date);
 	
 	$titleencoded=base64_encode($title);
 	
@@ -33,10 +35,10 @@
 		
 		echo "<div class='mdl-card__title'><div class='mdl-card__title-text'>$title</div></div>";
 		echo "<div class='mdl-card__supporting-text-subtitle' style='margin:0 0 25px 15px;'><span>$displaydate</span></div>";
-		echo "<div class='mdl-card__supporting-text-subtitle'><a href='$feedlink' class='mdl-color-text--blue-800' target='_blank'>$feedtitle</a></div>";
+		echo "<div class='mdl-card__supporting-text-subtitle'><a href='$feedlink' style='color: ".sitesettings("sitecolor")."' target='_blank'>$feedtitle</a></div>";
 		if($excerpt!=""){ echo "<div class='mdl-card__supporting-text'>$excerpt</div>"; }
 		echo "<div class='mdl-card__actions mdl-card--border'>";
-			echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect mdl-color-text--blue-800' href='$link' target='_blank'>$linklabel</a>";
+			echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='$link' style='color: ".sitesettings("sitecolor")."' target='_blank'>$linklabel</a>";
 			
 			if($_SESSION['usertype']=='staff')
 			{
@@ -48,31 +50,69 @@
 				
 				if($num_rows_like==0)
 				{
-					echo "<a class='material-icons mdl-color-text--grey-600 likeicon' style='margin-right:10px;' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Like' href='#'>favorite</a>";
+					echo "<a class='material-icons mdl-color-text--grey-600 likeicon' style='margin-right:30px;' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a>";
 				}
 				else
 				{
 					if($num_rows_like_current_user==0)
 					{
-						echo "<a class='material-icons mdl-badge mdl-badge--no-background mdl-badge--overlap mdl-color-text--grey-600 likeicon' style='margin-right:15px;' data-badge='$num_rows_like' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Like' href='#'>favorite</a>";
+						echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 					}
 					else
 					{
-						echo "<a class='material-icons mdl-badge mdl-badge--no-background mdl-badge--overlap mdl-color-text--red likeicon' style='margin-right:15px;' data-badge='$num_rows_like' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Like' href='#'>favorite</a>";
+						echo "<a class='material-icons mdl-color-text--red likeicon' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--red' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 					}
 				}
 				
 				if($num_rows_comment==0)
 				{
-					echo "<a class='material-icons mdl-color-text--grey-600 modal-addstreamcomment' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a>";
+					echo "<a class='material-icons mdl-color-text--grey-600 modal-addstreamcomment commenticon' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment' style='padding-right:30px;'>insert_comment</a>";
 				}
 				else
 				{
-					echo "<a class='material-icons mdl-badge mdl-badge--no-background mdl-badge--overlap mdl-color-text--grey-600 modal-addstreamcomment' data-badge='$num_rows_comment' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a>";
+					echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".sitesettings("sitecolor")."' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".sitesettings("sitecolor")."'>$num_rows_comment</span>";
 				}
 			}
 			
 		echo "</div>";
+		
+		//Get Last Comment
+		$querycomment = "SELECT * FROM streams_comments where url='$link' and comment!='' order by ID DESC LIMIT 1";
+		$dbreturncomment = databasequery($querycomment);
+		$dbreturncomment_count = count($dbreturncomment);
+		foreach ($dbreturncomment as $value)
+		{
+			$useremail=htmlspecialchars($value ['user'], ENT_QUOTES);
+			$comment=htmlspecialchars($value ['comment'], ENT_QUOTES);
+			
+			//Look up name given email from directory
+			$User2=encrypt($useremail, "");
+			$picture="";
+			$sql = "SELECT firstname, lastname, picture FROM directory where email='$User2'";
+			$dbreturn = databasequery($sql);
+			foreach ($dbreturn as $row)
+			{
+				$firstname=htmlspecialchars($row["firstname"], ENT_QUOTES);
+				$firstname=stripslashes(htmlspecialchars(decrypt($firstname, ""), ENT_QUOTES));
+				$lastname=htmlspecialchars($row["lastname"], ENT_QUOTES);
+				$lastname=stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
+				$picture=htmlspecialchars($row["picture"], ENT_QUOTES);
+			}
+			
+				if(empty($picture)){ 
+					$picture=$portal_root."/modules/directory/images/user.png";
+				}
+				else
+				{
+					$fileExtension = strrchr($picture, ".");
+					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
+				}
+			
+			echo "<div class='mdl-card__actions modal-addstreamcomment commenticon pointer' style='background-color:#f9f9f9; padding:20px;' href='#addstreamcomment' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase'>";
+				echo "<span style='font-weight:500; font-size:12px;' class='truncate'><img src='$picture' class='profile-avatar-small' style='margin-right:5px;'> $firstname $lastname added a comment</span>";
+			echo "</div>";
+		}
+		
 	echo "</div>";
 		
 ?>

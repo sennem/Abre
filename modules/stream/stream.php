@@ -59,11 +59,13 @@
 	//Load Masonry
 	function checkWidth()
 	{
-		if ($(window).width() > 600) {
+		if ($(window).width() > 600)
+		{
 			$('.grid').masonry({ itemSelector: '.grid-item', isFitWidth: true, transitionDuration: 0, gutter: 15 });
 		}
 		else
 		{
+			$('.grid').masonry({ });
 			$('.grid').masonry( 'destroy' );
 		}
 	}
@@ -87,8 +89,7 @@
 			$( "#streamcalendar" ).show();
 			$( "#streamclassroom" ).show();
 			$( "#streamapps" ).show();
-			$('.grid').masonry( 'reloadItems' );
-			$('.grid').masonry( 'layout' );
+			if ($(window).width() >= 600){ $('.grid').masonry( 'reloadItems' ); $('.grid').masonry( 'layout' ); }
 			mdlregister();
 		});			
 		setTimeout(loadCards, 300000);
@@ -101,8 +102,7 @@
 			<?php if(!empty($setting_card_classroom)==1 or empty($gafecards)){ ?>
 				function loadClassroom() {
 					$('#classroom').load("modules/classroom/card.php", function () {	
-						$('.grid').masonry( 'reloadItems' );
-						$('.grid').masonry( 'layout' );
+						if ($(window).width() >= 600){ $('.grid').masonry( 'reloadItems' ); $('.grid').masonry( 'layout' ); }
 					});
 				}
 				loadClassroom();
@@ -112,8 +112,7 @@
 			<?php if(!empty($setting_card_drive)==1 or empty($gafecards)){ ?>
 				function loadDrive() {
 					$('#drive').load("modules/drive/card.php", function () {	
-						$('.grid').masonry( 'reloadItems' );
-						$('.grid').masonry( 'layout' );
+						if ($(window).width() >= 600){ $('.grid').masonry( 'reloadItems' ); $('.grid').masonry( 'layout' ); }
 					});
 					setTimeout(loadDrive, 600000);
 				}
@@ -124,8 +123,7 @@
 			<?php if(!empty($setting_card_calendar)==1 or empty($gafecards)){ ?>
 				function loadCalendar() {
 					$('#calendar').load("modules/calendar/card.php", function () {	
-						$('.grid').masonry( 'reloadItems' );
-						$('.grid').masonry( 'layout' );
+						if ($(window).width() >= 600){ $('.grid').masonry( 'reloadItems' ); $('.grid').masonry( 'layout' ); }
 					});
 					setTimeout(loadCalendar, 600000);
 				}
@@ -136,9 +134,7 @@
 			<?php if(studentaccess()==true){ if(!empty($setting_card_mail)==1 or empty($gafecards)){ ?>
 				function loadMail() {
 					$('#mail').load("modules/mail/card.php", function () {	
-						$('.grid').masonry( 'reloadItems' );
-						$('.grid').masonry( 'layout' );
-		
+						if ($(window).width() >= 600){ $('.grid').masonry( 'reloadItems' ); $('.grid').masonry( 'layout' ); }
 					});
 					setTimeout(loadMail, 120000);
 				}
@@ -156,8 +152,7 @@
 		<?php if(!empty($setting_card_apps)==1 or empty($gafecards)){ ?>
 			function loadApps() {
 				$('#apps').load("modules/apps/card.php", function () {	
-					$('.grid').masonry( 'reloadItems' );
-					$('.grid').masonry( 'layout' );
+					if ($(window).width() >= 600){ $('.grid').masonry( 'reloadItems' ); $('.grid').masonry( 'layout' ); }
 				});
 			}
 			loadApps();

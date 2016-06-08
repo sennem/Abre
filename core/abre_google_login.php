@@ -70,8 +70,25 @@ try
 	if (isset($_GET['code']))
 	{
 		$client->authenticate($_GET['code']);  
-		$_SESSION['access_token'] = $client->getAccessToken();  
-		header("Location: $portal_root");
+		$_SESSION['access_token'] = $client->getAccessToken();
+		
+		if(isset($_GET["dash"]))
+		{ 
+			$dash=$_GET["dash"];
+			if($dash==1)
+			{
+				$pagelocation=$portal_root."?dash=1";
+			}
+			else
+			{
+				$pagelocation=$portal_root;
+			}
+		}
+		else
+		{
+			$pagelocation=$portal_root;
+		}
+		header("Location: $pagelocation");
 	}     
 
 	//Set access token to make request

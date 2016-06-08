@@ -44,8 +44,8 @@
 	$pageview=1;
 	$drawerhidden=0;
 	$pageorder=1;
-	$pagetitle="Stream";
-	$pageicon="dashboard";
+	$pagetitle="Home";
+	$pageicon="home";
 	$pagepath="";
 	$pagerestrictions="";
 	
@@ -55,28 +55,53 @@
 
 //Page locations
 routie({
-    '': function() {
-	    //Load Streams
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Stream");
-	    document.title = 'HCSD Portal - Stream';
-		$( "#content_holder" ).load( "modules/stream/stream.php", function() { });
-		$( "#modal_holder" ).load( "modules/stream/modals.php" );
-		
-    },
-    'apps': function() {
-	    //Load Streams
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Stream");
-	    document.title = 'HCSD Portal - Stream';
-		$( "#content_holder" ).load( "modules/stream/stream.php", function() { });
-		$( "#modal_holder" ).load( "modules/stream/modals.php" );
-		
-    },
+	<?php
+		if(!isset($_GET["dash"]))
+		{
+	?>
+		    '': function() {
+			    //Load Streams
+			    $( "#navigation_top" ).hide();
+			    $( "#content_holder" ).hide();
+			    $( "#loader" ).show();
+			    $( "#titletext" ).text("Home");
+			    document.title = '<?php echo sitesettings("sitetitle"); ?> - Stream';
+				$( "#content_holder" ).load( "modules/stream/stream.php", function() { });
+				$( "#modal_holder" ).load( "modules/stream/modals.php" );
+				
+				<?php if($_SESSION['usertype']=='staff'){ ?>
+					//Load Navigation
+					$( "#navigation_top" ).show();
+					$( "#navigation_top" ).load( "modules/stream/menu.php", function() {	
+						$( "#navigation_top" ).show();
+						$(".tab_1").addClass("tabmenuover");
+					});
+				<?php } ?>
+				
+		    },
+		    'likes': function() {
+			    //Load Streams
+			    $( "#navigation_top" ).hide();
+			    $( "#content_holder" ).hide();
+			    $( "#loader" ).show();
+			    $( "#titletext" ).text("Home");
+			    document.title = '<?php echo sitesettings("sitetitle"); ?> - Stream';
+				$( "#content_holder" ).load( "modules/stream/likes.php", function() { });
+				$( "#modal_holder" ).load( "modules/stream/modals.php" );
+				
+				<?php if($_SESSION['usertype']=='staff'){ ?>
+					//Load Navigation
+					$( "#navigation_top" ).show();
+					$( "#navigation_top" ).load( "modules/stream/menu.php", function() {	
+						$( "#navigation_top" ).show();
+						$(".tab_2").addClass("tabmenuover");
+					});
+				<?php } ?>
+				
+		    },
+	<?php
+		}
+	?>
     'discussion/?:name': function(discussionid){
 		$(".lean-overlay").hide();
 		$(".modal-content #streamTitle").text("");
@@ -86,8 +111,8 @@ routie({
 	    //Load Streams
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Stream");
-	    document.title = 'HCSD Portal - Stream';
+	    $( "#titletext" ).text("");
+	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Stream';
 		$( "#content_holder" ).load( "modules/stream/stream.php", function() {	
 				
 			init_page(loader);
@@ -123,13 +148,23 @@ routie({
 			
 		var Stream_Title = $(this).data('title');
 		var Stream_Url = $(this).data('url');
+		var Stream_Image = $(this).data('image');
+		var Page = $(this).data('page');
+		var ResultCounter = $(this).data('resultcounter');
 	
-		$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title, function() {
-			$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
-				$('.grid').masonry( 'reloadItems' );
-				$('.grid').masonry( 'layout' );
-				mdlregister();
-			});
+		$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() {
+			if(Page!=="likes")
+			{
+				$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+					$('.grid').masonry( 'reloadItems' );
+					$('.grid').masonry( 'layout' );
+					mdlregister();
+				});
+			}
+			else
+			{
+				$("."+ResultCounter).hide();
+			}
 		});
 	});
 

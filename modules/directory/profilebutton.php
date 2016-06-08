@@ -28,10 +28,10 @@
 	<div class="fixed-action-btn buttonpin">
 		<?php 
 			if($firstname=="" && $lastname==""){ $firstname="New"; $lastname="User"; }
-			echo "<a class='btn-floating btn-large waves-effect waves-light blue darken-3' id='name'><i class='large material-icons'>person</i></a><div class='mdl-tooltip mdl-tooltip--left' for='name'>$firstname $lastname</div>"; ?>
+			echo "<a class='btn-floating btn-large waves-effect waves-light' style='background-color: ".sitesettings("sitecolor")."' id='name'><i class='large material-icons'>person</i></a><div class='mdl-tooltip mdl-tooltip--left' for='name'>$firstname $lastname</div>"; ?>
 	    <ul>
-			<li><a class="btn-floating btn-large waves-effect waves-light blue darken-3" id='archiveuser' id='archiveuser'><i class="large material-icons">system_update_alt</i></a><div class='mdl-tooltip mdl-tooltip--left' for='archiveuser'>Archive</div></li>
-			<li><a class="btn-floating btn-large waves-effect waves-light blue darken-3" id='discard' href='#directory'><i class="large material-icons">close</i></a><div class='mdl-tooltip mdl-tooltip--left' for='discard'>Discard</div></li>
-			<li><button class="btn-floating btn-large waves-effect waves-light blue darken-3" id='save'><i class="large material-icons" type='submit'>check</i></button><div class='mdl-tooltip mdl-tooltip--left' for='save'>Save</div></li>
+			<li><a class="btn-floating btn-large waves-effect waves-light" style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='archiveuser' id='archiveuser'><i class="large material-icons">system_update_alt</i></a><div class='mdl-tooltip mdl-tooltip--left' for='archiveuser'>Archive</div></li>
+			<li><a class="btn-floating btn-large waves-effect waves-light" style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='discard' href='#directory'><i class="large material-icons">close</i></a><div class='mdl-tooltip mdl-tooltip--left' for='discard'>Discard</div></li>
+			<li><button class="btn-floating btn-large waves-effect waves-light" style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='save'><i class="large material-icons" type='submit'>check</i></button><div class='mdl-tooltip mdl-tooltip--left' for='save'>Save</div></li>
 		</ul>
 	</div>

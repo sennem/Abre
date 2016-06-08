@@ -29,7 +29,6 @@
 		echo "<div class='page_container mdl-shadow--4dp'>";
 		echo "<div class='page'>";
 					
-				echo "<div class='row'><div class='col s12'><h4>Achieved Employees</h4></div></div>";	
 				echo "<div id='archivedemployees'>"; include "archived.php"; echo "</div>";
 						
 		echo "</div>";

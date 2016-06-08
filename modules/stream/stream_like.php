@@ -18,14 +18,20 @@
     */
 	
 	//Required configuration files
+	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');  
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 	
 	$streamUrl=$_REQUEST['url'];
 	$streamTitle=$_REQUEST['title'];
+	$streamImage=$_REQUEST['image'];
 	$streamUrldecoded=base64_decode($streamUrl);
-	$streamTitledecoded=base64_decode($streamTitle);
+	$streamTitledecoded=addslashes(base64_decode($streamTitle));
+	$streamImagedecoded=base64_decode($streamImage);
+	
+	$portal_root_path=$portal_root.'/';
+	$trimmedimageurl = str_replace($portal_root_path, '', $streamImagedecoded);
 	
 	$userposter=$_SESSION['useremail'];
 
@@ -40,7 +46,7 @@
 		if($num_rows_like_count==0)
 		{
 			//Insert comment into database
-			$sql = "INSERT INTO streams_comments (url, title, user, liked) VALUES ('$streamUrldecoded', '$streamTitledecoded', '$userposter', '1');";
+			$sql = "INSERT INTO streams_comments (url, title, image, user, liked) VALUES ('$streamUrldecoded', '$streamTitledecoded', '$trimmedimageurl', '$userposter', '1');";
 			$dbreturn = databaseexecute($sql);
 		}
 		else

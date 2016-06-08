@@ -22,16 +22,18 @@
 	require_once('abre_google_login.php');
 	require_once('abre_functions.php');
 
+if(!isset($_GET["dash"]))
+{
 ?>
 
 	<!--Display the drawer-->
 	<div class='drawer mdl-layout__drawer' id='drawer' style='border:none;'>
 		
-		<header class='drawer-header mdl-color--blue-800'>
+		<header class='drawer-header' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
 			<?php
 				echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar'>";
-				echo "<span class='mdl-color-text--white'>".$_SESSION['displayName']."</span>";
-				echo "<span class='mdl-color-text--white'>".$_SESSION['useremail']."</span>";
+				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['displayName']."</span>";
+				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['useremail']."</span>";
 			?>
 		</header>
 		
@@ -48,10 +50,27 @@
 
 					if($pageview==1 && $drawerhidden!=1)
 					{
-						echo "<a class='mdl-navigation__link' href='#$pagepath' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>$pageicon</i>$pagetitle</a>";
+						echo "<a class='mdl-navigation__link' href='#$pagepath' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>$pageicon</i><span class='truncate'>$pagetitle</span></a>";
 					}
 				}
+				
+				//Show Feedback Module
+				if($_SESSION['usertype']=="staff")
+				{	
+					echo "<div class='mdl-menu__item--full-bleed-divider' style='margin:10px 0 10px 0'></div>";
+					echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>help</i><span class='truncate'>Send Feedback</span></a>";
+				}
+				
+				//Show Settings MOdule
+				$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
+				$result = $db->query($sql);
+				while($row = $result->fetch_assoc())
+				{
+					echo "<a class='mdl-navigation__link' href='#settings' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>settings</i><span class='truncate'>Settings</span></a>";
+				}
+				
 			?>
 		</nav>
 		
 	</div>
+<?php } ?>

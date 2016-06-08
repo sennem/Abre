@@ -28,8 +28,7 @@
 		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 		  <?php
-			  if(defined('GOOGLE_ANALYTICS')){ $analytics_id=constant("GOOGLE_ANALYTICS"); }else{ $analytics_id=""; }
-			  echo "ga('create', '$analytics_id', 'auto');";
+			  echo "ga('create', '".sitesettings('siteanalytics')."', 'auto');";
 		  ?>
 		  ga('send', 'pageview');
 		</script>

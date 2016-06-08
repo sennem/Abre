@@ -20,14 +20,15 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	
 ?>
 
 
     <div class="col s12">
-		<ul class="tabs mdl-color--blue-900">
-			<li class="tab col s3"><a href="#directory" class='mdl-color-text--white'>Active</a></li>
-			<li class="tab col s3"><a href="#directory/archived" class='mdl-color-text--white'>Archived</a></li>
-			<li class="tab col s3"><a href="#directory/export" class='mdl-color-text--white'>Export</a></li>
+		<ul class="tabs" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+			<li class="tab col s3 tab_1"><a href="#directory" class='mdl-color-text--white'>Active</a></li>
+			<li class="tab col s3 tab_2"><a href="#directory/archived" class='mdl-color-text--white'>Archived</a></li>
+			<li class="tab col s3 tab_3"><a href="#directory/export" class='mdl-color-text--white'>Export</a></li>
 		</ul>
 	</div>

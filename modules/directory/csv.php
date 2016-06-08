@@ -30,10 +30,10 @@
 			{
 				echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>"; 
 				echo "<input name='csv_data' type='file' id='csv_data' />";
-				echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--blue-800' name='Submit' value='Import' />";
+				echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."' name='Submit' value='Import' />";
 				echo "</form>";
 			}
-			echo "<br><a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--blue-800'>Export</a>";
+			echo "<br><a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."'>Export</a>";
 		echo "</div><div>";
 		
 		?>

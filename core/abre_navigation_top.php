@@ -23,16 +23,31 @@
 ?>
 
 	<!--Display top navigation-->
-	<header class='mdl-layout__header mdl-color--blue-800 mdl-color-text--white'>
-		<div class='mdl-layout__header-row'>
-			<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
-			<div class='mdl-layout-spacer'></div>
-				<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>
-				<div class='navspace'></div>
+	<header class='mdl-layout__header mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+			<div class='mdl-layout__header-row'>
 				<?php
-					echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+					if(!isset($_GET["dash"]))
+					{ 
+						echo "<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>";
+					}
+					else
+					{
+						echo "<span class='mdl-layout-title' style='margin-left:-40px;'><div id='titletext' class='truncate'></div></span>";
+					}
 				?>
-		</div>
+				<div class='mdl-layout-spacer'></div>
+					<?php
+						if(!isset($_GET["dash"]))
+						{ 
+							echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>";
+						}
+					?>
+					<div class='navspace'></div>
+					<?php
+						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+					?>
+			</div>
+			<div id='navigation_top'></div>
 	</header>
 	
 <script>

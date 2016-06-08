@@ -40,7 +40,7 @@
 			</div>
 	    </div>
 		<div class="modal-footer">
-			<button class="modal-close waves-effect btn-flat blue darken-3 white-text">Close</button>
+			<button class="modal-close waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
 			<div id="selecteddays" style='margin:12px 0 0 20px; font-weight:500; font-size:16px;'></div>
 	    </div>
 	</div>

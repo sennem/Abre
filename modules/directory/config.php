@@ -25,7 +25,7 @@
 	$pageview=1;
 	$drawerhidden=0;
 	$pageorder=5;
-	$pagetitle="Directory";
+	$pagetitle="Staff Directory";
 	$pageicon="people";
 	$pagepath="directory";
 	$pagerestrictions="student";
@@ -42,8 +42,8 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Directory");
-	    document.title = 'HCSD Portal - Directory';
+	    $( "#titletext" ).text("Staff Directory");
+	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Staff Directory';
 		$( "#content_holder" ).load( 'modules/directory/directory.php', function() { init_page(); $("#searchquery").focus(); });
 		
 			<?php if($pageaccess==1){ ?>
@@ -51,6 +51,7 @@ routie({
 				$( "#navigation_top" ).show();
 				$( "#navigation_top" ).load( "modules/directory/menu.php", function() {	
 					$( "#navigation_top" ).show();
+					$(".tab_1").addClass("tabmenuover");
 				});
 			<?php } ?>
 
@@ -60,8 +61,8 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Directory");
-	    document.title = 'HCSD Portal - Directory';
+	    $( "#titletext" ).text("Staff Directory");
+	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Staff Directory';
 		$( "#content_holder" ).load( 'modules/directory/archieved.php', function() { init_page(); });
 		
 			<?php if($pageaccess==1){ ?>
@@ -69,6 +70,7 @@ routie({
 				$( "#navigation_top" ).show();
 				$( "#navigation_top" ).load( "modules/directory/menu.php", function() {	
 					$( "#navigation_top" ).show();
+					$(".tab_2").addClass("tabmenuover");
 				});
 			<?php } ?>
 		
@@ -77,8 +79,8 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Directory");
-	    document.title = 'HCSD Portal - Directory';
+	    $( "#titletext" ).text("Staff Directory");
+	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Staff Directory';
 		$( "#content_holder" ).load( 'modules/directory/export.php', function() { init_page(); });
 		
 			<?php if($pageaccess==1){ ?>
@@ -86,6 +88,7 @@ routie({
 				$( "#navigation_top" ).show();
 				$( "#navigation_top" ).load( "modules/directory/menu.php", function() {	
 					$( "#navigation_top" ).show();
+					$(".tab_3").addClass("tabmenuover");
 				});
 			<?php } ?>
 		
@@ -94,9 +97,17 @@ routie({
 	    $( "#navigation_top" ).hide();
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Directory");
-	    document.title = 'HCSD Portal - Directory';
+	    $( "#titletext" ).text("Staff Directory");
+	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Staff Directory';
 		$( "#content_holder" ).load( 'modules/directory/profile.php?id='+name, function() { init_page(); $("#firstname").focus(); });
+		
+			<?php if($pageaccess==1){ ?>
+				//Load Navigation
+				$( "#navigation_top" ).show();
+				$( "#navigation_top" ).load( "modules/directory/menu.php", function() {	
+					$( "#navigation_top" ).show();
+				});
+			<?php } ?>
     }
 });
 

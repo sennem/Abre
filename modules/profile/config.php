@@ -34,18 +34,17 @@
 	}
 	
 	$pageview=1;
-	$drawerhidden=0;
+	$drawerhidden=1;
 	$pageorder=6;
 	$pagetitle="Profile";
 	$pageicon="account_circle";
 	$pagepath="profile";
 	$pagerestrictions="";
 	
-	
 ?>
 
 	<!--Profile modal-->
-	<div id='viewprofile_arrow' style='width:20px; height:10px; position:absolute; right:45px; top:52px; background-image: url("core/images/arrow.png"); z-index:1000; display:none;'></div>
+	<div id='viewprofile_arrow' class='hide-on-small-only'></div>
 	<div id="viewprofile" class="modal apps_modal modal-mobile-full">
 		<div class="modal-content" id="modal-content-section">
 			<a class="modal-close black-text hide-on-med-and-up" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
@@ -55,7 +54,11 @@
 					echo "<p style='text-align:center;' class='truncate'>".$_SESSION['useremail']."</p>";
 					echo "<hr style='margin-bottom:20px;'>";
 					echo "<p style='text-align:center; font-weight:600;' class='truncate'><img src='".$_SESSION['picture']."?sz=100' class='circle'></p>";
-					echo "<p style='text-align:center;'><a class='mdl-button mdl-js-button mdl-js-ripple-effect myprofilebutton' href='#profile'>My Profile</a> <a class='mdl-button mdl-js-button mdl-js-ripple-effect' href='?signout'>Sign Out</a></p>";
+					if(!isset($_GET["dash"]))
+					{
+						echo "<p style='text-align:center;'><a class='mdl-button mdl-js-button mdl-js-ripple-effect myprofilebutton' href='#profile'>My Profile</a>";
+						echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' href='?signout'>Sign Out</a></p>";
+					}
 				echo "</div>";
 			?>
     	</div>
@@ -71,7 +74,7 @@ routie({
 	    $( "#content_holder" ).hide();
 	    $( "#loader" ).show();
 	    $( "#titletext" ).text("Profile");
-	    document.title = 'HCSD Portal - Profile';
+	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Profile';
 	    $( "#modal_holder" ).load( "modules/profile/modals.php" );
 		$( "#content_holder" ).load( 'modules/profile/profile.php', function() { init_page(); });
     }   

@@ -235,6 +235,10 @@ if (!file_exists('configuration.php'))
    		$sql .= "CREATE TABLE `directory_discipline` (`id` int(11) NOT NULL,`archived` int(11) NOT NULL,`UserID` int(11) NOT NULL,`Filename` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
   		$sql .= "ALTER TABLE `directory_discipline` ADD PRIMARY KEY (`id`);";
   		$sql .= "ALTER TABLE `directory_discipline` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+  		$sql .= "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+  		$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
+  		$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";
+  		$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
   		
 		$conn->multi_query($sql);
 		$conn->close();

@@ -29,8 +29,6 @@
 		echo "<div class='page_container mdl-shadow--4dp'>";
 		echo "<div class='page'>";
 					
-				echo "<div class='row'><div class='col s12'><h4>Export</h4></div></div>";	
-					
 				include "csv.php";
 						
 		echo "</div>";

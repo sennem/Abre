@@ -28,7 +28,16 @@
 	$client_secret=constant("GOOGLE_CLIENT_SECRET");
 	$client->setClientSecret($client_secret);
 	$redirect_uri=constant("GOOGLE_REDIRECT");
-	$client->setRedirectUri($redirect_uri);
+	if(isset($_GET["dash"]) && $_GET["dash"]==1)
+	{ 
+		$dash=$_GET["dash"];
+		$redirect_uri=$redirect_uri."?dash=1";
+		$client->setRedirectUri($redirect_uri);
+	}
+	else
+	{
+		$client->setRedirectUri($redirect_uri);
+	}
 	$simple_api_key=constant("GOOGLE_API_KEY");
 	$client->setDeveloperKey($simple_api_key);
 	$client->setAccessType("offline");

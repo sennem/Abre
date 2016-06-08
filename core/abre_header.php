@@ -20,6 +20,7 @@
 //Display correct header  
 if (file_exists('configuration.php'))
 {
+	require_once('abre_functions.php'); 
 ?>
 	<!doctype html>
 	<html lang='en'>
@@ -27,42 +28,35 @@ if (file_exists('configuration.php'))
 			<meta charset='utf-8'>
 			<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 			<?php 
-			$site_description=constant("SITE_DESCRIPTION");
-			echo "<meta name='description' content='$site_description'>";
+			echo "<meta name='description' content='".sitesettings("sitedescription")."'>";
 			?>
 			<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
 			<?php
 				
 			//Site title
-			$site_title=constant("SITE_TITLE");
-			echo "<title>$site_title</title>";
+			echo "<title>".sitesettings("sitetitle")."</title>";
 			
 			//Site favicon
-			$site_favicon=constant("SITE_FAVICON");
-			echo "<link rel='icon' type='image/png' href='$site_favicon'>";
+			echo "<link rel='icon' type='image/png' href='core/images/".sitesettings("sitelogo")."'>";
 	
 			//Chrome icon
-			$site_chrome_icon=constant("SITE_CHROME_ICON");
 			echo "<meta name='mobile-web-app-capable' content='yes'>";
-			echo "<link rel='icon' sizes='192x192' href='$site_chrome_icon'>";
+			echo "<link rel='icon' sizes='192x192' href='core/images/".sitesettings("sitelogo")."'>";
 	
 			//iOS icon
-			$site_safari_icon=constant("SITE_SAFARI_ICON");
-			echo "<meta name='apple-mobile-web-app-title' content='$site_title'>";
-			echo "<link rel='apple-touch-icon' href='$site_safari_icon'>";
+			echo "<meta name='apple-mobile-web-app-title' content='".sitesettings("sitetitle")."'>";
+			echo "<link rel='apple-touch-icon' href='core/images/".sitesettings("sitelogo")."'>";
 	
 			//Windows icon
-			$site_windows_icon=constant("SITE_WINDOWS_ICON");
-			echo "<meta name='msapplication-TileImage' content='$site_windows_icon'>";
-			$site_windows_icon_color=constant("SITE_WINDOWS_ICON_COLOR");
-			echo "<meta name='msapplication-TileColor' content='$site_windows_icon_color'>";
+			echo "<meta name='msapplication-TileImage' content='core/images/".sitesettings("sitelogo")."'>";
+			echo "<meta name='msapplication-TileColor' content='".sitesettings("sitecolor")."'>";
 			?>
 	
 		    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
 		    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 		    <link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>
 		    <link rel='stylesheet' href='core/css/material.1.1.3.min.css'>
-		    <link rel='stylesheet' href='core/css/abre.1.1.4.css'>
+		    <link rel='stylesheet' href='core/css/abre.1.1.8.css'>
 		    <link rel='stylesheet' href='core/css/animate.min.css'>
 		    <link rel='stylesheet' href='core/css/timepicker.min.css'>
 		    <link rel='stylesheet' href='modules/books/css/main.css'>
@@ -98,7 +92,7 @@ else
 		    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 		    <link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>
 		    <link rel='stylesheet' href='core/css/material.1.1.3.min.css'>
-		    <link rel='stylesheet' href='core/css/abre.1.1.4.css'>
+		    <link rel='stylesheet' href='core/css/abre.1.1.8.css'>
 	    
 		    <script src='core/js/jquery-2.1.4.min.js'></script>
 		    <script src='core/js/jquery-ui.min.js'></script>

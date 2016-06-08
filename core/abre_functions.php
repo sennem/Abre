@@ -105,6 +105,31 @@
 		$db->close();
 	}
 	
+	//Retrieve Site Title
+	function sitesettings($value){
+		include "abre_dbconnect.php";
+		$result = $db->query("SELECT * FROM settings");
+		$result_count = mysqli_num_rows($result);
+		while($row = $result->fetch_assoc())
+		{
+			$options = $row["options"];
+			$options = json_decode($options);
+			$valuereturn = $options->$value;
+			if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
+			if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
+			if($value=="sitedescription" && $valuereturn==""){ $valuereturn="Abre Portal"; }
+			if($value=="sitelogintext" && $valuereturn==""){ $valuereturn="Open Platform for Education"; }
+			if($value=="siteanalytics" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="siteadminemail" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="sitevendorlinkurl" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="sitevendorlinkidentifier" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="sitevendorlinkkey" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="sitelogo" && $valuereturn==""){ $valuereturn="abre_siteicon.png"; }
+			return $valuereturn;
+		}
+		$db->close();
+	}
+	
 	function linkify($value, $protocols = array('http', 'mail'), array $attributes = array())
     {
         // Link attributes
@@ -135,9 +160,9 @@
     
 	//Insert into the database
 	function vendorLinkGet($call){
-		$VendorLinkURL=constant("VENDORLINK_URL");
-		$vendorIdentifier=constant("VENDORLINK_IDENTIFIER");
-		$vendorKey=constant("VENDORLINK_KEY");
+		$VendorLinkURL=sitesettings(sitevendorlinkurl);
+		$vendorIdentifier=sitesettings(sitevendorlinkidentifier);
+		$vendorKey=sitesettings(sitevendorlinkkey);
 		$userID = "";
 		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
 		$userName = $vendorIdentifier."|".$userID."|".$requestDate;

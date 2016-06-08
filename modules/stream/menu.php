@@ -16,18 +16,17 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-	
+
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php');
+	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	require_once('permissions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	
 ?>
 
-	<div class="fixed-action-btn buttonpin">
-		<?php 
-			echo "<a class='btn-floating btn-large waves-effect waves-light' style='background-color: ".sitesettings("sitecolor")."' id='newentry' data-position='left' href='$portal_root/#directory/new'><i class='large material-icons'>add</i></a>";
-			echo "<div class='mdl-tooltip mdl-tooltip--left' for='newentry'>New</div>";
-		?>
+    <div class="col s12">
+		<ul class="tabs" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+			<li class="tab col s3 tab_1"><a href="#">Stream</a></li>
+			<li class="tab col s3 tab_2"><a href="#likes">Likes</a></li>
+		</ul>
 	</div>

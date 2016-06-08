@@ -133,6 +133,9 @@
 						$('.grid').masonry( 'layout' );
 						mdlregister();
 					});
+					$('#streamlikes').load("modules/stream/stream_likes.php", function () {	
+						mdlregister();
+					});
 				});			
 			});
 			

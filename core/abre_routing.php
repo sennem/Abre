@@ -32,7 +32,7 @@
 	//Redirect to profile if staff do not have streams
 	function streamCheck() {
 		$.ajax({ type: 'POST', url: 'modules/profile/check.php' })
-		.done(function(html){ if(html=='no'){ window.location.href = '#profile'; } })	
+		.done(function(html){ if(html=='no'){ window.location.href = '#profile'; } })
 	}
 
 	//Toggle slide navigation drawer
@@ -45,13 +45,10 @@
 	
 	//Start the page
 	function init_page(loader) {
-		
-		//Clear everything in Modal Div
-		//$( "#modal_holder" ).empty();
 		//Redirect to profile if staff do not have streams
 		streamCheck();
 		//Hide Loader
-		if (loader === undefined){ $( "#loader" ).hide(); }	
+		if (loader === undefined | loader === "still"){ $( "#loader" ).hide(); }	
 		//Scroll to Top
 		var content = $(".mdl-layout__content");
 		var target = top ? 0 : $(".content").height();
