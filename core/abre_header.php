@@ -56,7 +56,7 @@ if (file_exists('configuration.php'))
 		    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 		    <link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>
 		    <link rel='stylesheet' href='core/css/material.1.1.3.min.css'>
-		    <link rel='stylesheet' href='core/css/abre.1.1.8.css'>
+		    <link rel='stylesheet' href='core/css/abre.1.1.9.css'>
 		    <link rel='stylesheet' href='core/css/animate.min.css'>
 		    <link rel='stylesheet' href='core/css/timepicker.min.css'>
 		    <link rel='stylesheet' href='modules/books/css/main.css'>
@@ -92,7 +92,7 @@ else
 		    <link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 		    <link rel='stylesheet' href='core/css/materialize.0.97.5.min.css'>
 		    <link rel='stylesheet' href='core/css/material.1.1.3.min.css'>
-		    <link rel='stylesheet' href='core/css/abre.1.1.8.css'>
+		    <link rel='stylesheet' href='core/css/abre.1.1.9.css'>
 	    
 		    <script src='core/js/jquery-2.1.4.min.js'></script>
 		    <script src='core/js/jquery-ui.min.js'></script>
