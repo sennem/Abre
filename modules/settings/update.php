@@ -109,6 +109,9 @@
 		rcopy("$portal_path_root/update/modules/settings/","$portal_path_root/modules/settings/");
 		rcopy("$portal_path_root/update/modules/stream/","$portal_path_root/modules/stream/");
 		
+		//Replace core files
+		copy("$portal_path_root/update/core/abre_version.php", "$portal_path_root/core/abre_version.php")
+		
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
 		
