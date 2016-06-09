@@ -132,7 +132,7 @@
 	$("#updateabre").click(function(event) {
 		event.preventDefault();
 		var Link = $(this).data('version');
-		$.post("modules/settings/update.php", { link: Link },function(){ alert("done"); });
+		$.post("modules/settings/update.php", { link: Link },function(){ location.reload(); });
   	});
 	
 	//Provide image upload on icon click
