@@ -20,6 +20,7 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
 	
 	if($pageaccess==1)
@@ -64,7 +65,7 @@
 		}
 
 			echo "<div class='col s12'>";
-				echo "<button class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored mdl-color--blue-800' id='addlicensebutton'>Add</button>";
+				echo "<button class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."' id='addlicensebutton'>Add</button>";
 			 echo "</div>";   
 		echo "</div>";
 		

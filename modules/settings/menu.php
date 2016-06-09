@@ -16,5 +16,17 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-    
+
+	//Required configuration files
+	require(dirname(__FILE__) . '/../../configuration.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	
 ?>
+
+	<div class="col s12">
+		<ul class="tabs" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+			<li class="tab col s3 tab_1"><a href="#settings">General</a></li>
+			<!--<li class="tab col s3 tab_2"><a href="#modules">Modules</a></li>-->
+		</ul>
+	</div>

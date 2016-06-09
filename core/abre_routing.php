@@ -70,7 +70,7 @@
 		    $( "#content_holder" ).hide();
 		    $( "#loader" ).show();
 		    $( "#titletext" ).text("Not Found");
-		    document.title = 'HCSD Portal';
+		    document.title = '<?php echo sitesettings("sitetitle"); ?>';
 			$( "#content_holder" ).load( "core/abre_404.php", function() { init_page(); });
 	    }
 	});

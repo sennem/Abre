@@ -22,34 +22,29 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 	
-	$pageview=1;
-	$drawerhidden=1;
-	$pageorder=1000;
-
+	//Streams
+	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
+	$result = $db->query($sql);
+	while($row = $result->fetch_assoc())
+	{	
+		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
+			echo "<div class='page'>";
+				echo "<table><thead><tr><th>Name</th></tr></thead>";
+				echo "<tbody>";
+					$modules = array();
+					$modulecount=0;
+					$moduledirectory = dirname(__FILE__) . '/../../modules';
+					$modulefolders = scandir($moduledirectory);
+					foreach ($modulefolders as $result)
+					{
+						$result;
+					}
+				echo "</tbody>";
+				echo "</table>";
+			echo "</div>";
+		echo "</div>";
+	}
+	
 ?>
-	
-
-<script>
-
-//Page locations
-routie({
-    'settings': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Settings");
-	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Settings';
-		$( "#content_holder" ).load( 'modules/settings/settings.php', function() { init_page(); });
-    },
-    'modules': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Settings");
-	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Settings';
-		$( "#content_holder" ).load( 'modules/settings/modules.php', function() { init_page(); });
-    }
-});
-
-</script>

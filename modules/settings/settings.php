@@ -22,6 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 	
 	//Streams
 	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
@@ -35,7 +36,7 @@
 					//Settings
 					echo "<div class='row'>";
 						echo "<div class='col l6 m12'>";
-							echo "<div class='input-field col s12'><h5>General</h5><br></div>";
+							echo "<div class='input-field col s12'><h5>Site</h5><br></div>";
 							echo "<div class='input-field col s12'>";
 						    	echo "<input placeholder='Enter a Site Title' value='".sitesettings("sitetitle")."' id='sitetitle' name='sitetitle' type='text'>";
 								echo "<label class='active' for='sitetitle'>Site Title</label>";
@@ -97,6 +98,27 @@
 						echo "</div></div>";
 					echo "</div>";
 					
+					echo "<div class='row'>";
+						echo "<div class='col s12'><div class='col s12'>";
+							$updatejson = file_get_contents("http://updates.abre.io/");
+							if ($updatejson !== FALSE)
+							{
+								$updatedata = json_decode($updatejson, true);
+								$currentversion = $updatedata['version'];
+								$currentlink = $updatedata['link'];
+								if($abre_version<$currentversion)
+								{
+									echo "<a id='updateabre' href='#' data-version='$currentlink' style='color:#999'>You have version $abre_version installed. Update to $currentversion.</a>";
+								}
+								else
+								{
+									echo "<p style='color:#999'>Release: $abre_version</p>";
+								}
+									
+							}
+						echo "</div></div>";
+					echo "</div>";
+					
 				echo "</div>";
 			echo "</div>";
 		echo "</form>";
@@ -105,6 +127,13 @@
 ?>
 
 <script>
+	
+	//Update Abre
+	$("#updateabre").click(function(event) {
+		event.preventDefault();
+		var Link = $(this).data('version');
+		$.post("modules/settings/update.php", { link: Link },function(){ alert("done"); });
+  	});
 	
 	//Provide image upload on icon click
 	$(".sitelogobutton").click(function() {

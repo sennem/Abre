@@ -22,8 +22,7 @@
 	
 	//Load Modals
 	echo "<div id='modal_holder'></div>";
-	
-	//Load modules based on permissions
+	//Load additional modules based on permissions
 	$modules = array();
 	$modulecount=0;
 	$moduledirectory = dirname(__FILE__) . '/../modules';
@@ -49,7 +48,6 @@
 				array_push($modules, array($pageorder,$pagetitle,$pageview,$pageicon,$pagepath,$drawerhidden,$subpages));
 				$modulecount++;
 			}
-			
 		}  
 	}
 	sort($modules, SORT_DESC);

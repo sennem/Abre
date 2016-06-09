@@ -147,10 +147,10 @@
         foreach ((array)$protocols as $protocol) {
             switch ($protocol) {
                 case 'http':
-                case 'https':   $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { if ($match[1]) $protocol = $match[1]; $link = $match[2] ?: $match[3]; return '<' . array_push($links, "<a $attr href=\"$protocol://$link\" target=\"_blank\" class='mdl-color-text--blue-800'>$link</a>") . '>'; }, $value); break;
-                case 'mail':    $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"mailto:{$match[1]}\" target=\"_blank\" class='mdl-color-text--blue-800'>{$match[1]}</a>") . '>'; }, $value); break;
-                case 'twitter': $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1]  . "\" target=\"_blank\" class='mdl-color-text--blue-800'>{$match[0]}</a>") . '>'; }, $value); break;
-                default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\" target=\"_blank\" class='mdl-color-text--blue-800'>{$match[1]}</a>") . '>'; }, $value); break;
+                case 'https':   $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { if ($match[1]) $protocol = $match[1]; $link = $match[2] ?: $match[3]; return '<' . array_push($links, "<a $attr href=\"$protocol://$link\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>$link</a>") . '>'; }, $value); break;
+                case 'mail':    $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"mailto:{$match[1]}\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[1]}</a>") . '>'; }, $value); break;
+                case 'twitter': $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1]  . "\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[0]}</a>") . '>'; }, $value); break;
+                default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[1]}</a>") . '>'; }, $value); break;
             }
         }
         
@@ -160,9 +160,9 @@
     
 	//Insert into the database
 	function vendorLinkGet($call){
-		$VendorLinkURL=sitesettings(sitevendorlinkurl);
-		$vendorIdentifier=sitesettings(sitevendorlinkidentifier);
-		$vendorKey=sitesettings(sitevendorlinkkey);
+		$VendorLinkURL=sitesettings("sitevendorlinkurl");
+		$vendorIdentifier=sitesettings("sitevendorlinkidentifier");
+		$vendorKey=sitesettings("sitevendorlinkkey");
 		$userID = "";
 		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
 		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
