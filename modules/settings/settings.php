@@ -132,6 +132,7 @@
 	$("#updateabre").click(function(event) {
 		event.preventDefault();
 		var Link = $(this).data('version');
+		$(this).html("Updating...");
 		$.post("modules/settings/update.php", { link: Link },function(){ location.reload(); });
   	});
 	
