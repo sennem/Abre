@@ -115,6 +115,9 @@
 		copy("$portal_path_root/update/configuration-sample.php", "$portal_path_root/configuration-sample.php");
 		copy("$portal_path_root/update/README.md", "$portal_path_root/README.md");
 		copy("$portal_path_root/update/index.php", "$portal_path_root/index.php");
+		
+		//Create content folder if one doesn't exist
+		if (!file_exists("$portal_path_root/content/")){ mkdir("$portal_path_root/content/"); }
 			
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
