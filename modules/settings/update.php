@@ -93,10 +93,12 @@
 		    }
 		
 		    return rmdir($dir);
-		}
-    	
+		}  	
     	deleteDirectory("$portal_path_root/Abre-$linkfile/");
     	unlink("$portal_path_root/update.zip");
+    	
+		//Replace settings module
+		rcopy("$portal_path_root/update/modules/settings/","$portal_path_root/modules/settings/");
 
 		//Replace core modules
 		rcopy("$portal_path_root/update/modules/apps/","$portal_path_root/modules/apps/");
@@ -106,15 +108,14 @@
 		rcopy("$portal_path_root/update/modules/drive/","$portal_path_root/modules/drive/");
 		rcopy("$portal_path_root/update/modules/mail/","$portal_path_root/modules/mail/");
 		rcopy("$portal_path_root/update/modules/profile/","$portal_path_root/modules/profile/");
-		rcopy("$portal_path_root/update/modules/settings/","$portal_path_root/modules/settings/");
 		rcopy("$portal_path_root/update/modules/stream/","$portal_path_root/modules/stream/");
+		rcopy("$portal_path_root/update/core/","$portal_path_root/core/");
 		
 		//Replace core files
 		copy("$portal_path_root/update/configuration-sample.php", "$portal_path_root/configuration-sample.php");
 		copy("$portal_path_root/update/README.md", "$portal_path_root/README.md");
 		copy("$portal_path_root/update/index.php", "$portal_path_root/index.php");
-		copy("$portal_path_root/update/core/abre_version.php", "$portal_path_root/core/abre_version.php");
-		
+			
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
 		
