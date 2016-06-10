@@ -124,7 +124,8 @@
 			if($value=="sitevendorlinkurl" && $valuereturn==""){ $valuereturn=""; }
 			if($value=="sitevendorlinkidentifier" && $valuereturn==""){ $valuereturn=""; }
 			if($value=="sitevendorlinkkey" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="sitelogo" && $valuereturn==""){ $valuereturn="abre_siteicon.png"; }
+			if($value=="sitelogo" && $valuereturn!=""){ $valuereturn="/content/$valuereturn"; }
+			if($value=="sitelogo" && $valuereturn==""){ $valuereturn="/core/images/abre_siteicon.png"; }
 			return $valuereturn;
 		}
 		$db->close();

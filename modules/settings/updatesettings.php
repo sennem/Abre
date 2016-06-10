@@ -46,13 +46,14 @@
 			$fileextention=pathinfo($file, PATHINFO_EXTENSION);
 			$cleanfilename=basename($file);
 			$sitelogofilename = time() . "siteicon." . $fileextention;
-			$uploaddir = $portal_path_root.'/core/images/';
+			$uploaddir = $portal_path_root.'/content/';
 			
 			//Delete previous image
-			$oldimagelocation = $uploaddir . $sitelogoexisting;
-			if($sitelogoexisting!='abre_siteicon.png'){ unlink($oldimagelocation); }
+			$oldimagelocation = $portal_path_root.$sitelogoexisting;
+			if($sitelogoexisting!='/core/images/abre_siteicon.png'){ unlink($oldimagelocation); }
 			
 			//Upload new image
+			if (!file_exists("$portal_path_root/content/")){ mkdir("$portal_path_root/content/"); }
 			$sitelogo = $uploaddir . $sitelogofilename;
 			move_uploaded_file($_FILES['sitelogo']['tmp_name'], $sitelogo);
 		}

@@ -78,7 +78,7 @@
 							    if($sitelogoexisting!="")
 							    {
 									echo "<h6>Primary Logo</h6>";
-									echo "<img class='sitelogobutton pointer' src='/core/images/$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'>";
+									echo "<img class='sitelogobutton pointer' src='$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'>";
 							    	echo "<input type='hidden' name='sitelogoexisting' value='$sitelogoexisting'>";
 							    	echo "<input type='file' name='sitelogo' id='sitelogo' style='display:none;'>";
 							    }

@@ -37,18 +37,18 @@ if (file_exists('configuration.php'))
 			echo "<title>".sitesettings("sitetitle")."</title>";
 			
 			//Site favicon
-			echo "<link rel='icon' type='image/png' href='core/images/".sitesettings("sitelogo")."'>";
+			echo "<link rel='icon' type='image/png' href='".sitesettings("sitelogo")."'>";
 	
 			//Chrome icon
 			echo "<meta name='mobile-web-app-capable' content='yes'>";
-			echo "<link rel='icon' sizes='192x192' href='core/images/".sitesettings("sitelogo")."'>";
+			echo "<link rel='icon' sizes='192x192' href='".sitesettings("sitelogo")."'>";
 	
 			//iOS icon
 			echo "<meta name='apple-mobile-web-app-title' content='".sitesettings("sitetitle")."'>";
-			echo "<link rel='apple-touch-icon' href='core/images/".sitesettings("sitelogo")."'>";
+			echo "<link rel='apple-touch-icon' href='".sitesettings("sitelogo")."'>";
 	
 			//Windows icon
-			echo "<meta name='msapplication-TileImage' content='core/images/".sitesettings("sitelogo")."'>";
+			echo "<meta name='msapplication-TileImage' content='".sitesettings("sitelogo")."'>";
 			echo "<meta name='msapplication-TileColor' content='".sitesettings("sitecolor")."'>";
 			?>
 	
