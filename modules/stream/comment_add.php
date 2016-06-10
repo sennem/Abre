@@ -26,7 +26,7 @@
 	$streamUrldecoded=base64_decode($streamUrl);
 	$streamComment=$_POST["streamComment"];
 	$streamTitleValue=$_POST["streamTitleValue"];
-	$streamTitleValue=mysql_real_escape_string($streamTitleValue);
+	$streamTitleValue=addslashes($streamTitleValue);
 	$streamComment=htmlspecialchars($streamComment, ENT_QUOTES);
 	
 	$Commentspecial=nl2br(strip_tags(html_entity_decode($streamComment)));
