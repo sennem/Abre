@@ -100,6 +100,7 @@
 		$title=str_replace("'",'"',$title);
 		$title=str_replace('"',"'",$title);
 		$title=str_replace('’',"'",$title);
+		$title=str_replace('—',"-",$title);
 		$excerpt=$feeds[$cardcountloop][2];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt=strip_tags(html_entity_decode($excerpt));
@@ -146,8 +147,9 @@
 		$("#commentloader").show();
 		$("#streamComments").empty();
 	    var Stream_Title = $(this).data('title');
-	    $(".modal-content #streamTitle").text(Stream_Title);
-	    $(".modal-content #streamTitleValue").val(Stream_Title);
+	    Stream_Title_Decoded = atob(Stream_Title);
+	    $(".modal-content #streamTitle").text(Stream_Title_Decoded);
+	    $(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
 	    var Stream_Url = $(this).data('url');
 	    $(".modal-content #streamUrl").val(Stream_Url);
 

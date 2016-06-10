@@ -66,11 +66,11 @@
 				
 				if($num_rows_comment==0)
 				{
-					echo "<a class='material-icons mdl-color-text--grey-600 modal-addstreamcomment commenticon' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment' style='padding-right:30px;'>insert_comment</a>";
+					echo "<a class='material-icons mdl-color-text--grey-600 modal-addstreamcomment commenticon' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment' style='padding-right:30px;'>insert_comment</a>";
 				}
 				else
 				{
-					echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".sitesettings("sitecolor")."' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".sitesettings("sitecolor")."'>$num_rows_comment</span>";
+					echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".sitesettings("sitecolor")."' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".sitesettings("sitecolor")."'>$num_rows_comment</span>";
 				}
 			}
 			

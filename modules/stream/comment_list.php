@@ -39,8 +39,6 @@
 			$Comment=nl2br(strip_tags(html_entity_decode($Comment)));
 			$Comment=linkify($Comment);
 			$articletitle=html_entity_decode($row["title"]);
-			$articletitle = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $articletitle);
-			$articletitle=htmlspecialchars($articletitle, ENT_QUOTES);
 			$CommentID=htmlspecialchars($row["id"], ENT_QUOTES);
 			$CommentCreationTime=htmlspecialchars($row["creationtime"], ENT_QUOTES);
 			
