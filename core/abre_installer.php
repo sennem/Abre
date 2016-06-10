@@ -261,6 +261,7 @@ if (!file_exists('configuration.php'))
 		
 	//Header
 	require_once('core/abre_header.php');
+	require_once('core/abre_version.php');
 		
 	?>
 		
@@ -271,7 +272,7 @@ if (!file_exists('configuration.php'))
 	<div class='page'>
 	<div class='row'>
 		<div class='col s12'><h3>Welcome</h3></div>
-		<div class='col s12'><p>Welcome to the 5 minute Abre installation process! You may want to browse the documentation available at <a href='https://abre.io/documentation' target='_blank' class='deep-orange-text text-darken-3'>abre.io/documentation</a>. Otherwise, just fill in the information below and you'll be on your way to using the Abre Platform.</p></div>
+		<div class='col s12'><p>Welcome to the 5 minute Abre installation process! You may want to browse the documentation available at <a href='https://abre.io/documentation' target='_blank' class='deep-orange-text text-darken-3'>abre.io/documentation</a>. Otherwise, just fill in the information below and you'll be on your way to using the Abre Platform. <?php echo "($abre_version)"; ?></p></div>
 		<?php
 		if(isset($_POST["site_title"])=="")
 		{
