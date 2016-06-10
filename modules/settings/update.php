@@ -99,7 +99,7 @@
     	
 		//Replace settings module
 		rcopy("$portal_path_root/update/modules/settings/","$portal_path_root/modules/settings/");
-
+		
 		//Replace core modules
 		rcopy("$portal_path_root/update/modules/apps/","$portal_path_root/modules/apps/");
 		rcopy("$portal_path_root/update/modules/calendar/","$portal_path_root/modules/calendar/");
