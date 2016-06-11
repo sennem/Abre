@@ -108,7 +108,7 @@
 					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
 				}
 			
-			echo "<div class='mdl-card__actions modal-addstreamcomment commenticon pointer' style='background-color:#f9f9f9; padding:20px;' href='#addstreamcomment' data-title='$title' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase'>";
+			echo "<div class='mdl-card__actions modal-addstreamcomment commenticon pointer' style='background-color:#f9f9f9; padding:20px;' href='#addstreamcomment' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase'>";
 				echo "<span style='font-weight:500; font-size:12px;' class='truncate'><img src='$picture' class='profile-avatar-small' style='margin-right:5px;'> $firstname $lastname added a comment</span>";
 			echo "</div>";
 		}

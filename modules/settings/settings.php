@@ -133,7 +133,10 @@
 		event.preventDefault();
 		var Link = $(this).data('version');
 		$(this).html("Updating...");
-		$.post("modules/settings/update.php", { link: Link },function(){ location.reload(); });
+		$.post("modules/settings/update.php", { link: Link },function(){ })
+		.done(function() {
+			location.reload();
+  		})
   	});
 	
 	//Provide image upload on icon click
