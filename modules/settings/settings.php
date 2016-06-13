@@ -135,11 +135,7 @@
 		event.preventDefault();
 		var Link = $(this).data('version');
 		$(this).html("Updating...");
-<<<<<<< HEAD
 		$.post("modules/settings/update.php", { link: Link }, function(){ })
-=======
-		$.post("modules/settings/update.php", { link: Link },function(){ })
->>>>>>> origin/master
 		.done(function() {
 			location.reload();
   		})
