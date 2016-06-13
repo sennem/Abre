@@ -56,7 +56,7 @@
 					echo "</div>";
 					
 					echo "<a class='material-icons mdl-color-text--red likeicon' style='position:absolute; bottom:10px; right:100px;' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' data-page='likes' data-resultcounter='likes_$counter' href='#'>favorite</a> <span class='mdl-color-text--white truncate' style='position:absolute; bottom:12px; right:10px; font-size:12px; font-weight:600; width:90px; padding-left:5px; text-align: left;'>$num_rows_like</span>";
-					echo "<a class='material-icons modal-addstreamcomment commenticon' style='position:absolute; bottom:10px; right:40px; color: ".sitesettings("sitecolor")."' data-title='$title' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span class='mdl-color-text--white' style='position:absolute; bottom:12px; right:10px; font-size:12px; font-weight:600; width:30px; padding-left:5px; text-align: left;'>$num_rows_comment</span>";
+					echo "<a class='material-icons modal-addstreamcomment commenticon' style='position:absolute; bottom:10px; right:40px; color: ".sitesettings("sitecolor")."' data-title='$titleencoded' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span class='mdl-color-text--white' style='position:absolute; bottom:12px; right:10px; font-size:12px; font-weight:600; width:30px; padding-left:5px; text-align: left;'>$num_rows_comment</span>";
 					
 				echo "</div>";
 			echo "</div>";
@@ -97,8 +97,9 @@
 		$("#commentloader").show();
 		$("#streamComments").empty();
 	    var Stream_Title = $(this).data('title');
-	    $(".modal-content #streamTitle").text(Stream_Title);
-	    $(".modal-content #streamTitleValue").val(Stream_Title);
+	    Stream_Title_Decoded = atob(Stream_Title);
+	    $(".modal-content #streamTitle").text(Stream_Title_Decoded);
+	    $(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
 	    var Stream_Url = $(this).data('url');
 	    $(".modal-content #streamUrl").val(Stream_Url);
 
