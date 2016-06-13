@@ -100,42 +100,23 @@
 					
 					echo "<div class='row'>";
 						echo "<div class='col s12'><div class='col s12'>";
-						
-							$updatejson = file_get_contents("http://updates.abre.io/");
-							if ($updatejson !== FALSE)
-							{
-								$updatedata = json_decode($updatejson, true);
-								$currentversion = $updatedata['version'];
-								$currentlink = $updatedata['link'];
-								if($abre_version<$currentversion)
-								{
-									echo "<a id='updateabre' href='#' data-version='$currentlink' style='color:#999'>You have version $abre_version installed. Update to $currentversion.</a>";
-								}
-								else
-								{
-									echo "<p style='color:#999'>Release: $abre_version</p>";
-								}
-									
-							}
-								
+
 							//Retrieve latest version from public GitHub repo
-							/*
 							$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
 							$context = stream_context_create($opts);
 							$content = file_get_contents("https://api.github.com/repos/abreio/Abre/releases/latest", false, $context);
 							$json = json_decode($content, true);
 							$currentversion = $json['name'];
-							$currentlink = $json['zipball_url'];
 								
 							if($abre_version<$currentversion)
 							{
+								$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
 								echo "<a id='updateabre' href='#' data-version='$currentlink' style='color:#999'>You have version $abre_version installed. Update to $currentversion.</a>";
 							}
 							else
 							{
 								echo "<p style='color:#999'>Release: $abre_version</p>";
 							}
-							*/
 							
 						echo "</div></div>";
 					echo "</div>";
