@@ -25,6 +25,7 @@
 	if($pageaccess==1)
 	{		
 		
+		/*
 		echo "<div class='row'><div class='col s12'>";
 			if($superadmin==1)
 			{
@@ -35,6 +36,37 @@
 			}
 			echo "<br><a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."'>Export</a>";
 		echo "</div><div>";
+		*/
+		
+		
+		
+		
+		echo "<div class='row'><div class='col s12'>";
+							
+				echo "<table id='myTable' class='tablesorter'>";
+					echo "<thead>";
+						echo "<tr class='pointer'>";
+							echo "<th>Report</th>";
+	 						echo "<th style='width:30px'></th>";
+						echo "</tr>";
+					echo "</thead>";
+					echo "<tbody>";
+							echo "<tr>";
+								echo "<td>Staff - All Active Staff</td>";
+								echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600'><a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--grey-600'><i class='material-icons'>file_download</i></button></a></td>";	
+							echo "</tr>";
+							echo "<tr>";
+								echo "<td>Staff - Work Calendars</td>";
+								echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600'><a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--grey-600'><i class='material-icons'>file_download</i></button></a></td>";	
+							echo "</tr>";
+					echo "</tbody>";
+				echo "</table>";
+
+		echo "</div>";
+		
+		
+		
+		
 		
 		?>
 		

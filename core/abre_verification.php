@@ -30,7 +30,7 @@
 		if (isset($_COOKIE[$cookie_name]) && !isset($_SESSION['access_token'])){ require_once 'abre_google_login.php'; }
 		
 		//Check to make sure they are logged in
-		if(!(isset($_SESSION['useremail']) && $_SESSION['useremail'] != "")){ header("Location: $portal_root/?signout"); };
+		if(!(isset($_SESSION['usertype']) && $_SESSION['usertype'] != "")){ header("Location: $portal_root/?signout"); };
 	
 	}
 

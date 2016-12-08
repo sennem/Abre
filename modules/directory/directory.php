@@ -84,12 +84,19 @@
 								$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
 							}
 							$id=htmlspecialchars($row["id"], ENT_QUOTES);
-							if($pageaccess==1){ echo "<tr class='clickrow'>"; }else{ echo "<tr class='clickrowemail'>"; }
+							if($pageaccess==1 or $pageaccess==2){ echo "<tr class='clickrow'>"; }else{ echo "<tr class='clickrowemail'>"; }
 								echo "<td width='60px'><img src='$picture' class='profile-avatar-small'></td>";
 								echo "<td><strong>$firstname $lastname</strong>";
 								if($_SESSION['usertype']=="staff" && $pageaccess!=1)
 								{
-									echo "<a href='https://mail.google.com/mail/u/0/?view=cm&fs=1&to=$email&tf=1' class='hidden'></a>";
+									if($pageaccess==2)
+									{
+										echo "<a href='$portal_root/#directory/$id' class='hidden'></a>";
+									}
+									else
+									{
+										echo "<a href='https://mail.google.com/mail/u/0/?view=cm&fs=1&to=$email&tf=1' class='hidden'></a>";
+									}
 								}
 								else
 								{

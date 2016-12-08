@@ -24,7 +24,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 	
-	//Streams
+	//Settings
 	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc())
@@ -36,7 +36,7 @@
 					//Settings
 					echo "<div class='row'>";
 						echo "<div class='col l6 m12'>";
-							echo "<div class='input-field col s12'><h5>Site</h5><br></div>";
+							echo "<div class='input-field col s12'><h5>Abre</h5><br></div>";
 							echo "<div class='input-field col s12'>";
 						    	echo "<input placeholder='Enter a Site Title' value='".sitesettings("sitetitle")."' id='sitetitle' name='sitetitle' type='text'>";
 								echo "<label class='active' for='sitetitle'>Site Title</label>";
@@ -50,6 +50,10 @@
 								echo "<label class='active' for='sitedescription'>Site Login Text</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
+						    	echo "<input placeholder='Enter a Site Color' value='".sitesettings('sitecolor')."' id='sitecolor' name='sitecolor' type='text'>";
+								echo "<label class='active' for='sitecolor'>Site Color</label>";
+						    echo "</div>";
+							echo "<div class='input-field col s12'>";
 						    	echo "<input placeholder='Enter the Google Analytics ID' value='".sitesettings('siteanalytics')."' id='siteanalytics' name='siteanalytics' type='text'>";
 								echo "<label class='active' for='siteanalytics'>Google Analytics ID</label>";
 						    echo "</div>";
@@ -57,22 +61,18 @@
 						    	echo "<input placeholder='Enter the Site Administrator Email' value='".sitesettings('siteadminemail')."' id='siteadminemail' name='siteadminemail' type='text'>";
 								echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
 						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Host URL' value='".sitesettings('sitevendorlinkurl')."' id='sitevendorlinkurl' name='sitevendorlinkurl' type='text'>";
-								echo "<label class='active' for='sitevendorlinkurl'>Site VendorLink URL</label>";
+							echo "<div class='input-field col s6'>";
+						    	echo "<input placeholder='Enter Student Domain' value='".sitesettings('studentdomain')."' id='studentdomain' name='studentdomain' type='text'>";
+								echo "<label class='active' for='studentdomain'>Student Domain</label>";
 						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Identifier' value='".sitesettings('sitevendorlinkidentifier')."' id='sitevendorlinkidentifier' name='sitevendorlinkidentifier' type='text'>";
-								echo "<label class='active' for='sitevendorlinkidentifier'>Site VendorLink Identifier</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Key' value='".sitesettings('sitevendorlinkkey')."' id='sitevendorlinkkey' name='sitevendorlinkkey' type='text'>";
-								echo "<label class='active' for='sitevendorlinkkey'>Site VendorLink Key</label>";
+						    echo "<div class='input-field col s6'>";
+						    	echo "<input placeholder='Enter Required Characters' value='".sitesettings('studentdomainrequired')."' id='studentdomainrequired' name='studentdomainrequired' type='text'>";
+								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
 						    echo "</div>";
 						echo "</div>";
 						
 						echo "<div class='col l6 m12'>";
-							echo "<div class='input-field col s12'><h5>Style</h5></div>";
+							echo "<div class='input-field col s12'><br></div>";
 							echo "<div class='input-field col s12 center-align'>";
 							    $sitelogoexisting=sitesettings('sitelogo');
 							    if($sitelogoexisting!="")
@@ -83,12 +83,35 @@
 							    	echo "<input type='file' name='sitelogo' id='sitelogo' style='display:none;'>";
 							    }
 						    echo "</div>";
+						echo "</div>";
+						   
+						echo "<div class='col l12'>";
+						    //Software Answers
+						    echo "<div class='input-field col s12'><h5>Software Answers</h5><br></div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Color' value='".sitesettings('sitecolor')."' id='sitecolor' name='sitecolor' type='text'>";
-								echo "<label class='active' for='sitecolor'>Site Color</label>";
+						    	echo "<input placeholder='Enter VendorLink Host URL' value='".sitesettings('sitevendorlinkurl')."' id='sitevendorlinkurl' name='sitevendorlinkurl' type='text'>";
+								echo "<label class='active' for='sitevendorlinkurl'>Software Answers VendorLink URL</label>";
+						    echo "</div>";
+							echo "<div class='input-field col s12'>";
+						    	echo "<input placeholder='Enter VendorLink Identifier' value='".sitesettings('sitevendorlinkidentifier')."' id='sitevendorlinkidentifier' name='sitevendorlinkidentifier' type='text'>";
+								echo "<label class='active' for='sitevendorlinkidentifier'>Software Answers VendorLink Identifier</label>";
+						    echo "</div>";
+							echo "<div class='input-field col s12'>";
+						    	echo "<input placeholder='Enter VendorLink Key' value='".sitesettings('sitevendorlinkkey')."' id='sitevendorlinkkey' name='sitevendorlinkkey' type='text'>";
+								echo "<label class='active' for='sitevendorlinkkey'>Software Answers VendorLink Key</label>";
+						    echo "</div>";
+						    
+						    //Certica Solutions
+						    echo "<div class='input-field col s12'><h5>Certica Solutions</h5><br></div>";
+							echo "<div class='input-field col s12'>";
+						    	echo "<input placeholder='Enter Certica REST API Base URL' value='".sitesettings('certicabaseurl')."' id='certicabaseurl' name='certicabaseurl' type='text'>";
+								echo "<label class='active' for='certicabaseurl'>Certica REST API Base URL</label>";
+						    echo "</div>";
+							echo "<div class='input-field col s12'>";
+						    	echo "<input placeholder='Enter Certica Customer AccessKey' value='".sitesettings('certicaaccesskey')."' id='certicaaccesskey' name='certicaaccesskey' type='text'>";
+								echo "<label class='active' for='certicaaccesskey'>Certica Customer AccessKey</label>";
 						    echo "</div>";
 						echo "</div>";
-						
 					echo "</div>";
 					
 					//Save Button

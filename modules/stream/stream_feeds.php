@@ -64,12 +64,12 @@
 	$location=$_SERVER['DOCUMENT_ROOT'] . '/../private/stream/cache/feed/';
 	$feed_flipboard->set_cache_location($location);
 	$feed_flipboard->enable_cache($streamcachesetting);
-	$feed_flipboard->set_item_limit(10);
 	$feed_flipboard->init();
 	$feed_flipboard->handle_content_type();	
 
-	
-	foreach ($feed_flipboard->get_items() as $item)
+	$StreamEndResult=20;
+	if(isset($_GET["StreamEndResult"])){ $StreamEndResult=$_GET["StreamEndResult"]; }
+	foreach ($feed_flipboard->get_items(0,$StreamEndResult) as $item)
 	{
 		$title=$item->get_title();
 		$link=$item->get_link();
@@ -133,36 +133,36 @@
 ?>
 
 <script>
-
-	$(document).ready(function(){
-    	$('.modal-addstreamcomment').leanModal({
-	    	in_duration: 0,
-			out_duration: 0,
-	    	ready: function() { $("#streamComment").focus(); }
-	   	});
-  	});
-
-	$(document).on("click", ".modal-addstreamcomment", function (event) {
-		event.preventDefault();
-		$("#commentloader").show();
-		$("#streamComments").empty();
-	    var Stream_Title = $(this).data('title');
-	    Stream_Title_Decoded = atob(Stream_Title);
-	    $(".modal-content #streamTitle").text(Stream_Title_Decoded);
-	    $(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
-	    var Stream_Url = $(this).data('url');
-	    $(".modal-content #streamUrl").val(Stream_Url);
-
-		$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
-			$("#commentloader").hide();
-			
-			//Scroll to bottom
-			var height=$("#addstreamcomment").height();
-			height=height+10000;
-			$('.modal-content').scrollTop(height);
-			
-		});
+	
+	$(function()
+	{
 		
+		//Like a Stream Post
+		$(".likeicon").unbind().click(function()
+		{
+			
+			event.preventDefault();
+						
+			//Toggle icon color
+			$(this).toggleClass("mdl-color-text--grey-600");
+			$(this).toggleClass("mdl-color-text--red");
+						
+			var Stream_Title = $(this).data('title');
+			var Stream_Url = $(this).data('url');
+			var Stream_Image = $(this).data('image');
+				
+			$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() {
+				$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+					$('.grid').masonry( 'reloadItems' );
+					$('.grid').masonry( 'layout' );
+					mdlregister();
+				});
+			});
+		
+		});
+	
 	});
 
 </script>
+
+<script src='/modules/stream/commenting.js'></script>

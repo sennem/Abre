@@ -20,8 +20,9 @@
 	//Required configuration files
 	require_once('abre_verification.php');
 	
-	//Load Modals
+	//Modal Holder
 	echo "<div id='modal_holder'></div>";
+	
 	//Load additional modules based on permissions
 	$modules = array();
 	$modulecount=0;

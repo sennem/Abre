@@ -127,22 +127,40 @@
 
 <script>
 	
-	//Sortable settings
-	$( ".appssort" ).sortable({
-		cursorAt: { top: 25, left: 45 },
-		update: function(event, ui){
-			var postData = $(this).sortable('serialize');
-			<?php 
-				echo "$.post('$portal_root/modules/apps/apps_save_order.php', {list: postData})";
-			?>
-			.done(function()
+	$(function()
+	{	
+		
+		//Load Masonry
+		function checkWidthapps()
+		{
+			if ($(window).width() > 600)
 			{
-				if (typeof loadOtherCardsApps == 'function')
-				{ 
-					loadOtherCardsApps();
-				}
-			});
+				//Sortable settings
+				$( ".appssort" ).sortable({
+					cursorAt: { top: 25, left: 45 },
+					update: function(event, ui){
+						var postData = $(this).sortable('serialize');
+						<?php 
+							echo "$.post('$portal_root/modules/apps/apps_save_order.php', {list: postData})";
+						?>
+						.done(function()
+						{
+							if (typeof loadOtherCardsApps == 'function')
+							{ 
+								loadOtherCardsApps();
+							}
+						});
+					}
+				});
+			}
 		}
+		checkWidthapps();
+		
+		//Make the Icons Clickable
+		$(".app").click(function() {
+			window.open($(this).find("a").attr("href"), '_blank');
+		});
+		
 	});
 
 </script>

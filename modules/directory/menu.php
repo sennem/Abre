@@ -21,14 +21,30 @@
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once('permissions.php');
 	
+	if($pageaccess==1)
+	{	
+?>
+	    <div class="col s12">
+			<ul class="tabs_2" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+				<li class="tab col s3 tab_1 directorymenu pointer" data="#directory"><a href="#directory" class='mdl-color-text--white'>Active</a></li>
+				<li class="tab col s3 tab_2 directorymenu pointer" data="#directory/archived"><a href="#directory/archived" class='mdl-color-text--white'>Archived</a></li>
+				<li class="tab col s3 tab_3 directorymenu pointer" data="#directory/reports"><a href="#directory/reports" class='mdl-color-text--white'>Reports</a></li>
+			</ul>
+		</div>	
+<?php	
+	}	
 ?>
 
-
-    <div class="col s12">
-		<ul class="tabs" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
-			<li class="tab col s3 tab_1"><a href="#directory" class='mdl-color-text--white'>Active</a></li>
-			<li class="tab col s3 tab_2"><a href="#directory/archived" class='mdl-color-text--white'>Archived</a></li>
-			<li class="tab col s3 tab_3"><a href="#directory/export" class='mdl-color-text--white'>Export</a></li>
-		</ul>
-	</div>
+<script>
+	
+	$(function()
+	{	
+		$( ".directorymenu" ).click(function()
+		{
+			window.open($(this).attr("data"), '_self');
+		});	
+	});
+	
+</script>

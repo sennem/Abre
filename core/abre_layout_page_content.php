@@ -23,7 +23,6 @@
 ?>
 
 	<!--Display page content-->
-	<div id='modal_holder'></div>
 	<main class='mdl-layout__content'>
 		<div class='content' id='content'>
 			<div id='loader'><?php include "abre_loader_spinner.php"; ?></div>

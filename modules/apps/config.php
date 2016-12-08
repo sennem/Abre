@@ -52,41 +52,41 @@
     	</div>
 	</div>
 
-<script>
-	
-	//Load apps into modal
-	$( "#loadapps" ).load( "modules/apps/apps.php" );
-	
-	$(document).ready(function(){
-    	$('.modal-viewapps').leanModal({
-	    	in_duration: 0,
-			out_duration: 0,
-			opacity: 0,
-	    	ready: function() { 
-		    	$("#viewapps_arrow").show(); 
-		    	$("#viewapps").scrollTop(0);
-		    	$('#viewprofile').closeModal({
+	<script>
+		
+		$(document).ready(function()
+		{
+			//Load Apps into Modal
+			$('#loadapps').load('modules/apps/apps.php');
+		
+			//Apps Modal
+	    	$('.modal-viewapps').leanModal({
+				in_duration: 0,
+				out_duration: 0,
+				opacity: 0,
+		    	ready: function() { 
+			    	$("#viewapps_arrow").show(); 
+			    	$("#viewapps").scrollTop(0);
+			    	$('#viewprofile').closeModal({
+				    	in_duration: 0,
+						out_duration: 0,
+				   	});
+			    	$("#viewprofile_arrow").hide();
+			    },
+		    	complete: function() { $("#viewapps_arrow").hide(); }
+		   	});	  	
+	  	
+		   	//Make the App Icons Clickable
+		   	$(document).on("click", ".app", function ()
+		   	{
+				window.open($(this).find("a").attr("href"), '_blank');			
+				$("#viewapps_arrow").hide();
+				
+		    	$('#viewapps').closeModal({
 			    	in_duration: 0,
 					out_duration: 0,
 			   	});
-		    	$("#viewprofile_arrow").hide();
-		    },
-	    	complete: function() { $("#viewapps_arrow").hide(); }
-	   	});
-  	});
-  	
-  	//Make the Icons Clickable
-	$(document).on("click", ".app", function ()
-	{
-		window.open($(this).find("a").attr("href"), '_blank');
-		
-		$("#viewapps_arrow").hide();
-		 
-		 //Close the app modal
-    	$('#viewapps').closeModal({
-	    	in_duration: 0,
-			out_duration: 0,
-	   	});
-	});
-
-</script>
+			});
+		});
+	
+	</script>

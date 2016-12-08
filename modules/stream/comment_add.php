@@ -22,27 +22,27 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
 	
-	$streamUrl=$_POST["streamUrl"];
-	$streamUrldecoded=base64_decode($streamUrl);
-	$streamComment=$_POST["streamComment"];
-	$streamTitleValue=$_POST["streamTitleValue"];
-	$streamTitleValue=addslashes($streamTitleValue);
-	$streamComment=htmlspecialchars($streamComment, ENT_QUOTES);
-	
-	$Commentspecial=nl2br(strip_tags(html_entity_decode($streamComment)));
-	$Commentspecial=linkify($Commentspecial);
-	
-	$userposter=$_SESSION['useremail'];
-
-	if($streamComment!="" && $streamTitleValue!="")
-	{
+	if($_SESSION['usertype']=='staff')
+	{	
+		$streamUrl=$_POST["streamUrl"];
+		$streamUrldecoded=base64_decode($streamUrl);
+		$streamComment=$_POST["streamComment"];
+		$streamTitleValue=$_POST["streamTitleValue"];
+		$streamTitleValue=addslashes($streamTitleValue);
+		$streamComment=htmlspecialchars($streamComment, ENT_QUOTES);
 		
-		//Insert comment into database
-		$sql = "INSERT INTO streams_comments (url, title, user, comment) VALUES ('$streamUrldecoded', '$streamTitleValue', '$userposter', '$streamComment');";
-		$dbreturn = databaseexecute($sql);
-
+		$Commentspecial=nl2br(strip_tags(html_entity_decode($streamComment)));
+		$Commentspecial=linkify($Commentspecial);
+		
+		$userposter=$_SESSION['useremail'];
+	
+		if($streamComment!="" && $streamTitleValue!="")
+		{	
+			$sql = "INSERT INTO streams_comments (url, title, user, comment) VALUES ('$streamUrldecoded', '$streamTitleValue', '$userposter', '$streamComment');";
+			$dbreturn = databaseexecute($sql);
+		}
+		$streamUrldecoded=base64_encode($streamUrldecoded);
+		echo $streamUrldecoded;
 	}
-	$streamUrldecoded=base64_encode($streamUrldecoded);
-	echo $streamUrldecoded;
 	
 ?>

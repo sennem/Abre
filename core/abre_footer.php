@@ -18,7 +18,7 @@
     */
 
 	//Add google anaylitics and routing if configuration file exists
-	if (file_exists('configuration.php'))
+	if(file_exists('configuration.php'))
 	{  
 	?>
 	
@@ -32,11 +32,13 @@
 		  ?>
 		  ga('send', 'pageview');
 		</script>
-	
-		<?php require_once('abre_routing.php'); ?>
+
 		
 	<?php
+		
+		require_once('abre_routing.php');
 	}
+	
 	?>
 	
 </body>

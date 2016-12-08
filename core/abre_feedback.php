@@ -25,7 +25,6 @@
 	if($_SESSION['usertype']=="staff")
 	{	
 	?>
-	
 		<!--Feedback modal-->
 		<div id='feedback' class='modal modal-fixed-footer modal-mobile-full'>
 			<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>
@@ -51,26 +50,23 @@
 	          
 <script>
 	
-	$(document).ready(function(){
+	$(function()
+	{   
+		
+		//Feedback Modal			
+    	$('.modal-trigger').leanModal({ in_duration: 0, out_duration: 0, ready: function() { $("#textarea").focus(); } });
     	
-    	$('.modal-trigger').leanModal({
-	    	in_duration: 0,
-			out_duration: 0,
-	    	ready: function() { $("#textarea").focus(); }
-	   	}
-	   	);
-    	
-    	
-		//Save Form Data
+		//Submit Feedback Form
 		var form = $('#form-feedback');
 		var formMessages = $('#form-messages');
-		
-		$(form).submit(function(event) {
-		    event.preventDefault();
+		$(form).submit(function(event)
+		{					
+			event.preventDefault();
 		    $('#feedback').closeModal({
 			    in_duration: 0,
 				out_duration: 0,
 		    });
+		    
 			var formData = $(form).serialize();
 			$.ajax({
 			    type: 'POST',
@@ -78,18 +74,14 @@
 			    data: formData
 			})
 			
-			//Show the notification
 			.done(function(response) {
 				$("#textarea").val('');
 				var notification = document.querySelector('.mdl-js-snackbar');
 				var data = { message: response };
 				notification.MaterialSnackbar.showSnackbar(data);	
-			})
-			
+			})		
 		});
-    	
-    	
+	
   	});
-  
   
 </script> 

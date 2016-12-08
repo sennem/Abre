@@ -24,7 +24,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	
 	//Display User Profile Information
-	if($pageaccess==1)
+	if($pageaccess==1 or $pageaccess==2)
 	{	
 
 		$id=htmlspecialchars($_GET["id"], ENT_QUOTES);		
@@ -87,8 +87,12 @@
 					$sd=stripslashes(htmlspecialchars(decrypt($sd, ""), ENT_QUOTES));
 					$ed=htmlspecialchars($row["effectivedate"], ENT_QUOTES);
 					$ed=stripslashes(htmlspecialchars(decrypt($ed, ""), ENT_QUOTES));
+					$rategroup=htmlspecialchars($row["rategroup"], ENT_QUOTES);
+					$rategroup=stripslashes(htmlspecialchars(decrypt($rategroup, ""), ENT_QUOTES));
 					$step=htmlspecialchars($row["step"], ENT_QUOTES);
 					$step=stripslashes(htmlspecialchars(decrypt($step, ""), ENT_QUOTES));
+					$educationlevel=htmlspecialchars($row["educationlevel"], ENT_QUOTES);
+					$educationlevel=stripslashes(htmlspecialchars(decrypt($educationlevel, ""), ENT_QUOTES));
 					$salary=htmlspecialchars($row["salary"], ENT_QUOTES);
 					$salary=stripslashes(htmlspecialchars(decrypt($salary, ""), ENT_QUOTES));
 					$hours=htmlspecialchars($row["hours"], ENT_QUOTES);
@@ -164,6 +168,12 @@
 					$contractdays=stripslashes(htmlspecialchars(decrypt($contractdays, ""), ENT_QUOTES));
 	
 					$id=htmlspecialchars($row["id"], ENT_QUOTES);
+					
+					
+					
+					echo "<div id='workcalendardisplay' style='display:none;'>Calendar for $firstname $lastname</div>";
+
+					
 				}
 			}
 			else
@@ -192,6 +202,7 @@
 				$doh="";
 				$sd="";
 				$ed="";
+				$rategroup="";
 				$step="";
 				$salary="";
 				$hours="";
@@ -244,215 +255,293 @@
 					$pictureserver=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
 				}
 				echo "<form id='form-hr' method='post' enctype='multipart/form-data' action='modules/directory/updateuser.php'>";
-			
-				  echo "<div class='row'><div class='col s12'>";
-				  		echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'>";
-				  echo "</div></div>";
-				  echo "<div class='row'><div class='col l12'><h4>Basic Information</h4></div></div>";
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a First Name' value='$firstname' id='firstname' name='firstname' type='text' required>";
-				      echo "<label class='active' for='firstname'>First Name</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Middle Name' value='$middlename' id='middlename' name='middlename' type='text'>";
-				      echo "<label class='active' for='middlename'>Middle Name</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Last Name' value='$lastname' id='lastname' name='lastname' type='text' required>";
-				      echo "<label class='active' for='lastname'>Last Name</label>";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Social Security Number' value='$ss' id='ss' name='ss' type='text'>";
-				      echo "<label class='active' for='middlename'>Social Security Number</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$dob' name='dob' class='datepicker'>";
-				      echo "<label class='active' for='dob'>Date of Birth</label>";
-				    echo "</div>";
-				    echo "<div class='col l4 s12'>";
-				      echo "<p>Profile Picture</p>";
-				      if($picture!="" xor $picture=='user.png'){ echo "<input type='hidden' name='currentpicture' value='$picture'>"; }else{ echo "<input type='hidden' name='currentpicture' value=''>"; }
-				      echo "<input type='file' name='picture' />";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  echo "<div class='row'>";
-					echo "<div class='input-field col l4 s12'>";
-						echo "<select name='ethnicity'>";
-					      	include "ethnicity.php";
-						echo "</select>";
-					    echo "<label>Ethnicity</label>";
-				    echo "</div>"; 
-					echo "<div class='input-field col l4 s12'>";
-						echo "<select name='gender'>";
-					      	include "gender.php";
-						echo "</select>";
-					    echo "<label>Gender</label>";
-				    echo "</div>"; 
-				  echo "</div>";
-				  
-				  echo "<div class='row'><div class='col l12'><h4>Contact Information</h4></div></div>";
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Address' value='$address' id='address' name='address' type='text'>";
-				      echo "<label class='active' for='address'>Address</label>";
-				    echo "</div>";
-					echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a City' value='$city' id='city' name='city' type='text'>";
-				      echo "<label class='active' for='city'>City</label>";
-				    echo "</div>";   
-					echo "<div class='input-field col l2 s12'>";
-						echo "<select name='state'>";
-					      	include "states.php";
-						echo "</select>";
-					    echo "<label>State</label>";
-				    echo "</div>"; 
-					echo "<div class='input-field col l2 s12'>";
-				      echo "<input placeholder='Enter a Zipcode' value='$zip' id='zip' name='zip' type='text'>";
-				      echo "<label class='active' for='zip'>Zipcode</label>";
-				    echo "</div>";   
-				  echo "</div>";  
-				  
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Phone Number' value='$phone' id='phone' name='phone' type='text'>";
-				      echo "<label class='active' for='phone'>Phone Number</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Cell Number' value='$cellphone' id='cellphone' name='cellphone' type='text'>";
-				      echo "<label class='active' for='cellphone'>Cell Number</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Email' value='$email' id='email' name='email' type='text'>";
-				      echo "<label class='active' for='email'>Email</label>";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  echo "<div class='row'><div class='col l12'><h4>Job Information</h4></div></div>";
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l9 s12'>";
-				      echo "<input placeholder='Enter a Job Title' value='$title' id='title' name='title' type='text'>";
-				      echo "<label class='active' for='title'>Current Job Title</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-						echo "<select name='contract'>";
-					      	include "contract.php";
-						echo "</select>";
-					    echo "<label>Contract</label>";
-				    echo "</div>";
-				  echo "</div>";  
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l3 s12'>";
-						echo "<select name='classification'>";
-					      	if($classification==""){ echo "<option value='$classification' selected>Choose</option>"; }
-					      	if($classification!=""){ echo "<option value='$classification' selected>$classification</option>"; }
-							echo "<option value='Certified'>Certified</option>";
-							echo "<option value='Classified'>Classified</option>";
-						echo "</select>";
-					    echo "<label>Classification Type</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-						echo "<select name='location'>";
-					      	include "locations.php";
-						echo "</select>";
-					    echo "<label>Home Building</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-						echo "<select name='grade'>";
-					      	include "grade.php";
-						echo "</select>";
-					    echo "<label>Grade</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-						echo "<select name='subject'>";
-					      	include "subject.php";
-						echo "</select>";
-					    echo "<label>Subject</label>";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l3 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$doh' name='doh' class='datepicker'>";
-				      echo "<label class='active' for='doh'>Date of Hire</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$sd' name='sd' class='datepicker'>";
-				      echo "<label class='active' for='sd'>Seniority Date</label>";
-				    echo "</div>";
-				  	echo "<div class='input-field col l3 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$ed' name='ed' class='datepicker'>";
-				      echo "<label class='active' for='ed'>Effective Date</label>";
-				    echo "</div>";
-					echo "<div class='input-field col l3 s12'>";
-						echo "<input placeholder='Enter a Step' value='$step' id='step' name='step' type='text'>";
-				      echo "<label class='active' for='step'>Step</label>";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l3 s12'>";
-				      echo "<input placeholder='Enter a Salary' value='$salary' id='salary' name='salary' type='text'>";
-				      echo "<label class='active' for='salary'>Salary</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-				      echo "<input placeholder='Enter Number of Hours' value='$hours' id='hours' name='hours' type='text'>";
-				      echo "<label class='active' for='hours'>Hours</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l3 s12'>";
-				      echo "<input placeholder='Enter Number of Contracted Days' value='$contractdays' id='contractdays' name='contractdays' type='number' min='1' max='365'>";
-				      echo "<label class='active' for='contractdays'>Contract Days</label>";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  echo "<div class='row'><div class='col l12'><h4>Background Information</h4></div></div>";
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$probationreportdate' name='probationreportdate' class='datepicker'>";
-				      echo "<label class='active' for='probationreportdate'>Probationary Report Date</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$statebackgroundcheck' name='statebackgroundcheck' class='datepicker'>";
-				      echo "<label class='active' for='statebackgroundcheck'>State Background Check</label>";
-				    echo "</div>";
-				    echo "<div class='input-field col l4 s12'>";
-				      echo "<input placeholder='Enter a Date' type='date' value='$federalbackgroundcheck' name='federalbackgroundcheck' class='datepicker'>";
-				      echo "<label class='active' for='federalbackgroundcheck'>Federal Background Check</label>";
-				    echo "</div>";
-				  echo "</div>";
-				  
-				  include "profile_licenses.php";
-				  
-				  if($id!="new")
-				  {
-					  echo "<div class='row'>";
-					  		echo "<div class='col s12'><h4>Discipline Report Information</h4></div>";
-					  		echo "<div id='disciplinediv'>"; include "profile_disciplinereport.php"; echo "</div>";
-						  echo "<div class='input-field col s12'>";
-						  	echo "<input type='file' name='discipline' />";
-						  echo "</div>";
-					  echo "</div>";
-				  }
-				  
-				  //Permissions
-				  echo "<div class='row'><div class='col l12'><h4>Permissions</h4></div></div>";
-				  echo "<div class='row'>";
-				    echo "<div class='input-field col l3 s12'>";
-						echo "<select name='permissions'>";
-					      	include "permissionlist.php";
-						echo "</select>";
-					    echo "<label>Curriculum</label>";
-				    echo "</div>";
-				  echo "</div>";
 				
-				  echo "<input type='hidden' name='id' value='$id' id='userid'><br>";
+					//Profile
+					echo "<div id='profile'>";
+						echo "<div class='row'><div class='col s12'>";
+							echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'><h6 class='center-align'>$firstname $lastname</h6>";
+						echo "</div></div>";
+						echo "<div class='row'>";
+							echo "<div class='col s12'><h4>Contact</h4></div>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a First Name' value='$firstname' id='firstname' name='firstname' type='text' required>";
+								echo "<label class='active' for='firstname'>First Name</label>";
+							echo "</div>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Middle Name' value='$middlename' id='middlename' name='middlename' type='text'>";
+								echo "<label class='active' for='middlename'>Middle Name</label>";
+							echo "</div>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Last Name' value='$lastname' id='lastname' name='lastname' type='text' required>";
+								echo "<label class='active' for='lastname'>Last Name</label>";
+							echo "</div>";
+						echo "</div>";
+						
+						echo "<div class='row'>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Address' value='$address' id='address' name='address' type='text'>";
+								echo "<label class='active' for='address'>Address</label>";
+							echo "</div>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a City' value='$city' id='city' name='city' type='text'>";
+								echo "<label class='active' for='city'>City</label>";
+							echo "</div>";   
+							echo "<div class='input-field col l2 s12'>";
+								echo "<select "; if($pageaccess==2){ echo "disabled "; } echo "name='state'>";
+									include "states.php";
+								echo "</select>";
+								echo "<label>State</label>";
+							echo "</div>"; 
+							echo "<div class='input-field col l2 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Zipcode' value='$zip' id='zip' name='zip' type='text'>";
+								echo "<label class='active' for='zip'>Zipcode</label>";
+							echo "</div>";   
+						echo "</div>";  
+									  
+						echo "<div class='row'>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Phone Number' value='$phone' id='phone' name='phone' type='text'>";
+								echo "<label class='active' for='phone'>Phone Number</label>";
+							echo "</div>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Cell Number' value='$cellphone' id='cellphone' name='cellphone' type='text'>";
+								echo "<label class='active' for='cellphone'>Cell Number</label>";
+							echo "</div>";
+							echo "<div class='input-field col l4 s12'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Email' value='$email' id='email' name='email' type='text'>";
+								echo "<label class='active' for='email'>Email</label>";
+							echo "</div>";
+						echo "</div>";		
+								  
+						if($pageaccess!=2)
+						{
+							echo "<div class='row'>";
+								echo "<div class='input-field col l4 s12'>";
+									echo "<input placeholder='Enter a Social Security Number' value='$ss' id='ss' name='ss' type='text'>";
+									echo "<label class='active' for='middlename'>Social Security Number</label>";
+								echo "</div>";
+								echo "<div class='input-field col l4 s12'>";
+									echo "<input placeholder='Enter a Date' type='date' value='$dob' name='dob' class='datepicker'>";
+									echo "<label class='active' for='dob'>Date of Birth</label>";
+								echo "</div>";
+								echo "<div class='col l4 s12'>";
+									echo "<p>Profile Picture</p>";
+									if($picture!="" xor $picture=='user.png'){ echo "<input type='hidden' name='currentpicture' value='$picture'>"; }else{ echo "<input type='hidden' name='currentpicture' value=''>"; }
+									echo "<input type='file' name='picture' />";
+								echo "</div>";
+							echo "</div>";
+									  
+							echo "<div class='row'>";
+								echo "<div class='col s12'><h4>Demographics</h4></div>";
+								echo "<div class='input-field col l4 s12'>";
+									echo "<select name='ethnicity'>";
+										include "ethnicity.php";
+									echo "</select>";
+									echo "<label>Ethnicity</label>";
+								echo "</div>"; 
+								echo "<div class='input-field col l4 s12'>";
+									echo "<select name='gender'>";
+									include "gender.php";
+									echo "</select>";
+									echo "<label>Gender</label>";
+								echo "</div>"; 
+							echo "</div>";
+							
+							
+								  if($id!="new")
+								  {
+									  echo "<div class='row'>";
+									  		echo "<div class='col s12'><h4>Discipline Reports</h4></div>";
+									  		echo "<div id='disciplinediv'>"; include "profile_disciplinereport.php"; echo "</div>";
+										  echo "<div class='input-field col s12'>";
+										  	echo "<input type='file' name='discipline' />";
+										  echo "</div>";
+									  echo "</div>";
+								  }
+						}
+								    
+					echo "</div>";
 				  
-				  include "profilebutton.php";
-				  
+					//Employment
+					echo "<div id='employment'>";
+						echo "<div class='row'>";
+						echo "<div class='row'><div class='col s12'>";
+							echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'><h6 class='center-align'>$firstname $lastname</h6>";
+						echo "</div></div>";
+							echo "<div class='col s12'><h4>Classification</h4></div>";
+							echo "<div class='input-field col l9 s12'>";
+								echo "<select name='title'>";
+									include "jobtitles.php";
+								echo "</select>";
+								echo "<label>Current Job Title</label>";
+							echo "</div>";
+								    
+							if($pageaccess==2)
+							{
+								echo "<div class='input-field col l3 s12'>";
+									echo "<select name='location' disabled>";
+										include "locations.php";
+									echo "</select>";
+									echo "<label>Home Building</label>";
+								echo "</div>";
+							}
+								    
+							if($pageaccess!=2)
+							{
+								echo "<div class='input-field col l3 s12'>";
+									echo "<select name='contract'>";
+										include "contract.php";
+									echo "</select>";
+									 echo "<label>Contract</label>";
+								echo "</div>";
+								echo "</div>";  
+									echo "<div class='row'>";
+									    echo "<div class='input-field col l3 s12'>";
+											echo "<select name='classification'>";
+										      	if($classification==""){ echo "<option value='$classification' selected>Choose</option>"; }
+										      	if($classification!=""){ echo "<option value='$classification' selected>$classification</option>"; }
+												echo "<option value='Certified'>Certified</option>";
+												echo "<option value='Classified'>Classified</option>";
+											echo "</select>";
+										    echo "<label>Classification Type</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+											echo "<select name='location'>";
+										      	include "locations.php";
+											echo "</select>";
+										    echo "<label>Home Building</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+											echo "<select name='grade'>";
+										      	include "grade.php";
+											echo "</select>";
+										    echo "<label>Grade</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+											echo "<select name='subject'>";
+										      	include "subject.php";
+											echo "</select>";
+										    echo "<label>Subject</label>";
+									    echo "</div>";
+									echo "</div>";
+									
+									
+					  
+									echo "<div class='row'>";
+										echo "<div class='input-field col l3 s12'>";
+									      	echo "<select name='rategroup'>";
+												include "rategroup.php";
+											echo "</select>";
+											echo "<label>Choose a Group Rate</label>";
+									    echo "</div>";
+										echo "<div class='input-field col l3 s12'>";
+									      	echo "<select name='step'>";
+												include "steps.php";
+											echo "</select>";
+											echo "<label>Choose a Step</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+									      	echo "<select name='educationlevel'>";
+												include "educationlevel.php";
+											echo "</select>";
+											echo "<label>Level of Education</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Salary' value='$salary' id='salary' name='salary' type='text'>";
+									      echo "<label class='active' for='salary'>Salary</label>";
+									    echo "</div>";    
+									echo "</div>";
+									
+									echo "<div class='row'>";
+										echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter Number of Hours' value='$hours' id='hours' name='hours' type='text'>";
+									      echo "<label class='active' for='hours'>Hours</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+									    	echo "<input placeholder='Enter Number of Contracted Days' value='$contractdays' id='contractdays' name='contractdays' type='number' min='1' max='365'>";
+										    echo "<label class='active' for='contractdays'>Contract Days</label>";
+										echo "</div>";
+									//echo "</div>";
+									
+									  
+									echo "<div class='row'>";
+									  	echo "<div class='col s12'><h4>Dates</h4></div>";
+									    echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Date' type='date' value='$doh' name='doh' class='datepicker'>";
+									      echo "<label class='active' for='doh'>Date of Hire</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Date' type='date' value='$sd' name='sd' class='datepicker'>";
+									      echo "<label class='active' for='sd'>Seniority Date</label>";
+									    echo "</div>";
+									  	echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Date' type='date' value='$ed' name='ed' class='datepicker'>";
+									      echo "<label class='active' for='ed'>Effective Date</label>";
+									    echo "</div>";
+							}
+										echo "<div class='input-field col l3 s12'>";
+											echo "<button class='printbutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' style='background-color:"; echo sitesettings("sitecolor"); echo "'><i class='material-icons'>date_range</i></button>";								
+										echo "</div>"; 
+									echo "</div>";
+									  
+							if($pageaccess!=2)
+							{
+									 echo "<div class='row'>";
+									    echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Date' type='date' value='$probationreportdate' name='probationreportdate' class='datepicker'>";
+									      echo "<label class='active' for='probationreportdate'>Probationary Report Date</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Date' type='date' value='$statebackgroundcheck' name='statebackgroundcheck' class='datepicker'>";
+									      echo "<label class='active' for='statebackgroundcheck'>State Background Check</label>";
+									    echo "</div>";
+									    echo "<div class='input-field col l3 s12'>";
+									      echo "<input placeholder='Enter a Date' type='date' value='$federalbackgroundcheck' name='federalbackgroundcheck' class='datepicker'>";
+									      echo "<label class='active' for='federalbackgroundcheck'>Federal Background Check</label>";
+									    echo "</div>";
+									  echo "</div>";
+									  
+							}
+							
+							
+				
+								    
+							echo "</div>";
+								  
+							if($pageaccess!=2)
+							{
+									  
+									  
+					
+								echo "</div>";
+					
+								echo "<div id='licensure'>";
+
+						echo "<div class='row'><div class='col s12'>";
+							echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'><h6 class='center-align'>$firstname $lastname</h6>";
+						echo "</div></div>";
+					
+								include "profile_licenses.php";
+								  
+								  //Permissions
+								  if($superadmin=1)
+								  {
+									  echo "<div class='row'><div class='col l12'><h4>Permissions</h4></div></div>";
+									  echo "<div class='row'>";
+									    echo "<div class='input-field col l3 s12'>";
+											echo "<select name='permissions'>";
+										      	include "permissionlist.php";
+											echo "</select>";
+										    echo "<label>Curriculum</label>";
+									    echo "</div>";
+									  echo "</div>";
+									 }
+								
+								  echo "<input type='hidden' name='id' value='$id' id='userid'><br>"; 
+						   }
+					echo "</div>";
+				 
+					if($pageaccess!=2){ include "profilebutton.php"; }
 				echo "</form>";
 
 		
@@ -462,6 +551,13 @@
 		?>
 		
 		<script>
+			
+			//Load Menu
+			$( "#navigation_top" ).show();
+			$( "#navigation_top" ).load( "modules/directory/menu_person.php", function() {	
+				$( "#navigation_top" ).show();
+				$('ul.tabs').tabs();
+			});		
 			
 			//Work Schedule Modal
 			$('.modal-viewscheduleemployee').leanModal({ in_duration: 0, out_duration: 0 });
@@ -539,6 +635,72 @@
 							var data = { message: response };
 							notification.MaterialSnackbar.showSnackbar(data);			
 					})
+				});
+				
+				//Work Days for Employee
+				var today = new Date();
+				var y = today.getFullYear();			
+				$('#workcalendardisplay').multiDatesPicker({
+					<?php
+						if($pageaccess==1 or $pageaccess==2)
+						{
+							$sql = "SELECT * FROM profiles where email='$email'";
+							$dbreturn = databasequery($sql);
+							foreach ($dbreturn as $row)
+							{
+								$work_calendar_saved=htmlspecialchars($row['work_calendar'], ENT_QUOTES);
+								if($work_calendar_saved!=NULL)
+								{
+									$work_calendar_saved = str_replace(' ', '', $work_calendar_saved);
+									$work_calendar_saved=explode(",", $work_calendar_saved);
+									$work_calendar_saved=implode("','", $work_calendar_saved);
+									$work_calendar_saved="'".$work_calendar_saved."'";
+									echo "addDates: [$work_calendar_saved],";
+									//echo "addDisabledDates:['12/04/2016','12/03/2016'],";
+								}
+							}
+						}
+					?>
+					numberOfMonths: [6,2],
+					defaultDate: '8/1/'+y,
+					altField: '#saveddates',
+					dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+					onSelect: function (date) {
+
+				        var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+						$("#selecteddays").text(dates + " Days Selected");
+						
+						
+						
+						var datestosave = $( "#saveddates" ).val();
+						$.ajax({
+							type: 'POST',
+							url: '/modules/profile/calendar_update.php',
+							data: { calendardaystosave : datestosave },
+						})
+								
+						//Show the notification
+						.done(function(response) {
+							//var notification = document.querySelector('.mdl-js-snackbar');
+							//var data = { message: response };
+							//notification.MaterialSnackbar.showSnackbar(data);
+						})
+						
+						
+						
+				    }
+				});
+				
+	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+				$("#selecteddays").text(dates + " Days Selected");
+				
+				//Print Spcific Div
+				$(".printbutton").click(function(e) {
+					e.preventDefault();
+					var win = window.open('','printwindow');
+					win.document.write('<html><head><title>Print Work Calendar</title><link rel="stylesheet" type="text/css" href="https://hcsdoh.org/modules/profile/css/calendar.css"></head><body>');
+					win.document.write($("#workcalendardisplay").html());
+					win.document.write('</body></html>');
 				});
 								
 			});

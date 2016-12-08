@@ -47,3 +47,6 @@
 	<option value="Transportation">Transportation</option>
 	<option value="Food Service">Food Service</option>
 	<option value="Immanuel Lutheran">Immanuel Lutheran</option>
+	<option value="St. Ann">St. Ann</option>
+	<option value="St. Peter">St. Peter</option>
+	<option value="St. Joseph">St. Joseph</option>

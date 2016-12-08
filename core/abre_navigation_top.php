@@ -25,16 +25,7 @@
 	<!--Display top navigation-->
 	<header class='mdl-layout__header mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
 			<div class='mdl-layout__header-row'>
-				<?php
-					if(!isset($_GET["dash"]))
-					{ 
-						echo "<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>";
-					}
-					else
-					{
-						echo "<span class='mdl-layout-title' style='margin-left:-40px;'><div id='titletext' class='truncate'></div></span>";
-					}
-				?>
+				<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
 				<div class='mdl-layout-spacer'></div>
 					<?php
 						if(!isset($_GET["dash"]))
@@ -52,14 +43,13 @@
 	
 <script>
 			
-	//Scroll to top
-	$('.mdl-layout__header-row').click(function(e)
+	$(function()
 	{
-		if(e.target == e.currentTarget)
+		//Scroll to top
+		$('.mdl-layout__header-row').click(function()
 		{
-			$(".mdl-layout__content").animate({ scrollTop: $(".page-content").height() }, "fast");
-			return false;
-		}
+			$('.mdl-layout__content').animate({ scrollTop: 0 }, 'fast');	
+		});
 	});
 	
 </script>

@@ -22,8 +22,11 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 		
-	$commentid=mysqli_real_escape_string($db, $_GET["commentid"]);
-	$sql = "DELETE from streams_comments where ID = '$commentid' and user='".$_SESSION['useremail']."'";
-	$dbreturn = databaseexecute($sql);
+	if($_SESSION['usertype']=='staff')
+	{	
+		$commentid=mysqli_real_escape_string($db, $_GET["commentid"]);
+		$sql = "DELETE from streams_comments where ID = '$commentid' and user='".$_SESSION['useremail']."'";
+		$dbreturn = databaseexecute($sql);
+	}
 	
 ?>

@@ -54,11 +54,8 @@
 					echo "<p style='text-align:center;' class='truncate'>".$_SESSION['useremail']."</p>";
 					echo "<hr style='margin-bottom:20px;'>";
 					echo "<p style='text-align:center; font-weight:600;' class='truncate'><img src='".$_SESSION['picture']."?sz=100' class='circle'></p>";
-					if(!isset($_GET["dash"]))
-					{
-						echo "<p style='text-align:center;'><a class='mdl-button mdl-js-button mdl-js-ripple-effect myprofilebutton' href='#profile'>My Profile</a>";
-						echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' href='?signout'>Sign Out</a></p>";
-					}
+					echo "<p style='text-align:center;'><a class='mdl-button mdl-js-button mdl-js-ripple-effect myprofilebutton' href='#profile'>My Profile</a>";
+					echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' href='?signout'>Sign Out</a></p>";
 				echo "</div>";
 			?>
     	</div>
@@ -66,19 +63,6 @@
 	
 
 <script>
-
-//Page locations
-routie({
-    'profile': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Profile");
-	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Profile';
-	    $( "#modal_holder" ).load( "modules/profile/modals.php" );
-		$( "#content_holder" ).load( 'modules/profile/profile.php', function() { init_page(); });
-    }   
-});
 
 	$(document).ready(function(){
     	$('.modal-viewprofile').leanModal({

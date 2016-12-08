@@ -41,5 +41,12 @@
 		$pageaccess=1;
 		$superadmin=htmlspecialchars($row["superadmin"], ENT_QUOTES);
 	}
+	
+	$sql = "SELECT *  FROM directory where email='$userEmailencrypt' and admin=2 and archived=0";
+	$result = $db->query($sql);
+	while($row = $result->fetch_assoc())
+	{
+		$pageaccess=2;
+	}
 
 ?>

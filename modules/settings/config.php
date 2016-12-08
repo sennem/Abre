@@ -28,28 +28,3 @@
 	$pageorder=1000;
 
 ?>
-	
-
-<script>
-
-//Page locations
-routie({
-    'settings': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Settings");
-	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Settings';
-		$( "#content_holder" ).load( 'modules/settings/settings.php', function() { init_page(); });
-    },
-    'modules': function(name) {
-	    $( "#navigation_top" ).hide();
-	    $( "#content_holder" ).hide();
-	    $( "#loader" ).show();
-	    $( "#titletext" ).text("Settings");
-	    document.title = '<?php echo sitesettings("sitetitle"); ?> - Settings';
-		$( "#content_holder" ).load( 'modules/settings/modules.php', function() { init_page(); });
-    }
-});
-
-</script>

@@ -41,9 +41,10 @@
 					$employeeemailencrypted=encrypt($employeeemail, "");
 					$employeeRefID=encrypt($result[RefId]);
 					$employeeStateID=encrypt($result[StateProvinceId]);
+					$employeeLocalId=encrypt($result[LocalId]);
 					
 					//Add information to employee database
-					mysqli_query($db, "UPDATE directory set RefID='$employeeRefID', StateID='$employeeStateID', TeacherID='$employeeTeacherID' where email='$employeeemailencrypted'");
+					mysqli_query($db, "UPDATE directory set RefID='$employeeRefID', StateID='$employeeStateID', TeacherID='$employeeTeacherID', LocalId='$employeeLocalId' where email='$employeeemailencrypted'");
 				}
 			}	
 		}

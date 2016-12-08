@@ -26,8 +26,8 @@
 	if($pageaccess==1)
 	{
 	
-		echo "<div class='row'><div class='col l12'><h4>License Information</h4></div></div>";
 		echo "<div class='row'>";
+			echo "<div class='col l12'><h4>License Information</h4></div>";
 			echo "<div class='input-field col s12'>";
 				echo "<input placeholder='Enter a Educator State ID' value='$stateeducatorid' id='stateeducatorid' name='stateeducatorid' type='text'>";
 				echo "<label class='active' for='stateeducatorid'>Educator State ID</label>";

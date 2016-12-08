@@ -51,13 +51,33 @@
 	
 	//Profile form
 	echo "<form id='form-profile' method='post' action='$portal_root/modules/profile/profile_update.php'>";
+	
+	
+		//Bio
+		echo "<div class='page_container page_container_limit'>";
+			echo "<div class='row center-align' style='margin-top:30px;'>";
+				echo "<img src='".$_SESSION['picture']."?sz=120' style='border-radius: 50%;'>";
+				echo "<div class='col s12'><h4 class='truncate' style='margin:10px 0 10px 0;'>".$_SESSION['displayName']."</h4>";
+					//Display Job Title
+					$email=encrypt($_SESSION['useremail'], "");
+					$sql = "SELECT * FROM directory where email='$email'";
+					$dbreturn = databasequery($sql);
+					foreach ($dbreturn as $row)
+					{
+						$job_title=htmlspecialchars($row['title'], ENT_QUOTES);
+						$job_title=stripslashes(htmlspecialchars(decrypt($job_title, ""), ENT_QUOTES));
+						echo "<h6 class='truncate' style='margin:0;'>$job_title</h6>";
+					}
+				echo "</div>";
+			echo "</div>";
+		echo "</div>";
 			
 		//Streams
 		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 		echo "<div class='page'>";
 			echo "<div class='row'>";
 				echo "<div class='col s12'><h3>Streams</h3></div>";
-				echo "<div class='col s12'><p>Decide which information is relevant to you. Please choose from the topics below to customize your stream information.</p></div>";
+				echo "<div class='col s12'><p>Decide which information is relevant to you. Please choose from the topics below to customize your stream.</p></div>";
 				echo "<div class='col s12'><div id='streamerror'></div></div>";
 			echo "</div>";
 			echo "<div class='row'>";
@@ -97,7 +117,7 @@
 			echo "<hr style='margin-bottom:20px;'>";
 			
 				//Card settings
-				echo "<div class='col l6 s12' style='padding-right:50px;'>";
+				echo "<div class='col l6 s12' style='padding:20px;'>";
 						echo "<h3 style='margin-top:5px;'>Cards</h3><p>Cards are small pieces of information that display on your stream. You can customize your stream by controlling which cards are visible.<br><br></p>";
 				echo "</div>";				
 				echo "<div class='page col l6 s12 mdl-shadow--4dp'>";
@@ -172,7 +192,7 @@
 			echo "<hr style='margin-bottom:20px;'>";
 			
 				//Card settings
-				echo "<div class='col l6 s12' style='padding-right:50px;'>";
+				echo "<div class='col l6 s12' style='padding:20px;'>";
 						echo "<h3 style='margin-top:5px;'>Work Calendar</h3><p>Review your work calendar for the upcoming school year. Your calendar will automatically be shared with Human Resources.<br><br></p>";
 				echo "</div>";				
 				echo "<div class='page col l6 s12 mdl-shadow--4dp'>";
@@ -185,7 +205,7 @@
 						{
 							echo "<p>You can use the calendar below to choose your work schedule.</p>";
 						}
-						echo "<a href='#viewschedule' class='modal-viewschedule' style='line-height:40px; color:".sitesettings("sitecolor")."'>SET CALENDAR</a>";
+						echo "<a href='#viewschedule' class='modal-viewschedule' style='line-height:40px; color:".sitesettings("sitecolor")."'>SET CALENDAR</a><br><a href='#' class='printbutton' style='line-height:40px; color:".sitesettings("sitecolor")."'>PRINT CALENDAR</a>";
 
 					echo "</div>";
 				echo "</div>";		
@@ -242,16 +262,29 @@ $(".formclick").click(function() {
 					
 			//Show the notification
 			.done(function(response) {
-				$('#streamerror').show();
-				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
-				var notification = document.querySelector('.mdl-js-snackbar');
-				var data = { message: 'Your changes have been saved.' };
-				notification.MaterialSnackbar.showSnackbar(data);
+				
+				if ($('.streamtopic:checked').length === 3)
+				{
+					$('#streamerror').show();
+					$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
+					var notification = document.querySelector('.mdl-js-snackbar');
+					var data = { message: 'Your changes have been saved.' };
+					notification.MaterialSnackbar.showSnackbar(data);
+				}
 			})
 			
 		}
 	<?php } ?>
 });
+
+				//Print Spcific Div
+				$(".printbutton").click(function(e){
+					e.preventDefault();
+					var win = window.open('','printwindow');
+					win.document.write('<html><head><title>Print Work Calendar</title><link rel="stylesheet" type="text/css" href="https://hcsdoh.org/modules/profile/css/calendar.css"><link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100" rel="stylesheet" type="text/css"></head><body>');
+					win.document.write($("#workcalendardisplay").html());
+					win.document.write('</body></html>');
+				});
 
 	
 

@@ -24,8 +24,7 @@
 ?>
 	
 	<!--Display page content-->
-	<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>
-		
+	<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>		
 	  	<?php
 			require_once('abre_navigation_top.php'); 
 			require_once('abre_navigation_drawer.php');

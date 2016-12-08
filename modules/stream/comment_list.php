@@ -103,40 +103,24 @@
 		
 		<script>
 			
-			//Fill modal with content
-			<?php if($articletitle!=""){ ?>
-				$(".modal-content #streamTitle").text("<?php echo $articletitle; ?>");
-				$(".modal-content #streamUrl").val("<?php echo base64_encode($url); ?>");
-				$(".modal-content #streamTitleValue").val("<?php echo $articletitle; ?>");
-			<?php } ?>
+			$(function()
+			{
 				
-			//Scroll to bottom of the div
-			var element = document.getElementById("modal-content-section");
-			element.scrollTop = element.scrollHeight;
-			
-			//Delete a comment
-			$( ".commentdeletebutton" ).click(function(event){				
-				event.preventDefault();
-				$(this).closest(".commentwrapper").hide();
-				var address = $(this).attr("href");
-				$.ajax({
-					type: 'POST',
-					url: address,
-					data: '',
-				})
+				//Fill modal with content
+				<?php if($articletitle!=""){ ?>
+					$(".modal-content #streamTitle").text("<?php echo $articletitle; ?>");
+					$(".modal-content #streamUrl").val("<?php echo base64_encode($url); ?>");
+					$(".modal-content #streamTitleValue").val("<?php echo $articletitle; ?>");
+				<?php } ?>
 				
-				.done(function() {
-					$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
-						$('.grid').masonry( 'reloadItems' );
-						$('.grid').masonry( 'layout' );
-						mdlregister();
-					});
-					$('#streamlikes').load("modules/stream/stream_likes.php", function () {	
-						mdlregister();
-					});
-				});			
+				//Scroll to bottom of the div
+				var element = document.getElementById("modal-content-section");
+				element.scrollTop = element.scrollHeight;
+				
 			});
-			
+				
 		</script>
+		
+		<script src='/modules/stream/commenting.js'></script>
 		
 <?php } ?>

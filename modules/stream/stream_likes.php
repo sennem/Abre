@@ -51,11 +51,11 @@
 			$imagepath=$portal_root."/".$image;
 			echo "<div class='col l3 m4 s6 nopaddingmarginsmall' style='margin-bottom:20px;'>";
 				echo "<div class='mdl-card mdl-card__media mdl-shadow--2dp waves-effect waves-light' style='background-image: url($imagepath); background-color:#999; width:100%; height:100%;'>";
-					echo "<div class='mdl-color-text--white center-align likedpost' data='$link' style='position:absolute; bottom:0; top: 0; left: 0; right: 0; padding:20px; background-color: rgba(0, 0, 0, 0.7);'>";
-						echo "<span style='font-size:16px; line-height:22px;'>$title</span>";
+					echo "<div class='mdl-color-text--white valign-wrapper unlikelikedpost' data='$link' style='position:absolute; bottom:0; top: 0; left: 0; right: 0; padding:20px; background-color: rgba(0, 0, 0, 0.7);'>";
+						echo "<span style='font-size:16px; line-height:22px; width:100%' class='valign center-align'>$title</span>";
 					echo "</div>";
 					
-					echo "<a class='material-icons mdl-color-text--red likeicon' style='position:absolute; bottom:10px; right:100px;' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' data-page='likes' data-resultcounter='likes_$counter' href='#'>favorite</a> <span class='mdl-color-text--white truncate' style='position:absolute; bottom:12px; right:10px; font-size:12px; font-weight:600; width:90px; padding-left:5px; text-align: left;'>$num_rows_like</span>";
+					echo "<a class='material-icons mdl-color-text--red unlikeicon' style='position:absolute; bottom:10px; right:100px;' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' data-page='likes' data-resultcounter='likes_$counter' href='#'>favorite</a> <span class='mdl-color-text--white truncate' style='position:absolute; bottom:12px; right:10px; font-size:12px; font-weight:600; width:90px; padding-left:5px; text-align: left;'>$num_rows_like</span>";
 					echo "<a class='material-icons modal-addstreamcomment commenticon' style='position:absolute; bottom:10px; right:40px; color: ".sitesettings("sitecolor")."' data-title='$titleencoded' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span class='mdl-color-text--white' style='position:absolute; bottom:12px; right:10px; font-size:12px; font-weight:600; width:30px; padding-left:5px; text-align: left;'>$num_rows_comment</span>";
 					
 				echo "</div>";
@@ -74,45 +74,32 @@
 
 <script>
 	
-  	//Make the Likes clickable
-	$( ".likedpost" ).click(function()
+	$(function()
 	{
-		window.open($(this).attr("data"), '_blank');
+	
+	  	//Make the Likes clickable
+		$( ".unlikelikedpost" ).click(function()
+		{
+			window.open($(this).attr("data"), '_blank');
+		});
+		
+		//UnLike a Stream Post
+		$(".unlikeicon").unbind().click(function()
+		{
+			
+			event.preventDefault();
+						
+			var Stream_Title = $(this).data('title');
+			var Stream_Url = $(this).data('url');
+			var Stream_Image = $(this).data('image');
+			var ResultCounter = $(this).data('resultcounter');
+			$("."+ResultCounter).hide();
+			$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() { });
+		
+		});
+		
 	});
 	
 </script>
 
-<script>
-
-	$(document).ready(function(){
-    	$('.modal-addstreamcomment').leanModal({
-	    	in_duration: 0,
-			out_duration: 0,
-	    	ready: function() { $("#streamComment").focus(); }
-	   	});
-  	});
-
-	$(document).on("click", ".modal-addstreamcomment", function (event) {
-		event.preventDefault();
-		$("#commentloader").show();
-		$("#streamComments").empty();
-	    var Stream_Title = $(this).data('title');
-	    Stream_Title_Decoded = atob(Stream_Title);
-	    $(".modal-content #streamTitle").text(Stream_Title_Decoded);
-	    $(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
-	    var Stream_Url = $(this).data('url');
-	    $(".modal-content #streamUrl").val(Stream_Url);
-
-		$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
-			$("#commentloader").hide();
-			
-			//Scroll to bottom
-			var height=$("#addstreamcomment").height();
-			height=height+10000;
-			$('.modal-content').scrollTop(height);
-			
-		});
-		
-	});
-
-</script>
+<script src='/modules/stream/commenting.js'></script>

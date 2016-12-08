@@ -105,6 +105,35 @@
 		$db->close();
 	}
 	
+	//Save Screenshot to server
+	function savescreenshot($website, $filename)
+	{
+		//Get Image and Use Google Page Speed API
+		$website = $website;
+		$api = "https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=$website&screenshot=true";
+		$string = file_get_contents($api);
+		$json = json_decode($string, true);
+		
+		//Get Data from JSON
+		$data=$json['screenshot']['data'];
+		
+		//Replace characters for correct decode
+		$data=str_replace("_","/",$data);
+		$data=str_replace("-","+",$data);
+		
+		//Decode base64
+		$data = base64_decode($data);
+		
+		//Save image to server
+		$im = imagecreatefromstring($data);
+		
+		if (!file_exists("../../../private/guide")) {
+			mkdir("../../../private/guide", 0777, true);
+		}
+		
+		imagejpeg($im, "../../../private/guide/$filename");
+	}
+	
 	//Retrieve Site Title
 	function sitesettings($value){
 		include "abre_dbconnect.php";
@@ -113,8 +142,15 @@
 		while($row = $result->fetch_assoc())
 		{
 			$options = $row["options"];
-			$options = json_decode($options);
-			$valuereturn = $options->$value;
+			if($options!="")
+			{
+				$options = json_decode($options);
+				$valuereturn = $options->$value;
+			}
+			else
+			{
+				$valuereturn="";
+			}
 			if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
 			if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
 			if($value=="sitedescription" && $valuereturn==""){ $valuereturn="Abre Portal"; }
@@ -124,7 +160,21 @@
 			if($value=="sitevendorlinkurl" && $valuereturn==""){ $valuereturn=""; }
 			if($value=="sitevendorlinkidentifier" && $valuereturn==""){ $valuereturn=""; }
 			if($value=="sitevendorlinkkey" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="sitelogo" && $valuereturn!=""){ $valuereturn="/content/$valuereturn"; }
+			if($value=="certicabaseurl" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="certicaaccesskey" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="studentdomain" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="studentdomainrequired" && $valuereturn==""){ $valuereturn=""; }
+			if($value=="sitelogo" && $valuereturn!="")
+			{ 
+				if($valuereturn!='/core/images/abre_siteicon.png')
+				{
+					$valuereturn="/content/$valuereturn";
+				}
+				else
+				{
+					$valuereturn="/core/images/abre_siteicon.png";
+				}
+			}
 			if($value=="sitelogo" && $valuereturn==""){ $valuereturn="/core/images/abre_siteicon.png"; }
 			return $valuereturn;
 		}

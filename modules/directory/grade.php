@@ -36,4 +36,4 @@
 	<option value="7">7</option>
 	<option value="8">8</option>
 	<option value="9">9</option>
-	<option value="10-12">10 - 12</option>
+	<option value="10,11,12">10,11,12</option>

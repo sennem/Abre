@@ -61,18 +61,44 @@
 		mdlregister();
 		//Make sure top nav is present
 		$("header").show();	
+		//Remove an overlays
+		$( ".lean-overlay" ).remove();
+		//Add in menu
+		$( ".mdl-layout__drawer-button" ).show();
+		$( "#backbutton" ).remove();
 	}
 	
-	//404 not found page
-	routie({
-	    '*': function() {
-		    $( "#navigation_top" ).hide();
-		    $( "#content_holder" ).hide();
-		    $( "#loader" ).show();
-		    $( "#titletext" ).text("Not Found");
-		    document.title = '<?php echo sitesettings("sitetitle"); ?>';
-			$( "#content_holder" ).load( "core/abre_404.php", function() { init_page(); });
-	    }
+	//Back Button in Header
+	function back_button(url) {
+		$( ".mdl-layout__drawer-button" ).hide();
+		$( ".mdl-layout__header" ).append( "<a href='"+url+"' class='mdl-layout__drawer-button' id='backbutton'><i class='material-icons'>arrow_back</i></a>" );
+	}
+	
+	//Page Routing
+	routie({		
+		<?php
+			if(isset($_SESSION['useremail']))
+			{ 			
+				$moduledirectory = dirname(__FILE__) . '/../modules';
+				$modulefolders = scandir($moduledirectory);
+				foreach ($modulefolders as $result)
+				{
+					if(file_exists(dirname(__FILE__) . '/../modules/'.$result.'/routing.php'))
+					{
+						include(dirname(__FILE__) . '/../modules/'.$result.'/routing.php');
+					}
+				}
+			}			
+		?>
+	'*': function() {
+				$( "#navigation_top" ).hide();
+				$( "#content_holder" ).hide();
+				$( "#loader" ).show();
+				$( "#titletext" ).text("Not Found");
+				document.title = '<?php echo sitesettings("sitetitle"); ?>';
+				$( "#content_holder" ).load( "core/abre_404.php", function() { init_page(); });
+			}
+			
 	});
 
 </script>

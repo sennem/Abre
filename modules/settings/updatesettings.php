@@ -35,9 +35,13 @@
 		$siteanalytics=$_POST["siteanalytics"];
 		$siteadminemail=$_POST["siteadminemail"];
 		$sitevendorlinkurl=$_POST["sitevendorlinkurl"];
+		$studentdomain=$_POST["studentdomain"];
+		$studentdomainrequired=$_POST["studentdomainrequired"];
 		$sitevendorlinkidentifier=$_POST["sitevendorlinkidentifier"];
 		$sitevendorlinkkey=$_POST["sitevendorlinkkey"];
 		$sitelogoexisting=$_POST["sitelogoexisting"];
+		$certicabaseurl=$_POST["certicabaseurl"];
+		$certicaaccesskey=$_POST["certicaaccesskey"];
 		
 		if($_FILES['sitelogo']['name'])
 		{
@@ -59,10 +63,11 @@
 		}
 		else
 		{
+			$sitelogoexisting = ltrim($sitelogoexisting,"/content/");
 			$sitelogofilename=$sitelogoexisting;
 		}
 		
-		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename" ];
+		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "certicabaseurl" => "$certicabaseurl", "certicaaccesskey" => "$certicaaccesskey" ];
 		$json = json_encode($array);
 		
 		//Update the database

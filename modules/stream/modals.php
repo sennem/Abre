@@ -60,36 +60,41 @@
 	
 <script>
 	
-	//Save comment
-	var form = $('#form-addstreamcomment');			
-	$(form).submit(function(event) {
-		event.preventDefault();
-		$("#commentstatustext").text("Posting comment...");
-		var formData = $(form).serialize();
-		$.ajax({
-			type: 'POST',
-			url: $(form).attr('action'),
-			data: formData
-		})
-							
-		//Show the notification
-		.done(function(response) {
-			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+response, function() {
-				$("textarea").val('');
-				$("#commentstatustext").text("Write a comment");
-				$(".modal-content #streamUrl").val(response);
-				var element = document.getElementById("commentthreadbox");
-				element.scrollTop = element.scrollHeight;
-				$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
-					$('.grid').masonry( 'reloadItems' );
-					$('.grid').masonry( 'layout' );
-					mdlregister();
-				});
-				$('#streamlikes').load("modules/stream/stream_likes.php", function () {
-					mdlregister();
-				});
-			});			
-		})						
+	$(function()
+	{
+	
+		//Save comment
+		var form = $('#form-addstreamcomment');			
+		$(form).submit(function(event) {
+			event.preventDefault();
+			$("#commentstatustext").text("Posting comment...");
+			var formData = $(form).serialize();
+			$.ajax({
+				type: 'POST',
+				url: $(form).attr('action'),
+				data: formData
+			})
+								
+			//Show the notification
+			.done(function(response) {
+				$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+response, function() {
+					$("textarea").val('');
+					$("#commentstatustext").text("Write a comment");
+					$(".modal-content #streamUrl").val(response);
+					var element = document.getElementById("commentthreadbox");
+					element.scrollTop = element.scrollHeight;
+					$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+						$('.grid').masonry( 'reloadItems' );
+						$('.grid').masonry( 'layout' );
+						mdlregister();
+					});
+					$('#streamlikes').load("modules/stream/stream_likes.php", function () {
+						mdlregister();
+					});
+				});			
+			})						
+		});
+		
 	});
 	
 </script>

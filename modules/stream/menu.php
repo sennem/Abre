@@ -22,11 +22,29 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	
+	if($_SESSION['usertype']=='staff')
+	{
 ?>
 
     <div class="col s12">
-		<ul class="tabs" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
-			<li class="tab col s3 tab_1"><a href="#">Stream</a></li>
-			<li class="tab col s3 tab_2"><a href="#likes">Likes</a></li>
+		<ul class="tabs_2" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+			<li class="tab col s3 tab_1 streammenu pointer" data="#"><a href="#">Stream</a></li>
+			<li class="tab col s3 tab_2 streammenu pointer" data="#likes"><a href="#likes">Likes</a></li>
 		</ul>
 	</div>
+	
+<?php
+	}
+?>
+
+<script>
+	
+	$(function()
+	{	
+		$( ".streammenu" ).click(function()
+		{
+			window.open($(this).attr("data"), '_self');
+		});	
+	});
+	
+</script>

@@ -1,3 +1,5 @@
+html, body { font-family: 'Roboto', 'Helvetica', sans-serif; background-color: #F5F5F5; }
+
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default { text-align: center; color: #666; }

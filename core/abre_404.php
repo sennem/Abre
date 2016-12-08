@@ -16,8 +16,13 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
+    
+    require_once('abre_functions.php');
 	
 ?>
 
 <!--Display 404 Message-->
-<div class="center-align">Sorry. The page you are looking for does not exist.</div>
+<div class="center-align">
+	<h6>Sorry. We couldn't find that page.</h6>
+	<a class='modal-action waves-effect btn-flat white-text' href='/' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Continue to the Stream</button>
+</div>

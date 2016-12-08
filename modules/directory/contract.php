@@ -28,3 +28,4 @@
 	<option value="Limited">Limited</option>
 	<option value="Continuing">Continuing</option>
 	<option value="Administrator">Administrator</option>
+	<option value="Hourly">Hourly</option>

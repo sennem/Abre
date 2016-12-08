@@ -50,20 +50,36 @@
 			}
 			else
 			{
-							
-				$local_file = $portal_path_root . '/../private/stream/cache/images/'.$date.$file_name;
-				$remote_file = $image;
-				$ch = curl_init();
-				$fp = fopen ($local_file, 'w+');
-				$ch = curl_init($remote_file);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 50);
-				curl_setopt($ch, CURLOPT_FILE, $fp);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-				curl_setopt($ch, CURLOPT_ENCODING, "");
-				curl_exec($ch);
-				curl_close($ch);
-				fclose($fp);
-	
+				//Check for 404 and 403 errors
+				$file_headers = @get_headers($image);
+				if((!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') or (!$file_headers || $file_headers[0] == 'HTTP/1.1 403 Forbidden') or (!$file_headers || $file_headers[0] == 'HTTP/1.0 400 Bad Request') or (!$file_headers || $file_headers[0] == 'HTTP/1.1 503 Service Unavailable'))
+				{
+				    $image="";
+				}
+				else
+				{
+					//Make sure file is an image
+					if(@exif_imagetype($image))
+					{					    
+						//Save image to server
+						$local_file = $portal_path_root . '/../private/stream/cache/images/'.$date.$file_name;
+						$remote_file = $image;
+						$ch = curl_init();
+						$fp = fopen ($local_file, 'w+');
+						$ch = curl_init($remote_file);
+						curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+						curl_setopt($ch, CURLOPT_FILE, $fp);
+						curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+						curl_setopt($ch, CURLOPT_ENCODING, "");
+						curl_exec($ch);
+						curl_close($ch);
+						fclose($fp);
+					}	
+					else
+					{
+						$image="";
+					}
+				}
 			}
 
 		}

@@ -42,13 +42,17 @@
 
 <script>
 	
-	//Load Streams
-	function loadLikes()
+	$(function()
 	{
-		$('#streamlikes').load("modules/stream/stream_likes.php", function () {	
-			init_page();
-		});	
-	}
-	loadLikes();
+		//Load Streams
+		function loadLikes()
+		{
+			$('#streamlikes').load("modules/stream/stream_likes.php", function () {	
+				init_page();
+			});	
+		}
+		loadLikes();
+	});
+	
 		
 </script>

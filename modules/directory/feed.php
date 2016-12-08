@@ -7,8 +7,15 @@
 
 	$building=htmlspecialchars($_GET["building"]);
 	$building = preg_replace("/[^ \w]+/", "", $building);
-	$school=encrypt("$building");
-	$sql = "SELECT firstname, lastname, email, title, picture FROM directory where location='$school' and archived=0 order by lastname";
+	if($building=="All")
+	{
+		$sql = "SELECT firstname, lastname, email, title, picture FROM directory where archived=0 order by lastname";
+	}
+	else
+	{
+		$school=encrypt("$building", "");
+		$sql = "SELECT firstname, lastname, email, title, picture FROM directory where location='$school' and archived=0 order by lastname";
+	}
 	$result = $db->query($sql);
 	$numberofrows = $result->num_rows;
 	while($row = $result->fetch_assoc())

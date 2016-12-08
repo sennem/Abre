@@ -40,7 +40,8 @@
 			</div>
 	    </div>
 		<div class="modal-footer">
-			<button class="modal-close waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
+			<button class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
+			<button class="printbutton waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Print</button>
 			<div id="selecteddays" style='margin:12px 0 0 20px; font-weight:500; font-size:16px;'></div>
 	    </div>
 	</div>
@@ -110,6 +111,7 @@
 				
 	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 				$("#selecteddays").text(dates + " Days Selected");
+				
 				
 			});
 			
