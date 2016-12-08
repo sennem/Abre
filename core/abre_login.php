@@ -45,8 +45,7 @@
 			<?php
 				echo "<div class='mdl-card-text mdl-color-text--grey-600'>".sitesettings('sitelogintext')."</div>";
 
-		  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Login with Google</a><br><br>";
-		  		echo "<a class='modal-qrlogin' href='#qrlogin' style='margin: 0 auto; width:100%; font-weight:400; color:#999; text-transform:none;'>Login with QR Code</a>";
+		  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Login with Google</a>";
 		  	?>
 		</div>
 		
