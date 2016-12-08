@@ -15,9 +15,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//The Server Timezone
-	date_default_timezone_set("America/New_York");
-	
 	//The Domain/Location of Abre
 	$portal_root = "http://example.org";
 	
@@ -26,22 +23,7 @@
 	
 	//The Description of Your Site
 	if (!defined('SITE_DESCRIPTION')){ define('SITE_DESCRIPTION','Our Abre Portal'); }
-	
-	//The Favicon for Your Site
-	if (!defined('SITE_FAVICON')){ define('SITE_FAVICON','core/images/favicon.png'); }
-	
-	//The Chrome Icon for Your Site
-	if (!defined('SITE_CHROME_ICON')){ define('SITE_CHROME_ICON','core/images/chrome-touch-icon.png'); }
-	
-	//The iOS Icon for Your Site
-	if (!defined('SITE_SAFARI_ICON')){ define('SITE_SAFARI_ICON','core/images/apple-touch-icon.png'); }
-	
-	//The Windows Icon for Your Site
-	if (!defined('SITE_WINDOWS_ICON')){ define('SITE_WINDOWS_ICON','core/images/ms-touch-icon.png'); } 
-	
-	//The Windows Icon Color for Your Site
-	if (!defined('SITE_WINDOWS_ICON_COLOR')){ define('SITE_WINDOWS_ICON_COLOR','#2B2B2B'); } 
-	
+		
 	//Your Google Apps Domain Name
 	if (!defined('SITE_GAFE_DOMAIN')){ define('SITE_GAFE_DOMAIN','@example.org'); }
 	
@@ -58,7 +40,7 @@
 	if (!defined('DB_PASSWORD')){ define('DB_PASSWORD','password'); }
 	
 	//MySQL Database Name
-	if (!defined('DB_NAME')){ define('DB_NAME','nameofdatabse'); }
+	if (!defined('DB_NAME')){ define('DB_NAME','nameofdatabase'); }
 	
 	//MySQL (The Encryption Key Used to Store Encrypted Data. Must be a 32 Randomly Generated Key)
 	if (!defined('DB_KEY')){ define('DB_KEY','XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'); }
@@ -72,20 +54,11 @@
 	//Google Console API Key
 	if (!defined('GOOGLE_API_KEY')){ define('GOOGLE_API_KEY','XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'); }
 	
-	//Google Console Domain Name (Google Apps Domain Name)
-	if (!defined('GOOGLE_HD')){ define('GOOGLE_HD','domain.org'); }
-	
-	//Google Analytics ID
-	if (!defined('GOOGLE_ANALYTICS')){ define('GOOGLE_ANALYTICS','XXXXXXXXXX'); }
-	
-	//Cookie (The Encryption Key Used to Store Encrypted Cookie Data. Must be a 32 Randomly Generated Key)
+	//Cookie (The Encryption Key Used to Store Encrypted Cookie Data. Must be a 10 Digit Randomly Generated Key)
 	if (!defined('PORTAL_COOKIE_KEY')){ define('PORTAL_COOKIE_KEY','XXXXXXXXXX'); }
 	
 	//Cookie (The Name Used to Store the Cookie)
 	if (!defined('PORTAL_COOKIE_NAME')){ define('PORTAL_COOKIE_NAME','Cookie_Name'); }
-
-	//Feedback Response Email (The Email where Feedback is Sent)
-	if (!defined('FEEDBACK_EMAIL')){ define('FEEDBACK_EMAIL','you@example.org'); }
 	
 	/* That's all, stop editing! */
 	ini_set('display_errors','off');
