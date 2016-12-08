@@ -17,7 +17,7 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
     
-	//Start PHP session
+	//Start PHP session TEST
 	if(session_id() == ''){ session_start(); }
 	
 	//Check for configuration file
