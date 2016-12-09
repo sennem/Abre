@@ -63,7 +63,10 @@
 		}
 		else
 		{
-			$sitelogoexisting = ltrim($sitelogoexisting,"/content/");
+			if (strpos($sitelogoexisting, '/content/') !== false)
+			{
+				$sitelogoexisting = ltrim($sitelogoexisting,"/content/");
+			}
 			$sitelogofilename=$sitelogoexisting;
 		}
 		
