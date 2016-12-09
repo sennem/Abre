@@ -60,7 +60,6 @@ if (file_exists('configuration.php'))
 			<link rel='stylesheet' href='core/css/animate.min.css'>
 			<link rel='stylesheet' href='core/css/timepicker.min.css'>
 			<link rel='stylesheet' href='core/css/quill.snow.1.1.3.css'>
-			<link rel='stylesheet' href='modules/books/css/main.css'>
 			<link rel="stylesheet" href='modules/profile/css/calendar.css'>
 		    
 			<script src='core/js/jquery-3.1.1.min.js'></script>
