@@ -23,11 +23,13 @@
 	//Check for configuration file
 	if (file_exists('configuration.php'))
 	{
-		require('configuration.php');
+		
+		//Display the site headers
+		require_once('configuration.php');
 		require_once('core/abre_google_login.php');
 		require_once('core/abre_header.php');
 	
-		//Display content based on logged in status
+		//Display login if user is not logged in
 		if(isset($authUrl))
 		{
 			require_once('core/abre_login.php');
@@ -38,12 +40,17 @@
 			require_once('core/abre_layout_page.php');
 		}
 		
+		//Display page footer
 		require_once('core/abre_footer.php');
+		
 	}
 	else
 	{
+		
+		//Display the installer
 		require('core/abre_installer.php');
 		require_once('core/abre_footer.php');
+		
 	}
 	
 ?>
