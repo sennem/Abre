@@ -162,7 +162,7 @@
 			}
 			if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
 			if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
-			if($value=="sitedescription" && $valuereturn==""){ $valuereturn="Abre Portal"; }
+			if($value=="sitedescription" && $valuereturn==""){ $valuereturn="Abre Open Platform for Education"; }
 			if($value=="sitelogintext" && $valuereturn==""){ $valuereturn="Open Platform for Education"; }
 			if($value=="siteanalytics" && $valuereturn==""){ $valuereturn=""; }
 			if($value=="siteadminemail" && $valuereturn==""){ $valuereturn=""; }
