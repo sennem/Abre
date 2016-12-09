@@ -137,7 +137,16 @@
 	//Retrieve Site Title
 	function sitesettings($value){
 		include "abre_dbconnect.php";
-		$result = $db->query("SELECT * FROM settings");
+		
+		if(!$result = $db->query("SELECT * FROM settings"))
+		{
+	  		$sql = "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+	  		$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
+	  		$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";
+	  		$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+	  		if ($db->multi_query($sql) === TRUE) { }
+		}		
+
 		$result_count = mysqli_num_rows($result);
 		while($row = $result->fetch_assoc())
 		{
