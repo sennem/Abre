@@ -20,7 +20,7 @@
 	//Start PHP session
 	if(session_id() == ''){ session_start(); }
 	
-	//Check for configuration file
+	//Check for configuration fil
 	if (file_exists('configuration.php'))
 	{
 		require('configuration.php');
