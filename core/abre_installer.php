@@ -38,6 +38,7 @@ if (!file_exists('configuration.php'))
 		if (!$conn->connect_error)
 		{ 
 
+			//Create required database tables
 			$sql = "CREATE TABLE `users` (`id` int(11) NOT NULL,`email` text NOT NULL,`superadmin` int(11) NOT NULL DEFAULT '0',`refresh_token` text NOT NULL,`cookie_token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 	  		$sql .= "ALTER TABLE `users` ADD PRIMARY KEY (`id`);";
 	  		$sql .= "ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
@@ -70,48 +71,6 @@ if (!file_exists('configuration.php'))
 			$txt = '$portal_root = "'.$currenturl.'";';
 			fwrite($myfile, $txt);
 				
-			//Write site title
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_TITLE')){ define('SITE_TITLE','".$site_title."'); }";
-			fwrite($myfile, $txt);
-				
-			//Write site description
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_DESCRIPTION')){ define('SITE_DESCRIPTION','".$site_title."'); }";
-			fwrite($myfile, $txt);
-				
-			//Write site favicon
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_FAVICON')){ define('SITE_FAVICON','core/images/favicon.png'); }";
-			fwrite($myfile, $txt);
-				
-			//Write site chrome icon
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_CHROME_ICON')){ define('SITE_CHROME_ICON','core/images/chrome-touch-icon.png'); }";
-			fwrite($myfile, $txt);
-				
-			//Write iOS icon
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_SAFARI_ICON')){ define('SITE_SAFARI_ICON','core/images/apple-touch-icon.png'); }";
-			fwrite($myfile, $txt);
-				
-			//Write Windows icon
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_WINDOWS_ICON')){ define('SITE_WINDOWS_ICON','core/images/ms-touch-icon.png'); }";
-			fwrite($myfile, $txt);
-				
-			//Write Windows icon color
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_WINDOWS_ICON_COLOR')){ define('SITE_WINDOWS_ICON_COLOR','#2B2B2B'); }";
-			fwrite($myfile, $txt);
-				
 			//Write Google Apps Domain name
 			if($domain_name!="")
 			{
@@ -120,12 +79,6 @@ if (!file_exists('configuration.php'))
 				$txt = "if (!defined('SITE_GAFE_DOMAIN')){ define('SITE_GAFE_DOMAIN','$domain_name'); }";
 				fwrite($myfile, $txt);
 			}
-	
-			//Write help text for login
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('SITE_LOGIN_TEXT')){ define('SITE_LOGIN_TEXT','Student and Staff Portal'); }";
-			fwrite($myfile, $txt);
 				
 			//Write MySQL host
 			$txt = "\n";
@@ -196,12 +149,6 @@ if (!file_exists('configuration.php'))
 				fwrite($myfile, $txt);
 			}
 				
-			//Write Google Analytics ID
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('GOOGLE_ANALYTICS')){ define('GOOGLE_ANALYTICS',''); }";
-			fwrite($myfile, $txt);
-				
 			//Write cookie encryption
 			$txt = "\n";
 			fwrite($myfile, $txt);
@@ -213,12 +160,6 @@ if (!file_exists('configuration.php'))
 			$txt = "\n";
 			fwrite($myfile, $txt);
 			$txt = "if (!defined('PORTAL_COOKIE_NAME')){ define('PORTAL_COOKIE_NAME','Abre'); }";
-			fwrite($myfile, $txt);
-				
-			//Write feedback response email
-			$txt = "\n";
-			fwrite($myfile, $txt);
-			$txt = "if (!defined('FEEDBACK_EMAIL')){ define('FEEDBACK_EMAIL',''); }";
 			fwrite($myfile, $txt);
 				
 			//Write turn off php errors
