@@ -19,11 +19,12 @@
 	
 if (!file_exists('configuration.php'))
 {
-	if(isset($_POST["site_title"])!="" && $_POST["db_host"]!="" && $_POST["db_user"]!="" && $_POST["db_password"]!="" && $_POST["google_client_id"]!="" && $_POST["google_client_secret"]!="" && $_POST["google_api_key"]!="")
+	if(isset($_POST["site_title"])!="" && $_POST["db_host"]!="" && $_POST["db_name"]!="" && $_POST["db_user"]!="" && $_POST["db_password"]!="" && $_POST["google_client_id"]!="" && $_POST["google_client_secret"]!="" && $_POST["google_api_key"]!="")
 	{
 		$site_title=$_POST["site_title"];
 		$domain_name=$_POST["domain_name"];
 		$db_host=$_POST["db_host"];
+		$db_name=$_POST["db_name"];
 		$db_user=$_POST["db_user"];
 		$db_password=$_POST["db_password"];
 		$google_client_id=$_POST["google_client_id"];
@@ -113,6 +114,12 @@ if (!file_exists('configuration.php'))
 		fwrite($myfile, $txt);
 		$txt = "if (!defined('DB_HOST')){ define('DB_HOST','$db_host'); }";
 		fwrite($myfile, $txt);
+		
+		//Write MySQL name
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if (!defined('DB_NAME')){ define('DB_NAME','$db_name'); }";
+		fwrite($myfile, $txt);
 			
 		//Write MySQL username
 		$txt = "\n";
@@ -124,12 +131,6 @@ if (!file_exists('configuration.php'))
 		$txt = "\n";
 		fwrite($myfile, $txt);
 		$txt = "if (!defined('DB_PASSWORD')){ define('DB_PASSWORD','$db_password'); }";
-		fwrite($myfile, $txt);
-			
-		//Write MySQL database name
-		$txt = "\n";
-		fwrite($myfile, $txt);
-		$txt = "if (!defined('DB_NAME')){ define('DB_NAME','Abre'); }";
 		fwrite($myfile, $txt);
 			
 		//Write MySQL key
@@ -239,12 +240,11 @@ if (!file_exists('configuration.php'))
 		//Close file
 		fclose($myfile);
 			
-		//Create database and tables
-		$conn = new mysqli($db_host, $db_user, $db_password);
+		//Create Setup Tables
+		$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 		if ($conn->connect_error) { die("Connection failed: " . $conn->connect_error); }
-		$sql = "CREATE DATABASE Abre;";
-		$sql .= "USE Abre;";
-		$sql .= "CREATE TABLE `users` (`id` int(11) NOT NULL,`email` text NOT NULL,`superadmin` int(11) NOT NULL DEFAULT '0',`refresh_token` text NOT NULL,`cookie_token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+		
+		$sql = "CREATE TABLE `users` (`id` int(11) NOT NULL,`email` text NOT NULL,`superadmin` int(11) NOT NULL DEFAULT '0',`refresh_token` text NOT NULL,`cookie_token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
   		$sql .= "ALTER TABLE `users` ADD PRIMARY KEY (`id`);";
   		$sql .= "ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
   		
@@ -252,12 +252,8 @@ if (!file_exists('configuration.php'))
    		$sql .= "CREATE TABLE `directory_discipline` (`id` int(11) NOT NULL,`archived` int(11) NOT NULL,`UserID` int(11) NOT NULL,`Filename` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
   		$sql .= "ALTER TABLE `directory_discipline` ADD PRIMARY KEY (`id`);";
   		$sql .= "ALTER TABLE `directory_discipline` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-  		$sql .= "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-  		$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
-  		$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";
-  		$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
   		
-		$conn->multi_query($sql);
+ 		$conn->multi_query($sql);
 		$conn->close();
 			
 		//Create Private Folders
@@ -271,7 +267,7 @@ if (!file_exists('configuration.php'))
 		if (!file_exists('../private/stream/cache')){ mkdir("../private/stream/cache", 0700); }
 		if (!file_exists('../private/stream/cache/feed')){ mkdir("../private/stream/cache/feed", 0700); }
 		if (!file_exists('../private/stream/cache/images')){ mkdir("../private/stream/cache/images", 0700); }
-			
+		
 		//Redirect
 		header("Location: $currenturl");
 	}
@@ -306,15 +302,19 @@ if (!file_exists('configuration.php'))
 					<label class='active' for='domain_name'>Google Apps Domain Name</label>
 				</div>
 				<div class='col s12'><h6>Database Credentials</h6></div>
-				<div class='input-field col l4 s12'>
+				<div class='input-field col l3 s12'>
 					<input placeholder='Enter Database Host' id='db_host' name='db_host' type='text' required>
 					<label class='active' for='db_host'>Database Host</label>
 				</div>
-				<div class='input-field col l4 s12'>
+				<div class='input-field col l3 s12'>
+					<input placeholder='Enter Database Name' id='db_name' name='db_name' type='text' required>
+					<label class='active' for='db_name'>Database Name</label>
+				</div>
+				<div class='input-field col l3 s12'>
 					<input placeholder='Enter Database User' id='db_user' name='db_user' type='text' required>
 					<label class='active' for='db_user'>Database User</label>
 				</div>
-				<div class='input-field col l4 s12'>
+				<div class='input-field col l3 s12'>
 					<input placeholder='Enter Database Password' id='db_password' name='db_password' type='text' required>
 					<label class='active' for='db_password'>Database Password</label>
 				</div>
