@@ -17,10 +17,10 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Required configuration files
+	//Include required files
 	require_once('abre_verification.php');
 	
-	//Modal Holder
+	//Used to load modals
 	echo "<div id='modal_holder'></div>";
 	
 	//Load additional modules based on permissions

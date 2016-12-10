@@ -19,5 +19,5 @@
 	
 ?>
 
-<!-- Display the Loading Spinner -->
-<div class="mdl-spinner mdl-js-spinner is-active"></div>
+	<!-- Display loading spinner -->
+	<div class="mdl-spinner mdl-js-spinner is-active"></div>

@@ -17,7 +17,7 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
     
-    //Required configuration files
+    //Include required files
     require_once('abre_verification.php');
     require_once('abre_functions.php');
 	
@@ -53,10 +53,10 @@
 	$(function()
 	{   
 		
-		//Feedback Modal			
+		//Load feedback modal			
     	$('.modal-trigger').leanModal({ in_duration: 0, out_duration: 0, ready: function() { $("#textarea").focus(); } });
     	
-		//Submit Feedback Form
+		//Submit feedback form
 		var form = $('#form-feedback');
 		var formMessages = $('#form-messages');
 		$(form).submit(function(event)

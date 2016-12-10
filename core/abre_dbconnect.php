@@ -17,15 +17,14 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 
-	//Required configuration files
+	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php'); 
 	
-	//Connect to Abre database
+	//Connect to the database
 	$db_host=constant("DB_HOST");
 	$db_user=constant("DB_USER");
 	$db_password=constant("DB_PASSWORD");
 	$db_name=constant("DB_NAME");
 	$db = new mysqli($db_host, $db_user, $db_password, $db_name);
-	if($db->connect_errno > 0){ die('Unable to connect to database [' . $db->connect_error . ']'); }
 	
 ?>

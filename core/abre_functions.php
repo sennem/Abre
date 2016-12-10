@@ -17,25 +17,28 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Required configuration files
+	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php'); 
 	
 	//Encryption function
-	function encrypt($string, $encryption_key){
+	function encrypt($string, $encryption_key)
+	{
 		$encryption_key=constant("DB_KEY");
 		$string = rtrim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $encryption_key, $string, MCRYPT_MODE_ECB)));
 		return $string;
 	}
 	
 	//Decryption function
-	function decrypt($string, $encryption_key){
+	function decrypt($string, $encryption_key)
+	{
 		$encryption_key=constant("DB_KEY");
 		$string = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $encryption_key, base64_decode($string), MCRYPT_MODE_ECB));
 		return $string;
 	}
 	
 	//Find user ID in directory module given an email
-	function finduserid($email){
+	function finduserid($email)
+	{
 		$email=encrypt($email, "");
 		$sql = "SELECT *  FROM directory where email='$email'";
 		$result = $db->query($sql);
@@ -47,7 +50,8 @@
 	}
 	
 	//Find user ID given an email
-	function finduseridcore($email){
+	function finduseridcore($email)
+	{
 		include "abre_dbconnect.php";
 		$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."'";
 		$result = $db->query($sql);
@@ -59,7 +63,8 @@
 	}
 	
 	//Determine the grades that students do not have email access
-	function studentaccess(){
+	function studentaccess()
+	{
 		$email = $_SESSION['useremail'];
 		if(preg_replace('/[^0-9]+/', '', $email))
 		{
@@ -81,7 +86,8 @@
 	}
 	
 	//Query the database
-	function databasequery($query){
+	function databasequery($query)
+	{
 		include "abre_dbconnect.php";
 		$result = $db->query($query);
 		$rowarray = array();
@@ -94,7 +100,8 @@
 	}
 	
 	//Insert into the database
-	function databaseexecute($query){
+	function databaseexecute($query)
+	{
 		include "abre_dbconnect.php";
 		$stmt = $db->stmt_init();
 		$stmt->prepare($query);
@@ -135,7 +142,8 @@
 	}
 	
 	//Retrieve Site Title
-	function sitesettings($value){
+	function sitesettings($value)
+	{
 		include "abre_dbconnect.php";
 		
 		if(!$result = $db->query("SELECT * FROM settings"))
@@ -219,7 +227,8 @@
     }
     
 	//Insert into the database
-	function vendorLinkGet($call){
+	function vendorLinkGet($call)
+	{
 		$VendorLinkURL=sitesettings("sitevendorlinkurl");
 		$vendorIdentifier=sitesettings("sitevendorlinkidentifier");
 		$vendorKey=sitesettings("sitevendorlinkkey");

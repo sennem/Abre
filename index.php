@@ -17,14 +17,14 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
     
-	//Start PHP session
+	//Start PHP session if one does not exist
 	if(session_id() == ''){ session_start(); }
 	
-	//Check for configuration file
+	//Check for configuration file and run installer if one does not exist
 	if (file_exists('configuration.php'))
 	{
 		
-		//Display the site headers
+		//Load configuration file, google authentication, and site header
 		require_once('configuration.php');
 		require_once('core/abre_google_login.php');
 		require_once('core/abre_header.php');
@@ -40,7 +40,7 @@
 			require_once('core/abre_layout_page.php');
 		}
 		
-		//Display page footer
+		//Display site close and footer
 		require_once('core/abre_footer.php');
 		
 	}

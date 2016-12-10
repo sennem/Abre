@@ -17,7 +17,7 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Required configuration files
+	//Include required files
 	require_once('abre_verification.php');
 	require_once('abre_functions.php'); 
 	

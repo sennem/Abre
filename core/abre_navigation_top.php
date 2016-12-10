@@ -17,28 +17,28 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 	
-	//Required configuration files
+	//Include required files
 	require_once('abre_verification.php');
 	
 ?>
 
 	<!--Display top navigation-->
 	<header class='mdl-layout__header mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
-			<div class='mdl-layout__header-row'>
-				<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
-				<div class='mdl-layout-spacer'></div>
-					<?php
-						if(!isset($_GET["dash"]))
-						{ 
-							echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>";
-						}
-					?>
-					<div class='navspace'></div>
-					<?php
-						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
-					?>
+		<div class='mdl-layout__header-row'>
+			<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
+			<div class='mdl-layout-spacer'></div>
+				<?php
+					if(!isset($_GET["dash"]))
+					{ 
+						echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>";
+					}
+				?>
+				<div class='navspace'></div>
+				<?php
+					echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+				?>
 			</div>
-			<div id='navigation_top'></div>
+		<div id='navigation_top'></div>
 	</header>
 	
 <script>
