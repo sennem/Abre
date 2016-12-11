@@ -62,6 +62,14 @@
 					echo "<div class='mdl-menu__item--full-bleed-divider' style='margin:10px 0 10px 0'></div>";
 					echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>help</i><span class='truncate'>Send Feedback</span></a>";
 				}
+				
+				//Modules link
+				$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
+				$result = $db->query($sql);
+				while($row = $result->fetch_assoc())
+				{
+					echo "<a class='mdl-navigation__link' href='#modules' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>view_module</i><span class='truncate'>Modules</span></a>";
+				}
 					
 				//Settings link
 				$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";

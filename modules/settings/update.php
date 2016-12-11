@@ -47,6 +47,7 @@
 		$src="$portal_path_root/Abre-$linkfile/";
 		$dst="$portal_path_root/update/";
 		
+		//Delete a folder
 		function rrmdir($dir) {
 	        if (is_dir($dir)) {
 	            $files = scandir($dir);
@@ -57,6 +58,7 @@
 	        else if (file_exists($dir)) unlink($dir);
 		}
 		
+		//Make a copy
 		function rcopy($src, $dst) {
 	        if (file_exists ( $dst ))
 	            rrmdir ( $dst );
@@ -93,7 +95,9 @@
 		    }
 		
 		    return rmdir($dir);
-		}  	
+		}
+		
+		//Delete zipped files
     	deleteDirectory("$portal_path_root/Abre-$linkfile/");
     	unlink("$portal_path_root/update.zip");
     	

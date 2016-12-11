@@ -114,14 +114,11 @@
 					//Save Button
 					echo "<div class='row'>";
 						echo "<div class='col s12'><div class='col s12'>";
-							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Apply Changes</button>";
-						echo "</div></div>";
-					echo "</div>";
-					
-					echo "<div class='row'>";
-						echo "<div class='col s12'><div class='col s12'>";
+						
+							//Save changes button
+							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Save Changes</button>";
 
-							//Retrieve latest version from public GitHub repo
+							//Update Abre if new version available
 							$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
 							$context = stream_context_create($opts);
 							$content = file_get_contents("https://api.github.com/repos/abreio/Abre/releases/latest", false, $context);
@@ -131,14 +128,15 @@
 							if($abre_version<$currentversion)
 							{
 								$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
-								echo "<a id='updateabre' href='#' data-version='$currentlink' style='color:#999'>You have version $abre_version installed. Update to $currentversion.</a>";
-							}
-							else
-							{
-								echo "<p style='color:#999'>Release: $abre_version</p>";
-							}
+								echo " <button id='updateabre' data-version='$currentlink' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Update to $currentversion</button>";
+							}							
 							
 						echo "</div></div>";
+					echo "</div>";
+					
+					//Show Current Version
+					echo "<div class='row'>";
+						echo "<div class='col s12'><div class='col s12'><p style='color:#999'>Version $abre_version</p></div></div>";
 					echo "</div>";
 					
 				echo "</div>";
