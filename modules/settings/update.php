@@ -113,6 +113,7 @@
 		rcopy("$portal_path_root/update/modules/mail/","$portal_path_root/modules/mail/");
 		rcopy("$portal_path_root/update/modules/profile/","$portal_path_root/modules/profile/");
 		rcopy("$portal_path_root/update/modules/stream/","$portal_path_root/modules/stream/");
+		rcopy("$portal_path_root/update/modules/modules/","$portal_path_root/modules/modules/");
 		rcopy("$portal_path_root/update/core/","$portal_path_root/core/");
 		
 		//Replace core files
