@@ -16,22 +16,27 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-    
-    //Required configuration files
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+	//Required configuration files
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	
-    if($_SESSION['usertype']=="staff")
-    {
-    
-		echo "	
-			'modules': function(name) {
-		    	$( '#navigation_top' ).hide();
-				$( '#content_holder' ).hide();
-				$( '#loader' ).show();
-				$( '#titletext' ).text('Modules');
-				document.title = 'Modules';
-				$( '#content_holder' ).load( 'modules/modules/modules.php', function() { init_page(); });
-				$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
-	    	},";	
-	} 
 ?>
+
+	<div class='fixed-action-btn buttonpin'>
+		<a class='modal-addmodule btn-floating btn-large waves-effect waves-light' style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='addmodules' data-position='left' href='#addmodule'><i class='large material-icons'>add</i></a>
+		<div class="mdl-tooltip mdl-tooltip--left" for="addmodules">Add Module</div>
+	</div>
+
+<script>
+	
+	$(function() 
+	{
+		//Books Modal
+		$('.modal-addmodule').leanModal(
+		{
+			in_duration: 0,
+			out_duration: 0,
+			ready: function() {  }
+		});
+	});
+</script>

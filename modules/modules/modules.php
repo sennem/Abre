@@ -115,6 +115,9 @@
 													
 				echo "</div>";
 			echo "</div>";
+			
+			include "addmodule.php";
+			
 			?>
 			
 			<script>
