@@ -117,18 +117,22 @@
 					
 				echo "</tr>";
 									
-				if($modulecount==1)
-				{
-					echo "</tbody>";
-					echo "</table>";
-					echo "</div>";
-					echo "</div>";					
-					echo "</div>";
-					echo "</div>";	
-				}
 			}
+
 						
-			if($modulecount==0){ echo "<div class='row center-align'><div class='col s12'><h6>Add-On Modules</h6></div><div class='col s12'>Click the '+' button at the bottom right to add a module.</div></div>"; }
+			if($modulecount==0)
+			{ 
+				echo "<div class='row center-align'><div class='col s12'><h6>Add-On Modules</h6></div><div class='col s12'>Click the '+' button at the bottom right to add a module.</div></div>"; 
+			}
+			else
+			{
+				echo "</tbody>";
+				echo "</table>";
+				echo "</div>";
+				echo "</div>";					
+				echo "</div>";
+				echo "</div>";					
+			}
 			
 			include "addmodule.php";
 			
