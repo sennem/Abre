@@ -16,7 +16,7 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-
+    
     //Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
@@ -29,36 +29,24 @@
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc())
 	{	
-	
-		//Retrieve the repo
-		$repoaddress=$_POST["repoaddress"];
-		$repoaddress=str_replace('https://github.com/', '', $repoaddress);
-		$project=strstr($repoaddress, '/');
 		
-		$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
-		$context = stream_context_create($opts);
-		$content = file_get_contents("https://api.github.com/repos/$repoaddress/releases/latest", false, $context);
-		$json = json_decode($content, true);
-		$currentversion = $json['name'];
-			
-		$currentlink = "https://github.com/$repoaddress/archive/".$currentversion.".zip";
-		file_put_contents("$portal_path_root/modules/$project.zip", file_get_contents($currentlink));
-		
-		//Upzip the file
-		$zip = new ZipArchive;
-		if ($zip->open("$portal_path_root/modules/$project.zip") === TRUE) {
-			$zip->extractTo("$portal_path_root/modules/");
-			$zip->close();
+		//Delete a folder
+		function rrmdir($dir) {
+	        if (is_dir($dir)) {
+	            $files = scandir($dir);
+	            foreach ($files as $file)
+	                if ($file != "." && $file != "..") rrmdir("$dir/$file");
+	            rmdir($dir);
+	        }
+	        else if (file_exists($dir)) unlink($dir);
 		}
 		
-		//Rename folder
-		rename(realpath(dirname(__FILE__))."/../$project-$currentversion",realpath(dirname(__FILE__))."/../$project");
+		//Retrieve last repo link and zip file
+		$module=$_POST["link"];
 		
-		//Delete zipped files
-    	unlink("$portal_path_root/modules/$project.zip");
-		
-		echo "Module Added";
-		
+		//Delete module
+		rrmdir(realpath(dirname(__FILE__))."/../$module");
+
 	}
 	
 ?>

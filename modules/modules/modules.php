@@ -27,94 +27,108 @@
 	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc())
-	{	
-		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
-			echo "<div class='page'>";
+	{						
+		//List all modules
+		$modules = array();
+		$modulecount=0;
+		$moduledirectory = '../../modules/';
+		$modulefolders = scandir($moduledirectory);
+		foreach ($modulefolders as $result)
+		{	
+			if ($result == '.' or 
+				$result == '..' or 
+				$result == '.DS_Store' or 
+				$result == 'apps' or
+				$result == 'calendar' or
+				$result == 'classroom' or
+				$result == 'directory' or
+				$result == 'drive' or
+				$result == 'mail' or
+				$result == 'modules' or
+				$result == 'profile' or
+				$result == 'settings' or
+				$result == 'stream' or
+				$result == 'startup'
+				) continue;
 				
-				//Modules				
-				echo "<div class='row'>";	
+				//Count non core modules				
+				$modulecount++;
+								
+				if($modulecount==1)
+				{
+					echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
+					echo "<div class='page'>";			
+					echo "<div class='row'>";	
 					echo "<div class='col s12'>";	
-						echo "<table id='myTable'>";
-							echo "<thead>";
-								echo "<tr>";
-								echo "<th>Title</th>";
-								echo "<th>Description</th>";
-								echo "<th>Version</th>";
-								//echo "<th style='width:30px'></th>";
-								echo "</tr>";
-							echo "</thead>";
-							echo "<tbody>";
-						
-						//List all modules
-						$modules = array();
-						$modulecount=0;
-						$moduledirectory = '../../modules/';
-						$modulefolders = scandir($moduledirectory);
-						foreach ($modulefolders as $result)
-						{	
-							if ($result == '.' or 
-								$result == '..' or 
-								$result == '.DS_Store' or 
-								$result == 'apps' or
-								$result == 'calendar' or
-								$result == 'classroom' or
-								$result == 'directory' or
-								$result == 'drive' or
-								$result == 'mail' or
-								$result == 'modules' or
-								$result == 'profile' or
-								$result == 'settings' or
-								$result == 'stream' or
-								$result == 'startup'
-								) continue;
-								
-							$pagetitle=NULL;
-							$description=NULL;
-							$version=NULL;
-							$repo=NULL;
-							require_once('../../modules/'.$result.'/config.php');
-							
-							if($description==NULL){ $description="No Description"; }
-							if($version==NULL){ $version="No Version"; }
-
-							echo "<tr>";
-								echo "<td>$pagetitle</td>";
-								echo "<td>$description</td>";
-								echo "<td>$version</td>";
-								
-								//Update Module if new version available
-								if($repo!=NULL)
-								{
-									$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
-									$context = stream_context_create($opts);
-									$content = file_get_contents("https://api.github.com/repos/$repo/releases/latest", false, $context);
-									$json = json_decode($content, true);
-									$currentversion = $json['name'];
-									if($version<$currentversion)
-									{
-										$currentlink = "https://github.com/$repo/archive/".$currentversion.".zip";
-										echo "<td width=30px><button class='updatemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-version='$currentlink' data-repo='$repo'><i class='material-icons'>update</i></button></td>";
-									}
-									else
-									{
-										echo "<td width=30px></td>";
-									}
-								}
-								else
-								{
-									echo "<td width=30px></td>";
-								}
-							echo "</tr>";
-	
+					echo "<table id='myTable'>";
+					echo "<thead>";
+						echo "<tr>";
+						echo "<th>Title</th>";
+						echo "<th>Description</th>";
+						echo "<th>Version</th>";
+						echo "<th style='width:30px'></th>";
+						echo "<th style='width:30px'></th>";
+						echo "</tr>";
+					echo "</thead>";
+					echo "<tbody>";
+				}
+					
+				//Load the module meta					
+				$pagetitle=NULL;
+				$description=NULL;
+				$version=NULL;
+				$repo=NULL;
+				require_once('../../modules/'.$result.'/config.php');					
+				if($description==NULL){ $description="No Description"; }
+				if($version==NULL){ $version="No Version"; }
+		
+				echo "<tr>";
+					echo "<td>$pagetitle</td>";
+					echo "<td>$description</td>";
+					echo "<td>$version</td>";
+										
+					//Update Module if new version available
+					if($repo!=NULL)
+					{
+						$project=strstr($repo, '/');
+						$project=substr($project, 1);
+						$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
+						$context = stream_context_create($opts);
+						$content = file_get_contents("https://api.github.com/repos/$repo/releases/latest", false, $context);
+						$json = json_decode($content, true);
+						$currentversion = $json['name'];
+						if($version<$currentversion)
+						{
+							$currentlink = "https://github.com/$repo/archive/".$currentversion.".zip";
+							echo "<td width=30px><button class='updatemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-version='$currentlink' data-repo='$repo'><i class='material-icons'>update</i></button></td>";
 						}
-
-						echo "</tbody>";
-						echo "</table>";
+						else
+						{
+							echo "<td width=30px></td>";
+						}
+					}
+					else
+					{
+						echo "<td width=30px></td>";
+					}
+					
+					//Delete module
+					echo "<td width=30px><button class='deletemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-module='$project'><i class='material-icons'>delete</i></button></td>";
+					
+				echo "</tr>";
+									
+				if($modulecount==1)
+				{
+					echo "</tbody>";
+					echo "</table>";
 					echo "</div>";
+					echo "</div>";					
 					echo "</div>";
-													
-				echo "</div>";
-			echo "</div>";
+					echo "</div>";	
+				}
+			}
+						
+			if($modulecount==0){ echo "<div class='row center-align'><div class='col s12'><h6>Add-On Modules</h6></div><div class='col s12'>Click the '+' button at the bottom right to add a module.</div></div>"; }
 			
 			include "addmodule.php";
 			
@@ -132,6 +146,19 @@
 					.done(function() {
 						location.reload();
 			  		})
+			  	});
+			  	
+				//Update module
+				$(".deletemodule").click(function(event) {
+					event.preventDefault();
+					var result = confirm("Are you sure you want to delete this module?");
+					if (result) {
+						var Module = $(this).data('module');
+						$.post("modules/modules/deletemodule.php", { link: Module }, function(){ })
+						.done(function() {
+							location.reload();
+				  		})
+				  	}
 			  	});
 			  	
 			</script>

@@ -31,7 +31,7 @@
 	
 	$(function() 
 	{
-		//Books Modal
+		//Github Modal
 		$('.modal-addmodule').leanModal(
 		{
 			in_duration: 0,

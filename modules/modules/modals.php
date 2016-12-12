@@ -28,7 +28,7 @@
 			<h4>Enter a Github Repository</h4>
 			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 			<div class="input-field col s6">
-				<input id="repoaddress" name="repoaddress" type="text" maxlength="20" placeholder="Example: abreio/Abre-Books" required>
+				<input id="repoaddress" name="repoaddress" type="text" placeholder="Example: https://github.com/abreio/Abre-Books" required>
 			</div>
     	</div>
 	    <div class="modal-footer">
@@ -43,15 +43,10 @@
 	{					
 					
 		//Add a module
-		var formaddmodule = $('#form-addmodule');
-		var formMessages = $('#form-messages');
-					
+		var formaddmodule = $('#form-addmodule');					
 		$(formaddmodule).submit(function(event) {
 			event.preventDefault();
-			$('#addmodule').closeModal({
-				in_duration: 0,
-				out_duration: 0,
-			});
+			$('button').html("Installing...");
 			var formData = $(formaddmodule).serialize();
 			$.ajax({
 				type: 'POST',
@@ -60,16 +55,8 @@
 			})
 						
 			//Show the notification
-			.done(function(response) {
-				
-				
-				//Register MDL Components   
-				mdlregister();
-				$("input").val('');
-				var notification = document.querySelector('.mdl-js-snackbar');
-				var data = { message: response };
-				notification.MaterialSnackbar.showSnackbar(data);	
-
+			.done(function(response) {		
+				location.reload();
 			});						
 		});
 					    								
