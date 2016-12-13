@@ -50,6 +50,18 @@
 	}
 	
 	//Find user ID given an email
+	function superadmin()
+	{
+		include "abre_dbconnect.php";
+		$sql = "SELECT * FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
+		$result = $db->query($sql);
+		while($row = $result->fetch_assoc())
+		{
+			return true;
+		}
+	}
+	
+	//Find user ID given an email
 	function finduseridcore($email)
 	{
 		include "abre_dbconnect.php";
