@@ -71,10 +71,8 @@
 				<script src='core/js/jquery.tablesorter.min.js'></script>
 				<script src='core/js/jquery.timepicker.min.js'></script>
 				<script src='core/js/quill.min.1.1.3.js'></script>
-				<script src='modules/profile/js/jquery-ui.multidatespicker.js'></script>
-				<script src='https://www.gstatic.com/charts/loader.js'></script>	  
-				<script src='core/js/html5-qrcode.min.js'></script>
-				<script src='core/js/jsqrcode-combined.min.js'></script>
+				<script src='modules/profile/js/jquery-ui.multidatespicker.1.6.4.js'></script>
+				<script src='https://www.gstatic.com/charts/loader.js'></script>
 			</head>
 			<body>			
 			<script>google.charts.load('current', {'packages':['corechart']});</script>

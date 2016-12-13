@@ -48,8 +48,10 @@
 	
 <script>
 	
-			$(document).ready(function()
+			$(function()
  			{
+	 			
+	 			
 				var today = new Date();
 				var y = today.getFullYear();			
 				$('#workcalendardisplay').multiDatesPicker({
@@ -111,6 +113,8 @@
 				
 	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 				$("#selecteddays").text(dates + " Days Selected");
+				
+				
 				
 				
 			});
