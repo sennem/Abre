@@ -157,8 +157,12 @@
 		checkWidthapps();
 		
 		//Make the Icons Clickable
-		$(".app").click(function() {
+		$(".app").unbind().click(function(event) {
+			event.preventDefault();
 			window.open($(this).find("a").attr("href"), '_blank');
+		    
+		    $("#viewapps_arrow").hide();
+		    $('#viewapps').closeModal({ in_duration: 0, out_duration: 0, });
 		});
 		
 	});
