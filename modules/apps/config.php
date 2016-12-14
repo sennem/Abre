@@ -22,19 +22,8 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
 	
-	//Setup tables if new module
-	if(!$resultapps = $db->query("SELECT *  FROM apps"))
-	{
-			$sql = "CREATE TABLE apps (id int(11) NOT NULL,icon text NOT NULL,student int(11) NOT NULL,staff int(11) NOT NULL,title text NOT NULL,image text NOT NULL,link text NOT NULL,required int(11) NOT NULL,sort int(11) NOT NULL,minor_disabled int(11) NOT NULL DEFAULT '0') ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-			$sql .= "ALTER TABLE `apps` ADD PRIMARY KEY (`id`);";
-  			$sql .= "ALTER TABLE `apps` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-  			$sql .= "INSERT INTO `apps` (`id`, `icon`, `student`, `staff`, `title`, `image`, `link`, `required`, `sort`, `minor_disabled`) VALUES (NULL, 'icon_mail.png', '1', '1', 'Mail', 'icon_mail.png', 'https://mail.google.com/', '1', '1', '1');";
-  			$sql .= "INSERT INTO `apps` (`id`, `icon`, `student`, `staff`, `title`, `image`, `link`, `required`, `sort`, `minor_disabled`) VALUES (NULL, 'icon_drive.png', '1', '1', 'Drive', 'icon_drive.png', 'https://drive.google.com/', '1', '2', '0');";
-  			$sql .= "INSERT INTO `apps` (`id`, `icon`, `student`, `staff`, `title`, `image`, `link`, `required`, `sort`, `minor_disabled`) VALUES (NULL, 'icon_calendar.png', '1', '1', 'Calendar', 'icon_calendar.png', 'https://calendar.google.com/', '1', '3', '0');";
-  			$sql .= "INSERT INTO `apps` (`id`, `icon`, `student`, `staff`, `title`, `image`, `link`, `required`, `sort`, `minor_disabled`) VALUES (NULL, 'icon_classroom.png', '1', '1', 'Classroom', 'icon_classroom.png', 'https://classroom.google.com/', '1', '4', '0');";
-  		if ($db->multi_query($sql) === TRUE) { }
-	}
-	
+	//Check for installation
+	if(superadmin()){ require('installer.php'); }	
 	
 	$pageview=1;
 	$drawerhidden=1;
@@ -54,7 +43,7 @@
 
 	<script>
 		
-		$(document).ready(function()
+		$(function()
 		{
 			//Load Apps into Modal
 			$('#loadapps').load('modules/apps/apps.php');
@@ -76,20 +65,6 @@
 		    	complete: function() { $("#viewapps_arrow").hide(); }
 		   	});	  	
 	  	
-		   	//Make the App Icons Clickable
-		   	/*
-		   	$(document).on("click", ".app", function ()
-		   	{
-			   	event.preventDefault();
-				window.open($(this).find("a").attr("href"), '_blank');			
-				$("#viewapps_arrow").hide();
-				
-		    	$('#viewapps').closeModal({
-			    	in_duration: 0,
-					out_duration: 0,
-			   	});
-			});
-			*/
 		});
 	
 	</script>

@@ -74,7 +74,7 @@
 							$title=htmlspecialchars($row["title"], ENT_QUOTES);
 							$image=htmlspecialchars($row["image"], ENT_QUOTES);
 							$link=htmlspecialchars($row["link"], ENT_QUOTES);
-							echo "<div class='app col s4'>";
+							echo "<div class='topapps col s4'>";
 								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
 								echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
 							echo "</div>";
@@ -93,7 +93,7 @@
 						$title=htmlspecialchars($row["title"], ENT_QUOTES);
 						$image=htmlspecialchars($row["image"], ENT_QUOTES);
 						$link=htmlspecialchars($row["link"], ENT_QUOTES);
-						echo "<div class='app col s4'>";
+						echo "<div class='topapps col s4'>";
 							echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
 							echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
 						echo "</div>";
@@ -103,3 +103,18 @@
 			?>
 		
 	</div>
+	
+<script>
+	
+	$(function()
+	{	
+		
+		//Make the Icons Clickable
+		$(".topapps").unbind().click(function(event) {
+			event.preventDefault();
+			window.open($(this).find("a").attr("href"), '_blank');
+		});
+		
+	});
+
+</script>
