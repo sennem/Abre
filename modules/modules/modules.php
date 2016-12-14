@@ -24,10 +24,9 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	
 	//Modules
-	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc())
-	{						
+	if(superadmin())
+	{		
+						
 		//List all modules
 		$modules = array();
 		$modulecount=0;
