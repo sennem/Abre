@@ -77,8 +77,10 @@
 		   	});	  	
 	  	
 		   	//Make the App Icons Clickable
+		   	/*
 		   	$(document).on("click", ".app", function ()
 		   	{
+			   	event.preventDefault();
 				window.open($(this).find("a").attr("href"), '_blank');			
 				$("#viewapps_arrow").hide();
 				
@@ -87,6 +89,7 @@
 					out_duration: 0,
 			   	});
 			});
+			*/
 		});
 	
 	</script>
