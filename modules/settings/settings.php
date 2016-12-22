@@ -98,17 +98,6 @@
 								echo "<label class='active' for='sitevendorlinkkey'>Software Answers VendorLink Key</label>";
 						    echo "</div>";
 						    
-						    //Certica Solutions
-						    echo "<div class='input-field col s12'><h5>Certica Solutions</h5><br></div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter Certica REST API Base URL' value='".sitesettings('certicabaseurl')."' id='certicabaseurl' name='certicabaseurl' type='text'>";
-								echo "<label class='active' for='certicabaseurl'>Certica REST API Base URL</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter Certica Customer AccessKey' value='".sitesettings('certicaaccesskey')."' id='certicaaccesskey' name='certicaaccesskey' type='text'>";
-								echo "<label class='active' for='certicaaccesskey'>Certica Customer AccessKey</label>";
-						    echo "</div>";
-						echo "</div>";
 					echo "</div>";
 					
 					//Save Button
