@@ -77,7 +77,7 @@
 							echo "<hr>";
 							echo "<div class='valign-wrapper'>";
 							echo "<div class='col s10'>";
-								echo "<div class='mdl-card__supporting-text subtext truncate'><b>$eventitle</b>";
+								echo "<div class='mdl-card__supporting-text subtext truncate demotext_dark'><b>$eventitle</b>";
 								if($eventdescription!="No Description"){ echo "<br>$eventdescription"; }
 								echo "<br>$timeofevent</div>";
 							echo "</div>";

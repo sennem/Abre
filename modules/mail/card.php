@@ -86,7 +86,7 @@
 						echo "<hr>";
 						echo "<div class='valign-wrapper emailwrapper'>";
 							echo "<div class='col s10'>";
-								echo "<div class='mdl-card__supporting-text subtext truncate'><b>$subjecttext</b>";
+								echo "<div class='mdl-card__supporting-text subtext truncate demotext_dark'><b>$subjecttext</b>";
 								if($sendertext!="Google"){ echo "<br>$sendertext"; }
 								if($sendertext!=""){ echo "<br>$snippet</div>"; }
 							echo "</div>";

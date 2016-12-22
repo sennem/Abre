@@ -72,7 +72,7 @@
 							echo "<hr>";
 							echo "<div class='valign-wrapper'>";
 								echo "<div class='col s10'>";
-									echo "<div class='mdl-card__supporting-text subtext truncate'><b>$courseName</b>";
+									echo "<div class='mdl-card__supporting-text subtext truncate demotext_dark'><b>$courseName</b>";
 									if($courseSection!=""){ echo "<br>$courseSection"; }
 									echo "<br>Code: $courseEnrollmentCode</div>";
 								echo "</div>";

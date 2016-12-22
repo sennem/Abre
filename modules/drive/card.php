@@ -73,7 +73,7 @@
 					echo "<hr>";
 					echo "<div class='valign-wrapper'>";
 						echo "<div class='col s10'>";
-							echo "<div class='mdl-card__supporting-text subtext truncate'><b>$drivetitle</b><br>".$_SESSION['displayName']."<br>$drivemodifydate</div>";
+							echo "<div class='mdl-card__supporting-text subtext truncate demotext_dark'><b>$drivetitle</b><br>".$_SESSION['displayName']."<br>$drivemodifydate</div>";
 						echo "</div>";
 						echo "<div class='col s2'>";
 							echo "<a href='$drivelink' target='_blank'><i class='material-icons mdl-color-text--grey-600'>play_circle_filled</i></a>";
