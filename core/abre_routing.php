@@ -74,6 +74,28 @@
 			$( ".mdl-layout__header" ).append( "<a href='"+url+"' class='mdl-layout__drawer-button' id='backbutton'><i class='material-icons'>arrow_back</i></a>" );
 		}
 		
+		//Demo mode
+		var DemoMode = false;
+		$(document).keypress("d",function(e) {
+			if(e.ctrlKey)
+			{ 
+				if(DemoMode === false)
+				{
+					$('<style id="demomodedark">.demotext_dark { color:transparent; text-shadow: 0 0 15px rgba(0,0,0,1); }</style>').appendTo('head');
+					$('<style id="demomodelight">.demotext_light { color:transparent; text-shadow: 0 0 15px rgba(255,255,255,1); }</style>').appendTo('head');
+					$('<style id="demomodeimage">.demoimage { -webkit-filter: blur(7px); filter: blur(7px); }</style>').appendTo('head');
+					DemoMode = true;
+				}
+				else
+				{
+					$('#demomodedark').remove();
+					$('#demomodelight').remove();
+					$('#demomodeimage').remove();
+					DemoMode = false;
+				}
+			}
+		});
+		
 		//Load page routing
 		routie({		
 			<?php
