@@ -29,7 +29,7 @@
 		echo "<div class='row'>";
 			echo "<div class='col l12'><h4>License Information</h4></div>";
 			echo "<div class='input-field col s12'>";
-				echo "<input placeholder='Enter a Educator State ID' value='$stateeducatorid' id='stateeducatorid' name='stateeducatorid' type='text'>";
+				echo "<input placeholder='Enter a Educator State ID' value='$stateeducatorid' id='stateeducatorid' name='stateeducatorid' type='text' class='demotext_dark'>";
 				echo "<label class='active' for='stateeducatorid'>Educator State ID</label>";
 			echo "</div>";
 		echo "</div>";
@@ -40,7 +40,7 @@
 				if($licensetype==""){ echo "<div class='toAdd'>"; }else{ $fillcount++;  echo "<div>"; }
 				$licensetypeid = "licensetypeid".$x;
 				echo "<div class='input-field col l4 s12'>";
-				    echo "<input placeholder='Enter Type' value='$licensetype' id='$licensetypeid' name='$licensetypeid' type='text'>";
+				    echo "<input placeholder='Enter Type' value='$licensetype' id='$licensetypeid' name='$licensetypeid' type='text' class='demotext_dark'>";
 				    echo "<label class='active' for='$licensetypeid'>Type</label>";
 				echo "</div>";
 				$licenseissuedate = ${'licenseissuedate'.$x};
@@ -58,7 +58,7 @@
 				$licenseterm = ${'licenseterm'.$x};
 				$licensetermid = "licensetermid".$x;
 				echo "<div class='input-field col l2 s12'>";
-				    echo "<input placeholder='Enter Term' value='$licenseterm' id='$licensetermid' name='$licensetermid' type='text'>";
+				    echo "<input placeholder='Enter Term' value='$licenseterm' id='$licensetermid' name='$licensetermid' type='text' class='demotext_dark'>";
 				    echo "<label class='active' for='$licensetermid'>Term</label>";
 				echo "</div>";
 			echo "</div>";

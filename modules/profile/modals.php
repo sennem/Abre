@@ -53,7 +53,8 @@
 	 			
 	 			
 				var today = new Date();
-				var y = today.getFullYear();			
+				//var y = today.getFullYear();		
+				var y = 2016;		
 				$('#workcalendardisplay').multiDatesPicker({
 					<?php
 						if($_SESSION['usertype']!="student")

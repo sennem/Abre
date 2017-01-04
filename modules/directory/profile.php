@@ -259,31 +259,31 @@
 					//Profile
 					echo "<div id='profile'>";
 						echo "<div class='row'><div class='col s12'>";
-							echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'><h6 class='center-align'>$firstname $lastname</h6>";
+							echo "<img src='$pictureserver' class='profile-avatar demoimage' style='display: block; margin: 0 auto;'><h6 class='center-align demotext_dark'>$firstname $lastname</h6>";
 						echo "</div></div>";
 						echo "<div class='row'>";
 							echo "<div class='col s12'><h4>Contact</h4></div>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a First Name' value='$firstname' id='firstname' name='firstname' type='text' required>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a First Name' value='$firstname' id='firstname' name='firstname' type='text' class='demotext_dark' required>";
 								echo "<label class='active' for='firstname'>First Name</label>";
 							echo "</div>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Middle Name' value='$middlename' id='middlename' name='middlename' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Middle Name' value='$middlename' id='middlename' name='middlename' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='middlename'>Middle Name</label>";
 							echo "</div>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Last Name' value='$lastname' id='lastname' name='lastname' type='text' required>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Last Name' value='$lastname' id='lastname' name='lastname' type='text' class='demotext_dark' required>";
 								echo "<label class='active' for='lastname'>Last Name</label>";
 							echo "</div>";
 						echo "</div>";
 						
 						echo "<div class='row'>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Address' value='$address' id='address' name='address' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Address' value='$address' id='address' name='address' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='address'>Address</label>";
 							echo "</div>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a City' value='$city' id='city' name='city' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a City' value='$city' id='city' name='city' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='city'>City</label>";
 							echo "</div>";   
 							echo "<div class='input-field col l2 s12'>";
@@ -293,22 +293,22 @@
 								echo "<label>State</label>";
 							echo "</div>"; 
 							echo "<div class='input-field col l2 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Zipcode' value='$zip' id='zip' name='zip' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Zipcode' value='$zip' id='zip' name='zip' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='zip'>Zipcode</label>";
 							echo "</div>";   
 						echo "</div>";  
 									  
 						echo "<div class='row'>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Phone Number' value='$phone' id='phone' name='phone' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Phone Number' value='$phone' id='phone' name='phone' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='phone'>Phone Number</label>";
 							echo "</div>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Cell Number' value='$cellphone' id='cellphone' name='cellphone' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Cell Number' value='$cellphone' id='cellphone' name='cellphone' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='cellphone'>Cell Number</label>";
 							echo "</div>";
 							echo "<div class='input-field col l4 s12'>";
-								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Email' value='$email' id='email' name='email' type='text'>";
+								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Email' value='$email' id='email' name='email' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='email'>Email</label>";
 							echo "</div>";
 						echo "</div>";		
@@ -317,7 +317,7 @@
 						{
 							echo "<div class='row'>";
 								echo "<div class='input-field col l4 s12'>";
-									echo "<input placeholder='Enter a Social Security Number' value='$ss' id='ss' name='ss' type='text'>";
+									echo "<input placeholder='Enter a Social Security Number' value='$ss' id='ss' name='ss' type='text' class='demotext_dark'>";
 									echo "<label class='active' for='middlename'>Social Security Number</label>";
 								echo "</div>";
 								echo "<div class='input-field col l4 s12'>";
@@ -366,7 +366,7 @@
 					echo "<div id='employment'>";
 						echo "<div class='row'>";
 						echo "<div class='row'><div class='col s12'>";
-							echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'><h6 class='center-align'>$firstname $lastname</h6>";
+							echo "<img src='$pictureserver' class='profile-avatar demoimage' style='display: block; margin: 0 auto;'><h6 class='center-align demotext_dark'>$firstname $lastname</h6>";
 						echo "</div></div>";
 							echo "<div class='col s12'><h4>Classification</h4></div>";
 							echo "<div class='input-field col l9 s12'>";
@@ -447,14 +447,14 @@
 											echo "<label>Level of Education</label>";
 									    echo "</div>";
 									    echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Salary' value='$salary' id='salary' name='salary' type='text'>";
+									      echo "<input placeholder='Enter a Salary' value='$salary' id='salary' name='salary' type='text' class='demotext_dark'>";
 									      echo "<label class='active' for='salary'>Salary</label>";
 									    echo "</div>";    
 									echo "</div>";
 									
 									echo "<div class='row'>";
 										echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter Number of Hours' value='$hours' id='hours' name='hours' type='text'>";
+									      echo "<input placeholder='Enter Number of Hours' value='$hours' id='hours' name='hours' type='text' class='demotext_dark'>";
 									      echo "<label class='active' for='hours'>Hours</label>";
 									    echo "</div>";
 									    echo "<div class='input-field col l3 s12'>";
@@ -518,7 +518,7 @@
 								echo "<div id='licensure'>";
 
 						echo "<div class='row'><div class='col s12'>";
-							echo "<img src='$pictureserver' class='profile-avatar' style='display: block; margin: 0 auto;'><h6 class='center-align'>$firstname $lastname</h6>";
+							echo "<img src='$pictureserver' class='profile-avatar demoimage' style='display: block; margin: 0 auto;'><h6 class='center-align demotext_dark'>$firstname $lastname</h6>";
 						echo "</div></div>";
 					
 								include "profile_licenses.php";

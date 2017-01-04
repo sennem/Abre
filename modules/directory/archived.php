@@ -85,10 +85,10 @@
 								$senioritydate=stripslashes(htmlspecialchars(decrypt($senioritydate, ""), ENT_QUOTES));
 								$id=htmlspecialchars($row["id"], ENT_QUOTES);
 								echo "<tr>";
-									echo "<td width=60px><img src='$picture' class='profile-avatar-small' alt=''></td>";
-									echo "<td><strong>$firstname $lastname</strong><a href='$portal_root/#directory/$id' class='hidden'></a></td>";
-									echo "<td class='hide-on-small-only'>$email</td>";
-									echo "<td class='hide-on-med-and-down'>$title</td>";
+									echo "<td width=60px><img src='$picture' class='profile-avatar-small demoimage' alt=''></td>";
+									echo "<td><strong class='demotext_dark'>$firstname $lastname</strong><a href='$portal_root/#directory/$id' class='hidden'></a></td>";
+									echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
+									echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";
 									echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 restoreuser'><a href='modules/directory/restoreuser.php?id=$id'></a><i class='material-icons'>cached</i></button></td>";	
 									if($superadmin==1)
 									{

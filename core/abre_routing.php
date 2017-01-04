@@ -77,7 +77,7 @@
 		//Demo mode
 		var DemoMode = false;
 		$(document).keypress("d",function(e) {
-			if(e.ctrlKey)
+			if(e.which && e.ctrlKey && e.shiftKey)
 			{ 
 				if(DemoMode === false)
 				{

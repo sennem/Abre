@@ -28,7 +28,7 @@
 	<div class="fixed-action-btn buttonpin">
 		<?php 
 			if($firstname=="" && $lastname==""){ $firstname="New"; $lastname="User"; }
-			echo "<a class='btn-floating btn-large waves-effect waves-light' style='background-color: ".sitesettings("sitecolor")."' id='name'><i class='large material-icons'>person</i></a><div class='mdl-tooltip mdl-tooltip--left' for='name'>$firstname $lastname</div>"; ?>
+			echo "<a class='btn-floating btn-large waves-effect waves-light' style='background-color: ".sitesettings("sitecolor")."' id='name'><i class='large material-icons'>person</i></a><div class='mdl-tooltip mdl-tooltip--left demotext_dark' for='name'>$firstname $lastname</div>"; ?>
 	    <ul>
 			<li><a class="btn-floating btn-large waves-effect waves-light" style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='archiveuser' id='archiveuser'><i class="large material-icons">system_update_alt</i></a><div class='mdl-tooltip mdl-tooltip--left' for='archiveuser'>Archive</div></li>
 			<li><a class="btn-floating btn-large waves-effect waves-light" style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='discard' href='#directory'><i class="large material-icons">close</i></a><div class='mdl-tooltip mdl-tooltip--left' for='discard'>Discard</div></li>

@@ -103,8 +103,8 @@
 			}
 			$id=htmlspecialchars($row["id"], ENT_QUOTES);
 			if($pageaccess==1  or $pageaccess==2){ echo "<tr class='clickrow'>"; }else{ echo "<tr class='clickrowemail'>"; }
-				echo "<td width='60px'><img src='$picture' class='profile-avatar-small'></td>";
-				echo "<td><strong>$firstname $lastname</strong>";
+				echo "<td width='60px'><img src='$picture' class='profile-avatar-small demoimage'></td>";
+				echo "<td><strong class='demotext_dark'>$firstname $lastname</strong>";
 					if($_SESSION['usertype']=="staff" && $pageaccess!=1)
 					{
 						if($pageaccess==2)
@@ -121,9 +121,9 @@
 						echo "<a href='$portal_root/#directory/$id' class='hidden'></a>";
 					}
 				echo "</td>";
-				echo "<td class='hide-on-small-only'>$email</td>";
-				echo "<td class='hide-on-small-only'>$location</td>";
-				echo "<td class='hide-on-med-and-down'>$title</td>";
+				echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
+				echo "<td class='hide-on-small-only demotext_dark'>$location</td>";
+				echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";
 			echo "</tr>";
 		}
 		if($resultcount==0){ 
