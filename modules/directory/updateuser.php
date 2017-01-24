@@ -192,7 +192,7 @@
 		        $newImage = $manipulator->crop($x1, $y1, $x2, $y2);
 		        // saving file to uploads folder
 		        $picturefilename=$newNamePrefix . $_FILES['picture']['name'];
-		        $manipulator->save($portal_path_root.'/../private/directory/images/employees/' . $picturefilename);
+		        $manipulator->save($portal_path_root."/../$portal_private_root/directory/images/employees/" . $picturefilename);
 		    }
 		}
 		else
@@ -212,7 +212,7 @@
 			    {
 				    $newNamePrefix = time() . '$_$';
 				    $disfilename=$newNamePrefix . $_FILES['discipline']['name'];
-					if(!move_uploaded_file($_FILES['discipline']['tmp_name'], $portal_path_root . '/../private/directory/discipline/' . $disfilename)){
+					if(!move_uploaded_file($_FILES['discipline']['tmp_name'], $portal_path_root . "/../$portal_private_root/directory/discipline/" . $disfilename)){
 						echo "The file was not uploaded";
 					}
 					

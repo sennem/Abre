@@ -146,11 +146,11 @@
 		//Save image to server
 		$im = imagecreatefromstring($data);
 		
-		if (!file_exists("../../../private/guide")) {
-			mkdir("../../../private/guide", 0777, true);
+		if (!file_exists("../../../$portal_private_root/guide")) {
+			mkdir("../../../$portal_private_root/guide", 0777, true);
 		}
 		
-		imagejpeg($im, "../../../private/guide/$filename");
+		imagejpeg($im, "../../../$portal_private_root/guide/$filename");
 	}
 	
 	//Retrieve Site Title

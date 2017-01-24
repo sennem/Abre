@@ -34,7 +34,7 @@
 	if($fileextention=='.gif' or $fileextention=='.GIF'){ header('Content-Type: image/gif'); }
 	if($fileextention=='.tif' or $fileextention=='.TIF'){ header('Content-Type: image/tif'); }
 	if($fileextention=='.bmp' or $fileextention=='.BMP'){ header('Content-Type: image/bmp'); }
-	$img=$portal_path_root.'/../private/directory/images/employees/'.$img;
+	$img=$portal_path_root."/../$portal_private_root/directory/images/employees/".$img;
 	$img = file_get_contents($img);
 	echo($img);
 	exit();

@@ -238,7 +238,7 @@ $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
 	}
 
 <?php } ?>
-		
+
 $(".formclick").click(function() {
 	<?php if($_SESSION['usertype']=="staff"){ ?>
 		if ($('.streamtopic:checked').length < 3)
@@ -262,19 +262,34 @@ $(".formclick").click(function() {
 					
 			//Show the notification
 			.done(function(response) {
-				
-				if ($('.streamtopic:checked').length === 3)
-				{
-					$('#streamerror').show();
-					$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
-					var notification = document.querySelector('.mdl-js-snackbar');
-					var data = { message: 'Your changes have been saved.' };
-					notification.MaterialSnackbar.showSnackbar(data);
-				}
+				$('#streamerror').show();
+				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
+				var notification = document.querySelector('.mdl-js-snackbar');
+				var data = { message: 'Your changes have been saved.' };
+				notification.MaterialSnackbar.showSnackbar(data);
 			})
 			
 		}
 	<?php } ?>
+
+	<?php if($_SESSION['usertype']=="student"){ ?>			
+			$('.modal-viewapps').show();
+			var formData = $('#form-profile').serialize();
+			$.ajax({
+				type: 'POST',
+				url: $('#form-profile').attr('action'),
+				data: formData
+			})
+					
+			//Show the notification
+			.done(function(response) {
+				$('#streamerror').show();
+				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
+				var notification = document.querySelector('.mdl-js-snackbar');
+				var data = { message: 'Your changes have been saved.' };
+				notification.MaterialSnackbar.showSnackbar(data);
+			})
+	<?php } ?>	
 });
 
 				//Print Spcific Div

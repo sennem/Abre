@@ -34,7 +34,7 @@
 			$file_name=str_replace("+", "_", $file_name);
 			$file_name=str_replace("%", "_", $file_name);
 			$file_name = preg_replace('/[^a-zA-Z0-9_.]/', '', $file_name);
-			$filename = $portal_path_root . '/../private/stream/cache/images/'.$date.$file_name;
+			$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$date.$file_name;
 			
 			//If it already saved, read from local server
 			if (file_exists($filename))
@@ -62,7 +62,7 @@
 					if(@exif_imagetype($image))
 					{					    
 						//Save image to server
-						$local_file = $portal_path_root . '/../private/stream/cache/images/'.$date.$file_name;
+						$local_file = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $date.$file_name;
 						$remote_file = $image;
 						$ch = curl_init();
 						$fp = fopen ($local_file, 'w+');

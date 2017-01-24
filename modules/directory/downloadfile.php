@@ -25,7 +25,7 @@
 	if($pageaccess==1)
 	{
 		$filename=$_GET["file"];
-		$file=$portal_path_root.'/../private/directory/discipline/' . $filename;
+		$file=$portal_path_root."/../$portal_private_root/directory/discipline/" . $filename;
 		$fileext = pathinfo($filename, PATHINFO_EXTENSION);
 	
 		if (file_exists($file)) {

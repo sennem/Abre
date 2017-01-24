@@ -21,6 +21,7 @@
 	{
 		
 		//Load post values from form
+		$abre_private_root=$_POST["abre_private_root"];
 		$site_title=$_POST["site_title"];
 		$domain_name=$_POST["domain_name"];
 		$db_host=$_POST["db_host"];
@@ -64,6 +65,12 @@
 				$currenturl=url();
 				$currenturl = substr($currenturl, 0, strrpos($currenturl, "/"));
 				$txt = '$portal_root = "'.$currenturl.'";';
+				fwrite($myfile, $txt);
+				
+				$txt = "\n";
+				fwrite($myfile, $txt);
+				
+				$txt = '$portal_private_root = "'.$abre_private_root.'";';
 				fwrite($myfile, $txt);
 					
 				//Write Google Apps Domain name
@@ -195,16 +202,16 @@
 				fclose($myfile);
 					
 				//Create Private Folders
-				if (!file_exists('../private')){ mkdir("../private", 0700); }
-				if (!file_exists('../private/books')){ mkdir("../private/books", 0700); }
-				if (!file_exists('../private/directory')){ mkdir("../private/directory", 0700); }
-				if (!file_exists('../private/directory/discipline')){ mkdir("../private/directory/discipline", 0700); }
-				if (!file_exists('../private/directory/images')){ mkdir("../private/directory/images", 0700); }
-				if (!file_exists('../private/directory/images/employees')){ mkdir("../private/directory/images/employees", 0700); }
-				if (!file_exists('../private/stream')){ mkdir("../private/stream", 0700); }
-				if (!file_exists('../private/stream/cache')){ mkdir("../private/stream/cache", 0700); }
-				if (!file_exists('../private/stream/cache/feed')){ mkdir("../private/stream/cache/feed", 0700); }
-				if (!file_exists('../private/stream/cache/images')){ mkdir("../private/stream/cache/images", 0700); }
+				if (!file_exists("../$abre_private_root")){ mkdir("../$abre_private_root", 0700); }
+				if (!file_exists("../$abre_private_root/books")){ mkdir("../$abre_private_root/books", 0700); }
+				if (!file_exists("../$abre_private_root/directory")){ mkdir("../$abre_private_root/directory", 0700); }
+				if (!file_exists("../$abre_private_root/directory/discipline")){ mkdir("../$abre_private_root/directory/discipline", 0700); }
+				if (!file_exists("../$abre_private_root/directory/images")){ mkdir("../$abre_private_root/directory/images", 0700); }
+				if (!file_exists("../$abre_private_root/directory/images/employees")){ mkdir("../$abre_private_root/directory/images/employees", 0700); }
+				if (!file_exists("../$abre_private_root/stream")){ mkdir("../$abre_private_root/stream", 0700); }
+				if (!file_exists("../$abre_private_root/stream/cache")){ mkdir("../$abre_private_root/stream/cache", 0700); }
+				if (!file_exists("../$abre_private_root/stream/cache/feed")){ mkdir("../$abre_private_root/stream/cache/feed", 0700); }
+				if (!file_exists("../$abre_private_root/stream/cache/images")){ mkdir("../$abre_private_root/stream/cache/images", 0700); }
 				
 				//Redirect
 				header("Location: $currenturl");
@@ -239,13 +246,17 @@
 				<form id='form-abresetup' method='post' action='/'>
 					<?php if(!isset($errormessage)){ ?> <div class='col s12 deep-orange darken-3 white-text' style='padding:10px; margin-bottom:20px; border-radius: 3px;'>Please check your database credentials. Abre was unable to establish a connection.</div> <?php } ?>
 					<div class='col s12'><h6>Basic Information</h6></div>
-					<div class='input-field col l6 s12'>
+					<div class='input-field col l4 s12'>
 						<input placeholder='Enter a Title' id='site_title' name='site_title' type='text' value='<?php echo $site_title; ?>' required>
 						<label class='active' for='site_title'>Site Title</label>
 					</div>
-					<div class='input-field col l6 s12'>
+					<div class='input-field col l4 s12'>
 						<input placeholder='@example.org' id='domain_name' name='domain_name' type='text' value='<?php echo $domain_name; ?>' required>
 						<label class='active' for='domain_name'>Primary Google Apps Domain Name</label>
+					</div>
+					<div class='input-field col l4 s12'>
+						<input placeholder='private_html' id='abre_private_root' name='abre_private_root' type='text' required>
+						<label class='active' for='abre_private_root'>Abre Private Directory</label>
 					</div>
 					<div class='col s12'><h6>Database Credentials</h6></div>
 					<div class='input-field col l3 s12'>

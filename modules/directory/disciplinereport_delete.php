@@ -38,7 +38,7 @@
 			$filename=htmlspecialchars($row["Filename"], ENT_QUOTES);
 			if($filename!="")
 			{
-				$filename = dirname(__FILE__) . '/../../../../private/directory/discipline/' . $filename;
+				$filename = dirname(__FILE__) . "/../../../../$portal_private_root/directory/discipline/" . $filename;
 				unlink($filename);
 			}
 		}
