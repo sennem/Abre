@@ -26,6 +26,8 @@
 	//Display customized apps for staff	
 	if($_SESSION['usertype']=="staff")
 	{
+		
+		//Display Staff Apps
 		echo "<div class='row'><p style='text-align:center; font-weight:600;'>Staff Apps</p><hr style='margin-bottom:20px;'>";
 		$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 order by sort";
 		$result = $db->query($sql);

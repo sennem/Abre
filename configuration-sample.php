@@ -16,19 +16,19 @@
     */
 	
 	//The Domain/Location of Abre
-	$portal_root = "http://example.org";
+	$portal_root = "https://yourdomain.org";
 	
 	//The Title of Your Site
-	if (!defined('SITE_TITLE')){ define('SITE_TITLE','Abre Portal'); }
+	if (!defined('SITE_TITLE')){ define('SITE_TITLE','Abre'); }
 	
 	//The Description of Your Site
-	if (!defined('SITE_DESCRIPTION')){ define('SITE_DESCRIPTION','Our Abre Portal'); }
+	if (!defined('SITE_DESCRIPTION')){ define('SITE_DESCRIPTION','Our Abre Platform'); }
 		
 	//Your Google Apps Domain Name
-	if (!defined('SITE_GAFE_DOMAIN')){ define('SITE_GAFE_DOMAIN','@example.org'); }
+	if (!defined('SITE_GAFE_DOMAIN')){ define('SITE_GAFE_DOMAIN','@yourdomain.org'); }
 	
 	//The Help Text on the Login Page
-	if (!defined('SITE_LOGIN_TEXT')){ define('SITE_LOGIN_TEXT','Student and Staff Portal'); }
+	if (!defined('SITE_LOGIN_TEXT')){ define('SITE_LOGIN_TEXT','Your District Portal'); }
 	
 	//MySQL Host
 	if (!defined('DB_HOST')){ define('DB_HOST','localhost'); }
@@ -61,10 +61,23 @@
 	if (!defined('PORTAL_COOKIE_NAME')){ define('PORTAL_COOKIE_NAME','Cookie_Name'); }
 	
 	/* That's all, stop editing! */
+	
 	ini_set('display_errors','off');
+	
 	$portal_path_root = $_SERVER['DOCUMENT_ROOT'];
+	
 	if (!defined('GOOGLE_REDIRECT')){ define('GOOGLE_REDIRECT', $portal_root.'/index.php'); }
-	if (!defined('GOOGLE_SCOPES')){ define('GOOGLE_SCOPES',serialize (array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/gmail.modify', 'https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.rosters.readonly'))); }
+	
+	if (!defined('GOOGLE_SCOPES')){ define('GOOGLE_SCOPES',serialize (array(
+		'https://www.googleapis.com/auth/userinfo.email',
+		'https://www.googleapis.com/auth/plus.login',
+		'https://www.googleapis.com/auth/gmail.modify',
+		'https://www.googleapis.com/auth/drive.readonly',
+		'https://www.googleapis.com/auth/calendar.readonly',
+		'https://www.googleapis.com/auth/classroom.courses.readonly',
+		'https://www.googleapis.com/auth/classroom.rosters.readonly')));
+	}
+	
 	if (!defined('STREAM_CACHE')){ define('STREAM_CACHE','true'); }
 	
 ?>

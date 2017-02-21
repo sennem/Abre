@@ -137,47 +137,52 @@
 
 <script>
 	
-	//Update Abre
-	$("#updateabre").click(function(event) {
-		event.preventDefault();
-		var Link = $(this).data('version');
-		$(this).html("Updating...");
-		$.post("modules/settings/update.php", { link: Link }, function(){ })
-		.done(function() {
-			location.reload();
-  		})
-  	});
-	
-	//Provide image upload on icon click
-	$(".sitelogobutton").click(function() {
-		$("#sitelogo").click();
-  	});
-  	
-	//Submit form if image if changed
-	$("#sitelogo").change(function (){
-        if (this.files && this.files[0]){
-        	var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.sitelogobutton').attr('src', e.target.result);
-            }
-            reader.readAsDataURL(this.files[0]);
-        }
-  	});
-	
-	//Save Settings
-	var form = $('#form-settings');
-	$(form).submit(function(event)
+	$(function()
 	{
-		event.preventDefault();
-		var data = new FormData($(this)[0]);
-		var url = $(form).attr('action');
-		$.ajax({ type: 'POST', url: url, data: data, contentType: false, processData: false })
-					
-		//Show the notification
-		.done(function(response)
+	
+		//Update Abre
+		$("#updateabre").unbind().click(function(event) {
+			event.preventDefault();
+			var Link = $(this).data('version');
+			$(this).html("Updating...");
+			$.post("modules/settings/update.php", { link: Link }, function(){ })
+			.done(function() {
+				location.reload();
+	  		})
+	  	});
+		
+		//Provide image upload on icon click
+		$(".sitelogobutton").click(function() {
+			$("#sitelogo").click();
+	  	});
+	  	
+		//Submit form if image if changed
+		$("#sitelogo").change(function (){
+	        if (this.files && this.files[0]){
+	        	var reader = new FileReader();
+	            reader.onload = function (e) {
+	                $('.sitelogobutton').attr('src', e.target.result);
+	            }
+	            reader.readAsDataURL(this.files[0]);
+	        }
+	  	});
+		
+		//Save Settings
+		var form = $('#form-settings');
+		$(form).submit(function(event)
 		{
-			location.reload();
-		})		
+			event.preventDefault();
+			var data = new FormData($(this)[0]);
+			var url = $(form).attr('action');
+			$.ajax({ type: 'POST', url: url, data: data, contentType: false, processData: false })
+						
+			//Show the notification
+			.done(function(response)
+			{
+				location.reload();
+			})		
+		});
+		
 	});
 	
 </script>

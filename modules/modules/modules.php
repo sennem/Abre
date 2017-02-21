@@ -139,30 +139,33 @@
 			
 			<script>
 				
-				//Update module
-				$(".updatemodule").click(function(event) {
-					event.preventDefault();
-					var Link = $(this).data('version');
-					var Repo = $(this).data('repo');
-					$(this).html("<i class='material-icons'>file_download</i>");
-					$.post("modules/modules/update.php", { link: Link, repo: Repo }, function(){ })
-					.done(function() {
-						location.reload();
-			  		})
-			  	});
-			  	
-				//Update module
-				$(".deletemodule").click(function(event) {
-					event.preventDefault();
-					var result = confirm("Are you sure you want to delete this module?");
-					if (result) {
-						var Module = $(this).data('module');
-						$.post("modules/modules/deletemodule.php", { link: Module }, function(){ })
+				$(function()
+				{
+					//Update module
+					$(".updatemodule").click(function(event) {
+						event.preventDefault();
+						var Link = $(this).data('version');
+						var Repo = $(this).data('repo');
+						$(this).html("<i class='material-icons'>file_download</i>");
+						$.post("modules/modules/update.php", { link: Link, repo: Repo }, function(){ })
 						.done(function() {
 							location.reload();
 				  		})
-				  	}
-			  	});
+				  	});
+				  	
+					//Update module
+					$(".deletemodule").click(function(event) {
+						event.preventDefault();
+						var result = confirm("Are you sure you want to delete this module?");
+						if (result) {
+							var Module = $(this).data('module');
+							$.post("modules/modules/deletemodule.php", { link: Module }, function(){ })
+							.done(function() {
+								location.reload();
+					  		})
+					  	}
+				  	});
+				});
 			  	
 			</script>
 			

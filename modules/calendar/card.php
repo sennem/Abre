@@ -74,17 +74,17 @@
 							$timeofevent="$timeofevent - All Day Event";
 						}
 						
-							echo "<hr>";
-							echo "<div class='valign-wrapper'>";
-							echo "<div class='col s10'>";
-								echo "<div class='mdl-card__supporting-text subtext truncate demotext_dark'><b>$eventitle</b>";
-								if($eventdescription!="No Description"){ echo "<br>$eventdescription"; }
-								echo "<br>$timeofevent</div>";
-							echo "</div>";
-							echo "<div class='col s2'>";
-								echo "<a href='$eventlink' target='_blank'><i class='material-icons mdl-color-text--grey-600'>play_circle_filled</i></a>";
-							echo "</div>";
-							echo "</div>";
+						echo "<hr>";
+						echo "<div class='valign-wrapper'>";
+						echo "<div class='col s10'>";
+							echo "<div class='mdl-card__supporting-text subtext truncate demotext_dark'><b>$eventitle</b>";
+							if($eventdescription!="No Description"){ echo "<br>$eventdescription"; }
+							echo "<br>$timeofevent</div>";
+						echo "</div>";
+						echo "<div class='col s2'>";
+							echo "<a href='$eventlink' target='_blank'><i class='material-icons mdl-color-text--grey-600'>play_circle_filled</i></a>";
+						echo "</div>";
+						echo "</div>";
 		
 					}
 				?>

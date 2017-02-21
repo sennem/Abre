@@ -20,12 +20,11 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	
 	//Update system settings
-	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc())
+	if(superadmin())
 	{
 		//Retrieve settings and group as json
 		$sitetitle=$_POST["sitetitle"];

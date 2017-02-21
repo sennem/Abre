@@ -25,9 +25,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 	
 	//Verify Superadmin
-	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc())
+	if(superadmin())
 	{	
 		//Retrieve last repo link and zip file
 		$link=$_POST["link"];

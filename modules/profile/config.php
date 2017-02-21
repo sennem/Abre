@@ -64,7 +64,8 @@
 
 <script>
 
-	$(document).ready(function(){
+	$(function()
+	{
     	$('.modal-viewprofile').leanModal({
 	    	in_duration: 0,
 			out_duration: 0,
@@ -80,17 +81,18 @@
 		    },
 	    	complete: function() { $("#viewprofile_arrow").hide(); }
 	   	});
+	   	
+	  	//Make the Profile Icon Clickable/Closeable
+		$(".myprofilebutton").unbind().click(function()
+		{
+			 //Close the app modal
+			$("#viewprofile_arrow").hide();
+	    	$('#viewprofile').closeModal({
+		    	in_duration: 0,
+				out_duration: 0,
+		   	});
+		});
+	   	
   	});
-  	
-  	//Make the Icons Clickable
-	$(".myprofilebutton").click(function()
-	{
-		 //Close the app modal
-		$("#viewprofile_arrow").hide();
-    	$('#viewprofile').closeModal({
-	    	in_duration: 0,
-			out_duration: 0,
-	   	});
-	});
 
 </script>

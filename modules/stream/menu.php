@@ -41,7 +41,7 @@
 	
 	$(function()
 	{	
-		$( ".streammenu" ).click(function()
+		$( ".streammenu" ).unbind().click(function()
 		{
 			window.open($(this).attr("data"), '_self');
 		});	
