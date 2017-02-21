@@ -25,6 +25,7 @@
 	if($_SESSION['usertype']=="staff")
 	{	
 	?>
+	
 		<!--Feedback modal-->
 		<div id='feedback' class='modal modal-fixed-footer modal-mobile-full'>
 			<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>
@@ -43,6 +44,7 @@
 				</div>
 			</form>
 		</div>
+		
 	<?php
 	}
 ?>

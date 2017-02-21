@@ -112,14 +112,9 @@
 					}
 				}			
 			?>
-		'*': function() {
-					$( "#navigation_top" ).hide();
-					$( "#content_holder" ).hide();
-					$( "#loader" ).show();
-					$( "#titletext" ).text("Not Found");
-					document.title = '<?php echo sitesettings("sitetitle"); ?>';
-					$( "#content_holder" ).load( "core/abre_404.php", function() { init_page(); });
-				}
+		'*': function(){
+				window.location = "/";
+			}
 				
 		});
 	
