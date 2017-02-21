@@ -113,7 +113,7 @@
 				}			
 			?>
 		'*': function(){
-				window.location = "/";
+				//window.location = "/";
 			}
 				
 		});
