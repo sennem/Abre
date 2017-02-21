@@ -40,6 +40,7 @@
 	<option value="Braillist">Braillist</option>
 	<option value="Buildings and Grounds Director">Buildings and Grounds Director</option>
 	<option value="Bus Aide">Bus Aide</option>
+	<option value="Bus Driver">Bus Driver</option>
 	<option value="Business Manager">Business Manager</option>
 	<option value="Career Development Coordinator">Career Development Coordinator</option>
 	<option value="Carpenter Class I">Carpenter Class I</option>

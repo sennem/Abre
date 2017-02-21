@@ -321,7 +321,7 @@
 									echo "<label class='active' for='middlename'>Social Security Number</label>";
 								echo "</div>";
 								echo "<div class='input-field col l4 s12'>";
-									echo "<input placeholder='Enter a Date' type='date' value='$dob' name='dob' class='datepicker'>";
+									echo "<input placeholder='Enter a Date' type='text' value='$dob' name='dob' class='datepicker'>";
 									echo "<label class='active' for='dob'>Date of Birth</label>";
 								echo "</div>";
 								echo "<div class='col l4 s12'>";
@@ -467,15 +467,15 @@
 									echo "<div class='row'>";
 									  	echo "<div class='col s12'><h4>Dates</h4></div>";
 									    echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Date' type='date' value='$doh' name='doh' class='datepicker'>";
+									      echo "<input placeholder='Enter a Date' type='text' value='$doh' name='doh' class='datepicker'>";
 									      echo "<label class='active' for='doh'>Date of Hire</label>";
 									    echo "</div>";
 									    echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Date' type='date' value='$sd' name='sd' class='datepicker'>";
+									      echo "<input placeholder='Enter a Date' type='text' value='$sd' name='sd' class='datepicker'>";
 									      echo "<label class='active' for='sd'>Seniority Date</label>";
 									    echo "</div>";
 									  	echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Date' type='date' value='$ed' name='ed' class='datepicker'>";
+									      echo "<input placeholder='Enter a Date' type='text' value='$ed' name='ed' class='datepicker'>";
 									      echo "<label class='active' for='ed'>Effective Date</label>";
 									    echo "</div>";
 							}
@@ -488,15 +488,15 @@
 							{
 									 echo "<div class='row'>";
 									    echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Date' type='date' value='$probationreportdate' name='probationreportdate' class='datepicker'>";
+									      echo "<input placeholder='Enter a Date' type='text' value='$probationreportdate' name='probationreportdate' class='datepicker'>";
 									      echo "<label class='active' for='probationreportdate'>Probationary Report Date</label>";
 									    echo "</div>";
 									    echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Date' type='date' value='$statebackgroundcheck' name='statebackgroundcheck' class='datepicker'>";
+									      echo "<input placeholder='Enter a Date' type='text' value='$statebackgroundcheck' name='statebackgroundcheck' class='datepicker'>";
 									      echo "<label class='active' for='statebackgroundcheck'>State Background Check</label>";
 									    echo "</div>";
 									    echo "<div class='input-field col l3 s12'>";
-									      echo "<input placeholder='Enter a Date' type='date' value='$federalbackgroundcheck' name='federalbackgroundcheck' class='datepicker'>";
+									      echo "<input placeholder='Enter a Date' type='text' value='$federalbackgroundcheck' name='federalbackgroundcheck' class='datepicker'>";
 									      echo "<label class='active' for='federalbackgroundcheck'>Federal Background Check</label>";
 									    echo "</div>";
 									  echo "</div>";

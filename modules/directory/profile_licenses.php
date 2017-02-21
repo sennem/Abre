@@ -46,13 +46,13 @@
 				$licenseissuedate = ${'licenseissuedate'.$x};
 				$licenseissuedateid = "licenseissuedateid".$x;;
 				echo "<div class='input-field col l3 s12'>";
-					echo "<input placeholder='Enter Date' type='date' value='$licenseissuedate' id='$licenseissuedateid' name='$licenseissuedateid' class='datepicker'>";
+					echo "<input placeholder='Enter Date' type='text' value='$licenseissuedate' id='$licenseissuedateid' name='$licenseissuedateid' class='datepicker'>";
 				      echo "<label class='active' for='$licenseissuedateid'>Issue Date</label>";
 				echo "</div>";
 				$licenseexpirationdate = ${'licenseexpirationdate'.$x};
 				$licenseexpirationdateid = "licenseexpirationdateid".$x;
 				echo "<div class='input-field col l3 s12'>";
-					echo "<input placeholder='Enter Date' type='date' value='$licenseexpirationdate' id='$licenseexpirationdateid' name='$licenseexpirationdateid' class='datepicker'>";
+					echo "<input placeholder='Enter Date' type='text' value='$licenseexpirationdate' id='$licenseexpirationdateid' name='$licenseexpirationdateid' class='datepicker'>";
 				      echo "<label class='active' for='$licenseexpirationdateid'>Expiration Date</label>";
 				echo "</div>";
 				$licenseterm = ${'licenseterm'.$x};
