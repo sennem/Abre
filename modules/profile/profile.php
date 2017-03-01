@@ -24,7 +24,6 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
 	
-	
 	//Get profile information	
 	$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($sql);
@@ -241,6 +240,7 @@ $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
 
 $(".formclick").click(function() {
 	<?php if($_SESSION['usertype']=="staff"){ ?>
+	
 		if ($('.streamtopic:checked').length < 3)
 		{
 			$('#streamerror').show();
