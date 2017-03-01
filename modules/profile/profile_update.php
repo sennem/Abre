@@ -26,7 +26,6 @@
 	include "../../core/abre_dbconnect.php";
 	$sql = "SELECT *  FROM profiles where email='".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
-	$profileupdatecount=0;
 	$stack = array();
 	$departmentcount=mysqli_real_escape_string($db, $_POST["departmentcount"]);
 	if($_SESSION['usertype']!="student")
