@@ -202,16 +202,16 @@
 				fclose($myfile);
 					
 				//Create Private Folders
-				if (!file_exists("../$abre_private_root")){ mkdir("../$abre_private_root", 0700); }
-				if (!file_exists("../$abre_private_root/books")){ mkdir("../$abre_private_root/books", 0700); }
-				if (!file_exists("../$abre_private_root/directory")){ mkdir("../$abre_private_root/directory", 0700); }
-				if (!file_exists("../$abre_private_root/directory/discipline")){ mkdir("../$abre_private_root/directory/discipline", 0700); }
-				if (!file_exists("../$abre_private_root/directory/images")){ mkdir("../$abre_private_root/directory/images", 0700); }
-				if (!file_exists("../$abre_private_root/directory/images/employees")){ mkdir("../$abre_private_root/directory/images/employees", 0700); }
-				if (!file_exists("../$abre_private_root/stream")){ mkdir("../$abre_private_root/stream", 0700); }
-				if (!file_exists("../$abre_private_root/stream/cache")){ mkdir("../$abre_private_root/stream/cache", 0700); }
-				if (!file_exists("../$abre_private_root/stream/cache/feed")){ mkdir("../$abre_private_root/stream/cache/feed", 0700); }
-				if (!file_exists("../$abre_private_root/stream/cache/images")){ mkdir("../$abre_private_root/stream/cache/images", 0700); }
+				if (!file_exists("../$abre_private_root")){ mkdir("../$abre_private_root", 0775); }
+				if (!file_exists("../$abre_private_root/books")){ mkdir("../$abre_private_root/books", 0775); }
+				if (!file_exists("../$abre_private_root/directory")){ mkdir("../$abre_private_root/directory", 0775); }
+				if (!file_exists("../$abre_private_root/directory/discipline")){ mkdir("../$abre_private_root/directory/discipline", 0775); }
+				if (!file_exists("../$abre_private_root/directory/images")){ mkdir("../$abre_private_root/directory/images", 0775); }
+				if (!file_exists("../$abre_private_root/directory/images/employees")){ mkdir("../$abre_private_root/directory/images/employees", 0775); }
+				if (!file_exists("../$abre_private_root/stream")){ mkdir("../$abre_private_root/stream", 0775); }
+				if (!file_exists("../$abre_private_root/stream/cache")){ mkdir("../$abre_private_root/stream/cache", 0775); }
+				if (!file_exists("../$abre_private_root/stream/cache/feed")){ mkdir("../$abre_private_root/stream/cache/feed", 0775); }
+				if (!file_exists("../$abre_private_root/stream/cache/images")){ mkdir("../$abre_private_root/stream/cache/images", 0775); }
 				
 				//Redirect
 				header("Location: $currenturl");
