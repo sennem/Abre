@@ -104,8 +104,7 @@
 				}
 				else
 				{
-					$fileExtension = strrchr($picture, ".");
-					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
+					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture";
 				}
 				
 				$displayname="$firstname $lastname";

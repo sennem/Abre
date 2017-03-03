@@ -98,8 +98,7 @@
 			}
 			else
 			{
-				$fileExtension = strrchr($picture, ".");
-				$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
+				$picture=$portal_root."/modules/directory/serveimage.php?file=$picture";
 			}
 			$id=htmlspecialchars($row["id"], ENT_QUOTES);
 			if($pageaccess==1  or $pageaccess==2){ echo "<tr class='clickrow'>"; }else{ echo "<tr class='clickrowemail'>"; }

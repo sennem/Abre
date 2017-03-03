@@ -251,8 +251,7 @@
 				}
 				else
 				{
-					$fileExtension = strrchr($picture, ".");
-					$pictureserver=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
+					$pictureserver=$portal_root."/modules/directory/serveimage.php?file=$picture";	
 				}
 				echo "<form id='form-hr' method='post' enctype='multipart/form-data' action='modules/directory/updateuser.php'>";
 				

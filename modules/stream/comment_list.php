@@ -72,8 +72,7 @@
 				}
 				else
 				{
-					$fileExtension = strrchr($picture, ".");
-					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
+					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture";
 				}
 				echo "<td width='60px' style='vertical-align: top;'><img src='$picture' class='profile-avatar-small'></td>";
 				echo "<td width='100%'>";

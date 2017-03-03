@@ -78,8 +78,7 @@
 								}
 								else
 								{
-									$fileExtension = strrchr($picture, ".");
-									$picture=$portal_root."/modules/directory/serveimage.php?file=$picture&ext=$fileExtension";
+									$picture=$portal_root."/modules/directory/serveimage.php?file=$picture";
 								}
 								$senioritydate=htmlspecialchars($row["senioritydate"], ENT_QUOTES);
 								$senioritydate=stripslashes(htmlspecialchars(decrypt($senioritydate, ""), ENT_QUOTES));

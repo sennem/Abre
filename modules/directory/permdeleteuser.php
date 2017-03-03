@@ -36,7 +36,7 @@
 			$oldpicture=htmlspecialchars($row["picture"], ENT_QUOTES);
 			if($oldpicture!="")
 			{
-				$oldfile = dirname(__FILE__) . "/../../../../$portal_private_root/directory/images/employees/" . $oldpicture;
+				$oldfile = dirname(__FILE__) . "/../../../$portal_private_root/directory/images/employees/" . $oldpicture;
 				unlink($oldfile);
 			}
 		}
@@ -50,7 +50,7 @@
 			$filename=htmlspecialchars($row["Filename"], ENT_QUOTES);
 			if($filename!="")
 			{
-				$filename = dirname(__FILE__) . "/../../../../$portal_private_root/directory/discipline/" . $filename;
+				$filename = dirname(__FILE__) . "/../../../$portal_private_root/directory/discipline/" . $filename;
 				unlink($filename);
 			}
 		}
