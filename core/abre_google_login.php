@@ -80,7 +80,7 @@
 			$client->fetchAccessTokenWithAuthCode($_GET['code']);  
 			$_SESSION['access_token'] = $client->getAccessToken();
 			$pagelocation=$portal_root;
-			header("Location: $pagelocation");
+			if(isset($_SESSION["redirecturl"])){ header("Location: $pagelocation/#".$_SESSION["redirecturl"]); }else{ header("Location: $pagelocation"); }
 		}     
 	
 		//Set access token to make request
@@ -194,7 +194,9 @@
 				
 				$db->close();
 			}
+			
 		}
+		
 	}
 	catch (Exception $x)
 	{

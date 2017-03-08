@@ -26,6 +26,11 @@
 		
 		//Load configuration file, google authentication, and site header
 		require_once('configuration.php');
+		
+		//Look for redirected urls
+		if(isset($_GET["url"])){ $_SESSION["redirecturl"]=htmlspecialchars($_GET["url"]); }
+		if(isset($_GET["url"]) && isset($_SESSION['useremail'])){ $_SESSION["redirecturl"]=htmlspecialchars($_GET["url"]); header("Location: $portal_root/#".$_SESSION["redirecturl"]); }
+		
 		require_once('core/abre_google_login.php');
 		require_once('core/abre_header.php');
 	
