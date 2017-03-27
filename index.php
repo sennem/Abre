@@ -28,10 +28,22 @@
 		require_once('configuration.php');
 		
 		//Look for redirected urls
-		if(isset($_GET["url"])){ $_SESSION["redirecturl"]=htmlspecialchars($_GET["url"]); }
-		if(isset($_GET["url"]) && isset($_SESSION['useremail'])){ $_SESSION["redirecturl"]=htmlspecialchars($_GET["url"]); header("Location: $portal_root/#".$_SESSION["redirecturl"]); }
+		if(isset($_GET["url"]))
+		{ 
+			$_SESSION["redirecturl"]=htmlspecialchars($_GET["url"]); 
+		}
 		
+		//If there is a session redirect, load the redirect url
+		if(isset($_GET["url"]) && isset($_SESSION['useremail']))
+		{ 
+			$_SESSION["redirecturl"]=htmlspecialchars($_GET["url"]); 
+			header("Location: $portal_root/#".$_SESSION["redirecturl"]);
+		}
+		
+		//Include Google Login
 		require_once('core/abre_google_login.php');
+		
+		//Include Site Header
 		require_once('core/abre_header.php');
 	
 		//Display login if user is not logged in

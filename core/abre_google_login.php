@@ -27,7 +27,7 @@
 	//Try to login the user, if they have revoked Google access, request access again
 	try
 	{
-	
+
 		//Required configuration files
 		require_once('abre_google_authentication.php');
 		$cookie_name=constant("PORTAL_COOKIE_NAME");

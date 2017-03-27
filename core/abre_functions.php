@@ -164,48 +164,52 @@
 	  		$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
 	  		$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";
 	  		$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-	  		if ($db->multi_query($sql) === TRUE) { }
-		}		
-
-		$result_count = mysqli_num_rows($result);
-		while($row = $result->fetch_assoc())
+	  		$db->multi_query($sql);
+		}
+		
+		$sql2 = "SELECT * FROM settings LIMIT 1";
+		$result2 = $db->query($sql2);
+		if($result2) 
 		{
-			$options = $row["options"];
-			if($options!="")
+			while($row = $result2->fetch_assoc())
 			{
-				$options = json_decode($options);
-				$valuereturn = $options->$value;
-			}
-			else
-			{
-				$valuereturn="";
-			}
-			if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
-			if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
-			if($value=="sitedescription" && $valuereturn==""){ $valuereturn="Abre Open Platform for Education"; }
-			if($value=="sitelogintext" && $valuereturn==""){ $valuereturn="Open Platform for Education"; }
-			if($value=="siteanalytics" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="siteadminemail" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="sitevendorlinkurl" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="sitevendorlinkidentifier" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="sitevendorlinkkey" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="certicabaseurl" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="certicaaccesskey" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="studentdomain" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="studentdomainrequired" && $valuereturn==""){ $valuereturn=""; }
-			if($value=="sitelogo" && $valuereturn!="")
-			{ 
-				if($valuereturn!='/core/images/abre_siteicon.png')
+				$options = $row["options"];
+				if($options!="")
 				{
-					$valuereturn="/content/$valuereturn";
+					$options = json_decode($options);
+					$valuereturn = $options->$value;
 				}
 				else
 				{
-					$valuereturn="/core/images/abre_siteicon.png";
+					$valuereturn="";
 				}
+				if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
+				if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
+				if($value=="sitedescription" && $valuereturn==""){ $valuereturn="Abre Open Platform for Education"; }
+				if($value=="sitelogintext" && $valuereturn==""){ $valuereturn="Open Platform for Education"; }
+				if($value=="siteanalytics" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="siteadminemail" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="sitevendorlinkurl" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="sitevendorlinkidentifier" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="sitevendorlinkkey" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="certicabaseurl" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="certicaaccesskey" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="studentdomain" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="studentdomainrequired" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="sitelogo" && $valuereturn!="")
+				{ 
+					if($valuereturn!='/core/images/abre_siteicon.png')
+					{
+						$valuereturn="/content/$valuereturn";
+					}
+					else
+					{
+						$valuereturn="/core/images/abre_siteicon.png";
+					}
+				}
+				if($value=="sitelogo" && $valuereturn==""){ $valuereturn="/core/images/abre_siteicon.png"; }
+				return $valuereturn;
 			}
-			if($value=="sitelogo" && $valuereturn==""){ $valuereturn="/core/images/abre_siteicon.png"; }
-			return $valuereturn;
 		}
 		$db->close();
 	}

@@ -212,6 +212,8 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 :-ms-input-placeholder { color:#999 !important; }
 :-moz-placeholder { color:#999 !important; }
 
+.mdl-snackbar__action{ color:#fff !important; background-color: transparent !important; }
+
 
 /* Responsive */
 @media only screen and (max-width : 600px){ 
