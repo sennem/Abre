@@ -5,3 +5,5 @@ Abre is an open platform for schools who want to have a creative portal for thei
 ## Documentation
 
 Please visit <a href="https://abre.io/documentation" target="_blank">https://abre.io/documentation</a> for setup.
+
+This line of text is to work out pull requests. There is no meaning to this line and should be deleted. 
