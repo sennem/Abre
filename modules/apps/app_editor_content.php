@@ -32,7 +32,9 @@
 			{
 				$id=$value['id'];
 				$title=$value['title'];
+				$titleencoded=base64_encode($title);
 				$link=$value['link'];
+				$linkencoded=base64_encode($link);
 				$icon=$value['icon'];
 				$icon_end = substr($icon, 5);
 				$icon_final="icon_thumb_$icon_end";
@@ -42,7 +44,7 @@
 				echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
 					echo "<td style='width:60px'><img src='$portal_root/core/images/$icon' style='width:35px; height:35px;'></td>";
 					echo "<td><b>$title</b><td>";
-					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$title' data-applink='$link' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appminors='$minor_disabled'><i class='material-icons'>mode_edit</i></button></td>";
+					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appminors='$minor_disabled'><i class='material-icons'>mode_edit</i></button></td>";
 					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteapp' data-appid='$id'><i class='material-icons'>delete</i></button></td>";
 					echo "<td style='width:30px'><div class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 handle'><i class='material-icons'>reorder</i></div></td>";
 				echo "</tr>";
@@ -122,10 +124,10 @@
 				$(".passappdata").unbind().click(function() {
 					
 					//Fill Modal with Data
-					var apptitle = $(this).data('apptitle');
+					var apptitle = atob($(this).data('apptitle'));
 					$("#editmodaltitle").text(apptitle);
 					$("#app_name").val(apptitle);
-					var applink = $(this).data('applink');
+					var applink = atob($(this).data('applink'));
 					$("#app_link").val(applink);
 					var appicon = $(this).data('appicon');
 					$('[name=app_icon]').val(appicon);
