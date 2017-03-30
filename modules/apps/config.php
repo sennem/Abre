@@ -130,9 +130,6 @@
 		$(function()
 		{
 			
-			//Call ImagePicker
-			$("select").imagepicker();
-			
 			//Load Apps into Modal
 			$('#loadapps').load('modules/apps/apps.php');
 		
@@ -157,6 +154,9 @@
 			if(superadmin())
 			{
 			?>
+			
+				//Call ImagePicker
+				$("select").imagepicker();
 		   	
 				//Add/Edit App
 				$('.modal-addeditapp').leanModal({
