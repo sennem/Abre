@@ -40,11 +40,99 @@
 			<div id='loadapps'></div>
     	</div>
 	</div>
+	
+	<!--Apps Editor-->
+	<?php
+	if(superadmin())
+	{
+	?>
+	
+	<link rel="stylesheet" href='core/css/image-picker.0.3.0.css'>
+	<script src='core/js/image-picker.0.0.3.min.js'></script>
+	
+	<div id='appeditor' class='modal modal-fixed-footer modal-mobile-full'>
+		<div class='modal-content'>
+			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+			<div class='row'>
+				<div class='col s12'>
+					<h4>App Editor</h4>
+					<?php
+						include "app_editor_content.php";	
+					?>
+				</div>
+			</div>
+		</div>
+		<div class='modal-footer'>
+			<a class='modal-action waves-effect btn-flat white-text modal-addeditapp' href='#addeditapp' data-apptitle='Add New App' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Add</a>
+		</div>
+	</div>
+	
+	<div id='addeditapp' class='modal modal-fixed-footer modal-mobile-full' style="width: 90%">
+		<form id='addeditappform' method="post" action='#'>
+		<div class='modal-content'>
+			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+			<div class='row'>
+				<div class='col s12'><h4 id='editmodaltitle'></h4></div>
+				<div class='input-field col s12'>
+					<input placeholder="Enter App Name" id="app_name" name="app_name" type="text" autocomplete="off" required>
+					<label for="app_name">Name</label>
+				</div>
+				<div class='input-field col s12'>
+					<input placeholder="Enter App Link" id="app_link" name="app_link" type="text" autocomplete="off" required>
+					<label for="app_link">Link</label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col m4 s12'>
+					<input type="checkbox" id="app_staff" class="filled-in" value="1" />
+					<label for="app_staff">Available for staff</label>
+				</div>
+				<div class='col m4 s12'>
+					<input type="checkbox" id="app_students" class="filled-in" value="1" />
+					<label for="app_students">Available for students</label>
+				</div>
+				<div class='col m4 s12'>
+					<input type="checkbox" id="app_minors" class="filled-in" value="1" />
+					<label for="app_minors">Disable for minors</label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col s12'>
+					<select id="app_icon" name="app_icon" class="image-picker browser-default" required>
+					<?php
+						$icons = scandir("$portal_path_root/core/images/");
+						foreach($icons as $iconimage)
+						{
+							if (substr($iconimage, 0, 11) === 'icon_thumb_')
+							{
+								echo "<option data-img-src='/core/images/$iconimage' value='$iconimage'></option>";
+							}
+						}
+					?>
+					</select>
+				</div>
+				<input id="app_id" name="app_id" type="hidden">
+			</div>
+		</div>
+		<div class='modal-footer'>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdateapp' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Save</button>
+			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>; margin-right:5px;'>Cancel</a>
+		</div>
+		</form>
+	</div>
+	
+	<?php
+	}
+	?>
 
 	<script>
 		
 		$(function()
 		{
+			
+			//Call ImagePicker
+			$("select").imagepicker();
+			
 			//Load Apps into Modal
 			$('#loadapps').load('modules/apps/apps.php');
 		
@@ -63,7 +151,64 @@
 			    	$("#viewprofile_arrow").hide();
 			    },
 		    	complete: function() { $("#viewapps_arrow").hide(); }
-		   	});	  	
+		   	});
+		   	
+		   	<?php
+			if(superadmin())
+			{
+			?>
+		   	
+				//Add/Edit App
+				$('.modal-addeditapp').leanModal({
+					in_duration: 0,
+					out_duration: 0,
+					ready: function()
+					{  
+						$("#editmodaltitle").text('Add New App');
+						$("#app_name").val('');
+						$("#app_link").val('');
+						$("#app_id").val('');
+						$('#app_staff').prop('checked', false);
+						$('#app_students').prop('checked', false);
+						$('#app_minors').prop('checked', false);
+						$('[name=app_icon]').val('');
+						$("select").imagepicker();
+					}
+				}); 
+				
+				//Save/Update App
+				$('#addeditappform').submit(function(event)
+				{
+					event.preventDefault();
+					
+					var appname = $('#app_name').val();
+					var applink = $('#app_link').val();
+					var appicon = $('#app_icon').val();
+					if($('#app_staff').is(':checked')==true){ var appstaff = 1; }else{ var appstaff = 0; }
+					if($('#app_students').is(':checked')==true){ var appstudents = 1; }else{ var appstudents = 0; }
+					if($('#app_minors').is(':checked')==true){ var appminors = 1; }else{ var appminors = 0; }
+					
+					var appid = $('#app_id').val();
+					$("select").imagepicker();
+					
+					//Make the post request
+					$.ajax({
+						type: 'POST',
+						url: 'modules/apps/update_app.php',
+						data: { name: appname, link: applink, icon: appicon, id: appid, staff: appstaff, students: appstudents, minors: appminors }
+					})
+						
+					.done(function(){
+						$('#addeditapp').closeModal({ in_duration: 0, out_duration: 0 });
+						$('#appsort').load('modules/apps/app_editor_content.php');
+						$('#loadapps').load('modules/apps/apps.php');
+					});
+					
+				});
+				
+			<?php				   	
+			}
+			?>
 	  	
 		});
 	

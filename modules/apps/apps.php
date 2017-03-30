@@ -113,7 +113,7 @@
 
 	//Display student apps			
 	echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
-	$sql2 = "SELECT * FROM apps WHERE student = 1 AND required = 1";
+	$sql2 = "SELECT * FROM apps WHERE student = 1 AND required = 1 order by sort";
 	$result2 = $db->query($sql2);
 	while($row2 = $result2->fetch_assoc())
 	{
@@ -124,6 +124,12 @@
 		echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
 	}
 	echo "</div>";
+	
+	//Display Apps Editor if superadmin
+	if(superadmin())
+	{
+		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Edit</a></div>";
+	}
 
 ?>
 
@@ -171,6 +177,23 @@
 		$(".app").hover(function() {
 			$(this).find('.applink').toggleClass("truncate");
 		});
+		
+		//Apps Modal
+		<?php
+		if(superadmin())
+		{
+		?>
+		    $('.modal-editapps').leanModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function() { 
+			    	$("#viewapps_arrow").hide();
+					$('#viewapps').closeModal({ in_duration: 0, out_duration: 0, });
+			    },
+			}); 
+		<?php
+		}
+		?>
 		
 	});
 
