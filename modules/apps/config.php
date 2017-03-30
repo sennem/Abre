@@ -202,6 +202,10 @@
 						$('#addeditapp').closeModal({ in_duration: 0, out_duration: 0 });
 						$('#appsort').load('modules/apps/app_editor_content.php');
 						$('#loadapps').load('modules/apps/apps.php');
+						if (typeof loadOtherCardsApps == 'function')
+						{ 
+							loadOtherCardsApps();
+						}
 					});
 					
 				});
