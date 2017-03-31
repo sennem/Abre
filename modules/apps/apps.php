@@ -29,7 +29,7 @@
 		
 		//Display Staff Apps
 		echo "<div class='row'><p style='text-align:center; font-weight:600;'>Staff Apps</p><hr style='margin-bottom:20px;'>";
-		$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 order by sort";
+		$sql = "SELECT * FROM apps WHERE staff = 1 AND required = 1 order by sort";
 		$result = $db->query($sql);
 		$item=array();
 		while($row = $result->fetch_assoc())
@@ -46,6 +46,7 @@
 				//Get App preference settings (if they exist)
 				$sql2 = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 				$result2 = $db->query($sql2);
+				$apps_order=NULL;
 				while($row2 = $result2->fetch_assoc()) {
 					$apps_order=htmlspecialchars($row2["apps_order"], ENT_QUOTES);
 				}
@@ -86,24 +87,44 @@
 						array_push($order, $requiredvalue);
 					}
 				}
-								
-				foreach($order as $key => $value)
+				
+				if($apps_order!=NULL)
+				{			
+					foreach($order as $key => $value)
+					{
+						$sql = "SELECT * FROM apps WHERE id='$value'";
+						$result = $db->query($sql);
+	
+							while($row = $result->fetch_assoc())
+							{
+								$id=htmlspecialchars($row["id"], ENT_QUOTES);
+								$title=htmlspecialchars($row["title"], ENT_QUOTES);
+								$image=htmlspecialchars($row["image"], ENT_QUOTES);
+								$link=htmlspecialchars($row["link"], ENT_QUOTES);
+								echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+									echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+									echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+								echo "</li>";
+							}
+	
+					}
+				}
+				else
 				{
-					$sql = "SELECT * FROM apps WHERE id='$value'";
-					$result = $db->query($sql);
-
-						while($row = $result->fetch_assoc())
-						{
-							$id=htmlspecialchars($row["id"], ENT_QUOTES);
-							$title=htmlspecialchars($row["title"], ENT_QUOTES);
-							$image=htmlspecialchars($row["image"], ENT_QUOTES);
-							$link=htmlspecialchars($row["link"], ENT_QUOTES);
-							echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
-								echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
-							echo "</li>";
-						}
-
+						$sql = "SELECT * FROM apps order by sort";
+						$result = $db->query($sql);
+	
+							while($row = $result->fetch_assoc())
+							{
+								$id=htmlspecialchars($row["id"], ENT_QUOTES);
+								$title=htmlspecialchars($row["title"], ENT_QUOTES);
+								$image=htmlspecialchars($row["image"], ENT_QUOTES);
+								$link=htmlspecialchars($row["link"], ENT_QUOTES);
+								echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+									echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+									echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+								echo "</li>";
+							}	
 				}	
 			}
 	    }
@@ -187,6 +208,7 @@
 				in_duration: 0,
 				out_duration: 0,
 				ready: function() { 
+					$('.modal-content').scrollTop(0);
 			    	$("#viewapps_arrow").hide();
 					$('#viewapps').closeModal({ in_duration: 0, out_duration: 0, });
 			    },

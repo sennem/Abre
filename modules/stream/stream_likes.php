@@ -98,8 +98,40 @@
 		
 		});
 		
+		//Comment Modal
+		$('.modal-addstreamcomment').leanModal({
+			in_duration: 0,
+			out_duration: 0,
+			ready: function()
+			{ 
+				$("#streamComment").focus();
+			}
+		});
+		
+		//Fill comment modal
+		$(document).off().on("click", ".modal-addstreamcomment", function (event)
+		{
+			event.preventDefault();
+			$("#commentloader").show();
+			$("#streamComments").empty();
+			var Stream_Title = $(this).data('title');
+			Stream_Title_Decoded = atob(Stream_Title);
+			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
+			$(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
+			var Stream_Url = $(this).data('url');
+			$(".modal-content #streamUrl").val(Stream_Url);
+				
+			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
+			$("#commentloader").hide();
+							
+			//Scroll to bottom
+			var height=$("#addstreamcomment").height();
+			height=height+10000;
+			$('.modal-content').scrollTop(height);
+							
+			});
+		});
+		
 	});
 	
 </script>
-
-<script src='/modules/stream/commenting.js'></script>

@@ -38,6 +38,7 @@
 		<div id="addstreamcomment" class="modal modal-fixed-footer modal-mobile-full">
 			<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
 			<div class="modal-content" id="modal-content-section">
+				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 				<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
 				<div name="streamComments" id="streamComments"></div>
 				<div class="input-field col s12">
@@ -50,7 +51,7 @@
 	    	</div>
 		    <div class="modal-footer">
 				<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-left:5px; background-color:<?php echo sitesettings("sitecolor"); ?>'>Post</button>
-				<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
+				<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Cancel</button>
 			</div>
 			</form>
 		</div>

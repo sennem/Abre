@@ -79,21 +79,20 @@
 			
 					if(!empty($firstname))
 					{
-						echo "<span style='font-weight:700; font-size:16px;'>$firstname $lastname</span><p style='margin-bottom:0px;' class='wrap-links'>$Comment</p><p style='color:#888; font-size:14px'>$CommentCreationTime</p>";
+						echo "<span style='font-weight:700; font-size:16px;'>$firstname $lastname</span>";
 					}
 					else
 					{
-						echo "<span style='font-weight:700; font-size:16px;'>$User</span><p style='margin-bottom:0px;' class='wrap-links'>$Comment</p><p style='color:#888; font-size:14px'>$CommentCreationTime</p>";
+						echo "<span style='font-weight:700; font-size:16px;'>$User</span>";
 					}
+					
+					if($User==$_SESSION['useremail'])
+					{
+						echo "<span style='position:relative; top:5px; left:10px'><a href='#' data-commentid='$CommentID' class='mdl-color-text--grey commentdelete pointer'><i class='material-icons' style='font-size:20px'>clear</i></a></span>";
+					}
+					
+					echo "<p style='margin-bottom:0px;' class='wrap-links'>$Comment</p><p style='color:#888; font-size:14px'>$CommentCreationTime</p>";
 				echo "<td>";
-				if($User==$_SESSION['useremail'])
-				{
-					echo "<td style='vertical-align: top; width=30px;'><a href='modules/stream/comment_remove.php?commentid=".$CommentID."' class='mdl-color-text--grey commentdeletebutton pointer'><i class='material-icons'>clear</i></a></td>";
-				}
-				else
-				{
-					echo "<td></td>"; 
-				}
 			echo "</tr>";
 		}
 		echo "</table></div>";
@@ -116,10 +115,36 @@
 				var element = document.getElementById("modal-content-section");
 				element.scrollTop = element.scrollHeight;
 				
+				//Delete a comment
+				$(".commentdelete").unbind().click(function(event)
+				{				
+					event.preventDefault();
+					var result = confirm("Are you sure?");
+					if (result)
+					{
+						$(this).closest(".commentwrapper").hide();
+						var CommentID = $(this).data('commentid');
+						$.ajax({
+							type: 'POST',
+							url: 'modules/stream/comment_remove.php?commentid='+CommentID,
+							data: '',
+						})
+									
+						.done(function() {
+							$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+								$('.grid').masonry( 'reloadItems' );
+								$('.grid').masonry( 'layout' );
+								mdlregister();
+							});
+							$('#streamlikes').load("modules/stream/stream_likes.php", function () {	
+								mdlregister();
+							});
+						});
+					}
+				});
+								
 			});
 				
 		</script>
-		
-		<script src='/modules/stream/commenting.js'></script>
 		
 <?php } ?>

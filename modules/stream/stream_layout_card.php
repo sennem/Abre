@@ -90,6 +90,8 @@
 			$picture="";
 			$sql = "SELECT firstname, lastname, picture FROM directory where email='$User2'";
 			$dbreturn = databasequery($sql);
+			$firstname=NULL;
+			$lastname=NULL;
 			foreach ($dbreturn as $row)
 			{
 				$firstname=htmlspecialchars($row["firstname"], ENT_QUOTES);
@@ -106,12 +108,20 @@
 				{
 					$picture=$portal_root."/modules/directory/serveimage.php?file=$picture";
 				}
-				
-				$displayname="$firstname $lastname";
-				if($displayname==""){ $displayname=$useremail; }
 			
 			echo "<div class='mdl-card__actions modal-addstreamcomment commenticon pointer' style='background-color:#f9f9f9; padding:20px;' href='#addstreamcomment' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase'>";
-				echo "<span style='font-weight:500; font-size:12px;' class='truncate'><img src='$picture' class='profile-avatar-small' style='margin-right:5px;'> $displayname added a comment</span>";
+				echo "<span style='font-weight:500; font-size:12px;' class='truncate'><img src='$picture' class='profile-avatar-small' style='margin-right:5px;'>";
+				
+					if($firstname==NULL && $lastname==NULL)
+					{
+						echo "A comment was added";
+					}
+					else
+					{
+						echo "$firstname $lastname added a comment";
+					}
+					
+				echo "</span>";
 			echo "</div>";
 		}
 		

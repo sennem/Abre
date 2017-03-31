@@ -164,6 +164,7 @@
 					out_duration: 0,
 					ready: function()
 					{  
+						$('.modal-content').scrollTop(0);
 						$("#editmodaltitle").text('Add New App');
 						$("#app_name").val('');
 						$("#app_link").val('');
