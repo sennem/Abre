@@ -44,6 +44,8 @@
 			{
 				echo "<div class='mdl-layout-spacer'></div>";
 				
+				echo "<a class='material-icons mdl-color-text--grey-600 modal-sharecard commenticon shareinfo' style='margin-right:30px;' data-title='$titleencoded' data-url='$linkbase' title='Share' href='#sharecard'>share</a>";
+				
 				$query = "SELECT * FROM streams_comments where url='$link' and liked='1' and user='".$_SESSION['useremail']."'";
 				$dbreturn = databasequery($query);
 				$num_rows_like_current_user = count($dbreturn);

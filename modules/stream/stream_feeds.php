@@ -161,6 +161,19 @@
 		
 		});
 		
+		//Fill comment modal
+		$(".shareinfo").unbind().click(function()
+		{
+			event.preventDefault();
+			var Article_URL = $(this).data('url');
+			Article_URL = atob(Article_URL);
+			var Article_Title = $(this).data('title');
+			Article_Title = atob(Article_Title);
+			$(".modal-content #share_title").text(Article_Title);
+			$(".modal-content #share_url").val(Article_URL);
+			$('#sharecard').openModal({ in_duration: 0, out_duration: 0 });
+		});
+		
 		//Comment Modal
 		$('.modal-addstreamcomment').leanModal({
 			in_duration: 0,

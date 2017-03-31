@@ -29,7 +29,7 @@
 	$dbreturn = databasequery($query);
 	$counter=0;
 	foreach ($dbreturn as $value) {
-		$title=htmlspecialchars($value ['title'], ENT_QUOTES);
+		$title=$value['title'];
 		$titleencoded=base64_encode($title);
 		$image=htmlspecialchars($value ['image'], ENT_QUOTES);
 		$imagebase=base64_encode($image);
@@ -88,13 +88,17 @@
 		{
 			
 			event.preventDefault();
-						
-			var Stream_Title = $(this).data('title');
-			var Stream_Url = $(this).data('url');
-			var Stream_Image = $(this).data('image');
-			var ResultCounter = $(this).data('resultcounter');
-			$("."+ResultCounter).hide();
-			$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() { });
+			
+			var result = confirm("Remove from your likes?");
+			if (result)
+			{		
+				var Stream_Title = $(this).data('title');
+				var Stream_Url = $(this).data('url');
+				var Stream_Image = $(this).data('image');
+				var ResultCounter = $(this).data('resultcounter');
+				$("."+ResultCounter).hide();
+				$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() { });
+			}
 		
 		});
 		

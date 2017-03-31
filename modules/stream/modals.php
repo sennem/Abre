@@ -55,6 +55,21 @@
 			</div>
 			</form>
 		</div>
+		
+		<div id="sharecard" class="modal modal-fixed-footer modal-mobile-full" style="max-width: 600px;">
+			<form>
+			<div class="modal-content">
+				<h4>Share</h4>
+				<h6 id='share_title'></h6>
+				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+				<div class="socialshare pointer" style="width:100%; background-color:#0084b4; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="http://twitter.com/share?url=">Twitter</div><br>
+				<div class="socialshare pointer" style="width:100%; background-color:#3B5998; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="http://www.facebook.com/sharer.php?u=">Facebook</div><br>
+				<div class="socialshare pointer" style="width:100%; background-color:#d34836; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="https://plus.google.com/share?url=">Google</div>
+				<input type="hidden" name="share_url" id="share_url">
+	    	</div>
+	    	</form>
+		</div>
+		
 	<?php
 	}
 	?>
@@ -63,6 +78,18 @@
 	
 	$(function()
 	{
+
+		//Social Share
+		$(".socialshare").unbind().click(function(e)
+		{
+			e.preventDefault();
+			$('#sharecard').closeModal({ in_duration: 0, out_duration: 0 });
+			var network = $(this).data('link');
+			var link = $('#share_url').val();
+			var finallink = network+link;
+		    objWindow = window.open(finallink, 'Social Share', 'width=500,height=500,resizable=no').focus();
+
+		});
 	
 		//Save comment
 		var form = $('#form-addstreamcomment');			
