@@ -32,7 +32,7 @@
 				<?php
 					echo "<div class='mdl-card-text mdl-color-text--grey-600'>".sitesettings('sitelogintext')."</div>";
 	
-			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Login with Google</a>";
+			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Sign in with Google</a>";
 			  	?>
 			</div>
 			
