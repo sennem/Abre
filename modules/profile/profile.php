@@ -1,30 +1,30 @@
 <?php
-	
+
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-	
+
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 	
+	require(dirname(__FILE__) . '/../../configuration.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
-	
-	//Get profile information	
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+
+	//Get profile information
 	$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($sql);
 	foreach ($dbreturn as $row)
@@ -37,8 +37,8 @@
 		$setting_card_classroom=htmlspecialchars($row['card_classroom'], ENT_QUOTES);
 		$setting_card_apps=htmlspecialchars($row['card_apps'], ENT_QUOTES);
 	}
-	
-	//Get Contracted Days	
+
+	//Get Contracted Days
 	$useremailencrypt=encrypt($_SESSION['useremail'], "");
 	$sql = "SELECT * FROM directory where email='$useremailencrypt'";
 	$dbreturn = databasequery($sql);
@@ -47,11 +47,11 @@
 		$contractdays=htmlspecialchars($row['contractdays'], ENT_QUOTES);
 		$contractdays=decrypt($contractdays, "");
 	}
-	
+
 	//Profile form
 	echo "<form id='form-profile' method='post' action='$portal_root/modules/profile/profile_update.php'>";
-	
-	
+
+
 		//Bio
 		echo "<div class='page_container page_container_limit'>";
 			echo "<div class='row center-align' style='margin-top:30px;'>";
@@ -70,9 +70,9 @@
 				echo "</div>";
 			echo "</div>";
 		echo "</div>";
-			
+
 		//Streams
-		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
+		echo "<div id='streamcontainer' class='page_container page_container_limit mdl-shadow--4dp'>";
 		echo "<div class='page'>";
 			echo "<div class='row'>";
 				echo "<div class='col s12'><h3>Streams</h3></div>";
@@ -105,20 +105,23 @@
 				echo "<input type='hidden' name='departmentcount' value='$dcount'><br>";
 				echo "</div>";
 			echo "</div>";
+			if(superAdmin()){
+				echo "<div class='row left-align'><a href='#streameditor' class='modal-editstreams waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Edit</a></div>";
+			}
 		echo "</div>";
 		echo "</div>";
-		
+
 		//Stream preferences
 		if($_SESSION['usertype']!="student")
 		{
 			echo "<div class='row'>";
 			echo "<div class='page_container page_container_limit'>";
 			echo "<hr style='margin-bottom:20px;'>";
-			
+
 				//Card settings
 				echo "<div class='col l6 s12' style='padding:20px;'>";
 						echo "<h3 style='margin-top:5px;'>Cards</h3><p>Cards are small pieces of information that display on your stream. You can customize your stream by controlling which cards are visible.<br><br></p>";
-				echo "</div>";				
+				echo "</div>";
 				echo "<div class='page col l6 s12 mdl-shadow--4dp'>";
 					echo "<div style='margin:20px;'>";
 						echo "<table><tbody>";
@@ -128,7 +131,7 @@
 								echo "<td width='50px'><div class='switch'><label>";
 									if($setting_card_mail==1)
 									{ echo "<input type='checkbox' class='formclick' name='card_mail' value='1' checked />"; }
-									else 
+									else
 									{ echo "<input type='checkbox' class='formclick' name='card_mail' value='1' />"; }
 								echo "<span class='lever'></span></label></div></td>";
 							echo "</tr>";
@@ -174,14 +177,14 @@
 							echo "</tr>";
 						echo "</tbody></table>";
 					echo "</div>";
-				echo "</div>";		
+				echo "</div>";
 
-			
-			
+
+
 			echo "</div>";
 			echo "</div>";
 		}
-		
+
 
 		//Work Calendar
 		if($_SESSION['usertype']=="staff")
@@ -189,11 +192,11 @@
 			echo "<div class='row'>";
 			echo "<div class='page_container page_container_limit'>";
 			echo "<hr style='margin-bottom:20px;'>";
-			
+
 				//Card settings
 				echo "<div class='col l6 s12' style='padding:20px;'>";
 						echo "<h3 style='margin-top:5px;'>Work Calendar</h3><p>Review your work calendar for the upcoming school year. Your calendar will automatically be shared with Human Resources.<br><br></p>";
-				echo "</div>";				
+				echo "</div>";
 				echo "<div class='page col l6 s12 mdl-shadow--4dp'>";
 					echo "<div style='margin:30px 20px 20px 20px;'>";
 						if(isset($contractdays) && $contractdays!=NULL)
@@ -207,51 +210,55 @@
 						echo "<a href='#viewschedule' class='modal-viewschedule' style='line-height:40px; color:".sitesettings("sitecolor")."'>SET CALENDAR</a><br><a href='#' class='printbutton' style='line-height:40px; color:".sitesettings("sitecolor")."'>PRINT CALENDAR</a>";
 
 					echo "</div>";
-				echo "</div>";		
+				echo "</div>";
 
-			
-			
+
+
 			echo "</div>";
 			echo "</div>";
-		}		
-	
+		}
+
 	echo "</form>";
-	
+
 
 
 ?>
 
 
 <script>
-	
+
 //Work Schedule Modal
 $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
+$('.modal-editstreams').leanModal({ in_duration: 0, out_duration: 0 });
 
 <?php if($setting_streams=="" && $_SESSION['usertype']=="staff"){ echo "$('.modal-viewapps').hide();"; } ?>
-	
+
 <?php if($_SESSION['usertype']=="staff"){ ?>
+	//shouldn't throw an error message if the user hasn't selected 3 streams when there aren't
+	//3 streams to choose from.
 	if ($('.streamtopic:checked').length < 3)
 	{
-		$('#streamerror').show();
-		$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");	
+
+			$('#streamerror').show();
+			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");
 	}
 
 <?php } ?>
 
 $(".formclick").click(function() {
 	<?php if($_SESSION['usertype']=="staff"){ ?>
-	
+
 		if ($('.streamtopic:checked').length < 3)
 		{
 			$('#streamerror').show();
-			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");	
+			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");
 			var notification = document.querySelector('.mdl-js-snackbar');
 			var data = { message: 'You must follow 3 or more streams.' };
 			notification.MaterialSnackbar.showSnackbar(data);
 		}
 		else
 		{
-			
+
 			$('.modal-viewapps').show();
 			var formData = $('#form-profile').serialize();
 			$.ajax({
@@ -259,7 +266,7 @@ $(".formclick").click(function() {
 				url: $('#form-profile').attr('action'),
 				data: formData
 			})
-					
+
 			//Show the notification
 			.done(function(response) {
 				$('#streamerror').show();
@@ -268,11 +275,11 @@ $(".formclick").click(function() {
 				var data = { message: 'Your changes have been saved.' };
 				notification.MaterialSnackbar.showSnackbar(data);
 			})
-			
+
 		}
 	<?php } ?>
 
-	<?php if($_SESSION['usertype']=="student"){ ?>			
+	<?php if($_SESSION['usertype']=="student"){ ?>
 			$('.modal-viewapps').show();
 			var formData = $('#form-profile').serialize();
 			$.ajax({
@@ -280,7 +287,7 @@ $(".formclick").click(function() {
 				url: $('#form-profile').attr('action'),
 				data: formData
 			})
-					
+
 			//Show the notification
 			.done(function(response) {
 				$('#streamerror').show();
@@ -289,7 +296,7 @@ $(".formclick").click(function() {
 				var data = { message: 'Your changes have been saved.' };
 				notification.MaterialSnackbar.showSnackbar(data);
 			})
-	<?php } ?>	
+	<?php } ?>
 });
 
 				//Print Spcific Div
@@ -301,6 +308,6 @@ $(".formclick").click(function() {
 					win.document.write('</body></html>');
 				});
 
-	
+
 
 		</script>
