@@ -226,6 +226,55 @@
 
 
 <script>
+	
+		   	<?php
+			if(superadmin())
+			{
+			?>
+
+				//Add/Edit Stream
+				$('.modal-addeditstream').leanModal({
+					in_duration: 0,
+					out_duration: 0,
+					ready: function()
+					{
+						$('.modal-content').scrollTop(0);
+						$("#editstreammodaltitle").text('Add New Stream');
+						$("#stream_name").val('');
+						$("#rss_link").val('');
+						$("#stream_id").val('');
+						$('#stream_staff').prop('checked', false);
+						$('#stream_students').prop('checked', false);
+					}
+				});
+
+				//Save/Update Stream
+				$('#addeditstreamform').submit(function(event)
+				{
+					event.preventDefault();
+
+					var streamtitle = $('#stream_name').val();
+					var rsslink = $('#rss_link').val();
+					var streamgroup= $('input[name=streamradio]:checked').val();
+
+					var streamid = $('#stream_id').val();
+					//Make the post request
+					$.ajax({
+						type: 'POST',
+						url: 'modules/profile/update_stream.php',
+						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup }
+					})
+
+					.done(function(){
+						$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
+						$('#streamsort').load('modules/profile/stream_editor_content.php');
+						$('#content_holder').load( 'modules/profile/profile.php');
+					});
+				});
+
+			<?php
+			}
+			?>
 
 //Work Schedule Modal
 $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
