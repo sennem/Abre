@@ -46,10 +46,120 @@
 	    </div>
 	</div>
 	
+<!--Stream Editor-->
+	<?php
+	if(superadmin())
+	{
+	?>
+
+	<div id='streameditor' class='modal modal-fixed-footer modal-mobile-full'>
+		<div class='modal-content'>
+			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+			<div class='row'>
+				<div class='col s12'>
+					<h4>Stream Editor</h4>
+					<?php
+						include "stream_editor_content.php";
+					?>
+				</div>
+			</div>
+		</div>
+		<div class='modal-footer'>
+			<a class='modal-action waves-effect btn-flat white-text modal-addeditstream' href='#addeditstream' data-streamtitle='Add New Stream' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Add</a>
+		</div>
+	</div>
+
+	<div id='addeditstream' class='modal modal-fixed-footer modal-mobile-full' style="width: 90%">
+		<form id='addeditstreamform' method="post" action='#'>
+		<div class='modal-content'>
+			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+			<div class='row'>
+				<div class='col s12'><h4 id='editstreammodaltitle'></h4></div>
+				<div class='input-field col s12'>
+					<input placeholder="Enter Stream Name" id="stream_name" name="stream_name" type="text" autocomplete="off" required>
+					<label for="stream_name" class="active">Name</label>
+				</div>
+				<div class='input-field col s12'>
+					<input placeholder="Enter RSS Link" id="rss_link" name="rss_link" type="text" autocomplete="off" required>
+					<label for="rss_link" class="active">Link</label>
+				</div>
+			</div>
+			<div class='row'>
+				<div class='col m4 s12'>
+						<input type="radio" name="streamradio" id="stream_staff" value="staff" required>
+						<label for="stream_staff">Staff</label>
+				</div>
+				<div class='col m4 s12'>
+					<input type="radio" name="streamradio" id="stream_students" value="students">
+					<label for="stream_students">Students</label>
+				</div>
+			</div>
+			<input id="stream_id" name="stream_id" type="hidden">
+		</div>
+		<div class='modal-footer'>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdatestream' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Save</button>
+			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>; margin-right:5px;'>Cancel</a>
+		</div>
+		</form>
+	</div>
+	<?php
+ 	}
+ 	?>
+	
 <script>
 	
-			$(function()
- 			{
+$(function()
+{
+	 			
+	 			
+		   	<?php
+			if(superadmin())
+			{
+			?>
+
+				//Add/Edit Stream
+				$('.modal-addeditstream').leanModal({
+					in_duration: 0,
+					out_duration: 0,
+					ready: function()
+					{
+						$('.modal-content').scrollTop(0);
+						$("#editstreammodaltitle").text('Add New Stream');
+						$("#stream_name").val('');
+						$("#rss_link").val('');
+						$("#stream_id").val('');
+						$('#stream_staff').prop('checked', false);
+						$('#stream_students').prop('checked', false);
+					}
+				});
+
+				//Save/Update Stream
+				$('#addeditstreamform').submit(function(event)
+				{
+					event.preventDefault();
+
+					var streamtitle = $('#stream_name').val();
+					var rsslink = $('#rss_link').val();
+					var streamgroup= $('input[name=streamradio]:checked').val();
+
+					var streamid = $('#stream_id').val();
+					//Make the post request
+					$.ajax({
+						type: 'POST',
+						url: 'modules/profile/update_stream.php',
+						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup }
+					})
+
+					.done(function(){
+						$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
+						$('#streamsort').load('modules/profile/stream_editor_content.php');
+						$('#content_holder').load( 'modules/profile/profile.php');
+					});
+				});
+
+			<?php
+			}
+			?>
 	 			
 	 			
 				var today = new Date();
