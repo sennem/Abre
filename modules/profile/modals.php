@@ -71,7 +71,7 @@
 
 	<div id='addeditstream' class='modal modal-fixed-footer modal-mobile-full' style="width: 90%">
 		<form id='addeditstreamform' method="post" action='#'>
-		<div class='modal-content'>
+		<div class='modal-content' id="viewstreammodal">
 			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 			<div class='row'>
 				<div class='col s12'><h4 id='editstreammodaltitle'></h4></div>
@@ -123,7 +123,7 @@ $(function()
 					out_duration: 0,
 					ready: function()
 					{
-						$('.modal-content').scrollTop(0);
+						$(".modal-content").scrollTop(0);
 						$("#editstreammodaltitle").text('Add New Stream');
 						$("#stream_name").val('');
 						$("#rss_link").val('');
@@ -148,6 +148,7 @@ $(function()
 						type: 'POST',
 						url: 'modules/profile/update_stream.php',
 						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup }
+						
 					})
 
 					.done(function(){

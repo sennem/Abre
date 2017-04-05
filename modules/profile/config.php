@@ -65,13 +65,14 @@
 
 	$(function()
 	{
+		
     	$('.modal-viewprofile').leanModal({
 	    	in_duration: 0,
 			out_duration: 0,
 			opacity: 0,
 	    	ready: function() {
 		    	$("#viewprofile_arrow").show();
-		    	$( "#viewprofile" ).scrollTop(0);
+		    	$("#viewprofile").scrollTop(0);
 		    	$('#viewapps').closeModal({
 			    	in_duration: 0,
 					out_duration: 0,

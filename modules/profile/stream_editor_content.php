@@ -26,7 +26,7 @@ if(superadmin())
 {
 
   echo "<table class='bordered' id='streamsort'>";
-  $query = "SELECT * FROM streams";
+  $query = "SELECT * FROM streams order by title";
   $dbreturn = databasequery($query);
   foreach ($dbreturn as $value)
   {

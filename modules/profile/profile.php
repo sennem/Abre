@@ -106,7 +106,7 @@
 				echo "</div>";
 			echo "</div>";
 			if(superAdmin()){
-				echo "<div class='row left-align'><a href='#streameditor' class='modal-editstreams waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Edit</a></div>";
+				echo "<div class='row left-align'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Edit</a></div>";
 			}
 		echo "</div>";
 		echo "</div>";
@@ -229,7 +229,14 @@
 
 //Work Schedule Modal
 $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
-$('.modal-editstreams').leanModal({ in_duration: 0, out_duration: 0 });
+$('.modal-editstreams').leanModal({ 
+	in_duration: 0, 
+	out_duration: 0,
+	ready: function()
+	{
+		$(".modal-content").scrollTop(0);
+	}	
+});
 
 <?php if($setting_streams=="" && $_SESSION['usertype']=="staff"){ echo "$('.modal-viewapps').hide();"; } ?>
 
