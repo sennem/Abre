@@ -106,7 +106,7 @@
 				echo "</div>";
 			echo "</div>";
 			if(superAdmin()){
-				echo "<div class='row left-align'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Edit</a></div>";
+				echo "<div class='row'><div class='col s12'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Manage</a></div></div>";
 			}
 		echo "</div>";
 		echo "</div>";

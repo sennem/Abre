@@ -149,7 +149,7 @@
 	//Display Apps Editor if superadmin
 	if(superadmin())
 	{
-		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Edit</a></div>";
+		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Manage</a></div>";
 	}
 
 ?>
