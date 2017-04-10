@@ -28,7 +28,8 @@
 	$row = $result->fetch_assoc();
 	$titles = explode(PHP_EOL, $row['options']);
 	foreach($titles as $value){
-	 	echo "<option value ='$value'>$value</option>";
+		$val = str_replace(array("\n\r", "\n", "\r"), '', $value);
+	 	echo "<option value ='$val'>$val</option>";
 	 }
 
 ?>
