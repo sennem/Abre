@@ -47,7 +47,7 @@
     require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT options FROM directory_settings"))
 		{
-			$sql = "ALTER TABLE `options` ADD `directory_settings` text NOT NULL;";
+			$sql = "ALTER TABLE `directory_settings` ADD `options` text NOT NULL;";
 			$db->multi_query($sql);
 		}
 		$db->close();
