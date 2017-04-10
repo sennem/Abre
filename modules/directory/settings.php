@@ -26,6 +26,14 @@
 	if($pageaccess==1)
 	{
 
+		$dropdownArray = array();
+		$sql = "SELECT * FROM directory_settings";
+		$result = $db->query($sql);
+		while($row = $result->fetch_assoc()){
+			$key = $row['dropdownID'];
+			$dropdownArray[$key] = $row['options'];
+		}
+
 		echo "<div class='page_container mdl-shadow--4dp'>";
 			echo "<div class='page'>";
 
@@ -43,31 +51,56 @@
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Job Titles";
-							echo "<textarea placeholder='Enter Job Titles Separated by New Line' id='jobTitles' name='jobTitles'></textarea>";
+							if(!$dropdownArray['jobTitles'] == "" && isset($dropdownArray['jobTitles'])){
+								echo "<textarea placeholder='Enter Job Titles Separated by New Line' id='jobTitles' name='jobTitles'>".$dropdownArray['jobTitles']."</textarea>";
+							}else{
+								echo "<textarea placeholder='Enter Job Titles Separated by New Line' id='jobTitles' name='jobTitles'></textarea>";
+							}
 						echo "</div>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Contract Options";
-							echo "<textarea placeholder='Enter Contract Options Separated by New Line' id='contractOptions' name='contractOptions'></textarea>";
+							if(!$dropdownArray['contractOptions'] == "" && isset($dropdownArray['contractOptions'])){
+								echo "<textarea placeholder='Enter Contract Options Separated by New Line' id='contractOptions' name='contractOptions'>".$dropdownArray['contractOptions']."</textarea>";
+							}
+							else{
+								echo "<textarea placeholder='Enter Contract Options Separated by New Line' id='contractOptions' name='contractOptions'></textarea>";
+							}
 						echo "</div>";
 					echo "</div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Classification Types";
-							echo "<textarea placeholder='Enter Classificaton Types Separated by New Line' id='classificationTypes' name='classificationTypes'></textarea>";
+							if(!$dropdownArray['classificationTypes'] == "" && isset($dropdownArray['classificationTypes'])){
+								echo "<textarea placeholder='Enter Classificaton Types Separated by New Line' id='classificationTypes' name='classificationTypes'>".$dropdownArray['classificationTypes']."</textarea>";
+							}else{
+								echo "<textarea placeholder='Enter Classificaton Types Separated by New Line' id='classificationTypes' name='classificationTypes'></textarea>";
+							}
 						echo "</div>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Home Buildings";
-							echo "<textarea placeholder='Enter Buildings Separated by New Line' id='homeBuildings' name='homeBuildings'></textarea>";
+							if(!$dropdownArray['homeBuildings'] == "" && isset($dropdownArray['homeBuildings'])){
+								echo "<textarea placeholder='Enter Buildings Separated by New Line' id='homeBuildings' name='homeBuildings'>".$dropdownArray['homeBuildings']."</textarea>";
+							}else{
+								echo "<textarea placeholder='Enter Buildings Separated by New Line' id='homeBuildings' name='homeBuildings'></textarea>";
+							}
 						echo "</div>";
 			  	echo "</div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Subjects";
-							echo "<textarea placeholder='Enter Subjects Separated by New Line' id='subjects' name='subjects'></textarea>";
+							if(!$dropdownArray['subjects'] == "" && isset($dropdownArray['subjects'])){
+								echo "<textarea placeholder='Enter Subjects Separated by New Line' id='subjects' name='subjects'>".$dropdownArray['subjects']."</textarea>";
+							}else{
+								echo "<textarea placeholder='Enter Subjects Separated by New Line' id='subjects' name='subjects'></textarea>";
+							}
 						echo "</div>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Level of Education";
-							echo "<textarea placeholder='Enter Levels of Education Separated by New Line' id='educationLevel' name='educationLevel' type='text'></textarea>";
+							if(!$dropdownArray['educationLevel'] == "" && isset($dropdownArray['educationLevel'])){
+								echo "<textarea placeholder='Enter Levels of Education Separated by New Line' id='educationLevel' name='educationLevel' type='text'>".$dropdownArray['educationLevel']."</textarea>";
+							}else{
+								echo "<textarea placeholder='Enter Levels of Education Separated by New Line' id='educationLevel' name='educationLevel' type='text'></textarea>";
+							}
 						echo "</div>";
 					echo "</div>";
 					echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' id='saveSettings' style='background-color: ".sitesettings("sitecolor")."'>Save Changes</button>";

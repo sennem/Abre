@@ -25,10 +25,27 @@
 	require_once('functions.php');
 
 	//Update Directory Settings
-	if($pageaccess==1)
+	if(superadmin())
 	{
-		$jobTitles=$_POST["jobTitles"];
-		echo $jobTitles;
+		foreach($_POST as $key => $value){
+			$query = $db->query("SELECT * FROM `directory_settings` WHERE dropdownID ='$key'");
+
+			if($query->num_rows > 0){
+				$stmt = $db->stmt_init();
+				$sql = "UPDATE `directory_settings` set `options`='$value' WHERE `dropdownID`='$key'";
+				$stmt->prepare($sql);
+				$stmt->execute();
+			}
+			else{
+				$stmt = $db->stmt_init();
+				$sql = "INSERT INTO `directory_settings` (`dropdownID`,`options`) VALUES ('$key','$value');";
+				$stmt->prepare($sql);
+				$stmt->execute();
+			}
+		}
+		$stmt->close();
+		$db->close();
+
   }
 
 ?>
