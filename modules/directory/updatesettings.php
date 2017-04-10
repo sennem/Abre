@@ -20,31 +20,15 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	require_once('permissions.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require('permissions.php');
+	require_once('functions.php');
 
+	//Update Directory Settings
 	if($pageaccess==1)
 	{
+		$jobTitles=$_POST["jobTitles"];
+		echo $jobTitles;
+  }
+
 ?>
-	    <div class="col s12">
-			<ul class="tabs_2" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
-				<li class="tab col s3 tab_1 directorymenu pointer" data="#directory"><a href="#directory" class='mdl-color-text--white'>Active</a></li>
-				<li class="tab col s3 tab_2 directorymenu pointer" data="#directory/archived"><a href="#directory/archived" class='mdl-color-text--white'>Archived</a></li>
-				<li class="tab col s3 tab_3 directorymenu pointer" data="#directory/settings"><a href="#directory/settings" class='mdl-color-text--white'>Settings</a></li>
-			</ul>
-		</div>
-<?php
-	}
-?>
-
-<script>
-
-	$(function()
-	{
-		$( ".directorymenu" ).click(function()
-		{
-			window.open($(this).attr("data"), '_self');
-		});
-	});
-
-</script>
