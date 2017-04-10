@@ -35,6 +35,7 @@
 		$db->close();
 
 		//Check for dropdown title field
+    require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT dropdownID FROM directory_settings"))
 		{
 			$sql = "ALTER TABLE `directory_settings` ADD `dropdownID` text NOT NULL;";
@@ -43,6 +44,7 @@
 		$db->close();
 
 		//Check for options field
+    require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT options FROM directory_settings"))
 		{
 			$sql = "ALTER TABLE `options` ADD `directory_settings` text NOT NULL;";
