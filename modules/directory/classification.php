@@ -22,8 +22,8 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($educationlevel!=""){ echo "<option value='$educationlevel' selected>$educationlevel</option>"; }else{ echo "<option value='$educationlevel' selected>Choose</option>"; }
-	$sql = "SELECT options FROM directory_settings where dropdownID='educationLevel'";
+  if($classification==""){ echo "<option value='$classification' selected>Choose</option>"; } if($classification!=""){ echo "<option value='$classification' selected>$classification</option>"; }
+	$sql = "SELECT options FROM directory_settings where dropdownID='classificationTypes'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$titles = explode(PHP_EOL, $row['options']);
@@ -31,8 +31,5 @@
 		echo "<option value ='$value'>$value</option>";
 	 }
 ?>
-	<!-- <option value="BS/A">BS/A</option>
-	<option value="+150">+150</option>
-	<option value="ME">ME</option>
-	<option value="ME+30">ME+30</option>
-	<option value="Doctorate">Doctorate</option> -->
+<!-- <option value='Certified'>Certified</option>";
+<option value='Classified'>Classified</option>"; -->
