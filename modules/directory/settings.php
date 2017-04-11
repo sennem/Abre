@@ -41,13 +41,9 @@
 
 				echo "<div class ='col s12'>";
 				echo "<form id='directory-settings-form' method='post' enctype='multipart/form-data' action='modules/directory/updatesettings.php'>";
-					echo "<table id='settingsTable' class='tablesorter'>";
-						echo "<thead>";
-							echo "<tr class='pointer'>";
-								echo "<th = 'header'><h5>Settings</h5></th>";
-							echo "</tr>";
-						echo "</thead>";
-					echo "</table>";
+					echo "<div class='row'><div class='col s12'>";
+						echo "<h5>Dropdown Options</h5>";
+					echo "</div></div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
 							echo "Job Titles";
@@ -103,7 +99,11 @@
 							}
 						echo "</div>";
 					echo "</div>";
-					echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' id='saveSettings' style='background-color: ".sitesettings("sitecolor")."'>Save Changes</button>";
+					echo "<div class='row'>";
+						echo "<div class='col s12'>";
+							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' id='saveSettings' style='background-color: ".sitesettings("sitecolor")."'>Save Changes</button>";
+						echo "</div>";
+					echo "</div>";
 				echo "</form>";
 			echo "</div>";
 			echo "</div>";

@@ -25,7 +25,7 @@
 	require_once('functions.php');
 
 	//Update Directory Settings
-	if(superadmin())
+	if($pageaccess==1)
 	{
 		foreach($_POST as $key => $value){
 			$query = $db->query("SELECT * FROM `directory_settings` WHERE dropdownID ='$key'");

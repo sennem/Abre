@@ -25,48 +25,15 @@
 	if($pageaccess==1)
 	{
 
-		/*
-		echo "<div class='row'><div class='col s12'>";
-			if($superadmin==1)
-			{
-				echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
-				echo "<input name='csv_data' type='file' id='csv_data' />";
-				echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."' name='Submit' value='Import' />";
-				echo "</form>";
-			}
-			echo "<br><a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."'>Export</a>";
-		echo "</div><div>";
-*/
-
-
-
-
 		echo "<div class='row'><div class='col s12'>";
 
-				echo "<table id='myTable' class='tablesorter'>";
-					echo "<thead>";
-						echo "<tr class='pointer'>";
-							echo "<th><h5>Reports</h5></th>";
-	 						echo "<th style='width:30px'></th>";
-						echo "</tr>";
-					echo "</thead>";
-					echo "<tbody>";
-							echo "<tr>";
-								echo "<td>Staff - All Active Staff</td>";
-								echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600'><a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--grey-600'><i class='material-icons'>file_download</i></button></a></td>";
-							echo "</tr>";
-							echo "<tr>";
-								echo "<td>Staff - Work Calendars</td>";
-								echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600'><a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--grey-600'><i class='material-icons'>file_download</i></button></a></td>";
-							echo "</tr>";
-					echo "</tbody>";
-				echo "</table>";
+					echo "<div class='row'><div class='col s12'>";
+						echo "<h5>Downloads</h5>";
+						echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
+						echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
+					echo "</div></div>";
 
 		echo "</div>";
-
-
-
-
 
 		?>
 
