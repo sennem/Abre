@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($location!=""){ echo "<option value='$title' selected>$title</option>"; }else{ echo "<option value='$title' selected>Choose</option>"; }
+	if($titles!=""){ echo "<option value='$title' selected>$title</option>"; }else{ echo "<option value='$title' selected>Choose</option>"; }
 	$sql = "SELECT options FROM directory_settings where dropdownID='jobTitles'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
