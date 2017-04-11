@@ -33,7 +33,6 @@ if(superadmin())
 
   if($streamid=="")
   {
-    var_dump($db);
     $stmt = $db->stmt_init();
     //needed to backtick because SQL doesn't like when you use reserved words
     $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES ('$streamgroup','$streamtitle','$streamtitle','flipboard','$rsslink','0');";

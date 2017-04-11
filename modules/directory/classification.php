@@ -22,8 +22,8 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($subject!=""){ echo "<option value='$subject' selected>$subject</option>"; }else{ echo "<option value='$subject' selected>Choose</option>"; }
-	$sql = "SELECT options FROM directory_settings where dropdownID='subjects'";
+  if($classification==""){ echo "<option value='$classification' selected>Choose</option>"; } if($classification!=""){ echo "<option value='$classification' selected>$classification</option>"; }
+	$sql = "SELECT options FROM directory_settings where dropdownID='classificationTypes'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$titles = explode(PHP_EOL, $row['options']);
@@ -32,17 +32,5 @@
 		echo "<option value ='$val'>$val</option>";
 	 }
 ?>
-	<!-- <option value="Language Arts">Language Arts</option>
-	<option value="Math">Math</option>
-	<option value="Science">Science</option>
-	<option value="Social Studies">Social Studies</option>
-	<option value="Fine Arts">Fine Arts</option>
-	<option value="Special Education">Special Education</option>
-	<option value="Title I Intervention">Title I Intervention</option>
-	<option value="Foreign Language">Foreign Language</option>
-	<option value="Health">Health</option>
-	<option value="Library/Media">Library/Media</option>
-	<option value="ESL">ESL</option>
-	<option value="PE">PE</option>
-	<option value="CTE">CTE</option>
-	<option value="Student Support Services">Student Support Services</option> -->
+<!-- <option value='Certified'>Certified</option>";
+<option value='Classified'>Classified</option>"; -->

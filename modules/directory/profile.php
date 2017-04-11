@@ -1,39 +1,39 @@
 <?php
-	
+
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-	
+
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
-	
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+
 	//Display User Profile Information
 	if($pageaccess==1 or $pageaccess==2)
-	{	
+	{
 
-		$id=htmlspecialchars($_GET["id"], ENT_QUOTES);		
-		
+		$id=htmlspecialchars($_GET["id"], ENT_QUOTES);
+
 		require_once('../../core/abre_functions.php');
-	
+
 		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 		echo "<div class='page'>";
-			
+
 			if($id!="new")
 			{
 				include "../../core/abre_dbconnect.php";
@@ -106,7 +106,7 @@
 					$picture=htmlspecialchars($row["picture"], ENT_QUOTES);
 					$stateeducatorid=htmlspecialchars($row["stateeducatorid"], ENT_QUOTES);
 					$stateeducatorid=stripslashes(htmlspecialchars(decrypt($stateeducatorid, ""), ENT_QUOTES));
-					
+
 					$licensetype1=htmlspecialchars($row["licensetype1"], ENT_QUOTES);
 					$licensetype1=stripslashes(htmlspecialchars(decrypt($licensetype1, ""), ENT_QUOTES));
 					$licenseissuedate1=htmlspecialchars($row["licenseissuedate1"], ENT_QUOTES);
@@ -115,7 +115,7 @@
 					$licenseexpirationdate1=stripslashes(htmlspecialchars(decrypt($licenseexpirationdate1, ""), ENT_QUOTES));
 					$licenseterm1=htmlspecialchars($row["licenseterm1"], ENT_QUOTES);
 					$licenseterm1=stripslashes(htmlspecialchars(decrypt($licenseterm1, ""), ENT_QUOTES));
-					
+
 					$licensetype2=htmlspecialchars($row["licensetype2"], ENT_QUOTES);
 					$licensetype2=stripslashes(htmlspecialchars(decrypt($licensetype2, ""), ENT_QUOTES));
 					$licenseissuedate2=htmlspecialchars($row["licenseissuedate2"], ENT_QUOTES);
@@ -124,7 +124,7 @@
 					$licenseexpirationdate2=stripslashes(htmlspecialchars(decrypt($licenseexpirationdate2, ""), ENT_QUOTES));
 					$licenseterm2=htmlspecialchars($row["licenseterm2"], ENT_QUOTES);
 					$licenseterm2=stripslashes(htmlspecialchars(decrypt($licenseterm2, ""), ENT_QUOTES));
-					
+
 					$licensetype3=htmlspecialchars($row["licensetype3"], ENT_QUOTES);
 					$licensetype3=stripslashes(htmlspecialchars(decrypt($licensetype3, ""), ENT_QUOTES));
 					$licenseissuedate3=htmlspecialchars($row["licenseissuedate3"], ENT_QUOTES);
@@ -133,7 +133,7 @@
 					$licenseexpirationdate3=stripslashes(htmlspecialchars(decrypt($licenseexpirationdate3, ""), ENT_QUOTES));
 					$licenseterm3=htmlspecialchars($row["licenseterm3"], ENT_QUOTES);
 					$licenseterm3=stripslashes(htmlspecialchars(decrypt($licenseterm3, ""), ENT_QUOTES));
-					
+
 					$licensetype4=htmlspecialchars($row["licensetype4"], ENT_QUOTES);
 					$licensetype4=stripslashes(htmlspecialchars(decrypt($licensetype4, ""), ENT_QUOTES));
 					$licenseissuedate4=htmlspecialchars($row["licenseissuedate4"], ENT_QUOTES);
@@ -142,7 +142,7 @@
 					$licenseexpirationdate4=stripslashes(htmlspecialchars(decrypt($licenseexpirationdate4, ""), ENT_QUOTES));
 					$licenseterm4=htmlspecialchars($row["licenseterm4"], ENT_QUOTES);
 					$licenseterm4=stripslashes(htmlspecialchars(decrypt($licenseterm4, ""), ENT_QUOTES));
-					
+
 					$licensetype5=htmlspecialchars($row["licensetype5"], ENT_QUOTES);
 					$licensetype5=stripslashes(htmlspecialchars(decrypt($licensetype5, ""), ENT_QUOTES));
 					$licenseissuedate5=htmlspecialchars($row["licenseissuedate5"], ENT_QUOTES);
@@ -151,7 +151,7 @@
 					$licenseexpirationdate5=stripslashes(htmlspecialchars(decrypt($licenseexpirationdate5, ""), ENT_QUOTES));
 					$licenseterm5=htmlspecialchars($row["licenseterm5"], ENT_QUOTES);
 					$licenseterm5=stripslashes(htmlspecialchars(decrypt($licenseterm5, ""), ENT_QUOTES));
-					
+
 					$licensetype6=htmlspecialchars($row["licensetype6"], ENT_QUOTES);
 					$licensetype6=stripslashes(htmlspecialchars(decrypt($licensetype6, ""), ENT_QUOTES));
 					$licenseissuedate6=htmlspecialchars($row["licenseissuedate6"], ENT_QUOTES);
@@ -160,25 +160,25 @@
 					$licenseexpirationdate6=stripslashes(htmlspecialchars(decrypt($licenseexpirationdate6, ""), ENT_QUOTES));
 					$licenseterm6=htmlspecialchars($row["licenseterm6"], ENT_QUOTES);
 					$licenseterm6=stripslashes(htmlspecialchars(decrypt($licenseterm6, ""), ENT_QUOTES));
-					
+
 					$permissions=htmlspecialchars($row["permissions"], ENT_QUOTES);
 					$permissions=stripslashes(htmlspecialchars(decrypt($permissions, ""), ENT_QUOTES));
-					
+
 					$contractdays=htmlspecialchars($row["contractdays"], ENT_QUOTES);
 					$contractdays=stripslashes(htmlspecialchars(decrypt($contractdays, ""), ENT_QUOTES));
-	
+
 					$id=htmlspecialchars($row["id"], ENT_QUOTES);
-					
-					
-					
+
+
+
 					echo "<div id='workcalendardisplay' style='display:none;'>Calendar for $firstname $lastname</div>";
 
-					
+
 				}
 			}
 			else
 			{
-				
+
 				$firstname="";
 				$middlename="";
 				$lastname="";
@@ -211,50 +211,50 @@
 				$federalbackgroundcheck="";
 				$picture="";
 				$stateeducatorid="";
-					
+
 				$licensetype1="";
 				$licenseissuedate1="";
 				$licenseexpirationdate1="";
 				$licenseterm1="";
-					
+
 				$licensetype2="";
 				$licenseissuedate2="";
 				$licenseexpirationdate2="";
 				$licenseterm2="";
-					
+
 				$licensetype3="";
 				$licenseissuedate3="";
 				$licenseexpirationdate3="";
 				$licenseterm3="";
-					
+
 				$licensetype4="";
 				$licenseissuedate4="";
 				$licenseexpirationdate4="";
 				$licenseterm4="";
-					
+
 				$licensetype5="";
 				$licenseissuedate5="";
 				$licenseexpirationdate5="";
 				$licenseterm5="";
-					
+
 				$licensetype6="";
 				$licenseissuedate6="";
 				$licenseexpirationdate6="";
 				$licenseterm6="";
-				
+
 				$permissions="";
 				$contractdays="";
-				
+
 			}
-				if($picture==""){ 
+				if($picture==""){
 					$pictureserver=$portal_root."/modules/directory/images/user.png";
 				}
 				else
 				{
-					$pictureserver=$portal_root."/modules/directory/serveimage.php?file=$picture";	
+					$pictureserver=$portal_root."/modules/directory/serveimage.php?file=$picture";
 				}
 				echo "<form id='form-hr' method='post' enctype='multipart/form-data' action='modules/directory/updateuser.php'>";
-				
+
 					//Profile
 					echo "<div id='profile'>";
 						echo "<div class='row'><div class='col s12'>";
@@ -275,7 +275,7 @@
 								echo "<label class='active' for='lastname'>Last Name</label>";
 							echo "</div>";
 						echo "</div>";
-						
+
 						echo "<div class='row'>";
 							echo "<div class='input-field col l4 s12'>";
 								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Address' value='$address' id='address' name='address' type='text' class='demotext_dark'>";
@@ -284,19 +284,19 @@
 							echo "<div class='input-field col l4 s12'>";
 								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a City' value='$city' id='city' name='city' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='city'>City</label>";
-							echo "</div>";   
+							echo "</div>";
 							echo "<div class='input-field col l2 s12'>";
 								echo "<select "; if($pageaccess==2){ echo "disabled "; } echo "name='state'>";
 									include "states.php";
 								echo "</select>";
 								echo "<label>State</label>";
-							echo "</div>"; 
+							echo "</div>";
 							echo "<div class='input-field col l2 s12'>";
 								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Zipcode' value='$zip' id='zip' name='zip' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='zip'>Zipcode</label>";
-							echo "</div>";   
-						echo "</div>";  
-									  
+							echo "</div>";
+						echo "</div>";
+
 						echo "<div class='row'>";
 							echo "<div class='input-field col l4 s12'>";
 								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Phone Number' value='$phone' id='phone' name='phone' type='text' class='demotext_dark'>";
@@ -310,8 +310,8 @@
 								echo "<input "; if($pageaccess==2){ echo "disabled "; } echo "placeholder='Enter a Email' value='$email' id='email' name='email' type='text' class='demotext_dark'>";
 								echo "<label class='active' for='email'>Email</label>";
 							echo "</div>";
-						echo "</div>";		
-								  
+						echo "</div>";
+
 						if($pageaccess!=2)
 						{
 							echo "<div class='row'>";
@@ -329,7 +329,7 @@
 									echo "<input type='file' name='picture' />";
 								echo "</div>";
 							echo "</div>";
-									  
+
 							echo "<div class='row'>";
 								echo "<div class='col s12'><h4>Demographics</h4></div>";
 								echo "<div class='input-field col l4 s12'>";
@@ -337,16 +337,16 @@
 										include "ethnicity.php";
 									echo "</select>";
 									echo "<label>Ethnicity</label>";
-								echo "</div>"; 
+								echo "</div>";
 								echo "<div class='input-field col l4 s12'>";
 									echo "<select name='gender'>";
 									include "gender.php";
 									echo "</select>";
 									echo "<label>Gender</label>";
-								echo "</div>"; 
+								echo "</div>";
 							echo "</div>";
-							
-							
+
+
 								  if($id!="new")
 								  {
 									  echo "<div class='row'>";
@@ -358,9 +358,9 @@
 									  echo "</div>";
 								  }
 						}
-								    
+
 					echo "</div>";
-				  
+
 					//Employment
 					echo "<div id='employment'>";
 						echo "<div class='row'>";
@@ -374,7 +374,7 @@
 								echo "</select>";
 								echo "<label>Current Job Title</label>";
 							echo "</div>";
-								    
+
 							if($pageaccess==2)
 							{
 								echo "<div class='input-field col l3 s12'>";
@@ -384,7 +384,7 @@
 									echo "<label>Home Building</label>";
 								echo "</div>";
 							}
-								    
+
 							if($pageaccess!=2)
 							{
 								echo "<div class='input-field col l3 s12'>";
@@ -393,14 +393,11 @@
 									echo "</select>";
 									 echo "<label>Contract</label>";
 								echo "</div>";
-								echo "</div>";  
+								echo "</div>";
 									echo "<div class='row'>";
 									    echo "<div class='input-field col l3 s12'>";
 											echo "<select name='classification'>";
-										      	if($classification==""){ echo "<option value='$classification' selected>Choose</option>"; }
-										      	if($classification!=""){ echo "<option value='$classification' selected>$classification</option>"; }
-												echo "<option value='Certified'>Certified</option>";
-												echo "<option value='Classified'>Classified</option>";
+														include "classification.php";
 											echo "</select>";
 										    echo "<label>Classification Type</label>";
 									    echo "</div>";
@@ -423,9 +420,9 @@
 										    echo "<label>Subject</label>";
 									    echo "</div>";
 									echo "</div>";
-									
-									
-					  
+
+
+
 									echo "<div class='row'>";
 										echo "<div class='input-field col l3 s12'>";
 									      	echo "<select name='rategroup'>";
@@ -448,9 +445,9 @@
 									    echo "<div class='input-field col l3 s12'>";
 									      echo "<input placeholder='Enter a Salary' value='$salary' id='salary' name='salary' type='text' class='demotext_dark'>";
 									      echo "<label class='active' for='salary'>Salary</label>";
-									    echo "</div>";    
+									    echo "</div>";
 									echo "</div>";
-									
+
 									echo "<div class='row'>";
 										echo "<div class='input-field col l3 s12'>";
 									      echo "<input placeholder='Enter Number of Hours' value='$hours' id='hours' name='hours' type='text' class='demotext_dark'>";
@@ -461,8 +458,8 @@
 										    echo "<label class='active' for='contractdays'>Contract Days</label>";
 										echo "</div>";
 									//echo "</div>";
-									
-									  
+
+
 									echo "<div class='row'>";
 									  	echo "<div class='col s12'><h4>Dates</h4></div>";
 									    echo "<div class='input-field col l3 s12'>";
@@ -479,10 +476,10 @@
 									    echo "</div>";
 							}
 										echo "<div class='input-field col l3 s12'>";
-											echo "<button class='printbutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' style='background-color:"; echo sitesettings("sitecolor"); echo "'><i class='material-icons'>date_range</i></button>";								
-										echo "</div>"; 
+											echo "<button class='printbutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' style='background-color:"; echo sitesettings("sitecolor"); echo "'><i class='material-icons'>date_range</i></button>";
+										echo "</div>";
 									echo "</div>";
-									  
+
 							if($pageaccess!=2)
 							{
 									 echo "<div class='row'>";
@@ -499,29 +496,29 @@
 									      echo "<label class='active' for='federalbackgroundcheck'>Federal Background Check</label>";
 									    echo "</div>";
 									  echo "</div>";
-									  
+
 							}
-							
-							
-				
-								    
+
+
+
+
 							echo "</div>";
-								  
+
 							if($pageaccess!=2)
 							{
-									  
-									  
-					
+
+
+
 								echo "</div>";
-					
+
 								echo "<div id='licensure'>";
 
 						echo "<div class='row'><div class='col s12'>";
 							echo "<img src='$pictureserver' class='profile-avatar demoimage' style='display: block; margin: 0 auto;'><h6 class='center-align demotext_dark'>$firstname $lastname</h6>";
 						echo "</div></div>";
-					
+
 								include "profile_licenses.php";
-								  
+
 								  //Permissions
 								  if($superadmin=1)
 								  {
@@ -535,44 +532,44 @@
 									    echo "</div>";
 									  echo "</div>";
 									 }
-								
-								  echo "<input type='hidden' name='id' value='$id' id='userid'><br>"; 
+
+								  echo "<input type='hidden' name='id' value='$id' id='userid'><br>";
 						   }
 					echo "</div>";
-				 
+
 					if($pageaccess!=2){ include "profilebutton.php"; }
 				echo "</form>";
 
-		
+
 		echo "</div>";
 		echo "</div>";
-		
+
 		?>
-		
+
 		<script>
-			
+
 			//Load Menu
 			$( "#navigation_top" ).show();
-			$( "#navigation_top" ).load( "modules/directory/menu_person.php", function() {	
+			$( "#navigation_top" ).load( "modules/directory/menu_person.php", function() {
 				$( "#navigation_top" ).show();
 				$('ul.tabs').tabs();
-			});		
-			
+			});
+
 			//Work Schedule Modal
 			$('.modal-viewscheduleemployee').leanModal({ in_duration: 0, out_duration: 0 });
-		
+
 			//Process the profile form
 			$(function() {
-				
+
 				//Select Dropdown
 		    	$('select').material_select();
-		    	
+
 		    	//Date Picture
 		    	$('.datepicker').pickadate({
 					selectMonths: true,
 					selectYears: 160
 				});
-				
+
 				//Save Form Data
 				var form = $('#form-hr');
 				var formMessages = $('#form-messages');
@@ -586,17 +583,17 @@
 					    contentType: false,
 						processData: false
 					})
-					
+
 					//Show the notification
 					.done(function(response) {
 						<?php echo "window.location.href = '$portal_root/#directory';"; ?>
 							var notification = document.querySelector('.mdl-js-snackbar');
 							var data = { message: response };
-							notification.MaterialSnackbar.showSnackbar(data);			
+							notification.MaterialSnackbar.showSnackbar(data);
 					})
-					
+
 				});
-			
+
 				//Archive the User
 				$("#archiveuser").click(function(event){
 					event.preventDefault();
@@ -606,17 +603,17 @@
 					    url: 'modules/directory/archiveuser.php',
 					    data: { id : userid }
 					})
-					
+
 					//Show the notification
 					.done(function(response) {
 						<?php echo "window.location.href = '$portal_root/#directory';"; ?>
 							var notification = document.querySelector('.mdl-js-snackbar');
 							var data = { message: response };
-							notification.MaterialSnackbar.showSnackbar(data);			
+							notification.MaterialSnackbar.showSnackbar(data);
 					})
-					
+
 				});
-				
+
 				//Delete Discipline Record
 				$('#disciplinediv').on('click','.deletedisciplinerecord',function(event){
 					event.preventDefault();
@@ -626,19 +623,19 @@
 					    url: 'modules/directory/disciplinereport_delete.php',
 					    data: { id : fileid }
 					})
-					
+
 					//Show the notification
 					.done(function(response) {
 						<?php echo "$( '#disciplinediv' ).load( 'modules/directory/profile_disciplinereport.php?userid=$id' );"; ?>
 							var notification = document.querySelector('.mdl-js-snackbar');
 							var data = { message: response };
-							notification.MaterialSnackbar.showSnackbar(data);			
+							notification.MaterialSnackbar.showSnackbar(data);
 					})
 				});
-				
+
 				//Work Days for Employee
 				var today = new Date();
-				var y = today.getFullYear();			
+				var y = today.getFullYear();
 				$('#workcalendardisplay').multiDatesPicker({
 					<?php
 						if($pageaccess==1 or $pageaccess==2)
@@ -668,31 +665,31 @@
 
 				        var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 						$("#selecteddays").text(dates + " Days Selected");
-						
-						
-						
+
+
+
 						var datestosave = $( "#saveddates" ).val();
 						$.ajax({
 							type: 'POST',
 							url: '/modules/profile/calendar_update.php',
 							data: { calendardaystosave : datestosave },
 						})
-								
+
 						//Show the notification
 						.done(function(response) {
 							//var notification = document.querySelector('.mdl-js-snackbar');
 							//var data = { message: response };
 							//notification.MaterialSnackbar.showSnackbar(data);
 						})
-						
-						
-						
+
+
+
 				    }
 				});
-				
+
 	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 				$("#selecteddays").text(dates + " Days Selected");
-				
+
 				//Print Spcific Div
 				$(".printbutton").click(function(e) {
 					e.preventDefault();
@@ -701,11 +698,11 @@
 					win.document.write($("#workcalendardisplay").html());
 					win.document.write('</body></html>');
 				});
-								
+
 			});
-		
+
 		<?php
 
 	}
-	
+
 ?>
