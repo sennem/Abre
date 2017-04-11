@@ -83,6 +83,13 @@
 		{
 			$image=$enclosure->get_link();
 		}
+		
+		if($image=="")
+		{
+		    preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $excerpt, $embededimage);
+		    if(isset($embededimage['src'])){ $image=$embededimage['src']; }
+		}
+		   
 		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$linklabel","$feedtitle","$feedlink"));
 		$totalcount++;
 	}
