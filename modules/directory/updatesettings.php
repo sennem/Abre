@@ -45,7 +45,7 @@
 		}
 		$stmt->close();
 		$db->close();
-
+		echo "Settings have been updated.";
   }
 
 ?>
