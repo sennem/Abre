@@ -79,41 +79,10 @@
 						    data: $('#searchquery').serialize(),
 						    url: $(form).attr('action'),
 						    success: function(data) {   
-						        $('#searchresults').html(data);
+						    	$('#searchresults').html(data);
 						    }
 						});
 			
-					});
-					
-					//Save Form Data
-					var form = $('#form-hr');
-					var formMessages = $('#form-messages');
-					$(form).submit(function(event) {
-					    event.preventDefault();
-						var formData = new FormData($(this)[0]);
-						$.ajax({
-						    type: 'POST',
-						    url: $(form).attr('action'),
-						    data: formData,
-						    contentType: false,
-							processData: false
-						})
-	
-						//Show the notification
-						.done(function(response) {
-							var SearchQuery = $("#searchquerysave").val();
-							$.post("modules/<?php echo basename(__DIR__); ?>/searchresults.php", { searchquery: SearchQuery })
-							.done(function( data ) {
-						    	$('#searchresults').html(data);
-						  	});
-							
-							$('#employeeprofile').closeModal({ in_duration: 0, out_duration: 0, ready: function() { } });
-							
-							var notification = document.querySelector('.mdl-js-snackbar');
-							var data = { message: response };
-							notification.MaterialSnackbar.showSnackbar(data);
-						})
-	
 					});
 					
 					
