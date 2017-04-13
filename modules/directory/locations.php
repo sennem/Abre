@@ -32,28 +32,3 @@
 		echo "<option value ='$val'>$val</option>";
 	 }
 ?>
-	<!-- <option value="ABLE">ABLE</option>
-	<option value="JDC">JDC/JRC</option>
-	<option value="Badin">Badin</option>
-	<option value="Grant ELC">Grant ELC</option>
-	<option value="Hayes">Hayes</option>
-	<option value="Board Office">Board Office</option>
-	<option value="Bridgeport">Bridgeport</option>
-	<option value="Brookwood">Brookwood</option>
-	<option value="Crawford Woods">Crawford Woods</option>
-	<option value="Fairwood">Fairwood</option>
-	<option value="Highland">Highland</option>
-	<option value="Linden">Linden</option>
-	<option value="Ridgeway">Ridgeway</option>
-	<option value="Riverview">Riverview</option>
-	<option value="Garfield">Garfield</option>
-	<option value="Wilson">Wilson</option>
-	<option value="Hamilton Freshman">Hamilton Freshman</option>
-	<option value="Hamilton High">Hamilton High</option>
-	<option value="Maintenance">Maintenance</option>
-	<option value="Transportation">Transportation</option>
-	<option value="Food Service">Food Service</option>
-	<option value="Immanuel Lutheran">Immanuel Lutheran</option>
-	<option value="St. Ann">St. Ann</option>
-	<option value="St. Peter">St. Peter</option>
-	<option value="St. Joseph">St. Joseph</option> -->

@@ -27,7 +27,7 @@
 
 	<div class="fixed-action-btn buttonpin">
 		<?php 
-			echo "<a class='btn-floating btn-large waves-effect waves-light' style='background-color: ".sitesettings("sitecolor")."' id='newentry' data-position='left' href='$portal_root/#directory/new'><i class='large material-icons'>add</i></a>";
+			echo "<button class='btn-floating btn-large waves-effect waves-light employeeview' style='background-color: ".sitesettings("sitecolor")."' data-position='left' data-employeeid='new' data-searchquerysaved=''><i class='large material-icons'>add</i></button>";
 			echo "<div class='mdl-tooltip mdl-tooltip--left' for='newentry'>New</div>";
 		?>
 	</div>

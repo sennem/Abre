@@ -31,6 +31,7 @@
 				$('#titletext').text('Staff Directory');
 				document.title = 'Staff Directory';
 				$('#content_holder').load( 'modules/directory/directory.php', function() { init_page(); $('#searchquery').focus(); });
+				$( '#modal_holder' ).load( 'modules/".basename(__DIR__)."/modals.php' );
 
 				$( '#navigation_top' ).show();
 				$( '#navigation_top' ).load( 'modules/directory/menu.php', function() {

@@ -32,5 +32,3 @@
 		echo "<option value ='$val'>$val</option>";
 	 }
 ?>
-<!-- <option value='Certified'>Certified</option>";
-<option value='Classified'>Classified</option>"; -->

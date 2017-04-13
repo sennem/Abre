@@ -32,17 +32,3 @@
 		echo "<option value ='$val'>$val</option>";
 	 }
 ?>
-	<!-- <option value="Language Arts">Language Arts</option>
-	<option value="Math">Math</option>
-	<option value="Science">Science</option>
-	<option value="Social Studies">Social Studies</option>
-	<option value="Fine Arts">Fine Arts</option>
-	<option value="Special Education">Special Education</option>
-	<option value="Title I Intervention">Title I Intervention</option>
-	<option value="Foreign Language">Foreign Language</option>
-	<option value="Health">Health</option>
-	<option value="Library/Media">Library/Media</option>
-	<option value="ESL">ESL</option>
-	<option value="PE">PE</option>
-	<option value="CTE">CTE</option>
-	<option value="Student Support Services">Student Support Services</option> -->

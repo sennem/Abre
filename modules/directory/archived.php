@@ -20,15 +20,14 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 	
 	//Display search results
 	if($pageaccess==1)
 	{
-		
-		require_once('../../core/abre_functions.php');
-		
-		include "../../core/abre_dbconnect.php";
+
 		$sql = "SELECT *  FROM directory where archived=1";
 		$result=mysqli_query($db,$sql);
 		$rowcount=mysqli_num_rows($result);
@@ -52,7 +51,6 @@
 							echo "</tr>";
 						echo "</thead>";
 						echo "<tbody>";
-							include "../../core/abre_dbconnect.php";
 							$sql = "SELECT *  FROM directory where archived=1 order by updatedtime DESC";
 							$result = $db->query($sql);
 							while($row = $result->fetch_assoc())

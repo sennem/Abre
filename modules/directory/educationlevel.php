@@ -32,8 +32,3 @@
 		echo "<option value ='$val'>$val</option>";
 	 }
 ?>
-	<!-- <option value="BS/A">BS/A</option>
-	<option value="+150">+150</option>
-	<option value="ME">ME</option>
-	<option value="ME+30">ME+30</option>
-	<option value="Doctorate">Doctorate</option> -->

@@ -20,13 +20,13 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php'); 
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 
 	//Show the Search and Last 10 Modified Users
 	if($pageaccess==1 or $_SESSION['usertype']=="staff")
 	{
-		
-		require_once('../../core/abre_functions.php');
 		
 		$sql = "SELECT *  FROM directory where archived=0";
 		$dbreturn = databasequery($sql);
@@ -41,80 +41,14 @@
 				echo "<form id='form-search' method='post' action='modules/directory/searchresults.php'>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
-							echo "<input placeholder='Search' id='searchquery' name='searchquery' type='text'>";
+							echo "<input placeholder='Search' id='searchquery' name='searchquery' autocomplete='off' type='text'>";
 						echo "</div>";
 					echo "</div>";  
 				echo "</form>";	
-						
-				//Show the Results	
+								
+				//Display Recent Searches
 				echo "<div id='searchresults'>";
-							
-					//Display Recent Searches			
-					echo "<div class='row'><div class='col s12'>";
-						echo "<table id='myTable' class='tablesorter'>";
-							echo "<thead>";
-								echo "<tr class='pointer'>";
-									echo "<th></th>";
-									echo "<th>Name</th>";
-									echo "<th class='hide-on-small-only'>Email</th>";
-									echo "<th class='hide-on-small-only'>Building</th>";
-									echo "<th class='hide-on-med-and-down'>Title</th>";
-								echo "</tr>";
-							echo "</thead>";
-							echo "<tbody>";
-							
-							include "../../core/abre_dbconnect.php";
-							$sql = "SELECT *  FROM directory where archived=0 order by updatedtime DESC limit 10";
-							$result = $db->query($sql);
-							while($row = $result->fetch_assoc())
-							{
-								$resultcount=1;
-								$firstname=htmlspecialchars($row["firstname"], ENT_QUOTES);
-								$firstname=stripslashes(htmlspecialchars(decrypt($firstname, ""), ENT_QUOTES));
-								$lastname=htmlspecialchars($row["lastname"], ENT_QUOTES);
-								$lastname=stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
-								$location=htmlspecialchars($row["location"], ENT_QUOTES);
-								$location=stripslashes(htmlspecialchars(decrypt($location, ""), ENT_QUOTES));
-								$email=htmlspecialchars($row["email"], ENT_QUOTES);
-								$email=stripslashes(htmlspecialchars(decrypt($email, ""), ENT_QUOTES));
-								$title=htmlspecialchars($row["title"], ENT_QUOTES);
-								$title=stripslashes(htmlspecialchars(decrypt($title, ""), ENT_QUOTES));
-								$picture=htmlspecialchars($row["picture"], ENT_QUOTES);
-								if($picture==""){ 
-									$picture=$portal_root."/modules/directory/images/user.png";
-								}
-								else
-								{
-									$picture=$portal_root."/modules/directory/serveimage.php?file=$picture";	
-								}
-								$id=htmlspecialchars($row["id"], ENT_QUOTES);
-								if($pageaccess==1 or $pageaccess==2){ echo "<tr class='clickrow'>"; }else{ echo "<tr class='clickrowemail'>"; }
-									echo "<td width='60px'><img src='$picture' class='profile-avatar-small demoimage'></td>";
-									echo "<td><strong class='demotext_dark'>$firstname $lastname</strong>";
-									if($_SESSION['usertype']=="staff" && $pageaccess!=1)
-									{
-										if($pageaccess==2)
-										{
-											echo "<a href='$portal_root/#directory/$id' class='hidden'></a>";
-										}
-										else
-										{
-											echo "<a href='https://mail.google.com/mail/u/0/?view=cm&fs=1&to=$email&tf=1' class='hidden'></a>";
-										}
-									}
-									else
-									{
-										echo "<a href='$portal_root/#directory/$id' class='hidden'></a>";
-									}
-									echo "</td>";
-									echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
-									echo "<td class='hide-on-small-only demotext_dark'>$location</td>";
-									echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";
-								echo "</tr>";
-							}
-							echo "</tbody>";
-						echo "</table>";
-					echo "</div>";
+					include "searchresults.php";
 				echo "</div>";
 	
 			echo "</div>";
@@ -132,30 +66,14 @@
 			<script>
 			
 				//Process the profile form
-				$(function() {
-					
-					//Table Sorter
-					$("#myTable").tablesorter({ 
-    				});
-					
-					//Set the row links for the table
-					$("tr.clickrow").click(function() {
-					  window.location.href = $(this).find("a").attr("href");
-					});
-					
-					//Email Send click
-					$("tr.clickrowemail").click(function() {
-						 window.open($(this).find("a").attr("href"), '_blank');
-					});
+				$(function()
+				{
 					
 					//Press the search data
 					var form = $('#form-search');
 					var formMessages = $('#form-messages');
 					$(form).submit(function(event) {
 						event.preventDefault();
-						var notification = document.querySelector('.mdl-js-snackbar');
-						var data = { message: 'Searching...', timeout: 1000 };
-						notification.MaterialSnackbar.showSnackbar(data);	
 						$.ajax({
 						    type: 'POST',
 						    data: $('#searchquery').serialize(),
@@ -166,6 +84,7 @@
 						});
 			
 					});
+					
 				});
 				
 			</script>
