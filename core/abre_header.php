@@ -27,14 +27,15 @@
 			<head>
 				<meta charset='utf-8'>
 				<meta http-equiv='X-UA-Compatible' content='IE=edge'>
-				<?php 
-				echo "<meta name='description' content='".sitesettings("sitedescription")."'>";
-				?>
 				<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
+				
 				<?php
-						
+										
 				//Site title
 				echo "<title>".sitesettings("sitetitle")."</title>";
+				
+				//Site description
+				echo "<meta name='description' content='".sitesettings("sitedescription")."'>";
 					
 				//Site favicon
 				echo "<link rel='icon' type='image/png' href='".sitesettings("sitelogo")."'>";
@@ -50,6 +51,7 @@
 				//Windows icon
 				echo "<meta name='msapplication-TileImage' content='".sitesettings("sitelogo")."'>";
 				echo "<meta name='msapplication-TileColor' content='".sitesettings("sitecolor")."'>";
+				
 				?>
 			
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>

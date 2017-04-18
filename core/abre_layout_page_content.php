@@ -25,7 +25,7 @@
 	<!--Display page content-->
 	<main class='mdl-layout__content'>
 		<div class='content' id='content'>
-			<div id='loader'><?php include "abre_loader_spinner.php"; ?></div>
+			<div id='loader'><div class="mdl-spinner mdl-js-spinner is-active"></div></div>
 			<div id='content_holder'></div>
 			<div aria-live="assertive" aria-atomic="true" aria-relevant="text" class="mdl-snackbar mdl-js-snackbar">
 			    <div class="mdl-snackbar__text"></div>

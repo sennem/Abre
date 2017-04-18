@@ -35,7 +35,14 @@
 		//Display the Page
 		echo "<div class='row'>";
 		
-			$sql = "SELECT *  FROM directory where (lastname='$searchqueryuppercase' or firstname='$searchqueryuppercase' or email='$searchqueryuppercase' or location='$searchqueryuppercase' or classification='$searchqueryuppercase' or lastname='$searchquerylowercase' or firstname='$searchquerylowercase' or email='$searchquerylowercase' or location='$searchquerylowercase' or classification='$searchquerylowercase') and archived=0";
+			if($searchquery!="")
+			{
+				$sql = "SELECT *  FROM directory where (lastname='$searchqueryuppercase' or firstname='$searchqueryuppercase' or email='$searchqueryuppercase' or location='$searchqueryuppercase' or classification='$searchqueryuppercase' or lastname='$searchquerylowercase' or firstname='$searchquerylowercase' or email='$searchquerylowercase' or location='$searchquerylowercase' or classification='$searchquerylowercase') and archived=0";
+			}
+			else
+			{
+				$sql = "SELECT *  FROM directory where archived=0 order by updatedtime DESC limit 10";
+			}
 			$result = $db->query($sql);
 			$resultscount = $result->num_rows;
 			$resultscounter = 0;
