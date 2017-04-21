@@ -1,25 +1,25 @@
 <?php
-	
+
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-	
+
 	//Include required files
-	require_once(dirname(__FILE__) . '/../configuration.php'); 
-	
+	require_once(dirname(__FILE__) . '/../configuration.php');
+
 	//Encryption function
 	function encrypt($string, $encryption_key)
 	{
@@ -27,7 +27,7 @@
 		$string = rtrim(base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_256, $encryption_key, $string, MCRYPT_MODE_ECB)));
 		return $string;
 	}
-	
+
 	//Decryption function
 	function decrypt($string, $encryption_key)
 	{
@@ -35,7 +35,7 @@
 		$string = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_256, $encryption_key, base64_decode($string), MCRYPT_MODE_ECB));
 		return $string;
 	}
-	
+
 	//Find user ID in directory module given an email
 	function finduserid($email)
 	{
@@ -48,7 +48,7 @@
 			return $id;
 		}
 	}
-	
+
 	//Find user ID given an email
 	function superadmin()
 	{
@@ -60,7 +60,7 @@
 			return true;
 		}
 	}
-	
+
 	//Find user ID given an email
 	function finduseridcore($email)
 	{
@@ -73,7 +73,7 @@
 			return $id;
 		}
 	}
-	
+
 	//Determine the grades that students do not have email access
 	function studentaccess()
 	{
@@ -96,7 +96,7 @@
 			return true;
 		}
 	}
-	
+
 	//Query the database
 	function databasequery($query)
 	{
@@ -105,12 +105,12 @@
 		$rowarray = array();
 		while($row = $result->fetch_assoc())
 		{
-			array_push($rowarray, $row);	
+			array_push($rowarray, $row);
 		}
 		return $rowarray;
 		$db->close();
 	}
-	
+
 	//Insert into the database
 	function databaseexecute($query)
 	{
@@ -123,7 +123,7 @@
 		return $newcommentid;
 		$db->close();
 	}
-	
+
 	//Save Screenshot to server
 	function savescreenshot($website, $filename)
 	{
@@ -132,32 +132,32 @@
 		$api = "https://www.googleapis.com/pagespeedonline/v2/runPagespeed?url=$website&screenshot=true";
 		$string = file_get_contents($api);
 		$json = json_decode($string, true);
-		
+
 		//Get Data from JSON
 		$data=$json['screenshot']['data'];
-		
+
 		//Replace characters for correct decode
 		$data=str_replace("_","/",$data);
 		$data=str_replace("-","+",$data);
-		
+
 		//Decode base64
 		$data = base64_decode($data);
-		
+
 		//Save image to server
 		$im = imagecreatefromstring($data);
-		
+
 		if (!file_exists("../../../$portal_private_root/guide")) {
 			mkdir("../../../$portal_private_root/guide", 0777, true);
 		}
-		
+
 		imagejpeg($im, "../../../$portal_private_root/guide/$filename");
 	}
-	
+
 	//Retrieve Site Title
 	function sitesettings($value)
 	{
 		include "abre_dbconnect.php";
-		
+
 		if(!$result = $db->query("SELECT * FROM settings"))
 		{
 	  		$sql = "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
@@ -166,10 +166,10 @@
 	  		$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
 	  		$db->multi_query($sql);
 		}
-		
+
 		$sql2 = "SELECT * FROM settings LIMIT 1";
 		$result2 = $db->query($sql2);
-		if($result2) 
+		if($result2)
 		{
 			while($row = $result2->fetch_assoc())
 			{
@@ -182,6 +182,10 @@
 				else
 				{
 					$valuereturn="";
+				}
+				if(($value == "googleclientsecret" && $valuereturn !== "") || ($value == "facebookclientsecret" && $valuereturn !== "")
+				|| ($value == "microsoftclientsecret" && $valuereturn !== "")){
+					$valuereturn = decrypt($valuereturn);
 				}
 				if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
 				if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
@@ -197,7 +201,7 @@
 				if($value=="studentdomain" && $valuereturn==""){ $valuereturn=""; }
 				if($value=="studentdomainrequired" && $valuereturn==""){ $valuereturn=""; }
 				if($value=="sitelogo" && $valuereturn!="")
-				{ 
+				{
 					if($valuereturn!='/core/images/abre_siteicon.png')
 					{
 						$valuereturn="/content/$valuereturn";
@@ -208,12 +212,19 @@
 					}
 				}
 				if($value=="sitelogo" && $valuereturn==""){ $valuereturn="/core/images/abre_siteicon.png"; }
+				if($value=="googleclientid" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="parentaccess" && $valuereturn==""){ $valuereturn="unchecked"; }
+				if($value=="googleclientsecret" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="facebookclientid" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="facebookclientsecret" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="microsoftclientid" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="microsoftclientsecret" && $valuereturn==""){ $valuereturn=""; }
 				return $valuereturn;
 			}
 		}
 		$db->close();
 	}
-	
+
 	function linkify($value, $protocols = array('http', 'mail'), array $attributes = array())
     {
         // Link attributes
@@ -221,12 +232,12 @@
         foreach ($attributes as $key => $val) {
             $attr = ' ' . $key . '="' . htmlentities($val) . '"';
         }
-        
+
         $links = array();
-        
+
         // Extract existing links and tags
         $value = preg_replace_callback('~(<a .*?>.*?</a>|<.*?>)~i', function ($match) use (&$links) { return '<' . array_push($links, $match[1]) . '>'; }, $value);
-        
+
         // Extract text links for each protocol
         foreach ((array)$protocols as $protocol) {
             switch ($protocol) {
@@ -237,11 +248,11 @@
                 default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[1]}</a>") . '>'; }, $value); break;
             }
         }
-        
+
         // Insert all link
         return preg_replace_callback('/<(\d+)>/', function ($match) use (&$links) { return $links[$match[1] - 1]; }, $value);
     }
-    
+
 	//Insert into the database
 	function vendorLinkGet($call)
 	{
@@ -266,5 +277,5 @@
 		$json = json_decode($result,true);
 		return $json;
 	}
-	
+
 ?>
