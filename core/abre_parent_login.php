@@ -21,8 +21,8 @@
 	require_once('abre_functions.php');
   require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
   $fb = new Facebook\Facebook([
-    'app_id' => '1437651372975104', // Replace {app-id} with your app id
-    'app_secret' => '9f1fcbb500aec4aca39d95ca672823df',
+    'app_id' => '".sitesettings('facebookclientid')."', // Replace {app-id} with your app id
+    'app_secret' => '".sitesettings('facebookclientsecret')."',
     'default_graph_version' => 'v2.9',
     ]);
 
@@ -66,11 +66,4 @@
 		loginWidthCheck();
 		$(window).resize(loginWidthCheck);
 
-    function fbLogin() {
-        var oauth_url = 'https://www.facebook.com/dialog/oauth/';
-        oauth_url += '?client_id=1437651372975104';
-        oauth_url += '&redirect_uri=' + encodeURIComponent('http://localhost/index.php');
-        oauth_url += '&scope=email'
-        window.top.location = oauth_url;
-    }
 	</script>
