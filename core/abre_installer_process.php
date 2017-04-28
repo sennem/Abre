@@ -96,7 +96,6 @@
 		$sql .= "ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
 
 		$conn->multi_query($sql);
-		$conn->close();
 
 		$sql2 = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 		$sql2 .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
