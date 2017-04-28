@@ -229,13 +229,13 @@
 
 //Work Schedule Modal
 $('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
-$('.modal-editstreams').leanModal({ 
-	in_duration: 0, 
+$('.modal-editstreams').leanModal({
+	in_duration: 0,
 	out_duration: 0,
 	ready: function()
 	{
 		$(".modal-content").scrollTop(0);
-	}	
+	}
 });
 
 <?php if($setting_streams=="" && $_SESSION['usertype']=="staff"){ echo "$('.modal-viewapps').hide();"; } ?>
