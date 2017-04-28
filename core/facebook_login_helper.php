@@ -6,8 +6,8 @@
   require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
 
   $fb = new Facebook\Facebook([
-    'app_id' => '".sitesettings('facebookclientid')."', // Replace {app-id} with your app id
-    'app_secret' => '".sitesettings('facebookclientsecret')."',
+    'app_id' => sitesettings('facebookclientid'), // Replace {app-id} with your app id
+    'app_secret' => sitesettings('facebookclientsecret'),
     'default_graph_version' => 'v2.9',
   ]);
 
@@ -40,7 +40,6 @@
   }
 
   // Logged in
-  echo '<h3>Access Token</h3>';
   $_SESSION['access_token'] = $accessToken->getValue();
   $pagelocation=$portal_root;
   if(isset($_SESSION["redirecturl"])){ header("Location: $pagelocation/#".$_SESSION["redirecturl"]); }else{ header("Location: $pagelocation"); }
@@ -62,13 +61,14 @@ try{
       $_SESSION['displayName']= $user['name'];
     }
   }else{
-    header("Location: $pagelocation");
+    //header("Location: $pagelocation");
   }
 
   if (isset($_SESSION['access_token']))
   {
     if($_SESSION['usertype']!="")
     {
+      echo "hitting db";
       include "abre_dbconnect.php";
       if($result=$db->query("SELECT * from users_parent where email='".$_SESSION['useremail']."'"))
       {
@@ -108,7 +108,7 @@ catch (Exception $x)
     //$client->revokeToken();
 
     //Redirect user
-    header("Location: $portal_root");
+    //header("Location: $portal_root");
 
   }
 
@@ -121,10 +121,11 @@ catch (Exception $x)
     //$client->revokeToken();
 
     //Redirect user
-    header("Location: $portal_root");
+    //header("Location: $portal_root");
   }
 
 }
+
   header("Location: $portal_root");
   // User is logged in with a long-lived access token.
   // You can redirect them to a members-only page.
