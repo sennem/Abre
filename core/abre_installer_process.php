@@ -98,11 +98,11 @@
 		$conn->multi_query($sql);
 		$conn->close();
 
-		$sql = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-		$sql .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
-		$sql .= "ALTER TABLE `users_parent` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+		$sql2 = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+		$sql2 .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
+		$sql2 .= "ALTER TABLE `users_parent` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
 
-		$conn->multi_query($sql);
+		$conn->multi_query($sql2);
 		$conn->close();
 
 			//Setup PHP file
