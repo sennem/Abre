@@ -16,12 +16,10 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
   require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
-
   $fb = new Facebook\Facebook([
     'app_id' => '1437651372975104', // Replace {app-id} with your app id
     'app_secret' => '9f1fcbb500aec4aca39d95ca672823df',
@@ -30,8 +28,8 @@
 
   $helper = $fb->getRedirectLoginHelper();
 
-  $permissions = ['public_profile']; // Optional permissions
-  $loginUrl = $helper->getLoginUrl('http://localhost/core/facebook_login_helper.php', $permissions);
+  $permissions = ['public_profile', 'email']; // Optional permissions
+  $loginUrl = $helper->getLoginUrl('http://localhost/core/facebook_login_helper.php/', $permissions);
 ?>
 
 	<!-- Display the login -->

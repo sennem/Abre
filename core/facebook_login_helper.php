@@ -1,14 +1,13 @@
 <?php
+  if(session_id() == ''){ session_start(); }
+  require_once(dirname(__FILE__) . '/../configuration.php');
+  require_once('abre_functions.php');
+  require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
 
-require_once(dirname(__FILE__) . '/../configuration.php');
-require_once('abre_functions.php');
-require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
-
-echo "Hello World";
-$fb = new Facebook\Facebook([
-  'app_id' => '1437651372975104', // Replace {app-id} with your app id
-  'app_secret' => '9f1fcbb500aec4aca39d95ca672823df',
-  'default_graph_version' => 'v2.9',
+  $fb = new Facebook\Facebook([
+    'app_id' => '1437651372975104', // Replace {app-id} with your app id
+    'app_secret' => '9f1fcbb500aec4aca39d95ca672823df',
+    'default_graph_version' => 'v2.9',
   ]);
 
   $helper = $fb->getRedirectLoginHelper();
@@ -41,11 +40,56 @@ $fb = new Facebook\Facebook([
 
   // Logged in
   echo '<h3>Access Token</h3>';
-  var_dump($accessToken->getValue());
+  $_SESSION['access_token'] = $accessToken->getValue();
+  $pagelocation=$portal_root;
+  if(isset($_SESSION["redirecturl"])){ header("Location: $pagelocation/#".$_SESSION["redirecturl"]); }else{ header("Location: $pagelocation"); }
 
+
+  $response = $fb->get('/me?fields=name,email', $accessToken->getValue());
+  $user = $response->getGraphUser();
+  // access token but useremail not set
+  if(isset($_SESSION['access_token']))
+  {
+    if(!isset($_SESSION['useremail']))
+    {
+      $_SESSION['useremail']=$user['email'];
+      $_SESSION['usertype']= 'parent';
+      $_SESSION['displayName']= $user['name'];
+    }
+  }
+
+  if (isset($_SESSION['access_token']))
+  {
+    if($_SESSION['usertype']!="")
+    {
+      include "abre_dbconnect.php";
+      if($result=$db->query("SELECT * from users_parent where email='".$_SESSION['useremail']."'"))
+      {
+        $count=$result->num_rows;
+        if($count=='1')
+        {
+          //If not already logged in, check and get a refresh token
+          if (!isset($_SESSION['loggedin'])) { $_SESSION['loggedin']=""; }
+          if($_SESSION['loggedin']!="yes")
+          {
+            //Mark that they have logged in
+            $_SESSION['loggedin']="yes";
+          }
+        }
+        else
+        {
+          $sha1useremail=sha1($_SESSION['useremail']);
+          $storetoken=$sha1useremail.$hash;
+          mysqli_query($db, "Insert into users_parent (email, students) VALUES ('".$_SESSION['useremail']."', '')") or die (mysqli_error($db));
+        }
+
+      }
+      $db->close();
+    }
+
+  }
   // The OAuth 2.0 client handler helps us manage access tokens
   $oAuth2Client = $fb->getOAuth2Client();
-
   // Get the access token metadata from /debug_token
   $tokenMetadata = $oAuth2Client->debugToken($accessToken);
   echo '<h3>Metadata</h3>';
@@ -71,6 +115,7 @@ $fb = new Facebook\Facebook([
   }
 
   $_SESSION['fb_access_token'] = (string) $accessToken;
+  echo $_SESSION['fb_access_token'];
 
   // User is logged in with a long-lived access token.
   // You can redirect them to a members-only page.
