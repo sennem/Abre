@@ -20,16 +20,19 @@
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
   require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
-  $fb = new Facebook\Facebook([
-    'app_id' => '".sitesettings('facebookclientid')."', // Replace {app-id} with your app id
-    'app_secret' => '".sitesettings('facebookclientsecret')."',
-    'default_graph_version' => 'v2.9',
-    ]);
 
-  $helper = $fb->getRedirectLoginHelper();
+  if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
+    $fb = new Facebook\Facebook([
+      'app_id' => sitesettings('facebookclientid'), // Replace {app-id} with your app id
+      'app_secret' => sitesettings('facebookclientsecret'),
+      'default_graph_version' => 'v2.9',
+      ]);
 
-  $permissions = ['public_profile', 'email']; // Optional permissions
-  $loginUrl = $helper->getLoginUrl('http://localhost/core/facebook_login_helper.php/', $permissions);
+    $helper = $fb->getRedirectLoginHelper();
+
+    $permissions = ['public_profile', 'email']; // Optional permissions
+    $loginUrl = $helper->getLoginUrl($portal_root.'/core/facebook_login_helper.php/', $permissions);
+  }
 ?>
 
 	<!-- Display the login -->
@@ -40,7 +43,9 @@
 				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; margin-left:20px; margin-bottom:5px;'></div>
 				<?php
 					echo "<div class='mdl-card-text mdl-color-text--grey-600'>Please log in with one of the following services</div>";
-          echo '<a href="' . htmlspecialchars($loginUrl) . '">Log in with Facebook!</a>';
+          if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
+            echo "<a href='".htmlspecialchars($loginUrl)."'>Log in with Facebook!</a>";
+          }
 			  	?>
 			</div>
 
