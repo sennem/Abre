@@ -52,7 +52,7 @@
 				echo "<div class='row' style='margin-bottom:0;'>";
 					echo "<p style='text-align:center; font-weight:600; margin-bottom:0;' class='truncate'>".$_SESSION['displayName']."</p>";
 					echo "<p style='text-align:center;' class='truncate'>".$_SESSION['useremail']."</p>";
-					echo "<p style='text-align:center; font-weight:600;' class='truncate'><img src='".$_SESSION['picture']."?sz=100' class='circle'></p>";
+					echo "<p style='text-align:center; font-weight:600;' class='truncate'><img src='".$_SESSION['picture']."?sz=100' style='width:100px; height:100px;' class='circle'></p>";
 					echo "<hr style='margin-bottom:20px;'>";
 					echo "<p style='text-align:center;'><a class='waves-effect btn-flat white-text myprofilebutton' href='#profile' style='margin-right:5px; background-color:"; echo sitesettings("sitecolor"); echo "'>My Profile</a>";
 					echo "<a class='waves-effect btn-flat white-text' href='?signout' style='background-color:"; echo sitesettings("sitecolor"); echo "'>Sign Out</a></p>";
@@ -65,7 +65,7 @@
 
 	$(function()
 	{
-		
+
     	$('.modal-viewprofile').leanModal({
 	    	in_duration: 0,
 			out_duration: 0,
