@@ -1,4 +1,5 @@
 <?php
+
   if(session_id() == ''){ session_start(); }
   require_once(dirname(__FILE__) . '/../configuration.php');
   require_once('abre_functions.php');
@@ -44,9 +45,13 @@
   $pagelocation=$portal_root;
   if(isset($_SESSION["redirecturl"])){ header("Location: $pagelocation/#".$_SESSION["redirecturl"]); }else{ header("Location: $pagelocation"); }
 
-
   $response = $fb->get('/me?fields=name,email', $accessToken->getValue());
   $user = $response->getGraphUser();
+  $userid = $user['id'];
+  $revokeCall = '/'. $userid .'/permissions';
+
+try{
+
   // access token but useremail not set
   if(isset($_SESSION['access_token']))
   {
@@ -56,6 +61,8 @@
       $_SESSION['usertype']= 'parent';
       $_SESSION['displayName']= $user['name'];
     }
+  }else{
+    header("Location: $pagelocation");
   }
 
   if (isset($_SESSION['access_token']))
@@ -88,6 +95,36 @@
     }
 
   }
+}
+catch (Exception $x)
+{
+
+  if(strpos($x->getMessage(), 'Invalid Credentials'))
+  {
+
+
+    session_destroy();
+    $fb->api($revokeCall, "DELETE", $accessToken);
+    //$client->revokeToken();
+
+    //Redirect user
+    header("Location: $portal_root");
+
+  }
+
+  if(strpos($x->getMessage(), 'Invalid Credentials'))
+  {
+
+    //Destroy the OAuth & PHP session
+    session_destroy();
+    $fb->api($revokeCall, "DELETE", $accessToken);
+    //$client->revokeToken();
+
+    //Redirect user
+    header("Location: $portal_root");
+  }
+
+}
   // The OAuth 2.0 client handler helps us manage access tokens
   $oAuth2Client = $fb->getOAuth2Client();
   // Get the access token metadata from /debug_token
@@ -115,7 +152,6 @@
   }
 
   $_SESSION['fb_access_token'] = (string) $accessToken;
-  echo $_SESSION['fb_access_token'];
 
   // User is logged in with a long-lived access token.
   // You can redirect them to a members-only page.
