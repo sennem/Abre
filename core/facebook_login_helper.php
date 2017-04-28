@@ -59,6 +59,7 @@ try{
       $_SESSION['useremail']=$user['email'];
       $_SESSION['usertype']= 'parent';
       $_SESSION['displayName']= $user['name'];
+      $_SESSION['picture'] = sitesettings('sitelogo');
     }
   }else{
     //header("Location: $pagelocation");

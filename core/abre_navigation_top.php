@@ -35,11 +35,11 @@
 				?>
 				<div class='navspace'></div>
 				<?php
-					if($_SESSION['usertype'] == 'parent'){
-						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".sitesettings('sitelogo')."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
-					}else{
+					// if($_SESSION['usertype'] == 'parent'){
+					// 	echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".sitesettings('sitelogo')."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+					// }else{
 						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
-					}
+					// }
 				?>
 			</div>
 		<div id='navigation_top'></div>
