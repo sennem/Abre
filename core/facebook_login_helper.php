@@ -68,7 +68,6 @@ try{
   {
     if($_SESSION['usertype']!="")
     {
-      echo "hitting db";
       include "abre_dbconnect.php";
       if($result=$db->query("SELECT * from users_parent where email='".$_SESSION['useremail']."'"))
       {
