@@ -29,11 +29,7 @@
 
 		<header class='drawer-header' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
 			<?php
-			// if($_SESSION['usertype'] == 'parent'){
-			// 	echo "<img src='".sitesettings('sitelogo')."?sz=100' class='avatar'>";
-			// }else{
 				echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar'>";
-			// }
 				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['displayName']."</span>";
 				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['useremail']."</span>";
 			?>
