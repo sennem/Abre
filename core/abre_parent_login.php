@@ -16,10 +16,12 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
+		
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
   require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
+
 
   if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
     $fb = new Facebook\Facebook([
@@ -31,8 +33,14 @@
     $helper = $fb->getRedirectLoginHelper();
 
     $permissions = ['public_profile', 'email']; // Optional permissions
-    $loginUrl = $helper->getLoginUrl($portal_root.'/core/facebook_login_helper.php/', $permissions);
+    $loginUrl = $helper->getLoginUrl($portal_root.'/core/abre_facebook_login_helper.php/', $permissions);
   }
+
+	if(sitesettings('googleclientid') !== '' && sitesettings('googleclientsecret') !== '' ){
+
+		require_once('abre_parent_google_authentication.php');
+		$authUrl = $client->createAuthUrl();
+	}
 ?>
 
 	<!-- Display the login -->
@@ -43,10 +51,13 @@
 				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; margin-left:20px; margin-bottom:5px;'></div>
 				<?php
 					echo "<div class='mdl-card-text mdl-color-text--grey-600'>Please log in with one of the following services</div>";
+					echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style= 'margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Login with Google</a>";
           if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
             echo "<a href='".htmlspecialchars($loginUrl)."'>Log in with Facebook!</a>";
           }
 			  	?>
+					<br></br>
+          <a id="SignIn" href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=92c0fe4c-9956-4f78-940d-f1922b9f2fc2&response_type=code&redirect_uri=http://localhost/core/microsoft_login_helper.php&response_mode=form_post&scope=openid&state=12345'>Sign In with Microsoft</a>
 			</div>
 
 		</div>
