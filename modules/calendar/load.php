@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
-	if($_SESSION['usertype'] != parent){ 
+	if($_SESSION['usertype'] != 'parent'){
 ?>
 
 		<div class='grid-item'>
@@ -37,4 +37,4 @@
 				</div>
 			</div>
 		</div>
-<?}?>
+<?php}?>
