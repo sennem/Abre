@@ -52,17 +52,17 @@
 					echo "<div class='mdl-card-text mdl-color-text--grey-600'>Please log in with one of the following services</div>";
 					if(sitesettings('googleclientid') !== '' && sitesettings('googleclientsecret') !== '' ){
 						echo "<div style= 'padding-top: 1em'>";
-							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; width:100%; text-transform:none; background-color:#BF4434; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' ></i> Login with Google</a>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; width:100%; text-transform:none; background-color:#BF4434; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' ></i>Login with Google</a>";
 						echo "</div>";
 					}
           if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
 						echo "<div style= 'padding-top: 1em'>";
-							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='".htmlspecialchars($loginUrl)."' style='text-align:left; width:100%; text-transform:none; background-color:#1A60A2; font-size:14px'><i class='fa fa-facebook material-icons left'></i>Log in with Facebook</a>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='".htmlspecialchars($loginUrl)."' style='text-align:left; width:100%; text-transform:none; background-color:#1A60A2; font-size:14px'><i class='fa fa-facebook material-icons left'></i>Login with Facebook</a>";
 						echo "</div>";
           }
 					if(sitesettings('microsoftclientid') !== '' && sitesettings('microsoftclientsecret') !== '' ){
 						echo "<div style= 'padding-top: 1em'>";
-							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".sitesettings('microsoftclientid')."&response_type=code&redirect_uri=http://localhost/core/microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent' style='text-align:left; width:100%; text-transform:none; background-color:#0078d7; font-size:14px'><i class='fa fa-windows material-icons left'></i> Login with Microsoft</a>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".sitesettings('microsoftclientid')."&response_type=code&redirect_uri=http://localhost/core/microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent' style='text-align:left; width:100%; text-transform:none; background-color:#0078d7; font-size:14px'><i class='fa fa-windows material-icons left'></i>Login with Microsoft</a>";
 						echo "</div>";
 					}
 			  	?>
