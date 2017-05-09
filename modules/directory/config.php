@@ -26,6 +26,9 @@
 
 	$pageview=1;
 	$drawerhidden=0;
+	if($_SESSION['usertype'] == 'parent'){
+		$drawerhidden = 1;
+	}
 	$pageorder=5;
 	$pagetitle="Staff Directory";
 	$pageicon="people";
