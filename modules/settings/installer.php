@@ -33,4 +33,10 @@
 			$db->multi_query($sql);
 		}
 		$db->close();
+  }
+
+  //Write the Setup File
+  $myfile = fopen("$portal_path_root/modules/settings/setup.txt", "w");
+  fwrite($myfile, '');
+  fclose($myfile);
 ?>
