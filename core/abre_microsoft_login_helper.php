@@ -103,26 +103,26 @@
   catch (Exception $x)
   {
 
-  if(strpos($x->getMessage(), 'Invalid Credentials'))
-  {
+    if(strpos($x->getMessage(), 'Invalid Credentials'))
+    {
 
 
-    session_destroy();
+      session_destroy();
 
-    //Redirect user
-    header("Location: $portal_root");
+      //Redirect user
+      header("Location: $portal_root");
 
-  }
+    }
 
-  if(strpos($x->getMessage(), 'Invalid Credentials'))
-  {
+    if(strpos($x->getMessage(), 'Invalid Credentials'))
+    {
 
-    //Destroy the OAuth & PHP session
-    session_destroy();
+      //Destroy the OAuth & PHP session
+      session_destroy();
 
-    //Redirect user
-    header("Location: $portal_root");
-  }
+      //Redirect user
+      header("Location: $portal_root");
+    }
 
   }
 
