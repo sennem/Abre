@@ -16,7 +16,7 @@
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-		
+
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
@@ -42,7 +42,6 @@
 		$authUrl = $client->createAuthUrl();
 	}
 ?>
-
 	<!-- Display the login -->
 	<div class="mdl-layout mdl-js-layout login-card">
 		<div class="login_wrapper">
@@ -51,13 +50,22 @@
 				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; margin-left:20px; margin-bottom:5px;'></div>
 				<?php
 					echo "<div class='mdl-card-text mdl-color-text--grey-600'>Please log in with one of the following services</div>";
-					echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style= 'margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Login with Google</a>";
+					if(sitesettings('googleclientid') !== '' && sitesettings('googleclientsecret') !== '' ){
+						echo "<div style= 'padding-top: 1em'>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; width:100%; text-transform:none; background-color:#BF4434; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' ></i> Login with Google</a>";
+						echo "</div>";
+					}
           if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
-            echo "<a href='".htmlspecialchars($loginUrl)."'>Log in with Facebook!</a>";
+						echo "<div style= 'padding-top: 1em'>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='".htmlspecialchars($loginUrl)."' style='text-align:left; width:100%; text-transform:none; background-color:#1A60A2; font-size:14px'><i class='fa fa-facebook material-icons left'></i>Log in with Facebook</a>";
+						echo "</div>";
           }
+					if(sitesettings('microsoftclientid') !== '' && sitesettings('microsoftclientsecret') !== '' ){
+						echo "<div style= 'padding-top: 1em'>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".sitesettings('microsoftclientid')."&response_type=code&redirect_uri=http://localhost/core/microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent' style='text-align:left; width:100%; text-transform:none; background-color:#0078d7; font-size:14px'><i class='fa fa-windows material-icons left'></i> Login with Microsoft</a>";
+						echo "</div>";
+					}
 			  	?>
-					<br></br>
-          <a id="SignIn" href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=92c0fe4c-9956-4f78-940d-f1922b9f2fc2&response_type=code&redirect_uri=http://localhost/core/microsoft_login_helper.php&response_mode=form_post&scope=openid&state=12345'>Sign In with Microsoft</a>
 			</div>
 
 		</div>
