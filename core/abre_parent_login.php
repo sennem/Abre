@@ -57,7 +57,7 @@
 					}
           if(sitesettings('facebookclientid') !== '' && sitesettings('facebookclientsecret') !== '' ){
 						echo "<div style= 'padding-top: 1em'>";
-							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='".htmlspecialchars($loginUrl)."' style='text-align:left; width:100%; text-transform:none; background-color:#1A60A2; font-size:14px'><i class='fa fa-facebook material-icons left'></i>Log in with Facebook</a>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='".htmlspecialchars($loginUrl)."' style='text-align:left; width:100%; text-transform:none; background-color:#1A60A2; font-size:14px'><i class='fa fa-facebook material-icons left'></i> Login with Facebook</a>";
 						echo "</div>";
           }
 					if(sitesettings('microsoftclientid') !== '' && sitesettings('microsoftclientsecret') !== '' ){
