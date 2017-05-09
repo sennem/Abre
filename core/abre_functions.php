@@ -185,7 +185,7 @@
 				}
 				if(($value == "googleclientsecret" && $valuereturn !== "") || ($value == "facebookclientsecret" && $valuereturn !== "")
 				|| ($value == "microsoftclientsecret" && $valuereturn !== "")){
-					$valuereturn = decrypt($valuereturn);
+					$valuereturn = decrypt($valuereturn, '');
 				}
 				if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
 				if($value=="sitecolor" && $valuereturn==""){ $valuereturn="#2B2E4A"; }
