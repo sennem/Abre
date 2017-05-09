@@ -90,7 +90,7 @@
 		}
 
 		//Get basic user information if they are logged in
-		if((isset($_SESSION['access_token']) && $client->getAccessToken()) || isset($_SESSION['facebook_access_token']) || isset($_SESSION['google_parent_access_token']))
+		if((isset($_SESSION['access_token']) && $client->getAccessToken()) || isset($_SESSION['facebook_access_token']) || isset($_SESSION['google_parent_access_token']) || isset($_SESSION['microsoft_access_token']))
 		{
 			if(!isset($_SESSION['useremail']))
 			{
