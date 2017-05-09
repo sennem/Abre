@@ -112,7 +112,7 @@
 		echo "</div>";
 
 		//Stream preferences
-		if($_SESSION['usertype']!="student")
+		if($_SESSION['usertype']=="staff")
 		{
 			echo "<div class='row'>";
 			echo "<div class='page_container page_container_limit'>";
