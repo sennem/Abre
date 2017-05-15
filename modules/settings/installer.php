@@ -53,7 +53,7 @@
 			}
 			foreach($studentIds as $id){
 				$stringToken = $id . string(time());
-				$token = substr(hash('sha256', $token), 0, 10);
+				$token = encrypt(substr(hash('sha256', $token), 0, 10), "");
 				$stmt = $db->stmt_init();
 				$sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES ('$id', '$token');";
 				$stmt->prepare($sql);
