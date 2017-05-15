@@ -88,17 +88,17 @@
 					$title=htmlspecialchars($row['title'], ENT_QUOTES);
 					$id=htmlspecialchars($row['id'], ENT_QUOTES);
 					echo "<div class='col m4 s6'>";
-						$returncount=0;
-						$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."' and streams like '%$id%'";
-						$dbreturn = databasequery($sql);
-						foreach ($dbreturn as $row)
-						{
-							echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
-							$returncount=1;
-						}
-						if($returncount==0){ echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>"; }
-					echo "</div>";
-					$dcount++;
+					$returncount=0;
+					$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."' and streams like '%$id%'";
+					$dbreturn = databasequery($sql);
+					foreach ($dbreturn as $row)
+					{
+						echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+						$returncount=1;
+					}
+					if($returncount==0){ echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>"; }
+						echo "</div>";
+						$dcount++;
 	    		}
 	    		if($dcount==0){ echo "<div class='col s12'>No available streams</div>"; }
 				echo "<div class='col s12'>";
@@ -253,7 +253,7 @@ $('.modal-editstreams').leanModal({
 <?php } ?>
 
 $(".formclick").click(function() {
-	<?php if($_SESSION['usertype']=="staff"){ ?>
+	<?php if($_SESSION['usertype']=="staff" || $_SESSION['usertype'] == 'parent'){ ?>
 
 		if ($('.streamtopic:checked').length < 3)
 		{

@@ -19,6 +19,7 @@
 
 	//Include required files
 	require_once('abre_verification.php');
+	require_once('abre_functions.php');
 
 ?>
 <?php
@@ -52,6 +53,7 @@ if($_SESSION['usertype'] == 'parent'){
 					{
 						if($_SESSION['usertype'] == 'parent'){
 							echo "<a id='addstudent' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-verifystudent' href='#verifystudent'><i class='material-icons' style='margin-right:10px'>add</i></a>";
+							isVerified();
 						}
 						echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>";
 					}
@@ -97,6 +99,7 @@ if($_SESSION['usertype'] == 'parent'){
 				var notification = document.querySelector('.mdl-js-snackbar');
 				var status = response.status;
 				if(status == "Success"){
+					<?php isVerified(); ?>
 					$("#studenttoken").val('');
 					$('#verifystudent').closeModal({
 						in_duration: 0,
