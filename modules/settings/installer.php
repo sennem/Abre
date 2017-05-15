@@ -23,16 +23,44 @@
 
 	if(superadmin() && !file_exists("$portal_path_root/modules/settings/setup.txt"))
 	{
-		//Check for apps table
+		//Check for users_parents table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM users_parent"))
 		{
+			$stmt = $db->stmt_init();
       $sql = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
       $sql .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
       $sql .= "ALTER TABLE `users_parent` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-			$db->multi_query($sql);
+			$stmt->prepare($sql);
+			$stmt->execute();
 		}
-		$db->close();
+
+		//Check for student_tokens table
+		if(!$db->query("SELECT * FROM student_tokens"))
+		{
+			$stmt = $db->stmt_init();
+			$sql = "CREATE TABLE `student_tokens` (`id` int(11) NOT NULL,`studentId` text NOT NULL,`token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$sql .= "ALTER TABLE `student_tokens` ADD PRIMARY KEY (`id`);";
+			$sql .= "ALTER TABLE `student_tokens` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+			$stmt->prepare($sql);
+			$stmt->execute();
+
+			$sql = "SELECT studentId FROM Abre_Students";
+			$result = $db->query($sql);
+			$studentIds = [];
+			while($row = $result->fetch_array($result, MYSQL_ASSOC)){
+				$studentIds = $row['studentId'];
+			}
+			foreach($studentIds as $id){
+				$stringToken = $id . string(time());
+				$token = substr(hash('sha256', $token), 0, 10);
+				$stmt = $db->stmt_init();
+				$sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES ('$id', '$token');";
+				$stmt->prepare($sql);
+				$stmt->execute();
+			}
+			$db->close();
+		}
   }
 
   //Write the Setup File
