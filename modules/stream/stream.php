@@ -45,13 +45,12 @@
 		if(!empty($setting_card_classroom)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamclassroom'>"; include "../classroom/load.php"; echo "</div></div>"; }
 		if(!empty($setting_card_apps)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamapps'>"; include "../apps/load.php"; echo "</div></div>"; }
 		if($_SESSION['usertype'] == 'parent'){
-			echo "<div class='row center-align'><div class='col s12'><h6>Parent Access Coming Soon!</h6></div><div class='col s12'>Soon you will able to access student documents and grades via Abre!</div></div>"; 
+			echo "<div class='row center-align'><div class='col s12'><h6>Parent Access Coming Soon!</h6></div><div class='col s12'>Soon you will able to access student documents and grades via Abre!</div></div>";
 		}
 		echo "<div id='streamcards'></div>";
 	echo "</div>";
 
 	echo "<div style='height:80px;'><div id='showmorestream' style='display:none; position:absolute; left:50%; padding:20px; margin-left:-35px;'><div class='mdl-spinner mdl-js-spinner is-active'></div></div></div>";
-
 ?>
 
 <script>
@@ -204,5 +203,4 @@
 			loadApps();
 		<?php } ?>
 	}
-
 </script>
