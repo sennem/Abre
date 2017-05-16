@@ -253,7 +253,7 @@ $('.modal-editstreams').leanModal({
 <?php } ?>
 
 $(".formclick").click(function() {
-	<?php if($_SESSION['usertype']=="staff" || $_SESSION['usertype'] == 'parent'){ ?>
+	<?php if($_SESSION['usertype']=="staff"){ ?>
 
 		if ($('.streamtopic:checked').length < 3)
 		{
@@ -286,7 +286,7 @@ $(".formclick").click(function() {
 		}
 	<?php } ?>
 
-	<?php if($_SESSION['usertype']=="student"){ ?>
+	<?php if($_SESSION['usertype']=="student" || $_SESSION['usertype'] == 'parent'){ ?>
 			$('.modal-viewapps').show();
 			var formData = $('#form-profile').serialize();
 			$.ajax({
