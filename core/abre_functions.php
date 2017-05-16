@@ -98,7 +98,9 @@
 	}
 
 	//set verified session data for parent
-	function isVerified(){
+	function isVerified()
+	{
+		/*
 		include "abre_dbconnect.php";
 		$sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'";
 		$result = $db->query($sql);
@@ -111,6 +113,7 @@
 			}
 		}
 		$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'],", ");
+		*/
 	}
 
 	//Query the database
