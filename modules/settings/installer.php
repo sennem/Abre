@@ -27,40 +27,36 @@
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM users_parent"))
 		{
-			$stmt = $db->stmt_init();
-      $sql = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-      $sql .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
-      $sql .= "ALTER TABLE `users_parent` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-			$stmt->prepare($sql);
-			$stmt->execute();
+			 $sql = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			 $sql .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
+			 $sql .= "ALTER TABLE `users_parent` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+			 $db->multi_query($sql);
 		}
+		$db->close();
 
 		//Check for student_tokens table
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM student_tokens"))
 		{
-			$stmt = $db->stmt_init();
 			$sql = "CREATE TABLE `student_tokens` (`id` int(11) NOT NULL,`studentId` text NOT NULL,`token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 			$sql .= "ALTER TABLE `student_tokens` ADD PRIMARY KEY (`id`);";
 			$sql .= "ALTER TABLE `student_tokens` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-			$stmt->prepare($sql);
-			$stmt->execute();
-
-			$sql = "SELECT studentId FROM Abre_Students";
-			$result = $db->query($sql);
-			$studentIds = [];
-			while($row = $result->fetch_array($result, MYSQL_ASSOC)){
-				$studentIds = $row['studentId'];
-			}
-			foreach($studentIds as $id){
-				$stringToken = $id . string(time());
+			$db->multi_query($sql);
+			
+			require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+			$sql2 = "SELECT StudentId FROM Abre_Students";
+			$result = $db->query($sql2);
+			while($row = $result->fetch_assoc())
+			{
+				$id = $row['StudentId'];
+				$stringToken = $id . time();
 				$token = encrypt(substr(hash('sha256', $token), 0, 10), "");
-				$stmt = $db->stmt_init();
 				$sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES ('$id', '$token');";
-				$stmt->prepare($sql);
-				$stmt->execute();
+				$db->query($sql);	
 			}
-			$db->close();
+
 		}
+		$db->close();
   }
 
   //Write the Setup File
