@@ -38,35 +38,35 @@
 						echo "<div class='col l6 m12'>";
 							echo "<div class='input-field col s12'><h5>Site Settings</h5><br></div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Title' value='".sitesettings("sitetitle")."' id='sitetitle' name='sitetitle' type='text'>";
+						    	echo "<input placeholder='Enter a Site Title' value='".sitesettings("sitetitle")."' id='sitetitle' name='sitetitle' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitetitle'>Site Title</label>";
 						    echo "</div>";
 						    echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Description' value='".sitesettings('sitedescription')."' id='sitedescription' name='sitedescription' type='text'>";
+						    	echo "<input placeholder='Enter a Site Description' value='".sitesettings('sitedescription')."' id='sitedescription' name='sitedescription' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitedescription'>Site Description</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter the Site Login Text' value='".sitesettings('sitelogintext')."' id='sitelogintext' name='sitelogintext' type='text'>";
+						    	echo "<input placeholder='Enter the Site Login Text' value='".sitesettings('sitelogintext')."' id='sitelogintext' name='sitelogintext' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitedescription'>Site Login Text</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Color' value='".sitesettings('sitecolor')."' id='sitecolor' name='sitecolor' type='text'>";
+						    	echo "<input placeholder='Enter a Site Color' value='".sitesettings('sitecolor')."' id='sitecolor' name='sitecolor' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitecolor'>Site Color</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter the Google Analytics ID' value='".sitesettings('siteanalytics')."' id='siteanalytics' name='siteanalytics' type='text'>";
+						    	echo "<input placeholder='Enter the Google Analytics ID' value='".sitesettings('siteanalytics')."' id='siteanalytics' name='siteanalytics' type='text' autocomplete='off'>";
 								echo "<label class='active' for='siteanalytics'>Google Analytics ID</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter the Site Administrator Email' value='".sitesettings('siteadminemail')."' id='siteadminemail' name='siteadminemail' type='text'>";
+						    	echo "<input placeholder='Enter the Site Administrator Email' value='".sitesettings('siteadminemail')."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
 								echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s6'>";
-						    	echo "<input placeholder='Enter Student Domain' value='".sitesettings('studentdomain')."' id='studentdomain' name='studentdomain' type='text'>";
+						    	echo "<input placeholder='Enter Student Domain' value='".sitesettings('studentdomain')."' id='studentdomain' name='studentdomain' type='text' autocomplete='off'>";
 								echo "<label class='active' for='studentdomain'>Student Domain</label>";
 						    echo "</div>";
 						    echo "<div class='input-field col s6'>";
-						    	echo "<input placeholder='Enter Required Characters' value='".sitesettings('studentdomainrequired')."' id='studentdomainrequired' name='studentdomainrequired' type='text'>";
+						    	echo "<input placeholder='Enter Required Characters' value='".sitesettings('studentdomainrequired')."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
 								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
 						    echo "</div>";
 								echo "<div class='col s6'>";
@@ -89,29 +89,29 @@
 						echo "<div id=apiKeys class='col l12 m12'>";
 							echo "<div class='col s12'> <h6>Google</h6></div>";
 							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Client ID' value='".sitesettings('googleclientid')."' id='googleclientid' name='googleclientid' type='text'>";
+								echo "<input placeholder='Enter Client ID' value='".sitesettings('googleclientid')."' id='googleclientid' name='googleclientid' type='text' autocomplete='off'>";
 								echo "<label class='active' for='googleclientid'>Google Client ID</label>";
 							echo "</div>";
 							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Client Secret' value='".sitesettings('googleclientsecret')."' id='googleclientsecret' name='googleclientsecret' type='text'>";
+								echo "<input placeholder='Enter Client Secret' value='".sitesettings('googleclientsecret')."' id='googleclientsecret' name='googleclientsecret' type='text' autocomplete='off'>";
 								echo "<label class='active' for='googleclientsecret'>Google Client Secret</label>";
 							echo "</div>";
 							echo "<div class='col s12'> <h6>Facebook</h6></div>";
 							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Client ID' value='".sitesettings('facebookclientid')."' id='facebookclientid' name='facebookclientid' type='text'>";
+								echo "<input placeholder='Enter Client ID' value='".sitesettings('facebookclientid')."' id='facebookclientid' name='facebookclientid' type='text' autocomplete='off'>";
 								echo "<label class='active' for='facebookclientid'>Facebook Client ID</label>";
 							echo "</div>";
 							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Client Secret' value='".sitesettings('facebookclientsecret')."' id='facebookclientsecret' name='facebookclientsecret' type='text'>";
+								echo "<input placeholder='Enter Client Secret' value='".sitesettings('facebookclientsecret')."' id='facebookclientsecret' name='facebookclientsecret' type='text' autocomplete='off'>";
 								echo "<label class='active' for='facebookclientsecret'>Facebook Client Secret</label>";
 							echo "</div>";
 							echo "<div class='col s12'> <h6>Microsoft</h6></div>";
 							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Client ID' value='".sitesettings('microsoftclientid')."' id='microsoftclientid' name='microsoftclientid' type='text'>";
+								echo "<input placeholder='Enter Client ID' value='".sitesettings('microsoftclientid')."' id='microsoftclientid' name='microsoftclientid' type='text' autocomplete='off'>";
 								echo "<label class='active' for='microsoftclientid'>Microsoft Client ID</label>";
 							echo "</div>";
 							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Client Secret' value='".sitesettings('microsoftclientsecret')."' id='microsoftclientsecret' name='microsoftclientsecret' type='text'>";
+								echo "<input placeholder='Enter Client Secret' value='".sitesettings('microsoftclientsecret')."' id='microsoftclientsecret' name='microsoftclientsecret' type='text' autocomplete='off'>";
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
 							echo "<div class='input-field col s6'>";
@@ -126,15 +126,15 @@
 						    //Software Answers
 						    echo "<div class='input-field col s12'><h5>Software Answers</h5><br></div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Host URL' value='".sitesettings('sitevendorlinkurl')."' id='sitevendorlinkurl' name='sitevendorlinkurl' type='text'>";
+						    	echo "<input placeholder='Enter VendorLink Host URL' value='".sitesettings('sitevendorlinkurl')."' id='sitevendorlinkurl' name='sitevendorlinkurl' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitevendorlinkurl'>Software Answers VendorLink URL</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Identifier' value='".sitesettings('sitevendorlinkidentifier')."' id='sitevendorlinkidentifier' name='sitevendorlinkidentifier' type='text'>";
+						    	echo "<input placeholder='Enter VendorLink Identifier' value='".sitesettings('sitevendorlinkidentifier')."' id='sitevendorlinkidentifier' name='sitevendorlinkidentifier' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitevendorlinkidentifier'>Software Answers VendorLink Identifier</label>";
 						    echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Key' value='".sitesettings('sitevendorlinkkey')."' id='sitevendorlinkkey' name='sitevendorlinkkey' type='text'>";
+						    	echo "<input placeholder='Enter VendorLink Key' value='".sitesettings('sitevendorlinkkey')."' id='sitevendorlinkkey' name='sitevendorlinkkey' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitevendorlinkkey'>Software Answers VendorLink Key</label>";
 						    echo "</div>";
 
@@ -240,15 +240,17 @@
 	  	});
 
 		//Generate Keys for Parents
-		$("#generateallkeys").unbind().click(function(event) {
-				event.preventDefault();
-				var result = confirm('Are you sure you want to proceed? This will create new keys for every student and invalidate current parent keys');
-				if(result){
-					$.ajax({ type: 'POST', url: './generate_all_keys.php'})
-				}
-			.done(function() {
-				location.reload();
-			})
+		$("#generateallkeys").unbind().click(function(event)
+		{
+			event.preventDefault();
+			var result = confirm('Are you sure you want to proceed? This will create new keys for every student and invalidate current parent keys');
+			if(result){
+				$.ajax({ type: 'POST', url: '/modules/settings/generate_all_keys.php'})
+				.done(function()
+				{
+					location.reload();
+				})
+			}
 		});
 	});
 

@@ -46,8 +46,6 @@
 		$sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], '');
 		$sitevendorlinkkey=$_POST["sitevendorlinkkey"];
 		$sitelogoexisting=$_POST["sitelogoexisting"];
-		$certicabaseurl=$_POST["certicabaseurl"];
-		$certicaaccesskey=$_POST["certicaaccesskey"];
 
 		if($_FILES['sitelogo']['name'])
 		{
@@ -76,7 +74,7 @@
 			$sitelogofilename=$sitelogoexisting;
 		}
 
-		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "certicabaseurl" => "$certicabaseurl", "certicaaccesskey" => "$certicaaccesskey", "parentaccess" => "$siteparentaccess", "googleclientid" => "$sitegoogleclientid", "googleclientsecret" => "$sitegoogleclientsecret", "facebookclientid" => "$sitefacebookclientid", "facebookclientsecret" => "$sitefacebookclientsecret", "microsoftclientid" => "$sitemicrosoftclientid", "microsoftclientsecret" => "$sitemicrosoftclientsecret" ];
+		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "parentaccess" => "$siteparentaccess", "googleclientid" => "$sitegoogleclientid", "googleclientsecret" => "$sitegoogleclientsecret", "facebookclientid" => "$sitefacebookclientid", "facebookclientsecret" => "$sitefacebookclientsecret", "microsoftclientid" => "$sitemicrosoftclientid", "microsoftclientsecret" => "$sitemicrosoftclientsecret" ];
 		$json = json_encode($array);
 
 		//Update the database
