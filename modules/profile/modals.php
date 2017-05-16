@@ -1,25 +1,25 @@
 <?php
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-    
+
     //Required configuration files
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 ?>
 
@@ -45,7 +45,7 @@
 			<div id="selecteddays" style='margin:12px 0 0 20px; font-weight:500; font-size:16px;'></div>
 	    </div>
 	</div>
-	
+
 <!--Stream Editor-->
 	<?php
 	if(superadmin())
@@ -93,6 +93,10 @@
 					<input type="radio" name="streamradio" id="stream_students" value="students">
 					<label for="stream_students">Students</label>
 				</div>
+				<div class='col m4 s12'>
+					<input type="radio" name="streamradio" id="stream_parents" value="parent">
+					<label for="stream_parents">Parents</label>
+				</div>
 			</div>
 			<input id="stream_id" name="stream_id" type="hidden">
 		</div>
@@ -105,13 +109,13 @@
 	<?php
  	}
  	?>
-	
+
 <script>
-	
+
 $(function()
 {
-	 			
-	 			
+
+
 		   	<?php
 			if(superadmin())
 			{
@@ -130,6 +134,7 @@ $(function()
 						$("#stream_id").val('');
 						$('#stream_staff').prop('checked', false);
 						$('#stream_students').prop('checked', false);
+						$('#stream_parents').prop('checked', false);
 					}
 				});
 
@@ -148,7 +153,7 @@ $(function()
 						type: 'POST',
 						url: 'modules/profile/update_stream.php',
 						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup }
-						
+
 					})
 
 					.done(function(){
@@ -161,11 +166,11 @@ $(function()
 			<?php
 			}
 			?>
-	 			
-	 			
+
+
 				var today = new Date();
-				//var y = today.getFullYear();		
-				var y = 2016;		
+				//var y = today.getFullYear();
+				var y = 2016;
 				$('#workcalendardisplay').multiDatesPicker({
 					<?php
 						if($_SESSION['usertype']!="student")
@@ -201,34 +206,34 @@ $(function()
 
 				        var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 						$("#selecteddays").text(dates + " Days Selected");
-						
-						
-						
+
+
+
 						var datestosave = $( "#saveddates" ).val();
 						$.ajax({
 							type: 'POST',
 							url: '/modules/profile/calendar_update.php',
 							data: { calendardaystosave : datestosave },
 						})
-								
+
 						//Show the notification
 						.done(function(response) {
 							//var notification = document.querySelector('.mdl-js-snackbar');
 							//var data = { message: response };
 							//notification.MaterialSnackbar.showSnackbar(data);
 						})
-						
-						
-						
+
+
+
 				    }
 				});
-				
+
 	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 				$("#selecteddays").text(dates + " Days Selected");
-				
-				
-				
-				
+
+
+
+
 			});
-			
+
 </script>

@@ -1,35 +1,35 @@
-<?php	
-	
+<?php
+
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-    
+
     //Required configuration files
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
-	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+
 	//Check for variable in url
-	if(isset($_GET['discussion'])){ 
-		$discussionid=$_GET['discussion']; 
+	if(isset($_GET['discussion'])){
+		$discussionid=$_GET['discussion'];
 		$discussionid=preg_replace("/[^0-9]/","",$discussionid);
 	}
-	
+
 	?>
-	
+
 	<!-- Commenting Modal -->
 	<?php
 	if($_SESSION['usertype']=='staff')
@@ -55,7 +55,7 @@
 			</div>
 			</form>
 		</div>
-		
+
 		<div id="sharecard" class="modal modal-fixed-footer modal-mobile-full" style="max-width: 600px;">
 			<form>
 			<div class="modal-content">
@@ -68,13 +68,13 @@
 	    	</div>
 	    	</form>
 		</div>
-		
+
 	<?php
 	}
 	?>
 	
 <script>
-	
+
 	$(function()
 	{
 
@@ -89,9 +89,9 @@
 		    objWindow = window.open(finallink, 'Social Share', 'width=500,height=500,resizable=no').focus();
 
 		});
-	
+
 		//Save comment
-		var form = $('#form-addstreamcomment');			
+		var form = $('#form-addstreamcomment');
 		$(form).submit(function(event) {
 			event.preventDefault();
 			$("#commentstatustext").text("Posting comment...");
@@ -101,7 +101,7 @@
 				url: $(form).attr('action'),
 				data: formData
 			})
-								
+
 			//Show the notification
 			.done(function(response) {
 				$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+response, function() {
@@ -110,7 +110,7 @@
 					$(".modal-content #streamUrl").val(response);
 					var element = document.getElementById("commentthreadbox");
 					element.scrollTop = element.scrollHeight;
-					$('#streamcards').load("modules/stream/stream_feeds.php", function () {	
+					$('#streamcards').load("modules/stream/stream_feeds.php", function () {
 						$('.grid').masonry( 'reloadItems' );
 						$('.grid').masonry( 'layout' );
 						mdlregister();
@@ -118,10 +118,9 @@
 					$('#streamlikes').load("modules/stream/stream_likes.php", function () {
 						mdlregister();
 					});
-				});			
-			})						
+				});
+			})
 		});
-		
 	});
-	
+
 </script>
