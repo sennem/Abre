@@ -29,7 +29,7 @@
     $sql .= "ALTER TABLE `student_tokens` ADD PRIMARY KEY (`id`);";
     $sql .= "ALTER TABLE `student_tokens` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
     $db->multi_query($sql);
-
+  }
     require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
     $sql2 = "SELECT StudentId FROM Abre_Students";
     $result = $db->query($sql2);
@@ -41,8 +41,5 @@
       $sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES ('$id', '$token');";
       $db->query($sql);
     }
-
-  }
   $db->close();
-  echo "Your tokens were generated successfully."
 ?>
