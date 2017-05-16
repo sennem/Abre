@@ -37,7 +37,7 @@ if(superadmin())
     $linkencoded=base64_encode($link);
     $group=$value['group'];
     echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
-    echo "<td><b>$title</b><td>";
+    echo "<td><b>$title</b> (".ucfirst($group).")<td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
@@ -108,6 +108,14 @@ $(function()
       else
       {
         $('#stream_students').prop('checked', false);
+      }
+      if(group=="parent")
+      {
+        $('#stream_parents').prop('checked', true);
+      }
+      else
+      {
+        $('#stream_parents').prop('checked', false);
       }
 
       $('#addeditstream').openModal({
