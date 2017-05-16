@@ -115,8 +115,9 @@
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
 							echo "<div class='input-field col s6'>";
-								if($db->query("SELECT * FROM Abre_Students") || $db->query("SELECT * FROM student_tokens")){
-										echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
+								if(!$db->query("SELECT * FROM Abre_Students")){
+								}else{
+									echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
 								}
 							echo "</div>";
 						echo "</div>";
