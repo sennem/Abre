@@ -100,20 +100,20 @@
 	//set verified session data for parent
 	function isVerified()
 	{
-		/*
 		include "abre_dbconnect.php";
-		$sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'";
-		$result = $db->query($sql);
-		$_SESSION['auth_students'] = '';
-		while($row = $result->fetch_assoc()){
-			$sql2 = "SELECT * FROM student_tokens WHERE token='".$row['students']."'";
-			$result2 = $db->query($sql2);
-			while($row2 = $result2->fetch_assoc()){
-				$_SESSION['auth_students'] .= $row2['studentId'].',';
+		if(!$db->query("SELECT * FROM student_tokens") || !$db->query("SELECT * FROM users_parent")){
+			$sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'";
+			$result = $db->query($sql);
+			$_SESSION['auth_students'] = '';
+			while($row = $result->fetch_assoc()){
+				$sql2 = "SELECT * FROM student_tokens WHERE token='".$row['students']."'";
+				$result2 = $db->query($sql2);
+				while($row2 = $result2->fetch_assoc()){
+					$_SESSION['auth_students'] .= $row2['studentId'].',';
+				}
 			}
+			$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'],", ");
 		}
-		$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'],", ");
-		*/
 	}
 
 	//Query the database

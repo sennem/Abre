@@ -114,7 +114,13 @@
 								echo "<input placeholder='Enter Client Secret' value='".sitesettings('microsoftclientsecret')."' id='microsoftclientsecret' name='microsoftclientsecret' type='text'>";
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
+							echo "<div class='input-field col s6'>";
+								if($db->query("SELECT * FROM Abre_Students") || $db->query("SELECT * FROM student_tokens")){
+										echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
+								}
+							echo "</div>";
 						echo "</div>";
+
 						echo "<div class='col l12'>";
 						    //Software Answers
 						    echo "<div class='input-field col s12'><h5>Software Answers</h5><br></div>";
@@ -232,6 +238,17 @@
 			}
 	  	});
 
+		//Generate Keys for Parents
+		$("#generateallkeys").unbind().click(function(event) {
+				event.preventDefault();
+				var result = confirm('Are you sure you want to proceed? This will create new keys for every student and invalidate current parent keys');
+				if(result){
+					$.ajax({ type: 'POST', url: './generate_all_keys.php'})
+				}
+			.done(function() {
+				location.reload();
+			})
+		});
 	});
 
 </script>
