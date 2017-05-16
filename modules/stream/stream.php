@@ -44,9 +44,6 @@
 		if(!empty($setting_card_calendar)==1 or empty($gafecards)){ echo "<div id='streamcalendar'>"; include "../calendar/load.php"; echo "</div>"; }
 		if(!empty($setting_card_classroom)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamclassroom'>"; include "../classroom/load.php"; echo "</div></div>"; }
 		if(!empty($setting_card_apps)==1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamapps'>"; include "../apps/load.php"; echo "</div></div>"; }
-		if($_SESSION['usertype'] == 'parent'){
-			echo "<div class='row center-align'><div class='col s12'><h6>Parent Access Coming Soon!</h6></div><div class='col s12'>Soon you will able to access student documents and grades via Abre!</div></div>";
-		}
 		echo "<div id='streamcards'></div>";
 	echo "</div>";
 
