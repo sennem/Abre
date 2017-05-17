@@ -114,7 +114,7 @@
 								echo "<input placeholder='Enter Client Secret' value='".sitesettings('microsoftclientsecret')."' id='microsoftclientsecret' name='microsoftclientsecret' type='text' autocomplete='off'>";
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
-							echo "<div class='input-field col s6'>";
+							echo "<div class='input-field col s12'>";
 								if(!$db->query("SELECT * FROM Abre_Students")){
 								}else{
 									echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
