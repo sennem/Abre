@@ -40,11 +40,12 @@
 				$icon_final="icon_thumb_$icon_end";
 				$staff=$value['staff'];
 				$student=$value['student'];
+				$parent=$value['parent'];
 				$minor_disabled=$value['minor_disabled'];
 				echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
 					echo "<td style='width:60px'><img src='$portal_root/core/images/$icon' style='width:35px; height:35px;'></td>";
 					echo "<td><b>$title</b><td>";
-					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appminors='$minor_disabled'><i class='material-icons'>mode_edit</i></button></td>";
+					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appminors='$minor_disabled' data-appparents='$parent'><i class='material-icons'>mode_edit</i></button></td>";
 					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteapp' data-appid='$id'><i class='material-icons'>delete</i></button></td>";
 					echo "<td style='width:30px'><div class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 handle'><i class='material-icons'>reorder</i></div></td>";
 				echo "</tr>";
