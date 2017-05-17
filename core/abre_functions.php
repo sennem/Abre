@@ -101,7 +101,7 @@
 	function isVerified()
 	{
 		include "abre_dbconnect.php";
-		if(!$db->query("SELECT * FROM student_tokens") && !$db->query("SELECT * FROM users_parent")){
+		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
 			$sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'";
 			$result = $db->query($sql);
 			$_SESSION['auth_students'] = '';
