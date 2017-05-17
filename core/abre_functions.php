@@ -101,6 +101,50 @@
 	function isVerified()
 	{
 		include "abre_dbconnect.php";
+		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent") && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
+
+			//see if email matches any records
+			 $sql = "SELECT * FROM Abre_ParentContacts WHERE email1='".$_SESSION['useremail']."'";
+			 $result = $db->query($sql);
+			 while($row = $result->fetch_assoc()){
+				 //for records that match find kids associated with that email
+					$sql2 = "SELECT * FROM student_tokens WHERE studentId='".$row['StudentID']."'";
+					$result2 = $db->query($sql2);
+					while($row2 = $result2->fetch_assoc()){
+						//for kids associated with that email
+						$studenttokenencrypted = $row2['token'];
+						//Check to see if student has already been claimed by parent
+						$sqlcheck = "SELECT * FROM users_parent WHERE students='$studenttokenencrypted' AND email ='".$_SESSION['useremail']."'";
+						$resultcheck = $db->query($sqlcheck);
+						$numrows2 = $resultcheck->num_rows;
+
+						//this parent does not have access
+						if($numrows2 == 0)
+						{
+							$sqlcheck2 = "SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."' AND students=''";
+							$resultcheck2 = $db->query($sqlcheck2);
+							$nulltokenentries = $resultcheck2->num_rows;
+							//every entry associated with this email address is full
+							if($nulltokenentries == 0){
+								$stmt = $db->stmt_init();
+								$sql = "INSERT INTO users_parent (email, students) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted')";
+								$stmt->prepare($sql);
+								$stmt->execute();
+								$stmt->close();
+								$db->close();
+							//there is an email entry with no token associated with it
+							}else{
+								$stmt = $db->stmt_init();
+								$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email='".$_SESSION['useremail']."'";
+								$stmt->prepare($sql);
+								$stmt->execute();
+								$stmt->close();
+								$db->close();
+							}
+						}
+					}
+			 }
+		}
 		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
 			$sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'";
 			$result = $db->query($sql);
