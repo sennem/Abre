@@ -43,7 +43,7 @@
 		{
       $sqlcheck2 = "SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."' AND students=''";
       $resultcheck2 = $db->query($sqlcheck2);
-      $nulltokenentries = $resultcheck->num_rows;
+      $nulltokenentries = $resultcheck2->num_rows;
       if($nulltokenentries == 0){
         $stmt = $db->stmt_init();
         $sql = "INSERT INTO users_parent (email, students) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted')";
@@ -55,19 +55,18 @@
         header("Content-Type: application/json");
         echo json_encode($message);
         break;
-      }
-
-  		$stmt = $db->stmt_init();
-  		$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email='".$_SESSION['useremail']."'";
-  		$stmt->prepare($sql);
-  		$stmt->execute();
-  		$stmt->close();
-  		$db->close();
-      $message = array("status"=>"Success","message"=>"You now have access to your students information.");
-      header("Content-Type: application/json");
-      echo json_encode($message);
-      break;
-
+      }else{
+				$stmt = $db->stmt_init();
+				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email='".$_SESSION['useremail']."'";
+				$stmt->prepare($sql);
+				$stmt->execute();
+				$stmt->close();
+				$db->close();
+				$message = array("status"=>"Success","message"=>"You now have access to your students information.");
+				header("Content-Type: application/json");
+				echo json_encode($message);
+				break;
+			}
 		}
     else{
       $message = array("status"=>"Success","message"=>"You already have access to this student.");

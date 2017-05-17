@@ -52,7 +52,7 @@ if($_SESSION['usertype'] == 'parent'){
 					if(!isset($_GET["dash"]))
 					{
 						if($_SESSION['usertype'] == 'parent'){
-							echo "<a id='addstudent' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-verifystudent' href='#verifystudent'><i class='material-icons' style='margin-right:10px'>add</i></a>";
+							echo "<a id='addstudent' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-verifystudent' href='#verifystudent' style='margin-right:10px'><i class='material-icons'>add</i></a>";
 							isVerified();
 						}
 						echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewapps' href='#viewapps'><i class='material-icons'>apps</i></a>";
@@ -75,7 +75,7 @@ if($_SESSION['usertype'] == 'parent'){
 		{
 			in_duration: 0,
 			out_duration: 0,
-			 ready: function() { $("#studenttoken").focus(); }
+			ready: function() { $("#studenttoken").val(''); $('#errormessage').text(''); $("#studenttoken").focus(); }
 		});
 
 		//Scroll to top
