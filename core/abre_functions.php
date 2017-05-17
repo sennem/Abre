@@ -104,9 +104,10 @@
 		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent") && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
 
 			//see if email matches any records
-			 $sql = "SELECT * FROM Abre_ParentContacts WHERE email1='".$_SESSION['useremail']."'";
+			 $sql = "SELECT * FROM Abre_ParentContacts WHERE Email1='".$_SESSION['useremail']."'";
 			 $result = $db->query($sql);
 			 while($row = $result->fetch_assoc()){
+				 echo $row;
 				 //for records that match find kids associated with that email
 					$sql2 = "SELECT * FROM student_tokens WHERE studentId='".$row['StudentID']."'";
 					$result2 = $db->query($sql2);
@@ -131,7 +132,6 @@
 								$stmt->prepare($sql);
 								$stmt->execute();
 								$stmt->close();
-								$db->close();
 							//there is an email entry with no token associated with it
 							}else{
 								$stmt = $db->stmt_init();
@@ -139,12 +139,13 @@
 								$stmt->prepare($sql);
 								$stmt->execute();
 								$stmt->close();
-								$db->close();
 							}
 						}
 					}
 			 }
 		}
+		$db->close();
+		include "abre_dbconnect.php";
 		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
 			$sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'";
 			$result = $db->query($sql);
