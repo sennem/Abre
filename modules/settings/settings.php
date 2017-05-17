@@ -69,10 +69,6 @@
 						    	echo "<input placeholder='Enter Required Characters' value='".sitesettings('studentdomainrequired')."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
 								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
 						    echo "</div>";
-								echo "<div class='col s6'>";
-									echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".sitesettings('parentaccess')."/>";
-									echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
-								echo "</div>";
 						echo "</div>";
 
 						echo "<div class='col l6 s12 center-align'>";
@@ -84,6 +80,11 @@
 							    echo "<input type='hidden' name='sitelogoexisting' value='$sitelogoexisting'>";
 							    echo "<input type='file' name='sitelogo' id='sitelogo' style='display:none;'>";
 							}
+						echo "</div>";
+						
+						echo "<div class='input-field col l12'>";
+							echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".sitesettings('parentaccess')."/>";
+							echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
 						echo "</div>";
 
 						echo "<div id=apiKeys class='col l12 m12'>";
