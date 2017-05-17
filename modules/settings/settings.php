@@ -245,6 +245,7 @@
 			event.preventDefault();
 			var result = confirm('Are you sure you want to proceed? This will create new keys for every student and invalidate current parent keys');
 			if(result){
+				$("#generateallkeys").html("Generating Keys...");
 				$.ajax({ type: 'POST', url: '/modules/settings/generate_all_keys.php'})
 				.done(function()
 				{
