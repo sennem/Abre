@@ -39,11 +39,11 @@
 		$sitevendorlinkidentifier=$_POST["sitevendorlinkidentifier"];
 		$siteparentaccess = $_POST["parentaccess"];
 		$sitegoogleclientid = $_POST["googleclientid"];
-		$sitegoogleclientsecret = encrypt($_POST["googleclientsecret"], '');
+		if($_POST["googleclientsecret"]!=""){ $sitegoogleclientsecret = encrypt($_POST["googleclientsecret"], ''); }else{ $sitegoogleclientsecret=""; }
 		$sitefacebookclientid = $_POST["facebookclientid"];
-		$sitefacebookclientsecret = encrypt($_POST["facebookclientsecret"], '');
+		if($_POST["facebookclientid"]!=""){ $sitefacebookclientsecret = encrypt($_POST["facebookclientsecret"], ''); }else{ $sitefacebookclientsecret=""; }
 		$sitemicrosoftclientid = $_POST["microsoftclientid"];
-		$sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], '');
+		if($_POST["microsoftclientid"]!=""){ $sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], ''); }else{ $sitemicrosoftclientsecret=""; }
 		$sitevendorlinkkey=$_POST["sitevendorlinkkey"];
 		$sitelogoexisting=$_POST["sitelogoexisting"];
 
