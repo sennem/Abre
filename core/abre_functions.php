@@ -107,7 +107,6 @@
 			 $sql = "SELECT * FROM Abre_ParentContacts WHERE Email1='".$_SESSION['useremail']."'";
 			 $result = $db->query($sql);
 			 while($row = $result->fetch_assoc()){
-				 echo $row;
 				 //for records that match find kids associated with that email
 					$sql2 = "SELECT * FROM student_tokens WHERE studentId='".$row['StudentID']."'";
 					$result2 = $db->query($sql2);
