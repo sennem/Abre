@@ -1,30 +1,30 @@
 <?php
-	
+
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-	
+
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	
+
 	if(superadmin())
 	{
-	
+
 		echo "<table class='bordered' id='appsort'>";
 			$query = "SELECT * FROM apps order by sort";
 			$dbreturn = databasequery($query);
@@ -50,34 +50,34 @@
 				echo "</tr>";
 			}
 		echo "</table>";
-						
+
 	}
-	
+
 ?>
 
 	<script>
-		
+
 		$(function()
 		{
-					   	
+
 		   	<?php
 			if(superadmin())
 			{
 			?>
-				
+
 				//Save Default App Order
-				var fixHelper = function(e, ui) {  
-				ui.children().each(function() {  
-					$(this).width($(this).width());  
-				});  
-				return ui;  
+				var fixHelper = function(e, ui) {
+				ui.children().each(function() {
+					$(this).width($(this).width());
+				});
+				return ui;
 				};
 			   	$( "#appsort tbody" ).sortable({
 					axis: 'y',
 					handle: '.handle',
 					helper: fixHelper,
 					update: function(event, ui){
-							
+
 						//Sent Form Data
 						var data = $(this).sortable('serialize');
 						$.ajax({
@@ -85,44 +85,44 @@
 					        type: 'POST',
 					        url: '/modules/<?php echo basename(__DIR__); ?>/apps_save_default_order.php'
 					    })
-					    
+
 					    .done(function(){
 						    $('#loadapps').load('modules/<?php echo basename(__DIR__); ?>/apps.php');
 							if (typeof loadOtherCardsApps == 'function')
-							{ 
+							{
 								loadOtherCardsApps();
 							}
 						});
-					        
+
 					}
-				}); 
-				
+				});
+
 				//Delete assessment
 				$(".deleteapp").unbind().click(function() {
 					event.preventDefault();
 					var result = confirm("Are you sure you want to delete this app?");
 					if (result) {
-						
+
 						$(this).closest("tr").hide();
 						var appid = $(this).data('appid');
-						
+
 						//Make the post request
 						$.ajax({
 							type: 'POST',
 							url: 'modules/apps/app_delete.php?id='+appid,
 							data: '',
 						})
-						
+
 						.done(function(){
 							$('#loadapps').load('modules/apps/apps.php');
 						});
-						
+
 					}
 				});
-				
+
 				//Get App Data
 				$(".passappdata").unbind().click(function() {
-					
+
 					//Fill Modal with Data
 					var apptitle = atob($(this).data('apptitle'));
 					$("#editmodaltitle").text(apptitle);
@@ -132,7 +132,7 @@
 					var appicon = $(this).data('appicon');
 					$('[name=app_icon]').val(appicon);
 					$("select").imagepicker();
-					
+
 					var appid = $(this).data('appid');
 					$("#app_id").val(appid);
 					var appstaff = $(this).data('appstaff');
@@ -153,6 +153,15 @@
 					{
 						$('#app_students').prop('checked', false);
 					}
+					var appparents = $(this).data('appparents');
+					if(appparents==1)
+					{
+						$('#app_parents').prop('checked', true);
+					}
+					else
+					{
+						$('#app_parents').prop('checked', false);
+					}
 					var appminors = $(this).data('appminors');
 					if(appminors==1)
 					{
@@ -162,21 +171,21 @@
 					{
 						$('#app_minors').prop('checked', false);
 					}
-					
-					$('#addeditapp').openModal({ 
-						in_duration: 0, 
+
+					$('#addeditapp').openModal({
+						in_duration: 0,
 						out_duration: 0,
-						ready: function() { 
+						ready: function() {
 							$('.modal-content').scrollTop(0);
 					    },
 					});
-					
+
 				});
-								
-			<?php				   	
+
+			<?php
 			}
 			?>
-	  	
+
 		});
-	
+
 	</script>

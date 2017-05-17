@@ -81,7 +81,7 @@
 							    echo "<input type='file' name='sitelogo' id='sitelogo' style='display:none;'>";
 							}
 						echo "</div>";
-						
+
 						echo "<div class='input-field col l12'>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".sitesettings('parentaccess')."/>";
 							echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
@@ -116,9 +116,9 @@
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
 							echo "<div class='input-field col s12'>";
-								if(!$db->query("SELECT * FROM Abre_Students")){
+								if($db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM users_parent")){
+										echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
 								}else{
-									echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
 								}
 							echo "</div>";
 						echo "</div>";
