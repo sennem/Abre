@@ -33,6 +33,14 @@
 			 $db->multi_query($sql);
 		}
 		$db->close();
+
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT studentId FROM users_parent"))
+		{
+			$sql = "ALTER TABLE `users_parent` ADD `studentId` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
   }
 
   //Write the Setup File
