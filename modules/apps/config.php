@@ -136,7 +136,7 @@
 		<div id="verifystudent" class="modal modal-fixed-footer modal-mobile-full">
 			<form class="col s12" id="form-verifystudent" method="post" action="<?php echo basename(__DIR__); ?>/../../core/verifystudent_process.php">
 			<div class="modal-content">
-				<h4>Verify Your Student</h4>
+				<h4>Enter Student Access Code</h4>
 				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 				<div class="input-field col s6">
 					<input id="studenttoken" name="studenttoken" type="text" maxlength="20" placeholder="Enter your student token" autocomplete="off" required>
