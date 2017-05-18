@@ -129,10 +129,68 @@
 	}
 	?>
 
+	<?php
+	if($_SESSION['usertype'] == 'parent'){
+	?>
+		<!-- Student Token Modal -->
+		<div id="verifystudent" class="modal modal-fixed-footer modal-mobile-full">
+			<form class="col s12" id="form-verifystudent" method="post" action="<?php echo basename(__DIR__); ?>/../../core/verifystudent_process.php">
+			<div class="modal-content">
+				<h4>Enter Student Access Code</h4>
+				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+				<div class="input-field col s6">
+					<input id="studenttoken" name="studenttoken" type="text" maxlength="20" placeholder="Enter your student token" autocomplete="off" required>
+				</div>
+				<div id="errormessage" style="color:#F44336"></div>
+				</div>
+				<div class="modal-footer">
+				<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor");?>'>Verify</button>
+			</div>
+			</form>
+		</div>
+	<?php } ?>
+
 	<script>
 
 		$(function()
 		{
+			//Student Token Modal
+			$('.modal-verifystudent').leanModal(
+			{
+				in_duration: 0,
+				out_duration: 0,
+				ready: function() { $("#studenttoken").val(''); $('#errormessage').text(''); $("#studenttoken").focus(); }
+			});
+
+			var formverifystudent = $('#form-verifystudent');
+			$(formverifystudent).submit(function(event) {
+				event.preventDefault();
+				var formData = $(formverifystudent).serialize();
+				$.ajax({
+					type: 'POST',
+					url: $(formverifystudent).attr('action'),
+					data: formData
+				})
+
+				//Show the notification
+				.done(function(response) {
+					var notification = document.querySelector('.mdl-js-snackbar');
+					var status = response.status;
+					if(status == "Success"){
+						<?php isVerified(); ?>
+						$("#studenttoken").val('');
+						$('#verifystudent').closeModal({
+							in_duration: 0,
+							out_duration: 0,
+						});
+						var data = { message: response.message };
+						notification.MaterialSnackbar.showSnackbar(data);
+					}
+					if(status == "Error"){
+						$('#errormessage').text(response.message);
+					}
+				});
+			});
 
 			//Load Apps into Modal
 			$('#loadapps').load('modules/apps/apps.php');
