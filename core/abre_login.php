@@ -34,7 +34,7 @@
 
 			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style= 'margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Staff and Student Login</a>";
 						if(sitesettings("parentaccess") == "checked"){
-							echo "<div style= 'padding-top: 2em'>";
+							echo "<div style= 'padding-top: 1em'>";
 								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Parent Sign in</a>";
 							echo "</div>";
 						}

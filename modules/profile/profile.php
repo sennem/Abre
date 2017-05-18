@@ -55,7 +55,7 @@
 		//Bio
 		echo "<div class='page_container page_container_limit'>";
 			echo "<div class='row center-align' style='margin-top:30px;'>";
-				echo "<img src='".$_SESSION['picture']."?sz=120' style='border-radius: 50%;'>";
+				echo "<img src='".$_SESSION['picture']."?sz=120' style='border-radius: 50%; width:120px; height:120px;'>";
 				echo "<div class='col s12'><h4 class='truncate' style='margin:10px 0 10px 0;'>".$_SESSION['displayName']."</h4>";
 					//Display Job Title
 					$email=encrypt($_SESSION['useremail'], "");
