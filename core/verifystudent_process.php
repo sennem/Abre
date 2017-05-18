@@ -34,14 +34,20 @@
 	{
 
 		//Check to see if student has already been claimed by parent
-		$sqlcheck = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."'";
+		$sqlcheck = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."' AND students != '' AND studentId = '".$row['studentId']."'";
 		$resultcheck = $db->query($sqlcheck);
 		$parentrow = $resultcheck->fetch_assoc();
 		$numrows2 = $resultcheck->num_rows;
 
-    //no parent already has access
-		if($parentrow['studentId'] == $row['studentId'] && $parentrow['students'] != $row['token'])
-		{
+		if($numrows2 == 0){
+			$sqlcheck2 = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."' AND students != ''";
+			$resultcheck2 = $db->query($sqlcheck2);
+			$parentrow2 = $resultcheck2->fetch_assoc();
+			$numrows3 = $resultcheck2->num_rows;
+
+				//no parent already has access
+			if($parentrow2['studentId'] == $row['studentId'] && $parentrow2['students'] != $row['token'])
+			{
 				$stmt = $db->stmt_init();
 				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email LIKE '".$_SESSION['useremail']."' AND studentId= '".$row['studentId']."'";
 				$stmt->prepare($sql);
@@ -52,9 +58,9 @@
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
-      }elseif($parentrow['students'] != $studenttokenencrypted && $parentrow['studentId'] != $row['studentId']){
+	      	}elseif($parentrow2['students'] != $row['token'] && $parentrow2['studentId'] != $row['studentId']){
 				$stmt = $db->stmt_init();
-				$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted', ".$row['studentId'].")";
+				$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted','".$row['studentId']."')";
 				$stmt->prepare($sql);
 				$stmt->execute();
 				$stmt->close();
@@ -64,11 +70,33 @@
 				echo json_encode($message);
 				break;
 			}else{
-	      $message = array("status"=>"Success","message"=>"You already have access to this student.");
-	      header("Content-Type: application/json");
-	      echo json_encode($message);
-	      break;
+		    	$message = array("status"=>"Success","message"=>"You already have access to this student.");
+				header("Content-Type: application/json");
+				echo json_encode($message);
+				break;
 			}
+		}else{
+			//no parent already has access
+			if($parentrow['students'] != $row['token'])
+			{
+				$stmt = $db->stmt_init();
+				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email LIKE '".$_SESSION['useremail']."' AND studentId= '".$row['studentId']."'";
+				$stmt->prepare($sql);
+				$stmt->execute();
+				$stmt->close();
+				$db->close();
+				$message = array("status"=>"Success","message"=>"You now have access to your students information.");
+				header("Content-Type: application/json");
+				echo json_encode($message);
+				break;
+	      	}else{
+		    	$message = array("status"=>"Success","message"=>"You already have access to this student.");
+				header("Content-Type: application/json");
+				echo json_encode($message);
+				break;
+			}
+		}
+
     }
 
   if($numrows == 0){
