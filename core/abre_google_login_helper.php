@@ -38,6 +38,8 @@ try{
     //Get basic user information if they are logged in
     if(isset($_SESSION['google_parent_access_token']))
     {
+      if(!isset($_SESSION['useremail']))
+      {
         $client->setAccessToken($_SESSION['google_parent_access_token']);
         $userData = $Service_Oauth2->userinfo->get();
         $userEmail=$userData["email"];
@@ -48,6 +50,7 @@ try{
         $me = $Service_Plus->people->get('me');
         $displayName = $me['displayName'];
         $_SESSION['displayName']=$displayName;
+      }
     }
 
     if (isset($_SESSION['google_parent_access_token']))
