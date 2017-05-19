@@ -120,7 +120,7 @@
 						$numrows2 = $resultcheck->num_rows;
 
 						//this parent does not have access
-						if($numrows2 == 0)
+						if($numrows2 == 0 && $_SESSION['useremail'] != '')
 						{
 								$stmt = $db->stmt_init();
 								$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted', '$studentId')";
