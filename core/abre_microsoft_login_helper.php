@@ -77,7 +77,7 @@
       if($result=$db->query("SELECT * from users_parent where email='".$_SESSION['useremail']."'"))
       {
         $count=$result->num_rows;
-        if($count > 1)
+        if($count >= 1)
         {
           //If not already logged in, check and get a refresh token
           if (!isset($_SESSION['loggedin'])) { $_SESSION['loggedin']=""; }
