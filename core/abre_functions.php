@@ -234,8 +234,8 @@
 				{
 					$valuereturn="";
 				}
-				if(($value == "googleclientsecret" && $valuereturn !== "") || ($value == "facebookclientsecret" && $valuereturn !== "")
-				|| ($value == "microsoftclientsecret" && $valuereturn !== "")){
+				if(($value == "googleclientsecret" && $valuereturn != "") || ($value == "facebookclientsecret" && $valuereturn != "")
+				|| ($value == "microsoftclientsecret" && $valuereturn != "")){
 					$valuereturn = decrypt($valuereturn, '');
 				}
 				if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
