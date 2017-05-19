@@ -79,6 +79,12 @@
         $count=$result->num_rows;
         if($count >= 1)
         {
+          $sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."' and students=''";
+          $result = $db->query($sql);
+          $numrows = $result->num_rows;
+          if($numrows == 0){
+            mysqli_query($db, "Insert into users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
+          }
           //If not already logged in, check and get a refresh token
           if (!isset($_SESSION['loggedin'])) { $_SESSION['loggedin']=""; }
           if($_SESSION['loggedin']!="yes")
