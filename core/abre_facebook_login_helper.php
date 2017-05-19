@@ -70,13 +70,10 @@ try{
   // access token but useremail not set
   if(isset($_SESSION['facebook_access_token']))
   {
-    if(!isset($_SESSION['useremail']))
-    {
       $_SESSION['useremail']=$user['email'];
       $_SESSION['usertype']= 'parent';
       $_SESSION['displayName']= $user['name'];
       $_SESSION['picture'] = sitesettings('sitelogo');
-    }
   }
 
   if (isset($_SESSION['facebook_access_token']))

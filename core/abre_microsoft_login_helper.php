@@ -71,7 +71,7 @@
 
   if (isset($_SESSION['microsoft_access_token']))
   {
-    if($_SESSION['usertype']!="")
+    if($_SESSION['usertype']!= "")
     {
       include "abre_dbconnect.php";
       if($result=$db->query("SELECT * from users_parent where email='".$_SESSION['useremail']."'"))
