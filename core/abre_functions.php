@@ -101,34 +101,37 @@
 	function isVerified()
 	{
 		include "abre_dbconnect.php";
-		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent") && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
+		if($_SESSION['usertype'] == 'parent'){
+		
+			if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent") && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
 
-			//see if email matches any records
-			 $sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE'".$_SESSION['useremail']."'";
-			 $result = $db->query($sql);
-			 while($row = $result->fetch_assoc()){
-				 //for records that match find kids associated with that email
-					$sql2 = "SELECT * FROM student_tokens WHERE studentId='".$row['StudentID']."'";
-					$result2 = $db->query($sql2);
-					while($row2 = $result2->fetch_assoc()){
-						//for kids associated with that email
-						$studenttokenencrypted = $row2['token'];
-						$studentId = $row2['studentId'];
-						//Check to see if student has already been claimed by parent
-						$sqlcheck = "SELECT * FROM users_parent WHERE students='$studenttokenencrypted' AND email LIKE '".$_SESSION['useremail']."' AND studentId='$studentId'";
-						$resultcheck = $db->query($sqlcheck);
-						$numrows2 = $resultcheck->num_rows;
+				//see if email matches any records
+				 $sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE'".$_SESSION['useremail']."'";
+				 $result = $db->query($sql);
+				 while($row = $result->fetch_assoc()){
+					 //for records that match find kids associated with that email
+						$sql2 = "SELECT * FROM student_tokens WHERE studentId='".$row['StudentID']."'";
+						$result2 = $db->query($sql2);
+						while($row2 = $result2->fetch_assoc()){
+							//for kids associated with that email
+							$studenttokenencrypted = $row2['token'];
+							$studentId = $row2['studentId'];
+							//Check to see if student has already been claimed by parent
+							$sqlcheck = "SELECT * FROM users_parent WHERE students='$studenttokenencrypted' AND email LIKE '".$_SESSION['useremail']."' AND studentId='$studentId'";
+							$resultcheck = $db->query($sqlcheck);
+							$numrows2 = $resultcheck->num_rows;
 
-						//this parent does not have access
-						if($numrows2 == 0 && $_SESSION['useremail'] != '')
-						{
-								$stmt = $db->stmt_init();
-								$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted', '$studentId')";
-								$stmt->prepare($sql);
-								$stmt->execute();
-								$stmt->close();
+							//this parent does not have access
+							if($numrows2 == 0 && $_SESSION['useremail'] != '')
+							{
+									$stmt = $db->stmt_init();
+									$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted', '$studentId')";
+									$stmt->prepare($sql);
+									$stmt->execute();
+									$stmt->close();
+							}
 						}
-					}
+				 }
 			 }
 		}
 		$db->close();
@@ -234,8 +237,8 @@
 				{
 					$valuereturn="";
 				}
-				if(($value == "googleclientsecret" && $valuereturn !== "") || ($value == "facebookclientsecret" && $valuereturn !== "")
-				|| ($value == "microsoftclientsecret" && $valuereturn !== "")){
+				if(($value == "googleclientsecret" && $valuereturn != "") || ($value == "facebookclientsecret" && $valuereturn != "")
+				|| ($value == "microsoftclientsecret" && $valuereturn != "")){
 					$valuereturn = decrypt($valuereturn, '');
 				}
 				if($value=="sitetitle" && $valuereturn==""){ $valuereturn="Abre"; }
