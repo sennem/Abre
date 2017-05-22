@@ -132,7 +132,7 @@
 		}
 
 		//Save the user information to Abre users database
-		if (isset($_SESSION['access_token']) || isset($_SESSION['facebook_access_token']) || isset($_SESSION['google_parent_access_token']) || isset($_SESSION['microsoft_access_token']))
+		if (isset($_SESSION['access_token']))
 		{
 			if($_SESSION['usertype']!="")
 			{
