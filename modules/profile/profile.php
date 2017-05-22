@@ -105,7 +105,8 @@
 				echo "<input type='hidden' name='departmentcount' value='$dcount'><br>";
 				echo "</div>";
 			echo "</div>";
-			if(superAdmin()){
+			if(superAdmin() && $_SESSION['usertype'] == 'staff')
+			{
 				echo "<div class='row'><div class='col s12'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Manage</a></div></div>";
 			}
 		echo "</div>";
