@@ -162,7 +162,7 @@
 	}
 
 	//Display Apps Editor if superadmin
-	if(superadmin())
+	if(superadmin() && $_SESSION['usertype'] == 'staff')
 	{
 		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Manage</a></div>";
 	}
