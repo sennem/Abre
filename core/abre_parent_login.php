@@ -41,6 +41,7 @@
 		require_once('abre_parent_google_authentication.php');
 		$authUrl = $client->createAuthUrl();
 	}
+	$url = $portal_root . '/core/abre_microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent';
 ?>
 	<!-- Display the login -->
 	<div class="mdl-layout mdl-js-layout login-card">
@@ -62,7 +63,7 @@
           }
 					if(sitesettings('microsoftclientid') !== '' && sitesettings('microsoftclientsecret') !== '' ){
 						echo "<div style= 'padding-top: 1em'>";
-							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".sitesettings('microsoftclientid')."&response_type=code&redirect_uri=http://localhost/core/microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent' style='text-align:left; width:100%; text-transform:none; background-color:#0078d7; font-size:14px'><i class='fa fa-windows material-icons left' style='width:20px'></i>Login with Microsoft</a>";
+							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".sitesettings('microsoftclientid')."&response_type=code&redirect_uri=$url 'style='text-align:left; width:100%; text-transform:none; background-color:#0078d7; font-size:14px'><i class='fa fa-windows material-icons left' style='width:20px'></i>Login with Microsoft</a>";
 						echo "</div>";
 					}
 			  ?>
