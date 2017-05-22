@@ -22,19 +22,22 @@
 	require_once('abre_functions.php'); 
 	
 	//Send the feedback email
-	$textarea=$_POST["textarea"];
-	if($textarea!="")
+	if($_SESSION['usertype']=="staff")
 	{
-		$to=sitesettings("siteadminemail");
-		$subject = "Abre Feedback";
-		$message = "From: ".$_SESSION['useremail']."\r\n\r\n".$_SESSION['displayName']."\r\n\r\n$textarea";
-		$headers = "From: ". $_SESSION['useremail'];
-		mail($to,$subject,$message,$headers);
-		echo "Your feedback has been sent!";
-	}
-	else
-	{
-		echo "Whoops, you didn't enter any feedback.";
+		$textarea=$_POST["textarea"];
+		if($textarea!="")
+		{
+			$to=sitesettings("siteadminemail");
+			$subject = "Abre Feedback";
+			$message = "From: ".$_SESSION['useremail']."\r\n\r\n".$_SESSION['displayName']."\r\n\r\n$textarea";
+			$headers = "From: ". $_SESSION['useremail'];
+			mail($to,$subject,$message,$headers);
+			echo "Your feedback has been sent!";
+		}
+		else
+		{
+			echo "Whoops, you didn't enter any feedback.";
+		}
 	}
 	
 ?>
