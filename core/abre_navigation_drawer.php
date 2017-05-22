@@ -64,13 +64,13 @@
 				}
 
 				//Modules link
-				if(superadmin())
+				if(superadmin() && $_SESSION['usertype']=="staff")
 				{
 					echo "<a class='mdl-navigation__link' href='#modules' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>view_module</i><span class='truncate'>Modules</span></a>";
 				}
 
 				//Settings link
-				if(superadmin())
+				if(superadmin() && $_SESSION['usertype']=="staff")
 				{
 					echo "<a class='mdl-navigation__link' href='#settings' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>settings</i><span class='truncate'>Settings</span></a>";
 				}
