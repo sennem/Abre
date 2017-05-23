@@ -137,7 +137,7 @@
 			if($_SESSION['usertype']!="")
 			{
 				include "abre_dbconnect.php";
-				if($result=$db->query("SELECT * from users where email='".$_SESSION['useremail']."'"))
+				if($result=$db->query("SELECT * from users where email='".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%'"))
 				{
 					$count=$result->num_rows;
 					if($count=='1')
@@ -179,6 +179,9 @@
 					}
 					else
 					{
+						
+						mysqli_query($db, "DELETE FROM users where email = '".$_SESSION['useremail']."'") or die (mysqli_error($db));
+						
 						$getTokenKeyOnly = json_encode($_SESSION['access_token']);
 						
 						//Insert Token if contains refresh_token, otherwise, force consent
