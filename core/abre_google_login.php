@@ -147,12 +147,15 @@
 						if($_SESSION['loggedin']!="yes")
 						{
 
-							//Update the token
+							//Update the token (if contains refresh_token)
 							$getTokenKeyOnly = $_SESSION['access_token'];
 							$refreshTokenKey=json_encode($getTokenKeyOnly);
 							if($refreshTokenKey!="")
 							{
-								mysqli_query($db, "UPDATE users SET refresh_token='$refreshTokenKey' WHERE email='".$_SESSION['useremail']."'") or die (mysqli_error($db));
+								if (strpos($refreshTokenKey, 'refresh_token') !== false)
+								{
+									mysqli_query($db, "UPDATE users SET refresh_token='$refreshTokenKey' WHERE email='".$_SESSION['useremail']."'") or die (mysqli_error($db));
+								}
 							}
 
 							//Get the token from the database
@@ -177,14 +180,35 @@
 					else
 					{
 						$getTokenKeyOnly = json_encode($_SESSION['access_token']);
-						$sha1useremail=sha1($_SESSION['useremail']);
-						$cookiekey=constant("PORTAL_COOKIE_KEY");
-						$hash=sha1($cookiekey);
-						$storetoken=$sha1useremail.$hash;
-						mysqli_query($db, "Insert into users (email, refresh_token, cookie_token) VALUES ('".$_SESSION['useremail']."', '$getTokenKeyOnly', '$storetoken')") or die (mysqli_error($db));
+						
+						//Insert Token if contains refresh_token, otherwise, force consent
+						if (strpos($getTokenKeyOnly, 'refresh_token') !== false)
+						{
+							$sha1useremail=sha1($_SESSION['useremail']);
+							$cookiekey=constant("PORTAL_COOKIE_KEY");
+							$hash=sha1($cookiekey);
+							$storetoken=$sha1useremail.$hash;
+							mysqli_query($db, "Insert into users (email, refresh_token, cookie_token) VALUES ('".$_SESSION['useremail']."', '$getTokenKeyOnly', '$storetoken')") or die (mysqli_error($db));
 
-						//Set cookie for 7 days
-						setcookie($cookie_name,$storetoken, time()+86400 * 7, '/', '', true, true);
+							//Set cookie for 7 days
+							setcookie($cookie_name,$storetoken, time()+86400 * 7, '/', '', true, true);
+							
+						}
+						else
+						{
+							//Remove cookies and destroy session
+							if (isset($_SERVER['HTTP_COOKIE'])) {
+							    $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+							    foreach($cookies as $cookie) {
+							        $parts = explode('=', $cookie);
+							        $name = trim($parts[0]);
+							        setcookie($name, '', time()-1000);
+							        setcookie($name, '', time()-1000, '/');
+							    }
+							}
+							$client->revokeToken();
+							header("Location: $portal_root"); 
+						}
 					}
 
 				}

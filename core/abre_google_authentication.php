@@ -32,7 +32,7 @@
 	$simple_api_key=constant("GOOGLE_API_KEY");
 	$client->setDeveloperKey($simple_api_key);
 	$client->setAccessType("offline");
-	$client->setApprovalPrompt("force");
+	$client->setApprovalPrompt("auto");
 	$scopes=unserialize(constant("GOOGLE_SCOPES"));
 	$client->setScopes($scopes);
 

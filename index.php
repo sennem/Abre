@@ -45,6 +45,8 @@
 
 		//Include Site Header
 		require_once('core/abre_header.php');
+		
+		    echo $_SESSION['forceauth'];
 
 		//Display login if user is not logged in
 		if(isset($_GET["usertype"])){
