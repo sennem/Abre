@@ -30,12 +30,13 @@ if(superadmin())
   $streamtitle=mysqli_real_escape_string($db, $_POST["title"]);
   $rsslink=mysqli_real_escape_string($db, $_POST["link"]);
   $streamgroup=mysqli_real_escape_string($db, $_POST["group"]);
+  $required = mysqli_real_escape_string($db, $_POST["required"]);
 
   if($streamid=="")
   {
     $stmt = $db->stmt_init();
     //needed to backtick because SQL doesn't like when you use reserved words
-    $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES ('$streamgroup','$streamtitle','$streamtitle','flipboard','$rsslink','0');";
+    $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES ('$streamgroup','$streamtitle','$streamtitle','flipboard','$rsslink','$required');";
     $stmt->prepare($sql);
     $stmt->execute();
     $stmt->close();
@@ -44,7 +45,7 @@ if(superadmin())
   else
   {
     //needed to backtick because SQL doesn't like when you use reserved words
-    mysqli_query($db, "UPDATE `streams` set `group`='$streamgroup', `title`='$streamtitle', `slug`='$streamtitle', `type`='flipboard', `url`='$rsslink' where `id`='$streamid'") or die (mysqli_error($db));
+    mysqli_query($db, "UPDATE `streams` set `group`='$streamgroup', `title`='$streamtitle', `slug`='$streamtitle', `type`='flipboard', `url`='$rsslink', `required`='$required' where `id`='$streamid'") or die (mysqli_error($db));
   }
 }
 ?>
