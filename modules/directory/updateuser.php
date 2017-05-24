@@ -164,6 +164,28 @@
 		$permissions=mysqli_real_escape_string($db, $_POST["permissions"]);
 		$permissions=encrypt($permissions, "");
 		
+		$role = implode (", ", $_POST["role"]);
+		if (strpos($role, 'Directory Administrator') !== false) {
+			$superadmin=1;
+		}
+		else
+		{
+			$superadmin=0;
+		}
+		
+		if (strpos($role, 'Directory Supervisor') !== false) {
+			$admin=1;
+		}
+		elseif(strpos($role, 'Directory Advisor') !== false)
+		{
+			$admin=2;
+		}
+		else
+		{
+			$admin=0;
+		}
+		$role=encrypt($role, "");
+		
 		$contractdays=mysqli_real_escape_string($db, $_POST["contractdays"]);
 		$contractdays=encrypt($contractdays, "");
 		
@@ -231,11 +253,11 @@
 		
 		if($id!="")
 		{
-			mysqli_query($db, "UPDATE directory set updatedtime=now(), picture='$picturefilename', firstname='$firstname', middlename='$middlename', lastname='$lastname', address='$address', city='$city', state='$state', zip='$zip', phone='$phone', cellphone='$cellphone', email='$email', ss='$ss', dob='$dob', gender='$gender', ethnicity='$ethnicity', title='$title', contract='$contract', classification='$classification', location='$location', grade='$grade', subject='$subject', doh='$doh', senioritydate='$sd', effectivedate='$ed', rategroup='$rategroup', step='$step', educationlevel='$educationlevel', salary='$salary', hours='$hours', probationreportdate='$probationreportdate', statebackgroundcheck='$statebackgroundcheck', federalbackgroundcheck='$federalbackgroundcheck', stateeducatorid='$stateeducatorid', licensetype1='$licensetypeid1', licenseissuedate1='$licenseissuedateid1', licenseexpirationdate1='$licenseexpirationdateid1', licenseterm1='$licensetermid1', licensetype2='$licensetypeid2', licenseissuedate2='$licenseissuedateid2', licenseexpirationdate2='$licenseexpirationdateid2', licenseterm2='$licensetermid2', licensetype3='$licensetypeid3', licenseissuedate3='$licenseissuedateid3', licenseexpirationdate3='$licenseexpirationdateid3', licenseterm3='$licensetermid3', licensetype4='$licensetypeid4', licenseissuedate4='$licenseissuedateid4', licenseexpirationdate4='$licenseexpirationdateid4', licenseterm4='$licensetermid4', licensetype5='$licensetypeid5', licenseissuedate5='$licenseissuedateid5', licenseexpirationdate5='$licenseexpirationdateid5', licenseterm5='$licensetermid5', licensetype6='$licensetypeid6', licenseissuedate6='$licenseissuedateid6', licenseexpirationdate6='$licenseexpirationdateid6', licenseterm6='$licensetermid6', permissions='$permissions', contractdays='$contractdays' where id='$id'") or die (mysqli_error($db));
+			mysqli_query($db, "UPDATE directory set updatedtime=now(), superadmin='$superadmin', admin='$admin', picture='$picturefilename', firstname='$firstname', middlename='$middlename', lastname='$lastname', address='$address', city='$city', state='$state', zip='$zip', phone='$phone', cellphone='$cellphone', email='$email', ss='$ss', dob='$dob', gender='$gender', ethnicity='$ethnicity', title='$title', contract='$contract', classification='$classification', location='$location', grade='$grade', subject='$subject', doh='$doh', senioritydate='$sd', effectivedate='$ed', rategroup='$rategroup', step='$step', educationlevel='$educationlevel', salary='$salary', hours='$hours', probationreportdate='$probationreportdate', statebackgroundcheck='$statebackgroundcheck', federalbackgroundcheck='$federalbackgroundcheck', stateeducatorid='$stateeducatorid', licensetype1='$licensetypeid1', licenseissuedate1='$licenseissuedateid1', licenseexpirationdate1='$licenseexpirationdateid1', licenseterm1='$licensetermid1', licensetype2='$licensetypeid2', licenseissuedate2='$licenseissuedateid2', licenseexpirationdate2='$licenseexpirationdateid2', licenseterm2='$licensetermid2', licensetype3='$licensetypeid3', licenseissuedate3='$licenseissuedateid3', licenseexpirationdate3='$licenseexpirationdateid3', licenseterm3='$licensetermid3', licensetype4='$licensetypeid4', licenseissuedate4='$licenseissuedateid4', licenseexpirationdate4='$licenseexpirationdateid4', licenseterm4='$licensetermid4', licensetype5='$licensetypeid5', licenseissuedate5='$licenseissuedateid5', licenseexpirationdate5='$licenseexpirationdateid5', licenseterm5='$licensetermid5', licensetype6='$licensetypeid6', licenseissuedate6='$licenseissuedateid6', licenseexpirationdate6='$licenseexpirationdateid6', licenseterm6='$licensetermid6', permissions='$permissions', role='$role', contractdays='$contractdays' where id='$id'") or die (mysqli_error($db));
 		}
 		if($id=="new")
 		{
-			mysqli_query($db, "INSERT INTO directory (id, updatedtime, admin, picture, firstname, lastname, middlename, address, city, state, zip, email, phone, cellphone, ss, dob, gender, ethnicity, title, contract, classification, location, grade, subject, doh, senioritydate, effectivedate, rategroup, step, educationlevel, salary, hours, probationreportdate, statebackgroundcheck, federalbackgroundcheck, stateeducatorid, licensetype1, licenseissuedate1, licenseexpirationdate1, licenseterm1, licensetype2, licenseissuedate2, licenseexpirationdate2, licenseterm2, licensetype3, licenseissuedate3, licenseexpirationdate3, licenseterm3, licensetype4, licenseissuedate4, licenseexpirationdate4, licenseterm4, licensetype5, licenseissuedate5, licenseexpirationdate5, licenseterm5, licensetype6, licenseissuedate6, licenseexpirationdate6, licenseterm6, permissions, contractdays) VALUES (NULL, CURRENT_TIMESTAMP, '0', '$picturefilename', '$firstname', '$lastname', '$middlename', '$address', '$city', '$state', '$zip', '$email', '$phone', '$cellphone', '$ss', '$dob', '$gender', '$ethnicity', '$title', '$contract', '$classification', '$location', '$grade', '$subject', '$doh', '$sd', '$ed', '$rategroup', '$step', '$educationlevel', '$salary', '$hours', '$probationreportdate', '$statebackgroundcheck', '$federalbackgroundcheck', '$stateeducatorid', '$licensetypeid1', '$licenseissuedateid1', '$licenseexpirationdateid1', '$licensetermid1', '$licensetypeid2', '$licenseissuedateid2', '$licenseexpirationdateid2', '$licensetermid2', '$licensetypeid3', '$licenseissuedateid3', '$licenseexpirationdateid3', '$licensetermid3', '$licensetypeid4', '$licenseissuedateid4', '$licenseexpirationdateid4', '$licensetermid4', '$licensetypeid5', '$licenseissuedateid5', '$licenseexpirationdateid5', '$licensetermid5', '$licensetypeid6', '$licenseissuedateid6', '$licenseexpirationdateid6', '$licensetermid6', '$permissions', '$contractdays');") or die (mysqli_error($db));		
+			mysqli_query($db, "INSERT INTO directory (id, updatedtime, superadmin, admin, picture, firstname, lastname, middlename, address, city, state, zip, email, phone, cellphone, ss, dob, gender, ethnicity, title, contract, classification, location, grade, subject, doh, senioritydate, effectivedate, rategroup, step, educationlevel, salary, hours, probationreportdate, statebackgroundcheck, federalbackgroundcheck, stateeducatorid, licensetype1, licenseissuedate1, licenseexpirationdate1, licenseterm1, licensetype2, licenseissuedate2, licenseexpirationdate2, licenseterm2, licensetype3, licenseissuedate3, licenseexpirationdate3, licenseterm3, licensetype4, licenseissuedate4, licenseexpirationdate4, licenseterm4, licensetype5, licenseissuedate5, licenseexpirationdate5, licenseterm5, licensetype6, licenseissuedate6, licenseexpirationdate6, licenseterm6, permissions, role, contractdays) VALUES (NULL, CURRENT_TIMESTAMP, '$superadmin', '$admin', '$picturefilename', '$firstname', '$lastname', '$middlename', '$address', '$city', '$state', '$zip', '$email', '$phone', '$cellphone', '$ss', '$dob', '$gender', '$ethnicity', '$title', '$contract', '$classification', '$location', '$grade', '$subject', '$doh', '$sd', '$ed', '$rategroup', '$step', '$educationlevel', '$salary', '$hours', '$probationreportdate', '$statebackgroundcheck', '$federalbackgroundcheck', '$stateeducatorid', '$licensetypeid1', '$licenseissuedateid1', '$licenseexpirationdateid1', '$licensetermid1', '$licensetypeid2', '$licenseissuedateid2', '$licenseexpirationdateid2', '$licensetermid2', '$licensetypeid3', '$licenseissuedateid3', '$licenseexpirationdateid3', '$licensetermid3', '$licensetypeid4', '$licenseissuedateid4', '$licenseexpirationdateid4', '$licensetermid4', '$licensetypeid5', '$licenseissuedateid5', '$licenseexpirationdateid5', '$licensetermid5', '$licensetypeid6', '$licenseissuedateid6', '$licenseexpirationdateid6', '$licensetermid6', '$permissions', '$role', '$contractdays');") or die (mysqli_error($db));		
 		}
 		$db->close();
 		echo "The user has been updated.";		

@@ -157,6 +157,9 @@
 
 				$permissions=htmlspecialchars($row["permissions"], ENT_QUOTES);
 				$permissions=stripslashes(htmlspecialchars(decrypt($permissions, ""), ENT_QUOTES));
+				
+				$role=htmlspecialchars($row["role"], ENT_QUOTES);
+				$role=stripslashes(htmlspecialchars(decrypt($role, ""), ENT_QUOTES));
 
 				$contractdays=htmlspecialchars($row["contractdays"], ENT_QUOTES);
 				$contractdays=stripslashes(htmlspecialchars(decrypt($contractdays, ""), ENT_QUOTES));
@@ -236,6 +239,7 @@
 				$licenseterm6="";
 
 				$permissions="";
+				$role="";
 				$contractdays="";
 
 			}
@@ -500,15 +504,25 @@
 							//Permissions
 							if($superadmin=1)
 							{
+								
 								echo "<div class='row'><div class='col l12'><h5>Permissions</h5></div></div>";
 								echo "<div class='row'>";
-									echo "<div class='input-field col l3 s12'>";
+
+									echo "<div class='input-field col l6 s12'>";
+										echo "<select name='role[]' id='role' multiple>";
+										    include "rolelist.php";
+										echo "</select>";
+										echo "<label>Roles</label>";
+									echo "</div>";
+									
+									echo "<div class='input-field col l6 s12'>";
 										echo "<select name='permissions'>";
 										    include "permissionlist.php";
 										echo "</select>";
-									echo "<label>Curriculum</label>";
+										echo "<label>Curriculum</label>";
+									echo "</div>";
+									
 								 echo "</div>";
-								echo "</div>";
 							}
 
 							echo "<div class='row'><div class='col l12'><a class='waves-effect btn-flat white-text' id='archiveuser' id='archiveuser' style='background-color:"; echo sitesettings("sitecolor"); echo "'>Archive User</a></div></div>";
