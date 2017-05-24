@@ -98,6 +98,12 @@
 					<label for="stream_parents">Parents</label>
 				</div>
 			</div>
+			<div class='row'>
+				<div class='col m4 s12'>
+					<input type="checkbox" class="filled-in" name="streamradio" id="required_stream" value="1">
+					<label for="required_stream">Require Stream</label>
+				</div>
+			</div>
 			<input id="stream_id" name="stream_id" type="hidden">
 		</div>
 		<div class='modal-footer'>
@@ -135,6 +141,7 @@ $(function()
 						$('#stream_staff').prop('checked', false);
 						$('#stream_students').prop('checked', false);
 						$('#stream_parents').prop('checked', false);
+						$('#required_stream').prop('checked', false);
 					}
 				});
 
@@ -148,11 +155,13 @@ $(function()
 					var streamgroup= $('input[name=streamradio]:checked').val();
 
 					var streamid = $('#stream_id').val();
+					if($('#required_stream').is(':checked')==true){ var required = 1; }else{ var required = 0; }
+
 					//Make the post request
 					$.ajax({
 						type: 'POST',
 						url: 'modules/profile/update_stream.php',
-						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup }
+						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
 
 					})
 

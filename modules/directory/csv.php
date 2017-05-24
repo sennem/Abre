@@ -27,11 +27,23 @@
 
 		echo "<div class='row'><div class='col s12'>";
 
-					echo "<div class='row'><div class='col s12'>";
-						echo "<h5>Downloads</h5>";
-						echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
-						echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
-					echo "</div></div>";
+					echo "<div class='row'>";
+						echo "<div class='col s6'>";
+							echo "<h5>Downloads</h5>";
+							echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
+							echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
+						echo "</div>";
+						echo "<div class='col s6'>";
+				      if(superadmin())
+				      {
+									echo "<h5>Imports</h5>";
+									echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
+				          echo "<input name='csv_data' type='file' id='csv_data' />";
+				          echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."' name='Submit' value='Import' />";
+				          echo "</form>";
+				      }
+						echo "</div>";
+					echo "</div>";
 
 		echo "</div>";
 
@@ -65,14 +77,10 @@
 					     })
 
 						.done(function(form_data) {
-							$( "#content_holder" ).load( "modules/directory/export.php", function() {
 								var notification = document.querySelector('.mdl-js-snackbar');
 								var data = { message: form_data };
 								notification.MaterialSnackbar.showSnackbar(data);
-							});
 						})
-
-
 					});
 
 
