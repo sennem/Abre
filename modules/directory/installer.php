@@ -106,6 +106,16 @@
 		}
 		$db->close();
 		
+		//Check for Role field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$resultstreams = $db->query("SELECT role FROM directory"))
+		{
+			$sql = "ALTER TABLE `directory` ADD `role` text NOT NULL;";	
+			$db->multi_query($sql);
+			$db->close();
+		}
+		$db->close();	
+		
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreams = $db->query("SELECT * FROM directory_discipline"))
 		{
