@@ -241,53 +241,53 @@ $('.modal-editstreams').leanModal({
 
 <?php if($setting_streams=="" && $_SESSION['usertype']=="staff"){ echo "$('.modal-viewapps').hide();"; } ?>
 
-<?php if($_SESSION['usertype']=="staff"){ ?>
-	//shouldn't throw an error message if the user hasn't selected 3 streams when there aren't
-	//3 streams to choose from.
-	if ($('.streamtopic:checked').length < 3)
-	{
+// <?php if($_SESSION['usertype']=="staff"){ ?>
+// 	//shouldn't throw an error message if the user hasn't selected 3 streams when there aren't
+// 	//3 streams to choose from.
+// 	if ($('.streamtopic:checked').length < 3)
+// 	{
+//
+// 			$('#streamerror').show();
+// 			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");
+// 	}
 
-			$('#streamerror').show();
-			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");
-	}
-
-<?php } ?>
+// <?php } ?>
 
 $(".formclick").click(function() {
-	<?php if($_SESSION['usertype']=="staff"){ ?>
+// 	<?php if($_SESSION['usertype']=="staff"){ ?>
+//
+// 		if ($('.streamtopic:checked').length < 3)
+// 		{
+// 			$('#streamerror').show();
+// 			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");
+// 			var notification = document.querySelector('.mdl-js-snackbar');
+// 			var data = { message: 'You must follow 3 or more streams.' };
+// 			notification.MaterialSnackbar.showSnackbar(data);
+// 		}
+// 		else
+// 		{
+//
+// 			$('.modal-viewapps').show();
+// 			var formData = $('#form-profile').serialize();
+// 			$.ajax({
+// 				type: 'POST',
+// 				url: $('#form-profile').attr('action'),
+// 				data: formData
+// 			})
+//
+// 			//Show the notification
+// 			.done(function(response) {
+// 				$('#streamerror').show();
+// 				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
+// 				var notification = document.querySelector('.mdl-js-snackbar');
+// 				var data = { message: 'Your changes have been saved.' };
+// 				notification.MaterialSnackbar.showSnackbar(data);
+// 			})
+//
+// 		}
+// 	<?php } ?>
 
-		if ($('.streamtopic:checked').length < 3)
-		{
-			$('#streamerror').show();
-			$('#streamerror').html("<h6 class='mdl-color-text--red'>You must follow 3 or more streams.</h6>");
-			var notification = document.querySelector('.mdl-js-snackbar');
-			var data = { message: 'You must follow 3 or more streams.' };
-			notification.MaterialSnackbar.showSnackbar(data);
-		}
-		else
-		{
-
-			$('.modal-viewapps').show();
-			var formData = $('#form-profile').serialize();
-			$.ajax({
-				type: 'POST',
-				url: $('#form-profile').attr('action'),
-				data: formData
-			})
-
-			//Show the notification
-			.done(function(response) {
-				$('#streamerror').show();
-				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
-				var notification = document.querySelector('.mdl-js-snackbar');
-				var data = { message: 'Your changes have been saved.' };
-				notification.MaterialSnackbar.showSnackbar(data);
-			})
-
-		}
-	<?php } ?>
-
-	<?php if($_SESSION['usertype']=="student" || $_SESSION['usertype'] == 'parent'){ ?>
+	<?php if($_SESSION['usertype']=="student" || $_SESSION['usertype'] == 'parent' || $_SESSION['usertype'] == 'staff'){ ?>
 			$('.modal-viewapps').show();
 			var formData = $('#form-profile').serialize();
 			$.ajax({

@@ -36,9 +36,10 @@ if(superadmin())
     $link=$value['url'];
     $linkencoded=base64_encode($link);
     $group=$value['group'];
+    $required=$value['required'];
     echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
     echo "<td><b>$title</b> (".ucfirst($group).")<td>";
-    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group'><i class='material-icons'>mode_edit</i></button></td>";
+    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
   }
@@ -93,6 +94,7 @@ $(function()
       var streamid = $(this).data('streamid');
       $("#stream_id").val(streamid);
       var group = $(this).data('streamgroup');
+      var required = $(this).data('required');
       if(group=="staff")
       {
         $('#stream_staff').prop('checked', true);
@@ -116,6 +118,15 @@ $(function()
       else
       {
         $('#stream_parents').prop('checked', false);
+      }
+
+      if(required==1)
+      {
+        $('#required_stream').prop('checked', true);
+      }
+      else
+      {
+        $('#required_stream').prop('checked', false);
       }
 
       $('#addeditstream').openModal({
