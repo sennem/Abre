@@ -40,6 +40,7 @@
 									echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
 				          echo "<input name='csv_data' type='file' id='csv_data' />";
 				          echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."' name='Submit' value='Import' />";
+									echo "<br><br><a href='".dirname(__FILE__)."/directoryTemplate.csv' style='color:".sitesettings("sitecolor")."'>Download template file</a>";
 				          echo "</form>";
 				      }
 						echo "</div>";
