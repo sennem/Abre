@@ -23,7 +23,7 @@
 	require_once('permissions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if($superadmin==1)
+	if(superadmin())
 	{
 
 		//connect to the database
