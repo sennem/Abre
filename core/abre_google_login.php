@@ -146,7 +146,6 @@
 						if (!isset($_SESSION['loggedin'])) { $_SESSION['loggedin']=""; }
 						if($_SESSION['loggedin']!="yes")
 						{
-
 							//Update the token (if contains refresh_token)
 							$getTokenKeyOnly = $_SESSION['access_token'];
 							$refreshTokenKey=json_encode($getTokenKeyOnly);
@@ -162,8 +161,8 @@
 							$getRefreshToken=mysqli_fetch_assoc(mysqli_query($db,"SELECT refresh_token from users where email='".$_SESSION['useremail']."'"));
 							$refreshtoken=$getRefreshToken['refresh_token'];
 							$client->setAccessToken($refreshtoken);
-							$refreshtoken=json_encode($refreshtoken);
-							//$_SESSION['access_token']=$refreshtoken;
+							$refreshtoken=json_decode($refreshtoken,true);
+							$_SESSION['access_token']=$refreshtoken;
 
 							//Set cookie for 7 days
 							$sha1useremail=sha1($_SESSION['useremail']);
