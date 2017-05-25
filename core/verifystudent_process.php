@@ -39,6 +39,7 @@
 		$parentrow = $resultcheck->fetch_assoc();
 		$numrows2 = $resultcheck->num_rows;
 
+		//if no entry has been created for the student id given
 		if($numrows2 == 0){
 			$sqlcheck2 = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."' AND students != ''";
 			$resultcheck2 = $db->query($sqlcheck2);
