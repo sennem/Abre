@@ -19,7 +19,8 @@
     //Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once('permissions.php');
 
 ?>
 
@@ -46,21 +47,28 @@
 			{ 
     			
 	    		//Open Modal
-				$(document).off().on("click", ".employeeview", function ()
-				{
-					event.preventDefault();
-					$("#employeedata").hide();
-					var EmployeeID= $(this).data('employeeid');
-					var SearchQuerySaved= $(this).data('searchquerysaved');
-					$("#searchquerysave").val(SearchQuerySaved);
-					
-					$("#employeedata").load( "modules/<?php echo basename(__DIR__); ?>/profile.php?id="+EmployeeID, function()
-					{	
-						$("#employeedata").show();
+	    		<?php
+		    	if($pageaccess==1 or $pageaccess==2)
+		    	{
+			    ?>
+					$(document).off().on("click", ".employeeview", function ()
+					{
+						event.preventDefault();
+						$("#employeedata").hide();
+						var EmployeeID= $(this).data('employeeid');
+						var SearchQuerySaved= $(this).data('searchquerysaved');
+						$("#searchquerysave").val(SearchQuerySaved);
+						
+						$("#employeedata").load( "modules/<?php echo basename(__DIR__); ?>/profile.php?id="+EmployeeID, function()
+						{	
+							$("#employeedata").show();
+						});
+						
+						$('#employeeprofile').openModal({ in_duration: 0, out_duration: 0, ready: function() { } });
 					});
-					
-					$('#employeeprofile').openModal({ in_duration: 0, out_duration: 0, ready: function() { } });
-				}); 
+				<?php
+				}
+				?>
 				
 				//Archive the User
 				$(document).on("click", "#archiveuser", function ()
