@@ -115,11 +115,15 @@
 								echo "<input placeholder='Enter Client Secret' value='".sitesettings('microsoftclientsecret')."' id='microsoftclientsecret' name='microsoftclientsecret' type='text' autocomplete='off'>";
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
-							echo "<div class='input-field col s12'>";
-								if($db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM users_parent")){
-										echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
-								}else{
-								}
+							if($db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM users_parent") && superadmin()){
+								echo "<div class='input-field col s6'>";
+									echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Generate Keys for All Students</button>";
+								echo "</div>";
+								echo "<div class='input-field col s6'>";
+									echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".sitesettings("sitecolor")."'>Download All Keys</a>";
+								echo "</div>";
+							}else{
+							}
 							echo "</div>";
 						echo "</div>";
 
