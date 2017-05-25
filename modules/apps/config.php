@@ -184,9 +184,14 @@
 							out_duration: 0,
 						});
 						var url = "<?php echo $url ?>";
-						window.location.replace(url);
-						var data = { message: response.message };
-						notification.MaterialSnackbar.showSnackbar(data);
+						console.log(window.location.href);
+						if(window.location.href == url){
+						 	location.reload();
+						 }else{
+							window.location.replace(url);
+							var data = { message: response.message };
+							notification.MaterialSnackbar.showSnackbar(data);
+						}
 					}
 					if(status == "Error"){
 						$('#errormessage').text(response.message);
