@@ -39,13 +39,14 @@
 		$parentrow = $resultcheck->fetch_assoc();
 		$numrows2 = $resultcheck->num_rows;
 
+		//if no entry has been created for the student id given
 		if($numrows2 == 0){
 			$sqlcheck2 = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."' AND students != ''";
 			$resultcheck2 = $db->query($sqlcheck2);
 			$parentrow2 = $resultcheck2->fetch_assoc();
 			$numrows3 = $resultcheck2->num_rows;
 
-				//no parent already has access
+
 			if($parentrow2['studentId'] == $row['studentId'] && $parentrow2['students'] != $row['token'])
 			{
 				$stmt = $db->stmt_init();
@@ -76,7 +77,7 @@
 				break;
 			}
 		}else{
-			//no parent already has access
+			//there already is an entry matching the students studentid
 			if($parentrow['students'] != $row['token'] && $_SESSION['useremail'] != '')
 			{
 				$stmt = $db->stmt_init();
