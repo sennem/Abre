@@ -124,7 +124,7 @@
 								echo "</div>";
 							}else{
 							}
-							echo "</div>";
+							
 						echo "</div>";
 
 						echo "<div class='col l12'>";
