@@ -29,7 +29,7 @@
 	$drawerhidden=1;
 	$pagetitle="Apps";
 	$pagepath="apps";
-
+	$url = $portal_root .'/#students';
 ?>
 
 	<!--Apps modal-->
@@ -183,8 +183,15 @@
 							in_duration: 0,
 							out_duration: 0,
 						});
-						var data = { message: response.message };
-						notification.MaterialSnackbar.showSnackbar(data);
+						var url = "<?php echo $url ?>";
+						console.log(window.location.href);
+						if(window.location.href == url){
+						 	location.reload();
+						 }else{
+							window.location.replace(url);
+							var data = { message: response.message };
+							notification.MaterialSnackbar.showSnackbar(data);
+						}
 					}
 					if(status == "Error"){
 						$('#errormessage').text(response.message);
