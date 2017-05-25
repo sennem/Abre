@@ -40,12 +40,12 @@
 			$row2 = mysqli_fetch_assoc($sql);
 
 			$studentid=htmlspecialchars($row["studentId"], ENT_QUOTES);
-			$firstname=htmlspecialchars($row2["FirstName"], ENT_QUOTES);
-			$lastname=htmlspecialchars($row2["LastName"], ENT_QUOTES);
+			$firstname=$row2["FirstName"];
+			$lastname=$row2["LastName"];
 			$token=htmlspecialchars($row["token"], ENT_QUOTES);
 			$token=decrypt($token, "");
 
-			$data = [$studentid,$firstname,$lastname,$token];
+			$data = ["$studentid","$firstname","$lastname","$token"];
 			fputcsv($output, $data);
 		}
 		fclose($output);
