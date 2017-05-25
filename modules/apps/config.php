@@ -29,7 +29,7 @@
 	$drawerhidden=1;
 	$pagetitle="Apps";
 	$pagepath="apps";
-
+	$url = $portal_root .'/#students';
 ?>
 
 	<!--Apps modal-->
@@ -183,6 +183,8 @@
 							in_duration: 0,
 							out_duration: 0,
 						});
+						var url = "<?php echo $url ?>";
+						window.location.replace(url);
 						var data = { message: response.message };
 						notification.MaterialSnackbar.showSnackbar(data);
 					}

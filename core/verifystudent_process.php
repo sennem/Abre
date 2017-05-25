@@ -46,7 +46,7 @@
 			$parentrow2 = $resultcheck2->fetch_assoc();
 			$numrows3 = $resultcheck2->num_rows;
 
-				//no parent already has access
+
 			if($parentrow2['studentId'] == $row['studentId'] && $parentrow2['students'] != $row['token'])
 			{
 				$stmt = $db->stmt_init();
@@ -77,7 +77,7 @@
 				break;
 			}
 		}else{
-			//no parent already has access
+			//there already is an entry matching the students studentid
 			if($parentrow['students'] != $row['token'] && $_SESSION['useremail'] != '')
 			{
 				$stmt = $db->stmt_init();
