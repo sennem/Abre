@@ -630,9 +630,8 @@
 				$(".printbutton").click(function(e) {
 					e.preventDefault();
 					var win = window.open('','printwindow');
-					win.document.write('<html><head><title>Print Work Calendar</title><link rel="stylesheet" type="text/css" href="https://hcsdoh.org/modules/profile/css/calendar.css"></head><body>');
+					win.document.write('<title>Print Work Calendar</title><link rel="stylesheet" type="text/css" href="https://hcsdoh.org/modules/profile/css/calendar.css">');
 					win.document.write($("#workcalendardisplay").html());
-					win.document.write('</body></html>');
 				});
 
 			});
