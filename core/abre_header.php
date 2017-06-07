@@ -33,12 +33,14 @@
 
 				//Site title
 				echo "<title>".sitesettings("sitetitle")."</title>";
+				echo "<meta property='og:title' content='".sitesettings("sitetitle")."' />";
 
 				//Site description
-				echo "<meta name='description' content='".sitesettings("sitedescription")."'>";
+				echo "<meta name='description' property='og:description' content='".sitesettings("sitedescription")."'>";
 
 				//Site favicon
 				echo "<link rel='icon' type='image/png' href='".sitesettings("sitelogo")."'>";
+				echo "<meta property='og:image' content='".sitesettings("sitelogo")."'>";
 
 				//Chrome icon
 				echo "<meta name='mobile-web-app-capable' content='yes'>";
