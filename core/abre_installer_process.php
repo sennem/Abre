@@ -250,6 +250,9 @@
 
 			//Close file
 			fclose($myfile);
+			
+			//Ping Update
+			pingupdate();
 
 			//Redirect
 			echo "Redirect";

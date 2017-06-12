@@ -177,6 +177,21 @@
 		return $newcommentid;
 		$db->close();
 	}
+	
+	//Insert into the database
+	function pingupdate()
+	{
+		$url = 'https://status.abre.io/installation.php';
+		$ch = curl_init($url);
+		$jsonData = array(
+		    'Domain' => "$portal_root"
+		);
+		$jsonDataEncoded = json_encode($jsonData);
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
+		$result = curl_exec($ch);   
+	}
 
 	//Save Screenshot to server
 	function savescreenshot($website, $filename)

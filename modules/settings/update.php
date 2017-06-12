@@ -125,6 +125,9 @@
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
 		
+		//Send Update Ping
+		pingupdate();
+		
 	}
 	
 ?>
