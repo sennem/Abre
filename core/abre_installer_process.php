@@ -255,7 +255,16 @@
 			fclose($myfile);
 			
 			//Ping Update
-			pingupdate();
+			$url = 'https://status.abre.io/installation.php';
+			$ch = curl_init($url);
+			$jsonData = array(
+			    'Domain' => "$portal_root"
+			);
+			$jsonDataEncoded = json_encode($jsonData);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
+			$result = curl_exec($ch);   
 
 			//Redirect
 			echo "Redirect";
