@@ -125,17 +125,8 @@
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
 		
-		//Send Update Ping
-		$url = 'https://status.abre.io/installation.php';
-		$ch = curl_init($url);
-		$jsonData = array(
-		    'Domain' => "$portal_root"
-		);
-		$jsonDataEncoded = json_encode($jsonData);
-		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
-		$result = curl_exec($ch);   
+		//Send Update Ping 
+		require(dirname(__FILE__) . '/../../core/abre_ping.php');
 		
 	}
 	
