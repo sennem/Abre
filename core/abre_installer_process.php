@@ -20,6 +20,9 @@
 	//Check to make sure no configuration file exists
 	if (!file_exists('../configuration.php'))
 	{
+		
+		require_once('abre_functions.php');
+		
 		//Check for Mcrypt
 		if(!function_exists('mcrypt_encrypt')){
 		    echo "Mcrypt is not installed. Please install Mcrypt to proceed with the installation.";
