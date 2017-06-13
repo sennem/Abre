@@ -23,6 +23,10 @@
 
 	if(superadmin() && !file_exists("$portal_path_root/modules/settings/setup.txt"))
 	{
+		
+		//Ping Update
+		require(dirname(__FILE__) . '/../../core/abre_ping.php');
+		
 		//Check for users_parents table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM users_parent"))
