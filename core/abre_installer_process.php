@@ -21,8 +21,6 @@
 	if (!file_exists('../configuration.php'))
 	{
 		
-		require_once('abre_functions.php');
-		
 		//Check for Mcrypt
 		if(!function_exists('mcrypt_encrypt')){
 		    echo "Mcrypt is not installed. Please install Mcrypt to proceed with the installation.";
@@ -253,9 +251,6 @@
 
 			//Close file
 			fclose($myfile);
-			
-			//Ping Update
-			require('abre_ping.php');
 						
 			//Redirect
 			echo "Redirect";

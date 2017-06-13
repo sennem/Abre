@@ -192,7 +192,7 @@
 			$(this).html("Updating...");
 			$.post("modules/settings/update.php", { link: Link }, function(){ })
 			.done(function() {
-				location.reload();
+				$.post("/core/abre_ping.php", function(){ location.reload(); })
 	  		})
 	  	});
 

@@ -125,9 +125,6 @@
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
 		
-		//Send Update Ping 
-		require(dirname(__FILE__) . '/../../core/abre_ping.php');
-		
 	}
 	
 ?>

@@ -107,7 +107,7 @@
 				$('.alert').html(response);	
 				if(response==="Redirect")
 				{			
-					location.reload();
+					$.post("/core/abre_ping.php", function(){ location.reload(); })
 				}
 				else
 				{
