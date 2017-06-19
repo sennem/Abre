@@ -17,6 +17,6 @@
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
 
-	$abre_version = '3.9.9';
+	$abre_version = '4.0.0';
 
 ?>
