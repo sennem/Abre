@@ -26,18 +26,28 @@
 	<!--Work Schedule-->
 	<div id="viewschedule" class="modal modal-fixed-footer modal-mobile-full" style='width: 80%'>
 	    <div class="modal-content">
-			<h4>Set Your Work Schedule</h4>
-			<div class='row'>
-				<div class='col m3 hide-on-small-only'>
-					<?php include "calendarsidebar.php"; ?>
+				<div class='row'>
+					<div class ='col l8 s12'>
+					<h4>Set Your Work Schedule</h4>
+					</div>
+					<div class='col l2 s12' style='float:right;'>
+						<select id='calendaryear'>
+							<option value='2016' selected>2016-2017 School Year</option>
+							<option value='2017'>2017-2018 School Year</option>
+						</select>
+					</div>
 				</div>
-				<div class='col m9 s12'>
-					<?php echo "<form id='form-calendar' method='post'>"; ?>
-						<input id="saveddates" type="hidden"></input>
-					</form>
-					<div id="workcalendardisplay"></div>
+				<div class='row'>
+					<div class='col m3 hide-on-small-only'>
+						<?php include "calendarsidebar.php"; ?>
+					</div>
+					<div class='col m9 s12'>
+						<?php echo "<form id='form-calendar' method='post'>"; ?>
+							<input id="saveddates" type="hidden"></input>
+						</form>
+						<div id="workcalendardisplay"></div>
+					</div>
 				</div>
-			</div>
 	    </div>
 		<div class="modal-footer">
 			<button class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
@@ -120,129 +130,145 @@
 
 $(function()
 {
+  $('select').material_select();
 
+   	<?php
+	if(superadmin())
+	{
+	?>
 
-		   	<?php
-			if(superadmin())
+		//Add/Edit Stream
+		$('.modal-addeditstream').leanModal({
+			in_duration: 0,
+			out_duration: 0,
+			ready: function()
 			{
-			?>
+				$(".modal-content").scrollTop(0);
+				$("#editstreammodaltitle").text('Add New Stream');
+				$("#stream_name").val('');
+				$("#rss_link").val('');
+				$("#stream_id").val('');
+				$('#stream_staff').prop('checked', false);
+				$('#stream_students').prop('checked', false);
+				$('#stream_parents').prop('checked', false);
+				$('#required_stream').prop('checked', false);
+			}
+		});
 
-				//Add/Edit Stream
-				$('.modal-addeditstream').leanModal({
-					in_duration: 0,
-					out_duration: 0,
-					ready: function()
-					{
-						$(".modal-content").scrollTop(0);
-						$("#editstreammodaltitle").text('Add New Stream');
-						$("#stream_name").val('');
-						$("#rss_link").val('');
-						$("#stream_id").val('');
-						$('#stream_staff').prop('checked', false);
-						$('#stream_students').prop('checked', false);
-						$('#stream_parents').prop('checked', false);
-						$('#required_stream').prop('checked', false);
-					}
-				});
+		//Save/Update Stream
+		$('#addeditstreamform').submit(function(event)
+		{
+			event.preventDefault();
 
-				//Save/Update Stream
-				$('#addeditstreamform').submit(function(event)
-				{
-					event.preventDefault();
+			var streamtitle = $('#stream_name').val();
+			var rsslink = $('#rss_link').val();
+			var streamgroup= $('input[name=streamradio]:checked').val();
 
-					var streamtitle = $('#stream_name').val();
-					var rsslink = $('#rss_link').val();
-					var streamgroup= $('input[name=streamradio]:checked').val();
+			var streamid = $('#stream_id').val();
+			if($('#required_stream').is(':checked')==true){ var required = 1; }else{ var required = 0; }
 
-					var streamid = $('#stream_id').val();
-					if($('#required_stream').is(':checked')==true){ var required = 1; }else{ var required = 0; }
+			//Make the post request
+			$.ajax({
+				type: 'POST',
+				url: 'modules/profile/update_stream.php',
+				data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
 
-					//Make the post request
+			})
+
+			.done(function(){
+				$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
+				$('#streamsort').load('modules/profile/stream_editor_content.php');
+				$('#content_holder').load( 'modules/profile/profile.php');
+			});
+		});
+
+	<?php
+	}
+	?>
+
+
+		var today = new Date();
+		var y = $('#calendaryear').val();
+		var defaultDate = '8/1/'+y;
+		var currYear = y;
+
+		$.ajax({
+			type: 'POST',
+			url: '/modules/profile/load_dates.php',
+			data: { year : y },
+		})
+		.done(function(response) {
+			var dateArray = response.addDates;
+			var json = response.jsonDates;
+
+			$('#workcalendardisplay').multiDatesPicker({
+				addDates: dateArray,
+				numberOfMonths: [6,2],
+				defaultDate: defaultDate,
+				altField: '#saveddates',
+				dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+				onSelect: function (date) {
+
+					var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+					console.log(dates);
+					$("#selecteddays").text(dates + " Days Selected");
+
+					var datestosave = $( "#saveddates" ).val();
+
 					$.ajax({
 						type: 'POST',
-						url: 'modules/profile/update_stream.php',
-						data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
-
+						url: '/modules/profile/calendar_update.php',
+						data: { year: y, calendardaystosave : datestosave, jsonDates: json },
 					})
+				}
+			});
 
-					.done(function(){
-						$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
-						$('#streamsort').load('modules/profile/stream_editor_content.php');
-						$('#content_holder').load( 'modules/profile/profile.php');
-					});
-				});
+			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+			$("#selecteddays").text(dates + " Days Selected");
+		})
 
-			<?php
-			}
-			?>
+		$("#calendaryear").change(function(){
+			var y = $('#calendaryear').val();
+			var defaultDate = '8/1/'+y;
 
+			$.ajax({
+				type: 'POST',
+				url: '/modules/profile/load_dates.php',
+				data: { year : y },
+			})
+			.done(function(response) {
+				var dateArray = response.addDates;
+				var json = response.jsonDates;
 
-				var today = new Date();
-				//var y = today.getFullYear();
-				var y = 2016;
+				$('#workcalendardisplay').multiDatesPicker('destroy');
 				$('#workcalendardisplay').multiDatesPicker({
-					<?php
-						if($_SESSION['usertype']!="student")
-						{
-							$sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
-							$dbreturn = databasequery($sql);
-							foreach ($dbreturn as $row)
-							{
-								$work_calendar_saved=htmlspecialchars($row['work_calendar'], ENT_QUOTES);
-								if($work_calendar_saved!=NULL)
-								{
-									$work_calendar_saved = str_replace(' ', '', $work_calendar_saved);
-									$work_calendar_saved=explode(",", $work_calendar_saved);
-									$work_calendar_saved=implode("','", $work_calendar_saved);
-									$work_calendar_saved="'".$work_calendar_saved."'";
-									echo "addDates: [$work_calendar_saved],";
-									//echo "addDisabledDates:['12/04/2016','12/03/2016'],";
-								}
-								else
-								{
-									include "calendar_default_dates.php";
-									echo "addDates: [$work_calendar_saved],";
-									//echo "addDisabledDates:['12/04/2016','12/03/2016'],";
-								}
-							}
-						}
-					?>
+					addDates: dateArray,
 					numberOfMonths: [6,2],
-					defaultDate: '8/1/'+y,
+					defaultDate: defaultDate,
 					altField: '#saveddates',
 					dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
 					onSelect: function (date) {
 
-				        var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+						var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+						console.log(dates);
 						$("#selecteddays").text(dates + " Days Selected");
 
-
-
 						var datestosave = $( "#saveddates" ).val();
+
 						$.ajax({
 							type: 'POST',
 							url: '/modules/profile/calendar_update.php',
-							data: { calendardaystosave : datestosave },
+							data: { year: y, calendardaystosave : datestosave, jsonDates: json },
 						})
-
-						//Show the notification
-						.done(function(response) {
-							//var notification = document.querySelector('.mdl-js-snackbar');
-							//var data = { message: response };
-							//notification.MaterialSnackbar.showSnackbar(data);
-						})
-
-
-
-				    }
+					}
 				});
-
-	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+				var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 				$("#selecteddays").text(dates + " Days Selected");
-
-
-
-
-			});
-
+			})
+			if(currYear != y){
+				$('#workcalendardisplay').multiDatesPicker('resetDates', 'picked');
+				currYear = y;
+			}
+		});
+});
 </script>
