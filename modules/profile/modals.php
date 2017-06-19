@@ -34,6 +34,9 @@
 						<select id='calendaryear'>
 							<option value='2016' selected>2016-2017 School Year</option>
 							<option value='2017'>2017-2018 School Year</option>
+							<option value='2018'>2018-2019 School Year</option>
+							<option value='2019'>2019-2020 School Year</option>
+							<option value='2020'>2020-2021 School Year</option>
 						</select>
 					</div>
 				</div>
