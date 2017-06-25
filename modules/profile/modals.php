@@ -41,10 +41,7 @@
 					</div>
 				</div>
 				<div class='row'>
-					<div class='col m3 hide-on-small-only'>
-						<?php include "calendarsidebar.php"; ?>
-					</div>
-					<div class='col m9 s12'>
+					<div class='col m12 s12'>
 						<?php echo "<form id='form-calendar' method='post'>"; ?>
 							<input id="saveddates" type="hidden"></input>
 						</form>
