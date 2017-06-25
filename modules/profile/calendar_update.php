@@ -10,10 +10,16 @@
 	$year = $_POST["year"];
 	$json = $_POST["jsonDates"];
 
-	$replacement = array($year => $calendardaystosave);
+	if($json == null){
+			$replacement = array($year => $calendardaystosave);
+			$ret = array_replace(array(), $replacement);
+			$ret = json_encode($ret);
+	}else{
 
-	$ret = array_replace($json, $replacement);
-	$ret = json_encode($ret);
+		$replacement = array($year => $calendardaystosave);
+		$ret = array_replace($json, $replacement);
+		$ret = json_encode($ret);
+	}
 
 	include "../../core/abre_dbconnect.php";
 	$stmt = $db->stmt_init();

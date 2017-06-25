@@ -204,6 +204,7 @@ $(function()
 			var dateArray = response.addDates;
 			var json = response.jsonDates;
 
+			console.log(dateArray);
 			$('#workcalendardisplay').multiDatesPicker({
 				addDates: dateArray,
 				numberOfMonths: [6,2],

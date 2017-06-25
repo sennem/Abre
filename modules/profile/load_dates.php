@@ -29,26 +29,56 @@
     foreach ($dbreturn as $row)
     {
       $work_calendar_saved= $row['work_calendar'];
-      if($work_calendar_saved!=NULL)
+      if($work_calendar_saved != NULL)
       {
         $work_calendar_saved = json_decode($work_calendar_saved, TRUE);
-        $dates = $work_calendar_saved[$date];
-        $dates = str_replace(' ', '', $dates);
-        $dates=explode(",", $dates);
-        $message = array("addDates"=>$dates, "jsonDates"=>$work_calendar_saved);
+
+        if(gettype($work_calendar_saved) == 'string'){
+
+          $dates = str_replace("'", "", $work_calendar_saved);
+          $dates = str_replace(' ', '', $dates);
+          $dates=explode(",", $dates);
+
+          $message = array("addDates"=>$dates);
+          header("Content-Type: application/json");
+          echo json_encode($message);
+
+        }else{
+
+          $dates = $work_calendar_saved[$date];
+
+          if($dates == NULL){
+
+            $message = array("addDates"=>'', "jsonDates"=>$work_calendar_saved);
+            header("Content-Type: application/json");
+            echo json_encode($message);
+
+          }else{
+
+            $dates = str_replace(' ', '', $dates);
+            $dates=explode(",", $dates);
+
+            $message = array("addDates"=>$dates, "jsonDates"=>$work_calendar_saved);
+            header("Content-Type: application/json");
+            echo json_encode($message);
+
+          }
+        }
+      }else{
+
+        //this code can be used to enable default dates if no data is stored in the database
+        //this code is not used, but leaving here incase we change design decisions
+        
+        // include "calendar_default_dates.php";
+        // $work_calendar_saved = json_decode($work_calendar_saved, TRUE);
+        // $dates = $work_calendar_saved[$date];
+        // $dates = str_replace(' ', '', $dates);
+        // $dates=explode(",", $dates);
+
+        $message = array("addDates"=>'');
         header("Content-Type: application/json");
         echo json_encode($message);
-      }
-      else
-      {
-        include "calendar_default_dates.php";
-        $work_calendar_saved = json_decode($work_calendar_saved, TRUE);
-        $dates = $work_calendar_saved[$date];
-        $dates = str_replace(' ', '', $dates);
-        $dates=explode(",", $dates);
-        $message = array("addDates"=>$dates, "jsonDates"=>$work_calendar_saved);
-        header("Content-Type: application/json");
-        echo json_encode($message);
+
       }
     }
   }
