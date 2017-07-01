@@ -186,8 +186,6 @@ $(function()
 	}
 	?>
 
-
-		var today = new Date();
 		var y = $('#calendaryear').val();
 		var defaultDate = '8/1/'+y;
 		var currYear = y;
@@ -211,7 +209,6 @@ $(function()
 				onSelect: function (date) {
 
 					var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
-					console.log(dates);
 					$("#selecteddays").text(dates + " Days Selected");
 
 					var datestosave = $( "#saveddates" ).val();
@@ -251,7 +248,6 @@ $(function()
 					onSelect: function (date) {
 
 						var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
-						console.log(dates);
 						$("#selecteddays").text(dates + " Days Selected");
 
 						var datestosave = $( "#saveddates" ).val();
