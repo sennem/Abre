@@ -21,10 +21,11 @@
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
   $date = $_POST["year"];
+  $email = $_POST["email"];
 
   if($_SESSION['usertype']!="student")
   {
-    $sql = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
+    $sql = "SELECT * FROM profiles where email='$email'";
     $dbreturn = databasequery($sql);
     foreach ($dbreturn as $row)
     {
@@ -68,7 +69,7 @@
 
         //this code can be used to enable default dates if no data is stored in the database
         //this code is not used, but leaving here incase we change design decisions
-        
+
         // include "calendar_default_dates.php";
         // $work_calendar_saved = json_decode($work_calendar_saved, TRUE);
         // $dates = $work_calendar_saved[$date];

@@ -189,17 +189,17 @@ $(function()
 		var y = $('#calendaryear').val();
 		var defaultDate = '8/1/'+y;
 		var currYear = y;
+		var email = "<?php echo $_SESSION['useremail'] ?>";
 
 		$.ajax({
 			type: 'POST',
 			url: '/modules/profile/load_dates.php',
-			data: { year : y },
+			data: { year : y, email: email},
 		})
 		.done(function(response) {
 			var dateArray = response.addDates;
 			var json = response.jsonDates;
 
-			console.log(dateArray);
 			$('#workcalendardisplay').multiDatesPicker({
 				addDates: dateArray,
 				numberOfMonths: [6,2],
@@ -216,7 +216,7 @@ $(function()
 					$.ajax({
 						type: 'POST',
 						url: '/modules/profile/calendar_update.php',
-						data: { year: y, calendardaystosave : datestosave, jsonDates: json },
+						data: { year: y, calendardaystosave : datestosave, jsonDates: json, email: email },
 					})
 				}
 			});
@@ -228,11 +228,12 @@ $(function()
 		$("#calendaryear").change(function(){
 			var y = $('#calendaryear').val();
 			var defaultDate = '8/1/'+y;
+			var email = "<?php echo $_SESSION['useremail'] ?>";
 
 			$.ajax({
 				type: 'POST',
 				url: '/modules/profile/load_dates.php',
-				data: { year : y },
+				data: { year : y, email: email },
 			})
 			.done(function(response) {
 				var dateArray = response.addDates;
@@ -255,7 +256,7 @@ $(function()
 						$.ajax({
 							type: 'POST',
 							url: '/modules/profile/calendar_update.php',
-							data: { year: y, calendardaystosave : datestosave, jsonDates: json },
+							data: { year: y, calendardaystosave : datestosave, jsonDates: json, email: email },
 						})
 					}
 				});

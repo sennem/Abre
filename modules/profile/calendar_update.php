@@ -9,6 +9,7 @@
 	$calendardaystosave=$_POST["calendardaystosave"];
 	$year = $_POST["year"];
 	$json = $_POST["jsonDates"];
+	$email = $_POST["email"];
 
 	if($json == null){
 			$replacement = array($year => $calendardaystosave);
@@ -23,7 +24,7 @@
 
 	include "../../core/abre_dbconnect.php";
 	$stmt = $db->stmt_init();
-	$sql = "UPDATE profiles set work_calendar='$ret' where email='".$_SESSION['useremail']."'";
+	$sql = "UPDATE profiles set work_calendar='$ret' where email='$email'";
 	$stmt->prepare($sql);
 	$stmt->execute();
 	$stmt->store_result();
