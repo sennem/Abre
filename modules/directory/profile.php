@@ -577,7 +577,7 @@
 				$.ajax({
 					type: 'POST',
 					url: '/modules/profile/load_dates.php',
-					data: { year : 2016, email: email },
+					data: { year : y, email: email },
 				})
 				.done(function(response) {
 					var dateArray = response.addDates;
