@@ -10,9 +10,6 @@
 	$year = $_POST["year"];
 	$json = $_POST["jsonDates"];
 	$email = $_POST["email"];
-	error_log($calendardaystosave);
-	error_log($year);
-	error_log($json);
 
 	//if the json value passed from javascript == null.
 	//we need to insert the days to save in to a new blannk array
