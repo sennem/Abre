@@ -201,7 +201,6 @@ $(function()
 		.done(function(response) {
 			var dateArray = response.addDates;
 			var json = response.jsonDates;
-			console.log("Json " + json);
 
 			//makes a multidatepicker object with the dates returned from the ajax
 			//post and displays them in the calendar modal.

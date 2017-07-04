@@ -32,15 +32,14 @@
     {
       //grab the work calendar from the entry
       $work_calendar_saved= $row['work_calendar'];
-      error_log("entry from database " . $work_calendar_saved);
-      error_log("type of database entry " . gettype($work_calendar_saved));
+
       //check and see if they have existing data
       if($work_calendar_saved != NULL)
       {
         //This temp variable stores the value from the database. If we try and
         //decode a comma separated list the type will be null and we will need to
         //use this variable to get the database value back. Otherwise this variable
-        //is not used. 
+        //is not used.
         $work_calendar_temp = $work_calendar_saved;
         $work_calendar_saved = json_decode($work_calendar_saved, TRUE);
 
