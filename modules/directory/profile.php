@@ -569,7 +569,11 @@
 				});
 
 				//Work Days for Employee
-				var y = 2016;
+				//same logic found in modules/profile/modals.php. Please reference
+				//this file for documentation on the logic. Only difference here is that
+				//it uses the email of the staff member being inspected and uses
+				//the year of the current day. 
+				var y = new Date().getFullYear();
 				var defaultDate = '8/1/'+y;
 				var currYear = y;
 				var email = "<?php echo $email ?>";
