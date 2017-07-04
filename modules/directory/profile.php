@@ -157,7 +157,7 @@
 
 				$permissions=htmlspecialchars($row["permissions"], ENT_QUOTES);
 				$permissions=stripslashes(htmlspecialchars(decrypt($permissions, ""), ENT_QUOTES));
-				
+
 				$role=htmlspecialchars($row["role"], ENT_QUOTES);
 				$role=stripslashes(htmlspecialchars(decrypt($role, ""), ENT_QUOTES));
 
@@ -243,7 +243,7 @@
 				$contractdays="";
 
 			}
-			
+
 			if($picture==""){
 				$pictureserver=$portal_root."/modules/directory/images/user.png";
 			}
@@ -251,12 +251,12 @@
 			{
 				$pictureserver=$portal_root."/modules/directory/serveimage.php?file=$picture";
 			}
-				
+
 			echo "<div class='row'><div class='col s12'>";
 				echo "<img src='$pictureserver' class='profile-avatar demoimage' style='display: block; margin: 20px auto;'>";
 				echo "<h4 class='center-align demotext_dark'>$firstname $lastname</h4>";
 			echo "</div></div>";
-						
+
 			echo "<div class='row'>";
 				echo "<div class='col s12'><h5>Contact</h5></div>";
 				echo "<div class='input-field col l4 s12'>";
@@ -321,8 +321,8 @@
 						echo "<label class='active' for='dob'>Date of Birth</label>";
 					echo "</div>";
 				echo "</div>";
-				
-				
+
+
 				echo "<div class='row'>";
 					echo "<div class='col s12'><h5>Profile Picture</h5></div>";
 					echo "<div class='input-field col l4 s12'>";
@@ -390,7 +390,7 @@
 							 echo "<label>Contract</label>";
 						echo "</div>";
 						echo "</div>";
-						
+
 						echo "<div class='row'>";
 							 echo "<div class='input-field col l3 s12'>";
 								echo "<select name='classification'>";
@@ -504,7 +504,7 @@
 							//Permissions
 							if($superadmin=1)
 							{
-								
+
 								echo "<div class='row'><div class='col l12'><h5>Permissions</h5></div></div>";
 								echo "<div class='row'>";
 
@@ -514,14 +514,14 @@
 										echo "</select>";
 										echo "<label>Roles</label>";
 									echo "</div>";
-									
+
 									echo "<div class='input-field col l6 s12'>";
 										echo "<select name='permissions'>";
 										    include "permissionlist.php";
 										echo "</select>";
 										echo "<label>Curriculum</label>";
 									echo "</div>";
-									
+
 								 echo "</div>";
 							}
 
@@ -535,7 +535,7 @@
 		<script>
 
 			//Work Schedule Modal
-			$('.modal-viewscheduleemployee').leanModal({ in_duration: 0, out_duration: 0 });
+			$('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
 
 			//Process the profile form
 			$(function() {
@@ -569,62 +569,52 @@
 				});
 
 				//Work Days for Employee
-				var today = new Date();
-				//var y = today.getFullYear();		
-				var y = 2016;
-				$('#workcalendardisplay').multiDatesPicker({
-					<?php
-						if($pageaccess==1 or $pageaccess==2)
-						{
-							$sql = "SELECT * FROM profiles where email='$email'";
-							$dbreturn = databasequery($sql);
-							foreach ($dbreturn as $row)
-							{
-								$work_calendar_saved=htmlspecialchars($row['work_calendar'], ENT_QUOTES);
-								if($work_calendar_saved!=NULL)
-								{
-									$work_calendar_saved = str_replace(' ', '', $work_calendar_saved);
-									$work_calendar_saved=explode(",", $work_calendar_saved);
-									$work_calendar_saved=implode("','", $work_calendar_saved);
-									$work_calendar_saved="'".$work_calendar_saved."'";
-									echo "addDates: [$work_calendar_saved],";
-									//echo "addDisabledDates:['12/04/2016','12/03/2016'],";
-								}
-							}
+				//same logic found in modules/profile/modals.php. Please reference
+				//this file for documentation on the logic. Only difference here is that
+				//it uses the email of the staff member being inspected and uses
+				//the year of the current day.
+				var date = new Date();
+				var y = date.getFullYear();
+				if(date.getMonth() >= 1 && date.getMonth() <= 7){
+					y = y - 1;
+				}
+				var defaultDate = '8/1/'+y;
+				var currYear = y;
+				var email = "<?php echo $email ?>";
+
+				$.ajax({
+					type: 'POST',
+					url: '/modules/profile/load_dates.php',
+					data: { year : y, email: email },
+				})
+				.done(function(response) {
+					var dateArray = response.addDates;
+					var json = response.jsonDates;
+
+					$('#workcalendardisplay').multiDatesPicker({
+						addDates: dateArray,
+						numberOfMonths: [6,2],
+						defaultDate: defaultDate,
+						altField: '#saveddates',
+						dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+						onSelect: function (date) {
+
+							var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+							$("#selecteddays").text(dates + " Days Selected");
+
+							var datestosave = $( "#saveddates" ).val();
+
+							$.ajax({
+								type: 'POST',
+								url: '/modules/profile/calendar_update.php',
+								data: { year: y, calendardaystosave : datestosave, jsonDates: json, email: email },
+							})
 						}
-					?>
-					numberOfMonths: [6,2],
-					defaultDate: '8/1/'+y,
-					altField: '#saveddates',
-					dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-					onSelect: function (date) {
+					});
 
-				        var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
-						$("#selecteddays").text(dates + " Days Selected");
-
-
-
-						var datestosave = $( "#saveddates" ).val();
-						$.ajax({
-							type: 'POST',
-							url: '/modules/profile/calendar_update.php',
-							data: { calendardaystosave : datestosave },
-						})
-
-						//Show the notification
-						.done(function(response) {
-							//var notification = document.querySelector('.mdl-js-snackbar');
-							//var data = { message: response };
-							//notification.MaterialSnackbar.showSnackbar(data);
-						})
-
-
-
-				    }
-				});
-
-	 			var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
-				$("#selecteddays").text(dates + " Days Selected");
+					var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
+					$("#selecteddays").text(dates + " Days Selected");
+				})
 
 				//Print Spcific Div
 				$(".printbutton").click(function(e) {

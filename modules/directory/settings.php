@@ -100,6 +100,16 @@
 						echo "</div>";
 					echo "</div>";
 					echo "<div class='row'>";
+						echo "<div class='input-field col l6 s12'>";
+							echo "Support Ticket Email";
+							if(!$dropdownArray['supportTicket'] == "" && isset($dropdownArray['supportTicket'])){
+								echo "<input type='text' class='materialize-input' placeholder='Enter Support Ticket Email Address' id='suportTicketEmail' name='supportTicket' value ='".$dropdownArray['supportTicket']."'>";
+							}else{
+								echo "<input type='text' class='materialize-input' placeholder='Enter Support Ticket Email Address' id='suportTicketEmail' name='supportTicket'>";
+							}
+						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='col s12'>";
 							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' id='saveSettings' style='background-color: ".sitesettings("sitecolor")."'>Save Changes</button>";
 						echo "</div>";
