@@ -186,11 +186,13 @@ $(function()
 	}
 	?>
 
+		//grabs the selected date from the drop down options in the modal.
 		var y = $('#calendaryear').val();
 		var defaultDate = '8/1/'+y;
 		var currYear = y;
 		var email = "<?php echo $_SESSION['useremail'] ?>";
 
+		//makes a post request to get the already chosen dates from the database.
 		$.ajax({
 			type: 'POST',
 			url: '/modules/profile/load_dates.php',
@@ -199,13 +201,17 @@ $(function()
 		.done(function(response) {
 			var dateArray = response.addDates;
 			var json = response.jsonDates;
+			console.log("Json " + json);
 
+			//makes a multidatepicker object with the dates returned from the ajax
+			//post and displays them in the calendar modal.
 			$('#workcalendardisplay').multiDatesPicker({
 				addDates: dateArray,
 				numberOfMonths: [6,2],
 				defaultDate: defaultDate,
 				altField: '#saveddates',
 				dayNamesMin: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+				//saves the date selected to the list of stored dates for the user
 				onSelect: function (date) {
 
 					var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
@@ -225,6 +231,8 @@ $(function()
 			$("#selecteddays").text(dates + " Days Selected");
 		})
 
+		//has similiar logic to the above calls, but handles the case when a user
+		//selects a different year from the drop down options.
 		$("#calendaryear").change(function(){
 			var y = $('#calendaryear').val();
 			var defaultDate = '8/1/'+y;
@@ -263,6 +271,8 @@ $(function()
 				var dates = $('#workcalendardisplay').multiDatesPicker('getDates').length;
 				$("#selecteddays").text(dates + " Days Selected");
 			})
+			//resets the count of days worked if the current year does not equal the date
+			//selected in the drop down menu
 			if(currYear != y){
 				$('#workcalendardisplay').multiDatesPicker('resetDates', 'picked');
 				currYear = y;

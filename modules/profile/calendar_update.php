@@ -10,18 +10,25 @@
 	$year = $_POST["year"];
 	$json = $_POST["jsonDates"];
 	$email = $_POST["email"];
+	error_log($calendardaystosave);
+	error_log($year);
+	error_log($json);
 
-	if($json == null){
+	//if the json value passed from javascript == null.
+	//we need to insert the days to save in to a new blannk array
+	if($json == null || !isset($json)){
 			$replacement = array($year => $calendardaystosave);
 			$ret = array_replace(array(), $replacement);
 			$ret = json_encode($ret);
+	//there is already existing json, so we just need to replace the year entry
+	//with the new dates to save
 	}else{
-
 		$replacement = array($year => $calendardaystosave);
 		$ret = array_replace($json, $replacement);
 		$ret = json_encode($ret);
 	}
 
+	//make a request to save the values in the databse for the year.
 	include "../../core/abre_dbconnect.php";
 	$stmt = $db->stmt_init();
 	$sql = "UPDATE profiles set work_calendar='$ret' where email='$email'";
