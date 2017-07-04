@@ -572,8 +572,12 @@
 				//same logic found in modules/profile/modals.php. Please reference
 				//this file for documentation on the logic. Only difference here is that
 				//it uses the email of the staff member being inspected and uses
-				//the year of the current day. 
-				var y = new Date().getFullYear();
+				//the year of the current day.
+				var date = new Date();
+				var y = date.getFullYear();
+				if(date.getMonth() >= 1 && date.getMonth() <= 7){
+					y = y - 1;
+				}
 				var defaultDate = '8/1/'+y;
 				var currYear = y;
 				var email = "<?php echo $email ?>";
