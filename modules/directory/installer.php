@@ -23,7 +23,7 @@
 
 	if(superadmin() && !file_exists("$portal_path_root/modules/directory/setup.txt"))
 	{
-		
+
 		//Setup tables if new module
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreams = $db->query("SELECT * FROM directory"))
@@ -105,24 +105,23 @@
 			  		if ($db->multi_query($sql) === TRUE) { }
 		}
 		$db->close();
-		
+
 		//Check for Role field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreams = $db->query("SELECT role FROM directory"))
 		{
-			$sql = "ALTER TABLE `directory` ADD `role` text NOT NULL;";	
+			$sql = "ALTER TABLE `directory` ADD `role` text NOT NULL;";
 			$db->multi_query($sql);
-			$db->close();
 		}
-		$db->close();	
-		
+		$db->close();
+
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreams = $db->query("SELECT * FROM directory_discipline"))
 		{
 			$sql = "CREATE TABLE IF NOT EXISTS `directory_discipline` (`id` int(11) NOT NULL AUTO_INCREMENT,`archived` int(11) NOT NULL, `UserID` int(11) NOT NULL, `Filename` text NOT NULL, PRIMARY KEY (`id`)) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15;";
 			if ($db->multi_query($sql) === TRUE) { }
 		}
-		$db->close();	
+		$db->close();
 
 		//Check for directory settings table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
