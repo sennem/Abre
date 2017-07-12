@@ -246,7 +246,12 @@
 				if($options!="")
 				{
 					$options = json_decode($options);
-					$valuereturn = $options->$value;
+					if(isset($options->$value)){
+						$valuereturn = $options->$value;
+					}
+					else{
+						$valuereturn = "";
+					}
 				}
 				else
 				{
