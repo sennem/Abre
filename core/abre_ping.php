@@ -18,15 +18,16 @@
   */
 
   require_once(dirname(__FILE__) . '/../configuration.php');
+  require_once(dirname(__FILE__) . '/abre_functions.php');
 
 	$url = 'https://status.abre.io/installation.php';
 	$ch = curl_init($url);
 	$jsonData = array(
 		'Domain' => "$portal_root",
-		'community_first_name' => $_POST['community_first_name'],
-		'community_last_name' => $_POST['community_last_name'],
-		'community_email' => $_POST['community_email'],
-		'community_users' => $_POST['community_users']
+		'community_first_name' => sitesettings('community_first_name'),
+		'community_last_name' => sitesettings('community_last_name'),
+		'community_email' => sitesettings('community_email'),
+		'community_users' => sitesettings('community_users')
 	);
 	$jsonDataEncoded = json_encode($jsonData);
 	curl_setopt($ch, CURLOPT_POST, 1);
