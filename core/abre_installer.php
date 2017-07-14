@@ -79,7 +79,7 @@
 									<label class='active' for='google_api_key'>API Key</label>
 								</div>
 								<!-- Code for subscribing to the Abre Community -->
-								<div class='input-field col l12'>
+								<div class='col l12' style='margin-top:15px;'>
 									<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked'/>
 									<label for='abre_community' style = 'color:#000;margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>
 								</div>
@@ -144,7 +144,7 @@
 				$('.alert').html(response);
 				if(response==="Redirect")
 				{
-					$.post("/core/abre_ping.php", {community_first_name: $('#community_first_name').val(), community_last_name: $('#community_last_name').val(), community_email: $('#community_email').val(), community_users: $('#community_users').val()}, function(){ location.reload(); })
+					$.post("/core/abre_ping.php", function(){ location.reload(); })
 				}
 				else
 				{
