@@ -82,6 +82,30 @@
 							}
 						echo "</div>";
 
+						//Code for subscribing to the Abre Community
+						echo "<div class='input-field col l12'>";
+							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".sitesettings('abre_community')."/>";
+							echo "<label for='abre_community' style = 'color:#000;margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>";
+						echo "</div>";
+						echo "<div id=community_information class='col l12 m12'>";
+							echo "<div class='input-field col s6'>";
+								echo "<input placeholder='Enter a First Name' value='".sitesettings('community_first_name')."' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>";
+								echo "<label class='active' for='community_first_name'>First Name</label>";
+							echo "</div>";
+							echo "<div class='input-field col s6'>";
+								echo "<input placeholder='Enter a Last Name' id='community_last_name' value='".sitesettings('community_last_name')."' name='community_last_name' type='text' autocomplete='off'>";
+								echo "<label class='active' for='community_last_name'>Last Name</label>";
+							echo "</div>";
+							echo "<div class='input-field col s6'>";
+								echo "<input placeholder='Enter an Email' id='community_email' value='".sitesettings('community_email')."' name='community_email' type='text' autocomplete='off'>";
+								echo "<label class='active' for='community_email'>Community Email Address</label>";
+							echo "</div>";
+							echo "<div class='input-field col s6'>";
+								echo "<input placeholder='Enter Number of Users' id='community_users' value='".sitesettings('community_users')."' name='community_users' type='text' autocomplete='off'>";
+								echo "<label class='active' for='community_users'>Number of System Users</label>";
+							echo "</div>";
+						echo "</div>";
+
 						echo "<div class='input-field col l12'>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".sitesettings('parentaccess')."/>";
 							echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
@@ -124,29 +148,6 @@
 								echo "</div>";
 							}else{
 							}
-						echo "</div>";
-						//Code for subscribing to the Abre Community
-						echo "<div class='input-field col l12'>";
-							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".sitesettings('abre_community')."/>";
-							echo "<label for='abre_community' style = 'color:#000;margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>";
-						echo "</div>";
-						echo "<div id=community_information class='col l12 m12'>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter a First Name' value='".sitesettings('community_first_name')."' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_first_name'>First Name</label>";
-							echo "</div>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter a Last Name' id='community_last_name' value='".sitesettings('community_last_name')."' name='community_last_name' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_last_name'>Last Name</label>";
-							echo "</div>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter an Email' id='community_email' value='".sitesettings('community_email')."' name='community_email' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_email'>Community Email Address</label>";
-							echo "</div>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Number of Users' id='community_users' value='".sitesettings('community_users')."' name='community_users' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_users'>Number of System Users</label>";
-							echo "</div>";
 						echo "</div>";
 
 						echo "<div class='col l12'>";
