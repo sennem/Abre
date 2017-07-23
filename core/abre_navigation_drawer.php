@@ -66,7 +66,7 @@
 				//Modules link
 				if(superadmin() && $_SESSION['usertype']=="staff")
 				{
-					echo "<a class='mdl-navigation__link' href='#modules' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>view_module</i><span class='truncate'>Store</span></a>";
+					echo "<a class='mdl-navigation__link' href='#store' onclick='toggle_drawer()'><i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>store</i><span class='truncate'>Store</span></a>";
 				}
 
 				//Settings link

@@ -24,7 +24,7 @@
     {
 
 		echo "
-			'modules': function(name) {
+			'store': function(name) {
 		    	$( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
