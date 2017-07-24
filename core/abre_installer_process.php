@@ -20,7 +20,7 @@
 	//Check to make sure no configuration file exists
 	if (!file_exists('../configuration.php'))
 	{
-		
+
 		//Check for Mcrypt
 		if(!function_exists('mcrypt_encrypt')){
 		    echo "Mcrypt is not installed. Please install Mcrypt to proceed with the installation.";
@@ -251,7 +251,29 @@
 
 			//Close file
 			fclose($myfile);
-						
+
+			if($_POST['abre_community'] == 'checked'){
+				include "abre_dbconnect.php";
+				if(!$result = $db->query("SELECT * FROM settings"))
+				{
+						$sql = "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+						$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
+						$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";
+						$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+						$db->multi_query($sql);
+						$db->close();
+				}
+
+				include "abre_dbconnect.php";
+				$array = ["abre_community" => $_POST['abre_community'], "community_first_name" => $_POST['community_first_name'], "community_last_name" => $_POST['community_last_name'], "community_email" => $_POST['community_email'], "community_users" => $_POST['community_users']];
+				$json = json_encode($array);
+
+				//Update the database
+				mysqli_query($db, "UPDATE settings set options='$json'") or die (mysqli_error($db));
+
+				$db->close();
+			}
+
 			//Redirect
 			echo "Redirect";
 

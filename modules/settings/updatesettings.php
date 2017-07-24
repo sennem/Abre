@@ -46,6 +46,11 @@
 		if($_POST["microsoftclientid"]!=""){ $sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], ''); }else{ $sitemicrosoftclientsecret=""; }
 		$sitevendorlinkkey=$_POST["sitevendorlinkkey"];
 		$sitelogoexisting=$_POST["sitelogoexisting"];
+		$abre_community = $_POST['abre_community'];
+		$community_first_name = $_POST['community_first_name'];
+		$community_last_name = $_POST['community_last_name'];
+		$community_email = $_POST['community_email'];
+		$community_users = $_POST['community_users'];
 
 		if($_FILES['sitelogo']['name'])
 		{
@@ -74,7 +79,7 @@
 			$sitelogofilename=$sitelogoexisting;
 		}
 
-		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "parentaccess" => "$siteparentaccess", "googleclientid" => "$sitegoogleclientid", "googleclientsecret" => "$sitegoogleclientsecret", "facebookclientid" => "$sitefacebookclientid", "facebookclientsecret" => "$sitefacebookclientsecret", "microsoftclientid" => "$sitemicrosoftclientid", "microsoftclientsecret" => "$sitemicrosoftclientsecret" ];
+		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "parentaccess" => "$siteparentaccess", "googleclientid" => "$sitegoogleclientid", "googleclientsecret" => "$sitegoogleclientsecret", "facebookclientid" => "$sitefacebookclientid", "facebookclientsecret" => "$sitefacebookclientsecret", "microsoftclientid" => "$sitemicrosoftclientid", "microsoftclientsecret" => "$sitemicrosoftclientsecret", "abre_community" => "$abre_community", "community_first_name" => "$community_first_name", "community_last_name" => "$community_last_name", "community_email" => "$community_email", "community_users" => "$community_users" ];
 		$json = json_encode($array);
 
 		//Update the database

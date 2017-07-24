@@ -102,7 +102,7 @@
 	{
 		include "abre_dbconnect.php";
 		if($_SESSION['usertype'] == 'parent'){
-		
+
 			if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent") && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
 
 				//see if email matches any records
@@ -177,7 +177,7 @@
 		return $newcommentid;
 		$db->close();
 	}
-	
+
 	//Insert into the database
 	function pingupdate()
 	{
@@ -189,8 +189,8 @@
 		$jsonDataEncoded = json_encode($jsonData);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonDataEncoded);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
-		$result = curl_exec($ch);   
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+		$result = curl_exec($ch);
 	}
 
 	//Save Screenshot to server
@@ -246,7 +246,12 @@
 				if($options!="")
 				{
 					$options = json_decode($options);
-					$valuereturn = $options->$value;
+					if(isset($options->$value)){
+						$valuereturn = $options->$value;
+					}
+					else{
+						$valuereturn = "";
+					}
 				}
 				else
 				{
@@ -288,6 +293,11 @@
 				if($value=="facebookclientsecret" && $valuereturn==""){ $valuereturn=""; }
 				if($value=="microsoftclientid" && $valuereturn==""){ $valuereturn=""; }
 				if($value=="microsoftclientsecret" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="abre_community" && $valuereturn==""){ $valuereturn="unchecked"; }
+				if($value=="community_first_name" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="community_last_name" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="community_email" && $valuereturn==""){ $valuereturn=""; }
+				if($value=="community_users" && $valuereturn==""){ $valuereturn=""; }
 				return $valuereturn;
 			}
 		}

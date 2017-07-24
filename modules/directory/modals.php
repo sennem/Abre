@@ -1,24 +1,24 @@
-<?php	
+<?php
 	/*
-	* Copyright 2015 Hamilton City School District	
-	* 		
+	* Copyright 2015 Hamilton City School District
+	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the GNU General Public License as published by
     * the Free Software Foundation, either version 3 of the License, or
     * (at your option) any later version.
-	* 
+	*
     * This program is distributed in the hope that it will be useful,
     * but WITHOUT ANY WARRANTY; without even the implied warranty of
     * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     * GNU General Public License for more details.
-	* 
+	*
     * You should have received a copy of the GNU General Public License
     * along with this program.  If not, see <http://www.gnu.org/licenses/>.
     */
-    
+
     //Required configuration files
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
 
@@ -40,12 +40,12 @@
 		</div>
 		</form>
 	</div>
-	
+
 		<script>
-			
-			$(document).ready(function() 
-			{ 
-    			
+
+			$(document).ready(function()
+			{
+
 	    		//Open Modal
 	    		<?php
 		    	if($pageaccess==1 or $pageaccess==2)
@@ -58,18 +58,18 @@
 						var EmployeeID= $(this).data('employeeid');
 						var SearchQuerySaved= $(this).data('searchquerysaved');
 						$("#searchquerysave").val(SearchQuerySaved);
-						
+
 						$("#employeedata").load( "modules/<?php echo basename(__DIR__); ?>/profile.php?id="+EmployeeID, function()
-						{	
+						{
 							$("#employeedata").show();
 						});
-						
+
 						$('#employeeprofile').openModal({ in_duration: 0, out_duration: 0, ready: function() { } });
 					});
 				<?php
 				}
 				?>
-				
+
 				//Archive the User
 				$(document).on("click", "#archiveuser", function ()
 				{
@@ -83,7 +83,7 @@
 						    url: 'modules/directory/archiveuser.php',
 						    data: { id : userid }
 						})
-	
+
 						//Show the notification
 						.done(function(response) {
 							$('#employeeprofile').closeModal({ in_duration: 0, out_duration: 0, ready: function() { } });
@@ -91,18 +91,19 @@
 							$.post("modules/<?php echo basename(__DIR__); ?>/searchresults.php", { searchquery: SearchQuery })
 							.done(function( data ) {
 						    	$('#searchresults').html(data);
-						  	});						
+						  	});
 						})
 					}
 
 				});
-				
+
 					//Save Form Data
 					var form = $('#form-hr');
 					var formMessages = $('#form-messages');
 					$(form).submit(function(event) {
 					    event.preventDefault();
 						var formData = new FormData($(this)[0]);
+						console.log(formData);
 						$.ajax({
 						    type: 'POST',
 						    url: $(form).attr('action'),
@@ -110,7 +111,7 @@
 						    contentType: false,
 							processData: false
 						})
-	
+
 						//Show the notification
 						.done(function(response) {
 							var SearchQuery = $("#searchquerysave").val();
@@ -118,17 +119,17 @@
 							.done(function( data ) {
 						    	$("#content_holder").load( "modules/directory/directory.php" );
 						  	});
-							
+
 							$('#employeeprofile').closeModal({ in_duration: 0, out_duration: 0, ready: function() { } });
-							
+
 							var notification = document.querySelector('.mdl-js-snackbar');
 							var data = { message: response };
 							notification.MaterialSnackbar.showSnackbar(data);
 						})
-	
+
 					});
-				
-    			
-			}); 
-			
+
+
+			});
+
 		</script>

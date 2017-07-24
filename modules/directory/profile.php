@@ -20,7 +20,7 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
 
@@ -168,7 +168,12 @@
 
 				echo "<div id='workcalendardisplay' style='display:none;'>Calendar for $firstname $lastname</div>";
 
-
+				}
+				$sql = "SELECT *  FROM users where email= '$email'";
+				$result = $db->query($sql);
+				while($row = $result->fetch_assoc())
+				{
+					$sysadmin = $row["superadmin"];
 				}
 			}
 			else
@@ -241,6 +246,7 @@
 				$permissions="";
 				$role="";
 				$contractdays="";
+				$sysadmin = 0;
 
 			}
 
@@ -521,6 +527,17 @@
 										echo "</select>";
 										echo "<label>Curriculum</label>";
 									echo "</div>";
+
+									if(superadmin()){
+										echo "<div class='col l6 s12'>";
+											 if($sysadmin == "1"){
+												 echo "<input type='checkbox' id='sysadmin' name='sysadmin' class='filled-in' value='1' checked/>";
+											 }else{
+												 echo "<input type='checkbox' id='sysadmin' name='sysadmin' class='filled-in' value='1'/>";
+											 }
+											 echo "<label for='sysadmin' style='color:#000;'>System Admin Privileges</label>";
+										echo "</div>";
+									}
 
 								 echo "</div>";
 							}
