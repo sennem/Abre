@@ -63,7 +63,7 @@
 
 			//Delete previous image
 			$oldimagelocation = $portal_path_root.$sitelogoexisting;
-			if($sitelogoexisting!='/core/images/abre_siteicon.png'){ unlink($oldimagelocation); }
+			if($sitelogoexisting!='/core/images/abre_glyph.png'){ unlink($oldimagelocation); }
 
 			//Upload new image
 			if (!file_exists("$portal_path_root/content/")){ mkdir("$portal_path_root/content/"); }
