@@ -55,5 +55,13 @@
 	{
 		echo "<option value='Conduct Verification Monitor'>Conduct Verification Monitor</option>";
 	}
+	
+	if (strpos($role, 'Conduct Administrator') !== false) {
+		echo "<option value='Conduct Administrator' selected='selected'>Conduct Administrator</option>";
+	}
+	else
+	{
+		echo "<option value='Conduct Administrator'>Conduct Administrator</option>";
+	}
 
 ?>
