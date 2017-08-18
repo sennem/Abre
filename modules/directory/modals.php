@@ -25,7 +25,7 @@
 ?>
 
 	<!-- Employee Modal -->
-	<div id="employeeprofile" class="modal modal-fixed-footer modal-mobile-full">
+	<div id="employeeprofile" class="fullmodal modal modal-fixed-footer modal-mobile-full" style="width: 90%">
 		<form class="col s12" id='form-hr' method='post' enctype='multipart/form-data' action='modules/directory/updateuser.php'>
 		<div class="modal-content">
 			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
