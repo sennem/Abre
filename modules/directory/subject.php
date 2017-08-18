@@ -22,7 +22,15 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($subject!=""){ echo "<option value='$subject' selected>$subject</option>"; }else{ echo "<option value='$subject' selected>Choose</option>"; }
+	if($subject!="")
+	{
+		echo "<option value='' selected></option>";
+		echo "<option value='$subject' selected>$subject</option>";
+	}
+	else
+	{ 
+		echo "<option value='$subject' selected>Choose</option>";
+	}
 	$sql = "SELECT options FROM directory_settings where dropdownID='subjects'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
