@@ -356,5 +356,32 @@
 		$json = json_decode($result,true);
 		return $json;
 	}
+	
+	//Insert into the database
+	function vendorLinkPost($call,$fields)
+	{
+		
+		$VendorLinkURL=sitesettings("sitevendorlinkurl");
+		$vendorIdentifier=sitesettings("sitevendorlinkidentifier");
+		$vendorKey=sitesettings("sitevendorlinkkey");
+		$userID = "";
+		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
+		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
+		$password = $vendorIdentifier.$userID.$requestDate.$vendorKey;
+		$hmacData = $vendorIdentifier.$userID.$requestDate.$vendorKey;
+		$hmacSignature = base64_encode(pack("H*", sha1($hmacData)));
+		$vlauthheader = $vendorIdentifier."||".$hmacSignature;
+		$url = $call;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('VL-Authorization: '.$vlauthheader, 'Date: '.$requestDate));
+		curl_setopt($ch, CURLOPT_POSTFIELDS,$fields);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch);
+		$json = json_decode($result,true);
+		return $json;
+	}
 
 ?>
