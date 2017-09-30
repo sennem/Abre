@@ -116,11 +116,11 @@
 				}
 				else
 				{
-					if (strpos($_SESSION['useremail'], $site_domain) !== false){ $_SESSION['usertype']="staff"; }
+					if (strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype']="staff"; }
 					if (strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype']="student"; }
 				}
 
-				if ((strpos($_SESSION['useremail'], $site_domain) == false) && (strpos($_SESSION['useremail'], $studentdomain) == false)){ $_SESSION['usertype']=NULL; $_SESSION['useremail']=NULL; header("Location: $portal_root?signout"); }
+				if ($_SESSION['usertype'] != "staff" && $_SESSION['usertype'] != "student"){ $_SESSION['usertype']=NULL; $_SESSION['useremail']=NULL; header("Location: $portal_root?signout"); }
 
 				$me = $Service_Plus->people->get('me');
 				$displayName = $me['displayName'];
@@ -177,11 +177,11 @@
 					}
 					else
 					{
-						
+
 						mysqli_query($db, "DELETE FROM users where email = '".$_SESSION['useremail']."'") or die (mysqli_error($db));
-						
+
 						$getTokenKeyOnly = json_encode($_SESSION['access_token']);
-						
+
 						//Insert Token if contains refresh_token, otherwise, force consent
 						if (strpos($getTokenKeyOnly, 'refresh_token') !== false)
 						{
@@ -193,7 +193,7 @@
 
 							//Set cookie for 7 days
 							setcookie($cookie_name,$storetoken, time()+86400 * 7, '/', '', true, true);
-							
+
 						}
 						else
 						{
@@ -208,7 +208,7 @@
 							    }
 							}
 							$client->revokeToken();
-							header("Location: $portal_root"); 
+							header("Location: $portal_root");
 						}
 					}
 
