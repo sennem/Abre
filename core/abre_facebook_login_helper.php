@@ -125,10 +125,6 @@ catch (Exception $x)
 
     session_destroy();
     $fb->api($revokeCall, "DELETE", $accessToken);
-    //$client->revokeToken();
-
-    //Redirect user
-    //header("Location: $portal_root");
 
   }
 
@@ -138,18 +134,11 @@ catch (Exception $x)
     //Destroy the OAuth & PHP session
     session_destroy();
     $fb->api($revokeCall, "DELETE", $accessToken);
-    //$client->revokeToken();
 
-    //Redirect user
-    //header("Location: $portal_root");
   }
 
 }
 
   header("Location: $portal_root");
-  // User is logged in with a long-lived access token.
-  // You can redirect them to a members-only page.
-  //header('Location: https://example.com/members.php');
-
 
  ?>
