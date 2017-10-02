@@ -116,8 +116,8 @@
 				}
 				else
 				{
-					if (strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ error_log("usertype is staff"); $_SESSION['usertype']="staff"; }
-					if (strpos($_SESSION['useremail'], $studentdomain) !== false){ error_log("usertype is student"); $_SESSION['usertype']="student"; }
+					if (strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype']="staff"; }
+					if (strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype']="student"; }
 				}
 
 				if ($_SESSION['usertype'] != "staff" && $_SESSION['usertype'] != "student"){ $_SESSION['usertype']=NULL; $_SESSION['useremail']=NULL; header("Location: $portal_root?signout"); }
