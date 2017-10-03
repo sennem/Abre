@@ -116,7 +116,6 @@
 				}
 				else
 				{
-
 					if (strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype']="staff"; }
 					if (strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype']="student"; }
 				}
