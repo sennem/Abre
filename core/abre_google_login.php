@@ -109,13 +109,14 @@
 					{
 						$_SESSION['usertype']="student";
 					}
-					else if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false)
+					else if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false || strpos(substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@')),$site_domain) !== false)
 					{
 						$_SESSION['usertype']="staff";
 					}
 				}
 				else
 				{
+
 					if (strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype']="staff"; }
 					if (strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype']="student"; }
 				}
