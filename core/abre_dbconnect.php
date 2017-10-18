@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -17,13 +17,13 @@
     */
 
 	//Include required files
-	require_once(dirname(__FILE__) . '/../configuration.php'); 
-	
+	require_once(dirname(__FILE__) . '/../configuration.php');
+
 	//Connect to the database
-	$db_host=constant("DB_HOST");
-	$db_user=constant("DB_USER");
-	$db_password=constant("DB_PASSWORD");
-	$db_name=constant("DB_NAME");
+	$db_host = constant("DB_HOST");
+	$db_user = constant("DB_USER");
+	$db_password = constant("DB_PASSWORD");
+	$db_name = constant("DB_NAME");
 	$db = new mysqli($db_host, $db_user, $db_password, $db_name);
-	
+
 ?>

@@ -17,11 +17,10 @@
     */
 
 	//Display correct header
-	if (file_exists('configuration.php'))
-	{
+	if(file_exists('configuration.php')){
 		require_once('abre_functions.php');
-		?>
-		<!doctype html>
+?>
+		<!DOCTYPE html>
 		<html lang='en'>
 			<head>
 				<meta charset='utf-8'>
@@ -29,10 +28,9 @@
 				<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
 
 				<?php
-
 				//Site title
 				echo "<title>".sitesettings("sitetitle")."</title>";
-				echo "<meta property='og:title' content='".sitesettings("sitetitle")."' />";
+				echo "<meta property='og:title' content='".sitesettings("sitetitle")."'/>";
 
 				//Site description
 				echo "<meta name='description' property='og:description' content='".sitesettings("sitedescription")."'>";
@@ -52,7 +50,6 @@
 				//Windows icon
 				echo "<meta name='msapplication-TileImage' content='".sitesettings("sitelogo")."'>";
 				echo "<meta name='msapplication-TileColor' content='".sitesettings("sitecolor")."'>";
-
 				?>
 
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
@@ -81,12 +78,10 @@
 			<body>
 			<script>google.charts.load('current', {'packages':['corechart']});</script>
 
-		<?php
-	}
-	else
-	{
+	<?php
+	}else{
 	?>
-		<!doctype html>
+		<!DOCTYPE html>
 		<html lang='en'>
 			<head>
 				<meta charset='utf-8'>
@@ -106,6 +101,6 @@
 				<script src='core/js/material.1.2.1.min.js'></script>
 			</head>
 			<body>
-		<?php
+  <?php
 	}
 	?>

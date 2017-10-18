@@ -22,13 +22,13 @@
   //Create Client request to access Google API
   $client = new Google_Client();
   $client->setApplicationName("Abre");
-  $client_id= sitesettings('googleclientid');
+  $client_id = sitesettings('googleclientid');
   $client->setClientId($client_id);
-  $client_secret= sitesettings('googleclientsecret');
+  $client_secret = sitesettings('googleclientsecret');
   $client->setClientSecret($client_secret);
-  $redirect_uri= $portal_root.'/core/abre_google_login_helper.php/';
+  $redirect_uri = $portal_root.'/core/abre_google_login_helper.php/';
   $client->setRedirectUri($redirect_uri);
-  $simple_api_key= constant("GOOGLE_API_KEY");
+  $simple_api_key = constant("GOOGLE_API_KEY");
   $client->setDeveloperKey($simple_api_key);
   $client->setAccessType("offline");
   $client->setApprovalPrompt("force");

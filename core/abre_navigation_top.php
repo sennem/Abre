@@ -19,7 +19,6 @@
 	//Include required files
 	require_once('abre_verification.php');
 	require_once('abre_functions.php');
-
 ?>
 
 	<!--Display top navigation-->
@@ -41,21 +40,17 @@
 				<?php
 						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
 				?>
-			</div>
+		</div>
 		<div id='navigation_top'></div>
 	</header>
 
 <script>
 
-	$(function()
-	{
-
+	$(function(){
 		//Scroll to top
-		$('.mdl-layout__header-row').click(function()
-		{
+		$('.mdl-layout__header-row').click(function(){
 			$('.mdl-layout__content').animate({ scrollTop: 0 }, 'fast');
 		});
-
 	});
 
 </script>

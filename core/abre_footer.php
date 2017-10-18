@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -17,11 +17,9 @@
     */
 
 	//Add google anaylitics
-	if(file_exists('configuration.php'))
-	{  
-	?>
-	
-		<script>
+	if(file_exists('configuration.php')){
+?>
+	<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
@@ -30,15 +28,13 @@
 				echo "ga('create', '".sitesettings('siteanalytics')."', 'auto');";
 			?>
 			ga('send', 'pageview');
-		</script>
+	</script>
 
-		
+
 	<?php
-		
 		require_once('abre_routing.php');
 	}
-	
 	?>
-	
+
 </body>
 </html>

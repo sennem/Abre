@@ -19,47 +19,41 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
-
 ?>
 
 	<!-- Display the login -->
 	<div class="mdl-layout mdl-js-layout login-card">
 		<div class="login_wrapper">
-
 			<div class="login-card-square mdl-card animated fadeIn">
-				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover; margin-left:20px; margin-bottom:5px;'></div>
+				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background:url(<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover; margin-left:20px; margin-bottom:5px;'></div>
 				<?php
 					echo "<div class='mdl-card-text mdl-color-text--grey-600'>".sitesettings('sitelogintext')."</div>";
 
-			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style= 'margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Staff and Student Login</a>";
+			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Staff and Student Login</a>";
 						if(sitesettings("parentaccess") == "checked"){
-							echo "<div style= 'padding-top: 1em'>";
-								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Parent Login</a>";
+							echo "<div style='padding-top: 1em'>";
+								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin:0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Parent Login</a>";
 							echo "</div>";
 						}
-					?>
+				?>
 			</div>
-
 		</div>
 	</div>
 
-	<script>
+<script>
 
 		//Responsive login view
-		function loginWidthCheck()
-		{
+		function loginWidthCheck(){
 			if ($(window).width() < 600) {
-				$( ".login-card-square" ).removeClass( "mdl-shadow--2dp" );
-				$( ".login-card" ).addClass( "mdl-color--white" );
-			}
-			else
-			{
-				$( ".login-card-square" ).addClass( "mdl-shadow--2dp" );
-				$( ".login-card" ).removeClass( "mdl-color--white" );
+				$(".login-card-square").removeClass("mdl-shadow--2dp");
+				$(".login-card").addClass("mdl-color--white");
+			}else{
+				$(".login-card-square").addClass("mdl-shadow--2dp");
+				$(".login-card").removeClass("mdl-color--white");
 			}
 		}
 
 		loginWidthCheck();
 		$(window).resize(loginWidthCheck);
 
-	</script>
+</script>

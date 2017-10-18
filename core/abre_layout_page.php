@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,18 +15,17 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Include required files
 	require_once('abre_verification.php');
 	require_once('abre_feedback.php');
-
 ?>
-	
+
 	<!--Display page content-->
-	<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>		
-	  	<?php
-			require_once('abre_navigation_top.php'); 
+	<div class='layout mdl-layout mdl-js-layout mdl-layout--fixed-header'>
+		<?php
+			require_once('abre_navigation_top.php');
 			require_once('abre_navigation_drawer.php');
 			require_once('abre_layout_page_content.php');
-	    ?>
+		?>
 	</div>

@@ -17,18 +17,15 @@
     */
 
 	//Check to make sure no configuration file exists
-	if (!file_exists('configuration.php'))
-	{
-
+	if (!file_exists('configuration.php')){
 		//Load header
 		require_once('core/abre_header.php');
 		require_once('core/abre_version.php');
-
-		?>
+?>
 
 		<!--Abre Setup Screen-->
 		<div class='row' style='margin-top:50px;'>
-			<img src='core/images/abre_logo.png' alt='Abre' style='display: block; margin-left: auto; margin-right: auto; width:200px; height:63px;'>
+			<img src='core/images/abre_logo.png' alt='Abre' style='display:block; margin-left:auto; margin-right:auto; width:200px; height:63px;'>
 		</div>
 		<div style='margin-top:50px;'>
 			<div class='page_container page_container_limit mdl-shadow--4dp'>
@@ -37,7 +34,7 @@
 						<div class='col s12'><h3>Welcome</h3></div>
 						<div class='col s12'><p>Welcome to the 5 minute Abre installation process! You may want to browse the documentation available at <a href='https://abre.io/documentation' target='_blank' class='deep-orange-text text-darken-3'>abre.io/documentation</a>. Otherwise, just fill in the information below and you'll be on your way to using the Abre Platform. <?php echo "($abre_version)"; ?></p></div>
 							<form id='install'>
-								<div class='col s12 deep-orange darken-3 white-text alert' style='display:none; padding:10px; margin-bottom:20px; border-radius: 3px;'></div>
+								<div class='col s12 deep-orange darken-3 white-text alert' style='display:none; padding:10px; margin-bottom:20px; border-radius:3px;'></div>
 								<div class='col s12'><h6>Basic Information</h6></div>
 								<div class='input-field col l6 s12'>
 									<input placeholder='@example.org' id='domain_name' name='domain_name' type='text' autocomplete='off' required>
@@ -79,10 +76,10 @@
 								</div>
 								<!-- Code for subscribing to the Abre Community -->
 								<div class='col l12' style='margin-top:15px;'>
-									<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked'/>
-									<label for='abre_community' style = 'color:#000;margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>
+									<input type='checkbox' class='formclick filled-in' id='abre_community' name='abre_community' value='checked'/>
+									<label for='abre_community' style='color:#000; margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>
 								</div>
-								<div id=community_information class='col l12 m12'>
+								<div id='community_information' class='col l12 m12'>
 									<div class='input-field col s6'>
 										<input placeholder='Enter a First Name' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>
 										<label class='active' for='community_first_name'>First Name</label>
@@ -107,16 +104,14 @@
 						</div>
 					</div>
 				</div>
-		</div>
-
+			</div>
 <?php
 	}
 ?>
 
 <script>
 
-	$(function()
-	{
+	$(function(){
 
 		if($("#abre_community").prop("checked")){
 			$("#community_information").show();
@@ -124,35 +119,34 @@
 			$("#community_information").hide();
 		}
 
-		$("#abre_community").click(function() {
+		$("#abre_community").click(function(){
 			if($("#abre_community").prop("checked")){
 				$("#community_information").show();
 			}else{
 				$("#community_information").hide();
 			}
-		 });
+		});
 
-		$('#install').submit(function(event)
-		{
+		$('#install').submit(function(event){
 			event.preventDefault();
 			$('.alert').hide();
 			var data = new FormData($(this)[0]);
-			$.ajax({ type: 'POST', url: '/core/abre_installer_process.php', data: data, contentType: false, processData: false })
-			.done(function(response)
-			{
+			$.ajax({
+				type: 'POST',
+				url: '/core/abre_installer_process.php',
+				data: data, contentType: false,
+				processData: false
+			})
+			.done(function(response){
 				$('.alert').html(response);
-				if(response==="Redirect")
-				{
+				if(response === "Redirect"){
 					$.post("/core/abre_ping.php", function(){ location.reload(); })
-				}
-				else
-				{
+				}else{
 					$('html, body').animate({scrollTop:0},0);
 					$('.alert').show();
 				}
 			})
 		});
-
-  	});
+	});
 
 </script>
