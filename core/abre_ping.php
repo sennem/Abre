@@ -23,10 +23,10 @@
 	$ch = curl_init($url);
 	$jsonData = array(
 		'Domain' => "$portal_root",
-		'community_first_name' => sitesettings('community_first_name'),
-		'community_last_name' => sitesettings('community_last_name'),
-		'community_email' => sitesettings('community_email'),
-		'community_users' => sitesettings('community_users')
+		'community_first_name' => getSiteCommunityLastName(),
+		'community_last_name' => getSiteCommunityLastName(),
+		'community_email' => getSiteCommunityEmail(),
+		'community_users' => getSiteCommunityUsers()
 	);
 	$jsonDataEncoded = json_encode($jsonData);
 	curl_setopt($ch, CURLOPT_POST, 1);

@@ -22,8 +22,8 @@
   require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
 
   $fb = new Facebook\Facebook([
-    'app_id' => sitesettings('facebookclientid'),
-    'app_secret' => sitesettings('facebookclientsecret'),
+    'app_id' => getSiteFacebookClientId(),
+    'app_secret' => getSiteFacebookClientSecret(),
     'default_graph_version' => 'v2.9',
   ]);
 
@@ -57,7 +57,7 @@
 
   // Set user access token. They are now logged in.
   $_SESSION['facebook_access_token'] = $accessToken->getValue();
-  $pagelocation=$portal_root;
+  $pagelocation = $portal_root;
   if(isset($_SESSION["redirecturl"])){
     header("Location: $pagelocation/#".$_SESSION["redirecturl"]);
   }else{
@@ -77,11 +77,8 @@
         $_SESSION['useremail'] = $user['email'];
         $_SESSION['usertype'] = 'parent';
         $_SESSION['displayName'] = $user['name'];
-        $_SESSION['picture'] = sitesettings('sitelogo');
+        $_SESSION['picture'] = getSiteLogo();
       }
-    }
-
-    if(isset($_SESSION['facebook_access_token'])){
       if($_SESSION['usertype']!=""){
         include "abre_dbconnect.php";
         if($result = $db->query("SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'")){
@@ -98,13 +95,12 @@
               $_SESSION['loggedin'] = "";
             }
             if($_SESSION['loggedin'] != "yes"){
-              //Mark that they have logged in
               $_SESSION['loggedin'] = "yes";
             }
           }else{
             $sha1useremail = sha1($_SESSION['useremail']);
             $storetoken = $sha1useremail.$hash;
-            mysqli_query($db, "Insert into users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
+            mysqli_query($db, "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
           }
 
         }
@@ -117,7 +113,6 @@
       $fb->api($revokeCall, "DELETE", $accessToken);
     }
     if(strpos($x->getMessage(), 'Invalid Credentials')){
-      //Destroy the OAuth & PHP session
       session_destroy();
       $fb->api($revokeCall, "DELETE", $accessToken);
     }

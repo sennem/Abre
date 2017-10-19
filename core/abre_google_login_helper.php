@@ -40,7 +40,7 @@
         $userData = $Service_Oauth2->userinfo->get();
         $userEmail = $userData["email"];
         $_SESSION['useremail'] = $userEmail;
-        $_SESSION['picture'] = sitesettings('sitelogo');
+        $_SESSION['picture'] = getSiteLogo();
         $_SESSION['usertype'] = 'parent';
 
         $me = $Service_Plus->people->get('me');

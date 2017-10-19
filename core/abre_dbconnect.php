@@ -25,5 +25,4 @@
 	$db_password = constant("DB_PASSWORD");
 	$db_name = constant("DB_NAME");
 	$db = new mysqli($db_host, $db_user, $db_password, $db_name);
-
 ?>

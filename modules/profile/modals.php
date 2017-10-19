@@ -50,8 +50,8 @@
 				</div>
 	    </div>
 		<div class="modal-footer">
-			<button class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
-			<button class="printbutton waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Print</button>
+			<button class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Close</button>
+			<button class="printbutton waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Print</button>
 			<div id="selecteddays" style='margin:12px 0 0 20px; font-weight:500; font-size:16px;'></div>
 	    </div>
 	</div>
@@ -75,7 +75,7 @@
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<a class='modal-action waves-effect btn-flat white-text modal-addeditstream' href='#addeditstream' data-streamtitle='Add New Stream' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Add</a>
+			<a class='modal-action waves-effect btn-flat white-text modal-addeditstream' href='#addeditstream' data-streamtitle='Add New Stream' style='background-color: <?php echo getSiteColor(); ?>'>Add</a>
 		</div>
 	</div>
 
@@ -117,8 +117,8 @@
 			<input id="stream_id" name="stream_id" type="hidden">
 		</div>
 		<div class='modal-footer'>
-			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdatestream' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Save</button>
-			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>; margin-right:5px;'>Cancel</a>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdatestream' style='background-color: <?php echo getSiteColor(); ?>'>Save</button>
+			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>; margin-right:5px;'>Cancel</a>
 		</div>
 		</form>
 	</div>

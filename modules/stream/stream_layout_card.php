@@ -34,10 +34,10 @@
 		
 		echo "<div class='mdl-card__title'><div class='mdl-card__title-text'>$title</div></div>";
 		echo "<div class='mdl-card__supporting-text-subtitle' style='margin:0 0 25px 15px;'><span>$displaydate</span></div>";
-		echo "<div class='mdl-card__supporting-text-subtitle'><a href='$feedlink' style='color: ".sitesettings("sitecolor")."' target='_blank'>$feedtitle</a></div>";
+		echo "<div class='mdl-card__supporting-text-subtitle'><a href='$feedlink' style='color: ".getSiteColor()."' target='_blank'>$feedtitle</a></div>";
 		if($excerpt!=""){ echo "<div class='mdl-card__supporting-text'>$excerpt</div>"; }
 		echo "<div class='mdl-card__actions mdl-card--border'>";
-			echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='$link' style='color: ".sitesettings("sitecolor")."' target='_blank'>$linklabel</a>";
+			echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='$link' style='color: ".getSiteColor()."' target='_blank'>$linklabel</a>";
 			
 			if($_SESSION['usertype']=='staff')
 			{
@@ -71,7 +71,7 @@
 				}
 				else
 				{
-					echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".sitesettings("sitecolor")."' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".sitesettings("sitecolor")."'>$num_rows_comment</span>";
+					echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".getSiteColor()."' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".getSiteColor()."'>$num_rows_comment</span>";
 				}
 			}
 			

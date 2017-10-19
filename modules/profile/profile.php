@@ -106,7 +106,7 @@
 			echo "</div>";
 			if(superAdmin() && $_SESSION['usertype'] == 'staff')
 			{
-				echo "<div class='row'><div class='col s12'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Manage</a></div></div>";
+				echo "<div class='row'><div class='col s12'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo getSiteColor(); echo "'>Manage</a></div></div>";
 			}
 		echo "</div>";
 		echo "</div>";
@@ -207,7 +207,7 @@
 						{
 							echo "<p>You can use the calendar below to choose your work schedule.</p>";
 						}
-						echo "<a href='#viewschedule' class='modal-viewschedule' style='line-height:40px; color:".sitesettings("sitecolor")."'>SET CALENDAR</a><br><a href='#' class='printbutton' style='line-height:40px; color:".sitesettings("sitecolor")."'>PRINT CALENDAR</a>";
+						echo "<a href='#viewschedule' class='modal-viewschedule' style='line-height:40px; color:".getSiteColor()."'>SET CALENDAR</a><br><a href='#' class='printbutton' style='line-height:40px; color:".getSiteColor()."'>PRINT CALENDAR</a>";
 
 					echo "</div>";
 				echo "</div>";
@@ -277,7 +277,7 @@ $(".formclick").click(function() {
 // 			//Show the notification
 // 			.done(function(response) {
 // 				$('#streamerror').show();
-// 				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
+// 				$('#streamerror').html("<h6 style='color: <?php echo getSiteColor(); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo getSiteColor(); ?>'>Done</a></h6>");
 // 				var notification = document.querySelector('.mdl-js-snackbar');
 // 				var data = { message: 'Your changes have been saved.' };
 // 				notification.MaterialSnackbar.showSnackbar(data);
@@ -298,7 +298,7 @@ $(".formclick").click(function() {
 			//Show the notification
 			.done(function(response) {
 				$('#streamerror').show();
-				$('#streamerror').html("<h6 style='color: <?php echo sitesettings("sitecolor"); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Done</a></h6>");
+				$('#streamerror').html("<h6 style='color: <?php echo getSiteColor(); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo getSiteColor(); ?>'>Done</a></h6>");
 				var notification = document.querySelector('.mdl-js-snackbar');
 				var data = { message: 'Your changes have been saved.' };
 				notification.MaterialSnackbar.showSnackbar(data);

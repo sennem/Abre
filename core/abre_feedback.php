@@ -37,7 +37,7 @@
 					</div>
 			  </div>
 			  <div class='modal-footer'>
-					<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Submit</button>
+					<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>'>Submit</button>
 				</div>
 			</form>
 		</div>
@@ -59,7 +59,6 @@
 
 		//Submit feedback form
 		let form = $('#form-feedback');
-		let formMessages = $('#form-messages');
 		$(form).submit(function(event){
 			event.preventDefault();
 		  $('#feedback').closeModal({

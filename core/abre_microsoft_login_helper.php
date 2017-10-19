@@ -21,10 +21,10 @@
   require_once('abre_functions.php');
 
   $fields = array(
-  	'client_id' => urlencode(sitesettings('microsoftclientid')),
+  	'client_id' => urlencode(getSiteMicrosoftClientId()),
   	'redirect_uri' => urlencode($portal_root . '/core/abre_microsoft_login_helper.php'),
   	'grant_type' => urlencode('authorization_code'),
-  	'client_secret' => urlencode(sitesettings('microsoftclientsecret')),
+  	'client_secret' => urlencode(getSiteMicrosoftClientSecret()),
   	'code' => urlencode($_POST['code']),
   	'scope' => urlencode('openid profile')
   );
@@ -63,7 +63,7 @@
          $_SESSION['useremail']=$infoObject->preferred_username;
          $_SESSION['usertype']= 'parent';
          $_SESSION['displayName']= $infoObject->name;
-         $_SESSION['picture'] = sitesettings('sitelogo');
+         $_SESSION['picture'] = getSiteLogo();
        }
      }else{
       //header("Location: $pagelocation");

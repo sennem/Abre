@@ -40,9 +40,9 @@
 		$sitegoogleclientid = $_POST["googleclientid"];
 		if($_POST["googleclientsecret"]!=""){ $sitegoogleclientsecret = encrypt($_POST["googleclientsecret"], ''); }else{ $sitegoogleclientsecret=""; }
 		$sitefacebookclientid = $_POST["facebookclientid"];
-		if($_POST["facebookclientid"]!=""){ $sitefacebookclientsecret = encrypt($_POST["facebookclientsecret"], ''); }else{ $sitefacebookclientsecret=""; }
+		if($_POST["facebookclientsecret"]!=""){ $sitefacebookclientsecret = encrypt($_POST["facebookclientsecret"], ''); }else{ $sitefacebookclientsecret=""; }
 		$sitemicrosoftclientid = $_POST["microsoftclientid"];
-		if($_POST["microsoftclientid"]!=""){ $sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], ''); }else{ $sitemicrosoftclientsecret=""; }
+		if($_POST["microsoftclientsecret"]!=""){ $sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], ''); }else{ $sitemicrosoftclientsecret=""; }
 		$sitevendorlinkkey=$_POST["sitevendorlinkkey"];
 		$sitelogoexisting=$_POST["sitelogoexisting"];
 		$abre_community = $_POST['abre_community'];

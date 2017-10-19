@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,24 +15,24 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
-	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php'); 
-	require(dirname(__FILE__) . '/../../core/abre_functions.php'); 
 
-	$VendorLinkURL=sitesettings("sitevendorlinkurl");
+	//Required configuration files
+	require(dirname(__FILE__) . '/../../configuration.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_functions.php');
+
+	$VendorLinkURL=getSiteVendorLinkUrl();
 	$json=vendorLinkGet("$VendorLinkURL/GBService/HA/teacher");
-	
+
 	//Retrieve employee information from database
-	foreach ($json as $key => $result) 
+	foreach ($json as $key => $result)
 	{
 	    foreach ($result as $key => $result)
 		{
 			$employeeTeacherID=encrypt($result[TeacherID]);
 			$staffrefid=$result[ExternalRefId];
 			$json2=vendorLinkGet("$VendorLinkURL/SisService/Staff?staffPersonalRefId=$staffrefid");
-			foreach ($json2 as $key => $result) 
+			foreach ($json2 as $key => $result)
 			{
 				foreach ($result as $key => $result)
 				{
@@ -41,12 +41,12 @@
 					$employeeRefID=encrypt($result[RefId]);
 					$employeeStateID=encrypt($result[StateProvinceId]);
 					$employeeLocalId=encrypt($result[LocalId]);
-					
+
 					//Add information to employee database
 					mysqli_query($db, "UPDATE directory set RefID='$employeeRefID', StateID='$employeeStateID', TeacherID='$employeeTeacherID', LocalId='$employeeLocalId' where email='$employeeemailencrypted'");
 				}
-			}	
+			}
 		}
 	}
-	
+
 ?>

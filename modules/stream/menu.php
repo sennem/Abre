@@ -26,7 +26,7 @@
 ?>
 
     <div class="col s12">
-		<ul class="tabs_2" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
 			<li class="tab col s3 tab_1 streammenu pointer" data="#"><a href="#">Stream</a></li>
 			<li class="tab col s3 tab_2 streammenu pointer" data="#likes"><a href="#likes">Likes</a></li>
 		</ul>

@@ -110,7 +110,7 @@
 					echo "</div>";
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
-							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' id='saveSettings' style='background-color: ".sitesettings("sitecolor")."'>Save Changes</button>";
+							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' id='saveSettings' style='background-color: ".getSiteColor()."'>Save Changes</button>";
 						echo "</div>";
 					echo "</div>";
 				echo "</form>";

@@ -25,14 +25,14 @@
 	<div class="mdl-layout mdl-js-layout login-card">
 		<div class="login_wrapper">
 			<div class="login-card-square mdl-card animated fadeIn">
-				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background:url(<?php echo sitesettings('sitelogo'); ?>) center center no-repeat; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover; margin-left:20px; margin-bottom:5px;'></div>
+				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background:url(<?php echo getSiteLogo(); ?>) center center no-repeat; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover; margin-left:20px; margin-bottom:5px;'></div>
 				<?php
-					echo "<div class='mdl-card-text mdl-color-text--grey-600'>".sitesettings('sitelogintext')."</div>";
+					echo "<div class='mdl-card-text mdl-color-text--grey-600'>".getSiteLoginText()."</div>";
 
-			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Staff and Student Login</a>";
-						if(sitesettings("parentaccess") == "checked"){
+			  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Staff and Student Login</a>";
+						if(getSiteParentAccess() == "checked"){
 							echo "<div style='padding-top: 1em'>";
-								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin:0 auto; width:100%; text-transform:none; background-color:".sitesettings("sitecolor")."'>Parent Login</a>";
+								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Parent Login</a>";
 							echo "</div>";
 						}
 				?>

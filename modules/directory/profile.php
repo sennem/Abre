@@ -477,7 +477,7 @@
 									echo "</div>";
 					}
 									echo "<div class='input-field col l3 s12'>";
-									echo "<a class='printbutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' style='background-color:"; echo sitesettings("sitecolor"); echo "'><i class='material-icons'>date_range</i></a>";
+									echo "<a class='printbutton mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored' style='background-color:"; echo getSiteColor(); echo "'><i class='material-icons'>date_range</i></a>";
 									echo "</div>";
 								echo "</div>";
 
@@ -541,7 +541,7 @@
 								 echo "</div>";
 							}
 
-							echo "<div class='row'><div class='col l12'><a class='waves-effect btn-flat white-text' id='archiveuser' id='archiveuser' style='background-color:"; echo sitesettings("sitecolor"); echo "'>Archive User</a></div></div>";
+							echo "<div class='row'><div class='col l12'><a class='waves-effect btn-flat white-text' id='archiveuser' id='archiveuser' style='background-color:"; echo getSiteColor(); echo "'>Archive User</a></div></div>";
 							echo "<input type='hidden' name='id' value='$id' id='userid'><br>";
 						}
 

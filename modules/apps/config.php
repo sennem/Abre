@@ -62,7 +62,7 @@
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<a class='modal-action waves-effect btn-flat white-text modal-addeditapp' href='#addeditapp' data-apptitle='Add New App' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Add</a>
+			<a class='modal-action waves-effect btn-flat white-text modal-addeditapp' href='#addeditapp' data-apptitle='Add New App' style='background-color: <?php echo getSiteColor(); ?>'>Add</a>
 		</div>
 	</div>
 
@@ -118,8 +118,8 @@
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdateapp' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Save</button>
-			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>; margin-right:5px;'>Cancel</a>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdateapp' style='background-color: <?php echo getSiteColor(); ?>'>Save</button>
+			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>; margin-right:5px;'>Cancel</a>
 		</div>
 		</form>
 	</div>
@@ -143,7 +143,7 @@
 				<div id="errormessage" style="color:#F44336"></div>
 				</div>
 				<div class="modal-footer">
-				<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor");?>'>Verify</button>
+				<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor();?>'>Verify</button>
 			</div>
 			</form>
 		</div>

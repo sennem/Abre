@@ -32,7 +32,7 @@
 			</div>
     	</div>
 	    <div class="modal-footer">
-			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Add</button>
+			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Add</button>
 		</div>
 		</form>
 	</div>

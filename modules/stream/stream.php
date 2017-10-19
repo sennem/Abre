@@ -50,7 +50,7 @@
 			if($numrows >= 1){
 
 			}else{
-				echo "<div class='row center-align'><div class='col s12'><h3>Welcome to the Parent Portal!</h3></div><div class='col s12'>Click <a href='#profile' style='color: ".sitesettings("sitecolor")."'>here</a> to your profile settings or click the '+' button in the top right to add your students</div></div>";
+				echo "<div class='row center-align'><div class='col s12'><h3>Welcome to the Parent Portal!</h3></div><div class='col s12'>Click <a href='#profile' style='color: ".getSiteColor()."'>here</a> to your profile settings or click the '+' button in the top right to add your students</div></div>";
 			}
  		}
 		echo "<div id='streamcards'></div>";

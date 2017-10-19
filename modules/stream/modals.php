@@ -42,15 +42,15 @@
 				<div name="streamComments" id="streamComments"></div>
 				<div class="input-field col s12">
 					<h4 name="streamTitle" id="streamTitle"></h4>
-					<b style='color: <?php echo sitesettings("sitecolor"); ?>;' id="commentstatustext">Write a comment</b>
+					<b style='color: <?php echo getSiteColor(); ?>;' id="commentstatustext">Write a comment</b>
 					<textarea id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
 				</div>
 				<input type="hidden" name="streamUrl" id="streamUrl">
 				<input type="hidden" name="streamTitleValue" id="streamTitleValue">
 	    	</div>
 		    <div class="modal-footer">
-				<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-left:5px; background-color:<?php echo sitesettings("sitecolor"); ?>'>Post</button>
-				<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Cancel</button>
+				<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-left:5px; background-color:<?php echo getSiteColor(); ?>'>Post</button>
+				<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Cancel</button>
 			</div>
 			</form>
 		</div>

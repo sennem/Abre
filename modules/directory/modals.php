@@ -35,8 +35,8 @@
 			</div>
     	</div>
 	    <div class="modal-footer">
-			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo sitesettings("sitecolor"); ?>'>Save</button>
-			<a class="modal-close waves-effect btn-flat white-text"  style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Cancel</a>
+			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor("sitecolor"); ?>'>Save</button>
+			<a class="modal-close waves-effect btn-flat white-text"  style='background-color: <?php echo getSiteColor("sitecolor"); ?>'>Cancel</a>
 		</div>
 		</form>
 	</div>

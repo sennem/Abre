@@ -20,8 +20,8 @@
   require_once(dirname(__FILE__) . '/../core/abre_functions.php');
 
   //Load configuration settings
-  $studentdomain = sitesettings('studentdomain');
-  $studentdomainrequired = sitesettings('studentdomainrequired');
+  $studentdomain = getSiteStudentDomain();
+  $studentdomainrequired = getSiteStudentDomainRequired();
 
 	//Try to login the user, if they have revoked Google access, request access again
 	try{

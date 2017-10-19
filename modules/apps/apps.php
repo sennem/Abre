@@ -162,7 +162,7 @@
 			}
 			echo "</div>";
 		}else{
-			
+
 			//Display editable student apps
 			echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
 			$sql = "SELECT * FROM apps WHERE student = 1 AND required = 1 order by sort";
@@ -271,7 +271,7 @@
 	//Display Apps Editor if superadmin
 	if(superadmin() && $_SESSION['usertype'] == 'staff')
 	{
-		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo sitesettings("sitecolor"); echo "'>Manage</a></div>";
+		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo getSiteColor(); echo "'>Manage</a></div>";
 	}
 
 ?>
