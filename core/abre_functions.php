@@ -203,6 +203,7 @@
 	}
 
 	//Retrieve Site Title
+	//DEPRECIATED
 	function sitesettings($value){
 		include "abre_dbconnect.php";
 		if(!$result = $db->query("SELECT * FROM settings")){
@@ -265,11 +266,242 @@
 				if($value == "community_last_name" && $valuereturn == ""){ $valuereturn = ""; }
 				if($value == "community_email" && $valuereturn == ""){ $valuereturn = ""; }
 				if($value == "community_users" && $valuereturn == ""){ $valuereturn = ""; }
-
-				return $valuereturn;
 			}
 		}
 		$db->close();
+		return $valuereturn;
+	}
+
+	function getSettingsDbValue($value){
+		include "abre_dbconnect.php";
+		$sql2 = "SELECT * FROM settings LIMIT 1";
+		$result2 = $db->query($sql2);
+		if($result2){
+			$row = $result2->fetch_assoc();
+			$options = $row["options"];
+			if($options != ""){
+				$options = json_decode($options);
+				if(isset($options->$value)){
+					$valuereturn = $options->$value;
+				}else{
+					$valuereturn = "";
+				}
+			}else{
+				$valuereturn = "";
+			}
+		}else{
+			$sql = "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
+			$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";
+			$sql .= "ALTER TABLE `settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+			$db->multi_query($sql);
+
+			$valuereturn = "";
+		}
+		$db->close();
+		return $valuereturn;
+	}
+
+	function getSiteTitle(){
+		$valuereturn = getSettingsDbValue('sitetitle');
+		if($valuereturn == ""){ $valuereturn = "Abre"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteColor(){
+		$valuereturn = getSettingsDbValue('sitecolor');
+		if($valuereturn == ""){ $valuereturn = "#2B2E4A"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteDescription(){
+		$valuereturn = getSettingsDbValue('sitedescription');
+		if($valuereturn == ""){ $valuereturn = "Abre Open Platform for Education"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteLoginText(){
+		$valuereturn = getSettingsDbValue('sitelogintext');
+		if($valuereturn == ""){ $valuereturn = "Open Platform for Education"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteAnalytics(){
+		$valuereturn = getSettingsDbValue('siteanalytics');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteAdminEmail(){
+		$valuereturn = getSettingsDbValue('siteadminemail');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteVendorLinkUrl(){
+		$valuereturn = getSettingsDbValue('sitevendorlinkurl');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteVendorLinkIdentifier(){
+		$valuereturn = getSettingsDbValue('sitevendorlinkidentifier');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteVendorLinkKey(){
+		$valuereturn = getSettingsDbValue('sitevendorlinkkey');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteCerticaBaseUrl(){
+		$valuereturn = getSettingsDbValue('certicabaseurl');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteCerticaAccessKey(){
+		$valuereturn = getSettingsDbValue('certicaaccesskey');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteStudentDomain(){
+		$valuereturn = getSettingsDbValue('studentdomain');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteStudentDomainRequired(){
+		$valuereturn = getSettingsDbValue('studentdomainrequired');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteLogo(){
+		$valuereturn = getSettingsDbValue('sitelogo');
+		if($valuereturn == ""){
+			$valuereturn = "/core/images/abre_glyph.png";
+		}else{
+			if($valuereturn != '/core/images/abre_glyph.png'){
+				$valuereturn = "/content/$valuereturn";
+			}else{
+				$valuereturn="/core/images/abre_glyph.png";
+			}
+		}
+
+		return $valuereturn;
+	}
+
+	function getSiteGoogleClientId(){
+		$valuereturn = getSettingsDbValue('googleclientid');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteParentAccess(){
+		$valuereturn = getSettingsDbValue('parentaccess');
+		if($valuereturn == ""){ $valuereturn = "unchecked"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteGoogleClientSecret(){
+		$valuereturn = getSettingsDbValue('googleclientsecret');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			$valuereturn = decrypt($valuereturn, '');
+		}
+
+		return $valuereturn;
+	}
+
+	function getSiteFacebookClientId(){
+		$valuereturn = getSettingsDbValue('facebookclientid');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteFacebookClientSecret(){
+		$valuereturn = getSettingsDbValue('facebookclientsecret');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			$valuereturn = decrypt($valuereturn, '');
+		}
+
+		return $valuereturn;
+	}
+
+	function getSiteMicrosoftClientId(){
+		$valuereturn = getSettingsDbValue('microsoftclientid');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteMicrosoftClientSecret(){
+		$valuereturn = getSettingsDbValue('microsoftclientsecret');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			$valuereturn = decrypt($valuereturn, '');
+		}
+
+		return $valuereturn;
+	}
+
+	function getSiteAbreCommunity(){
+		$valuereturn = getSettingsDbValue('abre_community');
+		if($valuereturn == ""){ $valuereturn = "unchecked"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteCommunityFirstName(){
+		$valuereturn = getSettingsDbValue('community_first_name');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteCommunityLastName(){
+		$valuereturn = getSettingsDbValue('community_last_name');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteCommunityEmail(){
+		$valuereturn = getSettingsDbValue('community_email');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteCommunityUsers(){
+		$valuereturn = getSettingsDbValue('community_users');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
 	}
 
 	function linkify($value, $protocols = array('http', 'mail'), array $attributes = array()){
@@ -287,10 +519,10 @@
     foreach ((array)$protocols as $protocol){
         switch ($protocol){
             case 'http':
-            case 'https':   $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { if ($match[1]) $protocol = $match[1]; $link = $match[2] ?: $match[3]; return '<' . array_push($links, "<a $attr href=\"$protocol://$link\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>$link</a>") . '>'; }, $value); break;
-            case 'mail':    $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"mailto:{$match[1]}\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[1]}</a>") . '>'; }, $value); break;
-            case 'twitter': $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1]  . "\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[0]}</a>") . '>'; }, $value); break;
-            default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\" target=\"_blank\" style='color: ".sitesettings("sitecolor")."'>{$match[1]}</a>") . '>'; }, $value); break;
+            case 'https':   $value = preg_replace_callback('~(?:(https?)://([^\s<]+)|(www\.[^\s<]+?\.[^\s<]+))(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { if ($match[1]) $protocol = $match[1]; $link = $match[2] ?: $match[3]; return '<' . array_push($links, "<a $attr href=\"$protocol://$link\" target=\"_blank\" style='color: ".getSiteColor()."'>$link</a>") . '>'; }, $value); break;
+            case 'mail':    $value = preg_replace_callback('~([^\s<]+?@[^\s<]+?\.[^\s<]+)(?<![\.,:])~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"mailto:{$match[1]}\" target=\"_blank\" style='color: ".getSiteColor()."'>{$match[1]}</a>") . '>'; }, $value); break;
+            case 'twitter': $value = preg_replace_callback('~(?<!\w)[@#](\w++)~', function ($match) use (&$links, $attr) { return '<' . array_push($links, "<a $attr href=\"https://twitter.com/" . ($match[0][0] == '@' ? '' : 'search/%23') . $match[1]  . "\" target=\"_blank\" style='color: ".getSiteColor()."'>{$match[0]}</a>") . '>'; }, $value); break;
+            default:        $value = preg_replace_callback('~' . preg_quote($protocol, '~') . '://([^\s<]+?)(?<![\.,:])~i', function ($match) use ($protocol, &$links, $attr) { return '<' . array_push($links, "<a $attr href=\"$protocol://{$match[1]}\" target=\"_blank\" style='color: ".getSiteColor()."'>{$match[1]}</a>") . '>'; }, $value); break;
         }
     }
     // Insert all link
@@ -299,9 +531,9 @@
 
 	//Insert into the database
 	function vendorLinkGet($call){
-		$VendorLinkURL = sitesettings("sitevendorlinkurl");
-		$vendorIdentifier = sitesettings("sitevendorlinkidentifier");
-		$vendorKey = sitesettings("sitevendorlinkkey");
+		$VendorLinkURL = getSiteVendorLinkUrl();
+		$vendorIdentifier = getSiteVendorLinkIdentifier();
+		$vendorKey = getSiteVendorLinkKey();
 		$userID = "";
 		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
 		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
@@ -325,9 +557,9 @@
 
 	//Insert into the database
 	function vendorLinkPost($call,$fields){
-		$VendorLinkURL = sitesettings("sitevendorlinkurl");
-		$vendorIdentifier = sitesettings("sitevendorlinkidentifier");
-		$vendorKey = sitesettings("sitevendorlinkkey");
+		$VendorLinkURL = getSiteVendorLinkUrl();
+		$vendorIdentifier = getSiteVendorLinkIdentifier();
+		$vendorKey = getSiteVendorLinkKey();
 		$userID = "";
 		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
 		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
