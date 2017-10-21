@@ -38,7 +38,7 @@
 	//Find user ID in directory module given an email
 	function finduserid($email){
 		$email = encrypt($email, "");
-		$sql = "SELECT * FROM directory WHERE email='$email'";
+		$sql = "SELECT * FROM directory WHERE email = '$email'";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$id = $row["id"];
@@ -49,7 +49,7 @@
 	//Find user ID given an email
 	function superadmin(){
 		include "abre_dbconnect.php";
-		$sql = "SELECT * FROM users WHERE email='".$_SESSION['useremail']."' AND superadmin=1";
+		$sql = "SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			return true;
@@ -59,7 +59,7 @@
 	//Find user ID given an email
 	function finduseridcore($email){
 		include "abre_dbconnect.php";
-		$sql = "SELECT *  FROM users WHERE email='".$_SESSION['useremail']."'";
+		$sql = "SELECT * FROM users WHERE email = '".$_SESSION['useremail']."'";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$id = $row["id"];
@@ -85,13 +85,17 @@
 	}
 
 	//set verified session data for parent
+	/* the first part of this function finds students who have a registered
+	parent in the abre parent contact table, but not claimed in the
+	users_parents table. We wanted to make parents who are registered as a contact
+	for the school to be able to "fastpass" registering a student token */
 	function isVerified(){
 		include "abre_dbconnect.php";
 		if($_SESSION['usertype'] == 'parent'){
 			if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")
 			    && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
 				//see if email matches any records
-				$sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE'".$_SESSION['useremail']."'";
+				$sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE '".$_SESSION['useremail']."'";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){
 					//for records that match find kids associated with that email
@@ -126,7 +130,7 @@
 			$result = $db->query($sql);
 			$_SESSION['auth_students'] = '';
 			while($row = $result->fetch_assoc()){
-				$sql2 = "SELECT * FROM student_tokens WHERE token='".$row['students']."'";
+				$sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['students']."'";
 				$result2 = $db->query($sql2);
 				while($row2 = $result2->fetch_assoc()){
 					$_SESSION['auth_students'] .= $row2['studentId'].',';
@@ -144,9 +148,9 @@
 		while($row = $result->fetch_assoc()){
 			array_push($rowarray, $row);
 		}
+		$db->close();
 
 		return $rowarray;
-		$db->close();
 	}
 
 	//Insert into the database
@@ -157,9 +161,9 @@
 		$stmt->execute();
 		$newcommentid = $stmt->insert_id;
 		$stmt->close();
-
-		return $newcommentid;
 		$db->close();
+		
+		return $newcommentid;
 	}
 
 	//Insert into the database

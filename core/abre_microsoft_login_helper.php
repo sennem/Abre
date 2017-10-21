@@ -60,9 +60,9 @@
    try{
      if(isset($_SESSION['microsoft_access_token'])){
        if(!isset($_SESSION['useremail'])){
-         $_SESSION['useremail']=$infoObject->preferred_username;
-         $_SESSION['usertype']= 'parent';
-         $_SESSION['displayName']= $infoObject->name;
+         $_SESSION['useremail'] = $infoObject->preferred_username;
+         $_SESSION['usertype'] = 'parent';
+         $_SESSION['displayName'] = $infoObject->name;
          $_SESSION['picture'] = getSiteLogo();
        }
      }else{
@@ -72,7 +72,7 @@
      if(isset($_SESSION['microsoft_access_token'])){
        if($_SESSION['usertype'] != ""){
          include "abre_dbconnect.php";
-         if($result = $db->query("SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'")){
+         if($result = $db->query("SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
            $count = $result->num_rows;
            if($count >= 1){
              $sql = "SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."' and students = ''";
@@ -88,8 +88,6 @@
                $_SESSION['loggedin']="yes";
              }
            }else{
-             $sha1useremail = sha1($_SESSION['useremail']);
-             $storetoken = $sha1useremail.$hash;
              mysqli_query($db, "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
            }
          }

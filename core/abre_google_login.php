@@ -38,8 +38,8 @@
 			    foreach($cookies as $cookie){
 			        $parts = explode('=', $cookie);
 			        $name = trim($parts[0]);
-			        setcookie($name, '', time()-1000);
-			        setcookie($name, '', time()-1000, '/');
+			        setcookie($name, '', time() - 1000);
+			        setcookie($name, '', time() - 1000, '/');
 			    }
 			}
 			session_destroy();
@@ -88,7 +88,7 @@
 		if((isset($_SESSION['access_token']) && $client->getAccessToken()) || isset($_SESSION['facebook_access_token'])
         || isset($_SESSION['google_parent_access_token']) || isset($_SESSION['microsoft_access_token'])){
 			if(!isset($_SESSION['useremail'])){
-				$client->setAccessToken($_SESSION['access_token']);
+        $client->setAccessToken($_SESSION['access_token']);
 				$userData = $Service_Oauth2->userinfo->get();
 				$userEmail = $userData["email"];
 				$_SESSION['useremail'] = $userEmail;
@@ -103,21 +103,22 @@
 						$_SESSION['usertype'] = "student";
 					}else if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false
               || strpos(substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@')), $site_domain) !== false){
-						$_SESSION['usertype']="staff";
+						$_SESSION['usertype'] = "staff";
 					}
 				}else{
-					if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype']="staff"; }
-					if(strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype']="student"; }
+					if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype'] = "staff"; }
+					if(strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype'] = "student"; }
 				}
 
 				if($_SESSION['usertype'] != "staff" && $_SESSION['usertype'] != "student"){
-          $_SESSION['usertype']=NULL; $_SESSION['useremail']=NULL;
+          $_SESSION['usertype'] = NULL;
+          $_SESSION['useremail'] = NULL;
           header("Location: $portal_root?signout");
         }
 
 				$me = $Service_Plus->people->get('me');
 				$displayName = $me['displayName'];
-				$_SESSION['displayName']=$displayName;
+				$_SESSION['displayName'] = $displayName;
 			}
 		}else{
 			$authUrl = $client->createAuthUrl();
@@ -127,9 +128,9 @@
 		if(isset($_SESSION['access_token'])){
 			if($_SESSION['usertype'] != ""){
 				include "abre_dbconnect.php";
-				if($result = $db->query("SELECT * FROM users WHERE email='".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%'")){
-					$count=$result->num_rows;
-					if($count == '1'){
+				if($result = $db->query("SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%'")){
+					$count = $result->num_rows;
+					if($count == 1){
 						//If not already logged in, check and get a refresh token
 						if(!isset($_SESSION['loggedin'])) { $_SESSION['loggedin'] = ""; }
 						if($_SESSION['loggedin'] != "yes"){

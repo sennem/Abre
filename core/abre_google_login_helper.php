@@ -52,10 +52,10 @@
     if(isset($_SESSION['google_parent_access_token'])){
       if($_SESSION['usertype'] != ""){
         include "abre_dbconnect.php";
-        if($result = $db->query("SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."'")){
+        if($result = $db->query("SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
           $count = $result->num_rows;
           if($count >= 1){
-            $sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."' AND students=''";
+            $sql = "SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."' AND students = ''";
             $result = $db->query($sql);
             $numrows = $result->num_rows;
             if($numrows == 0){
@@ -69,8 +69,6 @@
               $_SESSION['loggedin'] = "yes";
             }
           }else{
-            $sha1useremail = sha1($_SESSION['useremail']);
-            $storetoken = $sha1useremail.$hash;
             mysqli_query($db, "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
           }
         }

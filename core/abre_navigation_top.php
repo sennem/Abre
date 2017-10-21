@@ -27,8 +27,7 @@
 			<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
 			<div class='mdl-layout-spacer'></div>
 				<?php
-					if(!isset($_GET["dash"]))
-					{
+					if(!isset($_GET["dash"])){
 						if($_SESSION['usertype'] == 'parent'){
 							echo "<a id='addstudent' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-verifystudent' href='#verifystudent' style='margin-right:10px'><i class='material-icons'>add</i></a>";
 							isVerified();

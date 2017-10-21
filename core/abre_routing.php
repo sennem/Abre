@@ -38,7 +38,7 @@
 				url: 'modules/profile/check.php'
 			})
 			.done(function(html){
-				if(html=='no'){
+				if(html == 'no'){
 					window.location.href = '#profile';
 				}
 			})
@@ -87,7 +87,7 @@
 		//Back button in header
 		function back_button(url) {
 			$(".mdl-layout__drawer-button").hide();
-			$(".mdl-layout__header").append( "<a href='"+url+"' class='mdl-layout__drawer-button' id='backbutton'><i class='material-icons'>arrow_back</i></a>" );
+			$(".mdl-layout__header").append("<a href='"+url+"' class='mdl-layout__drawer-button' id='backbutton'><i class='material-icons'>arrow_back</i></a>");
 		}
 
 		//Demo mode

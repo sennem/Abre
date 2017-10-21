@@ -26,7 +26,7 @@
 	//Verify student token
 	$studenttoken = $_POST["studenttoken"];
   $studenttokenencrypted = encrypt($studenttoken, "");
-	$sql = "SELECT * FROM student_tokens WHERE token='$studenttokenencrypted'";
+	$sql = "SELECT * FROM student_tokens WHERE token = '$studenttokenencrypted'";
 	$result = $db->query($sql);
 	$numrows = $result->num_rows;
 	while($row = $result->fetch_assoc()){
@@ -44,13 +44,13 @@
 			$numrows3 = $resultcheck2->num_rows;
 			if($parentrow2['studentId'] == $row['studentId'] && $parentrow2['students'] != $row['token']){
 				$stmt = $db->stmt_init();
-				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email LIKE '".$_SESSION['useremail']."' AND studentId= '".$row['studentId']."'";
+				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email LIKE '".$_SESSION['useremail']."' AND studentId = '".$row['studentId']."'";
 				$stmt->prepare($sql);
 				$stmt->execute();
 				$stmt->close();
 				$db->close();
 
-				$message = array("status"=>"Success","message"=>"You now have access to your students information.");
+				$message = array("status"=>"Success", "message"=>"You now have access to your students information.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
@@ -62,12 +62,12 @@
 				$stmt->close();
 				$db->close();
 
-				$message = array("status"=>"Success","message"=>"You now have access to your students information.");
+				$message = array("status"=>"Success", "message"=>"You now have access to your students information.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
 			}else{
-		    $message = array("status"=>"Success","message"=>"You already have access to this student.");
+		    $message = array("status"=>"Success", "message"=>"You already have access to this student.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
@@ -82,12 +82,12 @@
 				$stmt->close();
 				$db->close();
 
-				$message = array("status"=>"Success","message"=>"You now have access to your students information.");
+				$message = array("status"=>"Success", "message"=>"You now have access to your students information.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
 	     }else{
-		    $message = array("status"=>"Success","message"=>"You already have access to this student.");
+		    $message = array("status"=>"Success", "message"=>"You already have access to this student.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
@@ -95,7 +95,7 @@
 		}
 	}
   if($numrows == 0){
-    $message = array("status"=>"Error","message"=>"Error: Your code does not match our records. Please confirm your code and try again.");
+    $message = array("status"=>"Error", "message"=>"Error: Your code does not match our records. Please confirm your code and try again.");
     header("Content-Type: application/json");
     echo json_encode($message);
   }

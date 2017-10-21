@@ -30,19 +30,19 @@
 	foreach($modulefolders as $result){
 		if($result == '.' or $result == '..') continue;
 		if(is_dir($moduledirectory . '/' . $result)){
-			$pageview=NULL;
-			$drawerhidden=NULL;
-			$pageorder=NULL;
-			$pagetitle=NULL;
-			$pageicon=NULL;
-			$pagepath=NULL;
-			$pagerestrictions=NULL;
-			$subpages=NULL;
+			$pageview = NULL;
+			$drawerhidden = NULL;
+			$pageorder = NULL;
+			$pagetitle = NULL;
+			$pageicon = NULL;
+			$pagepath = NULL;
+			$pagerestrictions = NULL;
+			$subpages = NULL;
 
 			require_once(dirname(__FILE__) . '/../modules/'.$result.'/config.php');
-			$access=strpos($pagerestrictions, $_SESSION['usertype']);
+			$access = strpos($pagerestrictions, $_SESSION['usertype']);
 			if($access === false){
-				array_push($modules, array($pageorder,$pagetitle,$pageview,$pageicon,$pagepath,$drawerhidden,$subpages));
+				array_push($modules, array($pageorder, $pagetitle, $pageview, $pageicon, $pagepath, $drawerhidden, $subpages));
 				$modulecount++;
 			}
 		}

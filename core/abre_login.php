@@ -44,7 +44,7 @@
 
 		//Responsive login view
 		function loginWidthCheck(){
-			if ($(window).width() < 600) {
+			if ($(window).width() < 600){
 				$(".login-card-square").removeClass("mdl-shadow--2dp");
 				$(".login-card").addClass("mdl-color--white");
 			}else{

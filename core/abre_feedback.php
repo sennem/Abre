@@ -58,7 +58,7 @@
 		});
 
 		//Submit feedback form
-		let form = $('#form-feedback');
+		var form = $('#form-feedback');
 		$(form).submit(function(event){
 			event.preventDefault();
 		  $('#feedback').closeModal({
@@ -66,7 +66,7 @@
 				out_duration: 0,
 		  });
 
-			let formData = $(form).serialize();
+			var formData = $(form).serialize();
 			$.ajax({
 				type: 'POST',
 			  url: $(form).attr('action'),
