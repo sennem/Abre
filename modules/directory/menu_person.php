@@ -23,11 +23,10 @@
 	require_once('permissions.php');
 ?>
 
-
     <div class="col s12">
 		<ul class="tabs" style='background-color: <?php echo getSiteColor(); ?>'>
 			<li class="tab col s3"><a href="#profile">Profile</a></li>
 			<li class="tab col s3"><a href="#employment">Employment</a></li>
-			<?php 	if($pageaccess==1){ echo "<li class='tab col s3'><a href='#licensure'>Licensure</a></li>"; } ?>
+			<?php 	if($pageaccess == 1){ echo "<li class='tab col s3'><a href='#licensure'>Licensure</a></li>"; } ?>
 		</ul>
 	</div>

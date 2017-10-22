@@ -21,8 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if($_SESSION['usertype']=="staff" || $_SESSION['usertype']=="student")
-	{
+	if($_SESSION['usertype'] == "staff" || $_SESSION['usertype'] == "student"){
 
 		$list = $_POST['list'];
 
@@ -32,26 +31,24 @@
 
 		//Check to see if profile record exists
 		include "../../core/abre_dbconnect.php";
-		$query = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
+		$query = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 		$results = databasequery($query);
-		$records=count($results);
+		$records = count($results);
 
-		if($records==0)
-		{
+		if($records==0){
 			$stmt = $db->stmt_init();
-			$sql = "INSERT into profiles (email,startup) VALUES ('".$_SESSION['useremail']."', '0')";
+			$sql = "INSERT into profiles (email, startup) VALUES ('".$_SESSION['useremail']."', '0')";
 			$stmt->prepare($sql);
 			$stmt->execute();
 			$stmt->close();
 		}
 
 		$stmt = $db->stmt_init();
-		$sql = "Update profiles set apps_order='$a' where email='".$_SESSION['useremail']."'";
+		$sql = "UPDATE profiles SET apps_order = '$a' WHERE email = '".$_SESSION['useremail']."'";
 		$stmt->prepare($sql);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();
-
 	}
 
 ?>

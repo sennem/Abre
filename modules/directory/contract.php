@@ -21,13 +21,17 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($contract!=""){ echo "<option value='$contract' selected>$contract</option>"; }else{ echo "<option value='$contract' selected>Choose</option>"; }
-	$sql = "SELECT options FROM directory_settings where dropdownID='contractOptions'";
+	if($contract != ""){
+		echo "<option value='$contract' selected>$contract</option>";
+	}else{
+		echo "<option value='$contract' selected>Choose</option>";
+	}
+	$sql = "SELECT options FROM directory_settings WHERE dropdownID = 'contractOptions'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$titles = explode(PHP_EOL, $row['options']);
 	foreach($titles as $value){
 		$val = str_replace(array("\n\r", "\n", "\r"), '', $value);
 		echo "<option value ='$val'>$val</option>";
-	 }
+	}
 ?>

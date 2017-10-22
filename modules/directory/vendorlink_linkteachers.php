@@ -21,32 +21,27 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	$VendorLinkURL=getSiteVendorLinkUrl();
-	$json=vendorLinkGet("$VendorLinkURL/GBService/HA/teacher");
+	$VendorLinkURL = getSiteVendorLinkUrl();
+	$json = vendorLinkGet("$VendorLinkURL/GBService/HA/teacher");
 
 	//Retrieve employee information from database
-	foreach ($json as $key => $result)
-	{
-	    foreach ($result as $key => $result)
-		{
-			$employeeTeacherID=encrypt($result[TeacherID]);
-			$staffrefid=$result[ExternalRefId];
-			$json2=vendorLinkGet("$VendorLinkURL/SisService/Staff?staffPersonalRefId=$staffrefid");
-			foreach ($json2 as $key => $result)
-			{
-				foreach ($result as $key => $result)
-				{
-					$employeeemail=$result[EmailList][0][Value];
-					$employeeemailencrypted=encrypt($employeeemail, "");
-					$employeeRefID=encrypt($result[RefId]);
-					$employeeStateID=encrypt($result[StateProvinceId]);
-					$employeeLocalId=encrypt($result[LocalId]);
+	foreach($json as $key => $result){
+		foreach($result as $key => $result){
+			$employeeTeacherID = encrypt($result[TeacherID]);
+			$staffrefid = $result[ExternalRefId];
+			$json2 = vendorLinkGet("$VendorLinkURL/SisService/Staff?staffPersonalRefId=$staffrefid");
+			foreach($json2 as $key => $result){
+				foreach ($result as $key => $result){
+					$employeeemail = $result[EmailList][0][Value];
+					$employeeemailencrypted = encrypt($employeeemail, "");
+					$employeeRefID = encrypt($result[RefId]);
+					$employeeStateID = encrypt($result[StateProvinceId]);
+					$employeeLocalId = encrypt($result[LocalId]);
 
 					//Add information to employee database
-					mysqli_query($db, "UPDATE directory set RefID='$employeeRefID', StateID='$employeeStateID', TeacherID='$employeeTeacherID', LocalId='$employeeLocalId' where email='$employeeemailencrypted'");
+					mysqli_query($db, "UPDATE directory SET RefID = '$employeeRefID', StateID = '$employeeStateID', TeacherID = '$employeeTeacherID', LocalId = '$employeeLocalId' WHERE email = '$employeeemailencrypted'");
 				}
 			}
 		}
 	}
-
 ?>

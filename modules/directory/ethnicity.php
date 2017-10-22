@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,14 +15,17 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
+	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
-	
-	if($ethnicity!=""){ echo "<option value='$ethnicity' selected>$ethnicity</option>"; }else{ echo "<option value='$ethnicity' selected>Choose</option>"; }
-	
+
+	if($ethnicity != ""){
+		echo "<option value='$ethnicity' selected>$ethnicity</option>";
+	}else{
+		echo "<option value='$ethnicity' selected>Choose</option>";
+	}
 ?>
 	<option value="Caucasian">Caucasian</option>
 	<option value="African American/Black">African American/Black</option>

@@ -38,12 +38,12 @@
 
 <script>
 
-	$(function()
-	{
-		$( ".directorymenu" ).click(function()
-		{
+	$(function(){
+
+		$(".directorymenu").click(function(){
 			window.open($(this).attr("data"), '_self');
 		});
+
 	});
 
 </script>

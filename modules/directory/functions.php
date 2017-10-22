@@ -23,70 +23,58 @@
 	require_once('../../core/abre_functions.php');
 
 	//Predict Email
-	function emailPrediction($first, $last)
-	{
+	function emailPrediction($first, $last){
 		//Construct Email Address
-		$firstfirstchar=$first[0];
-		$firstsecondchar=$first[1];
-		$firstthirdchar=$first[2];
-		$predictedemail=$firstfirstchar.$last.SITE_GAFE_DOMAIN;
-		$predictedemail=strtolower($predictedemail);
-		$predictedemailencrypted=encrypt($predictedemail, "");
+		$firstfirstchar = $first[0];
+		$firstsecondchar = $first[1];
+		$firstthirdchar = $first[2];
+		$predictedemail = $firstfirstchar.$last.SITE_GAFE_DOMAIN;
+		$predictedemail = strtolower($predictedemail);
+		$predictedemailencrypted = encrypt($predictedemail, "");
 
 		//Check to make sure email doesn't already exist
 		include "../../configuration.php";
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT *  FROM directory where email='$predictedemailencrypted'";
+		$sql = "SELECT *  FROM directory WHERE email = '$predictedemailencrypted'";
 		$result = $db->query($sql);
-		$count=0;
-		$count=mysqli_num_rows($result);
+		$count = mysqli_num_rows($result);
 
-		if($count==1)
-		{
-			$firstsecondchar=$first[1];
-			$predictedemail=$firstfirstchar.$firstsecondchar.$last.SITE_GAFE_DOMAIN;
-			$predictedemail=strtolower($predictedemail);
+		if($count == 1){
+			$firstsecondchar = $first[1];
+			$predictedemail = $firstfirstchar.$firstsecondchar.$last.SITE_GAFE_DOMAIN;
+			$predictedemail = strtolower($predictedemail);
 
 			//Check again
 			$count=0;
-			$predictedemailencrypted=encrypt($predictedemail, "");
+			$predictedemailencrypted = encrypt($predictedemail, "");
 			include "../../configuration.php";
 			include "../../core/abre_dbconnect.php";
-			$sql = "SELECT *  FROM directory where email='$predictedemailencrypted'";
+			$sql = "SELECT *  FROM directory WHERE email = '$predictedemailencrypted'";
 			$result = $db->query($sql);
-			$count=mysqli_num_rows($result);
+			$count = mysqli_num_rows($result);
 
-			if($count==1)
-			{
-				$predictedemail=$firstfirstchar.$firstsecondchar.$firstthirdchar.$last.SITE_GAFE_DOMAIN;
-				$predictedemail=strtolower($predictedemail);
+			if($count == 1){
+				$predictedemail = $firstfirstchar.$firstsecondchar.$firstthirdchar.$last.SITE_GAFE_DOMAIN;
+				$predictedemail = strtolower($predictedemail);
+				sendSupportTicket($first, $last, $predictedemail);
+				return $predictedemail;
+			}else{
 				sendSupportTicket($first, $last, $predictedemail);
 				return $predictedemail;
 			}
-			else
-			{
-				sendSupportTicket($first, $last, $predictedemail);
-				return $predictedemail;
-			}
-
-		}
-		else
-		{
+		}else{
 			sendSupportTicket($first, $last, $predictedemail);
 			return $predictedemail;
 		}
-
 	}
 
-	function sendSupportTicket($first, $last, $predictedemail)
-	{
+	function sendSupportTicket($first, $last, $predictedemail){
 		//Send the VarTek Ticket to have account created.
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT * FROM directory_settings where dropdownID='supportTicket'";
+		$sql = "SELECT * FROM directory_settings where dropdownID = 'supportTicket'";
 		$result = $db->query($sql);
-		while($row = $result->fetch_assoc())
-		{
-			$email=$row["options"];
+		while($row = $result->fetch_assoc()){
+			$email = $row["options"];
 		}
 
 		if($email != ''){
@@ -95,9 +83,8 @@
 			$subject = "New User Account Needed for $first $last";
 			$message = "Please create a new user account for:\n\n$first $last ($predictedemail).";
 			$headers = "From: web@hcsdoh.org";
-			mail($to,$subject,$message,$headers);
+			mail($to, $subject, $message, $headers);
 		}
-
 	}
 
 ?>

@@ -23,17 +23,16 @@
 
 	if(superadmin()){ require('installer.php'); }
 
-	$pageview=1;
-	$drawerhidden=0;
+	$pageview = 1;
+	$drawerhidden = 0;
 	if($_SESSION['usertype'] == 'parent'){
 		$drawerhidden = 1;
 	}
-	$pageorder=5;
-	$pagetitle="Staff Directory";
-	$pageicon="people";
-	$pagepath="directory";
-	$pagerestrictions="student";
+	$pageorder = 5;
+	$pagetitle = "Staff Directory";
+	$pageicon = "people";
+	$pagepath = "directory";
+	$pagerestrictions = "student";
 
 	require_once('permissions.php');
-
 ?>

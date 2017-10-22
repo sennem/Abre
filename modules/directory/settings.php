@@ -22,8 +22,7 @@
 	require_once('permissions.php');
 
 	//Show the Search and Last 10 Modified Users
-	if($pageaccess==1)
-	{
+	if($pageaccess == 1){
 
 		$dropdownArray = array();
 		$sql = "SELECT * FROM directory_settings";
@@ -119,39 +118,35 @@
 			echo "</div>";
 		echo "</div>";
 
-		?>
+?>
 
-			<script>
+<script>
 
-				$(function() {
+		$(function() {
 
-					var form = $('#directory-settings-form');
-					$(form).submit(function(event) {
-					    event.preventDefault();
-						var formData = new FormData($(this)[0]);
-						console.log(formData);
-						$.ajax({
-						    type: 'POST',
-						    url: $(form).attr('action'),
-						    data: formData,
-						    contentType: false,
-							processData: false
-						})
-
-						//Show the notification
-						.done(function(response) {
-								$( "#updateHolder" ).load( "modules/directory/settings.php", function() {
-									var notification = document.querySelector('.mdl-js-snackbar');
-									var data = { message: response };
-									notification.MaterialSnackbar.showSnackbar(data);
-								});
-						})
-
+			var form = $('#directory-settings-form');
+			$(form).submit(function(event) {
+				event.preventDefault();
+				var formData = new FormData($(this)[0]);
+				$.ajax({
+				    type: 'POST',
+				    url: $(form).attr('action'),
+				    data: formData,
+				    contentType: false,
+					processData: false
+				})
+				//Show the notification
+				.done(function(response) {
+					$( "#updateHolder" ).load( "modules/directory/settings.php", function() {
+						var notification = document.querySelector('.mdl-js-snackbar');
+						var data = { message: response };
+						notification.MaterialSnackbar.showSnackbar(data);
 					});
+				})
+			});
 
-
-				});
-			</script>
-	<?php
+		});
+</script>
+<?php
 	}
 ?>

@@ -22,8 +22,7 @@
 	require_once('permissions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if($pageaccess==1)
-	{
+	if($pageaccess == 1){
 
 		header('Content-Type: text/csv; charset=utf-8');
 		header('Content-Disposition: attachment; filename=staffworkcalendars.csv');
@@ -32,22 +31,20 @@
 		$setupCSV = false;
 
 		include "../../core/abre_dbconnect.php";
-		$rows = mysqli_query($db, 'SELECT * FROM directory where archived=0');
+		$rows = mysqli_query($db, 'SELECT * FROM directory WHERE archived = 0');
 		while ($row = mysqli_fetch_assoc($rows)) {
-			$email=htmlspecialchars($row["email"], ENT_QUOTES);
-			$email=stripslashes(decrypt($email, ""));
-			$firstname=htmlspecialchars($row["firstname"], ENT_QUOTES);
-			$firstname=stripslashes(decrypt($firstname, ""));
-			$lastname=htmlspecialchars($row["lastname"], ENT_QUOTES);
-			$lastname=stripslashes(decrypt($lastname, ""));
-			$contractdays=htmlspecialchars($row["contractdays"], ENT_QUOTES);
-			$contractdays=stripslashes(decrypt($contractdays, ""));
-			if($contractdays!="")
-			{
-				$rowsselected = mysqli_query($db, "SELECT * FROM profiles where email='$email'");
-				while ($rowselect = mysqli_fetch_assoc($rowsselected))
-				{
-					$data = [$firstname,$lastname,$email,$contractdays];
+			$email = htmlspecialchars($row["email"], ENT_QUOTES);
+			$email = stripslashes(decrypt($email, ""));
+			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
+			$firstname = stripslashes(decrypt($firstname, ""));
+			$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
+			$lastname = stripslashes(decrypt($lastname, ""));
+			$contractdays = htmlspecialchars($row["contractdays"], ENT_QUOTES);
+			$contractdays = stripslashes(decrypt($contractdays, ""));
+			if($contractdays != ""){
+				$rowsselected = mysqli_query($db, "SELECT * FROM profiles WHERE email = '$email'");
+				while ($rowselect = mysqli_fetch_assoc($rowsselected)){
+					$data = [$firstname, $lastname, $email, $contractdays];
 					$work_calendar = $rowselect["work_calendar"];
 					$work_calendar_decode = json_decode($work_calendar, true);
 					foreach($work_calendar_decode as $key => $value){
@@ -60,8 +57,8 @@
 						$setupCSV = true;
 					}
 					foreach($work_calendar_decode as $key => $value){
-						$work_calendar_count=substr_count($value, ",");
-						if($work_calendar_count!=0){ $work_calendar_count=$work_calendar_count+1; }
+						$work_calendar_count = substr_count($value, ",");
+						if($work_calendar_count != 0){ $work_calendar_count=$work_calendar_count + 1; }
 						array_push($data, $work_calendar_count, $value);
 					}
 					fputcsv($output, $data);
@@ -72,7 +69,5 @@
 		fclose($output);
 		mysqli_close($db);
 		exit();
-
 	}
-
 ?>

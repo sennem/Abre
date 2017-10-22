@@ -21,13 +21,17 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($educationlevel!=""){ echo "<option value='$educationlevel' selected>$educationlevel</option>"; }else{ echo "<option value='$educationlevel' selected>Choose</option>"; }
-	$sql = "SELECT options FROM directory_settings where dropdownID='educationLevel'";
+	if($educationlevel != ""){
+		echo "<option value='$educationlevel' selected>$educationlevel</option>";
+	}else{
+		echo "<option value='$educationlevel' selected>Choose</option>";
+	}
+	$sql = "SELECT options FROM directory_settings where dropdownID = 'educationLevel'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$titles = explode(PHP_EOL, $row['options']);
 	foreach($titles as $value){
 		$val = str_replace(array("\n\r", "\n", "\r"), '', $value);
-		echo "<option value ='$val'>$val</option>";
-	 }
+		echo "<option value='$val'>$val</option>";
+	}
 ?>

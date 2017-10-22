@@ -24,18 +24,16 @@
 	require_once('functions.php');
 
 	//Update Directory Settings
-	if($pageaccess==1)
-	{
+	if($pageaccess == 1){
 		foreach($_POST as $key => $value){
-			$query = $db->query("SELECT * FROM `directory_settings` WHERE dropdownID ='$key'");
+			$query = $db->query("SELECT * FROM `directory_settings` WHERE dropdownID = '$key'");
 
 			if($query->num_rows > 0){
 				$stmt = $db->stmt_init();
-				$sql = "UPDATE `directory_settings` set `options`='$value' WHERE `dropdownID`='$key'";
+				$sql = "UPDATE `directory_settings` SET `options` = '$value' WHERE `dropdownID` = '$key'";
 				$stmt->prepare($sql);
 				$stmt->execute();
-			}
-			else{
+			}else{
 				$stmt = $db->stmt_init();
 				$sql = "INSERT INTO `directory_settings` (`dropdownID`,`options`) VALUES ('$key','$value');";
 				$stmt->prepare($sql);
