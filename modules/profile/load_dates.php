@@ -24,18 +24,15 @@
   $email = $_POST["email"];
 
   //if the user is not a student grab their information from the database.
-  if($_SESSION['usertype']!="student")
-  {
-    $sql = "SELECT * FROM profiles where email='$email'";
+  if($_SESSION['usertype'] != "student"){
+    $sql = "SELECT * FROM profiles WHERE email = '$email'";
     $dbreturn = databasequery($sql);
-    foreach ($dbreturn as $row)
-    {
+    foreach($dbreturn as $row){
       //grab the work calendar from the entry
-      $work_calendar_saved= $row['work_calendar'];
+      $work_calendar_saved = $row['work_calendar'];
 
       //check and see if they have existing data
-      if($work_calendar_saved != NULL)
-      {
+      if($work_calendar_saved != NULL){
         //This temp variable stores the value from the database. If we try and
         //decode a comma separated list the type will be null and we will need to
         //use this variable to get the database value back. Otherwise this variable
@@ -46,6 +43,7 @@
         //This if statement is used for conversion of old format(comma separated)
         //list of dates to new json format as of 07/03/2017.
         //If it is in old format, we are unable to treat it as json.
+        //author - Bwilson
         if(gettype($work_calendar_saved) == "NULL"){
 
           $work_calendar_saved = $work_calendar_temp;
@@ -53,7 +51,7 @@
           //parse comma separated string
           $dates = str_replace("'", "", $work_calendar_saved);
           $dates = str_replace(' ', '', $dates);
-          $dates=explode(",", $dates);
+          $dates = explode(",", $dates);
 
           $date_check = substr($dates[0],6,4);
           if($date_check == $date){
@@ -67,7 +65,6 @@
             header("Content-Type: application/json");
             echo json_encode($message);
           }
-
         }else{
 
           //get the date entries for the year provided from javascript
@@ -82,12 +79,11 @@
           }else{
 
             $dates = str_replace(' ', '', $dates);
-            $dates=explode(",", $dates);
+            $dates = explode(",", $dates);
 
             $message = array("addDates"=>$dates, "jsonDates"=>$work_calendar_saved);
             header("Content-Type: application/json");
             echo json_encode($message);
-
           }
         }
       //There is no calendar data for the given user so simply return an empty
@@ -96,6 +92,7 @@
 
         //this code can be used to enable default dates if no data is stored in the database
         //this code is not used, but leaving here incase we change design decisions
+        //author - Bwilson
 
         // include "calendar_default_dates.php";
         // $work_calendar_saved = json_decode($work_calendar_saved, TRUE);

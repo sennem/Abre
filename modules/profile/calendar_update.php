@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
 
-	$calendardaystosave=$_POST["calendardaystosave"];
+	$calendardaystosave = $_POST["calendardaystosave"];
 	$year = $_POST["year"];
 	$json = $_POST["jsonDates"];
 	$email = $_POST["email"];
@@ -43,7 +43,7 @@
 	//make a request to save the values in the databse for the year.
 	include "../../core/abre_dbconnect.php";
 	$stmt = $db->stmt_init();
-	$sql = "UPDATE profiles set work_calendar='$ret' where email='$email'";
+	$sql = "UPDATE profiles SET work_calendar = '$ret' WHERE email = '$email'";
 	$stmt->prepare($sql);
 	$stmt->execute();
 	$stmt->store_result();

@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,17 +15,16 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-		
-	if($_SESSION['usertype']=='staff')
-	{	
+
+	if($_SESSION['usertype'] == 'staff'){
 		$commentid=mysqli_real_escape_string($db, $_GET["commentid"]);
-		$sql = "DELETE from streams_comments where ID = '$commentid' and user='".$_SESSION['useremail']."'";
+		$sql = "DELETE FROM streams_comments WHERE ID = '$commentid' AND user = '".$_SESSION['useremail']."'";
 		$dbreturn = databaseexecute($sql);
 	}
-	
+
 ?>

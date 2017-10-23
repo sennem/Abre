@@ -23,16 +23,14 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Modules
-	if(superadmin())
-	{
+	if(superadmin()){
 
 		//List all modules
 		$modules = array();
-		$modulecount=0;
+		$modulecount = 0;
 		$moduledirectory = '../../modules/';
 		$modulefolders = scandir($moduledirectory);
-		foreach ($modulefolders as $result)
-		{
+		foreach($modulefolders as $result){
 			if ($result == '.' or
 				$result == '..' or
 				$result == '.DS_Store' or
@@ -52,8 +50,7 @@
 				//Count non core modules
 				$modulecount++;
 
-				if($modulecount==1)
-				{
+				if($modulecount == 1){
 					echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 					echo "<div class='page'>";
 					echo "<div class='row'>";
@@ -72,13 +69,13 @@
 				}
 
 				//Load the module meta
-				$pagetitle=NULL;
-				$description=NULL;
-				$version=NULL;
-				$repo=NULL;
+				$pagetitle = NULL;
+				$description = NULL;
+				$version = NULL;
+				$repo = NULL;
 				require_once('../../modules/'.$result.'/config.php');
-				if($description==NULL){ $description="No Description"; }
-				if($version==NULL){ $version="No Version"; }
+				if($description == NULL){ $description = "No Description"; }
+				if($version == NULL){ $version = "No Version"; }
 
 				echo "<tr>";
 					echo "<td>$pagetitle</td>";
@@ -86,44 +83,32 @@
 					echo "<td>$version</td>";
 
 					//Update Module if new version available
-					if($repo!=NULL)
-					{
-						$project=strstr($repo, '/');
-						$project=substr($project, 1);
+					if($repo != NULL){
+						$project = strstr($repo, '/');
+						$project = substr($project, 1);
 						$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
 						$context = stream_context_create($opts);
 						$content = file_get_contents("https://api.github.com/repos/$repo/releases/latest", false, $context);
 						$json = json_decode($content, true);
 						$currentversion = $json['name'];
-						if($version<$currentversion)
-						{
+						if($version < $currentversion){
 							$currentlink = "https://github.com/$repo/archive/".$currentversion.".zip";
 							echo "<td width=30px><button class='updatemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-version='$currentlink' data-repo='$repo'><i class='material-icons'>update</i></button></td>";
-						}
-						else
-						{
+						}else{
 							echo "<td width=30px></td>";
 						}
-					}
-					else
-					{
+					}else{
 						echo "<td width=30px></td>";
 					}
 
 					//Delete module
 					echo "<td width=30px><button class='deletemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-module='$project'><i class='material-icons'>delete</i></button></td>";
-
 				echo "</tr>";
-
 			}
 
-
-			if($modulecount==0)
-			{
+			if($modulecount == 0){
 				echo "<div class='row center-align'><div class='col s12'><h6>Add-On Apps</h6></div><div class='col s12'>Click the '+' button at the bottom right to add an app.</div></div>";
-			}
-			else
-			{
+			}else{
 				echo "</tbody>";
 				echo "</table>";
 				echo "</div>";
@@ -134,41 +119,42 @@
 
 			include "addmodule.php";
 
-			?>
+?>
 
-			<script>
+<script>
 
-				$(function()
-				{
+				$(function(){
 					//Update module
 					$(".updatemodule").click(function(event) {
 						event.preventDefault();
 						var Link = $(this).data('version');
 						var Repo = $(this).data('repo');
 						$(this).html("<i class='material-icons'>file_download</i>");
-						$.post("modules/modules/update.php", { link: Link, repo: Repo }, function(){ })
+						$.post("modules/modules/update.php",
+						{ link: Link, repo: Repo }, function(){ })
 						.done(function() {
 							location.reload();
-				  		})
-				  	});
+				  	})
+					});
 
 					//Update module
 					$(".deletemodule").click(function(event) {
 						event.preventDefault();
 						var result = confirm("Are you sure you want to delete this app?");
-						if (result) {
+						if(result){
 							var Module = $(this).data('module');
-							$.post("modules/modules/deletemodule.php", { link: Module }, function(){ })
+							$.post("modules/modules/deletemodule.php",
+							{ link: Module }, function(){ })
 							.done(function() {
 								location.reload();
-					  		})
-					  	}
-				  	});
+					  	})
+					  }
+				  });
+
 				});
 
-			</script>
+</script>
 
-			<?php
+<?php
 	}
-
 ?>

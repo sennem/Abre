@@ -24,10 +24,9 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Settings
-	$sql = "SELECT *  FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
+	$sql = "SELECT *  FROM users WHERE email = '".$_SESSION['useremail']."' and superadmin = 1";
 	$result = $db->query($sql);
-	while($row = $result->fetch_assoc())
-	{
+	while($row = $result->fetch_assoc()){
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updatesettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
@@ -71,9 +70,8 @@
 						echo "</div>";
 
 						echo "<div class='col l6 s12 center-align'>";
-							$sitelogoexisting=getSiteLogo();
-							if($sitelogoexisting!="")
-							{
+							$sitelogoexisting = getSiteLogo();
+							if($sitelogoexisting != ""){
 								echo "<div class='input-field col s12'><h5>Site Logo</h5><br></div>";
 								echo "<img class='sitelogobutton pointer' src='$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'>";
 							    echo "<input type='hidden' name='sitelogoexisting' value='$sitelogoexisting'>";
@@ -145,25 +143,24 @@
 								echo "<div class='input-field col s6'>";
 									echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Download All Keys</a>";
 								echo "</div>";
-							}else{
 							}
 						echo "</div>";
 
 						echo "<div class='col l12'>";
 						    //Software Answers
-						    echo "<div class='input-field col s12'><h5>Software Answers</h5><br></div>";
+						  echo "<div class='input-field col s12'><h5>Software Answers</h5><br></div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Host URL' value='".getSiteVendorLinkUrl()."' id='sitevendorlinkurl' name='sitevendorlinkurl' type='text' autocomplete='off'>";
+						    echo "<input placeholder='Enter VendorLink Host URL' value='".getSiteVendorLinkUrl()."' id='sitevendorlinkurl' name='sitevendorlinkurl' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitevendorlinkurl'>Software Answers VendorLink URL</label>";
-						    echo "</div>";
+						  echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Identifier' value='".getSiteVendorLinkIdentifier()."' id='sitevendorlinkidentifier' name='sitevendorlinkidentifier' type='text' autocomplete='off'>";
+						    echo "<input placeholder='Enter VendorLink Identifier' value='".getSiteVendorLinkIdentifier()."' id='sitevendorlinkidentifier' name='sitevendorlinkidentifier' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitevendorlinkidentifier'>Software Answers VendorLink Identifier</label>";
-						    echo "</div>";
+						  echo "</div>";
 							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter VendorLink Key' value='".getSiteVendorLinkKey()."' id='sitevendorlinkkey' name='sitevendorlinkkey' type='text' autocomplete='off'>";
+						    echo "<input placeholder='Enter VendorLink Key' value='".getSiteVendorLinkKey()."' id='sitevendorlinkkey' name='sitevendorlinkkey' type='text' autocomplete='off'>";
 								echo "<label class='active' for='sitevendorlinkkey'>Software Answers VendorLink Key</label>";
-						    echo "</div>";
+						  echo "</div>";
 
 					echo "</div>";
 
@@ -181,12 +178,10 @@
 							$json = json_decode($content, true);
 							$currentversion = $json['name'];
 
-							if($abre_version<$currentversion)
-							{
+							if($abre_version < $currentversion){
 								$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
 								echo " <button id='updateabre' data-version='$currentlink' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Update to $currentversion</button>";
 							}
-
 						echo "</div></div>";
 					echo "</div>";
 
@@ -204,8 +199,7 @@
 
 <script>
 
-	$(function()
-	{
+	$(function(){
 
 		//Update Abre
 		$("#updateabre").unbind().click(function(event) {
@@ -214,39 +208,37 @@
 			$(this).html("Updating...");
 			$.post("modules/settings/update.php", { link: Link }, function(){ })
 			.done(function() {
-				$.post("/core/abre_ping.php", {community_first_name: $('#community_first_name').val(), community_last_name: $('#community_last_name').val(), community_email: $('#community_email').val(), community_users: $('#community_users').val()}, function(){ location.reload(); })
+				$.post("/core/abre_ping.php",
+				{community_first_name: $('#community_first_name').val(), community_last_name: $('#community_last_name').val(), community_email: $('#community_email').val(), community_users: $('#community_users').val()},
+				function(){ location.reload(); })
 	  		})
 	  	});
 
 		//Provide image upload on icon click
 		$(".sitelogobutton").click(function() {
 			$("#sitelogo").click();
-	  	});
+	  });
 
 		//Submit form if image if changed
 		$("#sitelogo").change(function (){
-	        if (this.files && this.files[0]){
-	        	var reader = new FileReader();
-	            reader.onload = function (e) {
-	                $('.sitelogobutton').attr('src', e.target.result);
-	            }
-	            reader.readAsDataURL(this.files[0]);
-	        }
-	  	});
+			if (this.files && this.files[0]){
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('.sitelogobutton').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+	  });
 
 		//Save Settings
 		var form = $('#form-settings');
-		$(form).submit(function(event)
-		{
+		$(form).submit(function(event){
 			event.preventDefault();
 			var data = new FormData($(this)[0]);
-			console.log(data);
 			var url = $(form).attr('action');
 			$.ajax({ type: 'POST', url: url, data: data, contentType: false, processData: false })
-
 			//Show the notification
-			.done(function(response)
-			{
+			.done(function(response){
 				location.reload();
 			})
 		});
@@ -264,7 +256,7 @@
 			}else{
 				$("#apiKeys").hide();
 			}
-	  	});
+	  });
 
 		if($("#abre_community").prop("checked")){
 			$("#community_information").show();
@@ -281,19 +273,18 @@
 		 });
 
 		//Generate Keys for Parents
-		$("#generateallkeys").unbind().click(function(event)
-		{
+		$("#generateallkeys").unbind().click(function(event){
 			event.preventDefault();
-			var result = confirm('Are you sure you want to proceed? This will create new keys for every student and invalidate current parent keys');
+			var result = confirm('Are you sure you want to proceed? This will create new keys for every student and invalidate current active keys!');
 			if(result){
 				$("#generateallkeys").html("Generating Keys...");
 				$.ajax({ type: 'POST', url: '/modules/settings/generate_all_keys.php'})
-				.done(function()
-				{
+				.done(function(){
 					location.reload();
 				})
 			}
 		});
+
 	});
 
 </script>

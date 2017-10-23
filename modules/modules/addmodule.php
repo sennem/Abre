@@ -15,7 +15,7 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-    
+
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
@@ -29,11 +29,9 @@
 
 <script>
 
-	$(function()
-	{
+	$(function(){
 		//Github Modal
-		$('.modal-addmodule').leanModal(
-		{
+		$('.modal-addmodule').leanModal({
 			in_duration: 0,
 			out_duration: 0,
 			ready: function() {  }

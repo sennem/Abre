@@ -16,35 +16,31 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-//Required configuration files
-require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+  //Required configuration files
+  require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+  require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+  require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-if(superadmin())
-{
+  if(superadmin()){
 
-  //Add the stream
-  $streamid=$_POST["id"];
-  $streamtitle=mysqli_real_escape_string($db, $_POST["title"]);
-  $rsslink=mysqli_real_escape_string($db, $_POST["link"]);
-  $streamgroup=mysqli_real_escape_string($db, $_POST["group"]);
-  $required = mysqli_real_escape_string($db, $_POST["required"]);
+    //Add the stream
+    $streamid = $_POST["id"];
+    $streamtitle = mysqli_real_escape_string($db, $_POST["title"]);
+    $rsslink = mysqli_real_escape_string($db, $_POST["link"]);
+    $streamgroup = mysqli_real_escape_string($db, $_POST["group"]);
+    $required = mysqli_real_escape_string($db, $_POST["required"]);
 
-  if($streamid=="")
-  {
-    $stmt = $db->stmt_init();
-    //needed to backtick because SQL doesn't like when you use reserved words
-    $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES ('$streamgroup','$streamtitle','$streamtitle','flipboard','$rsslink','$required');";
-    $stmt->prepare($sql);
-    $stmt->execute();
-    $stmt->close();
-    $db->close();
+    if($streamid == ""){
+      $stmt = $db->stmt_init();
+      //needed to backtick because SQL doesn't like when you use reserved words
+      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES ('$streamgroup','$streamtitle','$streamtitle','flipboard','$rsslink','$required');";
+      $stmt->prepare($sql);
+      $stmt->execute();
+      $stmt->close();
+      $db->close();
+    }else{
+      //needed to backtick because SQL doesn't like when you use reserved words
+      mysqli_query($db, "UPDATE `streams` SET `group` = '$streamgroup', `title` = '$streamtitle', `slug` = '$streamtitle', `type` = 'flipboard', `url` = '$rsslink', `required` = '$required' WHERE `id` = '$streamid'") or die (mysqli_error($db));
+    }
   }
-  else
-  {
-    //needed to backtick because SQL doesn't like when you use reserved words
-    mysqli_query($db, "UPDATE `streams` set `group`='$streamgroup', `title`='$streamtitle', `slug`='$streamtitle', `type`='flipboard', `url`='$rsslink', `required`='$required' where `id`='$streamid'") or die (mysqli_error($db));
-  }
-}
 ?>

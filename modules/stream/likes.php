@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,23 +15,23 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');	
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');	
-	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+
 	//Get User Settings
-	$query = "SELECT * FROM profiles where email='".$_SESSION['useremail']."'";
+	$query = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$gafecards = databasequery($query);
-	foreach ($gafecards as $value) {
-		$setting_card_mail=htmlspecialchars($value['card_mail'], ENT_QUOTES);
-		$setting_card_drive=htmlspecialchars($value['card_drive'], ENT_QUOTES);
-		$setting_card_calendar=htmlspecialchars($value['card_calendar'], ENT_QUOTES);
-		$setting_card_classroom=htmlspecialchars($value['card_classroom'], ENT_QUOTES);
-		$setting_card_apps=htmlspecialchars($value['card_apps'], ENT_QUOTES);
+	foreach($gafecards as $value) {
+		$setting_card_mail = htmlspecialchars($value['card_mail'], ENT_QUOTES);
+		$setting_card_drive = htmlspecialchars($value['card_drive'], ENT_QUOTES);
+		$setting_card_calendar = htmlspecialchars($value['card_calendar'], ENT_QUOTES);
+		$setting_card_classroom = htmlspecialchars($value['card_classroom'], ENT_QUOTES);
+		$setting_card_apps = htmlspecialchars($value['card_apps'], ENT_QUOTES);
 	}
 
 	//Display the Likes
@@ -40,18 +40,15 @@
 ?>
 
 <script>
-	
-	$(function()
-	{
+
+	$(function(){
 		//Load Streams
-		function loadLikes()
-		{
-			$('#streamlikes').load("modules/stream/stream_likes.php", function () {	
+		function loadLikes(){
+			$('#streamlikes').load("modules/stream/stream_likes.php", function () {
 				init_page();
-			});	
+			});
 		}
 		loadLikes();
 	});
 	
-		
 </script>
