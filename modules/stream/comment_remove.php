@@ -23,8 +23,14 @@
 
 	if($_SESSION['usertype'] == 'staff'){
 		$commentid=mysqli_real_escape_string($db, $_GET["commentid"]);
-		$sql = "DELETE FROM streams_comments WHERE ID = '$commentid' AND user = '".$_SESSION['useremail']."'";
-		$dbreturn = databaseexecute($sql);
+
+		$stmt = $db->stmt_init();
+		$sql = "DELETE FROM streams_comments WHERE ID = ? AND user = ?";
+		$stmt->prepare($sql);
+		$stmt->bind_param("is", $commentid, $_SESSION['useremail']);
+		$stmt->execute();
+		$stmt->close();
+		$db->close();
 	}
 
 ?>

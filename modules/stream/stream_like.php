@@ -43,12 +43,22 @@
 
 		if($num_rows_like_count == 0){
 			//Insert comment into database
-			$sql = "INSERT INTO streams_comments (url, title, image, user, liked) VALUES ('$streamUrldecoded', '$streamTitledecoded', '$trimmedimageurl', '$userposter', '1');";
-			$dbreturn = databaseexecute($sql);
+			$stmt = $db->stmt_init();
+			$sql = "INSERT INTO streams_comments (url, title, image, user, liked) VALUES (?, ?, ?, ?, '1');";
+			$stmt->prepare($sql);
+			$stmt->bind_param("ssss", $streamUrldecoded, $streamTitledecoded, $trimmedimageurl, $userposter);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}else{
 			//Remove commment from database
-			$sql = "DELETE FROM streams_comments WHERE url = '$streamUrldecoded' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
-			$dbreturn = databaseexecute($sql);
+			$stmt = $db->stmt_init();
+			$sql = "DELETE FROM streams_comments WHERE url = ? AND liked = '1' AND user = ?";
+			$stmt->prepare($sql);
+			$stmt->bind_param("ss", $streamUrldecoded, $_SESSION['useremail']);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}
 	}
 
