@@ -266,8 +266,12 @@
 			$json = json_encode($array);
 
 			//Update the database
-			mysqli_query($db, "UPDATE settings SET options='$json'") or die (mysqli_error($db));
-
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE settings SET options = ?";
+			$stmt->prepare($sql);
+			$stmt->bind_param("s", $json);
+			$stmt->execute();
+			$stmt->close();
 			$db->close();
 		}
 

@@ -139,7 +139,12 @@
 							$refreshTokenKey = json_encode($getTokenKeyOnly);
 							if($refreshTokenKey != ""){
 								if(strpos($refreshTokenKey, 'refresh_token') !== false){
-									mysqli_query($db, "UPDATE users SET refresh_token = '$refreshTokenKey' WHERE email = '".$_SESSION['useremail']."'") or die (mysqli_error($db));
+                  $stmt = $db->stmt_init();
+                  $sql = "UPDATE users SET refresh_token = ? WHERE email = ?";
+                  $stmt->prepare($sql);
+                  $stmt->bind_param("ss", $refreshTokenKey, $_SESSION['useremail']);
+                  $stmt->execute();
+                  $stmt->close();
 								}
 							}
 
@@ -161,7 +166,13 @@
 							$_SESSION['loggedin'] = "yes";
 						}
 					}else{
-						mysqli_query($db, "DELETE FROM users WHERE email = '".$_SESSION['useremail']."'") or die (mysqli_error($db));
+
+            $stmt = $db->stmt_init();
+            $sql = "DELETE FROM users WHERE email = ?";
+            $stmt->prepare($sql);
+            $stmt->bind_param("s", $_SESSION['useremail']);
+            $stmt->execute();
+            $stmt->close();
 
 						$getTokenKeyOnly = json_encode($_SESSION['access_token']);
 
@@ -171,7 +182,13 @@
 							$cookiekey = constant("PORTAL_COOKIE_KEY");
 							$hash = sha1($cookiekey);
 							$storetoken = $sha1useremail.$hash;
-							mysqli_query($db, "INSERT INTO users (email, refresh_token, cookie_token) VALUES ('".$_SESSION['useremail']."', '$getTokenKeyOnly', '$storetoken')") or die (mysqli_error($db));
+
+              $stmt = $db->stmt_init();
+              $sql = "INSERT INTO users (email, refresh_token, cookie_token) VALUES (?, ?, ?)";
+              $stmt->prepare($sql);
+              $stmt->bind_param("sss", $_SESSION['useremail'], $getTokenKeyOnly, $storetoken);
+              $stmt->execute();
+              $stmt->close();
 
 							//Set cookie for 7 days
 							setcookie($cookie_name, $storetoken, time()+86400 * 7, '/', '', true, true);

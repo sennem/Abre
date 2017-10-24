@@ -44,8 +44,9 @@
 			$numrows3 = $resultcheck2->num_rows;
 			if($parentrow2['studentId'] == $row['studentId'] && $parentrow2['students'] != $row['token']){
 				$stmt = $db->stmt_init();
-				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email LIKE '".$_SESSION['useremail']."' AND studentId = '".$row['studentId']."'";
+				$sql = "UPDATE users_parent SET students = ? WHERE email LIKE ? AND studentId = ?";
 				$stmt->prepare($sql);
+				$stmt->bind_param("sss", $studenttokenencrypted, $_SESSION['useremail'], $row['studentId']);
 				$stmt->execute();
 				$stmt->close();
 				$db->close();
@@ -56,8 +57,9 @@
 				break;
 			}elseif($parentrow2['students'] != $row['token'] && $parentrow2['studentId'] != $row['studentId'] && $_SESSION['useremail'] != ''){
 				$stmt = $db->stmt_init();
-				$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted','".$row['studentId']."')";
+				$sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
 				$stmt->prepare($sql);
+				$stmt->bind_param("sss", $_SESSION['useremail'], $studenttokenencrypted, $row['studentId']);
 				$stmt->execute();
 				$stmt->close();
 				$db->close();
@@ -76,8 +78,9 @@
 			//there already is an entry matching the students studentid
 			if($parentrow['students'] != $row['token'] && $_SESSION['useremail'] != ''){
 				$stmt = $db->stmt_init();
-				$sql = "UPDATE users_parent SET students = '$studenttokenencrypted' WHERE email LIKE '".$_SESSION['useremail']."' AND studentId= '".$row['studentId']."'";
+				$sql = "UPDATE users_parent SET students = ? WHERE email LIKE ? AND studentId = ?";
 				$stmt->prepare($sql);
+				$stmt->bind_param("sss", $studenttokenencrypted, $_SESSION['useremail'], $row['studentId']);
 				$stmt->execute();
 				$stmt->close();
 				$db->close();

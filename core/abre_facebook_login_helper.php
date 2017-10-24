@@ -88,7 +88,12 @@
             $result = $db->query($sql);
             $numrows = $result->num_rows;
             if($numrows == 0){
-              mysqli_query($db, "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
+              $stmt = $db->stmt_init();
+              $sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
+              $stmt->prepare($sql);
+              $stmt->bind_param("sss", $_SESSION['useremail'], '', '');
+              $stmt->execute();
+              $stmt->close();
             }
             //If not already logged in, check and get a refresh token
             if(!isset($_SESSION['loggedin'])){
@@ -98,7 +103,12 @@
               $_SESSION['loggedin'] = "yes";
             }
           }else{
-            mysqli_query($db, "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
+            $stmt = $db->stmt_init();
+            $sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
+            $stmt->prepare($sql);
+            $stmt->bind_param("sss", $_SESSION['useremail'], '', '');
+            $stmt->execute();
+            $stmt->close();
           }
         }
         $db->close();
