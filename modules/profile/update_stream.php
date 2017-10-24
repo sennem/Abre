@@ -33,14 +33,21 @@
     if($streamid == ""){
       $stmt = $db->stmt_init();
       //needed to backtick because SQL doesn't like when you use reserved words
-      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES ('$streamgroup','$streamtitle','$streamtitle','flipboard','$rsslink','$required');";
+      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES (?, ?, ?,'flipboard', ?, ?);";
       $stmt->prepare($sql);
+      $stmt->bind_param("ssssi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required);
       $stmt->execute();
       $stmt->close();
-      $db->close();
     }else{
       //needed to backtick because SQL doesn't like when you use reserved words
-      mysqli_query($db, "UPDATE `streams` SET `group` = '$streamgroup', `title` = '$streamtitle', `slug` = '$streamtitle', `type` = 'flipboard', `url` = '$rsslink', `required` = '$required' WHERE `id` = '$streamid'") or die (mysqli_error($db));
+      $stmt = $db->stmt_init();
+      //needed to backtick because SQL doesn't like when you use reserved words
+      $sql = "UPDATE `streams` SET `group` = ?, `title` = ?, `slug` = ?, `type` = 'flipboard', `url` = ?, `required` = ? WHERE `id` = ?";
+      $stmt->prepare($sql);
+      $stmt->bind_param("ssssii", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $streamid);
+      $stmt->execute();
+      $stmt->close();
     }
+    $db->close();
   }
 ?>

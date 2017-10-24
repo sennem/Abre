@@ -27,10 +27,10 @@
 
 		//Delete the Stream
 		$stmt = $db->stmt_init();
-		$sql = "DELETE FROM streams WHERE id = '$streamid'";
+		$sql = "DELETE FROM streams WHERE id = ?";
 		$stmt->prepare($sql);
+		$stmt->bind_param("i", $streamid);
 		$stmt->execute();
-		$stmt->store_result();
 		$stmt->close();
 		$db->close();
 	}

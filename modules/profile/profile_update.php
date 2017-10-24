@@ -46,7 +46,7 @@
 		$card_classroom = 1;
 		$card_apps = 1;
 	}
-	
+
 	while($row = $result->fetch_assoc()){
 		$profileupdatecount = 1;
 		for ($x = 0; $x <= $departmentcount; $x++) {
@@ -55,11 +55,10 @@
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE profiles SET streams = '$str', card_mail = '$card_mail', card_drive = '$card_drive', card_calendar = '$card_calendar', card_classroom = '$card_classroom', card_apps = '$card_apps' WHERE email = '".$_SESSION['useremail']."'";
+		$sql = "UPDATE profiles SET streams = ?, card_mail = ?, card_drive = ?, card_calendar = ?, card_classroom = ?, card_apps = ? WHERE email = ?";
 		$stmt->prepare($sql);
+		$stmt->bind_param("siiiiis", $str, $card_mail, $card_drive, $card_calendar, $card_classroom, $card_apps, $_SESSION['useremail']);
 		$stmt->execute();
-		$stmt->store_result();
-		$num_rows = $stmt->num_rows;
 		$stmt->close();
 		$db->close();
 	}
@@ -71,11 +70,10 @@
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();
-		$sql = "INSERT INTO profiles (id, email, streams, card_mail, card_drive, card_calendar, card_classroom, card_apps) VALUES (NULL, '".$_SESSION['useremail']."', '$str', '$card_mail', '$card_drive', '$card_calendar', '$card_classroom', '$card_apps')";
+		$sql = "INSERT INTO profiles (email, streams, card_mail, card_drive, card_calendar, card_classroom, card_apps) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$stmt->prepare($sql);
+		$stmt->bind_param("ssiiiii", $_SESSION['useremail'], $str, $card_mail, $card_drive, $card_calendar, $card_classroom, $card_apps);
 		$stmt->execute();
-		$stmt->store_result();
-		$num_rows = $stmt->num_rows;
 		$stmt->close();
 		$db->close();
 	}

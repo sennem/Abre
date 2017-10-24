@@ -43,11 +43,10 @@
 	//make a request to save the values in the databse for the year.
 	include "../../core/abre_dbconnect.php";
 	$stmt = $db->stmt_init();
-	$sql = "UPDATE profiles SET work_calendar = '$ret' WHERE email = '$email'";
+	$sql = "UPDATE profiles SET work_calendar = ? WHERE email = ?";
 	$stmt->prepare($sql);
+	$stmt->bind_param("ss", $ret, $email);
 	$stmt->execute();
-	$stmt->store_result();
-	$num_rows = $stmt->num_rows;
 	$stmt->close();
 	$db->close();
 
