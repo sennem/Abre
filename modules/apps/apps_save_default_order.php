@@ -27,14 +27,15 @@
 
 		$i = 0;
 		include "../../core/abre_dbconnect.php";
+		$stmt = $db->stmt_init();
+		$sql = "UPDATE apps SET sort = ? WHERE id = ?";
 		foreach($list as $value){
-			$stmt = $db->stmt_init();
-			$sql = "UPDATE apps SET sort = '$i' WHERE id = '$value'";
 			$stmt->prepare($sql);
+			$stmt->bind_param("ii", $i, $value);
 			$stmt->execute();
-			$stmt->close();
 			$i++;
 		}
+		$stmt->close();
 		$db->close();
 	}
 

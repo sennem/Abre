@@ -37,15 +37,17 @@
 
 		if($records==0){
 			$stmt = $db->stmt_init();
-			$sql = "INSERT into profiles (email, startup) VALUES ('".$_SESSION['useremail']."', '0')";
+			$sql = "INSERT INTO profiles (email, startup) VALUES (?, ?)";
 			$stmt->prepare($sql);
+			$stmt->bind_param("si", $_SESSION['useremail'], 0);
 			$stmt->execute();
 			$stmt->close();
 		}
 
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE profiles SET apps_order = '$a' WHERE email = '".$_SESSION['useremail']."'";
+		$sql = "UPDATE profiles SET apps_order = ? WHERE email = ?";
 		$stmt->prepare($sql);
+		$stmt->bind_param("ss", $a, $_SESSION['useremail']);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();

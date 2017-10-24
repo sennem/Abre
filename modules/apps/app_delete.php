@@ -26,8 +26,9 @@
 
 		//Delete the App
 		$stmt = $db->stmt_init();
-		$sql = "DELETE FROM apps WHERE id = '$appid'";
+		$sql = "DELETE FROM apps WHERE id = ?";
 		$stmt->prepare($sql);
+		$stmt->bind_param("i", $appid);
 		$stmt->execute();
 		$stmt->store_result();
 		$stmt->close();

@@ -37,13 +37,19 @@
 
 		if($appid == ""){
 			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO apps (title,link,icon,image,staff,student,minor_disabled,required,parent) VALUES ('$appname','$applink','$appicon','$appicon','$appstaff','$appstudents','$appminors','1','$appparents');";
+			$sql = "INSERT INTO apps (title,link,icon,image,staff,student,minor_disabled,required,parent) VALUES (?, ?, ?, ?, ?, ?, ?, '1', ?);";
 			$stmt->prepare($sql);
+			$stmt->bind_param("ssssiiii", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appminors, $appparents);
 			$stmt->execute();
 			$stmt->close();
-			$db->close();
 		}else{
-			mysqli_query($db, "UPDATE apps SET title = '$appname', link = '$applink', icon = '$appicon', image = '$appicon', staff = '$appstaff', student = '$appstudents', minor_disabled = '$appminors', parent = '$appparents' WHERE id = '$appid'") or die (mysqli_error($db));
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE apps SET title = ?, link = ?, icon = ?, image = ?, staff = ?, student = ?, minor_disabled = ?, parent = ? WHERE id = ?;";
+			$stmt->prepare($sql);
+			$stmt->bind_param("ssssiiiii", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appminors, $appparents, $appid);
+			$stmt->execute();
+			$stmt->close();
 		}
+		$db->close();
 	}
 ?>
