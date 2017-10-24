@@ -35,8 +35,13 @@
       $id = $row['StudentId'];
       $stringToken = $id . time();
       $token = encrypt(substr(hash('sha256', $stringToken), 0, 10), "");
-      $sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES ('$id', '$token');";
-      $db->query($sql);
+
+			$stmt = $db->stmt_init();
+      $sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES (?, ?);";
+			$stmt->prepare($sql);
+			$stmt->bind_param("is", $id, $token);
+			$stmt->execute();
+			$stmt->close();
     }
 		$db->close();
 	}else{
@@ -51,8 +56,13 @@
       $id = $row['StudentId'];
       $stringToken = $id . time();
       $token = encrypt(substr(hash('sha256', $stringToken), 0, 10), "");
-      $sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES ('$id', '$token');";
-      $db->query($sql);
+
+			$stmt = $db->stmt_init();
+      $sql = "INSERT INTO `student_tokens` (`studentId`, `token`) VALUES (?, ?);";
+			$stmt->prepare($sql);
+			$stmt->bind_param("is", $id, $token);
+			$stmt->execute();
+			$stmt->close();
     }
 		$db->close();
 	}

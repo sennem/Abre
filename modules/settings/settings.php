@@ -138,7 +138,7 @@
 							echo "</div>";
 							if($db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM users_parent") && superadmin()){
 								echo "<div class='input-field col s6'>";
-									echo "<button id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</button>";
+									echo "<a id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</a>";
 								echo "</div>";
 								echo "<div class='input-field col s6'>";
 									echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Download All Keys</a>";

@@ -88,8 +88,13 @@
 		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "parentaccess" => "$siteparentaccess", "googleclientid" => "$sitegoogleclientid", "googleclientsecret" => "$sitegoogleclientsecret", "facebookclientid" => "$sitefacebookclientid", "facebookclientsecret" => "$sitefacebookclientsecret", "microsoftclientid" => "$sitemicrosoftclientid", "microsoftclientsecret" => "$sitemicrosoftclientsecret", "abre_community" => "$abre_community", "community_first_name" => "$community_first_name", "community_last_name" => "$community_last_name", "community_email" => "$community_email", "community_users" => "$community_users" ];
 		$json = json_encode($array);
 
-		//Update the database
-		mysqli_query($db, "UPDATE settings set options='$json'") or die (mysqli_error($db));
+		$stmt = $db->stmt_init();
+		$sql = "UPDATE settings SET options=?";
+		$stmt->prepare($sql);
+		$stmt->bind_param("s", $json);
+		$stmt->execute();
+		$stmt->close();
+		$db->close();
 
 		//Notification message
 		echo "Settings have been updated.";
