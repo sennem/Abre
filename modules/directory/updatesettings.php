@@ -30,13 +30,15 @@
 
 			if($query->num_rows > 0){
 				$stmt = $db->stmt_init();
-				$sql = "UPDATE `directory_settings` SET `options` = '$value' WHERE `dropdownID` = '$key'";
+				$sql = "UPDATE `directory_settings` SET `options` = ? WHERE `dropdownID` = ?";
 				$stmt->prepare($sql);
+				$stmt->bind_param("ss", $value, $key);
 				$stmt->execute();
 			}else{
 				$stmt = $db->stmt_init();
-				$sql = "INSERT INTO `directory_settings` (`dropdownID`,`options`) VALUES ('$key','$value');";
+				$sql = "INSERT INTO `directory_settings` (`dropdownID`,`options`) VALUES (?, ?);";
 				$stmt->prepare($sql);
+				$stmt->bind_param("ss", $key, $value);
 				$stmt->execute();
 			}
 		}

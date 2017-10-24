@@ -46,8 +46,6 @@
 		$stmt->close();
 		$db->close();
 
-
-
 		echo "The discipline record has been deleted.";
 	}
 

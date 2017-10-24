@@ -62,11 +62,10 @@
 		//Remove from Database
 		include "../../core/abre_dbconnect.php";
 		$stmt = $db->stmt_init();
-		$sql = "Delete from directory where id = '$id' LIMIT 1";
+		$sql = "DELETE FROM directory WHERE id = ? LIMIT 1";
 		$stmt->prepare($sql);
+		$stmt->bind_param("i", $id);
 		$stmt->execute();
-		$stmt->store_result();
-		$num_rows = $stmt->num_rows;
 		$stmt->close();
 		$db->close();
 

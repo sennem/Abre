@@ -39,7 +39,13 @@
 					$employeeLocalId = encrypt($result[LocalId]);
 
 					//Add information to employee database
-					mysqli_query($db, "UPDATE directory SET RefID = '$employeeRefID', StateID = '$employeeStateID', TeacherID = '$employeeTeacherID', LocalId = '$employeeLocalId' WHERE email = '$employeeemailencrypted'");
+					$stmt = $db->stmt_init();
+					$sql = "UPDATE directory SET RefID = ?, StateID = ?, TeacherID = ?, LocalId = ? WHERE email = ?";
+					$stmt->prepare($sql);
+					$stmt->bind_param("sssss", $employeeRefID, $employeeStateID, $employeeTeacherID, $employeeLocalId, $employeeemailencrypted);
+					$stmt->execute();
+					$stmt->close();
+					$db->close();
 				}
 			}
 		}

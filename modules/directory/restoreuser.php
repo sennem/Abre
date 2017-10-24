@@ -26,11 +26,10 @@
 		include "../../core/abre_dbconnect.php";
 		$id = mysqli_real_escape_string($db, $_GET["id"]);
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE directory SET archived = 0 WHERE id = '$id' LIMIT 1";
+		$sql = "UPDATE directory SET archived = '0' WHERE id = ? LIMIT 1";
 		$stmt->prepare($sql);
+		$stmt->bind_param("i", $id);
 		$stmt->execute();
-		$stmt->store_result();
-		$num_rows = $stmt->num_rows;
 		$stmt->close();
 		$db->close();
 

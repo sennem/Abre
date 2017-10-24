@@ -27,7 +27,7 @@
 
 		include "../../core/abre_dbconnect.php";
 		$stmt = $db->prepare("UPDATE directory SET archived = '1' WHERE id = ? LIMIT 1");
-		$stmt->bind_param("i",$id);
+		$stmt->bind_param("i", $id);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();

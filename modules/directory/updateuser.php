@@ -156,7 +156,7 @@
 
 		$permissions = mysqli_real_escape_string($db, $_POST["permissions"]);
 		$permissions = encrypt($permissions, "");
-		$sysadmin = $_POST["sysadmin"];
+		isset($_POST["sysadmin"]) ? $sysadmin = $_POST["sysadmin"] : $sysadmin = 0;
 
 		$role = mysqli_real_escape_string($db, $_POST["role"]);
 		if($role != ""){
@@ -225,22 +225,37 @@
 					//Add Record to Database
 			    include "../../core/abre_dbconnect.php";
 			    $stmtdiscipline = $db->stmt_init();
-			    $sqldiscipline = "INSERT INTO directory_discipline (UserID,Filename) VALUES ('$id','$disfilename');";
+			    $sqldiscipline = "INSERT INTO directory_discipline (UserID,Filename) VALUES (?, ?);";
 			    $stmtdiscipline->prepare($sqldiscipline);
+					$stmtdiscipline->bind_param("is", $id, $disfilename);
 					$stmtdiscipline->execute();
 					$stmtdiscipline->store_result();
 					$stmtdiscipline->close();
+					$db->close();
 		    }
 			}
 		}
 
 		if($id != ""){
-			mysqli_query($db, "UPDATE directory SET updatedtime = now(), superadmin = '$superadmin', admin = '$admin', picture = '$picturefilename', firstname = '$firstname', middlename = '$middlename', lastname = '$lastname', address = '$address', city = '$city', state = '$state', zip = '$zip', phone = '$phone', cellphone = '$cellphone', email = '$email', ss = '$ss', dob = '$dob', gender = '$gender', ethnicity = '$ethnicity', title = '$title', contract = '$contract', classification = '$classification', location = '$location', grade = '$grade', subject = '$subject', doh = '$doh', senioritydate = '$sd', effectivedate = '$ed', rategroup = '$rategroup', step = '$step', educationlevel = '$educationlevel', salary = '$salary', hours = '$hours', probationreportdate = '$probationreportdate', statebackgroundcheck = '$statebackgroundcheck', federalbackgroundcheck = '$federalbackgroundcheck', stateeducatorid = '$stateeducatorid', licensetype1 = '$licensetypeid1', licenseissuedate1 = '$licenseissuedateid1', licenseexpirationdate1 = '$licenseexpirationdateid1', licenseterm1 = '$licensetermid1', licensetype2 = '$licensetypeid2', licenseissuedate2 = '$licenseissuedateid2', licenseexpirationdate2 = '$licenseexpirationdateid2', licenseterm2 = '$licensetermid2', licensetype3 = '$licensetypeid3', licenseissuedate3 = '$licenseissuedateid3', licenseexpirationdate3 = '$licenseexpirationdateid3', licenseterm3 = '$licensetermid3', licensetype4 = '$licensetypeid4', licenseissuedate4 = '$licenseissuedateid4', licenseexpirationdate4 = '$licenseexpirationdateid4', licenseterm4 = '$licensetermid4', licensetype5 = '$licensetypeid5', licenseissuedate5 = '$licenseissuedateid5', licenseexpirationdate5 = '$licenseexpirationdateid5', licenseterm5 = '$licensetermid5', licensetype6 = '$licensetypeid6', licenseissuedate6 = '$licenseissuedateid6', licenseexpirationdate6 = '$licenseexpirationdateid6', licenseterm6 = '$licensetermid6', permissions = '$permissions', role = '$role', contractdays = '$contractdays' where id = '$id'") or die (mysqli_error($db));
+			include "../../core/abre_dbconnect.php";
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE directory SET updatedtime = now(), superadmin = ?, admin = ?, picture = ?, firstname = ?, middlename = ?, lastname = ?, address = ?, city = ?, state = ?, zip = ?, phone = ?, cellphone = ?, email = ?, ss = ?, dob = ?, gender = ?, ethnicity = ?, title = ?, contract = ?, classification = ?, location = ?, grade = ?, subject = ?, doh = ?, senioritydate = ?, effectivedate = ?, rategroup = ?, step = ?, educationlevel = ?, salary = ?, hours = ?, probationreportdate = ?, statebackgroundcheck = ?, federalbackgroundcheck = ?, stateeducatorid = ?, licensetype1 = ?, licenseissuedate1 = ?, licenseexpirationdate1 = ?, licenseterm1 = ?, licensetype2 = ?, licenseissuedate2 = ?, licenseexpirationdate2 = ?, licenseterm2 = ?, licensetype3 = ?, licenseissuedate3 = ?, licenseexpirationdate3 = ?, licenseterm3 = ?, licensetype4 = ?, licenseissuedate4 = ?, licenseexpirationdate4 = ?, licenseterm4 = ?, licensetype5 = ?, licenseissuedate5 = ?, licenseexpirationdate5 = ?, licenseterm5 = ?, licensetype6 = ?, licenseissuedate6 = ?, licenseexpirationdate6 = ?, licenseterm6 = ?, permissions = ?, role = ?, contractdays = ? WHERE id = ?";
+			$stmt->prepare($sql);
+			$stmt->bind_param("iissssssssssssssssssssssssssssssssssssssssssssssssssssssssssssi", $superadmin, $admin, $picturefilename, $firstname, $middlename, $lastname, $address, $city, $state, $zip, $phone, $cellphone, $email, $ss, $dob, $gender, $ethnicity, $title, $contract, $classification, $location, $grade, $subject, $doh, $sd, $ed, $rategroup, $step, $educationlevel, $salary, $hours, $probationreportdate, $statebackgroundcheck, $federalbackgroundcheck, $stateeducatorid, $licensetypeid1, $licenseissuedateid1, $licenseexpirationdateid1, $licensetermid1, $licensetypeid2, $licenseissuedateid2, $licenseexpirationdateid2, $licensetermid2, $licensetypeid3, $licenseissuedateid3, $licenseexpirationdateid3, $licensetermid3, $licensetypeid4, $licenseissuedateid4, $licenseexpirationdateid4, $licensetermid4, $licensetypeid5, $licenseissuedateid5, $licenseexpirationdateid5, $licensetermid5, $licensetypeid6, $licenseissuedateid6, $licenseexpirationdateid6, $licensetermid6, $permissions, $role, $contractdays, $id);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}
 		if($id == "new"){
-			mysqli_query($db, "INSERT INTO directory (id, updatedtime, superadmin, admin, picture, firstname, lastname, middlename, address, city, state, zip, email, phone, cellphone, ss, dob, gender, ethnicity, title, contract, classification, location, grade, subject, doh, senioritydate, effectivedate, rategroup, step, educationlevel, salary, hours, probationreportdate, statebackgroundcheck, federalbackgroundcheck, stateeducatorid, licensetype1, licenseissuedate1, licenseexpirationdate1, licenseterm1, licensetype2, licenseissuedate2, licenseexpirationdate2, licenseterm2, licensetype3, licenseissuedate3, licenseexpirationdate3, licenseterm3, licensetype4, licenseissuedate4, licenseexpirationdate4, licenseterm4, licensetype5, licenseissuedate5, licenseexpirationdate5, licenseterm5, licensetype6, licenseissuedate6, licenseexpirationdate6, licenseterm6, permissions, role, contractdays) VALUES (NULL, CURRENT_TIMESTAMP, '$superadmin', '$admin', '$picturefilename', '$firstname', '$lastname', '$middlename', '$address', '$city', '$state', '$zip', '$email', '$phone', '$cellphone', '$ss', '$dob', '$gender', '$ethnicity', '$title', '$contract', '$classification', '$location', '$grade', '$subject', '$doh', '$sd', '$ed', '$rategroup', '$step', '$educationlevel', '$salary', '$hours', '$probationreportdate', '$statebackgroundcheck', '$federalbackgroundcheck', '$stateeducatorid', '$licensetypeid1', '$licenseissuedateid1', '$licenseexpirationdateid1', '$licensetermid1', '$licensetypeid2', '$licenseissuedateid2', '$licenseexpirationdateid2', '$licensetermid2', '$licensetypeid3', '$licenseissuedateid3', '$licenseexpirationdateid3', '$licensetermid3', '$licensetypeid4', '$licenseissuedateid4', '$licenseexpirationdateid4', '$licensetermid4', '$licensetypeid5', '$licenseissuedateid5', '$licenseexpirationdateid5', '$licensetermid5', '$licensetypeid6', '$licenseissuedateid6', '$licenseexpirationdateid6', '$licensetermid6', '$permissions', '$role', '$contractdays');") or die (mysqli_error($db));
+			include "../../core/abre_dbconnect.php";
+			$stmt = $db->stmt_init();
+			$sql = "INSERT INTO directory (updatedtime, superadmin, admin, picture, firstname, lastname, middlename, address, city, state, zip, email, phone, cellphone, ss, dob, gender, ethnicity, title, contract, classification, location, grade, subject, doh, senioritydate, effectivedate, rategroup, step, educationlevel, salary, hours, probationreportdate, statebackgroundcheck, federalbackgroundcheck, stateeducatorid, licensetype1, licenseissuedate1, licenseexpirationdate1, licenseterm1, licensetype2, licenseissuedate2, licenseexpirationdate2, licenseterm2, licensetype3, licenseissuedate3, licenseexpirationdate3, licenseterm3, licensetype4, licenseissuedate4, licenseexpirationdate4, licenseterm4, licensetype5, licenseissuedate5, licenseexpirationdate5, licenseterm5, licensetype6, licenseissuedate6, licenseexpirationdate6, licenseterm6, permissions, role, contractdays) VALUES (CURRENT_TIMESTAMP, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			$stmt->prepare($sql);
+			$stmt->bind_param("iissssssssssssssssssssssssssssssssssssssssssssssssssssssssssss", $superadmin, $admin, $picturefilename, $firstname, $lastname, $middlename, $address, $city, $state, $zip, $email, $phone, $cellphone, $ss, $dob, $gender, $ethnicity, $title, $contract, $classification, $location, $grade, $subject, $doh, $sd, $ed, $rategroup, $step, $educationlevel, $salary, $hours, $probationreportdate, $statebackgroundcheck, $federalbackgroundcheck, $stateeducatorid, $licensetypeid1, $licenseissuedateid1, $licenseexpirationdateid1, $licensetermid1, $licensetypeid2, $licenseissuedateid2, $licenseexpirationdateid2, $licensetermid2, $licensetypeid3, $licenseissuedateid3, $licenseexpirationdateid3, $licensetermid3, $licensetypeid4, $licenseissuedateid4, $licenseexpirationdateid4, $licensetermid4, $licensetypeid5, $licenseissuedateid5, $licenseexpirationdateid5, $licensetermid5, $licensetypeid6, $licenseissuedateid6, $licenseexpirationdateid6, $licensetermid6, $permissions, $role, $contractdays);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}
-		$db->close();
 
 		include "../../core/abre_dbconnect.php";
 		$useremail = decrypt($email, '');
@@ -248,9 +263,23 @@
 		$result = mysqli_query($db,$sql);
 		$rowcount = mysqli_num_rows($result);
 		if($rowcount == 0){
-			mysqli_query($db, "INSERT INTO users (email, superadmin) VALUES ('$useremail', '$sysadmin');") or die (mysqli_error($db));
+			include "../../core/abre_dbconnect.php";
+			$stmt = $db->stmt_init();
+			$sql = "INSERT INTO users (email, superadmin) VALUES (?, ?);";
+			$stmt->prepare($sql);
+			$stmt->bind_param("si", $useremail, $sysadmin);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}else{
-			mysqli_query($db, "UPDATE users SET superadmin = '$sysadmin' WHERE email = '$useremail';") or die (mysqli_error($db));
+			include "../../core/abre_dbconnect.php";
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE users SET superadmin = ? WHERE email = ?;";
+			$stmt->prepare($sql);
+			$stmt->bind_param("is", $sysadmin, $useremail);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}
 
 		echo "The user has been updated.";

@@ -513,7 +513,7 @@
 
 									if(superadmin()){
 										echo "<div class='col l6 s12'>";
-											 if($sysadmin == "1"){
+											 if($sysadmin == 1){
 												 echo "<input type='checkbox' id='sysadmin' name='sysadmin' class='filled-in' value='1' checked/>";
 											 }else{
 												 echo "<input type='checkbox' id='sysadmin' name='sysadmin' class='filled-in' value='1'/>";
