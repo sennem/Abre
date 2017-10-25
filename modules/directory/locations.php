@@ -21,13 +21,18 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($location!=""){ echo "<option value='$location' selected>$location</option>"; }else{ echo "<option value='$location' selected>Choose</option>"; }
-	$sql = "SELECT options FROM directory_settings where dropdownID='homeBuildings'";
+	if($location != ""){
+		echo "<option value='$location' selected>$location</option>";
+	}else{
+		echo "<option value='$location' selected>Choose</option>";
+	}
+
+	$sql = "SELECT options FROM directory_settings where dropdownID = 'homeBuildings'";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$titles = explode(PHP_EOL, $row['options']);
 	foreach($titles as $value){
 		$val = str_replace(array("\n\r", "\n", "\r"), '', $value);
 		echo "<option value ='$val'>$val</option>";
-	 }
+	}
 ?>

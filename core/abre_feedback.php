@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,16 +15,14 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-    
-    //Include required files
-    require_once('abre_verification.php');
-    require_once('abre_functions.php');
-	
+
+  //Include required files
+  require_once('abre_verification.php');
+  require_once('abre_functions.php');
+
 	//Display feedback modal for staff
-	if($_SESSION['usertype']=="staff")
-	{	
-	?>
-	
+	if($_SESSION['usertype'] == "staff"){
+?>
 		<!--Feedback modal-->
 		<div id='feedback' class='modal modal-fixed-footer modal-mobile-full'>
 			<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>
@@ -37,52 +35,50 @@
 							<textarea id='textarea' name='textarea' class='materialize-textarea' placeholder="Write a brief description" required></textarea>
 					    </div>
 					</div>
-			    </div>
-			    <div class='modal-footer'>
-					<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Submit</button>
+			  </div>
+			  <div class='modal-footer'>
+					<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>'>Submit</button>
 				</div>
 			</form>
 		</div>
-		
-	<?php
+<?php
 	}
 ?>
-	          
-	          
+
 <script>
-	
-	$(function()
-	{   
-		
-		//Load feedback modal			
-    	$('.modal-trigger').leanModal({ in_duration: 0, out_duration: 0, ready: function() { $("#textarea").focus(); } });
-    	
+
+	$(function(){
+		//Load feedback modal
+    $('.modal-trigger').leanModal({
+			in_duration: 0,
+			out_duration: 0,
+			ready: function() {
+				$("#textarea").focus();
+			}
+		});
+
 		//Submit feedback form
 		var form = $('#form-feedback');
-		var formMessages = $('#form-messages');
-		$(form).submit(function(event)
-		{					
+		$(form).submit(function(event){
 			event.preventDefault();
-		    $('#feedback').closeModal({
-			    in_duration: 0,
+		  $('#feedback').closeModal({
+				in_duration: 0,
 				out_duration: 0,
-		    });
-		    
+		  });
+
 			var formData = $(form).serialize();
 			$.ajax({
-			    type: 'POST',
-			    url: $(form).attr('action'),
-			    data: formData
+				type: 'POST',
+			  url: $(form).attr('action'),
+			  data: formData
 			})
-			
-			.done(function(response) {
+			.done(function(response){
 				$("#textarea").val('');
 				var notification = document.querySelector('.mdl-js-snackbar');
 				var data = { message: response };
-				notification.MaterialSnackbar.showSnackbar(data);	
-			})		
+				notification.MaterialSnackbar.showSnackbar(data);
+			})
 		});
-	
-  	});
-  
-</script> 
+	});
+
+</script>

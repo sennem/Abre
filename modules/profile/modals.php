@@ -50,16 +50,15 @@
 				</div>
 	    </div>
 		<div class="modal-footer">
-			<button class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo sitesettings("sitecolor"); ?>'>Close</button>
-			<button class="printbutton waves-effect btn-flat white-text" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Print</button>
+			<button class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Close</button>
+			<button class="printbutton waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Print</button>
 			<div id="selecteddays" style='margin:12px 0 0 20px; font-weight:500; font-size:16px;'></div>
-	    </div>
+	  </div>
 	</div>
 
 <!--Stream Editor-->
 	<?php
-	if(superadmin())
-	{
+	if(superadmin()){
 	?>
 
 	<div id='streameditor' class='modal modal-fixed-footer modal-mobile-full'>
@@ -75,7 +74,7 @@
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<a class='modal-action waves-effect btn-flat white-text modal-addeditstream' href='#addeditstream' data-streamtitle='Add New Stream' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Add</a>
+			<a class='modal-action waves-effect btn-flat white-text modal-addeditstream' href='#addeditstream' data-streamtitle='Add New Stream' style='background-color: <?php echo getSiteColor(); ?>'>Add</a>
 		</div>
 	</div>
 
@@ -117,8 +116,8 @@
 			<input id="stream_id" name="stream_id" type="hidden">
 		</div>
 		<div class='modal-footer'>
-			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdatestream' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>Save</button>
-			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo sitesettings("sitecolor"); ?>; margin-right:5px;'>Cancel</a>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdatestream' style='background-color: <?php echo getSiteColor(); ?>'>Save</button>
+			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>; margin-right:5px;'>Cancel</a>
 		</div>
 		</form>
 	</div>
@@ -128,63 +127,57 @@
 
 <script>
 
-$(function()
-{
-  $('select').material_select();
+	$(function(){
 
-   	<?php
-	if(superadmin())
-	{
-	?>
+	  $('select').material_select();
 
-		//Add/Edit Stream
-		$('.modal-addeditstream').leanModal({
-			in_duration: 0,
-			out_duration: 0,
-			ready: function()
-			{
-				$(".modal-content").scrollTop(0);
-				$("#editstreammodaltitle").text('Add New Stream');
-				$("#stream_name").val('');
-				$("#rss_link").val('');
-				$("#stream_id").val('');
-				$('#stream_staff').prop('checked', false);
-				$('#stream_students').prop('checked', false);
-				$('#stream_parents').prop('checked', false);
-				$('#required_stream').prop('checked', false);
-			}
-		});
+	  <?php
+		if(superadmin()){
+		?>
 
-		//Save/Update Stream
-		$('#addeditstreamform').submit(function(event)
-		{
-			event.preventDefault();
-
-			var streamtitle = $('#stream_name').val();
-			var rsslink = $('#rss_link').val();
-			var streamgroup= $('input[name=streamradio]:checked').val();
-
-			var streamid = $('#stream_id').val();
-			if($('#required_stream').is(':checked')==true){ var required = 1; }else{ var required = 0; }
-
-			//Make the post request
-			$.ajax({
-				type: 'POST',
-				url: 'modules/profile/update_stream.php',
-				data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
-
-			})
-
-			.done(function(){
-				$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
-				$('#streamsort').load('modules/profile/stream_editor_content.php');
-				$('#content_holder').load( 'modules/profile/profile.php');
+			//Add/Edit Stream
+			$('.modal-addeditstream').leanModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function(){
+					$(".modal-content").scrollTop(0);
+					$("#editstreammodaltitle").text('Add New Stream');
+					$("#stream_name").val('');
+					$("#rss_link").val('');
+					$("#stream_id").val('');
+					$('#stream_staff').prop('checked', false);
+					$('#stream_students').prop('checked', false);
+					$('#stream_parents').prop('checked', false);
+					$('#required_stream').prop('checked', false);
+				}
 			});
-		});
 
-	<?php
-	}
-	?>
+			//Save/Update Stream
+			$('#addeditstreamform').submit(function(event){
+				event.preventDefault();
+
+				var streamtitle = $('#stream_name').val();
+				var rsslink = $('#rss_link').val();
+				var streamgroup= $('input[name=streamradio]:checked').val();
+
+				var streamid = $('#stream_id').val();
+				if($('#required_stream').is(':checked') == true){ var required = 1; }else{ var required = 0; }
+
+				//Make the post request
+				$.ajax({
+					type: 'POST',
+					url: 'modules/profile/update_stream.php',
+					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
+				})
+				.done(function(){
+					$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
+					$('#streamsort').load('modules/profile/stream_editor_content.php');
+					$('#content_holder').load( 'modules/profile/profile.php');
+				});
+			});
+		<?php
+		}
+		?>
 
 		//grabs the selected date from the drop down options in the modal.
 		var y = $('#calendaryear').val();
@@ -277,5 +270,6 @@ $(function()
 				currYear = y;
 			}
 		});
-});
+
+	});
 </script>

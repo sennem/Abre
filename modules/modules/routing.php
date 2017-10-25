@@ -19,8 +19,7 @@
     //Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
-    if($_SESSION['usertype']=="staff")
-    {
+    if($_SESSION['usertype'] == "staff"){
 
 		echo "
 			'store': function(name) {

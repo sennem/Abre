@@ -19,17 +19,15 @@
 	//Include required files
 	require_once('abre_verification.php');
 	require_once('abre_functions.php');
-
 ?>
 
 	<!--Display top navigation-->
-	<header class='mdl-layout__header mdl-color-text--white' style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+	<header class='mdl-layout__header mdl-color-text--white' style='background-color: <?php echo getSiteColor(); ?>'>
 		<div class='mdl-layout__header-row'>
 			<span class='mdl-layout-title'><div id='titletext' class='truncate'></div></span>
 			<div class='mdl-layout-spacer'></div>
 				<?php
-					if(!isset($_GET["dash"]))
-					{
+					if(!isset($_GET["dash"])){
 						if($_SESSION['usertype'] == 'parent'){
 							echo "<a id='addstudent' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-verifystudent' href='#verifystudent' style='margin-right:10px'><i class='material-icons'>add</i></a>";
 							isVerified();
@@ -41,21 +39,17 @@
 				<?php
 						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
 				?>
-			</div>
+		</div>
 		<div id='navigation_top'></div>
 	</header>
 
 <script>
 
-	$(function()
-	{
-
+	$(function(){
 		//Scroll to top
-		$('.mdl-layout__header-row').click(function()
-		{
+		$('.mdl-layout__header-row').click(function(){
 			$('.mdl-layout__content').animate({ scrollTop: 0 }, 'fast');
 		});
-
 	});
 
 </script>

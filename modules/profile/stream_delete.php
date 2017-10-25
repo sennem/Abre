@@ -21,19 +21,17 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin())
-	{
+	if(superadmin()){
 
-		$streamid=mysqli_real_escape_string($db, $_GET["id"]);
+		$streamid = mysqli_real_escape_string($db, $_GET["id"]);
 
 		//Delete the Stream
 		$stmt = $db->stmt_init();
-		$sql = "Delete from streams where id='$streamid'";
+		$sql = "DELETE FROM streams WHERE id = ?";
 		$stmt->prepare($sql);
+		$stmt->bind_param("i", $streamid);
 		$stmt->execute();
-		$stmt->store_result();
 		$stmt->close();
-
 		$db->close();
 	}
 

@@ -21,35 +21,35 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin())
-	{
+	if(superadmin()){
 
 		//Add the app
-		$appid=$_POST["id"];
-		$appname=mysqli_real_escape_string($db, $_POST["name"]);
-		$applink=mysqli_real_escape_string($db, $_POST["link"]);
-		$appicon=$_POST["icon"];
+		$appid = $_POST["id"];
+		$appname = mysqli_real_escape_string($db, $_POST["name"]);
+		$applink = mysqli_real_escape_string($db, $_POST["link"]);
+		$appicon = $_POST["icon"];
 		$appicon = str_replace("thumb_", "", $appicon);
-		$appstaff=$_POST["staff"];
-		$appstudents=$_POST["students"];
+		$appstaff = $_POST["staff"];
+		$appstudents = $_POST["students"];
 		$appparents = $_POST["parents"];
-		$appminors=$_POST["minors"];
+		$appminors = $_POST["minors"];
 
 
-		if($appid=="")
-		{
+		if($appid == ""){
 			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO apps (title,link,icon,image,staff,student,minor_disabled,required,parent) VALUES ('$appname','$applink','$appicon','$appicon','$appstaff','$appstudents','$appminors','1','$appparents');";
+			$sql = "INSERT INTO apps (title,link,icon,image,staff,student,minor_disabled,required,parent) VALUES (?, ?, ?, ?, ?, ?, ?, '1', ?);";
 			$stmt->prepare($sql);
+			$stmt->bind_param("ssssiiii", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appminors, $appparents);
 			$stmt->execute();
 			$stmt->close();
-			$db->close();
+		}else{
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE apps SET title = ?, link = ?, icon = ?, image = ?, staff = ?, student = ?, minor_disabled = ?, parent = ? WHERE id = ?;";
+			$stmt->prepare($sql);
+			$stmt->bind_param("ssssiiiii", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appminors, $appparents, $appid);
+			$stmt->execute();
+			$stmt->close();
 		}
-		else
-		{
-			mysqli_query($db, "UPDATE apps set title='$appname', link='$applink', icon='$appicon', image='$appicon', staff='$appstaff', student='$appstudents', minor_disabled='$appminors', parent='$appparents' where id='$appid'") or die (mysqli_error($db));
-		}
-
+		$db->close();
 	}
-
 ?>

@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,28 +15,29 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Include required files
 	require_once('abre_verification.php');
-	require_once('abre_functions.php'); 
-	
+	require_once('abre_functions.php');
+
 	//Send the feedback email
-	if($_SESSION['usertype']=="staff")
-	{
-		$textarea=$_POST["textarea"];
-		if($textarea!="")
-		{
-			$to=sitesettings("siteadminemail");
+	if($_SESSION['usertype'] == "staff"){
+		$textarea = $_POST["textarea"];
+		if($textarea != ""){
+			if(getSiteAdminEmail() != ""){
+				$to = getSiteAdminEmail();
+			}else{
+				echo "Error: No administrator email has been set!";
+				return;
+			}
 			$subject = "Abre Feedback";
 			$message = "From: ".$_SESSION['useremail']."\r\n\r\n".$_SESSION['displayName']."\r\n\r\n$textarea";
 			$headers = "From: ". $_SESSION['useremail'];
 			mail($to,$subject,$message,$headers);
-			echo "Your feedback has been sent!";
-		}
-		else
-		{
+			echo "Your feedback has been sent! Thank you!";
+		}else{
 			echo "Whoops, you didn't enter any feedback.";
 		}
 	}
-	
+
 ?>

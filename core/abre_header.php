@@ -17,11 +17,10 @@
     */
 
 	//Display correct header
-	if (file_exists('configuration.php'))
-	{
+	if(file_exists('configuration.php')){
 		require_once('abre_functions.php');
-		?>
-		<!doctype html>
+?>
+		<!DOCTYPE html>
 		<html lang='en'>
 			<head>
 				<meta charset='utf-8'>
@@ -29,30 +28,28 @@
 				<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no'>
 
 				<?php
-
 				//Site title
-				echo "<title>".sitesettings("sitetitle")."</title>";
-				echo "<meta property='og:title' content='".sitesettings("sitetitle")."' />";
+				echo "<title>".getSiteTitle()."</title>";
+				echo "<meta property='og:title' content='".getSiteTitle()."'/>";
 
 				//Site description
-				echo "<meta name='description' property='og:description' content='".sitesettings("sitedescription")."'>";
+				echo "<meta name='description' property='og:description' content='".getSiteDescription()."'>";
 
 				//Site favicon
-				echo "<link rel='icon' type='image/png' href='".sitesettings("sitelogo")."'>";
-				echo "<meta property='og:image' content='".sitesettings("sitelogo")."'>";
+				echo "<link rel='icon' type='image/png' href='".getSiteLogo()."'>";
+				echo "<meta property='og:image' content='".getSiteLogo()."'>";
 
 				//Chrome icon
 				echo "<meta name='mobile-web-app-capable' content='yes'>";
-				echo "<link rel='icon' sizes='192x192' href='".sitesettings("sitelogo")."'>";
+				echo "<link rel='icon' sizes='192x192' href='".getSiteLogo()."'>";
 
 				//iOS icon
-				echo "<meta name='apple-mobile-web-app-title' content='".sitesettings("sitetitle")."'>";
-				echo "<link rel='apple-touch-icon' href='".sitesettings("sitelogo")."'>";
+				echo "<meta name='apple-mobile-web-app-title' content='".getSiteTitle()."'>";
+				echo "<link rel='apple-touch-icon' href='".getSiteLogo()."'>";
 
 				//Windows icon
-				echo "<meta name='msapplication-TileImage' content='".sitesettings("sitelogo")."'>";
-				echo "<meta name='msapplication-TileColor' content='".sitesettings("sitecolor")."'>";
-
+				echo "<meta name='msapplication-TileImage' content='".getSiteLogo()."'>";
+				echo "<meta name='msapplication-TileColor' content='".getSiteColor()."'>";
 				?>
 
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
@@ -81,12 +78,10 @@
 			<body>
 			<script>google.charts.load('current', {'packages':['corechart']});</script>
 
-		<?php
-	}
-	else
-	{
+	<?php
+	}else{
 	?>
-		<!doctype html>
+		<!DOCTYPE html>
 		<html lang='en'>
 			<head>
 				<meta charset='utf-8'>
@@ -106,6 +101,6 @@
 				<script src='core/js/material.1.2.1.min.js'></script>
 			</head>
 			<body>
-		<?php
+  <?php
 	}
 	?>

@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,18 +15,18 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
-	
+
 ?>
 
 	<div class="fixed-action-btn buttonpin">
-		<?php 
-			echo "<button class='btn-floating btn-large waves-effect waves-light employeeview' style='background-color: ".sitesettings("sitecolor")."' data-position='left' data-employeeid='new' data-searchquerysaved=''><i class='large material-icons'>add</i></button>";
+		<?php
+			echo "<button class='btn-floating btn-large waves-effect waves-light employeeview' style='background-color: ".getSiteColor()."' data-position='left' data-employeeid='new' data-searchquerysaved=''><i class='large material-icons'>add</i></button>";
 			echo "<div class='mdl-tooltip mdl-tooltip--left' for='newentry'>New</div>";
 		?>
 	</div>

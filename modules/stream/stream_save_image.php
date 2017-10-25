@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,51 +15,42 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	 
+
 	//Required configuration files
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+
 	//Check for feed image
-	if($image!="")
-	{		
-				
+	if($image != ""){
+
 		//Make sure image is over http or https
 		$url = parse_url($image);
-		if($url['scheme'] == 'https' xor $url['scheme'] == 'http')
-		{
-			
+		if($url['scheme'] == 'https' xor $url['scheme'] == 'http'){
+
 			//Get the name and sanatize the file name
 			$file_name = basename($image);
-			$file_name=str_replace("+", "_", $file_name);
-			$file_name=str_replace("%", "_", $file_name);
+			$file_name = str_replace("+", "_", $file_name);
+			$file_name = str_replace("%", "_", $file_name);
+			$file_name = str_replace(".", "_", $file_name);
 			$file_name = preg_replace('/[^a-zA-Z0-9_.]/', '', $file_name);
 			$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$date.$file_name;
-			
+
 			//If it already saved, read from local server
-			if (file_exists($filename))
-			{
-				$imagefile=$date.$file_name;
+			if (file_exists($filename)){
+				$imagefile = $date.$file_name;
 				$fileExtension = pathinfo($image, PATHINFO_EXTENSION);
 				$image = $portal_root."/modules/stream/stream_serve_image.php?file=$imagefile&ext=$fileExtension";
-				if(filesize($filename)<1000)
-				{
-					$image="";
+				if(filesize($filename) < 1000){
+					$image = "";
 				}
-
-			}
-			else
-			{
+			}else{
 				//Check for 404 and 403 errors
 				$file_headers = @get_headers($image);
-				if((!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') or (!$file_headers || $file_headers[0] == 'HTTP/1.1 403 Forbidden') or (!$file_headers || $file_headers[0] == 'HTTP/1.0 400 Bad Request') or (!$file_headers || $file_headers[0] == 'HTTP/1.1 503 Service Unavailable'))
-				{
-				    $image="";
-				}
-				else
-				{
+				if((!$file_headers || $file_headers[0] == 'HTTP/1.1 404 Not Found') or (!$file_headers || $file_headers[0] == 'HTTP/1.1 403 Forbidden')
+				or (!$file_headers || $file_headers[0] == 'HTTP/1.0 400 Bad Request') or (!$file_headers || $file_headers[0] == 'HTTP/1.1 503 Service Unavailable')){
+				    $image = "";
+				}else{
 					//Make sure file is an image
-					if(@exif_imagetype($image))
-					{					    
+					if(@exif_imagetype($image)){
 						//Save image to server
 						$local_file = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $date.$file_name;
 						$remote_file = $image;
@@ -73,15 +64,12 @@
 						curl_exec($ch);
 						curl_close($ch);
 						fclose($fp);
-					}	
-					else
-					{
-						$image="";
+					}else{
+						$image = "";
 					}
 				}
 			}
-
 		}
 	}
-			
+
 ?>

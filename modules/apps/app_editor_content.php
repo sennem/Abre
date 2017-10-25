@@ -21,37 +21,35 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin())
-	{
+	if(superadmin()){
 
 		echo "<table class='bordered' id='appsort'>";
-			$query = "SELECT * FROM apps order by sort";
+			$query = "SELECT * FROM apps ORDER BY sort";
 			$dbreturn = databasequery($query);
-			foreach ($dbreturn as $value)
-			{
-				$id=$value['id'];
-				$title=$value['title'];
-				$titleencoded=base64_encode($title);
-				$link=$value['link'];
-				$linkencoded=base64_encode($link);
-				$icon=$value['icon'];
+			foreach ($dbreturn as $value){
+				$id = $value['id'];
+				$title = $value['title'];
+				$titleencoded = base64_encode($title);
+				$link = $value['link'];
+				$linkencoded = base64_encode($link);
+				$icon = $value['icon'];
 				$icon_end = substr($icon, 5);
-				$icon_final="icon_thumb_$icon_end";
-				$staff=$value['staff'];
-				$student=$value['student'];
-				$parent=$value['parent'];
+				$icon_final = "icon_thumb_$icon_end";
+				$staff = $value['staff'];
+				$student = $value['student'];
+				$parent = $value['parent'];
 				$permissions = array();
 				if($staff){
-					array_push($permissions,'Staff');
+					array_push($permissions, 'Staff');
 				}
 				if($student == 1){
-					array_push($permissions,'Students');
+					array_push($permissions, 'Students');
 				}
 				if($parent == 1){
-					array_push($permissions,'Parents');
+					array_push($permissions, 'Parents');
 				}
 				$permissionsList = implode(", ", $permissions);
-				$minor_disabled=$value['minor_disabled'];
+				$minor_disabled = $value['minor_disabled'];
 				echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
 					echo "<td style='width:60px'><img src='$portal_root/core/images/$icon' style='width:35px; height:35px;'></td>";
 					if($permissionsList == ""){
@@ -65,50 +63,42 @@
 				echo "</tr>";
 			}
 		echo "</table>";
-
 	}
-
 ?>
 
-	<script>
+<script>
 
-		$(function()
-		{
+		$(function(){
 
 		   	<?php
-			if(superadmin())
-			{
+			if(superadmin()){
 			?>
-
 				//Save Default App Order
 				var fixHelper = function(e, ui) {
-				ui.children().each(function() {
-					$(this).width($(this).width());
-				});
-				return ui;
+					ui.children().each(function() {
+						$(this).width($(this).width());
+					});
+					return ui;
 				};
-			   	$( "#appsort tbody" ).sortable({
+
+			  $( "#appsort tbody" ).sortable({
 					axis: 'y',
 					handle: '.handle',
 					helper: fixHelper,
 					update: function(event, ui){
-
 						//Sent Form Data
 						var data = $(this).sortable('serialize');
 						$.ajax({
-					        data: data,
-					        type: 'POST',
-					        url: '/modules/<?php echo basename(__DIR__); ?>/apps_save_default_order.php'
-					    })
-
-					    .done(function(){
-						    $('#loadapps').load('modules/<?php echo basename(__DIR__); ?>/apps.php');
-							if (typeof loadOtherCardsApps == 'function')
-							{
+							data: data,
+			        type: 'POST',
+			        url: '/modules/<?php echo basename(__DIR__); ?>/apps_save_default_order.php'
+						})
+					  .done(function(){
+							$('#loadapps').load('modules/<?php echo basename(__DIR__); ?>/apps.php');
+							if(typeof loadOtherCardsApps == 'function'){
 								loadOtherCardsApps();
 							}
 						});
-
 					}
 				});
 
@@ -116,7 +106,7 @@
 				$(".deleteapp").unbind().click(function() {
 					event.preventDefault();
 					var result = confirm("Are you sure you want to delete this app?");
-					if (result) {
+					if(result){
 
 						$(this).closest("tr").hide();
 						var appid = $(this).data('appid');
@@ -127,11 +117,9 @@
 							url: 'modules/apps/app_delete.php?id='+appid,
 							data: '',
 						})
-
 						.done(function(){
 							$('#loadapps').load('modules/apps/apps.php');
 						});
-
 					}
 				});
 
@@ -150,40 +138,32 @@
 
 					var appid = $(this).data('appid');
 					$("#app_id").val(appid);
+
 					var appstaff = $(this).data('appstaff');
-					if(appstaff==1)
-					{
+					if(appstaff == 1){
 						$('#app_staff').prop('checked', true);
-					}
-					else
-					{
+					}else{
 						$('#app_staff').prop('checked', false);
 					}
+
 					var appstudents = $(this).data('appstudents');
-					if(appstudents==1)
-					{
+					if(appstudents == 1){
 						$('#app_students').prop('checked', true);
-					}
-					else
-					{
+					}else{
 						$('#app_students').prop('checked', false);
 					}
+
 					var appparents = $(this).data('appparents');
-					if(appparents==1)
-					{
+					if(appparents == 1){
 						$('#app_parents').prop('checked', true);
-					}
-					else
-					{
+					}else{
 						$('#app_parents').prop('checked', false);
 					}
+
 					var appminors = $(this).data('appminors');
-					if(appminors==1)
-					{
+					if(appminors == 1){
 						$('#app_minors').prop('checked', true);
-					}
-					else
-					{
+					}else{
 						$('#app_minors').prop('checked', false);
 					}
 
@@ -192,15 +172,13 @@
 						out_duration: 0,
 						ready: function() {
 							$('.modal-content').scrollTop(0);
-					    },
+					  },
 					});
-
 				});
 
 			<?php
 			}
 			?>
-
 		});
 
-	</script>
+</script>

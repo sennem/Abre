@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,46 +15,49 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-    
+
     //Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
+	require(dirname(__FILE__) . '/../../configuration.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
-	
+
 	//Verify Superadmin
-	if(superadmin())
-	{	
+	if(superadmin()){
 		//Retrieve last repo link and zip file
-		$link=$_POST["link"];
-		$linkfile=basename($link);
-		$linkfile=substr($linkfile, 0, -4);
+		$link = $_POST["link"];
+		$linkfile = basename($link);
+		$linkfile = substr($linkfile, 0, -4);
 		file_put_contents("$portal_path_root/update.zip", file_get_contents($link));
-		
+
 		//Upzip the file
 		$zip = new ZipArchive;
 		if ($zip->open("$portal_path_root/update.zip") === TRUE) {
 		    $zip->extractTo("$portal_path_root");
 		    $zip->close();
 		}
-		
+
 		//Copy all files/folders to update directory
 		mkdir("$portal_path_root/update/");
-		$src="$portal_path_root/Abre-$linkfile/";
-		$dst="$portal_path_root/update/";
-		
+		$src = "$portal_path_root/Abre-$linkfile/";
+		$dst = "$portal_path_root/update/";
+
 		//Delete a folder
-		function rrmdir($dir) {
-	        if (is_dir($dir)) {
-	            $files = scandir($dir);
-	            foreach ($files as $file)
-	                if ($file != "." && $file != "..") rrmdir("$dir/$file");
-	            rmdir($dir);
-	        }
-	        else if (file_exists($dir)) unlink($dir);
+		function rrmdir($dir){
+			if(is_dir($dir)){
+				$files = scandir($dir);
+				foreach($files as $file){
+					if($file != "." && $file != ".."){
+						rrmdir("$dir/$file");
+					}
+				}
+				rmdir($dir);
+			}else if(file_exists($dir)){
+				unlink($dir);
+			}
 		}
-		
+
 		//Make a copy
 		function rcopy($src, $dst) {
 	        if (file_exists ( $dst ))
@@ -69,38 +72,33 @@
 	            copy ( $src, $dst );
     	}
     	rcopy($src,$dst);
-    	
-    	//Delete the zip file and extract directory
+
+    //Delete the zip file and extract directory
 		function deleteDirectory($dir) {
-		    if (!file_exists($dir)) {
+		    if(!file_exists($dir)){
 		        return true;
 		    }
-		
-		    if (!is_dir($dir)) {
+		    if(!is_dir($dir)){
 		        return unlink($dir);
 		    }
-		
-		    foreach (scandir($dir) as $item) {
-		        if ($item == '.' || $item == '..') {
+		    foreach(scandir($dir) as $item){
+		        if($item == '.' || $item == '..'){
 		            continue;
 		        }
-		
-		        if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+		        if(!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)){
 		            return false;
 		        }
-		
 		    }
-		
 		    return rmdir($dir);
 		}
-		
+
 		//Delete zipped files
-    	deleteDirectory("$portal_path_root/Abre-$linkfile/");
-    	unlink("$portal_path_root/update.zip");
-    	
+  	deleteDirectory("$portal_path_root/Abre-$linkfile/");
+  	unlink("$portal_path_root/update.zip");
+
 		//Replace settings module
 		rcopy("$portal_path_root/update/modules/settings/","$portal_path_root/modules/settings/");
-		
+
 		//Replace core modules
 		rcopy("$portal_path_root/update/modules/apps/","$portal_path_root/modules/apps/");
 		rcopy("$portal_path_root/update/modules/calendar/","$portal_path_root/modules/calendar/");
@@ -112,18 +110,17 @@
 		rcopy("$portal_path_root/update/modules/stream/","$portal_path_root/modules/stream/");
 		rcopy("$portal_path_root/update/modules/modules/","$portal_path_root/modules/modules/");
 		rcopy("$portal_path_root/update/core/","$portal_path_root/core/");
-		
+
 		//Replace core files
 		copy("$portal_path_root/update/configuration-sample.php", "$portal_path_root/configuration-sample.php");
 		copy("$portal_path_root/update/README.md", "$portal_path_root/README.md");
 		copy("$portal_path_root/update/index.php", "$portal_path_root/index.php");
-		
+
 		//Create content folder if one doesn't exist
-		if (!file_exists("$portal_path_root/content/")){ mkdir("$portal_path_root/content/"); }
-			
+		if(!file_exists("$portal_path_root/content/")){ mkdir("$portal_path_root/content/"); }
+
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
-		
 	}
-	
+
 ?>

@@ -15,7 +15,7 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-    
+
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
@@ -23,17 +23,15 @@
 ?>
 
 	<div class='fixed-action-btn buttonpin'>
-		<a class='modal-addmodule btn-floating btn-large waves-effect waves-light' style='background-color: <?php echo sitesettings("sitecolor"); ?>' id='addmodules' data-position='left' href='#addmodule'><i class='large material-icons'>add</i></a>
+		<a class='modal-addmodule btn-floating btn-large waves-effect waves-light' style='background-color: <?php echo getSiteColor(); ?>' id='addmodules' data-position='left' href='#addmodule'><i class='large material-icons'>add</i></a>
 		<div class="mdl-tooltip mdl-tooltip--left" for="addmodules">Add App</div>
 	</div>
 
 <script>
 
-	$(function()
-	{
+	$(function(){
 		//Github Modal
-		$('.modal-addmodule').leanModal(
-		{
+		$('.modal-addmodule').leanModal({
 			in_duration: 0,
 			out_duration: 0,
 			ready: function() {  }

@@ -22,7 +22,6 @@
 
 	if($_SESSION['usertype'] != 'parent'){
 ?>
-
 		<div class='grid-item'>
 			<div class='demo-card-event mdl-card mdl-shadow--2dp card_stream'>
 				<div id='apps'>

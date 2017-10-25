@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -17,33 +17,32 @@
     */
 
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
+	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
-	
-	if($_SESSION['usertype']=='staff')
-	{
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+
+	if($_SESSION['usertype'] == 'staff'){
 ?>
 
     <div class="col s12">
-		<ul class="tabs_2" style='background-color: <?php echo sitesettings("sitecolor"); ?>'>
+		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
 			<li class="tab col s3 tab_1 streammenu pointer" data="#"><a href="#">Stream</a></li>
 			<li class="tab col s3 tab_2 streammenu pointer" data="#likes"><a href="#likes">Likes</a></li>
 		</ul>
 	</div>
-	
+
 <?php
 	}
 ?>
 
 <script>
-	
-	$(function()
-	{	
-		$( ".streammenu" ).unbind().click(function()
-		{
+
+	$(function(){
+
+		$( ".streammenu" ).unbind().click(function(){
 			window.open($(this).attr("data"), '_self');
-		});	
+		});
+		
 	});
-	
+
 </script>

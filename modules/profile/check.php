@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,29 +15,24 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
+
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	
-	if($_SESSION['usertype']=="staff")
-	{
-		$sql = "SELECT *  FROM profiles where email='".$_SESSION['useremail']."'";
+
+	if($_SESSION['usertype'] == "staff"){
+		$sql = "SELECT *  FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 		$result = $db->query($sql);
-		while($row = $result->fetch_assoc())
-		{
-			$streams=htmlspecialchars($row["streams"], ENT_QUOTES);
+		while($row = $result->fetch_assoc()){
+			$streams = htmlspecialchars($row["streams"], ENT_QUOTES);
 		}
-		if($streams=="")
-		{
-			$sql = "SELECT * FROM users where email='".$_SESSION['useremail']."' and superadmin=1";
+		if($streams == ""){
+			$sql = "SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' and superadmin = 1";
 			$result = $db->query($sql);
 			$row_cnt = $result->num_rows;
-			if($row_cnt==0)
-			{
+			if($row_cnt == 0){
 				echo "no";
 			}
 		}
 	}
-	
 ?>

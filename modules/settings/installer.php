@@ -20,16 +20,14 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin() && !file_exists("$portal_path_root/modules/settings/setup.txt"))
-	{
-		
+	if(superadmin() && !file_exists("$portal_path_root/modules/settings/setup.txt")){
+
 		//Ping Update
 		require(dirname(__FILE__) . '/../../core/abre_ping.php');
-		
+
 		//Check for users_parents table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT * FROM users_parent"))
-		{
+		if(!$db->query("SELECT * FROM users_parent")){
 			 $sql = "CREATE TABLE `users_parent` (`id` int(11) NOT NULL,`email` text NOT NULL,`students` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 			 $sql .= "ALTER TABLE `users_parent` ADD PRIMARY KEY (`id`);";
 			 $sql .= "ALTER TABLE `users_parent` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
@@ -38,8 +36,7 @@
 		$db->close();
 
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT studentId FROM users_parent"))
-		{
+		if(!$db->query("SELECT studentId FROM users_parent")){
 			$sql = "ALTER TABLE `users_parent` ADD `studentId` text NOT NULL;";
 			$db->multi_query($sql);
 		}

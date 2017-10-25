@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,74 +15,67 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
+	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
-	
+
 	//Insert/Update Profile
 	include "../../core/abre_dbconnect.php";
-	$sql = "SELECT *  FROM profiles where email='".$_SESSION['useremail']."'";
+	$sql = "SELECT *  FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$stack = array();
-	$departmentcount=mysqli_real_escape_string($db, $_POST["departmentcount"]);
-	if($_SESSION['usertype']!="student")
-	{
-		$card_mail=0;
-		$card_drive=0;
-		$card_calendar=0;
-		$card_classroom=0;
-		$card_apps=0;
-		if (!empty($_POST["card_mail"])){ $card_mail=mysqli_real_escape_string($db, $_POST["card_mail"]); }
-		if (!empty($_POST["card_drive"])){ $card_drive=mysqli_real_escape_string($db, $_POST["card_drive"]); }
-		if (!empty($_POST["card_calendar"])){ $card_calendar=mysqli_real_escape_string($db, $_POST["card_calendar"]); }
-		if (!empty($_POST["card_classroom"])){ $card_classroom=mysqli_real_escape_string($db, $_POST["card_classroom"]); }
-		if (!empty($_POST["card_apps"])){ $card_apps=mysqli_real_escape_string($db, $_POST["card_apps"]); }
-		if (!empty($_POST["datePick"])){ $datePick=mysqli_real_escape_string($db, $_POST["datePick"]); }
+	$departmentcount = mysqli_real_escape_string($db, $_POST["departmentcount"]);
+	if($_SESSION['usertype'] != "student"){
+		$card_mail = 0;
+		$card_drive = 0;
+		$card_calendar = 0;
+		$card_classroom = 0;
+		$card_apps = 0;
+		if(!empty($_POST["card_mail"])){ $card_mail = mysqli_real_escape_string($db, $_POST["card_mail"]); }
+		if(!empty($_POST["card_drive"])){ $card_drive = mysqli_real_escape_string($db, $_POST["card_drive"]); }
+		if(!empty($_POST["card_calendar"])){ $card_calendar = mysqli_real_escape_string($db, $_POST["card_calendar"]); }
+		if(!empty($_POST["card_classroom"])){ $card_classroom = mysqli_real_escape_string($db, $_POST["card_classroom"]); }
+		if(!empty($_POST["card_apps"])){ $card_apps = mysqli_real_escape_string($db, $_POST["card_apps"]); }
+		if(!empty($_POST["datePick"])){ $datePick = mysqli_real_escape_string($db, $_POST["datePick"]); }
+	}else{
+		$card_mail = 1;
+		$card_drive = 1;
+		$card_calendar = 1;
+		$card_classroom = 1;
+		$card_apps = 1;
 	}
-	else
-	{
-		$card_mail=1;
-		$card_drive=1;
-		$card_calendar=1;
-		$card_classroom=1;
-		$card_apps=1;
-	}
-	while($row = $result->fetch_assoc())
-	{
-		$profileupdatecount=1;
+
+	while($row = $result->fetch_assoc()){
+		$profileupdatecount = 1;
 		for ($x = 0; $x <= $departmentcount; $x++) {
-	    	if (!empty($_POST["checkbox_$x"])){ $message=mysqli_real_escape_string($db, $_POST["checkbox_$x"]); }
+	    	if(!empty($_POST["checkbox_$x"])){ $message = mysqli_real_escape_string($db, $_POST["checkbox_$x"]); }
 	    	if(!empty($message)){ array_push($stack, $message); }
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE profiles set streams='$str', card_mail='$card_mail', card_drive='$card_drive', card_calendar='$card_calendar', card_classroom='$card_classroom', card_apps='$card_apps' where email='".$_SESSION['useremail']."'";
+		$sql = "UPDATE profiles SET streams = ?, card_mail = ?, card_drive = ?, card_calendar = ?, card_classroom = ?, card_apps = ? WHERE email = ?";
 		$stmt->prepare($sql);
+		$stmt->bind_param("siiiiis", $str, $card_mail, $card_drive, $card_calendar, $card_classroom, $card_apps, $_SESSION['useremail']);
 		$stmt->execute();
-		$stmt->store_result();
-		$num_rows = $stmt->num_rows;
 		$stmt->close();
-		$db->close();	
-
+		$db->close();
 	}
-	
-	if ($profileupdatecount==0)
-	{
+
+	if($profileupdatecount == 0){
 		for ($x = 0; $x <= $departmentcount; $x++) {
-	    	$message=mysqli_real_escape_string($db, $_POST["checkbox_$x"]);
-	    	if($message!=""){ array_push($stack, $message); }
+	    	$message = mysqli_real_escape_string($db, $_POST["checkbox_$x"]);
+	    	if($message != ""){ array_push($stack, $message); }
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();
-		$sql = "Insert into profiles (id, email, streams, card_mail, card_drive, card_calendar, card_classroom, card_apps) VALUES (NULL, '".$_SESSION['useremail']."', '$str', '$card_mail', '$card_drive', '$card_calendar', '$card_classroom', '$card_apps')";
+		$sql = "INSERT INTO profiles (email, streams, card_mail, card_drive, card_calendar, card_classroom, card_apps) VALUES (?, ?, ?, ?, ?, ?, ?)";
 		$stmt->prepare($sql);
+		$stmt->bind_param("ssiiiii", $_SESSION['useremail'], $str, $card_mail, $card_drive, $card_calendar, $card_classroom, $card_apps);
 		$stmt->execute();
-		$stmt->store_result();
-		$num_rows = $stmt->num_rows;
 		$stmt->close();
-		$db->close();		
+		$db->close();
 	}
 
 ?>

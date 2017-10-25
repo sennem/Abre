@@ -21,76 +21,65 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
-	if($pageaccess==1)
-	{
+	if($pageaccess == 1){
 
 		echo "<div class='row'><div class='col s12'>";
-
-					echo "<div class='row'>";
-						echo "<div class='col s6'>";
-							echo "<h5>Downloads</h5>";
-							echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
-							echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
-						echo "</div>";
-						echo "<div class='col s6'>";
-				      if(superadmin())
-				      {
-									echo "<h5>Imports</h5>";
-									echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
-				          echo "<input name='csv_data' type='file' id='csv_data' />";
-				          echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".sitesettings("sitecolor")."' name='Submit' value='Import' />";
-									echo "<br><br><a href='$portal_root/modules/directory/directoryTemplate.csv' style='color:".sitesettings("sitecolor")."'>Download template file</a>";
-				          echo "</form>";
-				      }
-						echo "</div>";
-					echo "</div>";
-
+			echo "<div class='row'>";
+				echo "<div class='col s6'>";
+					echo "<h5>Downloads</h5>";
+					echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
+					echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
+				echo "</div>";
+				echo "<div class='col s6'>";
+				if(superadmin()){
+					echo "<h5>Imports</h5>";
+					echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
+	        echo "<input name='csv_data' type='file' id='csv_data' />";
+	        echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".getSiteColor()."' name='Submit' value='Import' />";
+				  echo "<br><br><a href='$portal_root/modules/directory/directoryTemplate.csv' style='color:".getSiteColor()."'>Download template file</a>";
+	        echo "</form>";
+	      }
+			 echo "</div>";
+		 echo "</div>";
 		echo "</div>";
+?>
 
-		?>
+<script>
 
-			<script>
+		//Process the Form
+		$(function() {
 
-				//Process the Form
-				$(function() {
+			var form = $('#form-upload');
+			$(form).submit(function(event) {
 
-					var form = $('#form-upload');
-					var formMessages = $('#form-messages');
-					$(form).submit(function(event) {
+				event.preventDefault();
+				var notification = document.querySelector('.mdl-js-snackbar');
+				var data = { message: 'Uploading...' };
+				notification.MaterialSnackbar.showSnackbar(data);
 
-						event.preventDefault();
-						var notification = document.querySelector('.mdl-js-snackbar');
-						var data = { message: 'Uploading...' };
-						notification.MaterialSnackbar.showSnackbar(data);
+		    var file_data = $('#csv_data').prop('files')[0];
+		    var form_data = new FormData();
+		    form_data.append('file', file_data)
+		    $.ajax({
+					url: $(form).attr('action'),
+					dataType: 'text',
+					cache: false,
+					contentType: false,
+					processData: false,
+					data: form_data,
+					type: 'post'
+		    })
+				.done(function(form_data) {
+					var notification = document.querySelector('.mdl-js-snackbar');
+					var data = { message: form_data };
+					notification.MaterialSnackbar.showSnackbar(data);
+				})
+			});
 
-					    var file_data = $('#csv_data').prop('files')[0];
-					    var form_data = new FormData();
-					    form_data.append('file', file_data)
-					    $.ajax({
-							url: $(form).attr('action'),
-							dataType: 'text',
-							cache: false,
-							contentType: false,
-							processData: false,
-							data: form_data,
-							type: 'post'
-					     })
+		});
 
-						.done(function(form_data) {
-								var notification = document.querySelector('.mdl-js-snackbar');
-								var data = { message: form_data };
-								notification.MaterialSnackbar.showSnackbar(data);
-						})
-					});
+</script>
 
-
-				});
-
-			</script>
-
-		<?php
-
-
+<?php
 	}
-
 ?>

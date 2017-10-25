@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,24 +15,24 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Google API PHP library files
 	require_once 'google/vendor/autoload.php';
- 
+
 	//Create Client request to access Google API
 	$client = new Google_Client();
 	$client->setApplicationName("Abre");
-	$client_id=constant("GOOGLE_CLIENT_ID");
+	$client_id = constant("GOOGLE_CLIENT_ID");
 	$client->setClientId($client_id);
-	$client_secret=constant("GOOGLE_CLIENT_SECRET");
+	$client_secret = constant("GOOGLE_CLIENT_SECRET");
 	$client->setClientSecret($client_secret);
-	$redirect_uri=constant("GOOGLE_REDIRECT");
+	$redirect_uri = constant("GOOGLE_REDIRECT");
 	$client->setRedirectUri($redirect_uri);
-	$simple_api_key=constant("GOOGLE_API_KEY");
+	$simple_api_key = constant("GOOGLE_API_KEY");
 	$client->setDeveloperKey($simple_api_key);
 	$client->setAccessType("offline");
 	$client->setApprovalPrompt("auto");
-	$scopes=unserialize(constant("GOOGLE_SCOPES"));
+	$scopes = unserialize(constant("GOOGLE_SCOPES"));
 	$client->setScopes($scopes);
 
 	//Send client requests

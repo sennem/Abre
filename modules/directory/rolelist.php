@@ -23,43 +23,33 @@
 
 	echo "<option value='' disabled selected>Choose a Role</option>";
 
-	if (strpos($role, 'Directory Administrator') !== false) {
+	if(strpos($role, 'Directory Administrator') !== false){
 		echo "<option value='Directory Administrator' selected='selected'>Directory Administrator</option>";
-	}
-	else
-	{
+	}else{
 		echo "<option value='Directory Administrator'>Directory Administrator</option>";
 	}
 
-	if (strpos($role, 'Directory Supervisor') !== false) {
+	if(strpos($role, 'Directory Supervisor') !== false){
 		echo "<option value='Directory Supervisor' selected='selected'>Directory Supervisor</option>";
-	}
-	else
-	{
+	}else{
 		echo "<option value='Directory Supervisor'>Directory Supervisor</option>";
 	}
 
-	if (strpos($role, 'Directory Advisor') !== false) {
+	if(strpos($role, 'Directory Advisor') !== false){
 		echo "<option value='Directory Advisor' selected='selected'>Directory Advisor</option>";
-	}
-	else
-	{
+	}else{
 		echo "<option value='Directory Advisor'>Directory Advisor</option>";
 	}
 
-	if (strpos($role, 'Conduct Verification Monitor') !== false) {
+	if(strpos($role, 'Conduct Verification Monitor') !== false){
 		echo "<option value='Conduct Verification Monitor' selected='selected'>Conduct Verification Monitor</option>";
-	}
-	else
-	{
+	}else{
 		echo "<option value='Conduct Verification Monitor'>Conduct Verification Monitor</option>";
 	}
-	
-	if (strpos($role, 'Conduct Administrator') !== false) {
+
+	if(strpos($role, 'Conduct Administrator') !== false){
 		echo "<option value='Conduct Administrator' selected='selected'>Conduct Administrator</option>";
-	}
-	else
-	{
+	}else{
 		echo "<option value='Conduct Administrator'>Conduct Administrator</option>";
 	}
 

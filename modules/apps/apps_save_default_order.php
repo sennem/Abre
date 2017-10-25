@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,30 +15,28 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-	require_once(dirname(__FILE__) . '/../../core/abre_functions.php'); 
-	
-	if(superadmin())
-	{
-	
+	require(dirname(__FILE__) . '/../../configuration.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+
+	if(superadmin()){
+
 		$list = $_POST['item'];
-	
-		$i=0;
-		foreach($list as $value)
-		{
-			include "../../core/abre_dbconnect.php";
-			$stmt = $db->stmt_init();
-			$sql = "Update apps set sort='$i' where id='$value'";
+
+		$i = 0;
+		include "../../core/abre_dbconnect.php";
+		$stmt = $db->stmt_init();
+		$sql = "UPDATE apps SET sort = ? WHERE id = ?";
+		foreach($list as $value){
 			$stmt->prepare($sql);
+			$stmt->bind_param("ii", $i, $value);
 			$stmt->execute();
-			$stmt->close();
-			$db->close();	
 			$i++;
 		}
-		
+		$stmt->close();
+		$db->close();
 	}
-	
+
 ?>

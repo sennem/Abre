@@ -21,16 +21,16 @@
   require_once('abre_functions.php');
 
   $fields = array(
-  	'client_id' => urlencode(sitesettings('microsoftclientid')),
+  	'client_id' => urlencode(getSiteMicrosoftClientId()),
   	'redirect_uri' => urlencode($portal_root . '/core/abre_microsoft_login_helper.php'),
   	'grant_type' => urlencode('authorization_code'),
-  	'client_secret' => urlencode(sitesettings('microsoftclientsecret')),
+  	'client_secret' => urlencode(getSiteMicrosoftClientSecret()),
   	'code' => urlencode($_POST['code']),
   	'scope' => urlencode('openid profile')
   );
 
   //url-ify the data for the POST
-  foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
+  foreach($fields as $key=>$value){ $fields_string .= $key.'='.$value.'&'; }
   rtrim($fields_string, '&');
 
   $ch = curl_init();
@@ -51,87 +51,74 @@
    $infoObject = json_decode($infoString);
    $_SESSION['microsoft_access_token'] = $accessToken;
    $pagelocation=$portal_root;
-   if(isset($_SESSION["redirecturl"])){ header("Location: $pagelocation/#".$_SESSION["redirecturl"]); }else{ header("Location: $pagelocation"); }
+   if(isset($_SESSION["redirecturl"])){
+     header("Location: $pagelocation/#".$_SESSION["redirecturl"]);
+   }else{
+     header("Location: $pagelocation");
+   }
 
-  try{
+   try{
+     if(isset($_SESSION['microsoft_access_token'])){
+       if(!isset($_SESSION['useremail'])){
+         $_SESSION['useremail'] = $infoObject->preferred_username;
+         $_SESSION['usertype'] = 'parent';
+         $_SESSION['displayName'] = $infoObject->name;
+         $_SESSION['picture'] = getSiteLogo();
+       }
+     }else{
+      //header("Location: $pagelocation");
+     }
 
-  // access token but useremail not set
-  if(isset($_SESSION['microsoft_access_token']))
-  {
-    if(!isset($_SESSION['useremail']))
-    {
-      $_SESSION['useremail']=$infoObject->preferred_username;
-      $_SESSION['usertype']= 'parent';
-      $_SESSION['displayName']= $infoObject->name;
-      $_SESSION['picture'] = sitesettings('sitelogo');
-    }
-  }else{
-    //header("Location: $pagelocation");
-  }
+     if(isset($_SESSION['microsoft_access_token'])){
+       if($_SESSION['usertype'] != ""){
+         include "abre_dbconnect.php";
+         if($result = $db->query("SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
+           $count = $result->num_rows;
+           if($count >= 1){
+             $sql = "SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."' and students = ''";
+             $result = $db->query($sql);
+             $numrows = $result->num_rows;
+             if($numrows == 0){
+               $stmt = $db->stmt_init();
+               $sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
+               $stmt->prepare($sql);
+               $stmt->bind_param("sss", $_SESSION['useremail'], '', '');
+               $stmt->execute();
+               $stmt->close();
+             }
+             //If not already logged in, check and get a refresh token
+             if(!isset($_SESSION['loggedin'])){ $_SESSION['loggedin'] = ""; }
+             if($_SESSION['loggedin'] != "yes"){
+               //Mark that they have logged in
+               $_SESSION['loggedin']="yes";
+             }
+           }else{
+             $stmt = $db->stmt_init();
+             $sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
+             $stmt->prepare($sql);
+             $stmt->bind_param("sss", $_SESSION['useremail'], '', '');
+             $stmt->execute();
+             $stmt->close();
+           }
+         }
+         $db->close();
+       }
+     }
+   }catch(Exception $x){
+     if(strpos($x->getMessage(), 'Invalid Credentials')){
+       session_destroy();
 
-  if (isset($_SESSION['microsoft_access_token']))
-  {
-    if($_SESSION['usertype']!= "")
-    {
-      include "abre_dbconnect.php";
-      if($result=$db->query("SELECT * from users_parent where email='".$_SESSION['useremail']."'"))
-      {
-        $count=$result->num_rows;
-        if($count >= 1)
-        {
-          $sql = "SELECT * FROM users_parent WHERE email='".$_SESSION['useremail']."' and students=''";
-          $result = $db->query($sql);
-          $numrows = $result->num_rows;
-          if($numrows == 0){
-            mysqli_query($db, "Insert into users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
-          }
-          //If not already logged in, check and get a refresh token
-          if (!isset($_SESSION['loggedin'])) { $_SESSION['loggedin']=""; }
-          if($_SESSION['loggedin']!="yes")
-          {
-            //Mark that they have logged in
-            $_SESSION['loggedin']="yes";
-          }
-        }
-        else
-        {
-          $sha1useremail=sha1($_SESSION['useremail']);
-          $storetoken=$sha1useremail.$hash;
-          mysqli_query($db, "Insert into users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '', '')") or die (mysqli_error($db));
-        }
+       //Redirect user
+       header("Location: $portal_root");
+     }
+     if(strpos($x->getMessage(), 'Invalid Credentials')){
+       //Destroy the OAuth & PHP session
+       session_destroy();
 
-      }
-      $db->close();
-    }
+       //Redirect user
+       header("Location: $portal_root");
+     }
+   }
 
-  }
-  }
-  catch (Exception $x)
-  {
-
-    if(strpos($x->getMessage(), 'Invalid Credentials'))
-    {
-
-
-      session_destroy();
-
-      //Redirect user
-      header("Location: $portal_root");
-
-    }
-
-    if(strpos($x->getMessage(), 'Invalid Credentials'))
-    {
-
-      //Destroy the OAuth & PHP session
-      session_destroy();
-
-      //Redirect user
-      header("Location: $portal_root");
-    }
-
-  }
-
-  header("Location: $portal_root");
-
+   header("Location: $portal_root");
 ?>
