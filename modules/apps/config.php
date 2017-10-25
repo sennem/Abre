@@ -177,7 +177,6 @@
 						out_duration: 0,
 					});
 					var url = "<?php echo $url ?>";
-					console.log(window.location.href);
 					if(window.location.href == url){
 					 	location.reload();
 					 }else{
