@@ -25,6 +25,10 @@
 	$displaydate = date("F jS, Y", $date);
 
 	$titleencoded = base64_encode($title);
+	//Shorten Excerpt if needed
+  if (strlen($excerpt) >= 200) {
+      $excerpt = substr($excerpt, 0, 200). " ... " . substr($excerpt, -5);
+  }
 
 	echo "<div class='mdl-card mdl-shadow--2dp card_stream'>";
 

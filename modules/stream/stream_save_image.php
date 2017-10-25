@@ -30,6 +30,7 @@
 			$file_name = basename($image);
 			$file_name = str_replace("+", "_", $file_name);
 			$file_name = str_replace("%", "_", $file_name);
+			$file_name = str_replace(".", "_", $file_name);
 			$file_name = preg_replace('/[^a-zA-Z0-9_.]/', '', $file_name);
 			$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$date.$file_name;
 
