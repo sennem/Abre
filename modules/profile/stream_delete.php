@@ -23,7 +23,7 @@
 
 	if(superadmin()){
 
-		$streamid = mysqli_real_escape_string($db, $_GET["id"]);
+		$streamid = $_GET["id"];
 
 		//Delete the Stream
 		$stmt = $db->stmt_init();
