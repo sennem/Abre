@@ -23,7 +23,7 @@
 
 	if($superadmin == 1){
 
-		$id = mysqli_real_escape_string($db, $_GET["id"]);
+		$id = $_GET["id"];
 
 		//Delete Picture
 		include "../../core/abre_dbconnect.php";

@@ -23,7 +23,7 @@
 
 	//Delete the User
 	if($pageaccess == 1){
-		$id = mysqli_real_escape_string($db, $_POST["id"]);
+		$id = $_POST["id"];
 
 		include "../../core/abre_dbconnect.php";
 		$stmt = $db->prepare("UPDATE directory SET archived = '1' WHERE id = ? LIMIT 1");
