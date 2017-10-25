@@ -26,19 +26,19 @@
 	$sql = "SELECT *  FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$stack = array();
-	$departmentcount = mysqli_real_escape_string($db, $_POST["departmentcount"]);
+	$departmentcount = $_POST["departmentcount"];
 	if($_SESSION['usertype'] != "student"){
 		$card_mail = 0;
 		$card_drive = 0;
 		$card_calendar = 0;
 		$card_classroom = 0;
 		$card_apps = 0;
-		if(!empty($_POST["card_mail"])){ $card_mail = mysqli_real_escape_string($db, $_POST["card_mail"]); }
-		if(!empty($_POST["card_drive"])){ $card_drive = mysqli_real_escape_string($db, $_POST["card_drive"]); }
-		if(!empty($_POST["card_calendar"])){ $card_calendar = mysqli_real_escape_string($db, $_POST["card_calendar"]); }
-		if(!empty($_POST["card_classroom"])){ $card_classroom = mysqli_real_escape_string($db, $_POST["card_classroom"]); }
-		if(!empty($_POST["card_apps"])){ $card_apps = mysqli_real_escape_string($db, $_POST["card_apps"]); }
-		if(!empty($_POST["datePick"])){ $datePick = mysqli_real_escape_string($db, $_POST["datePick"]); }
+		if(!empty($_POST["card_mail"])){ $card_mail = $_POST["card_mail"]; }
+		if(!empty($_POST["card_drive"])){ $card_drive = $_POST["card_drive"]; }
+		if(!empty($_POST["card_calendar"])){ $card_calendar = $_POST["card_calendar"]; }
+		if(!empty($_POST["card_classroom"])){ $card_classroom = $_POST["card_classroom"]; }
+		if(!empty($_POST["card_apps"])){ $card_apps = $_POST["card_apps"]; }
+		if(!empty($_POST["datePick"])){ $datePick = $_POST["datePick"]; }
 	}else{
 		$card_mail = 1;
 		$card_drive = 1;
@@ -50,7 +50,7 @@
 	while($row = $result->fetch_assoc()){
 		$profileupdatecount = 1;
 		for ($x = 0; $x <= $departmentcount; $x++) {
-	    	if(!empty($_POST["checkbox_$x"])){ $message = mysqli_real_escape_string($db, $_POST["checkbox_$x"]); }
+	    	if(!empty($_POST["checkbox_$x"])){ $_POST["checkbox_$x"]; }
 	    	if(!empty($message)){ array_push($stack, $message); }
 		}
 		$str = implode (", ", $stack);
@@ -65,7 +65,7 @@
 
 	if($profileupdatecount == 0){
 		for ($x = 0; $x <= $departmentcount; $x++) {
-	    	$message = mysqli_real_escape_string($db, $_POST["checkbox_$x"]);
+	    	$message = $_POST["checkbox_$x"];
 	    	if($message != ""){ array_push($stack, $message); }
 		}
 		$str = implode (", ", $stack);

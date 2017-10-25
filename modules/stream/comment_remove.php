@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	if($_SESSION['usertype'] == 'staff'){
-		$commentid=mysqli_real_escape_string($db, $_GET["commentid"]);
+		$commentid = $_GET["commentid"];
 
 		$stmt = $db->stmt_init();
 		$sql = "DELETE FROM streams_comments WHERE ID = ? AND user = ?";

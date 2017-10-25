@@ -25,10 +25,10 @@
 
     //Add the stream
     $streamid = $_POST["id"];
-    $streamtitle = mysqli_real_escape_string($db, $_POST["title"]);
-    $rsslink = mysqli_real_escape_string($db, $_POST["link"]);
-    $streamgroup = mysqli_real_escape_string($db, $_POST["group"]);
-    $required = mysqli_real_escape_string($db, $_POST["required"]);
+    $streamtitle = $_POST["title"];
+    $rsslink = $_POST["link"];
+    $streamgroup = $_POST["group"];
+    $required = $_POST["required"];
 
     if($streamid == ""){
       $stmt = $db->stmt_init();

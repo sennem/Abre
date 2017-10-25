@@ -24,7 +24,7 @@
 	//Delete the User
 	if($pageaccess == 1){
 
-		$id = mysqli_real_escape_string($db, $_POST["id"]);
+		$id = $_POST["id"];
 
 		//Delete the File
 		include "../../core/abre_dbconnect.php";

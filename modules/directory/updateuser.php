@@ -28,10 +28,10 @@
 	if($pageaccess == 1){
 
 		$stack = array();
-		$id = mysqli_real_escape_string($db, $_POST["id"]);
-		$email = mysqli_real_escape_string($db, $_POST["email"]);
-		$firstname = mysqli_real_escape_string($db, $_POST["firstname"]);
-		$lastname = mysqli_real_escape_string($db, $_POST["lastname"]);
+		$id = $_POST["id"];
+		$email = $_POST["email"];
+		$firstname = $_POST["firstname"];
+		$lastname = $_POST["lastname"];
 		if($email == "" && $id == "new"){
 			$email = emailPrediction($firstname, $lastname);
 			$email = encrypt($email, "");
@@ -39,126 +39,126 @@
 			$email = encrypt($email, "");
 		}
 		$firstname = encrypt($firstname, "");
-		$middlename = mysqli_real_escape_string($db, $_POST["middlename"]);
+		$middlename = $_POST["middlename"];
 		$middlename = encrypt($middlename, "");
 		$lastname = encrypt($lastname, "");
-		$title = mysqli_real_escape_string($db, $_POST["title"]);
+		$title = $_POST["title"];
 		$title = encrypt($title, "");
-		$contract = mysqli_real_escape_string($db, $_POST["contract"]);
+		$contract = $_POST["contract"];
 		$contract = encrypt($contract, "");
-		$address = mysqli_real_escape_string($db, $_POST["address"]);
+		$address = $_POST["address"];
 		$address = encrypt($address, "");
-		$city = mysqli_real_escape_string($db, $_POST["city"]);
+		$city = $_POST["city"];
 		$city = encrypt($city, "");
-		$state = mysqli_real_escape_string($db, $_POST["state"]);
+		$state = $_POST["state"];
 		$state = encrypt($state, "");
-		$zip = mysqli_real_escape_string($db, $_POST["zip"]);
+		$zip = $_POST["zip"];
 		$zip = encrypt($zip, "");
-		$phone = mysqli_real_escape_string($db, $_POST["phone"]);
+		$phone = $_POST["phone"];
 		$phone = encrypt($phone, "");
-		$cellphone = mysqli_real_escape_string($db, $_POST["cellphone"]);
+		$cellphone = $_POST["cellphone"];
 		$cellphone = encrypt($cellphone, "");
-		$ss = mysqli_real_escape_string($db, $_POST["ss"]);
+		$ss = $_POST["ss"];
 		$ss = encrypt($ss, "");
-		$dob = mysqli_real_escape_string($db, $_POST["dob"]);
+		$dob = $_POST["dob"];
 		$dob = encrypt($dob, "");
-		$gender = mysqli_real_escape_string($db, $_POST["gender"]);
+		$gender = $_POST["gender"];
 		$gender = encrypt($gender, "");
-		$ethnicity = mysqli_real_escape_string($db, $_POST["ethnicity"]);
+		$ethnicity = $_POST["ethnicity"];
 		$ethnicity = encrypt($ethnicity, "");
-		$classification = mysqli_real_escape_string($db, $_POST["classification"]);
+		$classification = $_POST["classification"];
 		$classification = encrypt($classification, "");
-		$location = mysqli_real_escape_string($db, $_POST["location"]);
+		$location = $_POST["location"];
 		$location = encrypt($location, "");
-		$grade = mysqli_real_escape_string($db, $_POST["grade"]);
+		$grade = $_POST["grade"];
 		$grade = encrypt($grade, "");
-		$subject = mysqli_real_escape_string($db, $_POST["subject"]);
+		$subject = $_POST["subject"];
 		$subject = encrypt($subject, "");
-		$doh = mysqli_real_escape_string($db, $_POST["doh"]);
+		$doh = $_POST["doh"];
 		$doh = encrypt($doh, "");
-		$sd = mysqli_real_escape_string($db, $_POST["sd"]);
+		$sd = $_POST["sd"];
 		$sd = encrypt($sd, "");
-		$ed = mysqli_real_escape_string($db, $_POST["ed"]);
+		$ed = $_POST["ed"];
 		$ed = encrypt($ed, "");
-		$rategroup = mysqli_real_escape_string($db, $_POST["rategroup"]);
+		$rategroup = $_POST["rategroup"];
 		$rategroup = encrypt($rategroup, "");
-		$step = mysqli_real_escape_string($db, $_POST["step"]);
+		$step = $_POST["step"];
 		$step = encrypt($step, "");
-		$educationlevel = mysqli_real_escape_string($db, $_POST["educationlevel"]);
+		$educationlevel = $_POST["educationlevel"];
 		$educationlevel = encrypt($educationlevel, "");
-		$salary = mysqli_real_escape_string($db, $_POST["salary"]);
+		$salary = $_POST["salary"];
 		$salary = encrypt($salary, "");
-		$hours = mysqli_real_escape_string($db, $_POST["hours"]);
+		$hours = $_POST["hours"];
 		$hours = encrypt($hours, "");
-		$probationreportdate = mysqli_real_escape_string($db, $_POST["probationreportdate"]);
+		$probationreportdate = $_POST["probationreportdate"];
 		$probationreportdate = encrypt($probationreportdate, "");
-		$statebackgroundcheck = mysqli_real_escape_string($db, $_POST["statebackgroundcheck"]);
+		$statebackgroundcheck = $_POST["statebackgroundcheck"];
 		$statebackgroundcheck = encrypt($statebackgroundcheck, "");
-		$federalbackgroundcheck = mysqli_real_escape_string($db, $_POST["federalbackgroundcheck"]);
+		$federalbackgroundcheck = $_POST["federalbackgroundcheck"];
 		$federalbackgroundcheck = encrypt($federalbackgroundcheck, "");
-		$stateeducatorid = mysqli_real_escape_string($db, $_POST["stateeducatorid"]);
+		$stateeducatorid = $_POST["stateeducatorid"];
 		$stateeducatorid = encrypt($stateeducatorid, "");
-		$currentpicture = mysqli_real_escape_string($db, $_POST["currentpicture"]);
+		$currentpicture = $_POST["currentpicture"];
 
-		$licensetypeid1 = mysqli_real_escape_string($db, $_POST["licensetypeid1"]);
+		$licensetypeid1 = $_POST["licensetypeid1"];
 		$licensetypeid1 = encrypt($licensetypeid1, "");
-		$licenseissuedateid1 = mysqli_real_escape_string($db, $_POST["licenseissuedateid1"]);
+		$licenseissuedateid1 = $_POST["licenseissuedateid1"];
 		$licenseissuedateid1 = encrypt($licenseissuedateid1, "");
-		$licenseexpirationdateid1 = mysqli_real_escape_string($db, $_POST["licenseexpirationdateid1"]);
+		$licenseexpirationdateid1 = $_POST["licenseexpirationdateid1"];
 		$licenseexpirationdateid1 = encrypt($licenseexpirationdateid1, "");
-		$licensetermid1 = mysqli_real_escape_string($db, $_POST["licensetermid1"]);
+		$licensetermid1 = $_POST["licensetermid1"];
 		$licensetermid1 = encrypt($licensetermid1, "");
 
-		$licensetypeid2 = mysqli_real_escape_string($db, $_POST["licensetypeid2"]);
+		$licensetypeid2 = $_POST["licensetypeid2"];
 		$licensetypeid2 = encrypt($licensetypeid2, "");
-		$licenseissuedateid2 = mysqli_real_escape_string($db, $_POST["licenseissuedateid2"]);
+		$licenseissuedateid2 = $_POST["licenseissuedateid2"];
 		$licenseissuedateid2 = encrypt($licenseissuedateid2, "");
-		$licenseexpirationdateid2 = mysqli_real_escape_string($db, $_POST["licenseexpirationdateid2"]);
+		$licenseexpirationdateid2 = $_POST["licenseexpirationdateid2"];
 		$licenseexpirationdateid2 = encrypt($licenseexpirationdateid2, "");
-		$licensetermid2 = mysqli_real_escape_string($db, $_POST["licensetermid2"]);
+		$licensetermid2 = $_POST["licensetermid2"];
 		$licensetermid2 = encrypt($licensetermid2, "");
 
-		$licensetypeid3 = mysqli_real_escape_string($db, $_POST["licensetypeid3"]);
+		$licensetypeid3 = $_POST["licensetypeid3"];
 		$licensetypeid3 = encrypt($licensetypeid3, "");
-		$licenseissuedateid3 = mysqli_real_escape_string($db, $_POST["licenseissuedateid3"]);
+		$licenseissuedateid3 = $_POST["licenseissuedateid3"];
 		$licenseissuedateid3 = encrypt($licenseissuedateid3, "");
-		$licenseexpirationdateid3 = mysqli_real_escape_string($db, $_POST["licenseexpirationdateid3"]);
+		$licenseexpirationdateid3 = $_POST["licenseexpirationdateid3"];
 		$licenseexpirationdateid3 = encrypt($licenseexpirationdateid3, "");
-		$licensetermid3 = mysqli_real_escape_string($db, $_POST["licensetermid3"]);
+		$licensetermid3 = $_POST["licensetermid3"];
 		$licensetermid3 = encrypt($licensetermid3, "");
 
-		$licensetypeid4 = mysqli_real_escape_string($db, $_POST["licensetypeid4"]);
+		$licensetypeid4 = $_POST["licensetypeid4"];
 		$licensetypeid4 = encrypt($licensetypeid4, "");
-		$licenseissuedateid4 = mysqli_real_escape_string($db, $_POST["licenseissuedateid4"]);
+		$licenseissuedateid4 = $_POST["licenseissuedateid4"];
 		$licenseissuedateid4 = encrypt($licenseissuedateid4, "");
-		$licenseexpirationdateid4 = mysqli_real_escape_string($db, $_POST["licenseexpirationdateid4"]);
+		$licenseexpirationdateid4 = $_POST["licenseexpirationdateid4"];
 		$licenseexpirationdateid4 = encrypt($licenseexpirationdateid4, "");
-		$licensetermid4 = mysqli_real_escape_string($db, $_POST["licensetermid4"]);
+		$licensetermid4 = $_POST["licensetermid4"];
 		$licensetermid4 = encrypt($licensetermid4, "");
 
-		$licensetypeid5 = mysqli_real_escape_string($db, $_POST["licensetypeid5"]);
+		$licensetypeid5 = $_POST["licensetypeid5"];
 		$licensetypeid5 = encrypt($licensetypeid5, "");
-		$licenseissuedateid5 = mysqli_real_escape_string($db, $_POST["licenseissuedateid5"]);
+		$licenseissuedateid5 = $_POST["licenseissuedateid5"];
 		$licenseissuedateid5 = encrypt($licenseissuedateid5, "");
-		$licenseexpirationdateid5 = mysqli_real_escape_string($db, $_POST["licenseexpirationdateid5"]);
+		$licenseexpirationdateid5 = $_POST["licenseexpirationdateid5"];
 		$licenseexpirationdateid5 = encrypt($licenseexpirationdateid5, "");
-		$licensetermid5 = mysqli_real_escape_string($db, $_POST["licensetermid5"]);
+		$licensetermid5 = $_POST["licensetermid5"];
 		$licensetermid5 = encrypt($licensetermid5, "");
 
-		$licensetypeid6 = mysqli_real_escape_string($db, $_POST["licensetypeid6"]);
+		$licensetypeid6 = $_POST["licensetypeid6"];
 		$licensetypeid6 = encrypt($licensetypeid6, "");
-		$licenseissuedateid6 = mysqli_real_escape_string($db, $_POST["licenseissuedateid6"]);
+		$licenseissuedateid6 = $_POST["licenseissuedateid6"];
 		$licenseissuedateid6 = encrypt($licenseissuedateid6, "");
-		$licenseexpirationdateid6 = mysqli_real_escape_string($db, $_POST["licenseexpirationdateid6"]);
+		$licenseexpirationdateid6 = $_POST["licenseexpirationdateid6"];
 		$licenseexpirationdateid6 = encrypt($licenseexpirationdateid6, "");
-		$licensetermid6 = mysqli_real_escape_string($db, $_POST["licensetermid6"]);
+		$licensetermid6 = $_POST["licensetermid6"];
 		$licensetermid6 = encrypt($licensetermid6, "");
 
-		$permissions = mysqli_real_escape_string($db, $_POST["permissions"]);
+		$permissions = $_POST["permissions"];
 		$permissions = encrypt($permissions, "");
 		isset($_POST["sysadmin"]) ? $sysadmin = $_POST["sysadmin"] : $sysadmin = 0;
 
-		$role = mysqli_real_escape_string($db, $_POST["role"]);
+		$role = $_POST["role"];
 		if($role != ""){
 			$role = implode (", ", $_POST["role"]);
 		}
@@ -177,7 +177,7 @@
 		}
 		$role = encrypt($role, "");
 
-		$contractdays = mysqli_real_escape_string($db, $_POST["contractdays"]);
+		$contractdays = $_POST["contractdays"];
 		$contractdays = encrypt($contractdays, "");
 
 		//Process New Profile Picture

@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	if(superadmin()){
-		$appid = mysqli_real_escape_string($db, $_GET["id"]);
+		$appid = $_GET["id"];
 
 		//Delete the App
 		$stmt = $db->stmt_init();
