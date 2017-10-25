@@ -25,8 +25,8 @@
 
 		//Add the app
 		$appid = $_POST["id"];
-		$appname = mysqli_real_escape_string($db, $_POST["name"]);
-		$applink = mysqli_real_escape_string($db, $_POST["link"]);
+		$appname = $_POST["name"];
+		$applink = $_POST["link"];
 		$appicon = $_POST["icon"];
 		$appicon = str_replace("thumb_", "", $appicon);
 		$appstaff = $_POST["staff"];
