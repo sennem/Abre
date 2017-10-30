@@ -30,6 +30,22 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/settings.php', function() { init_page(); });
+	    	},
+	    	'settings/integrations': function(name) {
+		    	$( '#navigation_top' ).hide();
+				$( '#content_holder' ).hide();
+				$( '#loader' ).show();
+				$( '#titletext' ).text('Settings');
+				document.title = 'Settings';
+				$( '#content_holder' ).load( 'modules/settings/integrations.php', function() { init_page(); });
+	    	},
+	    	'settings/parentaccess': function(name) {
+		    	$( '#navigation_top' ).hide();
+				$( '#content_holder' ).hide();
+				$( '#loader' ).show();
+				$( '#titletext' ).text('Settings');
+				document.title = 'Settings';
+				$( '#content_holder' ).load( 'modules/settings/parentaccess.php', function() { init_page(); });
 	    	},";
 	}
 ?>

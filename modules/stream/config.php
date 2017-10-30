@@ -46,6 +46,5 @@
 	$pagepath = "";
 	$pagerestrictions = "";
 	$pagetitle = "Home";
-	//$subpages = array('504' => array('title' => '504','path' => 'plans/504'),'WEP'  => array('title' => 'WEP','path' => 'plans/wep'));
 
 ?>

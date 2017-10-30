@@ -412,67 +412,6 @@
 		return $valuereturn;
 	}
 
-	function getSiteGoogleClientId(){
-		$valuereturn = getSettingsDbValue('googleclientid');
-		if($valuereturn == ""){ $valuereturn = ""; }
-
-		return $valuereturn;
-	}
-
-	function getSiteParentAccess(){
-		$valuereturn = getSettingsDbValue('parentaccess');
-		if($valuereturn == ""){ $valuereturn = "unchecked"; }
-
-		return $valuereturn;
-	}
-
-	function getSiteGoogleClientSecret(){
-		$valuereturn = getSettingsDbValue('googleclientsecret');
-		if($valuereturn == ""){
-			$valuereturn = "";
-		}else{
-			$valuereturn = decrypt($valuereturn, '');
-		}
-
-		return $valuereturn;
-	}
-
-	function getSiteFacebookClientId(){
-		$valuereturn = getSettingsDbValue('facebookclientid');
-		if($valuereturn == ""){ $valuereturn = ""; }
-
-		return $valuereturn;
-	}
-
-	function getSiteFacebookClientSecret(){
-		$valuereturn = getSettingsDbValue('facebookclientsecret');
-		if($valuereturn == ""){
-			$valuereturn = "";
-		}else{
-			$valuereturn = decrypt($valuereturn, '');
-		}
-
-		return $valuereturn;
-	}
-
-	function getSiteMicrosoftClientId(){
-		$valuereturn = getSettingsDbValue('microsoftclientid');
-		if($valuereturn == ""){ $valuereturn = ""; }
-
-		return $valuereturn;
-	}
-
-	function getSiteMicrosoftClientSecret(){
-		$valuereturn = getSettingsDbValue('microsoftclientsecret');
-		if($valuereturn == ""){
-			$valuereturn = "";
-		}else{
-			$valuereturn = decrypt($valuereturn, '');
-		}
-
-		return $valuereturn;
-	}
-
 	function getSiteAbreCommunity(){
 		$valuereturn = getSettingsDbValue('abre_community');
 		if($valuereturn == ""){ $valuereturn = "unchecked"; }
@@ -504,6 +443,137 @@
 	function getSiteCommunityUsers(){
 		$valuereturn = getSettingsDbValue('community_users');
 		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+	
+	function getIntegrationsDbValue($value){
+		include "abre_dbconnect.php";
+		$sql2 = "SELECT integrations FROM settings LIMIT 1";
+		$result2 = $db->query($sql2);
+		if($result2){
+			$row = $result2->fetch_assoc();
+			$options = $row["integrations"];
+			if($options != ""){
+				$options = json_decode($options);
+				if(isset($options->$value)){
+					$valuereturn = $options->$value;
+				}else{
+					$valuereturn = "";
+				}
+			}else{
+				$valuereturn = "";
+			}
+		}else{
+			$sql = "ALTER TABLE `settings` ADD `integrations` text NOT NULL;";
+			$db->multi_query($sql);
+			$valuereturn = "";
+		}
+		$db->close();
+		return $valuereturn;
+	}
+
+	function getSoftwareAnswersURL(){
+		$valuereturn = getIntegrationsDbValue('softwareanswersurl');
+		if($valuereturn == ""){ $valuereturn = ""; }
+		return $valuereturn;
+	}
+
+	function getSoftwareAnswersIdentifier(){
+		$valuereturn = getIntegrationsDbValue('softwareanswersidentifier');
+		if($valuereturn == ""){ $valuereturn = ""; }
+		return $valuereturn;
+	}
+	
+	function getSoftwareAnswersKey(){
+		$valuereturn = getIntegrationsDbValue('softwareanswerskey');
+		if($valuereturn == ""){ $valuereturn = ""; }
+		return $valuereturn;
+	}
+	
+	function getParentAccessDbValue($value){
+		include "abre_dbconnect.php";
+		$sql2 = "SELECT parentaccess FROM settings LIMIT 1";
+		$result2 = $db->query($sql2);
+		if($result2){
+			$row = $result2->fetch_assoc();
+			$options = $row["parentaccess"];
+			if($options != ""){
+				$options = json_decode($options);
+				if(isset($options->$value)){
+					$valuereturn = $options->$value;
+				}else{
+					$valuereturn = "";
+				}
+			}else{
+				$valuereturn = "";
+			}
+		}else{
+			$sql = "ALTER TABLE `settings` ADD `parentaccess` text NOT NULL;";
+			$db->multi_query($sql);
+			$valuereturn = "";
+		}
+		$db->close();
+		return $valuereturn;
+	}
+
+	function getSiteGoogleClientId(){
+		$valuereturn = getParentAccessDbValue('googleclientid');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteParentAccess(){
+		$valuereturn = getParentAccessDbValue('parentaccess');
+		if($valuereturn == ""){ $valuereturn = "unchecked"; }
+
+		return $valuereturn;
+	}
+
+	function getSiteGoogleClientSecret(){
+		$valuereturn = getParentAccessDbValue('googleclientsecret');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			$valuereturn = decrypt($valuereturn, '');
+		}
+
+		return $valuereturn;
+	}
+
+	function getSiteFacebookClientId(){
+		$valuereturn = getParentAccessDbValue('facebookclientid');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteFacebookClientSecret(){
+		$valuereturn = getParentAccessDbValue('facebookclientsecret');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			$valuereturn = decrypt($valuereturn, '');
+		}
+
+		return $valuereturn;
+	}
+
+	function getSiteMicrosoftClientId(){
+		$valuereturn = getParentAccessDbValue('microsoftclientid');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteMicrosoftClientSecret(){
+		$valuereturn = getParentAccessDbValue('microsoftclientsecret');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			$valuereturn = decrypt($valuereturn, '');
+		}
 
 		return $valuereturn;
 	}

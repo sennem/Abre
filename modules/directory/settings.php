@@ -38,7 +38,7 @@
 				include "csv.php";
 
 				echo "<div class ='col s12'>";
-				echo "<form id='directory-settings-form' method='post' enctype='multipart/form-data' action='modules/directory/updatesettings.php'>";
+				echo "<form id='directory-settings-form' method='post' enctype='multipart/form-data' action='modules/directory/updategeneralsettings.php'>";
 					echo "<div class='row'><div class='col s12'>";
 						echo "<h5>Dropdown Options</h5>";
 					echo "</div></div>";

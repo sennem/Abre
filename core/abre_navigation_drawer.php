@@ -65,7 +65,7 @@
 									$pagepath=$sublinks['path'];
 									echo "<div class='collapsible-body pointer' style='border:0;'>";
 										echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
-										echo "<span class='truncate' style='margin-left:48px;'>";
+										echo "<span class='truncate' style='margin-left:48px; font-weight:normal !important;'>";
 											echo $sublinks['title'];
 										echo "</span></span>";
 									echo "</div>";
@@ -94,7 +94,7 @@
 				}
 
 				//Modules link
-				if(superadmin() && $_SESSION['usertype'] == "staff")
+				if(superadmin())
 				{
 					echo "<li style='display:block;'>";
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
@@ -106,14 +106,28 @@
 				}
 
 				//Settings link
-				if(superadmin() && $_SESSION['usertype'] == "staff")
+				if(superadmin())
 				{
 					echo "<li style='display:block;'>";
+					
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
-							echo "<div class='mdl-navigation__link path' data-path='#settings' onclick='toggle_drawer()'>";
+							echo "<div class='mdl-navigation__link'>";
 							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>settings</i>";
 							echo "<span class='truncate' style='margin-left:-5px;'>Settings</span></div>";
 						echo "</div>";
+					
+						$subpages = array('General' => array('title' => 'General','path' => 'settings'),'Integrations'  => array('title' => 'Integrations','path' => 'settings/integrations'),'Parent Access'  => array('title' => 'Parent Access','path' => 'settings/parentaccess'),'Usage'  => array('title' => 'Usage','path' => 'settings/usage'));										
+						foreach ($subpages as $key => $sublinks){
+										
+								$pagepath=$sublinks['path'];
+								echo "<div class='collapsible-body pointer' style='border:0;'>";
+									echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
+									echo "<span class='truncate' style='margin-left:48px; font-weight:normal !important;'>";
+										echo $sublinks['title'];
+									echo "</span></span>";
+								echo "</div>";			
+						}
+						
 					echo "</li>";
 				}
 			?>

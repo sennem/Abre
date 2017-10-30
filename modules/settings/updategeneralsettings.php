@@ -24,6 +24,7 @@
 
 	//Update system settings
 	if(superadmin()){
+		
 		//Retrieve settings and group as json
 		$sitetitle = $_POST["sitetitle"];
 		$sitecolor = $_POST["sitecolor"];
@@ -31,31 +32,8 @@
 		$sitelogintext = $_POST["sitelogintext"];
 		$siteanalytics = $_POST["siteanalytics"];
 		$siteadminemail = $_POST["siteadminemail"];
-		$sitevendorlinkurl = $_POST["sitevendorlinkurl"];
 		$studentdomain = $_POST["studentdomain"];
 		$studentdomainrequired = $_POST["studentdomainrequired"];
-		$sitevendorlinkidentifier = $_POST["sitevendorlinkidentifier"];
-		$siteparentaccess = $_POST["parentaccess"];
-		$sitegoogleclientid = $_POST["googleclientid"];
-		if($_POST["googleclientsecret"] != ""){
-			$sitegoogleclientsecret = encrypt($_POST["googleclientsecret"], '');
-		}else{
-			$sitegoogleclientsecret="";
-		}
-		$sitefacebookclientid = $_POST["facebookclientid"];
-		if($_POST["facebookclientsecret"] != ""){
-			$sitefacebookclientsecret = encrypt($_POST["facebookclientsecret"], '');
-		}else{
-			$sitefacebookclientsecret="";
-		}
-		$sitemicrosoftclientid = $_POST["microsoftclientid"];
-		if($_POST["microsoftclientsecret"] != ""){
-			$sitemicrosoftclientsecret = encrypt($_POST["microsoftclientsecret"], '');
-		}else{
-			$sitemicrosoftclientsecret="";
-		}
-		$sitevendorlinkkey = $_POST["sitevendorlinkkey"];
-		$sitelogoexisting = $_POST["sitelogoexisting"];
 		$abre_community = $_POST['abre_community'];
 		$community_first_name = $_POST['community_first_name'];
 		$community_last_name = $_POST['community_last_name'];
@@ -85,7 +63,22 @@
 			$sitelogofilename=$sitelogoexisting;
 		}
 
-		$array = [ "sitetitle" => "$sitetitle", "sitecolor" => "$sitecolor", "sitedescription" => "$sitedescription", "sitelogintext" => "$sitelogintext", "siteanalytics" => "$siteanalytics", "siteadminemail" => "$siteadminemail", "sitevendorlinkurl" => "$sitevendorlinkurl", "sitevendorlinkidentifier" => "$sitevendorlinkidentifier", "sitevendorlinkkey" => "$sitevendorlinkkey", "sitelogo" => "$sitelogofilename", "studentdomain" => "$studentdomain", "studentdomainrequired" => "$studentdomainrequired", "parentaccess" => "$siteparentaccess", "googleclientid" => "$sitegoogleclientid", "googleclientsecret" => "$sitegoogleclientsecret", "facebookclientid" => "$sitefacebookclientid", "facebookclientsecret" => "$sitefacebookclientsecret", "microsoftclientid" => "$sitemicrosoftclientid", "microsoftclientsecret" => "$sitemicrosoftclientsecret", "abre_community" => "$abre_community", "community_first_name" => "$community_first_name", "community_last_name" => "$community_last_name", "community_email" => "$community_email", "community_users" => "$community_users" ];
+		$array = [ 
+					"sitetitle" => "$sitetitle",
+					"sitecolor" => "$sitecolor",
+					"sitedescription" => "$sitedescription",
+					"sitelogintext" => "$sitelogintext",
+					"siteanalytics" => "$siteanalytics",
+					"siteadminemail" => "$siteadminemail",
+					"sitelogo" => "$sitelogofilename",
+					"studentdomain" => "$studentdomain",
+					"studentdomainrequired" => "$studentdomainrequired",
+					"abre_community" => "$abre_community",
+					"community_first_name" => "$community_first_name",
+					"community_last_name" => "$community_last_name",
+					"community_email" => "$community_email",
+					"community_users" => "$community_users"
+				];
 		$json = json_encode($array);
 
 		$stmt = $db->stmt_init();
