@@ -33,7 +33,7 @@
 			echo "<div class='row'>";
 				echo "<div class='input-field col s12'>";
 					echo "<h4>Usage</h4>";
-					echo "<h6>Abre site usage</h6>";
+					echo "<h6>Abre site usage coming soon</h6>";
 				echo "</div>";
 			echo "</div>";
 	

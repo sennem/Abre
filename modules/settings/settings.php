@@ -32,10 +32,26 @@
 
 					//Page Title
 					echo "<div class='row'>";
-						echo "<div class='input-field col s12'>";
+
+						//Update Abre if new version available
+						$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
+						$context = stream_context_create($opts);
+						$content = file_get_contents("https://api.github.com/repos/abreio/Abre/releases/latest", false, $context);
+						$json = json_decode($content, true);
+						$currentversion = $json['name'];
+
+						if($abre_version < $currentversion){
+							$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
+							echo "<div class='col s12'>";
+								echo "<div id='updateabre' data-version='$currentlink' class='card white-text pointer' style='background-color:#4CAF50; padding:20px;'>A new version of Abre is available. <u>Click here to update to $currentversion.</u></div>";
+							echo "</div>";
+						}
+					
+						echo "<div class='input-field col s12' style='margin-top:0;'>";
 							echo "<h4>General Settings</h4>";
 							echo "<h6>Adjust Abre site settings and preferences. You can also manage colors and icons.</h6>";
 						echo "</div>";
+						
 					echo "</div>";
 					
 					//Form Fields
@@ -93,7 +109,7 @@
 						echo "<div class='col s12'>";
 							echo "<h5>Abre Community</h5>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".getSiteAbreCommunity()."/>";
-							echo "<label for='abre_community' style = 'color:#000;margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>";
+							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/community/' style='color:#000;' target='_blank'>Learn more</a></label>";
 						echo "</div>";	
 						echo "<div id='community_information'>";
 							echo "<div class='input-field col s6'>";
@@ -120,27 +136,13 @@
 					//Save Button
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
-
 							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Save Changes</button>";
-
-							//Update Abre if new version available
-							$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
-							$context = stream_context_create($opts);
-							$content = file_get_contents("https://api.github.com/repos/abreio/Abre/releases/latest", false, $context);
-							$json = json_decode($content, true);
-							$currentversion = $json['name'];
-
-							if($abre_version < $currentversion){
-								$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
-								echo " <button id='updateabre' data-version='$currentlink' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Update to $currentversion</button>";
-							}
-							
 						echo "</div>";
 					echo "</div>";
 
 					//Show Current Version
 					echo "<div class='row'>";
-						echo "<div class='col s12'><div class='col s12'><p style='color:#999'>Version $abre_version</p></div></div>";
+						echo "<div class='col s12'><p style='color:#999'>Version $abre_version</p></div>";
 					echo "</div>";
 
 				echo "</div>";
