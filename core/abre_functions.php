@@ -584,9 +584,9 @@
 
 	//Insert into the database
 	function vendorLinkGet($call){
-		$VendorLinkURL = getSiteVendorLinkUrl();
-		$vendorIdentifier = getSiteVendorLinkIdentifier();
-		$vendorKey = getSiteVendorLinkKey();
+		$VendorLinkURL = getSoftwareAnswersURL();
+		$vendorIdentifier = getSoftwareAnswersIdentifier();
+		$vendorKey = getSoftwareAnswersKey();
 		$userID = "";
 		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
 		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
