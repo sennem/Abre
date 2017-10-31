@@ -46,6 +46,14 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/parentaccess.php', function() { init_page(); });
+	    	},
+	    	'settings/usage': function(name) {
+		    	$( '#navigation_top' ).hide();
+				$( '#content_holder' ).hide();
+				$( '#loader' ).show();
+				$( '#titletext' ).text('Settings');
+				document.title = 'Settings';
+				$( '#content_holder' ).load( 'modules/settings/usage.php', function() { init_page(); });
 	    	},";
 	}
 ?>

@@ -24,17 +24,23 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Settings
-	$sql = "SELECT *  FROM users WHERE email = '".$_SESSION['useremail']."' and superadmin = 1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
+	if(superadmin()){
+		
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updateintegrationsettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
 				echo "<div class='row'>";
-
-					//Software Answers
-					echo "<div class='col l12'>";
-						echo "<div class='input-field col s12'><h5>Integrations</h5><br></div>";
+				
+					//Page Title
+					echo "<div class='row'>";
+						echo "<div class='input-field col s12'>";
+							echo "<h4>Integrations</h4>";
+							echo "<h6>Connect Abre to third party services</h6>";
+						echo "</div>";
+					echo "</div>";
+					
+					//Form Fields
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter VendorLink Host URL' value='".getSoftwareAnswersURL()."' id='softwareanswersurl' name='softwareanswersurl' type='text' autocomplete='off'>";
 							echo "<label class='active' for='softwareanswersurl'>Software Answers VendorLink URL</label>";
@@ -52,17 +58,15 @@
 			echo "</div>";
 
 
-					//Save Button
-					echo "<div class='row'>";
-						echo "<div class='col s12'><div class='col s12'>";
-
-							//Save changes button
-							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Save Changes</button>";
-
-						echo "</div></div>";
-					echo "</div>";
+			//Save Button
+			echo "<div class='row'>";
+				echo "<div class='col s12'>";
+					echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Save Changes</button>";
 
 				echo "</div>";
+			echo "</div>";
+
+			echo "</div>";
 			echo "</div>";
 		echo "</form>";
 	}

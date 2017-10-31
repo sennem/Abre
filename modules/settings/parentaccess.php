@@ -24,26 +24,30 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Settings
-	$sql = "SELECT *  FROM users WHERE email = '".$_SESSION['useremail']."' and superadmin = 1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
+	if(superadmin()){
+		
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updateparentaccesssettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
+	
+					//Page Title
+					echo "<div class='row'>";
+						echo "<div class='input-field col s12'>";
+							echo "<h4>Parent Access</h4>";
+							echo "<h6>Control parent access settings</h6>";
+						echo "</div>";
+					echo "</div>";
 
 					//Parent Access
 					echo "<div class='row'>";
-						echo "<div class='col s12'>";
-							echo "<div class='input-field col s12'><h5>Parent Access</h5><br></div>";
-						echo "</div>";
-
-						echo "<div class='input-field col l12'>";
+					
+						echo "<div class='col l12'>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".getSiteParentAccess()."/>";
 							echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
 						echo "</div>";
 
-						echo "<div id=apiKeys class='col l12 m12'>";
-							echo "<div class='col s12'> <h6>Google</h6></div>";
+						echo "<div id='apiKeys'>";
+							echo "<div class='col s12'><h6>Google</h6></div>";
 							echo "<div class='input-field col s6'>";
 								echo "<input placeholder='Enter Client ID' value='".getSiteGoogleClientId()."' id='googleclientid' name='googleclientid' type='text' autocomplete='off'>";
 								echo "<label class='active' for='googleclientid'>Google Client ID</label>";
@@ -85,12 +89,9 @@
 
 					//Save Button
 					echo "<div class='row'>";
-						echo "<div class='col s12'><div class='col s12'>";
-
-							//Save changes button
+						echo "<div class='col s12'>";
 							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Save Changes</button>";
-
-						echo "</div></div>";
+						echo "</div>";
 					echo "</div>";
 
 				echo "</div>";

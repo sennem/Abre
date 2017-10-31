@@ -24,68 +24,78 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Settings
-	$sql = "SELECT *  FROM users WHERE email = '".$_SESSION['useremail']."' and superadmin = 1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
+	if(superadmin()){
+		
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updategeneralsettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
 
-					//Settings
+					//Page Title
+					echo "<div class='row'>";
+						echo "<div class='input-field col s12'>";
+							echo "<h4>General Settings</h4>";
+							echo "<h6>Adjust Abre site settings and preferences. You can also manage colors and icons.</h6>";
+						echo "</div>";
+					echo "</div>";
+					
+					//Form Fields
+					echo "<div class='row'>";
+						echo "<div class='input-field col s12'>";
+						    echo "<input placeholder='Enter a Site Title' value='".getSiteTitle()."' id='sitetitle' name='sitetitle' type='text' autocomplete='off'>";
+							echo "<label class='active' for='sitetitle'>Site Title</label>";
+						echo "</div>";
+						echo "<div class='input-field col s12'>";
+						    echo "<input placeholder='Enter a Site Description' value='".getSiteDescription()."' id='sitedescription' name='sitedescription' type='text' autocomplete='off'>";
+							echo "<label class='active' for='sitedescription'>Site Description</label>";
+						echo "</div>";
+						echo "<div class='input-field col s12'>";
+						    echo "<input placeholder='Enter the Site Login Text' value='".getSiteLoginText()."' id='sitelogintext' name='sitelogintext' type='text' autocomplete='off'>";
+							echo "<label class='active' for='sitedescription'>Site Login Text</label>";
+						echo "</div>";
+						echo "<div class='input-field col s12'>";
+						    echo "<input placeholder='Enter a Site Color' value='".getSiteColor()."' id='sitecolor' name='sitecolor' type='text' autocomplete='off'>";
+							echo "<label class='active' for='sitecolor'>Site Color</label>";
+						echo "</div>";
+						echo "<div class='input-field col s12'>";
+						    echo "<input placeholder='Enter the Google Analytics ID' value='".getSiteAnalytics()."' id='siteanalytics' name='siteanalytics' type='text' autocomplete='off'>";
+							echo "<label class='active' for='siteanalytics'>Google Analytics ID</label>";
+						echo "</div>";
+						echo "<div class='input-field col s12'>";
+						    echo "<input placeholder='Enter the Site Administrator Email' value='".getSiteAdminEmail()."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
+							echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
+						echo "</div>";
+						echo "<div class='input-field col s6'>";
+						    echo "<input placeholder='Enter Student Domain' value='".getSiteStudentDomain()."' id='studentdomain' name='studentdomain' type='text' autocomplete='off'>";
+							echo "<label class='active' for='studentdomain'>Student Domain</label>";
+						echo "</div>";
+						echo "<div class='input-field col s6'>";
+						    echo "<input placeholder='Enter Required Characters' value='".getSiteStudentDomainRequired()."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
+							echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
+						echo "</div>";
+					echo "</div>";
+
+					//Site Icon
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
-							echo "<div class='input-field col s12'><h5>Setup</h5><br></div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Title' value='".getSiteTitle()."' id='sitetitle' name='sitetitle' type='text' autocomplete='off'>";
-								echo "<label class='active' for='sitetitle'>Site Title</label>";
-						    echo "</div>";
-						    echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Description' value='".getSiteDescription()."' id='sitedescription' name='sitedescription' type='text' autocomplete='off'>";
-								echo "<label class='active' for='sitedescription'>Site Description</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter the Site Login Text' value='".getSiteLoginText()."' id='sitelogintext' name='sitelogintext' type='text' autocomplete='off'>";
-								echo "<label class='active' for='sitedescription'>Site Login Text</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter a Site Color' value='".getSiteColor()."' id='sitecolor' name='sitecolor' type='text' autocomplete='off'>";
-								echo "<label class='active' for='sitecolor'>Site Color</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter the Google Analytics ID' value='".getSiteAnalytics()."' id='siteanalytics' name='siteanalytics' type='text' autocomplete='off'>";
-								echo "<label class='active' for='siteanalytics'>Google Analytics ID</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s12'>";
-						    	echo "<input placeholder='Enter the Site Administrator Email' value='".getSiteAdminEmail()."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
-								echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
-						    echo "</div>";
-							echo "<div class='input-field col s6'>";
-						    	echo "<input placeholder='Enter Student Domain' value='".getSiteStudentDomain()."' id='studentdomain' name='studentdomain' type='text' autocomplete='off'>";
-								echo "<label class='active' for='studentdomain'>Student Domain</label>";
-						    echo "</div>";
-						    echo "<div class='input-field col s6'>";
-						    	echo "<input placeholder='Enter Required Characters' value='".getSiteStudentDomainRequired()."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
-								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
-						    echo "</div>";
-						echo "</div>";
-
-						echo "<div class='col s12'>";
+							echo "<h5 style='margin-top:0;'>Site Icon</h5><p>Your site icon is used for the site login and favicon, where it’s useful in helping your users quickly identify your school.</p>";
 							$sitelogoexisting = getSiteLogo();
 							if($sitelogoexisting != ""){
-								echo "<div class='input-field col s12'><h5>Logo</h5><br></div>";
-								echo "<div class='col s12'><img class='sitelogobutton pointer' src='$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'></div>";
+								echo "<img class='sitelogobutton pointer' src='$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'>";
 							    echo "<input type='hidden' name='sitelogoexisting' value='$sitelogoexisting'>";
 							    echo "<input type='file' name='sitelogo' id='sitelogo' style='display:none;'>";
 							}
+							echo "<div><button class='sitelogobutton modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Update Site Icon</button></div>";
 						echo "</div>";
+					echo "</div>";
 
-
-						//Code for subscribing to the Abre Community
-						echo "<div class='input-field col l12'>";
+					//Abre Community
+					echo "<div class='row'>";
+						echo "<div class='col s12'>";
+							echo "<h5>Abre Community</h5>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".getSiteAbreCommunity()."/>";
 							echo "<label for='abre_community' style = 'color:#000;margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/' target='_blank' class='deep-orange-text text-darken-3'>Learn more</a></label>";
-						echo "</div>";
-						echo "<div id=community_information class='col l12 m12'>";
+						echo "</div>";	
+						echo "<div id='community_information'>";
 							echo "<div class='input-field col s6'>";
 								echo "<input placeholder='Enter a First Name' value='".getSiteCommunityFirstName()."' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>";
 								echo "<label class='active' for='community_first_name'>First Name</label>";
@@ -103,16 +113,14 @@
 								echo "<label class='active' for='community_users'>Number of System Users</label>";
 							echo "</div>";
 						echo "</div>";
-
 					echo "</div>";
 					
 
 
 					//Save Button
 					echo "<div class='row'>";
-						echo "<div class='col s12'><div class='col s12'>";
+						echo "<div class='col s12'>";
 
-							//Save changes button
 							echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Save Changes</button>";
 
 							//Update Abre if new version available
@@ -126,7 +134,8 @@
 								$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
 								echo " <button id='updateabre' data-version='$currentlink' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Update to $currentversion</button>";
 							}
-						echo "</div></div>";
+							
+						echo "</div>";
 					echo "</div>";
 
 					//Show Current Version
@@ -146,7 +155,7 @@
 	$(function(){
 
 		//Update Abre
-		$("#updateabre").unbind().click(function(event) {
+		$("#updateabre").unbind().click(function(event){
 			event.preventDefault();
 			var Link = $(this).data('version');
 			$(this).html("Updating...");
@@ -159,9 +168,10 @@
 	  	});
 
 		//Provide image upload on icon click
-		$(".sitelogobutton").click(function() {
+		$(".sitelogobutton").unbind().click(function(event){
+			event.preventDefault();
 			$("#sitelogo").click();
-	  });
+	  	});
 
 		//Submit form if image if changed
 		$("#sitelogo").change(function (){
@@ -172,7 +182,7 @@
 				}
 				reader.readAsDataURL(this.files[0]);
 			}
-	  });
+	  	});
 
 		//Save Settings
 		var form = $('#form-settings');
@@ -199,7 +209,7 @@
 			}else{
 				$("#community_information").hide();
 			}
-		 });
+		});
 
 	});
 
