@@ -348,27 +348,6 @@
 		return $valuereturn;
 	}
 
-	function getSiteVendorLinkUrl(){
-		$valuereturn = getSettingsDbValue('sitevendorlinkurl');
-		if($valuereturn == ""){ $valuereturn = ""; }
-
-		return $valuereturn;
-	}
-
-	function getSiteVendorLinkIdentifier(){
-		$valuereturn = getSettingsDbValue('sitevendorlinkidentifier');
-		if($valuereturn == ""){ $valuereturn = ""; }
-
-		return $valuereturn;
-	}
-
-	function getSiteVendorLinkKey(){
-		$valuereturn = getSettingsDbValue('sitevendorlinkkey');
-		if($valuereturn == ""){ $valuereturn = ""; }
-
-		return $valuereturn;
-	}
-
 	function getSiteCerticaBaseUrl(){
 		$valuereturn = getSettingsDbValue('certicabaseurl');
 		if($valuereturn == ""){ $valuereturn = ""; }
@@ -631,9 +610,9 @@
 
 	//Insert into the database
 	function vendorLinkPost($call,$fields){
-		$VendorLinkURL = getSiteVendorLinkUrl();
-		$vendorIdentifier = getSiteVendorLinkIdentifier();
-		$vendorKey = getSiteVendorLinkKey();
+		$VendorLinkURL = getSoftwareAnswersURL();
+		$vendorIdentifier = getSoftwareAnswersIdentifier();
+		$vendorKey = getSoftwareAnswersKey();
 		$userID = "";
 		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
 		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
