@@ -624,8 +624,8 @@
 		$url = $call;
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('VL-Authorization: '.$vlauthheader, 'Date: '.$requestDate));
-		curl_setopt($ch, CURLOPT_POSTFIELDS,$fields);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('VL-Authorization: '.$vlauthheader, 'Date: '.$requestDate, 'Content-Type: application/json'));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
