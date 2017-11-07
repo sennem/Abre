@@ -26,7 +26,7 @@
 	if(superadmin()){
 		
 		//Retrieve settings and group as json
-		$siteparentaccess = $_POST["parentaccess"];
+		if(isset($_POST['parentaccess'])){ $siteparentaccess=$_POST['parentaccess']; }else{ $siteparentaccess=""; }
 		$sitegoogleclientid = $_POST["googleclientid"];
 		if($_POST["googleclientsecret"] != ""){
 			$sitegoogleclientsecret = encrypt($_POST["googleclientsecret"], '');

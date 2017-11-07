@@ -34,7 +34,7 @@
 		$siteadminemail = $_POST["siteadminemail"];
 		$studentdomain = $_POST["studentdomain"];
 		$studentdomainrequired = $_POST["studentdomainrequired"];
-		$abre_community = $_POST['abre_community'];
+		if(isset($_POST['abre_community'])){ $abre_community=$_POST['abre_community']; }else{ $abre_community=""; }
 		$community_first_name = $_POST['community_first_name'];
 		$community_last_name = $_POST['community_last_name'];
 		$community_email = $_POST['community_email'];
@@ -49,6 +49,7 @@
 			$uploaddir = $portal_path_root.'/content/';
 
 			//Delete previous image
+			$sitelogoexisting = getSiteLogo();
 			$oldimagelocation = $portal_path_root.$sitelogoexisting;
 			if($sitelogoexisting != '/core/images/abre_glyph.png'){ unlink($oldimagelocation); }
 
@@ -57,6 +58,7 @@
 			$sitelogo = $uploaddir . $sitelogofilename;
 			move_uploaded_file($_FILES['sitelogo']['tmp_name'], $sitelogo);
 		}else{
+			$sitelogoexisting = getSiteLogo();
 			if(strpos($sitelogoexisting, '/content/') !== false){
 				$sitelogoexisting = ltrim($sitelogoexisting,"/content/");
 			}
