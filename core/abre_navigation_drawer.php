@@ -54,7 +54,7 @@
 									}
 									echo ">";
 									echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>$pageicon</i>";
-									echo "<span class='truncate' style='margin-left:-5px;'>$pagetitle</span>";
+									echo "<span class='truncate' style='margin-left:-10px;'>$pagetitle</span>";
 									echo "</span>";
 							echo "</div>";
 							
@@ -65,7 +65,7 @@
 									$pagepath=$sublinks['path'];
 									echo "<div class='collapsible-body pointer' style='border:0;'>";
 										echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
-										echo "<span class='truncate' style='margin-left:48px; font-weight:normal !important;'>";
+										echo "<span class='truncate' style='margin-left:60px; font-weight:normal !important;'>";
 											echo $sublinks['title'];
 										echo "</span></span>";
 									echo "</div>";
@@ -88,7 +88,7 @@
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'>";
 							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>help</i>";
-							echo "<span class='truncate' style='margin-left:-5px;'>Send Feedback</span></a>";
+							echo "<span class='truncate' style='margin-left:-10px;'>Send Feedback</span></a>";
 						echo "</div>";
 					echo "</li>";
 				}
@@ -100,7 +100,7 @@
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#store' onclick='toggle_drawer()'>";
 							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>store</i>";
-							echo "<span class='truncate' style='margin-left:-5px;'>Store</span></span>";
+							echo "<span class='truncate' style='margin-left:-10px;'>Store</span></span>";
 						echo "</div>";
 					echo "</li>";
 				}
@@ -113,7 +113,7 @@
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<div class='mdl-navigation__link'>";
 							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>settings</i>";
-							echo "<span class='truncate' style='margin-left:-5px;'>Settings</span></div>";
+							echo "<span class='truncate' style='margin-left:-10px;'>Settings</span></div>";
 						echo "</div>";
 					
 						$subpages = array('General' => array('title' => 'General','path' => 'settings'),'Integrations'  => array('title' => 'Integrations','path' => 'settings/integrations'),'Parent Access'  => array('title' => 'Parent Access','path' => 'settings/parentaccess'),'Usage'  => array('title' => 'Usage','path' => 'settings/usage'));										
@@ -122,7 +122,7 @@
 								$pagepath=$sublinks['path'];
 								echo "<div class='collapsible-body pointer' style='border:0;'>";
 									echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
-									echo "<span class='truncate' style='margin-left:48px; font-weight:normal !important;'>";
+									echo "<span class='truncate' style='margin-left:60px; font-weight:normal !important;'>";
 										echo $sublinks['title'];
 									echo "</span></span>";
 								echo "</div>";			
