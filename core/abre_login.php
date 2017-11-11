@@ -22,6 +22,7 @@
 ?>
 
 	<!-- Display the login -->
+	<main>
 	<div class="mdl-layout mdl-js-layout login-card">
 		<div class="login_wrapper">
 			<div class="login-card-square mdl-card animated fadeIn">
@@ -39,6 +40,7 @@
 			</div>
 		</div>
 	</div>
+	</main>
 
 <script>
 

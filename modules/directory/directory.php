@@ -37,7 +37,8 @@
 					echo "<form id='form-search' method='post' action='modules/directory/searchresults.php'>";
 						echo "<div class='row'>";
 							echo "<div class='input-field col s12'>";
-								echo "<input placeholder='Search' id='searchquery' name='searchquery' autocomplete='off' type='text'>";
+								echo "<input placeholder='Lastname or Building' id='searchquery' name='searchquery' autocomplete='off' type='text'>";
+								echo "<label for='searchquery' class='active'>Search</label>";
 							echo "</div>";
 						echo "</div>";
 					echo "</form>";

@@ -250,7 +250,7 @@
 			}
 
 			echo "<div class='row'><div class='col s12'>";
-				echo "<img src='$pictureserver' class='profile-avatar demoimage' style='display: block; margin: 20px auto;'>";
+				echo "<img src='$pictureserver' class='profile-avatar demoimage' alt='Profile Picture' style='display: block; margin: 20px auto;'>";
 				echo "<h4 class='center-align demotext_dark'>$firstname $lastname</h4>";
 			echo "</div></div>";
 

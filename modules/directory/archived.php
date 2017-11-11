@@ -75,7 +75,7 @@
 								$senioritydate = stripslashes(htmlspecialchars(decrypt($senioritydate, ""), ENT_QUOTES));
 								$id = htmlspecialchars($row["id"], ENT_QUOTES);
 								echo "<tr>";
-									echo "<td width=60px><img src='$picture' class='profile-avatar-small demoimage' alt=''></td>";
+									echo "<td width=60px><img src='$picture' class='profile-avatar-small demoimage' alt='Profile Picture'></td>";
 									echo "<td><strong class='demotext_dark'>$firstname $lastname</strong><a href='$portal_root/#directory/$id' class='hidden'></a></td>";
 									echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
 									echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";

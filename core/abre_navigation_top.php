@@ -37,7 +37,7 @@
 				?>
 				<div class='navspace'></div>
 				<?php
-						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' style='width:32px; height:32px;'></a>";
+						echo "<a href='#viewprofile' class='mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon modal-viewprofile'><img src='".$_SESSION['picture']."?sz=120' class='img-center' alt='User Profile Photo' style='width:32px; height:32px;'></a>";
 				?>
 		</div>
 		<div id='navigation_top'></div>

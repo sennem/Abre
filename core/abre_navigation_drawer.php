@@ -26,7 +26,7 @@
 	<div class='drawer mdl-layout__drawer' id='drawer' style='border:none;'>
 		<header class='drawer-header' style='background-color: <?php echo getSiteColor(); ?>'>
 			<?php
-				echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar'>";
+				echo "<img src='".$_SESSION['picture']."?sz=100' class='avatar' alt='User Profile Photo'>";
 				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['displayName']."</span>";
 				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['useremail']."</span>";
 			?>
