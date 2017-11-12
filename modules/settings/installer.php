@@ -72,8 +72,8 @@
 
 		//check for student id field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT student_id FROM parent_students")){
-			$sql = "ALTER TABLE `parent_students` ADD `student_id` text NOT NULL;";
+		if(!$db->query("SELECT studentId FROM parent_students")){
+			$sql = "ALTER TABLE `parent_students` ADD `studentId` text NOT NULL;";
 			$db->multi_query($sql);
 		}
 		$db->close();
