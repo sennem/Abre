@@ -91,6 +91,11 @@
 	for the school to be able to "fastpass" registering a student token */
 	function isVerified(){
 		include "abre_dbconnect.php";
+		$sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
+		$result = $db->query($sql);
+		$row = $result->fetch_assoc();
+		$parent_id = $row["id"];
+
 		if($_SESSION['usertype'] == 'parent'){
 			if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")
 			    && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
@@ -107,15 +112,16 @@
 						$studentId = $row2['studentId'];
 
 						//Check to see if student has already been claimed by parent
-						$sqlcheck = "SELECT * FROM users_parent WHERE students = '$studenttokenencrypted' AND email LIKE '".$_SESSION['useremail']."' AND studentId = '$studentId'";
+						$sqlcheck = "SELECT * FROM parent_students WHERE student_token = '$studenttokenencrypted' AND parent_id = $parent_id AND studentId = '$studentId'";
 						$resultcheck = $db->query($sqlcheck);
 						$numrows2 = $resultcheck->num_rows;
 
 						//this parent does not have access
 						if($numrows2 == 0 && $_SESSION['useremail'] != ''){
 								$stmt = $db->stmt_init();
-								$sql = "INSERT INTO users_parent (email, students, studentId) VALUES ('".$_SESSION['useremail']."', '$studenttokenencrypted', '$studentId')";
+								$sql = "INSERT INTO parent_students (parent_id, student_token, studentId) VALUES (?, ?, ?)";
 								$stmt->prepare($sql);
+								$stmt->bind_param("iss", $parent_id, $studenttokenencrypted, $row['studentId']);
 								$stmt->execute();
 								$stmt->close();
 						}
@@ -124,19 +130,19 @@
 			}
 		}
 		$db->close();
+
 		include "abre_dbconnect.php";
 		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
-			$sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."'";
+			$sql = "SELECT * FROM parent_students WHERE parent_id = $parent_id";
 			$result = $db->query($sql);
 			$_SESSION['auth_students'] = '';
 			while($row = $result->fetch_assoc()){
-				$sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['students']."'";
+				$sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['student_token']."'";
 				$result2 = $db->query($sql2);
-				while($row2 = $result2->fetch_assoc()){
-					$_SESSION['auth_students'] .= $row2['studentId'].',';
-				}
+			  $row2 = $result2->fetch_assoc()
+				$_SESSION['auth_students'] .= $row2['studentId'].',';
 			}
-			$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'],", ");
+			$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'], ", ");
 		}
 	}
 
@@ -162,7 +168,7 @@
 		$newcommentid = $stmt->insert_id;
 		$stmt->close();
 		$db->close();
-		
+
 		return $newcommentid;
 	}
 
@@ -425,7 +431,7 @@
 
 		return $valuereturn;
 	}
-	
+
 	function getIntegrationsDbValue($value){
 		include "abre_dbconnect.php";
 		$sql2 = "SELECT integrations FROM settings LIMIT 1";
@@ -463,13 +469,13 @@
 		if($valuereturn == ""){ $valuereturn = ""; }
 		return $valuereturn;
 	}
-	
+
 	function getSoftwareAnswersKey(){
 		$valuereturn = getIntegrationsDbValue('softwareanswerskey');
 		if($valuereturn == ""){ $valuereturn = ""; }
 		return $valuereturn;
 	}
-	
+
 	function getParentAccessDbValue($value){
 		include "abre_dbconnect.php";
 		$sql2 = "SELECT parentaccess FROM settings LIMIT 1";
