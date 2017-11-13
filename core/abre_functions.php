@@ -91,12 +91,13 @@
 	for the school to be able to "fastpass" registering a student token */
 	function isVerified(){
 		include "abre_dbconnect.php";
-		$sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
-		$result = $db->query($sql);
-		$row = $result->fetch_assoc();
-		$parent_id = $row["id"];
 
 		if($_SESSION['usertype'] == 'parent'){
+			$sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
+			$result = $db->query($sql);
+			$row = $result->fetch_assoc();
+			$parent_id = $row["id"];
+
 			if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")
 			    && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
 				//see if email matches any records
@@ -134,15 +135,16 @@
 		include "abre_dbconnect.php";
 		if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
 			$sql = "SELECT * FROM parent_students WHERE parent_id = $parent_id";
-			$result = $db->query($sql);
-			$_SESSION['auth_students'] = '';
-			while($row = $result->fetch_assoc()){
-				$sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['student_token']."'";
-				$result2 = $db->query($sql2);
-			  $row2 = $result2->fetch_assoc()
-				$_SESSION['auth_students'] .= $row2['studentId'].',';
+			if($result = $db->query($sql)){
+				$_SESSION['auth_students'] = '';
+				while($row = $result->fetch_assoc()){
+					$sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['student_token']."'";
+					$result2 = $db->query($sql2);
+					$row2 = $result2->fetch_assoc();
+					$_SESSION['auth_students'] .= $row2['studentId'].',';
+				}
+				$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'], ", ");
 			}
-			$_SESSION['auth_students'] = rtrim($_SESSION['auth_students'], ", ");
 		}
 	}
 
