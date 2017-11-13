@@ -51,13 +51,13 @@
 			$stmt->close();
 			$db->close();
 
-			$message = array("status"=>"Success", "message"=>"You now have access to your students information.");
+			$message = array("status"=>"Success", "message"=>"You now have access to your student's information.");
 			header("Content-Type: application/json");
 			echo json_encode($message);
 			break;
 		}else{
 			if($studenttokenencrypted == $parentrow['student_token']){
-				$message = array("status"=>"Success", "message"=>"You now have access to your students information.");
+				$message = array("status"=>"Success", "message"=>"You already have access to your student's information.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
@@ -70,7 +70,7 @@
 				$stmt->close();
 				$db->close();
 
-				$message = array("status"=>"Success", "message"=>"You now have access to your students information.");
+				$message = array("status"=>"Success", "message"=>"You now have access to your student's information.");
 				header("Content-Type: application/json");
 				echo json_encode($message);
 				break;
