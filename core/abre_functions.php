@@ -104,6 +104,7 @@
 				$sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE '".$_SESSION['useremail']."'";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){
+
 					//for records that match find kids associated with that email
 					$sql2 = "SELECT * FROM student_tokens WHERE studentId = '".$row['StudentID']."'";
 					$result2 = $db->query($sql2);
@@ -119,12 +120,12 @@
 
 						//this parent does not have access
 						if($numrows2 == 0 && $_SESSION['useremail'] != ''){
-								$stmt = $db->stmt_init();
-								$sql = "INSERT INTO parent_students (parent_id, student_token, studentId) VALUES (?, ?, ?)";
-								$stmt->prepare($sql);
-								$stmt->bind_param("iss", $parent_id, $studenttokenencrypted, $row['studentId']);
-								$stmt->execute();
-								$stmt->close();
+							$stmt = $db->stmt_init();
+							$sql = "INSERT INTO parent_students (parent_id, student_token, studentId) VALUES (?, ?, ?)";
+							$stmt->prepare($sql);
+							$stmt->bind_param("iss", $parent_id, $studenttokenencrypted, $row2['studentId']);
+							$stmt->execute();
+							$stmt->close();
 						}
 					}
 				}
