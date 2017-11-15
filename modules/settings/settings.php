@@ -93,7 +93,7 @@
 					//Site Icon
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
-							echo "<h5 style='margin-top:0;'>Site Icon</h5><p>Your site icon is used for the site login and favicon, where it’s useful in helping your users quickly identify your school.</p>";
+							echo "<h5 style='margin-top:0;'>Site Icon</h5><p>Your site icon is used for the site login and favicon, where it’s useful in helping your users quickly identify your school. We recommend a square image with a resolution of 200px by 200px. The image should have a transparent or white background.</p>";
 							$sitelogoexisting = getSiteLogo();
 							if($sitelogoexisting != ""){
 								echo "<img class='sitelogobutton pointer' alt='Site Logo' src='$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'>";
