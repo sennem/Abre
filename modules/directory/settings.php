@@ -35,8 +35,6 @@
 		echo "<div class='page_container mdl-shadow--4dp'>";
 			echo "<div class='page'>";
 
-				include "csv.php";
-
 				echo "<div class ='col s12'>";
 				echo "<form id='directory-settings-form' method='post' enctype='multipart/form-data' action='modules/directory/updatesettings.php'>";
 					echo "<div class='row'><div class='col s12'>";

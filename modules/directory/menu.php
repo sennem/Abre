@@ -30,6 +30,7 @@
 				<li class="tab col s3 tab_1 directorymenu pointer" data="#directory"><a href="#directory" class='mdl-color-text--white'>Active</a></li>
 				<li class="tab col s3 tab_2 directorymenu pointer" data="#directory/archived"><a href="#directory/archived" class='mdl-color-text--white'>Archived</a></li>
 				<li class="tab col s3 tab_3 directorymenu pointer" data="#directory/settings"><a href="#directory/settings" class='mdl-color-text--white'>Settings</a></li>
+				<li class="tab col s3 tab_4 directorymenu pointer" data="#directory/reports"><a href="#directory/reports" class='mdl-color-text--white'>Reports</a></li>
 			</ul>
 		</div>
 <?php

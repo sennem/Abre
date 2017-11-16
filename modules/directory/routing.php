@@ -66,6 +66,21 @@
 					$('.tab_3').addClass('tabmenuover');
 				});
 	    	},
+	    	'directory/reports': function(name) {
+		    	$( '#navigation_top' ).hide();
+				$( '#content_holder' ).hide();
+				$( '#loader' ).show();
+				$( '#titletext' ).text('Staff Directory');
+				document.title = 'Staff Directory';
+				$( '#content_holder' ).load( 'modules/directory/reports.php', function() { init_page(); });
+
+
+				$( '#navigation_top' ).show();
+				$( '#navigation_top' ).load( 'modules/directory/menu.php', function() {
+					$( '#navigation_top' ).show();
+					$('.tab_4').addClass('tabmenuover');
+				});
+	    	},
 			'directory/?:name': function(name) {
 		    	$( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
