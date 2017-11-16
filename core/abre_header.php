@@ -57,7 +57,7 @@
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 				<link rel='stylesheet' href='core/css/materialize.0.97.7.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
-				<link rel='stylesheet' href='core/css/abre.1.3.4.css'>
+				<link rel='stylesheet' href='core/css/abre.1.3.5.css'>
 				<link rel='stylesheet' href='core/css/animate.min.css'>
 				<link rel='stylesheet' href='core/css/timepicker.min.css'>
 				<link rel='stylesheet' href='core/css/quill.snow.1.1.3.css'>
@@ -94,7 +94,7 @@
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 				<link rel='stylesheet' href='core/css/materialize.0.97.7.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
-				<link rel='stylesheet' href='core/css/abre.1.3.4.css'>
+				<link rel='stylesheet' href='core/css/abre.1.3.5.css'>
 
 				<script src='core/js/jquery-3.1.1.min.js'></script>
 				<script src='core/js/jquery-ui.1.12.1.min.js'></script>
