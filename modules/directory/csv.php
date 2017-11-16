@@ -28,6 +28,7 @@
 				echo "<div class='col s6'>";
 					echo "<h5>Downloads</h5>";
 					echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
+					echo "<a href='$portal_root/modules/directory/csvexportfile_licenseexpiring.php' class='mdl-color-text--black'>Staff - License Expiring</a><br>";
 					echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
 				echo "</div>";
 				echo "<div class='col s6'>";
