@@ -83,18 +83,7 @@
         include "abre_dbconnect.php";
         if($result = $db->query("SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
           $count = $result->num_rows;
-          if($count >= 1){
-            $sql = "SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."' AND students=''";
-            $result = $db->query($sql);
-            $numrows = $result->num_rows;
-            if($numrows == 0){
-              $stmt = $db->stmt_init();
-              $sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
-              $stmt->prepare($sql);
-              $stmt->bind_param("sss", $_SESSION['useremail'], '', '');
-              $stmt->execute();
-              $stmt->close();
-            }
+          if($count == 1){
             //If not already logged in, check and get a refresh token
             if(!isset($_SESSION['loggedin'])){
               $_SESSION['loggedin'] = "";
@@ -104,11 +93,12 @@
             }
           }else{
             $stmt = $db->stmt_init();
-            $sql = "INSERT INTO users_parent (email, students, studentId) VALUES (?, ?, ?)";
+            $sql = "INSERT INTO users_parent (email) VALUES (?)";
             $stmt->prepare($sql);
-            $stmt->bind_param("sss", $_SESSION['useremail'], '', '');
+            $stmt->bind_param("s", $_SESSION['useremail']);
             $stmt->execute();
             $stmt->close();
+            $_SESSION['loggedin'] = "yes";
           }
         }
         $db->close();

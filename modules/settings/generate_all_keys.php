@@ -46,7 +46,7 @@
 		$db->close();
 	}else{
 		//if database already exists delete it and re-add
-		$sql = "DELETE from `student_tokens`";
+		$sql = "DELETE FROM `student_tokens`";
     $db->multi_query($sql);
 
     require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
