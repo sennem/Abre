@@ -348,6 +348,13 @@
 		return $valuereturn;
 	}
 
+	function getSiteAnalyticsViewId(){
+		$valuereturn = getSettingsDbValue('analyticsViewId');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
 	function getSiteAdminEmail(){
 		$valuereturn = getSettingsDbValue('siteadminemail');
 		if($valuereturn == ""){ $valuereturn = ""; }
