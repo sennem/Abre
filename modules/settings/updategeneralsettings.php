@@ -24,7 +24,7 @@
 
 	//Update system settings
 	if(superadmin()){
-		
+
 		//Retrieve settings and group as json
 		$sitetitle = $_POST["sitetitle"];
 		$sitecolor = $_POST["sitecolor"];
@@ -39,6 +39,7 @@
 		$community_last_name = $_POST['community_last_name'];
 		$community_email = $_POST['community_email'];
 		$community_users = $_POST['community_users'];
+		$analyticsViewId = $_POST['analyticsViewId'];
 
 		if($_FILES['sitelogo']['name']){
 			//Get file information
@@ -65,12 +66,13 @@
 			$sitelogofilename=$sitelogoexisting;
 		}
 
-		$array = [ 
+		$array = [
 					"sitetitle" => "$sitetitle",
 					"sitecolor" => "$sitecolor",
 					"sitedescription" => "$sitedescription",
 					"sitelogintext" => "$sitelogintext",
 					"siteanalytics" => "$siteanalytics",
+					"analyticsViewId" => "$analyticsViewId",
 					"siteadminemail" => "$siteadminemail",
 					"sitelogo" => "$sitelogofilename",
 					"studentdomain" => "$studentdomain",
