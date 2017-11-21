@@ -98,11 +98,14 @@
 
 <script>
 
-			$(document).ready(function(){  
+			$(document).ready(function(){
 
 				$("#myTable").tablesorter({
 					sortList: [[1,0],[3,0]]
     		});
+
+				ga('set', 'page', '/#directory/archived');
+				ga('send', 'pageview');
 
 			});
 

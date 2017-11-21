@@ -41,6 +41,8 @@
 
 		$(function() {
 
+			ga('set', 'page', '/#directory/reports');
+			ga('send', 'pageview');
 		});
 </script>
 <?php

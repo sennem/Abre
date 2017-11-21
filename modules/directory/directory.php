@@ -76,6 +76,9 @@
 				});
 			});
 
+			ga('set', 'page', '/#directory');
+			ga('send', 'pageview');
+
 		});
 
 </script>
