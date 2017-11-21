@@ -26,63 +26,64 @@
 	require_once(dirname(__FILE__).'/../../core/google/vendor/autoload.php');
 
 
-if(superadmin()){
+	if(superadmin()){
 
-	//Create Client request to access Google API
-	$client = new Google_Client();
-	$client->setApplicationName("Abre");
-	$client_id = constant("GOOGLE_CLIENT_ID");
-	$client->setClientId($client_id);
-	$client_secret = constant("GOOGLE_CLIENT_SECRET");
-	$client->setClientSecret($client_secret);
-	$client->setRedirectUri('http://localhost/modules/settings/usage.php');
-	$simple_api_key = constant("GOOGLE_API_KEY");
-	$client->setDeveloperKey($simple_api_key);
-	$client->setAccessType("offline");
-	$client->setApprovalPrompt("auto");
-	$client->addScope(array('https://www.googleapis.com/auth/analytics.readonly'));
-	$client->setIncludeGrantedScopes(true);
+		//Create Client request to access Google API
+		$client = new Google_Client();
+		$client->setApplicationName("Abre");
+		$client_id = constant("GOOGLE_CLIENT_ID");
+		$client->setClientId($client_id);
+		$client_secret = constant("GOOGLE_CLIENT_SECRET");
+		$client->setClientSecret($client_secret);
+		$client->setRedirectUri('http://localhost/modules/settings/usage.php');
+		$simple_api_key = constant("GOOGLE_API_KEY");
+		$client->setDeveloperKey($simple_api_key);
+		$client->setAccessType("offline");
+		$client->setApprovalPrompt("auto");
+		$client->addScope(array('https://www.googleapis.com/auth/analytics.readonly'));
+		$client->setIncludeGrantedScopes(true);
 
-	$authenticated = false;
-	$viewId = getSiteAnalyticsViewId();
+		$authenticated = false;
+		$viewId = getSiteAnalyticsViewId();
 
-	//Set Access Token
-	if(isset($_SESSION['access_token']) && $_SESSION['access_token']){
-		$client->setAccessToken($_SESSION['access_token']);
-	}
-
-	if($client->getAccessToken()){
-		$_SESSION['access_token'] = $client->getAccessToken();
-	}
-
-	if(isset($_GET["code"])){
-		$client->authenticate($_GET['code']);
-		$_SESSION['access_token'] = $client->getAccessToken();
-		$tokenToStore = json_encode($_SESSION["access_token"]);
-
-		$stmt = $db->stmt_init();
-		$sql = "UPDATE users SET refresh_token = ? WHERE email = ?";
-		$stmt->prepare($sql);
-		$stmt->bind_param("ss", $tokenToStore, $_SESSION["useremail"]);
-		$stmt->execute();
-		$stmt->close();
-		$db->close();
-
-		header('Location: '. $portal_root.'/#settings/usage');
-	}else{
-		if($client->isAccessTokenExpired()){
-			$_SESSION['access_token'] = $client->refreshToken($_SESSION['access_token']['refresh_token']);
-			$client->setAccessToken($_SESSION["access_token"]);
+		//Set Access Token
+		if(isset($_SESSION['access_token']) && $_SESSION['access_token']){
+			$client->setAccessToken($_SESSION['access_token']);
 		}
-		$authToken = $_SESSION["access_token"]["access_token"];
-		$scopes = getCurrentGoogleScopes($authToken);
-		if(strpos($scopes, 'https://www.googleapis.com/auth/analytics.readonly') === false){
-			$authUrl = $client->createAuthUrl();
+
+		if($client->getAccessToken()){
+			$_SESSION['access_token'] = $client->getAccessToken();
+		}
+
+		if(isset($_GET["code"])){
+			$client->authenticate($_GET['code']);
+			$_SESSION['access_token'] = $client->getAccessToken();
+			$tokenToStore = json_encode($_SESSION["access_token"]);
+
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE users SET refresh_token = ? WHERE email = ?";
+			$stmt->prepare($sql);
+			$stmt->bind_param("ss", $tokenToStore, $_SESSION["useremail"]);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
+
+			header('Location: '. $portal_root.'/#settings/usage');
 		}else{
-			$AUTH_TOKEN = $authToken;
-			$authenticated = true;
+			if($client->isAccessTokenExpired()){
+				$_SESSION['access_token'] = $client->refreshToken($_SESSION['access_token']['refresh_token']);
+				$client->setAccessToken($_SESSION["access_token"]);
+			}
+			$authToken = $_SESSION["access_token"]["access_token"];
+			$scopes = getCurrentGoogleScopes($authToken);
+			if(strpos($scopes, 'https://www.googleapis.com/auth/analytics.readonly') === false){
+				$authUrl = $client->createAuthUrl();
+			}else{
+				$AUTH_TOKEN = $authToken;
+				$authenticated = true;
+			}
 		}
-	}
+		
 		//Usage
 		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 		echo "<div class='page'>";
