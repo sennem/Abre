@@ -44,15 +44,13 @@
 		if(!empty($setting_card_classroom) == 1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamclassroom'>"; include "../classroom/load.php"; echo "</div></div>"; }
 		if(!empty($setting_card_apps) == 1 or empty($gafecards)){ echo "<div class='hide-on-small-only'><div id='streamapps'>"; include "../apps/load.php"; echo "</div></div>"; }
 		if($_SESSION['usertype'] == 'parent'){
-			$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."' AND streams != ''";
+			$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."' AND streams == ''";
 			$result = $db->query($sql);
 			$numrows = $result->num_rows;
 			if($numrows >= 1){
-
-			}else{
 				echo "<div class='row center-align'><div class='col s12'><h3>Welcome to the Parent Portal!</h3></div><div class='col s12'>Click <a href='#profile' style='color: ".getSiteColor()."'>here</a> to your profile settings or click the '+' button in the top right to add your students</div></div>";
 			}
- 		}
+		}
 		echo "<div id='streamcards'></div>";
 	echo "</div>";
 	echo "<div style='height:80px;'><div id='showmorestream' style='display:none; position:absolute; left:50%; padding:20px; margin-left:-35px;'><div class='mdl-spinner mdl-js-spinner is-active'></div></div></div>";
