@@ -83,7 +83,7 @@
 				$authenticated = true;
 			}
 		}
-		
+
 		//Usage
 		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 		echo "<div class='page'>";
@@ -102,6 +102,7 @@
 						echo "<div id='active-users-container' style='float:right;'></div>";
 					echo "</div>";
 			echo "</div>";
+			echo "<div id='googleCharts'>";
 					echo "<div class='row'>";
 						echo "<h5 id='chart1Title' class='center-align'> Number of Users (Past 30 Days)</h5>";
 						echo "<div class='input-field col s12'>";
@@ -123,6 +124,8 @@
 					echo "</div>";
 					echo "<h6>You are authenticated, but have not set up your analytics ID in the settings page. Please visit <a href='#settings' style='color: ".getSiteColor().";'>the settings page</a> to provide this information.</h6>";
 				}
+			echo "</div>";
+			echo "<h6 id='viewIdError' style='display:none'>You do not have permission to view the entered Analytics View ID. Please enter a View ID you have permission to access.</h6>";
 
 		echo "</div>";
 		echo "</div>";
@@ -162,113 +165,139 @@
 			}
 		});
 
-		/**
-		 * Create a new ActiveUsers instance to be rendered inside of an
-		 * element with the id "active-users-container" and poll for changes every
-		 * five seconds.
-		 */
-		var activeUsers = new gapi.analytics.ext.ActiveUsers({
-			container: 'active-users-container',
-			ids: 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>",
-			pollingInterval: 30
-		});
-		activeUsers.execute();
+		if(gapi.analytics.auth.isAuthorized()){
 
-		/**
-		 * Creates a new DataChart instance showing sessions over the past 30 days.
-		 * It will be rendered inside an element with the id "chart-1-container".
-		 */
-		var dataChart1 = new gapi.analytics.googleCharts.DataChart({
-			query: {
-				'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
-				'start-date': '30daysAgo',
-				'end-date': 'yesterday',
-				'metrics': 'ga:users',
-				'dimensions': 'ga:date'
-			},
-			chart: {
-				'container': 'chart-1-container',
-				'type': 'LINE',
-				'options': {
-					'width': '100%',
-					'vAxis': {
-								'title': 'Hello',
-					},
-					'hAxis': {
-								'title': 'Date',
+			/**
+			 * Create a new ActiveUsers instance to be rendered inside of an
+			 * element with the id "active-users-container" and poll for changes every
+			 * five seconds.
+			 */
+			var activeUsers = new gapi.analytics.ext.ActiveUsers({
+				container: 'active-users-container',
+				ids: 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>",
+				pollingInterval: 30
+			});
+			activeUsers.execute();
+
+			/**
+			 * Creates a new DataChart instance showing sessions over the past 30 days.
+			 * It will be rendered inside an element with the id "chart-1-container".
+			 */
+			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'metrics': 'ga:users',
+					'dimensions': 'ga:date'
+				},
+				chart: {
+					'container': 'chart-1-container',
+					'type': 'LINE',
+					'options': {
+						'width': '100%',
+						'vAxis': {
+									'title': 'Hello',
+						},
+						'hAxis': {
+									'title': 'Date',
+						}
 					}
 				}
-			}
-		});
-		dataChart1.execute();
+			});
+			dataChart1.execute();
 
-		dataChart1.on('success', function(response) {
-			$("#loader1").hide();
-		});
+			dataChart1.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
 
-		/**
-		 * Creates a new DataChart instance showing top 5 most popular demos/tools
-		 * amongst returning users only.
-		 * It will be rendered inside an element with the id "chart-3-container".
-		 */
-		var dataChart2 = new gapi.analytics.googleCharts.DataChart({
-			query: {
-				'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
-				'start-date': '30daysAgo',
-				'end-date': 'yesterday',
-				'dimensions': 'ga:deviceCategory',
-				'metrics': 'ga:pageviews',
-				'sort': '-ga:pageviews',
-			},
-			chart: {
-				'container': 'chart-2-container',
-				'type': 'PIE',
-				'options': {
-					'width': '100%',
-					'pieHole': 4/9,
-				}
-			}
-		});
-		dataChart2.execute();
+			dataChart1.on('success', function(response) {
+				$("#loader1").hide();
+			});
 
-		dataChart2.on('success', function(response) {
-			$("#loader2").hide();
-		});
-
-		/**
-		 * Creates a new DataChart instance showing sessions over the past 30 days.
-		 * It will be rendered inside an element with the id "chart-1-container".
-		 */
-		var dataChart3 = new gapi.analytics.googleCharts.DataChart({
-			query: {
-				'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
-				'start-date': '30daysAgo',
-				'end-date': 'yesterday',
-				'metrics': 'ga:users',
-				'dimensions': 'ga:hour',
-				'filters': 'ga:users>0'
-			},
-			chart: {
-				'container': 'chart-3-container',
-				'type': 'COLUMN',
-				'options': {
-					'vAxis': {
-								'title': 'Number of Users',
-					},
-					'hAxis': {
-								'title': 'Time of Day',
+			/**
+			 * Creates a new DataChart instance showing top 5 most popular demos/tools
+			 * amongst returning users only.
+			 * It will be rendered inside an element with the id "chart-3-container".
+			 */
+			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'dimensions': 'ga:deviceCategory',
+					'metrics': 'ga:pageviews',
+					'sort': '-ga:pageviews',
+				},
+				chart: {
+					'container': 'chart-2-container',
+					'type': 'PIE',
+					'options': {
+						'width': '100%',
+						'pieHole': 4/9,
 					}
 				}
-			}
-		});
-		dataChart3.execute();
+			});
+			dataChart2.execute();
 
-		dataChart3.on('success', function(response) {
-			$("#loader3").hide();
-		});
+			dataChart2.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
+
+			dataChart2.on('success', function(response) {
+				$("#loader2").hide();
+			});
+
+			/**
+			 * Creates a new DataChart instance showing sessions over the past 30 days.
+			 * It will be rendered inside an element with the id "chart-1-container".
+			 */
+			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'metrics': 'ga:users',
+					'dimensions': 'ga:hour',
+					'filters': 'ga:users>0'
+				},
+				chart: {
+					'container': 'chart-3-container',
+					'type': 'COLUMN',
+					'options': {
+						'vAxis': {
+									'title': 'Number of Users',
+						},
+						'hAxis': {
+									'title': 'Time of Day',
+						}
+					}
+				}
+			});
+			dataChart3.execute();
+
+			dataChart3.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
+
+			dataChart3.on('success', function(response) {
+				$("#loader3").hide();
+			});
+		}
 
 	});
 
-<?php } ?>
+	</script>
 
+<?php } ?>
+<script>
+
+	ga('set', 'page', '/#settings/usage');
+	ga('send', 'pageview');
 </script>

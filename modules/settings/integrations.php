@@ -25,12 +25,12 @@
 
 	//Settings
 	if(superadmin()){
-		
+
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updateintegrationsettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
 				echo "<div class='row'>";
-				
+
 					//Page Title
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
@@ -38,7 +38,7 @@
 							echo "<h6>Connect Abre to third party services</h6>";
 						echo "</div>";
 					echo "</div>";
-					
+
 					//Form Fields
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
@@ -54,7 +54,7 @@
 							echo "<label class='active' for='softwareanswerskey'>Software Answers VendorLink Key</label>";
 						echo "</div>";
 					echo "</div>";
-					
+
 			echo "</div>";
 
 
@@ -91,6 +91,9 @@
 				notification.MaterialSnackbar.showSnackbar(data);
 			})
 		});
+
+		ga('set', 'page', '/#settings/integrations');
+		ga('send', 'pageview');
 
 	});
 
