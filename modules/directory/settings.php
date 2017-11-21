@@ -143,6 +143,9 @@
 				})
 			});
 
+			ga('set', 'page', '/#directory/settings');
+			ga('send', 'pageview');
+
 		});
 </script>
 <?php

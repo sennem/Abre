@@ -90,64 +90,62 @@
 	users_parents table. We wanted to make parents who are registered as a contact
 	for the school to be able to "fastpass" registering a student token */
 	function isVerified(){
-        include "abre_dbconnect.php";
+		include "abre_dbconnect.php";
 
-        if($_SESSION['usertype'] == 'parent'){
-            $sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
-            $result = $db->query($sql);
-            $row = $result->fetch_assoc();
-            $parent_id = $row["id"];
+    if($_SESSION['usertype'] == 'parent'){
+			$sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
+      $result = $db->query($sql);
+      $row = $result->fetch_assoc();
+      $parent_id = $row["id"];
 
-            if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")
-                && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
-                //see if email matches any records
-                $sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE '".$_SESSION['useremail']."'";
-                $result = $db->query($sql);
-                while($row = $result->fetch_assoc()){
+      if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")
+          && $db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM Abre_ParentContacts")){
+					//see if email matches any records
+	        $sql = "SELECT * FROM Abre_ParentContacts WHERE Email1 LIKE '".$_SESSION['useremail']."'";
+	        $result = $db->query($sql);
+	        while($row = $result->fetch_assoc()){
+						//for records that match find kids associated with that email
+	          $sql2 = "SELECT * FROM student_tokens WHERE studentId = '".$row['StudentID']."'";
+	          $result2 = $db->query($sql2);
+	          while($row2 = $result2->fetch_assoc()){
+							$studenttokenencrypted = $row2['token'];
+	            $studentId = $row2['studentId'];
 
-                    //for records that match find kids associated with that email
-                    $sql2 = "SELECT * FROM student_tokens WHERE studentId = '".$row['StudentID']."'";
-                    $result2 = $db->query($sql2);
-                    while($row2 = $result2->fetch_assoc()){
-                        //for kids associated with that email
-                        $studenttokenencrypted = $row2['token'];
-                        $studentId = $row2['studentId'];
+	            //Check to see if student has already been claimed by parent
+	            $sqlcheck = "SELECT * FROM parent_students WHERE student_token = '$studenttokenencrypted' AND parent_id = $parent_id AND studentId = '$studentId'";
+	            $resultcheck = $db->query($sqlcheck);
+	            $numrows2 = $resultcheck->num_rows;
 
-                        //Check to see if student has already been claimed by parent
-                        $sqlcheck = "SELECT * FROM parent_students WHERE student_token = '$studenttokenencrypted' AND parent_id = $parent_id AND studentId = '$studentId'";
-                        $resultcheck = $db->query($sqlcheck);
-                        $numrows2 = $resultcheck->num_rows;
+	            //this parent does not have access
+	            if($numrows2 == 0 && $_SESSION['useremail'] != ''){
+								$stmt = $db->stmt_init();
+	              $sql = "INSERT INTO parent_students (parent_id, student_token, studentId) VALUES (?, ?, ?)";
+	              $stmt->prepare($sql);
+	              $stmt->bind_param("iss", $parent_id, $studenttokenencrypted, $row2['studentId']);
+	              $stmt->execute();
+	              $stmt->close();
+						}
+					}
+				}
+			}
+      $db->close();
 
-                        //this parent does not have access
-                        if($numrows2 == 0 && $_SESSION['useremail'] != ''){
-                            $stmt = $db->stmt_init();
-                            $sql = "INSERT INTO parent_students (parent_id, student_token, studentId) VALUES (?, ?, ?)";
-                            $stmt->prepare($sql);
-                            $stmt->bind_param("iss", $parent_id, $studenttokenencrypted, $row2['studentId']);
-                            $stmt->execute();
-                            $stmt->close();
-                        }
-                    }
-                }
-            }
-            $db->close();
-
-            include "abre_dbconnect.php";
-            if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
-                $sql = "SELECT * FROM parent_students WHERE parent_id = $parent_id";
-                if($result = $db->query($sql)){
-                    $_SESSION['auth_students'] = '';
-                    while($row = $result->fetch_assoc()){
-                        $sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['student_token']."'";
-                        $result2 = $db->query($sql2);
-                        $row2 = $result2->fetch_assoc();
-                        $_SESSION['auth_students'] .= $row2['studentId'].',';
-                    }
-                    $_SESSION['auth_students'] = rtrim($_SESSION['auth_students'], ", ");
-                }
-            }
-        }
-    }
+      include "abre_dbconnect.php";
+      if($db->query("SELECT * FROM student_tokens") && $db->query("SELECT * FROM users_parent")){
+				$sql = "SELECT * FROM parent_students WHERE parent_id = $parent_id";
+        if($result = $db->query($sql)){
+					$_SESSION['auth_students'] = '';
+          while($row = $result->fetch_assoc()){
+						$sql2 = "SELECT * FROM student_tokens WHERE token = '".$row['student_token']."'";
+            $result2 = $db->query($sql2);
+            $row2 = $result2->fetch_assoc();
+            $_SESSION['auth_students'] .= $row2['studentId'].',';
+          }
+          $_SESSION['auth_students'] = rtrim($_SESSION['auth_students'], ", ");
+				}
+			}
+		}
+	}
 
 	//Query the database
 	function databasequery($query){
@@ -345,6 +343,13 @@
 
 	function getSiteAnalytics(){
 		$valuereturn = getSettingsDbValue('siteanalytics');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
+
+	function getSiteAnalyticsViewId(){
+		$valuereturn = getSettingsDbValue('analyticsViewId');
 		if($valuereturn == ""){ $valuereturn = ""; }
 
 		return $valuereturn;
@@ -642,6 +647,16 @@
 		$json = json_decode($result,true);
 
 		return $json;
+	}
+
+	//returns a string listing all scopes the user has access too.
+	function getCurrentGoogleScopes($access_token){
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=".$access_token);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+		$result = curl_exec($ch);
+		$json = json_decode($result, true);
+		return $json["scope"];
 	}
 
 ?>

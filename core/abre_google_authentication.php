@@ -34,6 +34,7 @@
 	$client->setApprovalPrompt("auto");
 	$scopes = unserialize(constant("GOOGLE_SCOPES"));
 	$client->setScopes($scopes);
+	$client->setIncludeGrantedScopes(true);
 
 	//Send client requests
 	$Service_Oauth2 = new Google_Service_Oauth2($client);

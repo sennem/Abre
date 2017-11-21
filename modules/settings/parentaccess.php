@@ -25,11 +25,11 @@
 
 	//Settings
 	if(superadmin()){
-		
+
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updateparentaccesssettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
-	
+
 					//Page Title
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
@@ -40,7 +40,7 @@
 
 					//Parent Access
 					echo "<div class='row'>";
-					
+
 						echo "<div class='col l12'>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".getSiteParentAccess()."/>";
 							echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
@@ -83,7 +83,7 @@
 								echo "</div>";
 							}
 						echo "</div>";
-					
+
 			echo "</div>";
 
 
@@ -119,7 +119,7 @@
 				notification.MaterialSnackbar.showSnackbar(data);
 			})
 		});
-		
+
 		//Generate Keys for Parents
 		$("#generateallkeys").unbind().click(function(event){
 			event.preventDefault();
@@ -132,6 +132,9 @@
 				})
 			}
 		});
+
+		ga('set', 'page', '/#settings/parentaccess');
+		ga('send', 'pageview');
 
 	});
 

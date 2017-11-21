@@ -38,9 +38,10 @@
 		$authUrl = $client->createAuthUrl();
 	}
 	$url = $portal_root . '/core/abre_microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent';
+
+	echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre_pattern.png); '>";
 ?>
-	<!-- Display the login -->
-	<div class="mdl-layout mdl-js-layout login-card">
+		<!-- Display the login -->
 		<div class="login_wrapper">
 			<div class="login-card-square mdl-card animated fadeIn">
 				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(<?php echo getSiteLogo(); ?>) center center no-repeat; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover; margin-left:20px; margin-bottom:5px;'></div>

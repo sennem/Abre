@@ -25,7 +25,7 @@
 
 	//Settings
 	if(superadmin()){
-		
+
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updategeneralsettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
@@ -46,14 +46,14 @@
 								echo "<div id='updateabre' data-version='$currentlink' class='card white-text pointer' style='background-color:#4CAF50; padding:20px;'>A new version of Abre is available. <u>Click here to update to $currentversion.</u></div>";
 							echo "</div>";
 						}
-					
+
 						echo "<div class='input-field col s12' style='margin-top:0;'>";
 							echo "<h4>General Settings</h4>";
 							echo "<h6>Adjust Abre site settings and preferences. You can also manage colors and icons.</h6>";
 						echo "</div>";
-						
+
 					echo "</div>";
-					
+
 					//Form Fields
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
@@ -72,9 +72,13 @@
 						    echo "<input placeholder='Enter a Site Color' value='".getSiteColor()."' id='sitecolor' name='sitecolor' type='text' autocomplete='off'>";
 							echo "<label class='active' for='sitecolor'>Site Color</label>";
 						echo "</div>";
-						echo "<div class='input-field col s12'>";
+						echo "<div class='input-field col s6'>";
 						    echo "<input placeholder='Enter the Google Analytics ID' value='".getSiteAnalytics()."' id='siteanalytics' name='siteanalytics' type='text' autocomplete='off'>";
 							echo "<label class='active' for='siteanalytics'>Google Analytics ID</label>";
+						echo "</div>";
+						echo "<div class='input-field col s6'>";
+								echo "<input placeholder='Enter the Google Analytics View ID' value='".getSiteAnalyticsViewId()."' id='analyticsViewId' name='analyticsViewId' type='text' autocomplete='off'>";
+							echo "<label class='active' for='analyticsViewId'>Google Analytics View ID</label>";
 						echo "</div>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter the Site Administrator Email' value='".getSiteAdminEmail()."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
@@ -110,7 +114,7 @@
 							echo "<h5>Abre Community</h5>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".getSiteAbreCommunity()."/>";
 							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/community/' style='color:#000;' target='_blank'>Learn more</a></label>";
-						echo "</div>";	
+						echo "</div>";
 						echo "<div id='community_information'>";
 							echo "<div class='input-field col s6'>";
 								echo "<input placeholder='Enter a First Name' value='".getSiteCommunityFirstName()."' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>";
@@ -130,7 +134,7 @@
 							echo "</div>";
 						echo "</div>";
 					echo "</div>";
-					
+
 
 
 					//Save Button
@@ -212,6 +216,9 @@
 				$("#community_information").hide();
 			}
 		});
+
+		ga('set', 'page', '/#settings');
+		ga('send', 'pageview');
 
 	});
 

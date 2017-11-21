@@ -22,33 +22,279 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
-	
+	//Google API PHP library files
+	require_once(dirname(__FILE__).'/../../core/google/vendor/autoload.php');
+
+
 	if(superadmin()){
+
+		//Create Client request to access Google API
+		$client = new Google_Client();
+		$client->setApplicationName("Abre");
+		$client_id = constant("GOOGLE_CLIENT_ID");
+		$client->setClientId($client_id);
+		$client_secret = constant("GOOGLE_CLIENT_SECRET");
+		$client->setClientSecret($client_secret);
+		$client->setRedirectUri($portal_root.'/modules/settings/usage.php');
+		$simple_api_key = constant("GOOGLE_API_KEY");
+		$client->setDeveloperKey($simple_api_key);
+		$client->setAccessType("offline");
+		$client->setApprovalPrompt("auto");
+		$client->addScope(array('https://www.googleapis.com/auth/analytics.readonly'));
+		$client->setIncludeGrantedScopes(true);
+
+		$authenticated = false;
+		$viewId = getSiteAnalyticsViewId();
+
+		//Set Access Token
+		if(isset($_SESSION['access_token']) && $_SESSION['access_token']){
+			$client->setAccessToken($_SESSION['access_token']);
+		}
+
+		if(isset($_GET["code"])){
+			$client->authenticate($_GET['code']);
+			$_SESSION['access_token'] = $client->getAccessToken();
+			$tokenToStore = json_encode($_SESSION["access_token"]);
+
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE users SET refresh_token = ? WHERE email = ?";
+			$stmt->prepare($sql);
+			$stmt->bind_param("ss", $tokenToStore, $_SESSION["useremail"]);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
+
+			header('Location: '. $portal_root.'/#settings/usage');
+		}else{
+			if($client->isAccessTokenExpired()){
+				$newAccessTokenArray = $client->refreshToken($_SESSION['access_token']['refresh_token']);
+				$_SESSION['access_token']['access_token'] = $newAccessTokenArray['access_token'];
+				$client->setAccessToken($_SESSION["access_token"]);
+			}
+			$authToken = $_SESSION["access_token"]["access_token"];
+			$scopes = getCurrentGoogleScopes($authToken);
+			if(strpos($scopes, 'https://www.googleapis.com/auth/analytics.readonly') === false){
+				$authUrl = $client->createAuthUrl();
+			}else{
+				$AUTH_TOKEN = $authToken;
+				$authenticated = true;
+			}
+		}
 
 		//Usage
 		echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 		echo "<div class='page'>";
-	
+
 			//Page Title
 			echo "<div class='row'>";
-				echo "<div class='input-field col s12'>";
-					echo "<h4>Usage</h4>";
-					echo "<h6>Abre site usage coming soon</h6>";
+				echo "<div class='input-field col s8'>";
+					echo "<h4>Usage Analytics</h4>";
+					if(!$authenticated){
+						echo "<h6>To access Google Analytics, click below to give Google permission to access your usage.</h6>";
+						echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; text-transform:none; background-color:".getSiteColor()."; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' style='width:20px'></i>Enable Google Analytics</a>";
+					}
 				echo "</div>";
+				if($authenticated && $viewId != ""){
+					echo "<div class='input-field col s4'>";
+						echo "<div id='active-users-container' style='float:right;'></div>";
+					echo "</div>";
 			echo "</div>";
-	
+			echo "<div id='googleCharts'>";
+					echo "<div class='row'>";
+						echo "<h5 id='chart1Title' class='center-align'> Number of Users (Past 30 Days)</h5>";
+						echo "<div class='input-field col s12'>";
+							echo "<div id='chart-1-container'></div>";
+						echo "</div>";
+						echo "<div class='center-align' id='date-range-selector-1-container'><div id='loader1' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
+					echo "</div>";
+					echo "<div class='row'>";
+						echo "<div class='input-field col s6'>";
+							echo "<h5 id='chart1Title' class='center-align'>Page Views by Device Type</h5>";
+							echo "<div class='center-align' id='chart-2-container'><div id='loader2' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
+						echo "</div>";
+						echo "<div class='input-field col s6'>";
+							echo "<h5 id='chart1Title' class='center-align'> Users by Time of Day (Past 30 Days)</h5>";
+							echo "<div class='center-align' id='chart-3-container'><div id='loader3' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
+						echo "</div>";
+					echo "</div>";
+				}elseif($authenticated && $viewId == ""){
+					echo "</div>";
+					echo "<h6>You are authenticated, but have not set up your analytics ID in the settings page. Please visit <a href='#settings' style='color: ".getSiteColor().";'>the settings page</a> to provide this information.</h6>";
+				}
+			echo "</div>";
+			echo "<h6 id='viewIdError' style='display:none'>You do not have permission to view the entered Analytics View ID. Please enter a View ID you have permission to access.</h6>";
+
 		echo "</div>";
 		echo "</div>";
-		
+
 	}
 
 ?>
 
-<script>
+<?php if($authenticated && $viewId != ""){ ?>
+	<script>
+		(function (w, d, s, g, js, fs) {
+		if ($('#googleCache').length > 0) return;
+		g = w.gapi || (w.gapi = {}); g.analytics = { q: [], ready: function (f) { this.q.push(f); } };
+		js = d.createElement(s); fs = d.getElementsByTagName(s)[0];
+		js.src = 'https://apis.google.com/js/platform.js';
+		js.id = "googleCache";
+		fs.parentNode.insertBefore(js, fs); js.onload = function () { g.load('analytics'); };
+		}(window, document, 'script'));
+	</script>
 
-	$(function(){
+	<script src="./modules/settings/javascript/active-users.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
+	<script>
+
+
+	gapi.analytics.ready(function() {
+
+		/**
+		 * Authorize the user immediately if the user has already granted access.
+		 * If no access has been created, render an authorize button inside the
+		 * element with the ID "embed-api-auth-container".
+		 */
+		gapi.analytics.auth.authorize({
+			'serverAuth': {
+				'access_token': "<?php echo $AUTH_TOKEN;  ?>"
+			}
+		});
+
+		if(gapi.analytics.auth.isAuthorized()){
+
+			/**
+			 * Create a new ActiveUsers instance to be rendered inside of an
+			 * element with the id "active-users-container" and poll for changes every
+			 * five seconds.
+			 */
+			var activeUsers = new gapi.analytics.ext.ActiveUsers({
+				container: 'active-users-container',
+				ids: 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>",
+				pollingInterval: 30
+			});
+			activeUsers.execute();
+
+			/**
+			 * Creates a new DataChart instance showing sessions over the past 30 days.
+			 * It will be rendered inside an element with the id "chart-1-container".
+			 */
+			var dataChart1 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'metrics': 'ga:users',
+					'dimensions': 'ga:date'
+				},
+				chart: {
+					'container': 'chart-1-container',
+					'type': 'LINE',
+					'options': {
+						'width': '100%',
+						'vAxis': {
+									'title': 'Hello',
+						},
+						'hAxis': {
+									'title': 'Date',
+						}
+					}
+				}
+			});
+			dataChart1.execute();
+
+			dataChart1.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
+
+			dataChart1.on('success', function(response) {
+				$("#loader1").hide();
+			});
+
+			/**
+			 * Creates a new DataChart instance showing top 5 most popular demos/tools
+			 * amongst returning users only.
+			 * It will be rendered inside an element with the id "chart-3-container".
+			 */
+			var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'dimensions': 'ga:deviceCategory',
+					'metrics': 'ga:pageviews',
+					'sort': '-ga:pageviews',
+				},
+				chart: {
+					'container': 'chart-2-container',
+					'type': 'PIE',
+					'options': {
+						'width': '100%',
+						'pieHole': 4/9,
+					}
+				}
+			});
+			dataChart2.execute();
+
+			dataChart2.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
+
+			dataChart2.on('success', function(response) {
+				$("#loader2").hide();
+			});
+
+			/**
+			 * Creates a new DataChart instance showing sessions over the past 30 days.
+			 * It will be rendered inside an element with the id "chart-1-container".
+			 */
+			var dataChart3 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'metrics': 'ga:users',
+					'dimensions': 'ga:hour',
+					'filters': 'ga:users>0'
+				},
+				chart: {
+					'container': 'chart-3-container',
+					'type': 'COLUMN',
+					'options': {
+						'vAxis': {
+									'title': 'Number of Users',
+						},
+						'hAxis': {
+									'title': 'Time of Day',
+						}
+					}
+				}
+			});
+			dataChart3.execute();
+
+			dataChart3.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
+
+			dataChart3.on('success', function(response) {
+				$("#loader3").hide();
+			});
+		}
 
 	});
 
+	</script>
+
+<?php } ?>
+<script>
+
+	ga('set', 'page', '/#settings/usage');
+	ga('send', 'pageview');
 </script>
