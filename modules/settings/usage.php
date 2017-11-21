@@ -51,10 +51,6 @@
 			$client->setAccessToken($_SESSION['access_token']);
 		}
 
-		if($client->getAccessToken()){
-			$_SESSION['access_token'] = $client->getAccessToken();
-		}
-
 		if(isset($_GET["code"])){
 			$client->authenticate($_GET['code']);
 			$_SESSION['access_token'] = $client->getAccessToken();
@@ -71,7 +67,8 @@
 			header('Location: '. $portal_root.'/#settings/usage');
 		}else{
 			if($client->isAccessTokenExpired()){
-				$_SESSION['access_token'] = $client->refreshToken($_SESSION['access_token']['refresh_token']);
+				$newAccessTokenArray = $client->refreshToken($_SESSION['access_token']['refresh_token']);
+				$_SESSION['access_token']['access_token'] = $newAccessTokenArray['access_token'];
 				$client->setAccessToken($_SESSION["access_token"]);
 			}
 			$authToken = $_SESSION["access_token"]["access_token"];
