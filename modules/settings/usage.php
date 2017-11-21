@@ -92,7 +92,7 @@ if(superadmin()){
 				echo "<div class='input-field col s8'>";
 					echo "<h4>Usage Analytics</h4>";
 					if(!$authenticated){
-						echo "<div>To access Abre Analytics, click below to give Google permission to access your usage.</div>";
+						echo "<h6>To access Google Analytics, click below to give Google permission to access your usage.</h6>";
 						echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; text-transform:none; background-color:".getSiteColor()."; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' style='width:20px'></i>Enable Google Analytics</a>";
 					}
 				echo "</div>";
@@ -120,7 +120,7 @@ if(superadmin()){
 					echo "</div>";
 				}elseif($authenticated && $viewId == ""){
 					echo "</div>";
-					echo "<span>You are authenticated, but have not set up your analytics ID in the settings page. Please visit <a href='#settings' style='color: ".getSiteColor().";'>the settings page</a> to provide this information.</span>";
+					echo "<h6>You are authenticated, but have not set up your analytics ID in the settings page. Please visit <a href='#settings' style='color: ".getSiteColor().";'>the settings page</a> to provide this information.</h6>";
 				}
 
 		echo "</div>";
