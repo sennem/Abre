@@ -35,7 +35,7 @@
 		$client->setClientId($client_id);
 		$client_secret = constant("GOOGLE_CLIENT_SECRET");
 		$client->setClientSecret($client_secret);
-		$client->setRedirectUri('http://localhost/modules/settings/usage.php');
+		$client->setRedirectUri($portal_root.'/modules/settings/usage.php');
 		$simple_api_key = constant("GOOGLE_API_KEY");
 		$client->setDeveloperKey($simple_api_key);
 		$client->setAccessType("offline");
