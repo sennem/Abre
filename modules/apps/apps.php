@@ -257,12 +257,21 @@
 		checkWidthApps();
 
 		//Make the Icons Clickable
-		$(".app").unbind().click(function(event) {
+		$(".app").unbind().click(function(event){
+			
+			//Open link
 			event.preventDefault();
 			window.open($(this).find("a").attr("href"), '_blank');
 
-	    $("#viewapps_arrow").hide();
-	    $('#viewapps').closeModal({ in_duration: 0, out_duration: 0, });
+			//Close dock
+		    $("#viewapps_arrow").hide();
+		    $('#viewapps').closeModal({ in_duration: 0, out_duration: 0, });
+		    
+		    //Track click
+		    var linktitle = '/#apps/'+$(this).find("a").text();
+		    ga('set', 'page', linktitle);
+			ga('send', 'pageview');
+		    
 		});
 
 		//Hide truncate on hover
