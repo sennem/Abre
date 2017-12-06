@@ -38,15 +38,22 @@
 		$authUrl = $client->createAuthUrl();
 	}
 	$url = $portal_root . '/core/abre_microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent';
+	
+	//Overlay Div
+	echo "<div id='loadingcover' style='background-color:".getSiteColor()."; position:fixed; width:100%; height:100%; z-index:2'></div>";
 
 	echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre_pattern.png); '>";
 ?>
 		<!-- Display the login -->
 		<div class="login_wrapper">
-			<div class="login-card-square mdl-card animated fadeIn">
-				<div class="mdl-card__title mdl-card--expand" style='width:200px; height:200px; background: url(<?php echo getSiteLogo(); ?>) center center no-repeat; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover; margin-left:20px; margin-bottom:5px;'></div>
-				 <?php
-					echo "<div class='mdl-card-text mdl-color-text--grey-600'>Please log in with one of the following services</div>";
+			<div class="login-card-square mdl-card">
+				
+				<?php
+					echo "<div style='height:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
+				?>
+				
+				<?php
+					echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center;'>Please log in with one of the following services</div>";
 					if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
 						echo "<div style='padding-top:1em'>";
 							echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; width:100%; text-transform:none; background-color:#BF4434; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' style='width:20px'></i>Login with Google</a>";
@@ -68,10 +75,14 @@
 	</div>
 
 <script>
-
+	
+	$(function(){
+		
+		$("#loadingcover").delay(300).fadeOut();
+	
 		//Responsive login view
 		function loginWidthCheck(){
-			if($(window).width() < 600){
+			if ($(window).width() < 600){
 				$(".login-card-square").removeClass("mdl-shadow--2dp");
 				$(".login-card").addClass("mdl-color--white");
 			}else{
@@ -79,8 +90,10 @@
 				$(".login-card").removeClass("mdl-color--white");
 			}
 		}
-
+	
 		loginWidthCheck();
 		$(window).resize(loginWidthCheck);
+		
+	});
 
 </script>
