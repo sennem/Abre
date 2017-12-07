@@ -98,12 +98,12 @@
 		$(".topapps").unbind().click(function(event) {
 			event.preventDefault();
 			window.open($(this).find("a").attr("href"), '_blank');
-			
+
 			//Track click
-		    var linktitle = '/#apps/'+$(this).find("a").text();
-		    ga('set', 'page', linktitle);
+		  var linktitle = '/#apps/'+$(this).find("a").text()+'/';
+		  ga('set', 'page', linktitle);
 			ga('send', 'pageview');
-			
+
 		});
 
 	});

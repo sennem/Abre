@@ -36,7 +36,7 @@
 					$( '#navigation_top' ).show();
 					$('.tab_1').addClass('tabmenuover');
 				});
-				ga('set', 'page', '/#directory');
+				ga('set', 'page', '/#directory/');
 				ga('send', 'pageview');
 	    },
 			'directory/archived': function(name) {
@@ -52,7 +52,7 @@
 					$( '#navigation_top' ).show();
 					$('.tab_2').addClass('tabmenuover');
 				});
-				ga('set', 'page', '/#directory/archived');
+				ga('set', 'page', '/#directory/archived/');
 				ga('send', 'pageview');
 	    },
 			'directory/settings': function(name) {
@@ -69,7 +69,7 @@
 					$( '#navigation_top' ).show();
 					$('.tab_3').addClass('tabmenuover');
 				});
-				ga('set', 'page', '/#directory/settings');
+				ga('set', 'page', '/#directory/settings/');
 				ga('send', 'pageview');
 	    },
 	    'directory/reports': function(name) {
@@ -86,7 +86,7 @@
 					$( '#navigation_top' ).show();
 					$('.tab_4').addClass('tabmenuover');
 				});
-				ga('set', 'page', '/#directory/reports');
+				ga('set', 'page', '/#directory/reports/');
 				ga('send', 'pageview');
 	    },
 			'directory/?:name': function(name) {
