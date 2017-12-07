@@ -23,7 +23,7 @@
 
 		echo "
 			'directory': function(name) {
-		    	$('#navigation_top').hide();
+		    $('#navigation_top').hide();
 				$('#content_holder').hide();
 				$('#loader').show();
 				$('#titletext').text('Staff Directory');
@@ -36,9 +36,11 @@
 					$( '#navigation_top' ).show();
 					$('.tab_1').addClass('tabmenuover');
 				});
-	    	},
+				ga('set', 'page', '/#directory');
+				ga('send', 'pageview');
+	    },
 			'directory/archived': function(name) {
-		    	$( '#navigation_top' ).hide();
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Staff Directory');
@@ -50,9 +52,11 @@
 					$( '#navigation_top' ).show();
 					$('.tab_2').addClass('tabmenuover');
 				});
-	    	},
+				ga('set', 'page', '/#directory/archived');
+				ga('send', 'pageview');
+	    },
 			'directory/settings': function(name) {
-		    	$( '#navigation_top' ).hide();
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Staff Directory');
@@ -65,9 +69,11 @@
 					$( '#navigation_top' ).show();
 					$('.tab_3').addClass('tabmenuover');
 				});
-	    	},
-	    	'directory/reports': function(name) {
-		    	$( '#navigation_top' ).hide();
+				ga('set', 'page', '/#directory/settings');
+				ga('send', 'pageview');
+	    },
+	    'directory/reports': function(name) {
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Staff Directory');
@@ -80,15 +86,17 @@
 					$( '#navigation_top' ).show();
 					$('.tab_4').addClass('tabmenuover');
 				});
-	    	},
+				ga('set', 'page', '/#directory/reports');
+				ga('send', 'pageview');
+	    },
 			'directory/?:name': function(name) {
-		    	$( '#navigation_top' ).hide();
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Staff Directory');
 				document.title = 'Staff Directory';
 				$( '#content_holder' ).load( 'modules/directory/profile.php?id='+name, function() { init_page(); back_button('#directory'); $('#firstname').focus();
 				});
-	    	},";
+	    },";
 	}
 ?>
