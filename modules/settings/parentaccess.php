@@ -133,9 +133,6 @@
 			}
 		});
 
-		ga('set', 'page', '/#settings/parentaccess');
-		ga('send', 'pageview');
-
 	});
 
 </script>

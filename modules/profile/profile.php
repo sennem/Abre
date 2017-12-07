@@ -294,7 +294,4 @@
 		win.document.write('</body></html>');
 	});
 
-	ga('set', 'page', '/#profile');
-	ga('send', 'pageview');
-
 </script>

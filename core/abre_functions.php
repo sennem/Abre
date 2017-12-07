@@ -649,6 +649,34 @@
 		return $json;
 	}
 
+	//Insert into the database
+	function vendorLinkPut($call,$fields){
+		$VendorLinkURL = getSoftwareAnswersURL();
+		$vendorIdentifier = getSoftwareAnswersIdentifier();
+		$vendorKey = getSoftwareAnswersKey();
+		$userID = "";
+		$requestDate = gmdate('D, d M Y H:i:s').' GMT';
+		$userName = $vendorIdentifier."|".$userID."|".$requestDate;
+		$password = $vendorIdentifier.$userID.$requestDate.$vendorKey;
+		$hmacData = $vendorIdentifier.$userID.$requestDate.$vendorKey;
+		$hmacSignature = base64_encode(pack("H*", sha1($hmacData)));
+		$vlauthheader = $vendorIdentifier."||".$hmacSignature;
+
+		$url = $call;
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('VL-Authorization: '.$vlauthheader, 'Date: '.$requestDate, 'Content-Type: application/json'));
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch);
+		$json = json_decode($result,true);
+
+		return $json;
+	}
+
 	//returns a string listing all scopes the user has access too.
 	function getCurrentGoogleScopes($access_token){
 		$ch = curl_init();

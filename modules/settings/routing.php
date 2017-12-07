@@ -24,36 +24,44 @@
 
 		echo "
 			'settings': function(name) {
-		    	$( '#navigation_top' ).hide();
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/settings.php', function() { init_page(); });
-	    	},
-	    	'settings/integrations': function(name) {
-		    	$( '#navigation_top' ).hide();
+				ga('set', 'page', '/#settings');
+				ga('send', 'pageview');
+	    },
+	    'settings/integrations': function(name) {
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/integrations.php', function() { init_page(); });
-	    	},
-	    	'settings/parentaccess': function(name) {
-		    	$( '#navigation_top' ).hide();
+				ga('set', 'page', '/#settings/integrations');
+				ga('send', 'pageview');
+	    },
+	    'settings/parentaccess': function(name) {
+		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/parentaccess.php', function() { init_page(); });
-	    	},
-	    	'settings/usage': function(name) {
-		    	$( '#navigation_top' ).hide();
+				ga('set', 'page', '/#settings/parentaccess');
+				ga('send', 'pageview');
+	    },
+	    'settings/usage': function(name) {
+				$( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/usage.php', function() { init_page(); });
-	    	},";
+				ga('set', 'page', '/#settings/usage');
+				ga('send', 'pageview');
+	    },";
 	}
 ?>

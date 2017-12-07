@@ -217,9 +217,6 @@
 			}
 		});
 
-		ga('set', 'page', '/#settings');
-		ga('send', 'pageview');
-
 	});
 
 </script>

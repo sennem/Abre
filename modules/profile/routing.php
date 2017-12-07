@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2017 Abre.io LLC
 	*
@@ -15,11 +15,11 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-    
+
     //Required configuration files
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php'); 
-    
-		echo "	
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+
+		echo "
 			'profile': function(name)
 			{
 				$( '#navigation_top' ).hide();
@@ -29,5 +29,7 @@
 				document.title = 'Profile';
 				$( '#modal_holder' ).load( 'modules/profile/modals.php' );
 				$( '#content_holder' ).load( 'modules/profile/profile.php', function() { init_page(); });
-	    	},";	    
+				ga('set', 'page', '/#profile');
+				ga('send', 'pageview');
+	    },";
 ?>

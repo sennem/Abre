@@ -224,8 +224,9 @@
 					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
 					'start-date': '30daysAgo',
 					'end-date': 'yesterday',
-					'dimensions': 'ga:deviceCategory',
+					'dimensions': 'ga:pagePathLevel1',
 					'metrics': 'ga:pageviews',
+					'filters': 'ga:pageviews>=5',
 					'sort': '-ga:pageviews',
 				},
 				chart: {
@@ -293,8 +294,3 @@
 	</script>
 
 <?php } ?>
-<script>
-
-	ga('set', 'page', '/#settings/usage');
-	ga('send', 'pageview');
-</script>
