@@ -101,21 +101,26 @@
 			echo "</div>";
 			echo "<div id='googleCharts'>";
 					echo "<div class='row'>";
-						echo "<h5 id='chart1Title' class='center-align'> Number of Users (Past 30 Days)</h5>";
 						echo "<div class='input-field col s12'>";
-							echo "<div id='chart-1-container'></div>";
+							echo "<h5 id='chart1Title' class='center-align'> Number of Users (Past 30 Days)</h5>";
+							echo "<div class='center-align' id='chart-1-container'><div id='loader1' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
 						echo "</div>";
-						echo "<div class='center-align' id='date-range-selector-1-container'><div id='loader1' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
 					echo "</div>";
 					echo "<div class='row'>";
-						echo "<div class='input-field col s6'>";
-							echo "<h5 id='chart1Title' class='center-align'>Page Views by Device Type</h5>";
+						echo "<div class='input-field col l6 s12'>";
+							echo "<h5 id='chart2Title' class='center-align'>Page Views by Device Type (Past 30 Days)</h5>";
 							echo "<div class='center-align' id='chart-2-container'><div id='loader2' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
 						echo "</div>";
-						echo "<div class='input-field col s6'>";
-							echo "<h5 id='chart1Title' class='center-align'> Users by Time of Day (Past 30 Days)</h5>";
-							echo "<div class='center-align' id='chart-3-container'><div id='loader3' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
+						echo "<div class='input-field col l6 s12'>";
+							echo "<h5 id='chart4Title' class='center-align'> Page Views (Past 30 Days)</h5>";
+							echo "<div class='center-align' id='chart-4-container'><div id='loader4' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
+					echo "<div class='input-field col l6 s12'>";
+						echo "<h5 id='chart3Title' class='center-align'> Users by Time of Day (Past 30 Days)</h5>";
+						echo "<div class='center-align' id='chart-3-container'><div id='loader3' class='mdl-spinner mdl-js-spinner is-active'></div></div>";
+					echo "</div>";
 					echo "</div>";
 				}elseif($authenticated && $viewId == ""){
 					echo "</div>";
@@ -224,9 +229,8 @@
 					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
 					'start-date': '30daysAgo',
 					'end-date': 'yesterday',
-					'dimensions': 'ga:pagePathLevel1',
+					'dimensions': 'ga:deviceCategory',
 					'metrics': 'ga:pageviews',
-					'filters': 'ga:pageviews>=5',
 					'sort': '-ga:pageviews',
 				},
 				chart: {
@@ -286,6 +290,37 @@
 
 			dataChart3.on('success', function(response) {
 				$("#loader3").hide();
+			});
+
+			var dataChart4 = new gapi.analytics.googleCharts.DataChart({
+				query: {
+					'ids': 'ga:' + "<?php echo getSiteAnalyticsViewId(); ?>", // <-- Replace with the ids value for your view.
+					'start-date': '30daysAgo',
+					'end-date': 'yesterday',
+					'dimensions': 'ga:pagePathLevel1',
+					'metrics': 'ga:pageviews',
+					'filters': 'ga:pageviews>=5',
+					'sort': '-ga:pageviews',
+				},
+				chart: {
+					'container': 'chart-4-container',
+					'type': 'PIE',
+					'options': {
+						'width': '100%',
+						'pieHole': 4/9,
+					}
+				}
+			});
+			dataChart4.execute();
+
+			dataChart4.on('error', function(response){
+				$("#googleCharts").hide();
+				$("#active-users-container").hide();
+				$("#viewIdError").show();
+			});
+
+			dataChart4.on('success', function(response) {
+				$("#loader4").hide();
 			});
 		}
 
