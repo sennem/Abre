@@ -30,7 +30,7 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/settings.php', function() { init_page(); });
-				ga('set', 'page', '/#settings');
+				ga('set', 'page', '/#settings/');
 				ga('send', 'pageview');
 	    },
 	    'settings/integrations': function(name) {
@@ -40,7 +40,7 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/integrations.php', function() { init_page(); });
-				ga('set', 'page', '/#settings/integrations');
+				ga('set', 'page', '/#settings/integrations/');
 				ga('send', 'pageview');
 	    },
 	    'settings/parentaccess': function(name) {
@@ -50,7 +50,7 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/parentaccess.php', function() { init_page(); });
-				ga('set', 'page', '/#settings/parentaccess');
+				ga('set', 'page', '/#settings/parentaccess/');
 				ga('send', 'pageview');
 	    },
 	    'settings/usage': function(name) {
@@ -60,7 +60,7 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/usage.php', function() { init_page(); });
-				ga('set', 'page', '/#settings/usage');
+				ga('set', 'page', '/#settings/usage/');
 				ga('send', 'pageview');
 	    },";
 	}

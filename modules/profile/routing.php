@@ -29,7 +29,7 @@
 				document.title = 'Profile';
 				$( '#modal_holder' ).load( 'modules/profile/modals.php' );
 				$( '#content_holder' ).load( 'modules/profile/profile.php', function() { init_page(); });
-				ga('set', 'page', '/#profile');
+				ga('set', 'page', '/#profile/');
 				ga('send', 'pageview');
 	    },";
 ?>
