@@ -293,8 +293,3 @@
 	</script>
 
 <?php } ?>
-<script>
-
-	ga('set', 'page', '/#settings/usage');
-	ga('send', 'pageview');
-</script>

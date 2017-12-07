@@ -92,9 +92,6 @@
 			})
 		});
 
-		ga('set', 'page', '/#settings/integrations');
-		ga('send', 'pageview');
-
 	});
 
 </script>
