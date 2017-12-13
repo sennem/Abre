@@ -113,6 +113,7 @@
 		include "stream_save_image.php";
 
 		//Comment count
+		$link = base64_encode($link);
 		$query = "SELECT * FROM streams_comments WHERE url = '$link' and comment != ''";
 		$dbreturn = databasequery($query);
 		$num_rows_comment = count($dbreturn);
