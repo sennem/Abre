@@ -121,7 +121,10 @@
 					}
 				}
 			?>
-		'*': function(){
+			'privacy': function(){
+				window.location = "https://abre.io/privacy";
+			},
+			'*': function(){
 				//window.location = "/";
 			}
 		});
