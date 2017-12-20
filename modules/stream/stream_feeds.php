@@ -103,7 +103,7 @@
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));
 		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
-		$link = $feeds[$cardcountloop][3];
+		$linkraw = $feeds[$cardcountloop][3];
 		$image = $feeds[$cardcountloop][4];
 		$linklabel = $feeds[$cardcountloop][5];
 		$feedtitle = $feeds[$cardcountloop][6];
@@ -113,7 +113,7 @@
 		include "stream_save_image.php";
 
 		//Comment count
-		$link = base64_encode($link);
+		$link = base64_encode($linkraw);
 		$query = "SELECT * FROM streams_comments WHERE url = '$link' and comment != ''";
 		$dbreturn = databasequery($query);
 		$num_rows_comment = count($dbreturn);
