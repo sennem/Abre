@@ -31,19 +31,6 @@
 			componentHandler.upgradeAllRegistered();
 		}
 
-		//Redirect to profile if staff do not have streams
-		function streamCheck() {
-			$.ajax({
-				type: 'POST',
-				url: 'modules/profile/check.php'
-			})
-			.done(function(html){
-				if(html == 'no'){
-					window.location.href = '#profile';
-				}
-			})
-		}
-
 		//Toggle slide navigation drawer
 		function toggle_drawer() {
 			var drawer = document.getElementsByClassName('mdl-layout__drawer')[0];
@@ -54,8 +41,6 @@
 
 		//Start the page
 		function init_page(loader) {
-			//Redirect to profile if staff do not have streams
-			streamCheck();
 
 			//Hide Loader
 			if (loader === undefined | loader === "still"){ $("#loader").hide(); }
