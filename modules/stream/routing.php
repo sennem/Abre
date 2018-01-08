@@ -19,9 +19,6 @@
     //Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
-	    $StreamEnd = 20;
-	    if(isset($_GET["StreamEnd"])){ $StreamEnd = $_GET["StreamEnd"]; }
-
 		echo "
 			'': function()
 			{
@@ -32,32 +29,18 @@
 				document.title = 'Stream';
 				$('#modal_holder').load( 'modules/stream/modals.php', function()
 				{
-					$('#content_holder').load( 'modules/stream/stream.php?StreamEnd=$StreamEnd');
+					$('#content_holder').load( 'modules/stream/home.php', function()
+					{
+						init_page();
+					});
 				});
-
+				
+				
 				$( '#navigation_top' ).show();
 				$( '#navigation_top' ).load( 'modules/stream/menu.php', function() {
 					$( '#navigation_top' ).show();
-					$('.tab_1').addClass('tabmenuover');
 				});
-			},
-			'likes': function()
-			{
-				$( '#navigation_top' ).hide();
-				$( '#content_holder' ).hide();
-				$( '#loader' ).show();
-				$( '#titletext' ).text('Home');
-				document.title = 'Stream';
-				$('#modal_holder').load( 'modules/stream/modals.php', function()
-				{
-					$( '#content_holder' ).load( 'modules/stream/likes.php');
-				});
-
-				$( '#navigation_top' ).show();
-				$( '#navigation_top' ).load( 'modules/stream/menu.php', function() {
-					$( '#navigation_top' ).show();
-					$('.tab_2').addClass('tabmenuover');
-				});
+				
 			},";
 
 ?>
