@@ -57,7 +57,7 @@
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 				<link rel='stylesheet' href='core/css/materialize.0.97.7.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
-				<link rel='stylesheet' href='core/css/abre.1.3.5.css'>
+				<link rel='stylesheet' href='core/css/abre.1.3.8.css'>
 				<link rel='stylesheet' href='core/css/animate.min.css'>
 				<link rel='stylesheet' href='core/css/timepicker.min.css'>
 				<link rel='stylesheet' href='core/css/quill.snow.1.1.3.css'>
@@ -69,7 +69,6 @@
 				<script src='core/js/materialize.0.97.7.min.js'></script>
 				<script src='core/js/material.1.2.1.min.js'></script>
 				<script src='core/js/routie.min.3.2.js'></script>
-				<script src='core/js/masonry.4.4.1.min.js'></script>
 				<script src='core/js/jquery.tablesorter.min.js'></script>
 				<script src='core/js/jquery.timepicker.min.js'></script>
 				<script src='core/js/quill.min.1.1.3.js'></script>
@@ -94,7 +93,7 @@
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 				<link rel='stylesheet' href='core/css/materialize.0.97.7.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
-				<link rel='stylesheet' href='core/css/abre.1.3.5.css'>
+				<link rel='stylesheet' href='core/css/abre.1.3.8.css'>
 
 				<script src='core/js/jquery-3.1.1.min.js'></script>
 				<script src='core/js/jquery-ui.1.12.1.min.js'></script>
