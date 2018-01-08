@@ -71,7 +71,6 @@
 		$feedtitle = $item->get_feed()->get_title();
 		$feedlink = $item->get_feed()->get_link();
 		$date = strtotime($date);
-		$linklabel = "Read";
 		$excerpt = $item->get_description();
 		if($enclosure = $item->get_enclosure()){
 			$image=$enclosure->get_link();
@@ -82,7 +81,7 @@
 		    if(isset($embededimage['src'])){ $image=$embededimage['src']; }
 		}
 
-		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$linklabel","$feedtitle","$feedlink"));
+		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$feedtitle","$feedlink","$author"));
 		$totalcount++;
 	}
 
@@ -105,9 +104,9 @@
 		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
 		$linkraw = $feeds[$cardcountloop][3];
 		$image = $feeds[$cardcountloop][4];
-		$linklabel = $feeds[$cardcountloop][5];
-		$feedtitle = $feeds[$cardcountloop][6];
-		$feedlink = $feeds[$cardcountloop][7];
+		$feedtitle = $feeds[$cardcountloop][5];
+		$feedlink = $feeds[$cardcountloop][6];
+		$feedauthor = $feeds[$cardcountloop][7];
 
 		//Add images to server to securely store and reference
 		include "stream_save_image.php";
@@ -124,7 +123,7 @@
 		$num_rows_like = count($dbreturn);
 
 		if($title != "" && $excerpt != ""){
-			echo "<div class='grid-item'>"; include "stream_layout_card.php"; echo "</div>";
+			include "card.php";
 		}
 	}
 
@@ -133,6 +132,11 @@
 <script>
 
 	$(function(){
+		
+	  	//Make Streams Feeds Clickable
+		$( ".cardclick" ).unbind().click(function(){
+			window.open($(this).data('link'), '_blank');
+		});
 
 		//Like a Stream Post
 		$(".likeicon").unbind().click(function(){
@@ -147,13 +151,9 @@
 			var Stream_Url = $(this).data('url');
 			var Stream_Image = $(this).data('image');
 
-			$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() {
-				$('#streamcards').load("modules/stream/stream_feeds.php", function () {
-					$('.grid').masonry( 'reloadItems' );
-					$('.grid').masonry( 'layout' );
-					mdlregister();
-				});
-			});
+			
+			$.post( "modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image, function() { });
+			
 		});
 
 		//Fill comment modal
