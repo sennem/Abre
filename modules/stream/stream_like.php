@@ -26,7 +26,8 @@
 	$streamTitle = $_REQUEST['title'];
 	$streamImage = $_REQUEST['image'];
 	$streamUrldecoded = base64_decode($streamUrl);
-	$streamTitledecoded = addslashes(base64_decode($streamTitle));
+	$streamQuery = mysqli_real_escape_string($db, $streamUrldecoded);
+	$streamTitledecoded = base64_decode($streamTitle);
 	$streamImagedecoded = base64_decode($streamImage);
 
 	$portal_root_path = $portal_root.'/';
@@ -37,7 +38,7 @@
 	if($streamUrldecoded != "" && $streamTitledecoded != ""){
 
 		//Check to see if like already exists for this user
-		$query = "SELECT * FROM streams_comments WHERE url = '$streamUrldecoded' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
+		$query = "SELECT * FROM streams_comments WHERE url = '$streamQuery' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
 		$dbreturn = databasequery($query);
 		$num_rows_like_count = count($dbreturn);
 
