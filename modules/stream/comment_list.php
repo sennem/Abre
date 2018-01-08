@@ -24,7 +24,12 @@
 	if($_SESSION['usertype'] == 'staff'){
 
 		$articletitle = "";
-		if(isset($_GET['url'])){ $url = base64_decode($_GET['url']); }else{ $url = ""; }
+		if(isset($_GET['url'])){
+			$url = base64_decode($_GET['url']);
+			$url = mysqli_real_escape_string($db, $url);
+		}else{
+			$url = "";
+		}
 		if($url != ""){ $sql = "(SELECT * FROM streams_comments WHERE url = '$url' and comment != '' ORDER BY id DESC) ORDER BY id ASC LIMIT 100"; }
 
 		//Display comments
@@ -81,6 +86,9 @@
 					echo "<p style='margin-bottom:0px;' class='wrap-links'>$Comment</p><p style='color:#888; font-size:14px'>$CommentCreationTime</p>";
 				echo "<td>";
 			echo "</tr>";
+			$firstname = "";
+			$lastname = "";
+			$picture = "";
 		}
 		echo "</table></div>";
 
@@ -104,8 +112,11 @@
 			//Delete a comment
 			$(".commentdelete").unbind().click(function(event){
 				event.preventDefault();
-				var result = confirm("Are you sure?");
+				var result = confirm("Remove this comment?");
 				if(result){
+					var url = $("#streamUrl").val();
+					var id = $("#commentID").val();
+					var redirect = $("#redirect").val();
 					$(this).closest(".commentwrapper").hide();
 					var CommentID = $(this).data('commentid');
 					$.ajax({
@@ -114,13 +125,27 @@
 						data: '',
 					})
 					.done(function() {
-						$('#streamcards').load("modules/stream/stream_feeds.php", function () {
-							$('.grid').masonry( 'reloadItems' );
-							$('.grid').masonry( 'layout' );
-							mdlregister();
-						});
-						$('#streamlikes').load("modules/stream/stream_likes.php", function () {
-							mdlregister();
+						$.post( "modules/<?php echo basename(__DIR__); ?>/update_card.php", {url: url, redirect: redirect, type: "comment"})
+						.done(function(data) {
+							if(data.count == 0){
+								$("#"+id).prev().addClass("mdl-color-text--grey-600");
+								$("#"+id).prev().css("color", "");
+								$("#"+id).css("color", "grey");
+								$("#"+id).html(data.count);
+							}else{
+								$("#"+id).prev().removeClass("mdl-color-text--grey-600");
+								$("#"+id).prev().css("color", "<?php echo getSiteColor(); ?>");
+								$("#"+id).css("color", "<?php echo getSiteColor(); ?>");
+								$("#"+id).html(data.count);
+							}
+							if(redirect == "comments"){
+								if(data.currentusercount == 0){
+									$("#"+id).closest('.card_stream').hide();
+								}
+								if(data.streamcardsleft == 0){
+									$("#noCommentsMessage").show();
+								}
+							}
 						});
 					});
 				}
