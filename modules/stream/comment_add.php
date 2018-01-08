@@ -26,17 +26,23 @@
 		$streamUrldecoded = base64_decode($streamUrl);
 		$streamComment = $_POST["streamComment"];
 		$streamTitleValue = $_POST["streamTitleValue"];
-		$streamTitleValue = addslashes($streamTitleValue);
 		$streamComment = htmlspecialchars($streamComment, ENT_QUOTES);
+		$streamImage = $_POST["streamImage"];
+		$streamImagedecoded = base64_decode($streamImage);
 
-		$Commentspecial = nl2br(strip_tags(html_entity_decode($streamComment)));
-		$Commentspecial = linkify($Commentspecial);
+		$portal_root_path = $portal_root.'/';
+		$trimmedimageurl = str_replace($portal_root_path, '', $streamImagedecoded);
 
 		$userposter = $_SESSION['useremail'];
 
 		if($streamComment != "" && $streamTitleValue != ""){
-			$sql = "INSERT INTO streams_comments (url, title, user, comment) VALUES ('$streamUrldecoded', '$streamTitleValue', '$userposter', '$streamComment');";
-			$dbreturn = databaseexecute($sql);
+			$stmt = $db->stmt_init();
+			$sql = "INSERT INTO streams_comments (url, title, image, user, comment) VALUES (?, ?, ?, ?, ?);";
+			$stmt->prepare($sql);
+			$stmt->bind_param("sssss", $streamUrldecoded, $streamTitleValue, $trimmedimageurl, $userposter, $streamComment);
+			$stmt->execute();
+			$stmt->close();
+			$db->close();
 		}
 		$streamUrldecoded = base64_encode($streamUrldecoded);
 		echo $streamUrldecoded;
