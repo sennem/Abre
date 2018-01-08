@@ -20,27 +20,45 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-
-	if($_SESSION['usertype'] == 'staff'){
 ?>
 
-    <div class="col s12">
+    <div class="col s12 hide-on-large-only">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
-			<li class="tab col s3 tab_1 streammenu pointer" data="#"><a href="#">Stream</a></li>
-			<li class="tab col s3 tab_2 streammenu pointer" data="#likes"><a href="#likes">Likes</a></li>
+			<li class="tab col s3 stream pointer"><a class="active" href="#stream">Stream</a></li>
+			<li class="tab col s3 widgets pointer"><a href="#widgets">Widgets</a></li>
 		</ul>
 	</div>
-
-<?php
-	}
-?>
 
 <script>
 
 	$(function(){
+		
+		$('.stream').addClass('tabmenuover');
 
-		$( ".streammenu" ).unbind().click(function(){
-			window.open($(this).attr("data"), '_self');
+		$(".stream").unbind().click(function(event){
+			event.preventDefault();
+			$('.stream').addClass('tabmenuover');
+			$('.widgets').removeClass('tabmenuover');
+			$("#streamstream").removeClass("streamstream_toggle");
+			$("#streamwidgets").removeClass("streamwidgets_toggle");
+		});
+		
+		$(".widgets").unbind().click(function(event){
+			event.preventDefault();
+			$('.widgets').addClass('tabmenuover');
+			$('.stream').removeClass('tabmenuover');
+			$("#streamstream").addClass("streamstream_toggle");
+			$("#streamwidgets").addClass("streamwidgets_toggle");
+		});
+		
+		$(window).resize(function (){
+		    var viewportWidth = $(window).width();
+		    if (viewportWidth > 992){
+		    	$("#streamstream").removeClass("streamstream_toggle");
+				$("#streamwidgets").removeClass("streamwidgets_toggle");
+				$('.stream').addClass('tabmenuover');
+				$('.widgets').removeClass('tabmenuover');
+		    }
 		});
 		
 	});
