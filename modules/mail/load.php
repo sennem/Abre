@@ -21,19 +21,17 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
 	if($_SESSION['usertype'] != 'parent'){
-?>
 
-		<div class='grid-item'>
-			<div class='demo-card-event mdl-card mdl-shadow--2dp card_stream'>
-				<div id='mail'>
-					<div class='mdl-card__title'>
-						<div class="valign-wrapper">
-							<img src='core/images/icon_mail.png' class='icon_small'>
-							<div class='mdl-card__title-text'>Mail</div>
-						</div>
-					</div>
-					<div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-				</div>
-			</div>
-		</div>
-<?php } ?>
+		echo "<div class='mdl-card mdl-shadow--2dp card_stream'>";
+			echo "<div id='mail'>";
+				echo "<div class='mdl-card__title'>";
+					echo "<div class='valign-wrapper'>";
+						echo "<img src='core/images/icon_mail.png' class='icon_small'>";
+						echo "<div class='mdl-card__title-text'>Mail</div>";
+					echo "</div>";
+				echo "</div>";
+				echo "<div id='p2' class='mdl-progress mdl-js-progress mdl-progress__indeterminate'></div>";
+			echo "</div>";
+		echo "</div>";
+	
+	}
