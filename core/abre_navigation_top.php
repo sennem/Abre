@@ -42,14 +42,3 @@
 		</div>
 		<div id='navigation_top'></div>
 	</header>
-
-<script>
-
-	$(function(){
-		//Scroll to top
-		$('.mdl-layout__header-row').click(function(){
-			$('.mdl-layout__content').animate({ scrollTop: 0 }, 'fast');
-		});
-	});
-
-</script>
