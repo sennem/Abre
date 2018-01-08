@@ -77,6 +77,15 @@
 			$db->multi_query($sql);
 		}
 		$db->close();
+		
+		//check for widgets_order Column
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT widgets_order FROM profiles")){
+			$sql = "ALTER TABLE `profiles` ADD `widgets_order` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+		
 	}
 
 
