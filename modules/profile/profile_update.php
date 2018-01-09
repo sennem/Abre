@@ -27,25 +27,6 @@
 	$result = $db->query($sql);
 	$stack = array();
 	$departmentcount = $_POST["departmentcount"];
-	if($_SESSION['usertype'] != "student"){
-		$card_mail = 0;
-		$card_drive = 0;
-		$card_calendar = 0;
-		$card_classroom = 0;
-		$card_apps = 0;
-		if(!empty($_POST["card_mail"])){ $card_mail = $_POST["card_mail"]; }
-		if(!empty($_POST["card_drive"])){ $card_drive = $_POST["card_drive"]; }
-		if(!empty($_POST["card_calendar"])){ $card_calendar = $_POST["card_calendar"]; }
-		if(!empty($_POST["card_classroom"])){ $card_classroom = $_POST["card_classroom"]; }
-		if(!empty($_POST["card_apps"])){ $card_apps = $_POST["card_apps"]; }
-		if(!empty($_POST["datePick"])){ $datePick = $_POST["datePick"]; }
-	}else{
-		$card_mail = 1;
-		$card_drive = 1;
-		$card_calendar = 1;
-		$card_classroom = 1;
-		$card_apps = 1;
-	}
 
 	while($row = $result->fetch_assoc()){
 		$profileupdatecount = 1;
@@ -55,9 +36,9 @@
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE profiles SET streams = ?, card_mail = ?, card_drive = ?, card_calendar = ?, card_classroom = ?, card_apps = ? WHERE email = ?";
+		$sql = "UPDATE profiles SET streams = ? WHERE email = ?";
 		$stmt->prepare($sql);
-		$stmt->bind_param("siiiiis", $str, $card_mail, $card_drive, $card_calendar, $card_classroom, $card_apps, $_SESSION['useremail']);
+		$stmt->bind_param("ss", $str, $_SESSION['useremail']);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();
@@ -70,9 +51,9 @@
 		}
 		$str = implode (", ", $stack);
 		$stmt = $db->stmt_init();
-		$sql = "INSERT INTO profiles (email, streams, card_mail, card_drive, card_calendar, card_classroom, card_apps) VALUES (?, ?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO profiles (email, streams) VALUES (?, ?)";
 		$stmt->prepare($sql);
-		$stmt->bind_param("ssiiiii", $_SESSION['useremail'], $str, $card_mail, $card_drive, $card_calendar, $card_classroom, $card_apps);
+		$stmt->bind_param("ss", $_SESSION['useremail'], $str);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();

@@ -29,11 +29,6 @@
 	foreach($dbreturn as $row){
 		$setting_startup = htmlspecialchars($row['startup'], ENT_QUOTES);
 		$setting_streams = htmlspecialchars($row['streams'], ENT_QUOTES);
-		$setting_card_mail = htmlspecialchars($row['card_mail'], ENT_QUOTES);
-		$setting_card_drive = htmlspecialchars($row['card_drive'], ENT_QUOTES);
-		$setting_card_calendar = htmlspecialchars($row['card_calendar'], ENT_QUOTES);
-		$setting_card_classroom = htmlspecialchars($row['card_classroom'], ENT_QUOTES);
-		$setting_card_apps = htmlspecialchars($row['card_apps'], ENT_QUOTES);
 	}
 
 	//Get Contracted Days
@@ -142,8 +137,6 @@
 			$(".modal-content").scrollTop(0);
 		}
 	});
-
-	<?php if($setting_streams=="" && $_SESSION['usertype'] == "staff"){ echo "$('.modal-viewapps').hide();"; } ?>
 
 	// <?php if($_SESSION['usertype']=="staff"){ ?>
 	// 	//shouldn't throw an error message if the user hasn't selected 3 streams when there aren't
