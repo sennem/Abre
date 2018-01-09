@@ -17,5 +17,6 @@
     */
     
     $pagetitle = "Classroom";
+    $restrictions = "staff";
     
 ?>

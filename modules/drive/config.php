@@ -17,5 +17,6 @@
     */
     
     $pagetitle = "Drive";
+    $restrictions = "staff";
     
 ?>

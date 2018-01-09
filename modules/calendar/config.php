@@ -17,5 +17,6 @@
     */
     
     $pagetitle = "Calendar";
+    $restrictions = "staff";
     
 ?>

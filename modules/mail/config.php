@@ -17,6 +17,6 @@
     */
 	
     $pagetitle = "Mail";
-    $restrictions = "parents";
+    $restrictions = "staff";
 	
 ?>
