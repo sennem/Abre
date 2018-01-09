@@ -97,40 +97,45 @@
 						foreach($widgetsfolders as $result){
 							
 							$pagetitle = NULL;
+							$restrictions = NULL;
 				
 							if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
 
 								include(dirname(__FILE__) . '/../'.$result.'/config.php');
 									
-								echo "<tr style='background-color:#f9f9f9'>";
-									echo "<td><b>$pagetitle</b><td>";
-									echo "<td style='width:30px'>";
-								
-										echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
-										
-										//Check if a widget should be hidden
-										if($widgets_hidden==NULL){
+								if(strpos($restrictions,$_SESSION['usertype']) === false){
+									
+									echo "<tr style='background-color:#f9f9f9'>";
+										echo "<td><b>$pagetitle</b><td>";
+										echo "<td style='width:30px'>";
+									
+											echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
 											
-											echo "checked";
-											
-										}
-										else
-										{
-											
-											//Check to see if widget was hidden by use selection
-											$HiddenWidgets = explode(',',$widgets_hidden);
-											if(!in_array($result, $HiddenWidgets)){
+											//Check if a widget should be hidden
+											if($widgets_hidden==NULL){
 												
 												echo "checked";
-													
+												
 											}
-											
-										}
-											
-										echo "/><span class='lever'></span></label></div>";
-
-									echo "</td>";
-								echo "</tr>";
+											else
+											{
+												
+												//Check to see if widget was hidden by use selection
+												$HiddenWidgets = explode(',',$widgets_hidden);
+												if(!in_array($result, $HiddenWidgets)){
+													
+													echo "checked";
+														
+												}
+												
+											}
+												
+											echo "/><span class='lever'></span></label></div>";
+	
+										echo "</td>";
+									echo "</tr>";
+									
+								}
 
 							}
 				
