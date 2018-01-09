@@ -29,21 +29,24 @@
 
 ?>
 
-	<!-- Commenting Modal -->
+	<!-- Comments -->
 	<?php
 	if($_SESSION['usertype']=='staff'){
 	?>
 		<div id="addstreamcomment" class="modal modal-fixed-footer modal-mobile-full">
+			<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
 			<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
 				<div class="modal-content" id="modal-content-section">
+					<h4 name="streamTitle" id="streamTitle" style='margin-right:50px;'></h4>
 					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-					<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
-					<div name="streamComments" id="streamComments"></div>
-					<div class="input-field col s12">
-						<h4 name="streamTitle" id="streamTitle"></h4>
-						<b style='color: <?php echo getSiteColor(); ?>;' id="commentstatustext">Write a comment</b>
-						<textarea id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
+
+					<div class="input-field">
+						<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
 					</div>
+					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
+					
+					<div name="streamComments" id="streamComments"></div>
+					
 					<input type="hidden" name="streamUrl" id="streamUrl">
 					<input type="hidden" name="streamTitleValue" id="streamTitleValue">
 					<input type="hidden" name="commentID" id="commentID">
@@ -51,12 +54,12 @@
 					<input type="hidden" name="redirect" id="redirect">
 		    </div>
 			  <div class="modal-footer">
-					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-left:5px; background-color:<?php echo getSiteColor(); ?>'>Post</button>
-					<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Cancel</button>
+					<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
 				</div>
 			</form>
 		</div>
 
+		<!-- Social Sharing -->
 		<div id="sharecard" class="modal modal-fixed-footer modal-mobile-full" style="max-width: 600px;">
 			<form>
 				<div class="modal-content">
@@ -70,6 +73,7 @@
 	   		</form>
 	 	</div>
 	 	
+	 	<!-- Edit Widgets -->
 		<div id="editwidgets" class="modal modal-mobile-full" style="max-width: 600px;">
 			<form>
 				<div class="modal-content">
