@@ -22,14 +22,8 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
-	//Setup tables if new module
-	if(!$resultprofile = $db->query("SELECT *  FROM profiles")){
-			$sql = "CREATE TABLE `profiles` (`id` int(11) NOT NULL,`email` text NOT NULL,`startup` int(11) NOT NULL DEFAULT '1',`streams` text NOT NULL,`card_mail` int(11) NOT NULL DEFAULT '1',`card_drive` int(11) NOT NULL DEFAULT '1',`card_calendar` int(11) NOT NULL DEFAULT '1',`card_classroom` int(11) NOT NULL DEFAULT '1',`card_apps` int(11) NOT NULL DEFAULT '1',`apps_order` text NOT NULL,`work_calendar` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
-  			$sql .= "ALTER TABLE `profiles` ADD PRIMARY KEY (`id`);";
-  			$sql .= "ALTER TABLE `profiles` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
-  			$sql .= "INSERT INTO `profiles` (`id`, `email`, `startup`, `streams`, `card_mail`, `card_drive`, `card_calendar`, `card_classroom`, `card_apps`, `apps_order`, `work_calendar`) VALUES (NULL, '".$_SESSION['useremail']."', '0', '', '1', '1', '1', '1', '1', '', '');";
-  		if ($db->multi_query($sql) === TRUE) { }
-	}
+	//Check for installation
+	if(superadmin()){ require('installer.php'); }
 
 	$pageview = 1;
 	$drawerhidden = 1;
