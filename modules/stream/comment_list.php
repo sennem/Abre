@@ -30,67 +30,88 @@
 		}else{
 			$url = "";
 		}
-		if($url != ""){ $sql = "(SELECT * FROM streams_comments WHERE url = '$url' and comment != '' ORDER BY id DESC) ORDER BY id ASC LIMIT 100"; }
+		if($url != ""){ 
+			$sql = "(SELECT * FROM streams_comments WHERE url = '$url' and comment != '' ORDER BY id DESC) ORDER BY id DESC LIMIT 100";
+		}
 
 		//Display comments
-		echo "<div id='commentthreadbox'><table cellpadding='0'>";
-		$dbreturn = databasequery($sql);
-		foreach($dbreturn as $row){
-			$User = htmlspecialchars($row["user"], ENT_QUOTES);
-			$Comment = htmlspecialchars($row["comment"], ENT_QUOTES);
-			$Comment = nl2br(strip_tags(html_entity_decode($Comment)));
-			$Comment = linkify($Comment);
-			$articletitle = html_entity_decode($row["title"]);
-			$CommentID = htmlspecialchars($row["id"], ENT_QUOTES);
-			$CommentCreationTime = htmlspecialchars($row["creationtime"], ENT_QUOTES);
-
-			//Display comment creation in correct format
-			if(strtotime($CommentCreationTime) < strtotime('-7 days')){
-				$CommentCreationTime = date( "F j", strtotime($CommentCreationTime))." at ".date( "g:i A", strtotime($CommentCreationTime));
-		 	}else{
-				$CommentCreationTime = date( "l", strtotime($CommentCreationTime))." at ".date( "g:i A", strtotime($CommentCreationTime));
-			}
-
-			//Look up name given email from directory
-			$User2 = encrypt($User, "");
-			$picture = "";
-			$sql = "SELECT firstname, lastname, picture FROM directory WHERE email = '$User2'";
+		echo "<div id='commentthreadbox'>";
 			$dbreturn = databasequery($sql);
+			$commentcount=count($dbreturn);
+			$counter=0;
 			foreach($dbreturn as $row){
-				$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
-				$firstname = stripslashes(htmlspecialchars(decrypt($firstname, ""), ENT_QUOTES));
-				$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
-				$lastname = stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
-				$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
+				
+				$counter++;
+				$User = htmlspecialchars($row["user"], ENT_QUOTES);
+				$Comment = htmlspecialchars($row["comment"], ENT_QUOTES);
+				$Comment = nl2br(strip_tags(html_entity_decode($Comment)));
+				$Comment = linkify($Comment);
+				$articletitle = html_entity_decode($row["title"]);
+				$CommentID = htmlspecialchars($row["id"], ENT_QUOTES);
+				$CommentCreationTime = htmlspecialchars($row["creationtime"], ENT_QUOTES);
+	
+				//Display comment creation in correct format
+				if(strtotime($CommentCreationTime) < strtotime('-7 days')){
+					$CommentCreationTime = date( "F j", strtotime($CommentCreationTime))." at ".date( "g:i A", strtotime($CommentCreationTime));
+			 	}else{
+					$CommentCreationTime = date( "l", strtotime($CommentCreationTime))." at ".date( "g:i A", strtotime($CommentCreationTime));
+				}
+	
+				//Look up name given email from directory
+				$User2 = encrypt($User, "");
+				$picture = "";
+				$sql = "SELECT firstname, lastname, picture FROM directory WHERE email = '$User2'";
+				$dbreturn = databasequery($sql);
+				$firstname = "";
+				$lastname = "";
+				$picture = "";
+				foreach($dbreturn as $row){
+					$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
+					$firstname = stripslashes(htmlspecialchars(decrypt($firstname, ""), ENT_QUOTES));
+					$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
+					$lastname = stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
+					$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
+				}
+	
+					if(empty($picture)){
+						$picture = $portal_root."/modules/directory/images/user.png";
+					}else{
+						$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
+					}
+					
+					//Display Each Comment
+					echo "<div class='commentwrapper' style='overflow:hidden;'>";
+						echo "<div style='padding:10px 0 10px 0;'>";	
+										
+							echo "<div style='float:left; width:50px;'>";
+								echo "<img src='$picture' class='profile-avatar-small'>";
+							echo "</div>";	
+							
+							echo "<div style='float:right; width:50px; text-align:right;'>";
+								if($User == $_SESSION['useremail']){
+									echo "<a href='#' data-commentid='$CommentID' class='mdl-color-text--grey commentdelete pointer'><i class='material-icons'>clear</i></a>";
+								}
+							echo "</div>";
+							
+							echo "<div style='margin:0 50px;'>";
+
+								if(!empty($firstname)){
+									echo "<span style='font-weight:500; font-size:15px;'>$firstname $lastname</span><br>";
+								}else{
+									echo "<span style='font-weight:500; font-size:15px;'>$User</span><br>";
+								}
+								echo "<span style='color:#999; font-size:13px;'>$CommentCreationTime</span>";
+								echo "<p style=''>$Comment</p>";
+
+							echo "</div>";
+							
+												
+						echo "</div>";
+						if($commentcount!=$counter){ echo "<hr>"; }
+					echo "</div>";
 			}
 
-			echo "<tr class='commentwrapper'>";
-				if(empty($picture)){
-					$picture = $portal_root."/modules/directory/images/user.png";
-				}else{
-					$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
-				}
-				echo "<td width='60px' style='vertical-align: top;'><img src='$picture' class='profile-avatar-small'></td>";
-				echo "<td width='100%'>";
-
-					if(!empty($firstname)){
-						echo "<span style='font-weight:700; font-size:16px;'>$firstname $lastname</span>";
-					}else{
-						echo "<span style='font-weight:700; font-size:16px;'>$User</span>";
-					}
-
-					if($User == $_SESSION['useremail']){
-						echo "<span style='position:relative; top:5px; left:10px'><a href='#' data-commentid='$CommentID' class='mdl-color-text--grey commentdelete pointer'><i class='material-icons' style='font-size:20px'>clear</i></a></span>";
-					}
-
-					echo "<p style='margin-bottom:0px;' class='wrap-links'>$Comment</p><p style='color:#888; font-size:14px'>$CommentCreationTime</p>";
-				echo "<td>";
-			echo "</tr>";
-			$firstname = "";
-			$lastname = "";
-			$picture = "";
-		}
-		echo "</table></div>";
+		echo "</div>";
 
 ?>
 
@@ -104,10 +125,6 @@
 				$(".modal-content #streamUrl").val("<?php echo base64_encode($url); ?>");
 				$(".modal-content #streamTitleValue").val("<?php echo $articletitle; ?>");
 			<?php } ?>
-
-			//Scroll to bottom of the div
-			var element = document.getElementById("modal-content-section");
-			element.scrollTop = element.scrollHeight;
 
 			//Delete a comment
 			$(".commentdelete").unbind().click(function(event){
