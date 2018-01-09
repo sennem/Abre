@@ -108,18 +108,23 @@
 								
 										echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
 										
-										//Check if hidden
-										if($widgets_hidden!=NULL){
-											$HiddenWidgets = explode(',',$widgets_hidden);
-											if(!in_array($result, $HiddenWidgets)){
+										//Check if a widget should be hidden
+										if($widgets_hidden==NULL){
 											
-												echo " checked ";
-												
-											}
+											echo "checked";
+											
 										}
 										else
 										{
-											echo " checked ";
+											
+											//Check to see if widget was hidden by use selection
+											$HiddenWidgets = explode(',',$widgets_hidden);
+											if(!in_array($result, $HiddenWidgets)){
+												
+												echo "checked";
+													
+											}
+											
 										}
 											
 										echo "/><span class='lever'></span></label></div>";
