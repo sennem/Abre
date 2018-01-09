@@ -228,11 +228,6 @@
 
 			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
 				$("#commentloader").hide();
-
-				//Scroll to bottom
-				var height = $("#addstreamcomment").height();
-				height = height + 10000;
-				$('.modal-content').scrollTop(height);
 			});
 		});
 
