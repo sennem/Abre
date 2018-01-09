@@ -79,13 +79,3 @@
 	}
 	
 ?>
-
-<script>
-
-	$(function(){
-
-
-		
-	});
-
-</script>

@@ -90,13 +90,3 @@
 	}
 	
 ?>
-
-<script>
-
-	$(function(){
-
-
-		
-	});
-
-</script>
