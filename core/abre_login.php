@@ -39,15 +39,22 @@
 						echo "<div style='height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
 						
 						//Site Login Text
-						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; max-width:240px;'>".getSiteLoginText()."</div>";
+						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; max-width:240px;'>Please sign in to continue</div>";
 		
-						//Staff and Student Login
-					  	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Staff and Student Login</a>";
+						//Staff Login
+						echo "<div style='padding-top: 5px'>";
+					  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Staff' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Sign in as Staff</a>";
+					  	echo "</div>";
+					  	
+					  	//Student Login
+					  	echo "<div style='padding-top: 5px'>";
+					  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Student' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Sign in as Student</a>";
+					  	echo "</div>";
 						
 						//Parent Login	
 						if(getSiteParentAccess() == "checked"){
-							echo "<div style='padding-top: 1em'>";
-								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Parent Login</a>";
+							echo "<div style='padding-top: 5px'>";
+								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Sign in as Parent</a>";
 							echo "</div>";
 						}
 					

@@ -19,26 +19,7 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
-	require(dirname(__FILE__). '/facebook/src/Facebook/autoload.php');
 
-	if(getSiteFacebookClientId() !== '' && getSiteFacebookClientSecret() !== '' ){
-		$fb = new Facebook\Facebook([
-			'app_id' => getSiteFacebookClientId(),
-			'app_secret' => getSiteFacebookClientSecret(),
-			'default_graph_version' => 'v2.9',
-		]);
-	
-	    $helper = $fb->getRedirectLoginHelper();
-	    $permissions = ['public_profile', 'email']; // Optional permissions
-	    $loginUrl = $helper->getLoginUrl($portal_root.'/core/abre_facebook_login_helper.php/', $permissions);
-	}
-
-	if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
-		require_once('abre_parent_google_authentication.php');
-		$authUrl = $client->createAuthUrl();
-	}
-	$url = $portal_root . '/core/abre_microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent';
-	
 	//Display the Login
 	echo "<main>";
 	
@@ -56,22 +37,10 @@
 						//Site Login Text
 						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; max-width:240px;'>Choose a sign in service</div>";
 						
-						//Display SSO Options
-						if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
-							echo "<div style='padding-top: 5px'>";
-								include "abre_button_google.php";
-							echo "</div>";
-						}
-				        if(getSiteFacebookClientId() !== '' && getSiteFacebookClientSecret() !== '' ){
-							echo "<div style='padding-top: 5px'>";
-								include "abre_button_facebook.php";
-							echo "</div>";
-						}
-						if(getSiteMicrosoftClientId() !== '' && getSiteMicrosoftClientSecret() !== '' ){
-							echo "<div style='padding-top: 5px'>";
-								include "abre_button_microsoft.php";
-							echo "</div>";
-						}
+						//SSO Options
+						echo "<div style='padding-top: 5px'>";
+							include "abre_button_google.php";
+						echo "</div>";
 						
 						//Return Text
 						echo "<div class='mdl-color-text--grey-600' style='text-align:center; max-width:240px; margin-top:30px; font-size:14px;'><a href='/' style='color:#757575;'>Return Home</a></span></div>";
