@@ -85,7 +85,7 @@
              $stmt = $db->stmt_init();
              $sql = "INSERT INTO users_parent (email) VALUES (?)";
              $stmt->prepare($sql);
-             $stmt->bind_param("sss", $_SESSION['useremail']);
+             $stmt->bind_param("s", $_SESSION['useremail']);
              $stmt->execute();
              $stmt->close();
              $_SESSION['loggedin']="yes";
