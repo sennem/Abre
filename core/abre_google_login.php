@@ -104,13 +104,13 @@
 					if(strcspn($username, $studentdomainrequired) != strlen($username)){
 						$_SESSION['usertype'] = "student";
 					}else if(strpos($site_domain, $userdomain) !== false
-              || strpos(substr($userdomain, $site_domain) !== false)){
+              || strpos($userdomain, $site_domain) !== false){
 						$_SESSION['usertype'] = "staff";
 					}
 				}else{
           if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
             $_SESSION['usertype'] = "student";
-          }else if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){
+          }else if(strpos($site_domain, $userdomain) !== false){
             $_SESSION['usertype'] = "staff";
           }
 				}
