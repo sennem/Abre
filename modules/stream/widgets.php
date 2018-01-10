@@ -44,12 +44,19 @@
 				//Check if hidden
 				$HiddenWidgets = explode(',',$widgets_hidden);
 				if(!in_array($widget, $HiddenWidgets)){
+					
+					$restrictions = NULL;
 				
 					if(file_exists(dirname(__FILE__) . '/../'.$widget.'/widget.php')){
-						echo "<div id='item_$widget'>";
-							include(dirname(__FILE__) . '/../'.$widget.'/widget.php');
-						echo "</div>";
-						$WidgetCount++;
+						
+						include(dirname(__FILE__) . '/../'.$result.'/config.php');
+					
+						if(strpos($restrictions,$_SESSION['usertype']) === false){
+							echo "<div id='item_$widget'>";
+								include(dirname(__FILE__) . '/../'.$widget.'/widget.php');
+							echo "</div>";
+							$WidgetCount++;
+						}
 					}
 				
 				}
@@ -65,14 +72,20 @@
 			//Check if hidden
 			$HiddenWidgets = explode(',',$widgets_hidden);
 			if(!in_array($result, $HiddenWidgets)){
-
-				if (strpos($widgets_order, $result) === false) {
 				
-					if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
+				$restrictions = NULL;
+				
+				if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
+					
+					include(dirname(__FILE__) . '/../'.$result.'/config.php');
+					
+					if(strpos($restrictions,$_SESSION['usertype']) === false){
+					
 						echo "<div id='item_$result'>";
 							include(dirname(__FILE__) . '/../'.$result.'/widget.php');
 						echo "</div>";
 						$WidgetCount++;
+						
 					}
 					
 				}

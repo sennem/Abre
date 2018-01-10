@@ -73,89 +73,91 @@
 	   		</form>
 	 	</div>
 	 	
-	 	<!-- Edit Widgets -->
-		<div id="editwidgets" class="modal modal-mobile-full" style="max-width: 600px;">
-			<form>
-				<div class="modal-content">
-					<h4>Edit Widgets</h4>
-					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-					
-					<?php
-						
-						//Check to see if there is hidden widgets
-						$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-						$result = $db->query($sql);
-						$widgets_order = NULL;
-						while($row = $result->fetch_assoc()) {
-							$widgets_hidden = htmlspecialchars($row["widgets_hidden"], ENT_QUOTES);
-						}
-
-						//Show All Widgets
-						echo "<table class='bordered'>";
-						$widgetsdirectory = dirname(__FILE__) . '/../';
-						$widgetsfolders = scandir($widgetsdirectory);
-						$widgetcounter=0;
-						foreach($widgetsfolders as $result){
-							
-							$pagetitle = NULL;
-							$restrictions = NULL;
+	<?php
+		
+	}
+	
+	?>
+	 	
+ 	<!-- Edit Widgets -->
+	<div id="editwidgets" class="modal modal-mobile-full" style="max-width: 600px;">
+		<form>
+			<div class="modal-content">
+				<h4>Edit Widgets</h4>
+				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 				
-							if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
+				<?php
+					
+					//Check to see if there is hidden widgets
+					$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+					$result = $db->query($sql);
+					$widgets_order = NULL;
+					while($row = $result->fetch_assoc()) {
+						$widgets_hidden = htmlspecialchars($row["widgets_hidden"], ENT_QUOTES);
+					}
 
-								include(dirname(__FILE__) . '/../'.$result.'/config.php');
-									
-								if(strpos($restrictions,$_SESSION['usertype']) === false){
-									
-									$widgetcounter++;
-									
-									echo "<tr>";
-										echo "<td><b>$pagetitle</b><td>";
-										echo "<td style='width:30px; text-align:right;'>";
-									
-											echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
+					//Show All Widgets
+					echo "<table class='bordered'>";
+					$widgetsdirectory = dirname(__FILE__) . '/../';
+					$widgetsfolders = scandir($widgetsdirectory);
+					$widgetcounter=0;
+					foreach($widgetsfolders as $result){
+						
+						$pagetitle = NULL;
+						$restrictions = NULL;
+			
+						if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
+
+							include(dirname(__FILE__) . '/../'.$result.'/config.php');
+								
+							if(strpos($restrictions,$_SESSION['usertype']) === false){
+								
+								$widgetcounter++;
+								
+								echo "<tr>";
+									echo "<td><b>$pagetitle</b><td>";
+									echo "<td style='width:30px; text-align:right;'>";
+								
+										echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
+										
+										//Check if a widget should be hidden
+										if($widgets_hidden==NULL){
 											
-											//Check if a widget should be hidden
-											if($widgets_hidden==NULL){
+											echo "checked";
+											
+										}
+										else
+										{
+											
+											//Check to see if widget was hidden by use selection
+											$HiddenWidgets = explode(',',$widgets_hidden);
+											if(!in_array($result, $HiddenWidgets)){
 												
 												echo "checked";
-												
-											}
-											else
-											{
-												
-												//Check to see if widget was hidden by use selection
-												$HiddenWidgets = explode(',',$widgets_hidden);
-												if(!in_array($result, $HiddenWidgets)){
 													
-													echo "checked";
-														
-												}
-												
 											}
-												
-											echo "/><span class='lever'></span></label></div>";
-	
-										echo "</td>";
-									echo "</tr>";
-									
-								}
+											
+										}
+											
+										echo "/><span class='lever'></span></label></div>";
 
+									echo "</td>";
+								echo "</tr>";
+								
 							}
-				
-						}
-						
-						if($widgetcounter==0){ echo "<tr><td colspan='2'>No widgets are currently available.</td></tr>"; }
-						echo "</table>";	
-						
-					?>
-					
-				</div>
-	   		</form>
-	 	</div>
 
-	<?php
-	}
-	?>
+						}
+			
+					}
+					
+					if($widgetcounter==0){ echo "<tr><td colspan='2'>No widgets are currently available.</td></tr>"; }
+					echo "</table>";	
+					
+				?>
+				
+			</div>
+   		</form>
+ 	</div>
 
 <script>
 
