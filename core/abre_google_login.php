@@ -108,8 +108,11 @@
 						$_SESSION['usertype'] = "staff";
 					}
 				}else{
-					if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){ $_SESSION['usertype'] = "staff"; }
-					if(strpos($_SESSION['useremail'], $studentdomain) !== false){ $_SESSION['usertype'] = "student"; }
+          if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
+            $_SESSION['usertype'] = "student";
+          }else if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false){
+            $_SESSION['usertype'] = "staff";
+          }
 				}
 
 				if($_SESSION['usertype'] != "staff" && $_SESSION['usertype'] != "student"){
