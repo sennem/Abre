@@ -97,12 +97,14 @@
 				$_SESSION['usertype'] = NULL;
 
 				if($studentdomain == NULL){ $studentdomain = $site_domain; }
+        $userdomain = substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'));
+        $username = substr($_SESSION['useremail'], 0, strpos($_SESSION['useremail'], '@'));
 				if($site_domain == $studentdomain){
 					//Check for required chracters (if any)
-					if(strcspn($_SESSION['useremail'], $studentdomainrequired) != strlen($_SESSION['useremail'])){
+					if(strcspn($username, $studentdomainrequired) != strlen($username)){
 						$_SESSION['usertype'] = "student";
-					}else if(strpos($site_domain, substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'))) !== false
-              || strpos(substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@')), $site_domain) !== false){
+					}else if(strpos($site_domain, $userdomain) !== false
+              || strpos(substr($userdomain, $site_domain) !== false)){
 						$_SESSION['usertype'] = "staff";
 					}
 				}else{
