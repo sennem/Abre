@@ -31,14 +31,15 @@
 			
 			//Login Holder
 			echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre_pattern.png); '>";
+			
 				echo "<div class='login_wrapper'>";
 					echo "<div class='login-card-square mdl-card'>";
 						
 						//Site Logo
-						echo "<div style='height:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
+						echo "<div style='height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
 						
 						//Site Login Text
-						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center;'>".getSiteLoginText()."</div>";
+						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; max-width:240px;'>".getSiteLoginText()."</div>";
 		
 						//Staff and Student Login
 					  	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='$authUrl' style='margin: 0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Staff and Student Login</a>";
@@ -52,6 +53,7 @@
 					
 					echo "</div>";
 				echo "</div>";
+				
 			echo "</div>";
 		
 		?>
