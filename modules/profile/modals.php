@@ -99,7 +99,7 @@
 						<label for="stream_staff">Staff</label>
 				</div>
 				<div class='col m4 s12'>
-					<input type="radio" name="streamradio" id="stream_students" value="students">
+					<input type="radio" name="streamradio" id="stream_students" value="student">
 					<label for="stream_students">Students</label>
 				</div>
 				<div class='col m4 s12'>
