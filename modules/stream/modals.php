@@ -94,6 +94,7 @@
 						echo "<table class='bordered'>";
 						$widgetsdirectory = dirname(__FILE__) . '/../';
 						$widgetsfolders = scandir($widgetsdirectory);
+						$widgetcounter=0;
 						foreach($widgetsfolders as $result){
 							
 							$pagetitle = NULL;
@@ -105,9 +106,11 @@
 									
 								if(strpos($restrictions,$_SESSION['usertype']) === false){
 									
-									echo "<tr style='background-color:#f9f9f9'>";
+									$widgetcounter++;
+									
+									echo "<tr>";
 										echo "<td><b>$pagetitle</b><td>";
-										echo "<td style='width:30px'>";
+										echo "<td style='width:30px; text-align:right;'>";
 									
 											echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
 											
@@ -140,6 +143,8 @@
 							}
 				
 						}
+						
+						if($widgetcounter==0){ echo "<tr><td colspan='2'>No widgets are currently available.</td></tr>"; }
 						echo "</table>";	
 						
 					?>
