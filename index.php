@@ -48,8 +48,8 @@
 		//Display login if user is not logged in
 		if(isset($_GET["usertype"])){
 			
-			if($_GET["usertype"]=="Student"){ require_once('core/abre_student_login.php'); }
 			if($_GET["usertype"]=="Staff"){ require_once('core/abre_staff_login.php'); }
+			if($_GET["usertype"]=="Student"){ require_once('core/abre_student_login.php'); }
 			if($_GET["usertype"]=="Parent"){ require_once('core/abre_parent_login.php'); }
 			
 		}
