@@ -92,6 +92,7 @@
 					$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 					$result = $db->query($sql);
 					$widgets_order = NULL;
+					$widgets_hidden = NULL;
 					while($row = $result->fetch_assoc()) {
 						$widgets_hidden = htmlspecialchars($row["widgets_hidden"], ENT_QUOTES);
 					}
