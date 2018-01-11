@@ -36,27 +36,32 @@
 					echo "<div class='login-card-square mdl-card'>";
 						
 						//Site Logo
-						echo "<div style='height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
+						echo "<div style='margin:30px 40px 10px 40px; height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
 						
 						//Site Login Text
-						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; max-width:240px;'>Please sign in to continue</div>";
-		
-						//Staff Login
-						echo "<div style='padding-top: 5px'>";
-					  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Staff' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Sign in as Staff</a>";
-					  	echo "</div>";
-					  	
-					  	//Student Login
-					  	echo "<div style='padding-top: 5px'>";
-					  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Student' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Sign in as Student</a>";
-					  	echo "</div>";
+						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; margin:0 40px 10px 40px;'>Please sign in to continue</div>";
 						
-						//Parent Login	
-						if(getSiteParentAccess() == "checked"){
-							echo "<div style='padding-top: 5px'>";
-								echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='?usertype=Parent' style='margin:0 auto; width:100%; text-transform:none; background-color:".getSiteColor()."'>Sign in as Parent</a>";
-							echo "</div>";
-						}
+						//Logins
+						echo "<div class='loginholder_large'>"; 
+		
+							//Staff Login
+							echo "<div style='padding-top: 10px'>";
+						  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in as Staff</a>";
+						  	echo "</div>";
+						  	
+						  	//Student Login
+						  	echo "<div style='padding-top: 10px'>";
+						  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Student'>Sign in as Student</a>";
+						  	echo "</div>";
+							
+							//Parent Login	
+							if(getSiteParentAccess() == "checked"){
+								echo "<div style='padding-top: 10px'>";
+									echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Parent'>Sign in as Parent</a>";
+								echo "</div>";
+							}
+							
+						echo "</div>";
 					
 					echo "</div>";
 				echo "</div>";

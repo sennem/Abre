@@ -17,4 +17,4 @@
     */
 
 	//Facebook Auth Button
-	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='".htmlspecialchars($loginUrl)."' style='text-align:left; width:100%; text-transform:none; background-color:#1A60A2; font-size:14px'><i class='fa fa-facebook material-icons left' style='width:20px'></i>Sign in with Facebook</a>";
+	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#3664a2 !important; color:#fff !important;' href='$authUrl'><span class='left loginicon' style='background: url(\"core/images/button_icon_facebook.png\") no-repeat;'></span>Sign in with Facebook</a>";

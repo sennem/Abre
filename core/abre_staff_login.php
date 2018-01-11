@@ -32,18 +32,25 @@
 			echo "<div class='login_wrapper'>";
 				echo "<div class='login-card-square mdl-card'>";
 					
-						echo "<div style='height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
+						//Site Logo
+						echo "<div style='margin:30px 40px 10px 40px; height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
 						
 						//Site Login Text
-						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; max-width:240px;'>Choose a sign in service</div>";
+						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; margin:0 40px 10px 40px;'>Choose a sign in service</div>";
 						
-						//SSO Options
-						echo "<div style='padding-top: 5px'>";
-							include "abre_button_google.php";
+						//Logins
+						echo "<div class='loginholder'>"; 
+						
+							//Display SSO Options
+							echo "<div style='padding-top: 10px'>";
+								include "abre_button_google.php";
+							echo "</div>";
+							
+							//Return Text
+							echo "<div class='mdl-color-text--grey-600' style='text-align:center; margin:30px 40px 10px 40px; font-size:13px;'><a href='/' class='mdl-color-text--grey-600' style='font-weight:400'>Return to Homepage</a></span></div>";
+							
 						echo "</div>";
 						
-						//Return Text
-						echo "<div class='mdl-color-text--grey-600' style='text-align:center; max-width:240px; margin-top:30px; font-size:14px;'><a href='/' style='color:#757575;'>Return Home</a></span></div>";
 
 				   ?>
 				</div>

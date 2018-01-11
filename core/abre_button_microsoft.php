@@ -17,4 +17,4 @@
     */
 
 	//Google Auth Button
-	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".getSiteMicrosoftClientId()."&response_type=code&redirect_uri=$url 'style='text-align:left; width:100%; text-transform:none; background-color:#0078d7; font-size:14px'><i class='fa fa-windows material-icons left' style='width:20px'></i>Sign in with Microsoft</a>";
+	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#fff !important; color:#757575 !important;' href='$authUrl'><span class='left loginicon' style='background: url(\"core/images/button_icon_microsoft.png\") no-repeat;'></span>Sign in with Microsoft</a>";
