@@ -248,7 +248,7 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	.loginholder{ padding:0 40px 20px 40px; background-color:#fff; border-top:none; }
 	.loginholder_large{ padding:0 40px 30px 40px; background-color:#fff; border-top:none; }
 	.page_container{ margin:0;}
-	.mdl-card{ border-radius:0 !important; width:100%; }
+	.mdl-card{ border-radius:0 !important; }
 	.nopaddingmarginsmall{ margin:0 !important; padding:0 !important; }
 	.content{ margin: 0 auto; margin:0; } 
 	.scrollToTop{ display: block; } 
@@ -301,7 +301,6 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	#streamnavigation{ min-height:0; width:100%; margin:0 0 8px 0; }
 }
 @media only screen and (min-width: 601px) and (max-width: 850px){ 
-	.mdl-card{ width:100%; }
 	.card_stream{ width:calc(50% - 16px); margin:8px; } 
 	.streamnavholder{ float:left; }
 	#streamwidgets{ display:none; }
@@ -309,7 +308,6 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	#streamnavigation{ min-height:55px; width:auto; margin:8px; padding:8px; }
 }
 @media only screen and (min-width: 851px) and (max-width: 992px){ 
-	.mdl-card{ width:100%; }
 	.card_stream{ width:calc(33.333% - 16px); margin:8px; } 
 	.streamnavholder{ float:left; }
 	#streamwidgets{ display:none; }
@@ -317,7 +315,6 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	#streamnavigation{ min-height:55px; width:auto; margin:8px; padding:8px; }
 }
 @media only screen and (min-width: 993px) and (max-width: 1200px){ 
-	.mdl-card{ width:100%; }
 	.card_stream{ width:calc(50% - 16px); margin:8px; } 
 	.streamnavholder{ float:left; }
 	#streamwidgets{ display:block; width:334px; margin-top:-8px; padding-left:8px; float:left; }
@@ -325,7 +322,6 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	#streamnavigation{ min-height:55px; width:auto; margin:8px; padding:8px; }
 }
 @media only screen and (min-width: 1201px) and (max-width: 1550px){ 
-	.mdl-card{ width:100%; }
 	.card_stream{ width:calc(33.333% - 16px); margin:8px; } 
 	.streamnavholder{ float:left; }
 	#streamwidgets{ display:block; width:334px; margin-top:-8px; padding-left:8px; float:left; }
@@ -333,7 +329,6 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	#streamnavigation{ min-height:55px; width:auto; margin:8px; padding:8px; }
 }
 @media only screen and (min-width: 1551px) and (max-width: 1800px){ 
-	.mdl-card{ width:100%; }
 	.card_stream{ width:calc(25% - 16px); margin:8px; }
 	.streamnavholder{ float:left; }
 	#streamwidgets{ display:block; width:334px; margin-top:-8px; padding-left:8px; float:left; }
@@ -341,7 +336,6 @@ ul.tabs > li.tab > a.active{ opacity: 1; }
 	#streamnavigation{ min-height:55px; width:auto; margin:8px; padding:8px; }
 }
 @media only screen and (min-width: 1801px){
-	.mdl-card{ width:100%; }
 	.card_stream{ width:calc(20% - 16px); margin:8px; }
 	.streamnavholder{ float:left; }
 	#streamwidgets{ display:block; width:334px; margin-top:-8px; padding-left:8px; float:left; }
