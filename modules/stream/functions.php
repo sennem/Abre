@@ -26,7 +26,7 @@
 		
 		$Path = "/modules/$path/widget_content.php";
 
-		echo "<ul class='widget mdl-card mdl-shadow--2dp hoverable' data-collapsible='accordion'>";
+		echo "<ul class='widget mdl-card mdl-shadow--2dp hoverable' style='width:100%;' data-collapsible='accordion'>";
 			echo "<li>";
 				echo "<div class='collapsible-header' data-path='$Path' style='border-top: solid 3px $color;'>";
 					echo "<i class='material-icons' style='color: $color'>$icon</i>";
