@@ -27,12 +27,13 @@
 			//Set Access Token
 			if(isset($_SESSION['access_token']) && $_SESSION['access_token']){ $client->setAccessToken($_SESSION['access_token']); }
 	
-			//Get Calendar content
-			$_SESSION['access_token'] = $client->getAccessToken();
+			//Set Calendar Parameters
 			$rightNow = date('c');
 			$inOneDay = date('c', strtotime('+1 days'));
 			$inTwoDays = date('c', strtotime('+2 days'));
 			$params = array('singleEvents' => 'true', 'orderBy' => 'startTime', 'timeMin' => $rightNow, 'timeMax' => $inOneDay);
+			
+			//Request Calendar Files
 			$events = $Service_Calendar->events->listEvents('primary', $params);
 			
 			$counter=0;
