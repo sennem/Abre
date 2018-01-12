@@ -27,13 +27,15 @@
 			//Set Access Token
 			if(isset($_SESSION['access_token']) && $_SESSION['access_token']){ $client->setAccessToken($_SESSION['access_token']); }
 	
-			//Display Classroom Information
+			//Set Classroom Parameters
 			if($_SESSION['usertype'] == "staff"){
 				$optParams = array('pageSize' => 7, 'teacherId' => 'me');
 			}
 			if($_SESSION['usertype'] == "student"){
 				$optParams = array('pageSize' => 7, 'studentId' => 'me');
 			}
+			
+			//Request Classroom Files
 			$results = $Service_Classroom->courses->listCourses($optParams);
 
 			if (count($results->getCourses()) != 0){
