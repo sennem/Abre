@@ -27,28 +27,26 @@
 			//Set Access Token
 			if(isset($_SESSION['access_token']) && $_SESSION['access_token']){ $client->setAccessToken($_SESSION['access_token']); }
 	
-			//Get Drive content
-			$userData = $Service_Oauth2->userinfo->get();
-			$lastWeek = date("c",strtotime("-1 week"));
-			$hour_ago = strtotime('-1 day');
-
+			//Set Drive Parameters
 			$parameters['pageSize'] = 3;
 			$parameters['orderBy'] = "modifiedByMeTime desc";
 			$parameters['fields'] = "files(modifiedTime,name,owners/displayName,webViewLink)";
 			$parameters['q'] = "trashed=false and '".$_SESSION['useremail']."' in writers";
 
+			//Request Drive Files
 			$Drive_Results = $Service_Drive->files->listFiles($parameters);
 			
+			//Display Drive Files
 			$counter=0;
 			foreach($Drive_Results as $file){
+				
 				$counter++;
 				$json = json_encode($file);
 				$json = json_decode($json, true);
 				$drivetitle = $json['name'];
 				$drivelink = $json['webViewLink'];
 				$drivemodifydate = $json['modifiedTime'];
-				$drivemodifydate = date("m/d g:i A", strtotime($drivemodifydate));
-				
+				$drivemodifydate = date("m/d g:i A", strtotime($drivemodifydate));				
 				
 				if($counter==1){
 					echo "<hr class='widget_hr'>";
@@ -66,13 +64,14 @@
 
 			}
 			
+			//If no file, tell the user
 			if(empty($Drive_Results))
 			{
 				echo "<hr class='widget_hr'>";
 				echo "<div class='widget_holder pointer'>";
 					echo "<div class='widget_container widget_body truncate' style='color:#666;'>No Drive files <i class='right material-icons widget_holder_refresh pointer' data-path='/modules/drive/widget_content.php' data-reload='true'>refresh</i></div>";
 				echo "</div>";
-			}	
+			}
 
 		}catch(Exception $e){ }
 	
