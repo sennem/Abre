@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -61,9 +61,26 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
     return $this->call('completeSignup', array($params), "Google_Service_AndroidEnterprise_Enterprise");
   }
   /**
-   * Deletes the binding between the EMM and enterprise. This is now deprecated;
-   * use this to unenroll customers that were previously enrolled with the
-   * 'insert' call, then enroll them again with the 'enroll' call.
+   * Returns a unique token to access an embeddable UI. To generate a web UI, pass
+   * the generated token into the managed Google Play javascript API. Each token
+   * may only be used to start one UI session. See the javascript API
+   * documentation for further information. (enterprises.createWebToken)
+   *
+   * @param string $enterpriseId The ID of the enterprise.
+   * @param Google_Service_AndroidEnterprise_AdministratorWebTokenSpec $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AndroidEnterprise_AdministratorWebToken
+   */
+  public function createWebToken($enterpriseId, Google_Service_AndroidEnterprise_AdministratorWebTokenSpec $postBody, $optParams = array())
+  {
+    $params = array('enterpriseId' => $enterpriseId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('createWebToken', array($params), "Google_Service_AndroidEnterprise_AdministratorWebToken");
+  }
+  /**
+   * Deletes the binding between the EMM and enterprise. This is now deprecated.
+   * Use this method only to unenroll customers that were previously enrolled with
+   * the insert call, then enroll them again with the enroll call.
    * (enterprises.delete)
    *
    * @param string $enterpriseId The ID of the enterprise.
@@ -125,6 +142,20 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
     return $this->call('get', array($params), "Google_Service_AndroidEnterprise_Enterprise");
   }
   /**
+   * Returns the Android Device Policy config resource.
+   * (enterprises.getAndroidDevicePolicyConfig)
+   *
+   * @param string $enterpriseId The ID of the enterprise.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AndroidEnterprise_AndroidDevicePolicyConfig
+   */
+  public function getAndroidDevicePolicyConfig($enterpriseId, $optParams = array())
+  {
+    $params = array('enterpriseId' => $enterpriseId);
+    $params = array_merge($params, $optParams);
+    return $this->call('getAndroidDevicePolicyConfig', array($params), "Google_Service_AndroidEnterprise_AndroidDevicePolicyConfig");
+  }
+  /**
    * Returns a service account and credentials. The service account can be bound
    * to the enterprise by calling setAccount. The service account is unique to
    * this enterprise and EMM, and will be deleted if the enterprise is unbound.
@@ -155,7 +186,7 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
   }
   /**
    * Returns the store layout for the enterprise. If the store layout has not been
-   * set, or if the store layout has no homepageId set, returns a NOT_FOUND error.
+   * set, returns "basic" as the store layout type and no homepage.
    * (enterprises.getStoreLayout)
    *
    * @param string $enterpriseId The ID of the enterprise.
@@ -214,14 +245,19 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
    * Google Cloud Platform Pub/Sub system policy. Multiple requests might be
    * performed concurrently to retrieve notifications, in which case the pending
    * notifications (if any) will be split among each caller, if any are pending.
+   * If no notifications are present, an empty notification list is returned.
+   * Subsequent requests may return more notifications once they become available.
    * (enterprises.pullNotificationSet)
    *
    * @param array $optParams Optional parameters.
    *
-   * @opt_param string requestMode The request mode for pulling notifications. If
-   * omitted, defaults to WAIT_FOR_NOTIFCATIONS. If this is set to
-   * WAIT_FOR_NOTIFCATIONS, the request will eventually timeout, in which case it
-   * should be retried.
+   * @opt_param string requestMode The request mode for pulling notifications.
+   * Specifying waitForNotifications will cause the request to block and wait
+   * until one or more notifications are present, or return an empty notification
+   * list if no notifications are present after some time. Speciying
+   * returnImmediately will cause the request to immediately return the pending
+   * notifications, or an empty list if no notifications are present. If omitted,
+   * defaults to waitForNotifications.
    * @return Google_Service_AndroidEnterprise_NotificationSet
    */
   public function pullNotificationSet($optParams = array())
@@ -231,8 +267,8 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
     return $this->call('pullNotificationSet', array($params), "Google_Service_AndroidEnterprise_NotificationSet");
   }
   /**
-   * Sends a test push notification to validate the EMM integration with the
-   * Google Cloud Pub/Sub service for this enterprise.
+   * Sends a test notification to validate the EMM integration with the Google
+   * Cloud Pub/Sub service for this enterprise.
    * (enterprises.sendTestPushNotification)
    *
    * @param string $enterpriseId The ID of the enterprise.
@@ -246,7 +282,7 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
     return $this->call('sendTestPushNotification', array($params), "Google_Service_AndroidEnterprise_EnterprisesSendTestPushNotificationResponse");
   }
   /**
-   * Set the account that will be used to authenticate to the API as the
+   * Sets the account that will be used to authenticate to the API as the
    * enterprise. (enterprises.setAccount)
    *
    * @param string $enterpriseId The ID of the enterprise.
@@ -261,7 +297,30 @@ class Google_Service_AndroidEnterprise_Resource_Enterprises extends Google_Servi
     return $this->call('setAccount', array($params), "Google_Service_AndroidEnterprise_EnterpriseAccount");
   }
   /**
-   * Sets the store layout for the enterprise. (enterprises.setStoreLayout)
+   * Sets the Android Device Policy config resource. EMM may use this method to
+   * enable or disable Android Device Policy support for the specified enterprise.
+   * To learn more about managing devices and apps with Android Device Policy, see
+   * the Android Management API. (enterprises.setAndroidDevicePolicyConfig)
+   *
+   * @param string $enterpriseId The ID of the enterprise.
+   * @param Google_Service_AndroidEnterprise_AndroidDevicePolicyConfig $postBody
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AndroidEnterprise_AndroidDevicePolicyConfig
+   */
+  public function setAndroidDevicePolicyConfig($enterpriseId, Google_Service_AndroidEnterprise_AndroidDevicePolicyConfig $postBody, $optParams = array())
+  {
+    $params = array('enterpriseId' => $enterpriseId, 'postBody' => $postBody);
+    $params = array_merge($params, $optParams);
+    return $this->call('setAndroidDevicePolicyConfig', array($params), "Google_Service_AndroidEnterprise_AndroidDevicePolicyConfig");
+  }
+  /**
+   * Sets the store layout for the enterprise. By default, storeLayoutType is set
+   * to "basic" and the basic store layout is enabled. The basic layout only
+   * contains apps approved by the admin, and that have been added to the
+   * available product set for a user (using the  setAvailableProductSet call).
+   * Apps on the page are sorted in order of their product ID value. If you create
+   * a custom store layout (by setting storeLayoutType = "custom" and setting a
+   * homepage), the basic store layout is disabled. (enterprises.setStoreLayout)
    *
    * @param string $enterpriseId The ID of the enterprise.
    * @param Google_Service_AndroidEnterprise_StoreLayout $postBody

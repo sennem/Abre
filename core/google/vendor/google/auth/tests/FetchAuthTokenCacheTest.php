@@ -43,6 +43,10 @@ class FetchAuthTokenCacheTest extends BaseTest
         $cachedValue = '2/abcdef1234567890';
         $this->mockCacheItem
             ->expects($this->once())
+            ->method('isHit')
+            ->will($this->returnValue(true));
+        $this->mockCacheItem
+            ->expects($this->once())
             ->method('get')
             ->will($this->returnValue($cachedValue));
         $this->mockCache
@@ -70,9 +74,13 @@ class FetchAuthTokenCacheTest extends BaseTest
 
     public function testGetsCachedAuthTokenUsingCachePrefix()
     {
-        $prefix = 'test_prefix-';
+        $prefix = 'test_prefix_';
         $cacheKey = 'myKey';
         $cachedValue = '2/abcdef1234567890';
+        $this->mockCacheItem
+            ->expects($this->once())
+            ->method('isHit')
+            ->will($this->returnValue(true));
         $this->mockCacheItem
             ->expects($this->once())
             ->method('get')
@@ -102,7 +110,7 @@ class FetchAuthTokenCacheTest extends BaseTest
 
     public function testShouldSaveValueInCacheWithCacheOptions()
     {
-        $prefix = 'test_prefix-';
+        $prefix = 'test_prefix_';
         $lifetime = '70707';
         $cacheKey = 'myKey';
         $token = '1/abcdef1234567890';

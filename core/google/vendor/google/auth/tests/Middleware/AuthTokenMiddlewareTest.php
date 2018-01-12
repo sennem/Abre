@@ -78,7 +78,7 @@ class AuthTokenMiddlewareTest extends BaseTest
         $this->mockRequest
             ->expects($this->once())
             ->method('withHeader')
-            ->with('Authorization', 'Bearer ' . $authResult['access_token'])
+            ->with('authorization', 'Bearer ' . $authResult['access_token'])
             ->will($this->returnValue($this->mockRequest));
 
         // Run the test.
@@ -98,7 +98,7 @@ class AuthTokenMiddlewareTest extends BaseTest
         $this->mockRequest
             ->expects($this->once())
             ->method('withHeader')
-            ->with('Authorization', 'Bearer ')
+            ->with('authorization', 'Bearer ')
             ->will($this->returnValue($this->mockRequest));
 
         // Run the test.
@@ -112,6 +112,10 @@ class AuthTokenMiddlewareTest extends BaseTest
     {
         $cacheKey = 'myKey';
         $cachedValue = '2/abcdef1234567890';
+        $this->mockCacheItem
+            ->expects($this->once())
+            ->method('isHit')
+            ->will($this->returnValue(true));
         $this->mockCacheItem
             ->expects($this->once())
             ->method('get')
@@ -131,7 +135,7 @@ class AuthTokenMiddlewareTest extends BaseTest
         $this->mockRequest
             ->expects($this->once())
             ->method('withHeader')
-            ->with('Authorization', 'Bearer ' . $cachedValue)
+            ->with('authorization', 'Bearer ' . $cachedValue)
             ->will($this->returnValue($this->mockRequest));
 
         // Run the test.
@@ -148,9 +152,13 @@ class AuthTokenMiddlewareTest extends BaseTest
 
     public function testGetsCachedAuthTokenUsingCacheOptions()
     {
-        $prefix = 'test_prefix-';
+        $prefix = 'test_prefix_';
         $cacheKey = 'myKey';
         $cachedValue = '2/abcdef1234567890';
+        $this->mockCacheItem
+            ->expects($this->once())
+            ->method('isHit')
+            ->will($this->returnValue(true));
         $this->mockCacheItem
             ->expects($this->once())
             ->method('get')
@@ -170,7 +178,7 @@ class AuthTokenMiddlewareTest extends BaseTest
         $this->mockRequest
             ->expects($this->once())
             ->method('withHeader')
-            ->with('Authorization', 'Bearer ' . $cachedValue)
+            ->with('authorization', 'Bearer ' . $cachedValue)
             ->will($this->returnValue($this->mockRequest));
 
         // Run the test.
@@ -187,7 +195,7 @@ class AuthTokenMiddlewareTest extends BaseTest
 
     public function testShouldSaveValueInCacheWithSpecifiedPrefix()
     {
-        $prefix = 'test_prefix-';
+        $prefix = 'test_prefix_';
         $lifetime = '70707';
         $cacheKey = 'myKey';
         $token = '1/abcdef1234567890';
@@ -221,7 +229,7 @@ class AuthTokenMiddlewareTest extends BaseTest
         $this->mockRequest
             ->expects($this->once())
             ->method('withHeader')
-            ->with('Authorization', 'Bearer ' . $token)
+            ->with('authorization', 'Bearer ' . $token)
             ->will($this->returnValue($this->mockRequest));
 
         // Run the test.
@@ -239,7 +247,7 @@ class AuthTokenMiddlewareTest extends BaseTest
     /** @dataProvider provideShouldNotifyTokenCallback */
     public function testShouldNotifyTokenCallback(callable $tokenCallback)
     {
-        $prefix = 'test_prefix-';
+        $prefix = 'test_prefix_';
         $cacheKey = 'myKey';
         $token = '1/abcdef1234567890';
         $authResult = ['access_token' => $token];

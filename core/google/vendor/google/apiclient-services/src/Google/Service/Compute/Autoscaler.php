@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -15,8 +15,9 @@
  * the License.
  */
 
-class Google_Service_Compute_Autoscaler extends Google_Model
+class Google_Service_Compute_Autoscaler extends Google_Collection
 {
+  protected $collection_key = 'statusDetails';
   protected $autoscalingPolicyType = 'Google_Service_Compute_AutoscalingPolicy';
   protected $autoscalingPolicyDataType = '';
   public $creationTimestamp;
@@ -24,14 +25,24 @@ class Google_Service_Compute_Autoscaler extends Google_Model
   public $id;
   public $kind;
   public $name;
+  public $region;
   public $selfLink;
+  public $status;
+  protected $statusDetailsType = 'Google_Service_Compute_AutoscalerStatusDetails';
+  protected $statusDetailsDataType = 'array';
   public $target;
   public $zone;
 
+  /**
+   * @param Google_Service_Compute_AutoscalingPolicy
+   */
   public function setAutoscalingPolicy(Google_Service_Compute_AutoscalingPolicy $autoscalingPolicy)
   {
     $this->autoscalingPolicy = $autoscalingPolicy;
   }
+  /**
+   * @return Google_Service_Compute_AutoscalingPolicy
+   */
   public function getAutoscalingPolicy()
   {
     return $this->autoscalingPolicy;
@@ -76,6 +87,14 @@ class Google_Service_Compute_Autoscaler extends Google_Model
   {
     return $this->name;
   }
+  public function setRegion($region)
+  {
+    $this->region = $region;
+  }
+  public function getRegion()
+  {
+    return $this->region;
+  }
   public function setSelfLink($selfLink)
   {
     $this->selfLink = $selfLink;
@@ -83,6 +102,28 @@ class Google_Service_Compute_Autoscaler extends Google_Model
   public function getSelfLink()
   {
     return $this->selfLink;
+  }
+  public function setStatus($status)
+  {
+    $this->status = $status;
+  }
+  public function getStatus()
+  {
+    return $this->status;
+  }
+  /**
+   * @param Google_Service_Compute_AutoscalerStatusDetails
+   */
+  public function setStatusDetails($statusDetails)
+  {
+    $this->statusDetails = $statusDetails;
+  }
+  /**
+   * @return Google_Service_Compute_AutoscalerStatusDetails
+   */
+  public function getStatusDetails()
+  {
+    return $this->statusDetails;
   }
   public function setTarget($target)
   {

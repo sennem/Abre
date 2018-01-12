@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,18 +17,22 @@
 
 class Google_Service_Iam_Policy extends Google_Collection
 {
-  protected $collection_key = 'rules';
+  protected $collection_key = 'bindings';
   protected $bindingsType = 'Google_Service_Iam_Binding';
   protected $bindingsDataType = 'array';
   public $etag;
-  protected $rulesType = 'Google_Service_Iam_Rule';
-  protected $rulesDataType = 'array';
   public $version;
 
+  /**
+   * @param Google_Service_Iam_Binding
+   */
   public function setBindings($bindings)
   {
     $this->bindings = $bindings;
   }
+  /**
+   * @return Google_Service_Iam_Binding
+   */
   public function getBindings()
   {
     return $this->bindings;
@@ -40,14 +44,6 @@ class Google_Service_Iam_Policy extends Google_Collection
   public function getEtag()
   {
     return $this->etag;
-  }
-  public function setRules($rules)
-  {
-    $this->rules = $rules;
-  }
-  public function getRules()
-  {
-    return $this->rules;
   }
   public function setVersion($version)
   {

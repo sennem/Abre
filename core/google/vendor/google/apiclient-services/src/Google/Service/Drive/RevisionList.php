@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -19,6 +19,7 @@ class Google_Service_Drive_RevisionList extends Google_Collection
 {
   protected $collection_key = 'revisions';
   public $kind;
+  public $nextPageToken;
   protected $revisionsType = 'Google_Service_Drive_Revision';
   protected $revisionsDataType = 'array';
 
@@ -30,10 +31,24 @@ class Google_Service_Drive_RevisionList extends Google_Collection
   {
     return $this->kind;
   }
+  public function setNextPageToken($nextPageToken)
+  {
+    $this->nextPageToken = $nextPageToken;
+  }
+  public function getNextPageToken()
+  {
+    return $this->nextPageToken;
+  }
+  /**
+   * @param Google_Service_Drive_Revision
+   */
   public function setRevisions($revisions)
   {
     $this->revisions = $revisions;
   }
+  /**
+   * @return Google_Service_Drive_Revision
+   */
   public function getRevisions()
   {
     return $this->revisions;

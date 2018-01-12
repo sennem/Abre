@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -23,6 +23,7 @@ class Google_Service_Dataflow_Environment extends Google_Collection
   public $experiments;
   public $internalExperiments;
   public $sdkPipelineOptions;
+  public $serviceAccountEmail;
   public $tempStoragePrefix;
   public $userAgent;
   public $version;
@@ -69,6 +70,14 @@ class Google_Service_Dataflow_Environment extends Google_Collection
   {
     return $this->sdkPipelineOptions;
   }
+  public function setServiceAccountEmail($serviceAccountEmail)
+  {
+    $this->serviceAccountEmail = $serviceAccountEmail;
+  }
+  public function getServiceAccountEmail()
+  {
+    return $this->serviceAccountEmail;
+  }
   public function setTempStoragePrefix($tempStoragePrefix)
   {
     $this->tempStoragePrefix = $tempStoragePrefix;
@@ -93,10 +102,16 @@ class Google_Service_Dataflow_Environment extends Google_Collection
   {
     return $this->version;
   }
+  /**
+   * @param Google_Service_Dataflow_WorkerPool
+   */
   public function setWorkerPools($workerPools)
   {
     $this->workerPools = $workerPools;
   }
+  /**
+   * @return Google_Service_Dataflow_WorkerPool
+   */
   public function getWorkerPools()
   {
     return $this->workerPools;

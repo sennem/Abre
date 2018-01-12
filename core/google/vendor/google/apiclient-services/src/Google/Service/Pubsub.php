@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -37,8 +37,10 @@ class Google_Service_Pubsub extends Google_Service
   const PUBSUB =
       "https://www.googleapis.com/auth/pubsub";
 
+  public $projects_snapshots;
   public $projects_subscriptions;
   public $projects_topics;
+  public $projects_topics_snapshots;
   public $projects_topics_subscriptions;
   
   /**
@@ -54,6 +56,94 @@ class Google_Service_Pubsub extends Google_Service
     $this->version = 'v1';
     $this->serviceName = 'pubsub';
 
+    $this->projects_snapshots = new Google_Service_Pubsub_Resource_ProjectsSnapshots(
+        $this,
+        $this->serviceName,
+        'snapshots',
+        array(
+          'methods' => array(
+            'create' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PUT',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'delete' => array(
+              'path' => 'v1/{+snapshot}',
+              'httpMethod' => 'DELETE',
+              'parameters' => array(
+                'snapshot' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'getIamPolicy' => array(
+              'path' => 'v1/{+resource}:getIamPolicy',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'resource' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'list' => array(
+              'path' => 'v1/{+project}/snapshots',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'project' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+              ),
+            ),'patch' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'setIamPolicy' => array(
+              'path' => 'v1/{+resource}:setIamPolicy',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'resource' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'testIamPermissions' => array(
+              'path' => 'v1/{+resource}:testIamPermissions',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'resource' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->projects_subscriptions = new Google_Service_Pubsub_Resource_ProjectsSubscriptions(
         $this,
         $this->serviceName,
@@ -119,13 +209,13 @@ class Google_Service_Pubsub extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'modifyAckDeadline' => array(
@@ -148,8 +238,28 @@ class Google_Service_Pubsub extends Google_Service
                   'required' => true,
                 ),
               ),
+            ),'patch' => array(
+              'path' => 'v1/{+name}',
+              'httpMethod' => 'PATCH',
+              'parameters' => array(
+                'name' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
             ),'pull' => array(
               'path' => 'v1/{+subscription}:pull',
+              'httpMethod' => 'POST',
+              'parameters' => array(
+                'subscription' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+              ),
+            ),'seek' => array(
+              'path' => 'v1/{+subscription}:seek',
               'httpMethod' => 'POST',
               'parameters' => array(
                 'subscription' => array(
@@ -237,13 +347,13 @@ class Google_Service_Pubsub extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),'publish' => array(
@@ -280,6 +390,34 @@ class Google_Service_Pubsub extends Google_Service
           )
         )
     );
+    $this->projects_topics_snapshots = new Google_Service_Pubsub_Resource_ProjectsTopicsSnapshots(
+        $this,
+        $this->serviceName,
+        'snapshots',
+        array(
+          'methods' => array(
+            'list' => array(
+              'path' => 'v1/{+topic}/snapshots',
+              'httpMethod' => 'GET',
+              'parameters' => array(
+                'topic' => array(
+                  'location' => 'path',
+                  'type' => 'string',
+                  'required' => true,
+                ),
+                'pageToken' => array(
+                  'location' => 'query',
+                  'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
+                ),
+              ),
+            ),
+          )
+        )
+    );
     $this->projects_topics_subscriptions = new Google_Service_Pubsub_Resource_ProjectsTopicsSubscriptions(
         $this,
         $this->serviceName,
@@ -295,13 +433,13 @@ class Google_Service_Pubsub extends Google_Service
                   'type' => 'string',
                   'required' => true,
                 ),
-                'pageSize' => array(
-                  'location' => 'query',
-                  'type' => 'integer',
-                ),
                 'pageToken' => array(
                   'location' => 'query',
                   'type' => 'string',
+                ),
+                'pageSize' => array(
+                  'location' => 'query',
+                  'type' => 'integer',
                 ),
               ),
             ),

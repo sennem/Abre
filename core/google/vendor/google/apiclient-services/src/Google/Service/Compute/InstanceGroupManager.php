@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -31,6 +31,7 @@ class Google_Service_Compute_InstanceGroupManager extends Google_Collection
   public $name;
   protected $namedPortsType = 'Google_Service_Compute_NamedPort';
   protected $namedPortsDataType = 'array';
+  public $region;
   public $selfLink;
   public $targetPools;
   public $targetSize;
@@ -52,10 +53,16 @@ class Google_Service_Compute_InstanceGroupManager extends Google_Collection
   {
     return $this->creationTimestamp;
   }
+  /**
+   * @param Google_Service_Compute_InstanceGroupManagerActionsSummary
+   */
   public function setCurrentActions(Google_Service_Compute_InstanceGroupManagerActionsSummary $currentActions)
   {
     $this->currentActions = $currentActions;
   }
+  /**
+   * @return Google_Service_Compute_InstanceGroupManagerActionsSummary
+   */
   public function getCurrentActions()
   {
     return $this->currentActions;
@@ -116,13 +123,27 @@ class Google_Service_Compute_InstanceGroupManager extends Google_Collection
   {
     return $this->name;
   }
+  /**
+   * @param Google_Service_Compute_NamedPort
+   */
   public function setNamedPorts($namedPorts)
   {
     $this->namedPorts = $namedPorts;
   }
+  /**
+   * @return Google_Service_Compute_NamedPort
+   */
   public function getNamedPorts()
   {
     return $this->namedPorts;
+  }
+  public function setRegion($region)
+  {
+    $this->region = $region;
+  }
+  public function getRegion()
+  {
+    return $this->region;
   }
   public function setSelfLink($selfLink)
   {

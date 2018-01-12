@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,6 +21,7 @@ class Google_Service_Analytics_GaData extends Google_Collection
   protected $columnHeadersType = 'Google_Service_Analytics_GaDataColumnHeaders';
   protected $columnHeadersDataType = 'array';
   public $containsSampledData;
+  public $dataLastRefreshed;
   protected $dataTableType = 'Google_Service_Analytics_GaDataDataTable';
   protected $dataTableDataType = '';
   public $id;
@@ -39,10 +40,16 @@ class Google_Service_Analytics_GaData extends Google_Collection
   public $totalResults;
   public $totalsForAllResults;
 
+  /**
+   * @param Google_Service_Analytics_GaDataColumnHeaders
+   */
   public function setColumnHeaders($columnHeaders)
   {
     $this->columnHeaders = $columnHeaders;
   }
+  /**
+   * @return Google_Service_Analytics_GaDataColumnHeaders
+   */
   public function getColumnHeaders()
   {
     return $this->columnHeaders;
@@ -55,10 +62,24 @@ class Google_Service_Analytics_GaData extends Google_Collection
   {
     return $this->containsSampledData;
   }
+  public function setDataLastRefreshed($dataLastRefreshed)
+  {
+    $this->dataLastRefreshed = $dataLastRefreshed;
+  }
+  public function getDataLastRefreshed()
+  {
+    return $this->dataLastRefreshed;
+  }
+  /**
+   * @param Google_Service_Analytics_GaDataDataTable
+   */
   public function setDataTable(Google_Service_Analytics_GaDataDataTable $dataTable)
   {
     $this->dataTable = $dataTable;
   }
+  /**
+   * @return Google_Service_Analytics_GaDataDataTable
+   */
   public function getDataTable()
   {
     return $this->dataTable;
@@ -103,18 +124,30 @@ class Google_Service_Analytics_GaData extends Google_Collection
   {
     return $this->previousLink;
   }
+  /**
+   * @param Google_Service_Analytics_GaDataProfileInfo
+   */
   public function setProfileInfo(Google_Service_Analytics_GaDataProfileInfo $profileInfo)
   {
     $this->profileInfo = $profileInfo;
   }
+  /**
+   * @return Google_Service_Analytics_GaDataProfileInfo
+   */
   public function getProfileInfo()
   {
     return $this->profileInfo;
   }
+  /**
+   * @param Google_Service_Analytics_GaDataQuery
+   */
   public function setQuery(Google_Service_Analytics_GaDataQuery $query)
   {
     $this->query = $query;
   }
+  /**
+   * @return Google_Service_Analytics_GaDataQuery
+   */
   public function getQuery()
   {
     return $this->query;

@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -17,12 +17,22 @@
 
 class Google_Service_Iam_ServiceAccountKey extends Google_Model
 {
+  public $keyAlgorithm;
   public $name;
   public $privateKeyData;
   public $privateKeyType;
+  public $publicKeyData;
   public $validAfterTime;
   public $validBeforeTime;
 
+  public function setKeyAlgorithm($keyAlgorithm)
+  {
+    $this->keyAlgorithm = $keyAlgorithm;
+  }
+  public function getKeyAlgorithm()
+  {
+    return $this->keyAlgorithm;
+  }
   public function setName($name)
   {
     $this->name = $name;
@@ -46,6 +56,14 @@ class Google_Service_Iam_ServiceAccountKey extends Google_Model
   public function getPrivateKeyType()
   {
     return $this->privateKeyType;
+  }
+  public function setPublicKeyData($publicKeyData)
+  {
+    $this->publicKeyData = $publicKeyData;
+  }
+  public function getPublicKeyData()
+  {
+    return $this->publicKeyData;
   }
   public function setValidAfterTime($validAfterTime)
   {

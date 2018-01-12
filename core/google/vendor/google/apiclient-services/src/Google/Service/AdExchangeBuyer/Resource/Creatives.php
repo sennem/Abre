@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -93,6 +93,21 @@ class Google_Service_AdExchangeBuyer_Resource_Creatives extends Google_Service_R
     $params = array();
     $params = array_merge($params, $optParams);
     return $this->call('list', array($params), "Google_Service_AdExchangeBuyer_CreativesList");
+  }
+  /**
+   * Lists the external deal ids associated with the creative.
+   * (creatives.listDeals)
+   *
+   * @param int $accountId The id for the account that will serve this creative.
+   * @param string $buyerCreativeId The buyer-specific id for this creative.
+   * @param array $optParams Optional parameters.
+   * @return Google_Service_AdExchangeBuyer_CreativeDealIds
+   */
+  public function listDeals($accountId, $buyerCreativeId, $optParams = array())
+  {
+    $params = array('accountId' => $accountId, 'buyerCreativeId' => $buyerCreativeId);
+    $params = array_merge($params, $optParams);
+    return $this->call('listDeals', array($params), "Google_Service_AdExchangeBuyer_CreativeDealIds");
   }
   /**
    * Remove a deal id associated with the creative. (creatives.removeDeal)

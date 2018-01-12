@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -26,14 +26,32 @@
 class Google_Service_Analytics_Resource_ManagementRemarketingAudience extends Google_Service_Resource
 {
   /**
-   * Gets remarketing audiences to which the user has access.
+   * Delete a remarketing audience. (remarketingAudience.delete)
+   *
+   * @param string $accountId Account ID to which the remarketing audience
+   * belongs.
+   * @param string $webPropertyId Web property ID to which the remarketing
+   * audience belongs.
+   * @param string $remarketingAudienceId The ID of the remarketing audience to
+   * delete.
+   * @param array $optParams Optional parameters.
+   */
+  public function delete($accountId, $webPropertyId, $remarketingAudienceId, $optParams = array())
+  {
+    $params = array('accountId' => $accountId, 'webPropertyId' => $webPropertyId, 'remarketingAudienceId' => $remarketingAudienceId);
+    $params = array_merge($params, $optParams);
+    return $this->call('delete', array($params));
+  }
+  /**
+   * Gets a remarketing audience to which the user has access.
    * (remarketingAudience.get)
    *
-   * @param string $accountId Account ID for the remarketing audience to retrieve.
-   * @param string $webPropertyId Web property ID for the remarketing audience to
+   * @param string $accountId The account ID of the remarketing audience to
    * retrieve.
-   * @param string $remarketingAudienceId The ID to retrieve the Remarketing
-   * Audience for.
+   * @param string $webPropertyId The web property ID of the remarketing audience
+   * to retrieve.
+   * @param string $remarketingAudienceId The ID of the remarketing audience to
+   * retrieve.
    * @param array $optParams Optional parameters.
    * @return Google_Service_Analytics_RemarketingAudience
    */
@@ -44,11 +62,12 @@ class Google_Service_Analytics_Resource_ManagementRemarketingAudience extends Go
     return $this->call('get', array($params), "Google_Service_Analytics_RemarketingAudience");
   }
   /**
-   * Creates a new remarketing audiences. (remarketingAudience.insert)
+   * Creates a new remarketing audience. (remarketingAudience.insert)
    *
-   * @param string $accountId Account ID to create the remarketing audience for.
-   * @param string $webPropertyId Web property ID to create the remarketing
-   * audience for.
+   * @param string $accountId The account ID for which to create the remarketing
+   * audience.
+   * @param string $webPropertyId Web property ID for which to create the
+   * remarketing audience.
    * @param Google_Service_Analytics_RemarketingAudience $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Analytics_RemarketingAudience
@@ -63,9 +82,10 @@ class Google_Service_Analytics_Resource_ManagementRemarketingAudience extends Go
    * Lists remarketing audiences to which the user has access.
    * (remarketingAudience.listManagementRemarketingAudience)
    *
-   * @param string $accountId Account ID for the remarketing audience to retrieve.
-   * @param string $webPropertyId Web property ID for the remarketing audience to
+   * @param string $accountId The account ID of the remarketing audiences to
    * retrieve.
+   * @param string $webPropertyId The web property ID of the remarketing audiences
+   * to retrieve.
    * @param array $optParams Optional parameters.
    *
    * @opt_param int max-results The maximum number of remarketing audiences to
@@ -82,14 +102,15 @@ class Google_Service_Analytics_Resource_ManagementRemarketingAudience extends Go
     return $this->call('list', array($params), "Google_Service_Analytics_RemarketingAudiences");
   }
   /**
-   * Updates an existing remarketing audiences. This method supports patch
+   * Updates an existing remarketing audience. This method supports patch
    * semantics. (remarketingAudience.patch)
    *
-   * @param string $accountId Account ID for the remarketing audience to update.
-   * @param string $webPropertyId Web property ID for the remarketing audience to
+   * @param string $accountId The account ID of the remarketing audience to
    * update.
-   * @param string $remarketingAudienceId Remarketing audience ID of the
-   * remarketing audience to update.
+   * @param string $webPropertyId The web property ID of the remarketing audience
+   * to update.
+   * @param string $remarketingAudienceId The ID of the remarketing audience to
+   * update.
    * @param Google_Service_Analytics_RemarketingAudience $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Analytics_RemarketingAudience
@@ -101,13 +122,14 @@ class Google_Service_Analytics_Resource_ManagementRemarketingAudience extends Go
     return $this->call('patch', array($params), "Google_Service_Analytics_RemarketingAudience");
   }
   /**
-   * Updates an existing remarketing audiences. (remarketingAudience.update)
+   * Updates an existing remarketing audience. (remarketingAudience.update)
    *
-   * @param string $accountId Account ID for the remarketing audience to update.
-   * @param string $webPropertyId Web property ID for the remarketing audience to
+   * @param string $accountId The account ID of the remarketing audience to
    * update.
-   * @param string $remarketingAudienceId Remarketing audience ID of the
-   * remarketing audience to update.
+   * @param string $webPropertyId The web property ID of the remarketing audience
+   * to update.
+   * @param string $remarketingAudienceId The ID of the remarketing audience to
+   * update.
    * @param Google_Service_Analytics_RemarketingAudience $postBody
    * @param array $optParams Optional parameters.
    * @return Google_Service_Analytics_RemarketingAudience

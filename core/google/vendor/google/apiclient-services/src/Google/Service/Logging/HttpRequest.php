@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -21,12 +21,15 @@ class Google_Service_Logging_HttpRequest extends Google_Model
   public $cacheHit;
   public $cacheLookup;
   public $cacheValidatedWithOriginServer;
+  public $latency;
+  public $protocol;
   public $referer;
   public $remoteIp;
   public $requestMethod;
   public $requestSize;
   public $requestUrl;
   public $responseSize;
+  public $serverIp;
   public $status;
   public $userAgent;
 
@@ -61,6 +64,22 @@ class Google_Service_Logging_HttpRequest extends Google_Model
   public function getCacheValidatedWithOriginServer()
   {
     return $this->cacheValidatedWithOriginServer;
+  }
+  public function setLatency($latency)
+  {
+    $this->latency = $latency;
+  }
+  public function getLatency()
+  {
+    return $this->latency;
+  }
+  public function setProtocol($protocol)
+  {
+    $this->protocol = $protocol;
+  }
+  public function getProtocol()
+  {
+    return $this->protocol;
   }
   public function setReferer($referer)
   {
@@ -109,6 +128,14 @@ class Google_Service_Logging_HttpRequest extends Google_Model
   public function getResponseSize()
   {
     return $this->responseSize;
+  }
+  public function setServerIp($serverIp)
+  {
+    $this->serverIp = $serverIp;
+  }
+  public function getServerIp()
+  {
+    return $this->serverIp;
   }
   public function setStatus($status)
   {

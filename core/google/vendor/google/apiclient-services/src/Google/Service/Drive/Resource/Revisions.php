@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright 2016 Google Inc.
+ * Copyright 2014 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
@@ -62,6 +62,11 @@ class Google_Service_Drive_Resource_Revisions extends Google_Service_Resource
    *
    * @param string $fileId The ID of the file.
    * @param array $optParams Optional parameters.
+   *
+   * @opt_param int pageSize The maximum number of revisions to return per page.
+   * @opt_param string pageToken The token for continuing a previous list request
+   * on the next page. This should be set to the value of 'nextPageToken' from the
+   * previous response.
    * @return Google_Service_Drive_RevisionList
    */
   public function listRevisions($fileId, $optParams = array())
