@@ -34,7 +34,7 @@
 	<!--Apps modal-->
 	<div id='viewapps_arrow' class='hide-on-small-only'></div>
 	<div id="viewapps" class="modal apps_modal modal-mobile-full">
-		<div class="modal-content" id="modal-content-section">
+		<div class="modal-content">
 			<a class="modal-close black-text hide-on-med-and-up" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 			<div id='loadapps'></div>
     </div>
