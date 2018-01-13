@@ -41,11 +41,9 @@
 			foreach($Drive_Results as $file){
 				
 				$counter++;
-				$json = json_encode($file);
-				$json = json_decode($json, true);
-				$drivetitle = $json['name'];
-				$drivelink = $json['webViewLink'];
-				$drivemodifydate = $json['modifiedTime'];
+				$drivetitle = $file['name'];
+				$drivelink = $file['webViewLink'];
+				$drivemodifydate = $file['modifiedTime'];
 				$drivemodifydate = date("m/d g:i A", strtotime($drivemodifydate));				
 				
 				if($counter==1){
