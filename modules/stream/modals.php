@@ -185,7 +185,7 @@
         	
         	selectedWidgets = selectedWidgets.replace(/^,|,$/g,'');
 
-			$.post("modules/stream/save_widget_status.php", {widgets: selectedWidgets}, function() {
+			$.post("modules/stream/save_widget_visibility.php", {widgets: selectedWidgets}, function() {
 				$("#streamwidgets").load("modules/<?php echo basename(__DIR__); ?>/widgets.php");
 			});
 			
