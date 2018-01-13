@@ -24,16 +24,32 @@
 	//Display Widget
 	function DisplayWidget($path,$icon,$title,$color){
 		
-		$Path = "/modules/$path/widget_content.php";
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		
+		$URLPath = "/modules/$path/widget_content.php";
+		
+		//Check if widget is open for user
+		$widgets_open = NULL;
+		$active = "";
+		$sql = "SELECT widgets_open FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+		$result = $db->query($sql);
+		while($row = $result->fetch_assoc()) {
+			$widgets_open = htmlspecialchars($row["widgets_open"], ENT_QUOTES);
+		}
+		
+		$OpenWidgets = explode(',',$widgets_open);
+		if(in_array($path, $OpenWidgets)){
+			$active = "active";
+		}
 
 		echo "<ul class='widget mdl-card mdl-shadow--2dp hoverable' style='width:100%;' data-collapsible='accordion'>";
-			echo "<li>";
-				echo "<div class='collapsible-header' data-path='$Path' style='border-top: solid 3px $color;'>";
+			echo "<li class='widgetli' data-path='$path'>";
+				echo "<div class='collapsible-header $active' data-path='$URLPath' data-widget='$path' style='border-top: solid 3px $color;'>";
 					echo "<i class='material-icons' style='color: $color'>$icon</i>";
 					echo "<span style='color: #000'>$title</span>";
 					echo "<i class='right material-icons' style='color: #666; margin-right:2px;'>expand_more</i>";		
 				echo "</div>";
-				echo "<div class='collapsible-body'></div>";
+				echo "<div class='collapsible-body' id='widgetbody_$path'></div>";
 			echo "</li>";
   		echo "</ul>";		
 

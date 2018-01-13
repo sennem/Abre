@@ -22,8 +22,8 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	$widgets = $_POST['widgets'];
-	
+	$widget = $_POST['widget'];
+	$status = $_POST['status'];	
 
 	//Check to see if profile record exists
 	include "../../core/abre_dbconnect.php";
@@ -39,11 +39,43 @@
 		$stmt->execute();
 		$stmt->close();
 	}
+	else
+	{
+		$sql = "SELECT widgets_open FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+		$result = $db->query($sql);
+		while($row = $result->fetch_assoc()) {
+			$widgets_open = htmlspecialchars($row["widgets_open"], ENT_QUOTES);
+		}
+	}
+	
+	//Check if widget already saved as open
+	if($status == "false"){
+		$OpenWidgets = explode(',',$widgets_open);
+		if(!in_array($widget, $OpenWidgets)){
+			
+			if($widgets_open!=""){
+				$widgets_open = $widgets_open . ",$widget";
+			}
+			else
+			{
+				$widgets_open = $widget;
+			}
+		}
+	}
+	else
+	{
+		$OpenWidgets = explode(',',$widgets_open);	
+	    while(($i = array_search($widget, $OpenWidgets)) !== false) {
+	        unset($OpenWidgets[$i]);
+	    }
+	
+	    $widgets_open = implode(',', $OpenWidgets);
+	}
 
 	$stmt = $db->stmt_init();
-	$sql = "UPDATE profiles SET widgets_hidden = ? WHERE email = ?";
+	$sql = "UPDATE profiles SET widgets_open = ? WHERE email = ?";
 	$stmt->prepare($sql);
-	$stmt->bind_param("ss", $widgets, $_SESSION['useremail']);
+	$stmt->bind_param("ss", $widgets_open, $_SESSION['useremail']);
 	$stmt->execute();
 	$stmt->close();
 	$db->close();

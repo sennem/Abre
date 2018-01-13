@@ -153,14 +153,31 @@
 			});	
 		}
 		
-		//Load Widget Contents on Click
-		$(".widget .collapsible-header").off().on("click", function(){
+		//Load all widgets that have a class of active
+		$(".widgetli").each(function(){
 			var OpenStatus = $(this).hasClass("active");
 			var Path = $(this).data('path');
+			if(OpenStatus === true){
+				var Div = "#widgetbody_"+Path;
+				loadWidget(Div,'/modules/'+Path+'/widget_content.php')
+			}
+		});
+		
+		//Events when widget is opened or closed
+		$(".widget .collapsible-header").off().on("click", function(){
+			
+			//Load widget content
+			var OpenStatus = $(this).hasClass("active");
+			var Path = $(this).data('path');
+			var Widget = $(this).data('widget');
 			var BodyDiv = $(this).next();
 			if(OpenStatus === false){		
-				loadWidget(BodyDiv,Path);			
+				loadWidget(BodyDiv,Path);
 			}
+			
+			//Save open status to server
+			$.post("/modules/stream/save_widget_state.php", {widget: Widget, status: OpenStatus});
+			
 		});
 		
 		//Reload Widget
