@@ -40,6 +40,7 @@
 	foreach($dbreturn as $value){
 		$title = $value['title'];
 		$titleencoded = base64_encode($title);
+		$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
 		$image = htmlspecialchars($value ['image'], ENT_QUOTES);
 		$imagebase = base64_encode($image);
 		$linkbase = base64_encode($value['url']);
@@ -67,7 +68,7 @@
 		
 			//Title
 			echo "<div class='cardtitle' style='height:60px; padding:5px 16px 0 16px;'>";
-				echo "<div class='mdl-card__title-text ellipsis-multiline cardclick pointer' data-link='$linkescaped' style='font-weight:700; font-size:20px; line-height:24px;'>$title</div>";
+				echo "<div class='mdl-card__title-text ellipsis-multiline cardclick pointer' data-link='$linkescaped' style='font-weight:700; font-size:20px; line-height:24px;'>$titlewithoutlongwords</div>";
 			echo "</div>";
 			
 			//Date

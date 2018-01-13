@@ -26,7 +26,8 @@
 	$imagebase = base64_encode($image);
 	$displaydate = date("F jS, Y", $date);
 	$titleencoded = base64_encode($title);
-
+	$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
+	
 	//Display Card
 	echo "<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>";
 	
@@ -37,7 +38,7 @@
 	
 		//Title
 		echo "<div class='cardtitle' style='height:60px; padding:5px 16px 0 16px;'>";
-			echo "<div class='mdl-card__title-text ellipsis-multiline cardclick pointer' data-link='$linkescaped' style='font-weight:700; font-size:20px; line-height:24px;'>$title</div>";
+			echo "<div class='mdl-card__title-text ellipsis-multiline cardclick pointer' data-link='$linkescaped' style='font-weight:700; font-size:20px; line-height:24px;'>$titlewithoutlongwords</div>";
 		echo "</div>";
 		
 		//Date
