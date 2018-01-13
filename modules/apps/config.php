@@ -126,7 +126,7 @@
 	?>
 		<!-- Student Token Modal -->
 		<div id="verifystudent" class="modal modal-fixed-footer modal-mobile-full">
-			<form class="col s12" id="form-verifystudent" method="post" action="<?php echo basename(__DIR__); ?>/../../core/verifystudent_process.php">
+			<form class="col s12" id="form-verifystudent" method="post" action="<?php echo basename(__DIR__); ?>/../../core/abre_verifystudent_process.php">
 				<div class="modal-content">
 					<h4>Enter Student Access Code</h4>
 					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
