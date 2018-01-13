@@ -38,6 +38,7 @@
 			
 			$counter=0;
 			foreach($events->getItems() as $event){
+				
 				$counter++;
 				$eventitle = $event->getSummary();
 				$eventlink = $event->getHtmlLink();
@@ -75,6 +76,7 @@
 					echo "<div class='widget_container widget_heading_h1 truncate'>$eventitle</div>";
 					echo "<div class='widget_container widget_body truncate'>$timeofevent</div>";
 				echo "</div>";
+				
 			}		
 			
 			if(empty($events->getItems()))

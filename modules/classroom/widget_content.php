@@ -42,6 +42,7 @@
 				
 				$counter=0;
 				foreach ($results->getCourses() as $course){
+					
 					$counter++;
 					$courseName = $course->getName();
 					$courseSection = $course->getSection();
@@ -66,6 +67,7 @@
 						echo "</div>";
 						
 					}
+					
 				}
 			}
 			
