@@ -90,6 +90,7 @@
 	//Display the Feeds
 	sort($feeds, SORT_DESC);
 	$feeds = array_reverse($feeds);
+	$cardcount = 0;
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){
 		$date = $feeds[$cardcountloop][0];
 		$title = $feeds[$cardcountloop][1];
@@ -130,7 +131,17 @@
 
 		if($title != "" && $excerpt != ""){
 			include "card.php";
+			$cardcount++;
 		}
+		
+	}
+	
+	if($cardcount == 0 && $StreamStartResult == 0){
+		
+		echo "<div class='row center-align'>";
+			echo "<div class='widget' style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Welcome to Your Stream</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Get started by following a few streams.<br>You'll see the latest posts from the streams you follow here.</p></div>";
+			echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' style='background-color:".getSiteColor()."; color:#fff;' href='#profile'>View Available Streams</a>";
+		echo "</div>";
 	}
 
 

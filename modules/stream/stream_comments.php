@@ -137,7 +137,9 @@
 		
 	}
 
-	echo "<div id='noCommentsMessage' class='row center-align' style='display:none;'><div class='col s12'><h6>No Comments yet</h6></div><div class='col s12'>Click the comment button on a stream card to save the post to this page.</div></div>";
+	echo "<div id='noCommentsMessage' class='row center-align' style='display:none;'>";
+		echo "<div class='widget' style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Stream Comments</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Get started by commenting on a post from your stream.<br>You'll see the stream posts you have commented on here.</p></div>";
+	echo "</div>";
 		
 
 ?>

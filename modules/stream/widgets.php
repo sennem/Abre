@@ -103,7 +103,7 @@
 		}
 		
 		if($WidgetCount==0){
-			echo "<div class='widget_placeholder widget mdl-card' style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Add Widgets</span><br>Get timely information from your favorite apps, at a glance. Add widgets by clicking 'Edit Widgets' below.</div><br>";
+			echo "<div class='widget_placeholder widget mdl-card' style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Add Widgets</span><br><p style='font-size:16px; margin:0;'>Get timely information from your favorite apps, at a glance. Add widgets by clicking 'Edit Widgets' below.</p></div><br>";
 		}
 		
 	echo "</div>";
