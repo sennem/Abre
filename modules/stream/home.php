@@ -43,6 +43,9 @@
 				echo "<div class='mdl-spinner mdl-js-spinner is-active'></div>";
 			echo "</div></div>";
 			
+			//Scroll to Top
+			echo "<div class='scrollbutton pointer' style='display:none; position:fixed; width:90px; left:50%; bottom:10px; margin-left:-45px; text-align:center; z-index:1000;'><a href ='#' style='font-size:12px; color:#fff; padding:5px 10px; border-radius:3px; background-color: ".getSiteColor()."; white-space: nowrap;'>Scroll To Top</a></div>";
+			
 		echo "</div>";
 		
 		//Widget
@@ -137,6 +140,22 @@
 			$("#comments").attr( "disabled", "disabled" );
 			
 		});
+		
+		//Scroll to Top Functionality
+		$('.mdl-layout__content').scroll(function(){
+			if($(this).scrollTop() > 1000){
+				$(".scrollbutton").fadeIn();
+			}else{
+				$(".scrollbutton").fadeOut();
+			}
+		});
+		
+		//Scroll to Top Button
+		$('.scrollbutton').click(function(){
+			$('.mdl-layout__content').animate({scrollTop : 0},500);
+			return false;
+		});
+		
 
 	});
 
