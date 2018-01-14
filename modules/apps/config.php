@@ -28,6 +28,7 @@
 	$drawerhidden = 1;
 	$pagetitle = "Apps";
 	$pagepath = "apps";
+	$restrictions = "parent";
 	$url = $portal_root .'/#students';
 ?>
 
@@ -44,10 +45,12 @@
 	<?php
 	if(superadmin()){
 	?>
+	
 	<link rel="stylesheet" href='core/css/image-picker.0.3.0.css'>
 	<script src='core/js/image-picker.0.0.3.min.js'></script>
 
 	<div id='appeditor' class='modal modal-fixed-footer modal-mobile-full'>
+		
 		<div class='modal-content'>
 			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 			<div class='row'>
@@ -63,7 +66,7 @@
 			<a class='modal-action waves-effect btn-flat white-text modal-addeditapp' href='#addeditapp' data-apptitle='Add New App' style='background-color: <?php echo getSiteColor(); ?>'>Add</a>
 		</div>
 	</div>
-
+	
 	<div id='addeditapp' class='modal modal-fixed-footer modal-mobile-full' style="width: 90%">
 		<form id='addeditappform' method="post" action='#'>
 			<div class='modal-content'>

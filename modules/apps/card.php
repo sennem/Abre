@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	* Copyright (C) 2016-2018 Abre.io Inc.
+	* Copyright (C) 2016-2017 Abre.io LLC
 	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the Affero General Public License version 3
@@ -98,12 +98,6 @@
 		$(".topapps").unbind().click(function(event) {
 			event.preventDefault();
 			window.open($(this).find("a").attr("href"), '_blank');
-
-			//Track click
-		  var linktitle = '/#apps/'+$(this).find("a").text()+'/';
-		  ga('set', 'page', linktitle);
-			ga('send', 'pageview');
-
 		});
 
 	});

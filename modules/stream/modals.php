@@ -102,6 +102,7 @@
 					$widgetsdirectory = dirname(__FILE__) . '/../';
 					$widgetsfolders = scandir($widgetsdirectory);
 					$widgetcounter=0;
+					
 					foreach($widgetsfolders as $result){
 						
 						$pagetitle = NULL;
@@ -109,8 +110,8 @@
 			
 						if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
 
-							include(dirname(__FILE__) . '/../'.$result.'/config.php');
-								
+							include(dirname(__FILE__) . '/../'.$result.'/widget_config.php');
+
 							if(strpos($restrictions,$_SESSION['usertype']) === false){
 								
 								$widgetcounter++;
@@ -147,7 +148,7 @@
 								
 							}
 
-						}
+						}					
 			
 					}
 					

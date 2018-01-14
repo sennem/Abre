@@ -50,7 +50,7 @@
 				
 					if(file_exists(dirname(__FILE__) . '/../'.$widget.'/widget.php')){
 						
-						include(dirname(__FILE__) . '/../'.$widget.'/config.php');
+						include(dirname(__FILE__) . '/../'.$widget.'/widget_config.php');
 						
 						if(strpos($restrictions,$_SESSION['usertype']) === false){
 						
@@ -83,7 +83,7 @@
 				
 					if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
 						
-						include(dirname(__FILE__) . '/../'.$result.'/config.php');
+						include(dirname(__FILE__) . '/../'.$result.'/widget_config.php');
 						
 						if(strpos($restrictions,$_SESSION['usertype']) === false){
 							
