@@ -64,7 +64,7 @@
 	
 	$StreamStartResult = 0;
 	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
-	$StreamEndResult = 20;
+	$StreamEndResult = 24;
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 	foreach($feed_flipboard->get_items($StreamStartResult,$StreamEndResult) as $item){
 		$title = $item->get_title();

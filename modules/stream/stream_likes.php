@@ -25,7 +25,7 @@
 	//Get Stream Limit
 	$StreamStartResult = 0;
 	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
-	$StreamEndResult = 20;
+	$StreamEndResult = 24;
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 	
 	//Determine total number of likes

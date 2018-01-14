@@ -64,7 +64,7 @@
 		//Variables
 		var Page = "all";
 		var StreamStart = 0;
-		var StreamEnd = 20;
+		var StreamEnd = 24;
 		var LoaderCheck = false;
 			
 		//Paging function	
@@ -87,8 +87,8 @@
 				if(LoaderCheck === false){
 				    
 				    $('#showmorestream').show();
-				    StreamStart = StreamStart + 20;
-					StreamEnd = StreamEnd + 20;
+				    StreamStart = StreamStart + 24;
+					StreamEnd = StreamEnd + 24;
 					streamPaging(StreamStart,StreamEnd);
 					
 				}
@@ -100,11 +100,11 @@
 		function pageChange(Page){
 			
 			StreamStart = 0;
-			StreamEnd = 20;
+			StreamEnd = 24;
 			
 			$('#all, #likes, #comments').prop("disabled", false);
 			$('#streamnavigationloader').show();
-			$.get('modules/stream/stream_'+Page+'.php?StreamStartResult=0&StreamEndResult=20', function(results){
+			$.get('modules/stream/stream_'+Page+'.php?StreamStartResult='+StreamStart+'&StreamEndResult='+StreamEnd, function(results){
 				$('#streamnavigationloader').hide();
 			    $('#streamcards').html(results);
 			});
