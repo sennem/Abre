@@ -94,7 +94,7 @@ if(superadmin()){
         }else{
           $('#stream_staff').prop('checked', false);
         }
-        if(group == "students"){
+        if(group == "student"){
           $('#stream_students').prop('checked', true);
         }else{
           $('#stream_students').prop('checked', false);
