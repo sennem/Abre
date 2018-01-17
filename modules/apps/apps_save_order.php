@@ -32,7 +32,7 @@
 		//Check to see if profile record exists
 		include "../../core/abre_dbconnect.php";
 		$query = "SELECT COUNT(*) FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-		$results = $db-query($query);
+		$results = $db->query($query);
 		$resultrow = $results->fetch_assoc();
 		$records = $resultrow["COUNT(*)"];
 
