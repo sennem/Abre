@@ -31,7 +31,7 @@
 		$setupCSV = false;
 
 		include "../../core/abre_dbconnect.php";
-		$rows = mysqli_query($db, 'SELECT * FROM directory WHERE archived = 0');
+		$rows = mysqli_query($db, 'SELECT email, firstname, lastname, contractdays FROM directory WHERE archived = 0');
 		while ($row = mysqli_fetch_assoc($rows)) {
 			$email = htmlspecialchars($row["email"], ENT_QUOTES);
 			$email = stripslashes(decrypt($email, ""));
@@ -41,8 +41,9 @@
 			$lastname = stripslashes(decrypt($lastname, ""));
 			$contractdays = htmlspecialchars($row["contractdays"], ENT_QUOTES);
 			$contractdays = stripslashes(decrypt($contractdays, ""));
+			
 			if($contractdays != ""){
-				$rowsselected = mysqli_query($db, "SELECT * FROM profiles WHERE email = '$email'");
+				$rowsselected = mysqli_query($db, "SELECT work_calendar FROM profiles WHERE email = '$email'");
 				while ($rowselect = mysqli_fetch_assoc($rowsselected)){
 					$data = [$firstname, $lastname, $email, $contractdays];
 					$work_calendar = $rowselect["work_calendar"];

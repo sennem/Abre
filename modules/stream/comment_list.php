@@ -30,8 +30,8 @@
 		}else{
 			$url = "";
 		}
-		if($url != ""){ 
-			$sql = "(SELECT * FROM streams_comments WHERE url = '$url' and comment != '' ORDER BY id DESC) ORDER BY id DESC LIMIT 100";
+		if($url != ""){
+			$sql = "(SELECT user, comment, title, id, creationtime FROM streams_comments WHERE url = '$url' AND comment != '' ORDER BY id DESC) ORDER BY id DESC LIMIT 100";
 		}
 
 		//Display comments
@@ -40,7 +40,7 @@
 			$commentcount=count($dbreturn);
 			$counter=0;
 			foreach($dbreturn as $row){
-				
+
 				$counter++;
 				$User = htmlspecialchars($row["user"], ENT_QUOTES);
 				$Comment = htmlspecialchars($row["comment"], ENT_QUOTES);
@@ -49,14 +49,14 @@
 				$articletitle = html_entity_decode($row["title"]);
 				$CommentID = htmlspecialchars($row["id"], ENT_QUOTES);
 				$CommentCreationTime = htmlspecialchars($row["creationtime"], ENT_QUOTES);
-	
+
 				//Display comment creation in correct format
 				if(strtotime($CommentCreationTime) < strtotime('-7 days')){
 					$CommentCreationTime = date( "F j", strtotime($CommentCreationTime))." at ".date( "g:i A", strtotime($CommentCreationTime));
 			 	}else{
 					$CommentCreationTime = date( "l", strtotime($CommentCreationTime))." at ".date( "g:i A", strtotime($CommentCreationTime));
 				}
-	
+
 				//Look up name given email from directory
 				$User2 = encrypt($User, "");
 				$picture = "";
@@ -72,27 +72,27 @@
 					$lastname = stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
 					$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 				}
-	
+
 					if(empty($picture)){
 						$picture = $portal_root."/modules/directory/images/user.png";
 					}else{
 						$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
 					}
-					
+
 					//Display Each Comment
 					echo "<div class='commentwrapper' style='overflow:hidden;'>";
-						echo "<div style='padding:10px 0 10px 0;'>";	
-										
+						echo "<div style='padding:10px 0 10px 0;'>";
+
 							echo "<div style='float:left; width:50px;'>";
 								echo "<img src='$picture' class='profile-avatar-small'>";
-							echo "</div>";	
-							
+							echo "</div>";
+
 							echo "<div style='float:right; width:50px; text-align:right;'>";
 								if($User == $_SESSION['useremail']){
 									echo "<a href='#' data-commentid='$CommentID' class='mdl-color-text--grey commentdelete pointer'><i class='material-icons'>clear</i></a>";
 								}
 							echo "</div>";
-							
+
 							echo "<div style='margin:0 50px;'>";
 
 								if(!empty($firstname)){
@@ -104,8 +104,8 @@
 								echo "<p style=''>$Comment</p>";
 
 							echo "</div>";
-							
-												
+
+
 						echo "</div>";
 						if($commentcount!=$counter){ echo "<hr>"; }
 					echo "</div>";

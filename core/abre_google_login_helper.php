@@ -52,8 +52,10 @@
     if(isset($_SESSION['google_parent_access_token'])){
       if($_SESSION['usertype'] != ""){
         include "abre_dbconnect.php";
-        if($result = $db->query("SELECT * FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
-          $count = $result->num_rows;
+        if($result = $db->query("SELECT COUNT(*) FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
+          $resultrow = $result->fetch_assoc();
+          $count = $resultrow["COUNT(*)"];
+
           if($count == 1){
             //If not already logged in, check and get a refresh token
             if(!isset($_SESSION['loggedin'])){ $_SESSION['loggedin'] = ""; }

@@ -137,8 +137,10 @@
 		if(isset($_SESSION['access_token'])){
 			if($_SESSION['usertype'] != ""){
 				include "abre_dbconnect.php";
-				if($result = $db->query("SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%'")){
-					$count = $result->num_rows;
+				if($result = $db->query("SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%'")){
+          $resultrow = $result->fetch_assoc();
+          $count = $resultrow["COUNT(*)"];
+
 					if($count == 1){
 						//If not already logged in, check and get a refresh token
 						if(!isset($_SESSION['loggedin'])) { $_SESSION['loggedin'] = ""; }

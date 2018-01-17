@@ -38,9 +38,10 @@
 	if($streamUrldecoded != "" && $streamTitledecoded != ""){
 
 		//Check to see if like already exists for this user
-		$query = "SELECT * FROM streams_comments WHERE url = '$streamQuery' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
-		$dbreturn = databasequery($query);
-		$num_rows_like_count = count($dbreturn);
+		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$streamQuery' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
+		$dbreturn = $db->query($query);
+		$resultrow = $dbreturn->fetch_assoc();
+		$num_rows_like_count = $resultrow["COUNT(*)"];
 
 		if($num_rows_like_count == 0){
 			//Insert comment into database

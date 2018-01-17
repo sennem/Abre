@@ -35,9 +35,10 @@
 		//Check to make sure email doesn't already exist
 		include "../../configuration.php";
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT *  FROM directory WHERE email = '$predictedemailencrypted'";
+		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemailencrypted'";
 		$result = $db->query($sql);
-		$count = mysqli_num_rows($result);
+		$resultrow = $result->fetch_assoc();
+		$count = $resultrow["COUNT(*)"];
 
 		if($count == 1){
 			$firstsecondchar = $first[1];
@@ -49,9 +50,10 @@
 			$predictedemailencrypted = encrypt($predictedemail, "");
 			include "../../configuration.php";
 			include "../../core/abre_dbconnect.php";
-			$sql = "SELECT *  FROM directory WHERE email = '$predictedemailencrypted'";
+			$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemailencrypted'";
 			$result = $db->query($sql);
-			$count = mysqli_num_rows($result);
+			$resultrow = $result->fetch_assoc();
+			$count = $resultrow["COUNT(*)"];
 
 			if($count == 1){
 				$predictedemail = $firstfirstchar.$firstsecondchar.$firstthirdchar.$last.SITE_GAFE_DOMAIN;
@@ -71,7 +73,7 @@
 	function sendSupportTicket($first, $last, $predictedemail){
 		//Send the VarTek Ticket to have account created.
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT * FROM directory_settings where dropdownID = 'supportTicket'";
+		$sql = "SELECT options FROM directory_settings where dropdownID = 'supportTicket'";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$email = $row["options"];

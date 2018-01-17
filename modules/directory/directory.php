@@ -26,9 +26,11 @@
 	//Show the Search and Last 10 Modified Users
 	if($pageaccess == 1 or $_SESSION['usertype'] == "staff"){
 
-		$sql = "SELECT * FROM directory WHERE archived = 0";
-		$dbreturn = databasequery($sql);
-		$num_users = count($dbreturn);
+		$sql = "SELECT COUNT(*) FROM directory WHERE archived = 0";
+		$dbreturn = $db->query($sql);
+		$resultrow = $dbreturn->fetch_assoc();
+		$num_users = $resultrow["COUNT(*)"];
+		
 		if($num_users > 0){
 			echo "<div class='page_container mdl-shadow--4dp'>";
 				echo "<div class='page'>";

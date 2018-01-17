@@ -252,7 +252,7 @@
 
 		if($_POST['abre_community'] == 'checked'){
 			include "abre_dbconnect.php";
-			if(!$result = $db->query("SELECT * FROM settings")){
+			if(!$result = $db->query("SELECT * FROM settings LIMIT 1")){
 					$sql = "CREATE TABLE `settings` (`id` int(11) NOT NULL,`options` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 					$sql .= "INSERT INTO `settings` (`id`, `options`) VALUES (1, '');";
 					$sql .= "ALTER TABLE `settings` ADD PRIMARY KEY (`id`);";

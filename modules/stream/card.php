@@ -27,20 +27,20 @@
 	$displaydate = date("F jS, Y", $date);
 	$titleencoded = base64_encode($title);
 	$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
-	
+
 	//Display Card
 	echo "<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>";
-	
+
 		//Feed
 		echo "<div class='truncate' style='padding:16px 16px 0 16px; font-size: 12px; color: #999; font-weight: 500;'>";
 			echo "<a href='$feedlink' style='color: #999; font-weight: 500;' target='_blank'>$feedtitle</a>";
 		echo "</div>";
-	
+
 		//Title
 		echo "<div class='cardtitle' style='height:60px; padding:5px 16px 0 16px;'>";
 			echo "<div class='mdl-card__title-text ellipsis-multiline cardclick pointer' data-link='$linkescaped' style='font-weight:700; font-size:20px; line-height:24px;'>$titlewithoutlongwords</div>";
 		echo "</div>";
-		
+
 		//Date
 		echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 12px; color: #999;'>";
 			echo "<a href='$feedlink' style='color: #999; font-weight: 400;' target='_blank'>$displaydate</a>";
@@ -52,37 +52,39 @@
 		}
 		else
 		{
-				
+
 			if ($excerpt!=""){ $body = $excerpt; }else{ $body = $feedtitle; }
-			if (strlen($body) > 100){ 
+			if (strlen($body) > 100){
 				$body = substr( $body, 0, strrpos( substr( $body, 0, 100), ' ' ));
 				$body = substr($body, 0, 97) . ' ...';
 			}
-				
+
 			echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper cardclick pointer' data-link='$linkescaped' style='height:200px; background-image: url(/core/images/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
 				echo "<span style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
 			echo "</div>";
-			
+
 		}
 
 		//Card Actions
 		echo "<div class='mdl-card__actions'>";
-		
+
 			//Read Button
 			echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='$linkescaped' style='color: ".getSiteColor()."' target='_blank'>Read</a>";
 
 			//Share, Likes, Comments for Staff Only
 			if($_SESSION['usertype'] == 'staff'){
-				
+
 				echo "<div class='mdl-layout-spacer'></div>";
-				
+
 				//Share
 				echo "<a class='material-icons mdl-color-text--grey-600 modal-sharecard commenticon shareinfo' style='margin-right:30px;' data-url='$linkbase' title='Share' href='#sharecard'>share</a>";
 
 				//Likes
-				$query = "SELECT * FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
-				$dbreturn = databasequery($query);
-				$num_rows_like_current_user = count($dbreturn);
+				$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
+				$dbreturn = $db->query($query);
+				$resultrow = $dbreturn->fetch_assoc();
+				$num_rows_like_current_user = $resultrow["COUNT(*)"];
+				
 				if($num_rows_like == 0){
 					echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 				}else{

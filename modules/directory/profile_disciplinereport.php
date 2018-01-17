@@ -25,11 +25,10 @@
 		if($_GET["id"] != ""){ $id = $_GET["id"]; }
 
 			include "../../core/abre_dbconnect.php";
-			$sqlcount = "SELECT * FROM directory_discipline WHERE UserID = $id AND archived = 0";
-			$rowcount = 0;
-			if($resultcount = mysqli_query($db, $sqlcount)){
-				$rowcount = mysqli_num_rows($resultcount);
-			}
+			$sqlcount = "SELECT COUNT(*) FROM directory_discipline WHERE UserID = $id AND archived = 0";
+			$result = $db->query($sqlcount);
+			$resultrow = $result->fetch_assoc();
+			$rowcount = $resultrow["COUNT(*)"];
 
 			if($rowcount > 0){
 				echo "<div class='col s12'>";
@@ -44,7 +43,7 @@
 				echo "<tbody>";
 
 				include "../../core/abre_dbconnect.php";
-				$sql = "SELECT * FROM directory_discipline WHERE UserID = $id AND archived = 0";
+				$sql = "SELECT id, Filename FROM directory_discipline WHERE UserID = $id AND archived = 0";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){
 					$fileid = htmlspecialchars($row["id"], ENT_QUOTES);

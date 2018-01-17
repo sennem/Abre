@@ -24,7 +24,7 @@
 
     //Setup tables if new module
     require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-    if(!$resultprofile = $db->query("SELECT * FROM profiles")){
+    if(!$resultprofile = $db->query("SELECT * FROM profiles LIMIT 1")){
       $sql = "CREATE TABLE `profiles` (`id` int(11) NOT NULL,`email` text NOT NULL,`startup` int(11) NOT NULL DEFAULT '1',`streams` text NOT NULL,`apps_order` text NOT NULL,`work_calendar` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
       $sql .= "ALTER TABLE `profiles` ADD PRIMARY KEY (`id`);";
       $sql .= "ALTER TABLE `profiles` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
@@ -33,11 +33,10 @@
     }
     $db->close();
 
+		//Write the Setup File
+		$myfile = fopen("$portal_path_root/modules/profile/setup.txt", "w");
+		fwrite($myfile, '');
+		fclose($myfile);
 	}
 
-
-  //Write the Setup File
-  $myfile = fopen("$portal_path_root/modules/profile/setup.txt", "w");
-  fwrite($myfile, '');
-  fclose($myfile);
 ?>

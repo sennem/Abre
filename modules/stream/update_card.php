@@ -30,9 +30,10 @@
 	}
 
   if($type == "comment"){
-    $query = "SELECT * FROM streams_comments WHERE url = '$link' and comment != ''";
-    $dbreturn = databasequery($query);
-    $num_rows_comment = count($dbreturn);
+    $query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' and comment != ''";
+    $dbreturn = $db->query($query);
+		$resultrow = $dbreturn->fetch_assoc();
+    $num_rows_comment = $resultrow["COUNT(*)"];
 
 		if(isset($redirect)){
 			if($redirect == "comments"){
@@ -61,13 +62,15 @@
   }
   if($type == "like"){
 
-		$query = "SELECT * FROM streams_comments WHERE url = '$link' AND comment = '' AND liked = '1'";
-		$dbreturn = databasequery($query);
-		$num_rows_like = count($dbreturn);
+		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND comment = '' AND liked = '1'";
+		$dbreturn = $db->query($query);
+		$resultrow = $dbreturn->fetch_assoc();
+		$num_rows_like = $resultrow["COUNT(*)"];
 
-		$query = "SELECT * FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
-		$dbreturn = databasequery($query);
-		$num_rows_like_current_user = count($dbreturn);
+		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
+		$dbreturn = $db->query($query);
+		$resultrow = $dbreturn->fetch_assoc();
+		$num_rows_like_current_user = $resultrow["COUNT(*)"];
 
 		$json = array("count"=>$num_rows_like, "currentusercount"=>$num_rows_like_current_user);
 		header("Content-Type: application/json");

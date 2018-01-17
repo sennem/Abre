@@ -27,17 +27,17 @@
 	$studenttoken = $_POST["studenttoken"];
   $studenttokenencrypted = encrypt($studenttoken, "");
 
-	$sql = "SELECT * FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
+	$sql = "SELECT id FROM users_parent WHERE email LIKE '".$_SESSION['useremail']."';";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$parent_id = $row["id"];
 
-	$sql = "SELECT * FROM student_tokens WHERE token = '$studenttokenencrypted'";
+	$sql = "SELECT studentId FROM student_tokens WHERE token = '$studenttokenencrypted'";
 	$result = $db->query($sql);
 	$numrows = $result->num_rows;
 	while($row = $result->fetch_assoc()){
 		//Check to see if student has already been claimed by parent
-		$sqlcheck = "SELECT * FROM parent_students WHERE parent_id = $parent_id AND studentId = '".$row['studentId']."'";
+		$sqlcheck = "SELECT student_token FROM parent_students WHERE parent_id = $parent_id AND studentId = '".$row['studentId']."'";
 		$resultcheck = $db->query($sqlcheck);
 		$parentrow = $resultcheck->fetch_assoc();
 		$numrows2 = $resultcheck->num_rows;

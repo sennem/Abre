@@ -23,7 +23,7 @@
 
 	//Insert/Update Profile
 	include "../../core/abre_dbconnect.php";
-	$sql = "SELECT *  FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+	$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$result = $db->query($sql);
 	$stack = array();
 	$departmentcount = $_POST["departmentcount"];

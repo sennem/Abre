@@ -27,7 +27,7 @@
 
 		//Display Staff Apps
 		echo "<div class='row'><p style='text-align:center; font-weight:600;'>Staff Apps</p><hr style='margin-bottom:20px;'>";
-		$sql = "SELECT * FROM apps WHERE staff = 1 AND required = 1 ORDER BY sort";
+		$sql = "SELECT title, image, link, minor_disabled FROM apps WHERE staff = 1 AND required = 1 ORDER BY sort";
 		$result = $db->query($sql);
 		$item = array();
 
@@ -41,7 +41,7 @@
 				$required = array();
 
 				//Get App preference settings (if they exist)
-				$sql2 = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+				$sql2 = "SELECT apps_order FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 				$result2 = $db->query($sql2);
 				$apps_order = NULL;
 				while($row2 = $result2->fetch_assoc()) {
@@ -49,7 +49,7 @@
 				}
 
 				//Build Array of Required Apps
-				$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
+				$sql = "SELECT id FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){
 					$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -78,7 +78,7 @@
 				}
 				if($apps_order != NULL){
 					foreach($order as $value){
-						$sql = "SELECT * FROM apps WHERE id = '$value'";
+						$sql = "SELECT id, title, image, link FROM apps WHERE id = '$value'";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc()){
 							$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -92,7 +92,7 @@
 						}
 					}
 				}else{
-					$sql = "SELECT * FROM apps ORDER BY sort";
+					$sql = "SELECT id, title, image, link FROM apps ORDER BY sort";
 					$result = $db->query($sql);
 					while($row = $result->fetch_assoc()){
 						$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -114,7 +114,7 @@
 	//Display parent and student apps
 	if($_SESSION['usertype'] == 'parent'){
 		echo "<div class='row'><p style='text-align:center; font-weight:600;'>Parent Apps</p><hr style='margin-bottom:20px;'>";
-		$sql2 = "SELECT * FROM apps WHERE parent = 1 AND required = 1 ORDER BY sort";
+		$sql2 = "SELECT id, title, image, link FROM apps WHERE parent = 1 AND required = 1 ORDER BY sort";
 		$result2 = $db->query($sql2);
 		while($row2 = $result2->fetch_assoc()){
 			$id = htmlspecialchars($row2["id"], ENT_QUOTES);
@@ -128,7 +128,7 @@
 		if($_SESSION['usertype'] == "staff"){
 			//Display uneditable student apps
 			echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
-			$sql2 = "SELECT * FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
+			$sql2 = "SELECT id, title, image, link FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
 			$result2 = $db->query($sql2);
 			while($row2 = $result2->fetch_assoc()){
 				$id=htmlspecialchars($row2["id"], ENT_QUOTES);
@@ -141,7 +141,7 @@
 		}else{
 			//Display editable student apps
 			echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
-			$sql = "SELECT * FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
+			$sql = "SELECT title, image, link, minor_disabled FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
 			$result = $db->query($sql);
 			$item=array();
 			while($row = $result->fetch_assoc()){
@@ -154,7 +154,7 @@
 					$required = array();
 
 					//Get App preference settings (if they exist)
-					$sql2 = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+					$sql2 = "SELECT apps_order FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 					$result2 = $db->query($sql2);
 					$apps_order = NULL;
 					while($row2 = $result2->fetch_assoc()) {
@@ -162,7 +162,7 @@
 					}
 
 					//Build Array of Required Apps
-					$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
+					$sql = "SELECT id FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
 					$result = $db->query($sql);
 					while($row = $result->fetch_assoc()){
 						$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -190,7 +190,7 @@
 					}
 					if($apps_order != NULL){
 						foreach($order as $value){
-							$sql = "SELECT * FROM apps WHERE id= '$value'";
+							$sql = "SELECT id, title, image, link FROM apps WHERE id= '$value'";
 							$result = $db->query($sql);
 							while($row = $result->fetch_assoc()){
 								$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -204,7 +204,7 @@
 							}
 						}
 					}else{
-						$sql = "SELECT * FROM apps ORDER BY sort";
+						$sql = "SELECT id, title, image, link FROM apps ORDER BY sort";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc()){
 							$id = htmlspecialchars($row["id"], ENT_QUOTES);

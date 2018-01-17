@@ -31,7 +31,7 @@
 
 		fputcsv($output, array('Last Name', 'First Name', 'Middle Name', 'State Educator ID', 'License 1 Type', 'License 1 Expiration Date', 'License 2 Type', 'License 2 Expiration Date', 'License 3 Type', 'License 3 Expiration Date', 'License 4 Type', 'License 4 Expiration Date', 'License 5 Type', 'License 5 Expiration Date', 'License 6 Type', 'License 6 Expiration Date'));
 		include "../../core/abre_dbconnect.php";
-		$rows = mysqli_query($db, 'SELECT * FROM directory WHERE archived = 0 ORDER BY lastname');
+		$rows = mysqli_query($db, 'SELECT firstname, lastname, middlename, stateeducatorid, licensetype1, licenseexpirationdate1, licensetype2, licenseexpirationdate2, licensetype3, licenseexpirationdate3, licensetype4, licenseexpirationdate4, licensetype5, licenseexpirationdate5, licensetype6, licenseexpirationdate6 FROM directory WHERE archived = 0 ORDER BY lastname');
 
 		while($row = mysqli_fetch_assoc($rows)){
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);

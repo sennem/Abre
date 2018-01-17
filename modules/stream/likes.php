@@ -23,17 +23,6 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	//Get User Settings
-	$query = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-	$gafecards = databasequery($query);
-	foreach($gafecards as $value) {
-		$setting_card_mail = htmlspecialchars($value['card_mail'], ENT_QUOTES);
-		$setting_card_drive = htmlspecialchars($value['card_drive'], ENT_QUOTES);
-		$setting_card_calendar = htmlspecialchars($value['card_calendar'], ENT_QUOTES);
-		$setting_card_classroom = htmlspecialchars($value['card_classroom'], ENT_QUOTES);
-		$setting_card_apps = htmlspecialchars($value['card_apps'], ENT_QUOTES);
-	}
-
 	//Display the Likes
 	echo "<div id='streamlikes'></div>";
 
@@ -50,5 +39,5 @@
 		}
 		loadLikes();
 	});
-	
+
 </script>

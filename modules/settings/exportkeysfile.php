@@ -31,10 +31,10 @@
 
 		fputcsv($output, array('Student ID','First Name','Last Name','Token'));
 		include "../../core/abre_dbconnect.php";
-		$rows = mysqli_query($db, 'SELECT * FROM student_tokens');
+		$rows = mysqli_query($db, 'SELECT studentId, token FROM student_tokens');
 
 		while($row = mysqli_fetch_assoc($rows)) {
-			$sql = mysqli_query($db, "SELECT * FROM Abre_Students WHERE StudentId = '".$row['studentId']."'");
+			$sql = mysqli_query($db, "SELECT FirstName, LastName FROM Abre_Students WHERE StudentId = '".$row['studentId']."'");
 			$row2 = mysqli_fetch_assoc($sql);
 
 			$studentid = htmlspecialchars($row["studentId"], ENT_QUOTES);

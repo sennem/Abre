@@ -26,9 +26,11 @@
 	//Update Directory Settings
 	if($pageaccess == 1){
 		foreach($_POST as $key => $value){
-			$query = $db->query("SELECT * FROM `directory_settings` WHERE dropdownID = '$key'");
+			$query = $db->query("SELECT COUNT(*) FROM `directory_settings` WHERE dropdownID = '$key'");
+			$resultrow = $query->fetch_assoc();
+			$count = $resultrow["COUNT(*)"];
 
-			if($query->num_rows > 0){
+			if($count > 0){
 				$stmt = $db->stmt_init();
 				$sql = "UPDATE `directory_settings` SET `options` = ? WHERE `dropdownID` = ?";
 				$stmt->prepare($sql);
