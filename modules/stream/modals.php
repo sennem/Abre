@@ -40,9 +40,10 @@
 					<h4 name="streamTitle" id="streamTitle" style='margin-right:50px;'></h4>
 					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 
-					<div class="input-field">
+					<div class="input-field" style="padding-bottom: 5px;">
 						<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
 					</div>
+
 					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
 
 					<div name="streamComments" id="streamComments"></div>
@@ -54,7 +55,7 @@
 					<input type="hidden" name="redirect" id="redirect">
 		    </div>
 			  <div class="modal-footer">
-					<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
+					<button class="modal-action modal-close waves-effect btn-flat white-text" type="button" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
 				</div>
 			</form>
 		</div>
