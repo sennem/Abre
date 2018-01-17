@@ -27,6 +27,10 @@
 		//connect to the database
 		include "../../core/abre_dbconnect.php";
 
+		$stmt = $db->stmt_init();
+		$sql = "INSERT INTO directory (firstname,lastname,middlename,title,contract,address,city,state,zip,email,phone,cellphone,ss,dob,gender,ethnicity,classification,location,grade,subject,doh,senioritydate,effectivedate,rategroup,step,educationlevel,salary,hours,stateeducatorid,licensetype1,licenseissuedate1,licenseexpirationdate1,licenseterm1,licensetype2,licenseissuedate2,licenseexpirationdate2,licenseterm2,licensetype3,licenseissuedate3,licenseexpirationdate3,licenseterm3,licensetype4,licenseissuedate4,licenseexpirationdate4,licenseterm4,licensetype5,licenseissuedate5,licenseexpirationdate5,licenseterm5,licensetype6,licenseissuedate6,licenseexpirationdate6,licenseterm6,probationreportdate,statebackgroundcheck,federalbackgroundcheck) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		$stmt->prepare($sql);
+
 		//Upload and Process CSV File
 		if($_FILES['file']['tmp_name']){
 			$handle = fopen($_FILES['file']['tmp_name'], "r");
@@ -145,9 +149,7 @@
 					$statebackgroundcheck = encrypt($statebackgroundcheck, "");
 					$federalbackgroundcheck = $data[55];
 					$federalbackgroundcheck = encrypt($federalbackgroundcheck, "");
-					$stmt = $db->stmt_init();
-					$sql = "INSERT into directory (firstname,lastname,middlename,title,contract,address,city,state,zip,email,phone,cellphone,ss,dob,gender,ethnicity,classification,location,grade,subject,doh,senioritydate,effectivedate,rategroup,step,educationlevel,salary,hours,stateeducatorid,licensetype1,licenseissuedate1,licenseexpirationdate1,licenseterm1,licensetype2,licenseissuedate2,licenseexpirationdate2,licenseterm2,licensetype3,licenseissuedate3,licenseexpirationdate3,licenseterm3,licensetype4,licenseissuedate4,licenseexpirationdate4,licenseterm4,licensetype5,licenseissuedate5,licenseexpirationdate5,licenseterm5,licensetype6,licenseissuedate6,licenseexpirationdate6,licenseterm6,probationreportdate,statebackgroundcheck,federalbackgroundcheck) VALUES ('$firstname','$lastname','$middlename','$title','$contract','$address','$city','$state','$zip','$email','$phone','$cellphone','$ss','$dob','$gender','$ethnicity','$classification','$location','$grade','$subject','$doh','$senioritydate','$effectivedate','$rategroup','$step','$educationlevel','$salary','$hours','$stateeducatorid','$l1_1','$l1_2','$l1_3','$l1_4','$l2_1','$l2_2','$l2_3','$l2_4','$l3_1','$l3_2','$l3_3','$l3_4','$l4_1','$l4_2','$l4_3','$l4_4','$l5_1','$l5_2','$l5_3','$l5_4','$l6_1','$l6_2','$l6_3','$l6_4','$probationreportdate','$statebackgroundcheck','$federalbackgroundcheck')";
-					$stmt->prepare($sql);
+					
 					$stmt->bind_param("ssssssssssssssssssssssssssssssssssssssssssssssssssssssss", $firstname, $lastname, $middlename, $title, $contract, $address, $city, $state, $zip, $email, $phone, $cellphone, $ss, $dob, $gender, $ethnicity, $classification, $location, $grade, $subject, $doh, $senioritydate, $effectivedate, $rategroup, $step, $educationlevel, $salary, $hours, $stateeducatorid, $l1_1, $l1_2, $l1_3, $l1_4, $l2_1, $l2_2, $l2_3, $l2_4, $l3_1, $l3_2, $l3_3, $l3_4, $l4_1, $l4_2, $l4_3, $l4_4, $l5_1, $l5_2, $l5_3, $l5_4, $l6_1, $l6_2, $l6_3, $l6_4, $probationreportdate, $statebackgroundcheck, $federalbackgroundcheck);
 					$stmt->execute();
 				}
