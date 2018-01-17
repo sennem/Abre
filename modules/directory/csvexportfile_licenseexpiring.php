@@ -25,7 +25,7 @@
 	if($pageaccess == 1){
 
 		header('Content-Type: text/csv; charset=utf-8');
-		header('Content-Disposition: attachment; filename=allActiveStaff.csv');
+		header('Content-Disposition: attachment; filename=licenseExpiring.csv');
 
 		$output = fopen('php://output', 'w');
 
