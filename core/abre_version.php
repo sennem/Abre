@@ -16,5 +16,5 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-	$abre_version = '4.2.8';
+	$abre_version = '4.2.9';
 ?>
