@@ -25,7 +25,7 @@
 	if($pageaccess == 1){
 
 		$dropdownArray = array();
-		$sql = "SELECT * FROM directory_settings";
+		$sql = "SELECT dropdownID, options FROM directory_settings";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$key = $row['dropdownID'];
@@ -142,7 +142,7 @@
 					});
 				})
 			});
-			
+
 		});
 </script>
 <?php

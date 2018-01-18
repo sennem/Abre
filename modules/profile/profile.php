@@ -24,7 +24,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	//Get profile information
-	$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+	$sql = "SELECT startup, streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $row){
 		$setting_startup = htmlspecialchars($row['startup'], ENT_QUOTES);
@@ -33,7 +33,7 @@
 
 	//Get Contracted Days
 	$useremailencrypt = encrypt($_SESSION['useremail'], "");
-	$sql = "SELECT * FROM directory WHERE email = '$useremailencrypt'";
+	$sql = "SELECT contractdays, title FROM directory WHERE email = '$useremailencrypt'";
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $row){
 		$contractdays = htmlspecialchars($row['contractdays'], ENT_QUOTES);
@@ -68,7 +68,7 @@
 			echo "</div>";
 			echo "<div class='row'>";
 				$dcount = 0;
-				$sql = "SELECT * FROM streams WHERE `group` = '".$_SESSION['usertype']."' AND `required` != 1 ORDER BY type, title";
+				$sql = "SELECT title, id FROM streams WHERE `group` = '".$_SESSION['usertype']."' AND `required` != 1 ORDER BY type, title";
 				$dbreturn = databasequery($sql);
 				foreach($dbreturn as $row){
 					$title = htmlspecialchars($row['title'], ENT_QUOTES);

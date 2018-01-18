@@ -24,7 +24,7 @@
 
 		//Setup tables if new module
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$resultstreams = $db->query("SELECT * FROM directory")){
+		if(!$resultstreams = $db->query("SELECT * FROM directory LIMIT 1")){
 			$sql = "CREATE TABLE `directory` (
 			  `id` int(11) NOT NULL,
 			  `updatedtime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -105,14 +105,14 @@
 
 		//Check for Role field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$resultstreams = $db->query("SELECT role FROM directory")){
+		if(!$resultstreams = $db->query("SELECT role FROM directory LIMIT 1")){
 			$sql = "ALTER TABLE `directory` ADD `role` text NOT NULL;";
 			$db->multi_query($sql);
 		}
 		$db->close();
 
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$resultstreams = $db->query("SELECT * FROM directory_discipline")){
+		if(!$resultstreams = $db->query("SELECT * FROM directory_discipline LIMIT 1")){
 			$sql = "CREATE TABLE IF NOT EXISTS `directory_discipline` (
 				`id` int(11) NOT NULL AUTO_INCREMENT,`archived` int(11) NOT NULL,
 				`UserID` int(11) NOT NULL,
@@ -125,7 +125,7 @@
 
 		//Check for directory settings table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT * FROM directory_settings")){
+		if(!$db->query("SELECT * FROM directory_settings LIMIT 1")){
 			$sql = "CREATE TABLE `directory_settings` (`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 			$sql .= "ALTER TABLE `directory_settings` ADD PRIMARY KEY (`id`);";
 			$sql .= "ALTER TABLE `directory_settings` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
@@ -135,7 +135,7 @@
 
 		//Check for dropdown title field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT dropdownID FROM directory_settings")){
+		if(!$db->query("SELECT dropdownID FROM directory_settings LIMIT 1")){
 			$sql = "ALTER TABLE `directory_settings` ADD `dropdownID` text NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -143,7 +143,7 @@
 
 		//Check for options field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT options FROM directory_settings")){
+		if(!$db->query("SELECT options FROM directory_settings LIMIT 1")){
 			$sql = "ALTER TABLE `directory_settings` ADD `options` text NOT NULL;";
 			$db->multi_query($sql);
 		}

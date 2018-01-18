@@ -23,7 +23,7 @@
 	if(superadmin() && !file_exists("$portal_path_root/modules/apps/setup.txt")){
 		//Check for apps table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT * FROM apps")){
+		if(!$db->query("SELECT * FROM apps LIMIT 1")){
 			$sql = "CREATE TABLE `apps` (`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
 			$sql .= "ALTER TABLE `apps` ADD PRIMARY KEY (`id`);";
 			$sql .= "ALTER TABLE `apps` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
@@ -33,7 +33,7 @@
 
 		//Check for icon field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT icon FROM apps")){
+		if(!$db->query("SELECT icon FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `icon` text NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -41,7 +41,7 @@
 
 		//Check for student field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT student FROM apps")){
+		if(!$db->query("SELECT student FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `student` int(11) NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -49,7 +49,7 @@
 
 		//Check for staff field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT staff FROM apps")){
+		if(!$db->query("SELECT staff FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `staff` int(11) NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -57,7 +57,7 @@
 
 		//Check for title field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT title FROM apps")){
+		if(!$db->query("SELECT title FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `title` text NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -65,7 +65,7 @@
 
 		//Check for image field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT image FROM apps")){
+		if(!$db->query("SELECT image FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `image` text NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -73,7 +73,7 @@
 
 		//Check for link field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT link FROM apps")){
+		if(!$db->query("SELECT link FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `link` text NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -81,7 +81,7 @@
 
 		//Check for required field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT required FROM apps")){
+		if(!$db->query("SELECT required FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `required` int(11) NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -89,7 +89,7 @@
 
 		//Check for sort field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT sort FROM apps")){
+		if(!$db->query("SELECT sort FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `sort` int(11) NOT NULL;";
 			$db->multi_query($sql);
 		}
@@ -97,7 +97,7 @@
 
 		//Check for minor_disabled field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT minor_disabled FROM apps")){
+		if(!$db->query("SELECT minor_disabled FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `minor_disabled` int(11) NOT NULL DEFAULT '0';";
 			$db->multi_query($sql);
 		}
@@ -105,7 +105,7 @@
 
 		//Check for parent field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT parent FROM apps")){
+		if(!$db->query("SELECT parent FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `parent` int(11) NOT NULL DEFAULT '0';";
 			$db->multi_query($sql);
 		}

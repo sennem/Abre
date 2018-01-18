@@ -25,7 +25,7 @@
 
   //if the user is not a student grab their information from the database.
   if($_SESSION['usertype'] != "student"){
-    $sql = "SELECT * FROM profiles WHERE email = '$email'";
+    $sql = "SELECT work_calendar FROM profiles WHERE email = '$email'";
     $dbreturn = databasequery($sql);
     foreach($dbreturn as $row){
       //grab the work calendar from the entry

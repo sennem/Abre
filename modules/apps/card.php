@@ -37,7 +37,7 @@
 
 		<?php
 
-			$query = "SELECT * FROM profiles where email = '".$_SESSION['useremail']."'";
+			$query = "SELECT apps_order FROM profiles where email = '".$_SESSION['useremail']."'";
 			$gafecards = databasequery($query);
 			foreach ($gafecards as $value){
 				$apps_order = htmlspecialchars($value["apps_order"], ENT_QUOTES);
@@ -56,7 +56,7 @@
 				foreach($order as $value){
 					if ($appcount++ < 6){
 						include(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-						$sql = "SELECT * FROM apps WHERE id = '$value'";
+						$sql = "SELECT id, title, image, link FROM apps WHERE id = '$value'";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc()){
 							$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -73,7 +73,7 @@
 				$db->close();
 			}else{
 				include(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-				$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 LIMIT 6";
+				$sql = "SELECT id, title, image, link FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 LIMIT 6";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){
 					$id = htmlspecialchars($row["id"], ENT_QUOTES);

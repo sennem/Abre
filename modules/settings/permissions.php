@@ -27,7 +27,7 @@
 	$pageaccess = 0;
 	$superadmin = 0;
 
-	$sql = "SELECT *  FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
+	$sql = "SELECT superadmin FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
 		$pageaccess = 1;

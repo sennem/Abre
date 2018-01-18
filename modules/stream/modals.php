@@ -40,13 +40,14 @@
 					<h4 name="streamTitle" id="streamTitle" style='margin-right:50px;'></h4>
 					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
 
-					<div class="input-field">
+					<div class="input-field" style="padding-bottom: 5px;">
 						<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
 					</div>
+
 					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
-					
+
 					<div name="streamComments" id="streamComments"></div>
-					
+
 					<input type="hidden" name="streamUrl" id="streamUrl">
 					<input type="hidden" name="streamTitleValue" id="streamTitleValue">
 					<input type="hidden" name="commentID" id="commentID">
@@ -54,7 +55,7 @@
 					<input type="hidden" name="redirect" id="redirect">
 		    </div>
 			  <div class="modal-footer">
-					<button class="modal-action modal-close waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
+					<button class="modal-action modal-close waves-effect btn-flat white-text" type="button" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
 				</div>
 			</form>
 		</div>
@@ -72,24 +73,24 @@
 				</div>
 	   		</form>
 	 	</div>
-	 	
+
 	<?php
-		
+
 	}
-	
+
 	?>
-	 	
+
  	<!-- Edit Widgets -->
 	<div id="editwidgets" class="modal modal-mobile-full" style="max-width: 600px;">
 		<form>
 			<div class="modal-content">
 				<h4>Edit Widgets</h4>
 				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-				
+
 				<?php
-					
+
 					//Check to see if there is hidden widgets
-					$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+					$sql = "SELECT widgets_hidden FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 					$result = $db->query($sql);
 					$widgets_order = NULL;
 					$widgets_hidden = NULL;
@@ -102,61 +103,61 @@
 					$widgetsdirectory = dirname(__FILE__) . '/../';
 					$widgetsfolders = scandir($widgetsdirectory);
 					$widgetcounter=0;
-					
+
 					foreach($widgetsfolders as $result){
-						
+
 						$pagetitle = NULL;
 						$restrictions = NULL;
-			
+
 						if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
 
 							include(dirname(__FILE__) . '/../'.$result.'/widget_config.php');
 
 							if(strpos($restrictions,$_SESSION['usertype']) === false){
-								
+
 								$widgetcounter++;
-								
+
 								echo "<tr>";
 									echo "<td><b>$pagetitle</b><td>";
 									echo "<td style='width:30px; text-align:right;'>";
-								
+
 										echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
-										
+
 										//Check if a widget should be hidden
 										if($widgets_hidden==NULL){
-											
+
 											echo "checked";
-											
+
 										}
 										else
 										{
-											
+
 											//Check to see if widget was hidden by use selection
 											$HiddenWidgets = explode(',',$widgets_hidden);
 											if(!in_array($result, $HiddenWidgets)){
-												
+
 												echo "checked";
-													
+
 											}
-											
+
 										}
-											
+
 										echo "/><span class='lever'></span></label></div>";
 
 									echo "</td>";
 								echo "</tr>";
-								
+
 							}
 
-						}					
-			
+						}
+
 					}
-					
+
 					if($widgetcounter==0){ echo "<tr><td colspan='2'>No widgets are currently available.</td></tr>"; }
-					echo "</table>";	
-					
+					echo "</table>";
+
 				?>
-				
+
 			</div>
    		</form>
  	</div>
@@ -174,22 +175,22 @@
 			var finallink = network+link;
 		    objWindow = window.open(finallink, 'Social Share', 'width=500,height=500,resizable=no').focus();
 		});
-		
+
 		//Update Widget Setting
 		$(".widgetclick").unbind().click(function(e){
 			var widget = $(this).attr('id');
 			var selectedWidgets = "";
-			
+
 			$("input:checkbox[class=widgetclick]:not(:checked)").each(function () {
            		selectedWidgets = $(this).attr("id") + "," + selectedWidgets;
         	});
-        	
+
         	selectedWidgets = selectedWidgets.replace(/^,|,$/g,'');
 
 			$.post("modules/stream/save_widget_visibility.php", {widgets: selectedWidgets}, function() {
 				$("#streamwidgets").load("modules/<?php echo basename(__DIR__); ?>/widgets.php");
 			});
-			
+
 		});
 
 		//Save comment

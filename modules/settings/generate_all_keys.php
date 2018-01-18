@@ -22,7 +22,7 @@
 
 	//Check for student_tokens table
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-	if(!$db->query("SELECT * FROM student_tokens")){
+	if(!$db->query("SELECT * FROM student_tokens LIMIT 1")){
 		$sql = "CREATE TABLE `student_tokens` (`id` int(11) NOT NULL,`studentId` text NOT NULL,`token` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
     $sql .= "ALTER TABLE `student_tokens` ADD PRIMARY KEY (`id`);";
     $sql .= "ALTER TABLE `student_tokens` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";

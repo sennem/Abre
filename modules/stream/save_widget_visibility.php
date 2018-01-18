@@ -23,13 +23,14 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	$widgets = $_POST['widgets'];
-	
+
 
 	//Check to see if profile record exists
 	include "../../core/abre_dbconnect.php";
-	$query = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-	$results = databasequery($query);
-	$records = count($results);
+	$query = "SELECT COUNT(*) FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+	$results = $db->query($query);
+	$resultrow = $results->fetch_assoc();
+	$records = $resultrow["COUNT(*)"];
 
 	if($records==0){
 		$stmt = $db->stmt_init();

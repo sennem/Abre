@@ -23,13 +23,14 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	$widget = $_POST['widget'];
-	$status = $_POST['status'];	
+	$status = $_POST['status'];
 
 	//Check to see if profile record exists
 	include "../../core/abre_dbconnect.php";
-	$query = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-	$results = databasequery($query);
-	$records = count($results);
+	$query = "SELECT COUNT(*) FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+	$results = $db->query($query);
+	$resultrow = $results->fetch_assoc();
+	$records = $resultrow["COUNT(*)"];
 
 	if($records==0){
 		$stmt = $db->stmt_init();
@@ -47,12 +48,12 @@
 			$widgets_open = htmlspecialchars($row["widgets_open"], ENT_QUOTES);
 		}
 	}
-	
+
 	//Check if widget already saved as open
 	if($status == "false"){
 		$OpenWidgets = explode(',',$widgets_open);
 		if(!in_array($widget, $OpenWidgets)){
-			
+
 			if($widgets_open!=""){
 				$widgets_open = $widgets_open . ",$widget";
 			}
@@ -64,11 +65,11 @@
 	}
 	else
 	{
-		$OpenWidgets = explode(',',$widgets_open);	
+		$OpenWidgets = explode(',',$widgets_open);
 	    while(($i = array_search($widget, $OpenWidgets)) !== false) {
 	        unset($OpenWidgets[$i]);
 	    }
-	
+
 	    $widgets_open = implode(',', $OpenWidgets);
 	}
 

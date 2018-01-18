@@ -23,7 +23,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	//Find what streams to display
-	$query = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+	$query = "SELECT streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($query);
 	foreach($dbreturn as $value) {
 		$userstreams = htmlspecialchars($value ['streams'], ENT_QUOTES);
@@ -37,9 +37,9 @@
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();
 	if(!empty($userstreams) != NULL){
-		$sql = "SELECT * FROM streams WHERE (required = 1 AND `group` = '".$_SESSION['usertype']."') OR id in ($userstreams)";
+		$sql = "SELECT url FROM streams WHERE (required = 1 AND `group` = '".$_SESSION['usertype']."') OR id in ($userstreams)";
 	}else{
-		$sql = "SELECT * FROM streams WHERE `required` = 1 AND `group` = '".$_SESSION['usertype']."'";
+		$sql = "SELECT url FROM streams WHERE `required` = 1 AND `group` = '".$_SESSION['usertype']."'";
 	}
 
 	//Look for all streams that apply to user
@@ -61,7 +61,7 @@
 	$feed_flipboard->enable_cache($streamcachesetting);
 	$feed_flipboard->init();
 	$feed_flipboard->handle_content_type();
-	
+
 	$StreamStartResult = 0;
 	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
 	$StreamEndResult = 24;
@@ -120,24 +120,26 @@
 
 		//Comment count
 		$link = mysqli_real_escape_string($db, $linkraw);
-		$query = "SELECT * FROM streams_comments WHERE url = '$link' and comment != ''";
-		$dbreturn = databasequery($query);
-		$num_rows_comment = count($dbreturn);
+		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' and comment != ''";
+		$dbreturn = $db->query($query);
+		$resultrow = $dbreturn->fetch_assoc();
+		$num_rows_comment = $resultrow["COUNT(*)"];
 
 		//Like count
-		$query = "SELECT * FROM streams_comments WHERE url = '$link' AND comment = '' AND liked = '1'";
-		$dbreturn = databasequery($query);
-		$num_rows_like = count($dbreturn);
+		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND comment = '' AND liked = '1'";
+		$dbreturn = $db->query($query);
+		$resultrow = $dbreturn->fetch_assoc();
+		$num_rows_like = $resultrow["COUNT(*)"];
 
 		if($title != "" && $excerpt != ""){
 			include "card.php";
 			$cardcount++;
 		}
-		
+
 	}
-	
+
 	if($cardcount == 0 && $StreamStartResult == 0){
-		
+
 		echo "<div class='row center-align'>";
 			echo "<div class='widget' style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Welcome to Your Stream</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Get started by following a few streams.<br>You'll see the latest posts from the streams you follow here.</p></div>";
 			echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' style='background-color:".getSiteColor()."; color:#fff;' href='#profile'>View Available Streams</a>";
@@ -150,7 +152,7 @@
 <script>
 
 	$(function(){
-		
+
 	  	//Make Streams Feeds Clickable
 		$( ".cardclick" ).unbind().click(function(){
 			window.open($(this).data('link'), '_blank');
@@ -164,7 +166,7 @@
 			var Stream_Title = $(this).data('title');
 			var Stream_Url = $(this).data('url');
 			var Stream_Image = $(this).data('image');
-			
+
 			var elementCount = $(this).next();
 			var elementIcon = $(this);
 
@@ -194,7 +196,7 @@
 					}
 				});
 			});
-			
+
 		});
 
 		//Fill comment modal

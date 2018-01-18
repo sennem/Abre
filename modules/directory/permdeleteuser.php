@@ -27,7 +27,7 @@
 
 		//Delete Picture
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT *  FROM directory where id = $id";
+		$sql = "SELECT picture FROM directory where id = $id";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$oldpicture = htmlspecialchars($row["picture"], ENT_QUOTES);
@@ -40,7 +40,7 @@
 
 		//Delete Discipline Files
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT *  FROM directory_discipline where UserID = $id";
+		$sql = "SELECT Filename FROM directory_discipline where UserID = $id";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$filename = htmlspecialchars($row["Filename"], ENT_QUOTES);

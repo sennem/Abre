@@ -259,9 +259,11 @@
 
 		include "../../core/abre_dbconnect.php";
 		$useremail = decrypt($email, '');
-		$sql = "SELECT *  FROM users WHERE email = '$useremail'";
-		$result = mysqli_query($db,$sql);
-		$rowcount = mysqli_num_rows($result);
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '$useremail'";
+		$result = $db->query($sql);
+		$resultrow = $result->fetch_assoc();
+		$rowcount = $resultrow["COUNT(*)"];
+
 		if($rowcount == 0){
 			include "../../core/abre_dbconnect.php";
 			$stmt = $db->stmt_init();

@@ -26,9 +26,10 @@
 	//Display search results
 	if($pageaccess == 1){
 
-		$sql = "SELECT * FROM directory WHERE archived = 1";
-		$result = mysqli_query($db, $sql);
-		$rowcount = mysqli_num_rows($result);
+		$sql = "SELECT COUNT(*) FROM directory WHERE archived = 1";
+		$result = $db->query($sql);
+		$resultrow = $result->fetch_assoc();
+		$rowcount = $resultrow["COUNT(*)"];
 		if($rowcount != 0){
 
 			//Display Recent Searches
@@ -47,7 +48,7 @@
 								echo "</tr>";
 							echo "</thead>";
 							echo "<tbody>";
-							$sql = "SELECT *  FROM directory WHERE archived = 1 ORDER BY updatedtime DESC";
+							$sql = "SELECT firstname, lastname, location, email, title, classification, probationreportdate, picture, senioritydate, id FROM directory WHERE archived = 1 ORDER BY updatedtime DESC";
 							$result = $db->query($sql);
 							while($row = $result->fetch_assoc()){
 								$resultcount = 1;

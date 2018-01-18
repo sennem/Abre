@@ -27,8 +27,8 @@
 			echo "<div class='widget_container widget_body' style='color:#666;'>Your Top 6 Apps <i class='right material-icons widget_holder_refresh pointer' data-path='/modules/apps/widget_content.php' data-reload='true'>refresh</i></div>";
 		echo "</div>";
 		echo "<hr class='widget_hr'>";
-		
-		$query = "SELECT * FROM profiles where email = '".$_SESSION['useremail']."'";
+
+		$query = "SELECT apps_order FROM profiles where email = '".$_SESSION['useremail']."'";
 		$gafecards = databasequery($query);
 		foreach ($gafecards as $value){
 			$apps_order = htmlspecialchars($value["apps_order"], ENT_QUOTES);
@@ -47,7 +47,7 @@
 			foreach($order as $value){
 				if ($appcount++ < 6){
 					include(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-					$sql = "SELECT * FROM apps WHERE id = '$value'";
+					$sql = "SELECT id, title, image, link FROM apps WHERE id = '$value'";
 					$result = $db->query($sql);
 					while($row = $result->fetch_assoc()){
 						$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -64,7 +64,7 @@
 			$db->close();
 		}else{
 			include(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-			$sql = "SELECT * FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 LIMIT 6";
+			$sql = "SELECT id, title, image, link FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1 LIMIT 6";
 			$result = $db->query($sql);
 			while($row = $result->fetch_assoc()){
 				$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -78,27 +78,27 @@
 			}
 			$db->close();
 		}
-			
+
 	}
-	
+
 ?>
 
 <script>
-	
+
 	$(function(){
-		
+
 		//Make the Icons Clickable
 		$(".topapps").unbind().click(function(event) {
-			
+
 			event.preventDefault();
 			window.open($(this).find("a").attr("href"), '_blank');
-			
+
 			//Track click
 			var linktitle = '/#apps/'+$(this).find("a").text()+'/';
 			ga('set', 'page', linktitle);
 			ga('send', 'pageview');
 		});
-		
+
 	});
-	
+
 </script>

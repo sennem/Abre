@@ -28,7 +28,7 @@
 
 		//Delete the File
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT *  FROM directory_discipline WHERE id = $id";
+		$sql = "SELECT Filename FROM directory_discipline WHERE id = $id";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$filename = htmlspecialchars($row["Filename"], ENT_QUOTES);

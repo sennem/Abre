@@ -24,7 +24,7 @@
 	if(superadmin()){
 
 		echo "<table class='bordered' id='appsort'>";
-			$query = "SELECT * FROM apps ORDER BY sort";
+			$query = "SELECT id, title, link, icon, staff, student, parent, minor_disabled FROM apps ORDER BY sort";
 			$dbreturn = databasequery($query);
 			foreach ($dbreturn as $value){
 				$id = $value['id'];

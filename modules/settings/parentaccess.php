@@ -74,7 +74,7 @@
 								echo "<input placeholder='Enter Client Secret' value='".getSiteMicrosoftClientSecret()."' id='microsoftclientsecret' name='microsoftclientsecret' type='text' autocomplete='off'>";
 								echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 							echo "</div>";
-							if($db->query("SELECT * FROM Abre_Students") && $db->query("SELECT * FROM users_parent") && superadmin()){
+							if($db->query("SELECT * FROM Abre_Students LIMIT 1") && $db->query("SELECT * FROM users_parent LIMIT 1") && superadmin()){
 								echo "<div class='input-field col s12'>";
 									echo "<a id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</a>";
 								echo "</div>";
