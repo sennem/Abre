@@ -17,4 +17,4 @@
     */
 
 	//Google Auth Button
-	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#fff !important; color:#757575 !important;' href='$authUrl'><span class='left loginicon' style='background: url(\"core/images/button_icon_google.png\") no-repeat;'></span>Sign in with Google</a>";
+	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#fff !important; color:#757575 !important;' href='$authUrl'><span class='loginicon' style='background: url(\"core/images/button_icon_google.png\") no-repeat;'></span> Sign in with Google</a>";

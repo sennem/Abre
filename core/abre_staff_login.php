@@ -33,7 +33,7 @@
 				echo "<div class='login-card-square mdl-card'>";
 					
 						//Site Logo
-						echo "<div style='margin:30px 40px 10px 40px; height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
+						echo "<div style='margin:30px 40px 10px 45px; height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
 						
 						//Site Login Text
 						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; margin:0 40px 10px 40px;'>Choose a sign in service</div>";
