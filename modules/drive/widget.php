@@ -23,7 +23,7 @@
 
 	if($_SESSION['usertype'] != 'parent'){
   		
-  		DisplayWidget('drive','cloud','Drive','#FF9800');
+  		DisplayWidget('drive','cloud','Drive','#FF9800','https://drive.google.com');
 	
 	}
 	

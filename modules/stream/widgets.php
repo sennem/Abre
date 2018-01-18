@@ -121,7 +121,7 @@
 
 		//Make Collapsible Widgets
 		$('.widget').collapsible();
-		
+
 		//Sortable
 		$( ".widgetsort" ).sortable({
 			handle: ".widget .collapsible-header",
@@ -164,19 +164,24 @@
 		});
 		
 		//Events when widget is opened or closed
-		$(".widget .collapsible-header").off().on("click", function(){
+		$(".widget .collapsible-header").off().on("click", function(event){
 			
-			//Load widget content
-			var OpenStatus = $(this).hasClass("active");
-			var Path = $(this).data('path');
-			var Widget = $(this).data('widget');
-			var BodyDiv = $(this).next();
-			if(OpenStatus === false){		
-				loadWidget(BodyDiv,Path);
+			if (event.target === this)
+			{
+
+				//Load widget content
+				var OpenStatus = $(this).hasClass("active");
+				var Path = $(this).data('path');
+				var Widget = $(this).data('widget');
+				var BodyDiv = $(this).next();
+				if(OpenStatus === false){		
+					loadWidget(BodyDiv,Path);
+				}
+				
+				//Save open status to server
+				$.post("/modules/stream/save_widget_state.php", {widget: Widget, status: OpenStatus});
+				
 			}
-			
-			//Save open status to server
-			$.post("/modules/stream/save_widget_state.php", {widget: Widget, status: OpenStatus});
 			
 		});
 		
@@ -214,6 +219,16 @@
 		    event.preventDefault();
 			$('#editwidgets').openModal({ in_duration: 0, out_duration: 0 });
 		});
+		
+		//Widget Header Link
+		$(".widgeticonlink").off().on("click", function(event) {
+			event.stopPropagation();
+			var link = $(this).data('link');
+			if(link != ""){
+				window.open($(this).data('link'), '_blank');
+			}
+		});
+		
 
 	});
 

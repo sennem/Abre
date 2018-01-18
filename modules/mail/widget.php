@@ -23,7 +23,7 @@
 
 	if($_SESSION['usertype'] != 'parent'){
 
-		DisplayWidget('mail','mail','Mail','#F44336');
+		DisplayWidget('mail','mail','Mail','#F44336','https://mail.google.com');
 	
 	}
 	
