@@ -23,7 +23,7 @@
 
 	if($_SESSION['usertype'] != 'parent'){
   		
-  		DisplayWidget('classroom','class','Classroom','#4CAF50');
+  		DisplayWidget('classroom','class','Classroom','#4CAF50','https://classroom.google.com');
 	
 	}
 	

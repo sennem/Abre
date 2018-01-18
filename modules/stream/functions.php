@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	//Display Widget
-	function DisplayWidget($path,$icon,$title,$color){
+	function DisplayWidget($path,$icon,$title,$color,$url){
 		
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		
@@ -45,8 +45,10 @@
 		echo "<ul class='widget mdl-card mdl-shadow--2dp hoverable' style='width:100%;' data-collapsible='accordion'>";
 			echo "<li class='widgetli' data-path='$path'>";
 				echo "<div class='collapsible-header $active' data-path='$URLPath' data-widget='$path' style='border-top: solid 3px $color;'>";
-					echo "<i class='material-icons' style='color: $color'>$icon</i>";
-					echo "<span style='color: #000'>$title</span>";
+					echo "<span class='widgeticonlink' data-link='$url'>";
+						echo "<i class='material-icons' style='color: $color'>$icon</i>";
+						echo "<span style='color:#000;'>$title</span>";
+					echo "</span>";
 					echo "<i class='right material-icons' style='color: #666; margin-right:2px;'>expand_more</i>";		
 				echo "</div>";
 				echo "<div class='collapsible-body' id='widgetbody_$path'></div>";

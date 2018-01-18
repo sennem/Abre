@@ -23,7 +23,7 @@
 
 	if($_SESSION['usertype'] != 'parent'){
   		
-  		DisplayWidget('calendar','event','Calendar','#2196F3');
+  		DisplayWidget('calendar','event','Calendar','#2196F3','https://calendar.google.com');
 	
 	}
 	
