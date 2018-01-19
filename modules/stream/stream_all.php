@@ -110,6 +110,7 @@
 		$excerpt = str_replace('’',"'",$excerpt);
 		$excerpt = str_replace('—',"-",$excerpt);
 		$excerpt = filter_var($excerpt, FILTER_SANITIZE_STRING);
+		if($excerpt == ""){ $excerpt = $title; }
 		$linkraw = $feeds[$cardcountloop][3];
 		$image = $feeds[$cardcountloop][4];
 		$feedtitle = $feeds[$cardcountloop][5];
