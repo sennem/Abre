@@ -27,14 +27,15 @@
 
 		//Retrieve Search Query
 		if(isset($_POST["searchquery"])){ $searchquery = mysqli_real_escape_string($db, $_POST["searchquery"]); }else{ $searchquery = ""; }
-		$searchqueryuppercase = encrypt(ucwords($searchquery), "");
+		$searchqueryfirstuppercase = encrypt(ucwords($searchquery), "");
+		$searchqueryalluppercase = encrypt(strtoupper($searchquery), "");
 		$searchquerylowercase = encrypt(strtolower($searchquery), "");
 
 		//Display the Page
 		echo "<div class='row'>";
 
 		if($searchquery != ""){
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture FROM directory WHERE (lastname = '$searchqueryuppercase' OR firstname = '$searchqueryuppercase' OR email = '$searchqueryuppercase' OR location = '$searchqueryuppercase' OR classification = '$searchqueryuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase') AND archived = 0";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0";
 		}else{
 			$sql = "SELECT id, firstname, lastname, location, email, title, picture FROM directory WHERE archived = 0 ORDER BY updatedtime DESC limit 10";
 		}
