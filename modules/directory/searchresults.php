@@ -26,10 +26,10 @@
 	if($pageaccess == 1 or $_SESSION['usertype'] == "staff"){
 
 		//Retrieve Search Query
-		if(isset($_POST["searchquery"])){ $searchquery = mysqli_real_escape_string($db, $_POST["searchquery"]); }else{ $searchquery = ""; }
+		if(isset($_POST["searchquery"])){ $searchquery = strtolower(mysqli_real_escape_string($db, $_POST["searchquery"])); }else{ $searchquery = ""; }
 		$searchqueryfirstuppercase = encrypt(ucwords($searchquery), "");
 		$searchqueryalluppercase = encrypt(strtoupper($searchquery), "");
-		$searchquerylowercase = encrypt(strtolower($searchquery), "");
+		$searchquerylowercase = encrypt($searchquery, "");
 
 		//Display the Page
 		echo "<div class='row'>";
