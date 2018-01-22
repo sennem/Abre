@@ -29,7 +29,7 @@
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 
 	//Determine total number of comments
-	$query = "SELECT COUNT(*) FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC";
+	$query = "SELECT COUNT(*) FROM (SELECT * FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC) AS Result";
 	$result = $db->query($query);
 	$resultrow = $result->fetch_assoc();
 	$totalcomments = $resultrow["COUNT(*)"];
