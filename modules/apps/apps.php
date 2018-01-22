@@ -78,7 +78,7 @@
 				}
 				if($apps_order != NULL){
 					foreach($order as $value){
-						$sql = "SELECT id, title, image, link FROM apps WHERE id = '$value'";
+						$sql = "SELECT id, title, image, link FROM apps WHERE id = '$value' AND staff = 1";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc()){
 							$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -92,7 +92,7 @@
 						}
 					}
 				}else{
-					$sql = "SELECT id, title, image, link FROM apps ORDER BY sort";
+					$sql = "SELECT id, title, image, link FROM apps WHERE staff = 1 ORDER BY sort";
 					$result = $db->query($sql);
 					while($row = $result->fetch_assoc()){
 						$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -190,7 +190,7 @@
 					}
 					if($apps_order != NULL){
 						foreach($order as $value){
-							$sql = "SELECT id, title, image, link FROM apps WHERE id= '$value'";
+							$sql = "SELECT id, title, image, link FROM apps WHERE id= '$value' AND student = 1";
 							$result = $db->query($sql);
 							while($row = $result->fetch_assoc()){
 								$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -204,7 +204,7 @@
 							}
 						}
 					}else{
-						$sql = "SELECT id, title, image, link FROM apps ORDER BY sort";
+						$sql = "SELECT id, title, image, link FROM apps WHERE student = 1 ORDER BY sort";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc()){
 							$id = htmlspecialchars($row["id"], ENT_QUOTES);
