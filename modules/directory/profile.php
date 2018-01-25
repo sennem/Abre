@@ -51,6 +51,8 @@
 				$zip = stripslashes(htmlspecialchars(decrypt($zip, ""), ENT_QUOTES));
 				$phone = htmlspecialchars($row["phone"], ENT_QUOTES);
 				$phone = stripslashes(htmlspecialchars(decrypt($phone, ""), ENT_QUOTES));
+				$extension = htmlspecialchars($row["extension"], ENT_QUOTES);
+				$extension = stripslashes(htmlspecialchars(decrypt($extension, ""), ENT_QUOTES));
 				$cellphone = htmlspecialchars($row["cellphone"], ENT_QUOTES);
 				$cellphone = stripslashes(htmlspecialchars(decrypt($cellphone, ""), ENT_QUOTES));
 				$email = htmlspecialchars($row["email"], ENT_QUOTES);
@@ -182,6 +184,7 @@
 				$state = "";
 				$zip = "";
 				$phone = "";
+				$extension = "";
 				$cellphone = "";
 				$email = "";
 				$ss = "";
@@ -292,9 +295,13 @@
 			echo "</div>";
 
 			echo "<div class='row'>";
-				echo "<div class='input-field col l4 s12'>";
+				echo "<div class='input-field col l2 s12'>";
 					echo "<input "; if($pageaccess == 2){ echo "disabled "; } echo "placeholder='Enter a Phone Number' value='$phone' id='phone' name='phone' type='text' class='demotext_dark' autocomplete='off'>";
 					echo "<label class='active' for='phone'>Phone Number</label>";
+				echo "</div>";
+				echo "<div class='input-field col l2 s12'>";
+					echo "<input "; if($pageaccess == 2){ echo "disabled "; } echo "placeholder='Enter a Phone Extension' value='$extension' id='extension' name='extension' type='text' class='demotext_dark' autocomplete='off'>";
+					echo "<label class='active' for='extension'>Phone Extension</label>";
 				echo "</div>";
 				echo "<div class='input-field col l4 s12'>";
 					echo "<input "; if($pageaccess == 2){ echo "disabled "; } echo "placeholder='Enter a Cell Number' value='$cellphone' id='cellphone' name='cellphone' type='text' class='demotext_dark' autocomplete='off'>";
@@ -524,8 +531,6 @@
 
 								 echo "</div>";
 							}
-
-							echo "<div class='row'><div class='col l12'><a class='waves-effect btn-flat white-text' id='archiveuser' id='archiveuser' style='background-color:"; echo getSiteColor(); echo "'>Archive User</a></div></div>";
 							echo "<input type='hidden' name='id' value='$id' id='userid'><br>";
 						}
 ?>

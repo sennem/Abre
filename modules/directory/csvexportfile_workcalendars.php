@@ -41,7 +41,7 @@
 			$lastname = stripslashes(decrypt($lastname, ""));
 			$contractdays = htmlspecialchars($row["contractdays"], ENT_QUOTES);
 			$contractdays = stripslashes(decrypt($contractdays, ""));
-			
+
 			if($contractdays != ""){
 				$rowsselected = mysqli_query($db, "SELECT work_calendar FROM profiles WHERE email = '$email'");
 				while ($rowselect = mysqli_fetch_assoc($rowsselected)){

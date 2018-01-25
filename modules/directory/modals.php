@@ -35,8 +35,9 @@
 			</div>
     </div>
 	  <div class="modal-footer">
-			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor("sitecolor"); ?>'>Save</button>
-			<a class="modal-close waves-effect btn-flat white-text"  style='background-color: <?php echo getSiteColor("sitecolor"); ?>'>Cancel</a>
+			<?php if($pageaccess != 2) { ?> <a class='waves-effect btn-flat white-text' id='archiveuser' id='archiveuser' style='float:left; background-color: <?php echo getSiteColor(); ?>'>Archive User</a><?php } ?>
+			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Save</button>
+			<a class="modal-close waves-effect btn-flat white-text"  style='background-color: <?php echo getSiteColor(); ?>'>Cancel</a>
 		</div>
 	</form>
 </div>

@@ -35,9 +35,9 @@
 		echo "<div class='row'>";
 
 		if($searchquery != ""){
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0";
 		}else{
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture FROM directory WHERE archived = 0 ORDER BY updatedtime DESC limit 10";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC limit 10";
 		}
 		$result = $db->query($sql);
 		$resultscount = $result->num_rows;
@@ -45,7 +45,7 @@
 		while($row = $result->fetch_assoc()){
 			$resultscounter++;
 			if($resultscounter == 1){
-				echo "<table id='myTable' class='tablesorter highlight pointer'><thead style='display:none'><tr><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody>";
+				echo "<table id='myTable' class='tablesorter highlight pointer'><thead style='display:none'><tr><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody>";
 			}
 			$employeeid = htmlspecialchars($row["id"], ENT_QUOTES);
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
@@ -58,6 +58,8 @@
 			$email = stripslashes(htmlspecialchars(decrypt($email, ""), ENT_QUOTES));
 			$title = htmlspecialchars($row["title"], ENT_QUOTES);
 			$title = stripslashes(htmlspecialchars(decrypt($title, ""), ENT_QUOTES));
+			$extension = htmlspecialchars($row["extension"], ENT_QUOTES);
+			$extension = stripslashes(htmlspecialchars(decrypt($extension, ""), ENT_QUOTES));
 			$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 			if($picture == ""){
 				$picture = $portal_root."/modules/directory/images/user.png";
@@ -71,6 +73,11 @@
 				echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
 				echo "<td class='hide-on-small-only demotext_dark'>$location</td>";
 				echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";
+				if($extension == ""){
+					echo "<td class='hide-on-med-and-down demotext_dark'></td>";
+				}else{
+					echo "<td class='hide-on-med-and-down demotext_dark'>Ext. $extension</td>";
+				}
 			echo "</tr>";
 
 			if($resultscounter == $resultscount){ echo "</tbody></table>"; }

@@ -111,6 +111,14 @@
 		}
 		$db->close();
 
+		//Check for Phone Extension field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$resultstreams = $db->query("SELECT extension FROM directory LIMIT 1")){
+			$sql = "ALTER TABLE `directory` ADD `extension` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreams = $db->query("SELECT * FROM directory_discipline LIMIT 1")){
 			$sql = "CREATE TABLE IF NOT EXISTS `directory_discipline` (

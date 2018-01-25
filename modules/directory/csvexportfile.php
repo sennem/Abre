@@ -29,7 +29,7 @@
 
 		$output = fopen('php://output', 'w');
 
-		fputcsv($output, array('Last Name', 'First Name', 'Middle Name', 'SSN', 'Date of Birth', 'Address', 'City', 'State', 'Zip', 'Phone', 'Cell Phone', 'Ethnicity', 'Gender', 'Email', 'Title', 'Contract', 'Classification', 'Home Building', 'Grade', 'Subject', 'Date of Hire', 'Seniority Date', 'Effective Date', 'Step', 'Level of Education', 'Contract Days', 'Salary', 'Hours', 'Probation Report Date', 'State Background Check' , 'Federal Background Check', 'State Educator ID', 'License 1 Type', 'License 1 Issue Date', 'License 1 Expiration Date', 'License 1 Term', 'License 2 Type', 'License 2 Issue Date', 'License 2 Expiration Date', 'License 2 Term', 'License 3 Type', 'License 3 Issue Date', 'License 3 Expiration Date', 'License 3 Term', 'License 4 Type', 'License 4 Issue Date', 'License 4 Expiration Date', 'License 4 Term', 'License 5 Type', 'License 5 Issue Date', 'License 5 Expiration Date', 'License 5 Term', 'License 6 Type', 'License 6 Issue Date', 'License 6 Expiration Date', 'License 6 Term'));
+		fputcsv($output, array('Last Name', 'First Name', 'Middle Name', 'SSN', 'Date of Birth', 'Address', 'City', 'State', 'Zip', 'Phone', 'Extension', 'Cell Phone', 'Ethnicity', 'Gender', 'Email', 'Title', 'Contract', 'Classification', 'Home Building', 'Grade', 'Subject', 'Date of Hire', 'Seniority Date', 'Effective Date', 'Step', 'Level of Education', 'Contract Days', 'Salary', 'Hours', 'Probation Report Date', 'State Background Check' , 'Federal Background Check', 'State Educator ID', 'License 1 Type', 'License 1 Issue Date', 'License 1 Expiration Date', 'License 1 Term', 'License 2 Type', 'License 2 Issue Date', 'License 2 Expiration Date', 'License 2 Term', 'License 3 Type', 'License 3 Issue Date', 'License 3 Expiration Date', 'License 3 Term', 'License 4 Type', 'License 4 Issue Date', 'License 4 Expiration Date', 'License 4 Term', 'License 5 Type', 'License 5 Issue Date', 'License 5 Expiration Date', 'License 5 Term', 'License 6 Type', 'License 6 Issue Date', 'License 6 Expiration Date', 'License 6 Term'));
 		include "../../core/abre_dbconnect.php";
 		$rows = mysqli_query($db, 'SELECT * FROM directory WHERE archived = 0 ORDER BY lastname');
 
@@ -54,6 +54,12 @@
 			$zip = stripslashes(decrypt($zip, ""));
 			$phone = htmlspecialchars($row["phone"], ENT_QUOTES);
 			$phone = stripslashes(decrypt($phone, ""));
+			if(isset($extension)){
+				$extension = htmlspecialchars($row["extension"], ENT_QUOTES);
+				$extension = stripslashes(decrypt($extension, ""));
+			}else{
+				$extension = "";
+			}
 			$cellphone = htmlspecialchars($row["cellphone"], ENT_QUOTES);
 			$cellphone = stripslashes(decrypt($cellphone, ""));
 			$ethnicity = htmlspecialchars($row["ethnicity"], ENT_QUOTES);
@@ -146,7 +152,7 @@
 			$l6_3 = stripslashes(decrypt($l6_3, ""));
 			$l6_4 = htmlspecialchars($row["licenseterm6"], ENT_QUOTES);
 			$l6_4 = stripslashes(decrypt($l6_4, ""));
-			$data = [$lastname,$firstname,$middlename,$ss,$dob,$address,$city,$state,$zip,$phone,$cellphone,$ethnicity,$gender,$email,$title,$contract,$classification,$location,$grade,$subject,$doh,$senioritydate,$effectivedate,$step,$educationlevel,$contractdays,$salary,$hours,$probationreportdate,$statebackgroundcheck,$federalbackgroundcheck,$stateeducatorid,$l1_1,$l1_2,$l1_3,$l1_4,$l2_1,$l2_2,$l2_3,$l2_4,$l3_1,$l3_2,$l3_3,$l3_4,$l4_1,$l4_2,$l4_3,$l4_4,$l5_1,$l5_2,$l5_3,$l5_4,$l6_1,$l6_2,$l6_3,$l6_4];
+			$data = [$lastname,$firstname,$middlename,$ss,$dob,$address,$city,$state,$zip,$phone,$extension,$cellphone,$ethnicity,$gender,$email,$title,$contract,$classification,$location,$grade,$subject,$doh,$senioritydate,$effectivedate,$step,$educationlevel,$contractdays,$salary,$hours,$probationreportdate,$statebackgroundcheck,$federalbackgroundcheck,$stateeducatorid,$l1_1,$l1_2,$l1_3,$l1_4,$l2_1,$l2_2,$l2_3,$l2_4,$l3_1,$l3_2,$l3_3,$l3_4,$l4_1,$l4_2,$l4_3,$l4_4,$l5_1,$l5_2,$l5_3,$l5_4,$l6_1,$l6_2,$l6_3,$l6_4];
 			fputcsv($output, $data);
 		}
 		fclose($output);
