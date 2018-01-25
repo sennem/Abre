@@ -93,7 +93,7 @@
 			 echo "</div>";
 			echo "</div>";
 		}else{
-			echo "<div class='row center-align'><div class='col s12'><h6>No Archived Employees</h6></div></div>";
+			echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Archived Employees</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Employees you archive will show up here.</p></div>";
 		}
 ?>
 

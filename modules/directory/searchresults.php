@@ -25,6 +25,23 @@
 	//Display Search Results
 	if($pageaccess == 1 or $_SESSION['usertype'] == "staff"){
 
+		//get the current page the user is on
+		if(isset($_POST["page"])){
+			if($_POST["page"] == ""){
+				$PageNumber = 1;
+			}else{
+				$PageNumber = $_POST["page"];
+			}
+		}else{
+			$PageNumber = 1;
+		}
+
+		$PerPage = 10;
+
+		//set bounds for pagination
+	  $LowerBound = $PerPage * ($PageNumber - 1);
+	  $UpperBound = $PerPage * $PageNumber;
+
 		//Retrieve Search Query
 		if(isset($_POST["searchquery"])){ $searchquery = strtolower(mysqli_real_escape_string($db, $_POST["searchquery"])); }else{ $searchquery = ""; }
 		$searchqueryfirstuppercase = encrypt(ucwords($searchquery), "");
@@ -34,14 +51,22 @@
 		//Display the Page
 		echo "<div class='row'>";
 
+		//filter results based on the query
 		if($searchquery != ""){
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0";
+			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0";
+
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0 LIMIT $LowerBound, $PerPage";
 		}else{
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC limit 10";
+			$querycount = $sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC";
+
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC LIMIT $LowerBound, $PerPage";
 		}
+
 		$result = $db->query($sql);
 		$resultscount = $result->num_rows;
 		$resultscounter = 0;
+
+		//retrieve info from database
 		while($row = $result->fetch_assoc()){
 			$resultscounter++;
 			if($resultscounter == 1){
@@ -67,6 +92,7 @@
 				$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
 			}
 
+			//display the results in table
 			echo "<tr class='employeeview' data-employeeid='$employeeid' data-searchquerysaved='$searchquery'>";
 				echo "<td width='75px;'><img src='$picture' class='profile-avatar-small' alt='Profile Picture' style='margin-left:5px;'></td>";
 				echo "<td><strong class='demotext_dark'>$firstname $lastname</strong></td>";
@@ -81,7 +107,43 @@
 			echo "</tr>";
 
 			if($resultscounter == $resultscount){ echo "</tbody></table>"; }
-	}
+		}
+
+		//getting count for pagination
+		$dbreturnpossible = databasequery($querycount);
+		$totalpossibleresults = count($dbreturnpossible);
+
+		//Paging
+		$totalpages = ceil($totalpossibleresults / $PerPage);
+		if($totalpossibleresults > $PerPage){
+			$previouspage = $PageNumber-1;
+			$nextpage = $PageNumber+1;
+			if($PageNumber > 5){
+				if($totalpages > $PageNumber + 5){
+					$pagingstart = $PageNumber - 5;
+					$pagingend = $PageNumber + 5;
+				}else{
+					$pagingstart = $PageNumber - 5;
+					$pagingend = $totalpages;
+				}
+			}else{
+				if($totalpages >= 10){ $pagingstart = 1; $pagingend = 10; }else{ $pagingstart = 1; $pagingend = $totalpages; }
+			}
+
+			echo "<div class='row'><br>";
+			echo "<ul class='pagination center-align'>";
+				if($PageNumber != 1){ echo "<li class='pagebutton' data-page='$previouspage'><a href='#'><i class='material-icons'>chevron_left</i></a></li>"; }
+				for($x = $pagingstart; $x <= $pagingend; $x++){
+					if($PageNumber == $x){
+						echo "<li class='active pagebutton' style='background-color: ".getSiteColor().";' data-page='$x'><a href='#'>$x</a></li>";
+					}else{
+						echo "<li class='waves-effect pagebutton' data-page='$x'><a href='#'>$x</a></li>";
+					}
+				}
+				if($PageNumber != $totalpages){ echo "<li class='waves-effect pagebutton' data-page='$nextpage'><a href='#'><i class='material-icons'>chevron_right</i></a></li>"; }
+			echo "</ul>";
+			echo "</div>";
+		}
 
 		echo "</div>";
 
