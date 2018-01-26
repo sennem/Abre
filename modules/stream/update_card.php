@@ -42,10 +42,12 @@
 				$row = $dbreturn->fetch_assoc();
 				$num_rows_comment_current_user = $row["COUNT(*)"];
 
-				$query = "SELECT COUNT(*) FROM (SELECT * FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC) AS Result";
+				$query = "SELECT COUNT(*) FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC";
 				$dbreturn = $db->query($query);
-				$row = $dbreturn->fetch_assoc();
-				$streamCardsLeft = $row["COUNT(*)"];
+				$streamCardsLeft = 0;
+				while($resultrow = $dbreturn->fetch_assoc()){
+					$streamCardsLeft += $resultrow["COUNT(*)"];
+				}
 			}
 		}
 		if(!isset($num_rows_comment_current_user)){

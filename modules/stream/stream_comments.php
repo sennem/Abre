@@ -29,16 +29,24 @@
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 
 	//Determine total number of comments
-	$query = "SELECT COUNT(*) FROM (SELECT * FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC) AS Result";
+	$query = "SELECT COUNT(*) FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC";
+	error_log($query);
 	$result = $db->query($query);
-	$resultrow = $result->fetch_assoc();
-	$totalcomments = $resultrow["COUNT(*)"];
+	$totalcomments = 0;
+	while($resultrow = $result->fetch_assoc()){
+		$totalcomments += $resultrow["COUNT(*)"];
+	}
 
 	//Find what streams to display
-	$query = "SELECT title, image, url, creationtime  FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC LIMIT $StreamStartResult, $StreamEndResult";
+	$query = "SELECT title, image, url, creationtime  FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' ORDER BY ID DESC LIMIT $StreamStartResult, $StreamEndResult";
+	error_log($query);
 	$dbreturn = databasequery($query);
 	$counter = 0;
+	$lastUrl = NULL;
 	foreach($dbreturn as $value){
+		if($lastUrl == mysqli_real_escape_string($db, $value['url'])){
+			continue;
+		}
 		$title = $value['title'];
 		$titleencoded = base64_encode($title);
 		$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
@@ -47,6 +55,7 @@
 		$linkbase = base64_encode($value['url']);
 		$linkescaped = htmlspecialchars($value['url'], ENT_QUOTES);
 		$link = mysqli_real_escape_string($db, $value['url']);
+		$lastUrl = $link;
 		$creationtime = $value['creationtime'];
 		$creationtime = date('F jS, Y',strtotime($creationtime));
 		$counter++;
