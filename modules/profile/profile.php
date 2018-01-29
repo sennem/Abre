@@ -67,6 +67,13 @@
 				echo "<div class='col s12'><div id='streamerror'></div></div>";
 			echo "</div>";
 			echo "<div class='row'>";
+
+				$sql = "SELECT streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+				$result = $db->query($sql);
+				$resultrow = $result->fetch_assoc();
+				$streamValues = explode(',', $resultrow["streams"]);
+				$streamValues = array_unique($streamValues, SORT_NUMERIC);
+
 				$dcount = 0;
 				$sql = "SELECT title, id FROM streams WHERE `group` = '".$_SESSION['usertype']."' AND `required` != 1 ORDER BY type, title";
 				$dbreturn = databasequery($sql);
@@ -76,11 +83,11 @@
 					echo "<div class='col m4 s6'>";
 
 					$returncount = 0;
-					$sql = "SELECT * FROM profiles WHERE email = '".$_SESSION['useremail']."' AND streams LIKE '%$id%'";
-					$dbreturn = databasequery($sql);
-					foreach($dbreturn as $row){
-						echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
-						$returncount = 1;
+					foreach($streamValues as $value){
+						if($value == $id){
+							echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+							$returncount = 1;
+						}
 					}
 					if($returncount == 0){ echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>"; }
 						echo "</div>";
@@ -150,6 +157,8 @@
 			})
 			//Show the notification
 			.done(function(response) {
+				$('#streamerror').show();
+				$('#streamerror').html("<h6 style='color: <?php echo getSiteColor(); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo getSiteColor(); ?>'>Done</a></h6>");
 				var notification = document.querySelector('.mdl-js-snackbar');
 				var data = { message: 'Your changes have been saved.' };
 				notification.MaterialSnackbar.showSnackbar(data);
