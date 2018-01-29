@@ -30,7 +30,7 @@
 		$dbreturn = $db->query($sql);
 		$resultrow = $dbreturn->fetch_assoc();
 		$num_users = $resultrow["COUNT(*)"];
-		
+
 		if($num_users > 0){
 			echo "<div class='page_container mdl-shadow--4dp'>";
 				echo "<div class='page'>";
@@ -53,7 +53,7 @@
 				echo "</div>";
 			echo "</div>";
 		}else{
-			echo "<div class='row center-align'><div class='col s12'><h6>No Active Staff</h6></div><div class='col s12'>Click the '+' button at the bottom left to add a staff member.</div></div>";
+			echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button at the bottom left to add a staff member.</p></div>";
 		}
 
 		if($pageaccess == 1){ include "button.php"; }
@@ -63,6 +63,18 @@
 
 		//Process the profile form
 		$(function(){
+
+			//when clicking pagination button reload table with next page's results
+			$('#searchresults').off('.pagebutton').on('click', '.pagebutton', function(){
+				event.preventDefault();
+				$('.mdl-layout__content').animate({scrollTop:0}, 0);
+				var currentPage = $(this).data('page');
+				var searchQuery = $('#searchquery').val();
+				$.post( "modules/directory/searchresults.php", {page: currentPage, searchquery: searchQuery})
+				.done(function(data){
+					$("#searchresults").html(data);
+				});
+			});
 
 			//Press the search data
 			var form = $('#form-search');
