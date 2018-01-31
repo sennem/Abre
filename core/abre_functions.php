@@ -37,7 +37,6 @@
 
 	//Find user ID in directory module given an email
 	function finduserid($email){
-		$email = encrypt($email, "");
 		$sql = "SELECT id FROM directory WHERE email = '$email'";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
