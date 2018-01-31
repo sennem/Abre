@@ -32,8 +32,7 @@
 	}
 
 	//Get Contracted Days
-	$useremailencrypt = encrypt($_SESSION['useremail'], "");
-	$sql = "SELECT contractdays, title FROM directory WHERE email = '$useremailencrypt'";
+	$sql = "SELECT contractdays, title FROM directory WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $row){
 		$contractdays = htmlspecialchars($row['contractdays'], ENT_QUOTES);
@@ -51,7 +50,7 @@
 					//Display Job Title
 					foreach($dbreturn as $row){
 						$job_title = htmlspecialchars($row['title'], ENT_QUOTES);
-						$job_title = stripslashes(htmlspecialchars(decrypt($job_title, ""), ENT_QUOTES));
+						$job_title = stripslashes($job_title);
 						echo "<h6 class='truncate' style='margin:0;'>$job_title</h6>";
 					}
 				echo "</div>";
