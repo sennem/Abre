@@ -44,18 +44,15 @@
 
 		//Retrieve Search Query
 		if(isset($_POST["searchquery"])){ $searchquery = strtolower(mysqli_real_escape_string($db, $_POST["searchquery"])); }else{ $searchquery = ""; }
-		$searchqueryfirstuppercase = encrypt(ucwords($searchquery), "");
-		$searchqueryalluppercase = encrypt(strtoupper($searchquery), "");
-		$searchquerylowercase = encrypt($searchquery, "");
 
 		//Display the Page
 		echo "<div class='row'>";
 
 		//filter results based on the query
 		if($searchquery != ""){
-			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0";
+			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0";
 
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (lastname = '$searchqueryfirstuppercase' OR firstname = '$searchqueryfirstuppercase' OR email = '$searchqueryfirstuppercase' OR location = '$searchqueryfirstuppercase' OR classification = '$searchqueryfirstuppercase' OR lastname = '$searchquerylowercase' OR firstname = '$searchquerylowercase' OR email = '$searchquerylowercase' OR location = '$searchquerylowercase' OR classification = '$searchquerylowercase' OR lastname = '$searchqueryalluppercase' OR firstname = '$searchqueryalluppercase' OR email = '$searchqueryalluppercase' OR location = '$searchqueryalluppercase' OR classification = '$searchqueryalluppercase') AND archived = 0 LIMIT $LowerBound, $PerPage";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0 LIMIT $LowerBound, $PerPage";
 		}else{
 			$querycount = $sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC";
 
@@ -74,17 +71,17 @@
 			}
 			$employeeid = htmlspecialchars($row["id"], ENT_QUOTES);
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
-			$firstname = stripslashes(htmlspecialchars(decrypt($firstname, ""), ENT_QUOTES));
+			$firstname = stripslashes($firstname);
 			$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
-			$lastname = stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
+			$lastname = stripslashes($lastname);
 			$location = htmlspecialchars($row["location"], ENT_QUOTES);
-			$location = stripslashes(htmlspecialchars(decrypt($location, ""), ENT_QUOTES));
+			$location = stripslashes($location);
 			$email = htmlspecialchars($row["email"], ENT_QUOTES);
-			$email = stripslashes(htmlspecialchars(decrypt($email, ""), ENT_QUOTES));
+			$email = stripslashes($email);
 			$title = htmlspecialchars($row["title"], ENT_QUOTES);
-			$title = stripslashes(htmlspecialchars(decrypt($title, ""), ENT_QUOTES));
+			$title = stripslashes($title);
 			$extension = htmlspecialchars($row["extension"], ENT_QUOTES);
-			$extension = stripslashes(htmlspecialchars(decrypt($extension, ""), ENT_QUOTES));
+			$extension = stripslashes($extension);
 			$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 			if($picture == ""){
 				$picture = $portal_root."/modules/directory/images/user.png";

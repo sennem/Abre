@@ -34,16 +34,11 @@
 		$lastname = $_POST["lastname"];
 		if($email == "" && $id == "new"){
 			$email = emailPrediction($firstname, $lastname);
-			$email = encrypt($email, "");
 		}else{
-			$email = encrypt($email, "");
+			$email = $email;
 		}
-		$firstname = encrypt($firstname, "");
 		$middlename = $_POST["middlename"];
-		$middlename = encrypt($middlename, "");
-		$lastname = encrypt($lastname, "");
 		$title = $_POST["title"];
-		$title = encrypt($title, "");
 		$contract = $_POST["contract"];
 		$contract = encrypt($contract, "");
 		$address = $_POST["address"];
@@ -57,7 +52,6 @@
 		$phone = $_POST["phone"];
 		$phone = encrypt($phone, "");
 		$extension = $_POST["extension"];
-		$extension = encrypt($extension, "");
 		$cellphone = $_POST["cellphone"];
 		$cellphone = encrypt($cellphone, "");
 		$ss = $_POST["ss"];
@@ -69,13 +63,9 @@
 		$ethnicity = $_POST["ethnicity"];
 		$ethnicity = encrypt($ethnicity, "");
 		$classification = $_POST["classification"];
-		$classification = encrypt($classification, "");
 		$location = $_POST["location"];
-		$location = encrypt($location, "");
 		$grade = $_POST["grade"];
-		$grade = encrypt($grade, "");
 		$subject = $_POST["subject"];
-		$subject = encrypt($subject, "");
 		$doh = $_POST["doh"];
 		$doh = encrypt($doh, "");
 		$sd = $_POST["sd"];
@@ -260,8 +250,7 @@
 		}
 
 		include "../../core/abre_dbconnect.php";
-		$useremail = decrypt($email, '');
-		$sql = "SELECT COUNT(*) FROM users WHERE email = '$useremail'";
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '$email'";
 		$result = $db->query($sql);
 		$resultrow = $result->fetch_assoc();
 		$rowcount = $resultrow["COUNT(*)"];
@@ -271,7 +260,7 @@
 			$stmt = $db->stmt_init();
 			$sql = "INSERT INTO users (email, superadmin) VALUES (?, ?);";
 			$stmt->prepare($sql);
-			$stmt->bind_param("si", $useremail, $sysadmin);
+			$stmt->bind_param("si", $email, $sysadmin);
 			$stmt->execute();
 			$stmt->close();
 			$db->close();
@@ -280,7 +269,7 @@
 			$stmt = $db->stmt_init();
 			$sql = "UPDATE users SET superadmin = ? WHERE email = ?;";
 			$stmt->prepare($sql);
-			$stmt->bind_param("is", $sysadmin, $useremail);
+			$stmt->bind_param("is", $sysadmin, $email);
 			$stmt->execute();
 			$stmt->close();
 			$db->close();

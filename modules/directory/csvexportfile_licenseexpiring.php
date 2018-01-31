@@ -35,11 +35,11 @@
 
 		while($row = mysqli_fetch_assoc($rows)){
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
-			$firstname = stripslashes(decrypt($firstname, ""));
+			$firstname = stripslashes($firstname);
 			$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
-			$lastname = stripslashes(decrypt($lastname, ""));
+			$lastname = stripslashes($lastname);
 			$middlename = htmlspecialchars($row["middlename"], ENT_QUOTES);
-			$middlename = stripslashes(decrypt($middlename, ""));
+			$middlename = stripslashes($middlename);
 			$stateeducatorid = htmlspecialchars($row["stateeducatorid"], ENT_QUOTES);
 			$stateeducatorid = stripslashes(decrypt($stateeducatorid, ""));
 			$l1_1 = htmlspecialchars($row["licensetype1"], ENT_QUOTES);

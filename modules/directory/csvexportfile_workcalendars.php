@@ -34,11 +34,11 @@
 		$rows = mysqli_query($db, 'SELECT email, firstname, lastname, contractdays FROM directory WHERE archived = 0');
 		while ($row = mysqli_fetch_assoc($rows)) {
 			$email = htmlspecialchars($row["email"], ENT_QUOTES);
-			$email = stripslashes(decrypt($email, ""));
+			$email = stripslashes($email);
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
-			$firstname = stripslashes(decrypt($firstname, ""));
+			$firstname = stripslashes($firstname);
 			$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
-			$lastname = stripslashes(decrypt($lastname, ""));
+			$lastname = stripslashes($lastname);
 			$contractdays = htmlspecialchars($row["contractdays"], ENT_QUOTES);
 			$contractdays = stripslashes(decrypt($contractdays, ""));
 

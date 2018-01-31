@@ -33,13 +33,13 @@
 	$numberofrows = $result->num_rows;
 	while($row = $result->fetch_assoc()){
 		$firstname = $row["firstname"];
-		$firstname = stripslashes(decrypt($firstname, ""));
+		$firstname = stripslashes($firstname);
 		$lastname = $row["lastname"];
-		$lastname = stripslashes(decrypt($lastname, ""));
+		$lastname = stripslashes($lastname);
 		$email = $row["email"];
-		$email = stripslashes(decrypt($email, ""));
+		$email = stripslashes($email);
 		$title = $row["title"];
-		$title = stripslashes(decrypt($title, ""));
+		$title = stripslashes($title);
 		$picture = $row["picture"];
 		if($picture == ""){
 			$picture='user.png';

@@ -23,10 +23,9 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Check for Admin Authentication
-	$userEmailencrypt = encrypt($_SESSION['useremail'], "");
 	$pageaccess = 0;
 	$superadmin = 0;
-	$sql = "SELECT * FROM directory WHERE email = '$userEmailencrypt' AND admin = 1 AND archived = 0";
+	$sql = "SELECT * FROM directory WHERE email = '".$_SESSION['useremail']."' AND admin = 1 AND archived = 0";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
 		$pageaccess = 1;
@@ -39,7 +38,7 @@
 		$superadmin = htmlspecialchars($row["superadmin"], ENT_QUOTES);
 	}
 
-	$sql = "SELECT * FROM directory WHERE email = '$userEmailencrypt' AND admin = 2 AND archived = 0";
+	$sql = "SELECT * FROM directory WHERE email = '".$_SESSION['useremail']."' AND admin = 2 AND archived = 0";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
 		$pageaccess = 2;
