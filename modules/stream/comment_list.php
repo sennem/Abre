@@ -58,18 +58,17 @@
 				}
 
 				//Look up name given email from directory
-				$User2 = encrypt($User, "");
 				$picture = "";
-				$sql = "SELECT firstname, lastname, picture FROM directory WHERE email = '$User2'";
+				$sql = "SELECT firstname, lastname, picture FROM directory WHERE email = '$User'";
 				$dbreturn = databasequery($sql);
 				$firstname = "";
 				$lastname = "";
 				$picture = "";
 				foreach($dbreturn as $row){
 					$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
-					$firstname = stripslashes(htmlspecialchars(decrypt($firstname, ""), ENT_QUOTES));
+					$firstname = stripslashes($firstname);
 					$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
-					$lastname = stripslashes(htmlspecialchars(decrypt($lastname, ""), ENT_QUOTES));
+					$lastname = stripslashes($lastname);
 					$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 				}
 
