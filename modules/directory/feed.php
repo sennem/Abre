@@ -32,15 +32,15 @@
 	$result = $db->query($sql);
 	$numberofrows = $result->num_rows;
 	while($row = $result->fetch_assoc()){
-		$firstname = $row["firstname"];
-		$firstname = stripslashes(decrypt($firstname, ""));
-		$lastname = $row["lastname"];
-		$lastname = stripslashes(decrypt($lastname, ""));
-		$email = $row["email"];
-		$email = stripslashes(decrypt($email, ""));
-		$title = $row["title"];
-		$title = stripslashes(decrypt($title, ""));
-		$picture = $row["picture"];
+		$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
+		$firstname = stripslashes($firstname);
+		$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
+		$lastname = stripslashes($lastname);
+		$email = htmlspecialchars($row["email"], ENT_QUOTES);
+		$email = stripslashes($email);
+		$title = htmlspecialchars($row["title"], ENT_QUOTES);
+		$title = stripslashes($title);
+		$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 		if($picture == ""){
 			$picture='user.png';
 		}

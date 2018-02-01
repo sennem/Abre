@@ -30,12 +30,11 @@
 		$firstthirdchar = $first[2];
 		$predictedemail = $firstfirstchar.$last.SITE_GAFE_DOMAIN;
 		$predictedemail = strtolower($predictedemail);
-		$predictedemailencrypted = encrypt($predictedemail, "");
 
 		//Check to make sure email doesn't already exist
 		include "../../configuration.php";
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemailencrypted'";
+		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemail'";
 		$result = $db->query($sql);
 		$resultrow = $result->fetch_assoc();
 		$count = $resultrow["COUNT(*)"];
@@ -47,10 +46,9 @@
 
 			//Check again
 			$count=0;
-			$predictedemailencrypted = encrypt($predictedemail, "");
 			include "../../configuration.php";
 			include "../../core/abre_dbconnect.php";
-			$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemailencrypted'";
+			$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemail'";
 			$result = $db->query($sql);
 			$resultrow = $result->fetch_assoc();
 			$count = $resultrow["COUNT(*)"];

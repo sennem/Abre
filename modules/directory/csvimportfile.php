@@ -38,13 +38,9 @@
 			while(($data = fgetcsv($handle, 5000, ",")) !== FALSE){
 				if($counter > 0){
 					$firstname = $data[0];
-					$firstname = encrypt($firstname, "");
 					$lastname = $data[1];
-					$lastname = encrypt($lastname, "");
 					$middlename = $data[2];
-					$middlename = encrypt($middlename, "");
 					$title = $data[3];
-					$title = encrypt($title, "");
 					$contract = $data[4];
 					$contract = encrypt($contract, "");
 					$address = $data[5];
@@ -56,11 +52,9 @@
 					$zip = $data[8];
 					$zip = encrypt($zip, "");
 					$email = $data[9];
-					$email = encrypt($email, "");
 					$phone = $data[10];
 					$phone = encrypt($phone, "");
 					$extension = $data[11];
-					$extension = encrypt($extension, "");
 					$cellphone = $data[12];
 					$cellphone = encrypt($cellphone, "");
 					$ss = $data[13];
@@ -72,13 +66,9 @@
 					$ethnicity = $data[16];
 					$ethnicity = encrypt($ethnicity, "");
 					$classification = $data[17];
-					$classification = encrypt($classification, "");
 					$location = $data[18];
-					$location = encrypt($location, "");
 					$grade = $data[19];
-					$grade = encrypt($grade, "");
 					$subject = $data[20];
-					$subject = encrypt($subject, "");
 					$doh = $data[21];
 					$doh = encrypt($doh, "");
 					$senioritydate = $data[22];

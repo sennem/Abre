@@ -35,11 +35,11 @@
 
 		while($row = mysqli_fetch_assoc($rows)){
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
-			$firstname = stripslashes(decrypt($firstname, ""));
+			$firstname = stripslashes($firstname);
 			$lastname = htmlspecialchars($row["lastname"], ENT_QUOTES);
-			$lastname = stripslashes(decrypt($lastname, ""));
+			$lastname = stripslashes($lastname);
 			$middlename = htmlspecialchars($row["middlename"], ENT_QUOTES);
-			$middlename = stripslashes(decrypt($middlename, ""));
+			$middlename = stripslashes($middlename);
 			$ss = htmlspecialchars($row["ss"], ENT_QUOTES);
 			$ss = stripslashes(decrypt($ss, ""));
 			$dob = htmlspecialchars($row["dob"], ENT_QUOTES);
@@ -56,7 +56,7 @@
 			$phone = stripslashes(decrypt($phone, ""));
 			if(isset($extension)){
 				$extension = htmlspecialchars($row["extension"], ENT_QUOTES);
-				$extension = stripslashes(decrypt($extension, ""));
+				$extension = stripslashes($extension);
 			}else{
 				$extension = "";
 			}
@@ -67,19 +67,19 @@
 			$gender = htmlspecialchars($row["gender"], ENT_QUOTES);
 			$gender = stripslashes(decrypt($gender, ""));
 			$email = htmlspecialchars($row["email"], ENT_QUOTES);
-			$email = stripslashes(decrypt($email, ""));
+			$email = stripslashes($email);
 			$title = htmlspecialchars($row["title"], ENT_QUOTES);
-			$title = stripslashes(decrypt($title, ""));
+			$title = stripslashes($title);
 			$contract = htmlspecialchars($row["contract"], ENT_QUOTES);
 			$contract = stripslashes(decrypt($contract, ""));
 			$classification = htmlspecialchars($row["classification"], ENT_QUOTES);
-			$classification = stripslashes(decrypt($classification, ""));
+			$classification = stripslashes($classification);
 			$location = htmlspecialchars($row["location"], ENT_QUOTES);
-			$location = stripslashes(decrypt($location, ""));
+			$location = stripslashes($location);
 			$grade = htmlspecialchars($row["grade"], ENT_QUOTES);
-			$grade = stripslashes(decrypt($grade, ""));
+			$grade = stripslashes($grade);
 			$subject = htmlspecialchars($row["subject"], ENT_QUOTES);
-			$subject = stripslashes(decrypt($subject, ""));
+			$subject = stripslashes($subject);
 			$doh = htmlspecialchars($row["doh"], ENT_QUOTES);
 			$doh = stripslashes(decrypt($doh, ""));
 			$senioritydate = htmlspecialchars($row["senioritydate"], ENT_QUOTES);
