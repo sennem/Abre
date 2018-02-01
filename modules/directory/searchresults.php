@@ -50,13 +50,13 @@
 
 		//filter results based on the query
 		if($searchquery != ""){
-			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0";
+			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0 ORDER BY firstname, lastname";
 
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0 LIMIT $LowerBound, $PerPage";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0 ORDER BY firstname, lastname LIMIT $LowerBound, $PerPage";
 		}else{
-			$querycount = $sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC";
+			$querycount = $sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY firstname, lastname";
 
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY updatedtime DESC LIMIT $LowerBound, $PerPage";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY firstname, lastnameLIMIT $LowerBound, $PerPage";
 		}
 
 		$result = $db->query($sql);
