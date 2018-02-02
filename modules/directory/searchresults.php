@@ -56,7 +56,7 @@
 		}else{
 			$querycount = $sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY firstname, lastname";
 
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY firstname, lastnameLIMIT $LowerBound, $PerPage";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY firstname, lastname LIMIT $LowerBound, $PerPage";
 		}
 
 		$result = $db->query($sql);
