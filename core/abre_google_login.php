@@ -22,6 +22,25 @@
   //Load configuration settings
   $studentdomain = getSiteStudentDomain();
   $studentdomainrequired = getSiteStudentDomainRequired();
+  
+  //Add staff profile picture to directory if entry exists and picture is empty
+  function addPicture(){
+	  
+  	include "abre_dbconnect.php";
+	$sql = "SELECT * FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
+	$result = $db->query($sql);
+	while($row = $result->fetch_assoc()){
+		
+		$stmt = $db->stmt_init();
+	    $sql = "UPDATE directory SET picture = ? WHERE email = ?";
+	    $stmt->prepare($sql);
+	    $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
+	    $stmt->execute();
+	    $stmt->close();
+		
+	}	  
+	  
+  }
 
 	//Try to login the user, if they have revoked Google access, request access again
 	try{
@@ -111,20 +130,7 @@
 					if($studentdomainrequired == "" && (strpos($_SESSION['useremail'], $studentdomain) !== false)){
 						$_SESSION['usertype'] = "student";
 						
-						//Add staff profile picture to directory if entry exists and picture is empty
-						include "abre_dbconnect.php";
-						$sql = "SELECT * FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
-						$result = $db->query($sql);
-						while($row = $result->fetch_assoc()){
-							
-							$stmt = $db->stmt_init();
-			                $sql = "UPDATE directory SET picture = ? WHERE email = ?";
-			                $stmt->prepare($sql);
-			                $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
-			                $stmt->execute();
-			                $stmt->close();
-							
-						}
+						addPicture();
 						
 					}else{
 			            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
@@ -132,20 +138,7 @@
 						}else if(strpos($site_domain, $userdomain) !== false){
 							$_SESSION['usertype'] = "staff";
 							
-							//Add staff profile picture to directory if entry exists and picture is empty
-							include "abre_dbconnect.php";
-							$sql = "SELECT * FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
-							$result = $db->query($sql);
-							while($row = $result->fetch_assoc()){
-								
-								$stmt = $db->stmt_init();
-				                $sql = "UPDATE directory SET picture = ? WHERE email = ?";
-				                $stmt->prepare($sql);
-				                $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
-				                $stmt->execute();
-				                $stmt->close();
-								
-							}
+							addPicture();
 							
 							
 						}
