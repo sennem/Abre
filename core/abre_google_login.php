@@ -27,18 +27,20 @@
   function addPicture(){
 	  
   	include "abre_dbconnect.php";
-	$sql = "SELECT * FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
+	$sql = "SELECT count(*) FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
 	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
+	$row = $result->fetch_assoc();
+	$count = $row['count(*)'];
+	if($count > 0){
 		
 		$stmt = $db->stmt_init();
 	    $sql = "UPDATE directory SET picture = ? WHERE email = ?";
 	    $stmt->prepare($sql);
 	    $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
 	    $stmt->execute();
-	    $stmt->close();
-		
-	}	  
+	    $stmt->close();	 
+	    
+	}
 	  
   }
 
@@ -139,8 +141,7 @@
 						}else if(strpos($site_domain, $userdomain) !== false){
 							$_SESSION['usertype'] = "staff";
 							
-							addPicture();
-							
+							addPicture();						
 							
 						}
 		          	}

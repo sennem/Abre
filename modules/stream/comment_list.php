@@ -71,12 +71,16 @@
 					$lastname = stripslashes($lastname);
 					$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 				}
+				
+				if (strpos($picture, 'http') === false) {
 
 					if(empty($picture)){
 						$picture = $portal_root."/modules/directory/images/user.png";
 					}else{
 						$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
 					}
+					
+				}
 
 					//Display Each Comment
 					echo "<div class='commentwrapper' style='overflow:hidden;'>";
