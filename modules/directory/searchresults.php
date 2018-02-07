@@ -107,7 +107,7 @@
 			}
 
 			//display the results in table
-			echo "<tr class='employeeview' data-employeeid='$employeeid' data-searchquerysaved='$searchquery'>";
+			echo "<tr class='employeeview pointer' data-employeeid='$employeeid' data-searchquerysaved='$searchquery'>";
 				echo "<td width='75px;'><img src='$picture' class='profile-avatar-small' alt='Profile Picture' style='margin-left:5px;'></td>";
 				echo "<td><strong class='demotext_dark'>$firstname $lastname</strong></td>";
 				echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
