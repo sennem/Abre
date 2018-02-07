@@ -85,10 +85,9 @@
 		}
 
 		//Get basic user information if they are logged in
-		if((isset($_SESSION['access_token']) && $client->getAccessToken()) || isset($_SESSION['facebook_access_token'])
-        || isset($_SESSION['google_parent_access_token']) || isset($_SESSION['microsoft_access_token'])){
+		if((isset($_SESSION['access_token']) && $client->getAccessToken()) || isset($_SESSION['facebook_access_token']) || isset($_SESSION['google_parent_access_token']) || isset($_SESSION['microsoft_access_token'])){
 			if(!isset($_SESSION['useremail'])){
-        $client->setAccessToken($_SESSION['access_token']);
+				$client->setAccessToken($_SESSION['access_token']);
 				$userData = $Service_Oauth2->userinfo->get();
 				$userEmail = $userData["email"];
 				$_SESSION['useremail'] = $userEmail;
@@ -97,26 +96,61 @@
 				$_SESSION['usertype'] = NULL;
 
 				if($studentdomain == NULL){ $studentdomain = $site_domain; }
-        $userdomain = substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'));
-        $username = substr($_SESSION['useremail'], 0, strpos($_SESSION['useremail'], '@'));
+		        $userdomain = substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'));
+		        $username = substr($_SESSION['useremail'], 0, strpos($_SESSION['useremail'], '@'));
 				if($site_domain == $studentdomain){
+					
 					//Check for required chracters (if any)
 					if(strcspn($username, $studentdomainrequired) != strlen($username)){
 						$_SESSION['usertype'] = "student";
-					}else if(strpos($site_domain, $userdomain) !== false
-              || strpos($userdomain, $site_domain) !== false){
+					}else if(strpos($site_domain, $userdomain) !== false || strpos($userdomain, $site_domain) !== false){
 						$_SESSION['usertype'] = "staff";
 					}
 				}else{
-          if($studentdomainrequired == "" && (strpos($_SESSION['useremail'], $studentdomain) !== false)){
-            $_SESSION['usertype'] = "student";
-          }else{
-            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
-              $_SESSION['usertype'] = "student";
-            }else if(strpos($site_domain, $userdomain) !== false){
-              $_SESSION['usertype'] = "staff";
-            }
-          }
+					
+					if($studentdomainrequired == "" && (strpos($_SESSION['useremail'], $studentdomain) !== false)){
+						$_SESSION['usertype'] = "student";
+						
+						//Add staff profile picture to directory if entry exists and picture is empty
+						include "abre_dbconnect.php";
+						$sql = "SELECT * FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
+						$result = $db->query($sql);
+						while($row = $result->fetch_assoc()){
+							
+							$stmt = $db->stmt_init();
+			                $sql = "UPDATE directory SET picture = ? WHERE email = ?";
+			                $stmt->prepare($sql);
+			                $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
+			                $stmt->execute();
+			                $stmt->close();
+							
+						}
+						
+					}else{
+			            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
+							$_SESSION['usertype'] = "student";
+						}else if(strpos($site_domain, $userdomain) !== false){
+							$_SESSION['usertype'] = "staff";
+							
+							//Add staff profile picture to directory if entry exists and picture is empty
+							include "abre_dbconnect.php";
+							$sql = "SELECT * FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
+							$result = $db->query($sql);
+							while($row = $result->fetch_assoc()){
+								
+								$stmt = $db->stmt_init();
+				                $sql = "UPDATE directory SET picture = ? WHERE email = ?";
+				                $stmt->prepare($sql);
+				                $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
+				                $stmt->execute();
+				                $stmt->close();
+								
+							}
+							
+							
+						}
+		          	}
+		          	
 				}
 
 				if($_SESSION['usertype'] != "staff" && $_SESSION['usertype'] != "student"){

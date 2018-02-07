@@ -83,10 +83,15 @@
 			$extension = htmlspecialchars($row["extension"], ENT_QUOTES);
 			$extension = stripslashes($extension);
 			$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
-			if($picture == ""){
-				$picture = $portal_root."/modules/directory/images/user.png";
-			}else{
-				$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
+						
+			if (strpos($picture, 'http') === false) {
+		
+				if($picture == ""){
+					$picture = $portal_root."/modules/directory/images/user.png";
+				}else{
+					$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
+				}
+				
 			}
 
 			//display the results in table

@@ -246,10 +246,18 @@
 
 			}
 
-			if($picture == ""){
-				$pictureserver = $portal_root."/modules/directory/images/user.png";
-			}else{
-				$pictureserver = $portal_root."/modules/directory/serveimage.php?file=$picture";
+			if (strpos($picture, 'http') === false) {
+				
+				if($picture == ""){
+					$pictureserver = $portal_root."/modules/directory/images/user.png";
+				}else{
+					$pictureserver = $portal_root."/modules/directory/serveimage.php?file=$picture";
+				}
+				
+			}
+			else
+			{
+				$pictureserver=$picture;
 			}
 
 			echo "<div class='row'><div class='col s12'>";

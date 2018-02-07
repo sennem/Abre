@@ -67,11 +67,15 @@
 								$prd = htmlspecialchars($row["probationreportdate"], ENT_QUOTES);
 								$prd = stripslashes(htmlspecialchars(decrypt($prd, ""), ENT_QUOTES));
 								$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
-								if($picture == ""){
-									$picture = $portal_root."/modules/directory/images/user.png";
-								}else{
-									$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
+								
+								if (strpos($picture, 'http') === false) {
+									if($picture == ""){
+										$picture = $portal_root."/modules/directory/images/user.png";
+									}else{
+										$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
+									}
 								}
+								
 								$senioritydate = htmlspecialchars($row["senioritydate"], ENT_QUOTES);
 								$senioritydate = stripslashes(htmlspecialchars(decrypt($senioritydate, ""), ENT_QUOTES));
 								$id = htmlspecialchars($row["id"], ENT_QUOTES);
