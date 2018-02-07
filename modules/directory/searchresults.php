@@ -68,7 +68,18 @@
 				echo "<div class='page_container mdl-shadow--4dp'>";
 					echo "<div class='page'>";
 						echo "<div class='row'>";
-							echo "<table id='myTable' class='tablesorter highlight pointer'><thead style='display:none'><tr><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody>";
+							echo "<table id='myTable' class='tablesorter highlight pointer'>";
+							echo "<thead>";
+							echo "<tr>";
+							echo "<th></th>";
+							echo "<th>Name</th>";
+							echo "<th class='hide-on-small-only'>Email</th>";
+							echo "<th class='hide-on-small-only'>Location</th>";
+							echo "<th class='hide-on-med-and-down'>Title</th>";
+							echo "<th class='hide-on-med-and-down'>Extension</th>";
+							echo "</tr>";
+							echo "</thead>";
+							echo "<tbody>";
 			}
 			$employeeid = htmlspecialchars($row["id"], ENT_QUOTES);
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
@@ -105,7 +116,7 @@
 				if($extension == ""){
 					echo "<td class='hide-on-med-and-down demotext_dark'></td>";
 				}else{
-					echo "<td class='hide-on-med-and-down demotext_dark'>Ext. $extension</td>";
+					echo "<td class='hide-on-med-and-down demotext_dark'>$extension</td>";
 				}
 			echo "</tr>";
 
