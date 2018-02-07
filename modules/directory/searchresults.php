@@ -68,7 +68,7 @@
 				echo "<div class='page_container mdl-shadow--4dp'>";
 					echo "<div class='page'>";
 						echo "<div class='row'>";
-							echo "<table id='myTable' class='tablesorter highlight pointer'>";
+							echo "<table id='myTable' class='highlight'>";
 							echo "<thead>";
 							echo "<tr>";
 							echo "<th></th>";
@@ -173,10 +173,6 @@
 <script>
 
 			$(document).ready(function(){
-
- 				$("#myTable").tablesorter({
-					sortList: [[1,0]]
-    			});
 
 			});
 
