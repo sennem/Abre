@@ -48,7 +48,7 @@
 		//Login Holder
 		echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre_pattern.png); '>";
 
-			echo "<div class='login_wrapper'>";
+			echo "<div class='login_wrapper' style='z-index:100;'>";
 				echo "<div class='login-card-square mdl-card'>";
 					
 						//Site Logo
@@ -82,13 +82,16 @@
 							
 						echo "</div>";
 						
-
-				   ?>
-				</div>
-			</div>
-		</div>
+				echo "</div>";
+			echo "</div>";
+			
+			include "abre_copyright.php";
+			
+		echo "</div>";
 	
-	</main>
+	echo "</main>";
+	
+?>
 
 <script>
 	

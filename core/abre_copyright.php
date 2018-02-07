@@ -15,8 +15,11 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
+    
+    echo "<div style='position: fixed; bottom:10px; width:100%; text-align:center; color:#999;'>";
+    	echo "Copyright © "; 
+    	echo date("Y"); 
+    	echo " <a href='https://abre.io' target='_blank' style='color:#999;'>Abre.io Inc.</a>";
+    echo "</a>";
 
-	//Facebook Auth Button
-	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#3664a2 !important; color:#fff !important;' href='$loginUrl'><span class='loginicon' style='background: url(\"core/images/button_icon_facebook.png\") no-repeat;'></span> Sign in with Facebook</a>";
-	
 ?>

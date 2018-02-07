@@ -51,13 +51,16 @@
 							
 						echo "</div>";
 						
-
-				   ?>
-				</div>
-			</div>
-		</div>
+				echo "</div>";
+			echo "</div>";
+			
+			include "abre_copyright.php";
+			
+		echo "</div>";
 	
-	</main>
+	echo "</main>";
+	
+?>
 
 <script>
 	

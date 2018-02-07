@@ -18,3 +18,5 @@
 
 	//Google Auth Button
 	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#fff !important; color:#757575 !important;' href='$url'><span class='loginicon' style='background: url(\"core/images/button_icon_microsoft.png\") no-repeat;'></span> Sign in with Microsoft</a>";
+	
+?>

@@ -19,12 +19,9 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
-?>
 
-	<!-- Display the login -->
-	<main>
-		
-		<?php
+	//Display the login
+	echo "<main>";
 			
 			//Overlay Div
 			echo "<div id='loadingcover' style='background-color:".getSiteColor()."; position:fixed; width:100%; height:100%; z-index:2'></div>";
@@ -32,7 +29,7 @@
 			//Login Holder
 			echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre_pattern.png); '>";
 			
-				echo "<div class='login_wrapper'>";
+				echo "<div class='login_wrapper' style='z-index:100;'>";
 					echo "<div class='login-card-square mdl-card'>";
 						
 						//Site Logo
@@ -66,11 +63,13 @@
 					echo "</div>";
 				echo "</div>";
 				
+				include "abre_copyright.php";
+				
 			echo "</div>";
-		
-		?>
 	
-	</main>
+	echo "</main>";
+	
+?>
 
 <script>
 	
