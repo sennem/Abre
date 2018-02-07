@@ -124,13 +124,14 @@
 						$_SESSION['usertype'] = "student";
 					}else if(strpos($site_domain, $userdomain) !== false || strpos($userdomain, $site_domain) !== false){
 						$_SESSION['usertype'] = "staff";
+						
+						addPicture();
+						
 					}
 				}else{
 					
 					if($studentdomainrequired == "" && (strpos($_SESSION['useremail'], $studentdomain) !== false)){
 						$_SESSION['usertype'] = "student";
-						
-						addPicture();
 						
 					}else{
 			            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
