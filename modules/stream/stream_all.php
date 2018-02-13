@@ -37,18 +37,20 @@
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();
 	if(!empty($userstreams) != NULL){
-		$sql = "SELECT url FROM streams WHERE (required = 1 AND `group` = '".$_SESSION['usertype']."') OR id in ($userstreams)";
+		$sql = "SELECT url, `group` FROM streams WHERE required = 1 OR id IN ($userstreams)";
 	}else{
-		$sql = "SELECT url FROM streams WHERE `required` = 1 AND `group` = '".$_SESSION['usertype']."'";
+		$sql = "SELECT url, `group` FROM streams WHERE `required` = 1";
 	}
 
 	//Look for all streams that apply to user
 	$flipboardarray = array();
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $value) {
-		$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
-		if($fburl != ""){
-			array_push($flipboardarray, $fburl);
+		if(strpos($value["group"], $_SESSION["usertype"]) !== false){
+			$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
+			if($fburl != ""){
+				array_push($flipboardarray, $fburl);
+			}
 		}
 	}
 
