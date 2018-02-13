@@ -95,15 +95,15 @@
 			</div>
 			<div class='row'>
 				<div class='col m4 s12'>
-						<input type="radio" name="streamradio" id="stream_staff" value="staff" required>
+						<input type="checkbox" class="filled-in" name="stream_staff" id="stream_staff" value="staff">
 						<label for="stream_staff">Staff</label>
 				</div>
 				<div class='col m4 s12'>
-					<input type="radio" name="streamradio" id="stream_students" value="student">
+					<input type="checkbox" class="filled-in" name="stream_students" id="stream_students" value="student">
 					<label for="stream_students">Students</label>
 				</div>
 				<div class='col m4 s12'>
-					<input type="radio" name="streamradio" id="stream_parents" value="parent">
+					<input type="checkbox" class="filled-in" name="stream_parents" id="stream_parents" value="parent">
 					<label for="stream_parents">Parents</label>
 				</div>
 			</div>
@@ -158,7 +158,18 @@
 
 				var streamtitle = $('#stream_name').val();
 				var rsslink = $('#rss_link').val();
-				var streamgroup= $('input[name=streamradio]:checked').val();
+				var streamArray = [];
+				if($('input[id="stream_staff"]').is(':checked')){
+					streamArray.push("staff");
+				}
+				if($('input[id="stream_students"]').is(':checked')){
+					streamArray.push("student");
+				}
+				if($('input[id="stream_parents"]').is(':checked')){
+					streamArray.push("parents");
+				}
+
+				var streamgroup = streamArray.join(", ");
 
 				var streamid = $('#stream_id').val();
 				if($('#required_stream').is(':checked') == true){ var required = 1; }else{ var required = 0; }
