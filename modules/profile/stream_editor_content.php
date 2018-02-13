@@ -33,9 +33,12 @@ if(superadmin()){
     $link = $value['url'];
     $linkencoded = base64_encode($link);
     $group = $value['group'];
+    if($group == ""){
+      $group = "no assigned groups";
+    }
     $required = $value['required'];
     echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
-    echo "<td><b>$title</b> (".ucfirst($group).")<td>";
+    echo "<td><b>$title</b> (".ucwords($group).")<td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
@@ -89,17 +92,17 @@ if(superadmin()){
         $("#stream_id").val(streamid);
         var group = $(this).data('streamgroup');
         var required = $(this).data('required');
-        if(group == "staff"){
+        if(group.indexOf('staff') != -1){
           $('#stream_staff').prop('checked', true);
         }else{
           $('#stream_staff').prop('checked', false);
         }
-        if(group == "student"){
+        if(group.indexOf('student') != -1){
           $('#stream_students').prop('checked', true);
         }else{
           $('#stream_students').prop('checked', false);
         }
-        if(group == "parent"){
+        if(group.indexOf('parents') != -1){
           $('#stream_parents').prop('checked', true);
         }else{
           $('#stream_parents').prop('checked', false);
