@@ -188,7 +188,11 @@
 						url = "<?php echo $portal_root ?>";
 					<?php } ?>
 					if(window.location.href == url){
-					 	location.reload();
+						if(url == "<?php echo $portal_root ?>"){
+
+						}else{
+							location.reload();
+						}
 					 }else{
 						window.location.replace(url);
 						var data = { message: response.message };
