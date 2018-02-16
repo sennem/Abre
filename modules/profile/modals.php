@@ -162,10 +162,9 @@
 						allowEmpty: true,
 						showPaletteOnly: true,
 						showPalette: true,
-						palette: [["#F44336", "#E91E63", "#9C27B0", "#673AB7"],
-											["#3F51B5", "#2196F3", "#03A9F4", "#00BCD4"],
-											["#009688", "#4CAF50", "#8BC34A", "#CDDC39"],
-											["#FFC107", "#FF9800", "#FF5722", "#795548"]],
+						palette: [["#F44336", "#B71C1C", "#9C27B0", "#4A148C"],
+											["#2196F3", "#0D47A1", "#4CAF50", "#1B5E20"],
+											["#FF9800", "#E65100", "#607D8B", "#263238"]],
 						hide: function(color) {
 							console.log(color);
 							if(color !== null){

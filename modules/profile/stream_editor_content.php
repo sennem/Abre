@@ -41,7 +41,9 @@ if(superadmin()){
     echo "<tr id='item-$id'>";
     echo "<td style='width:30px;'>";
     if($color != ""){
-        echo "<div class='btn-floating btn-flat' style='background-color:$color; cursor:default;'>";
+      echo "<div class='btn-floating btn-flat' style='background-color:$color; cursor:default;'>";
+    }else{
+      echo "<div class='btn-floating btn-flat' style='background-color:#BDBDBD; cursor:default;'>";
     }
     echo "</div></td>";
     echo "<td><b>$title</b> (".ucwords($group).")</td>";
@@ -135,10 +137,9 @@ if(superadmin()){
               allowEmpty: true,
   						showPaletteOnly: true,
   						showPalette: true,
-              palette: [["#F44336", "#E91E63", "#9C27B0", "#673AB7"],
-  											["#3F51B5", "#2196F3", "#03A9F4", "#00BCD4"],
-  											["#009688", "#4CAF50", "#8BC34A", "#CDDC39"],
-  											["#FFC107", "#FF9800", "#FF5722", "#795548"]],
+              palette: [["#F44336", "#B71C1C", "#9C27B0", "#4A148C"],
+  											["#2196F3", "#0D47A1", "#4CAF50", "#1B5E20"],
+  											["#FF9800", "#E65100", "#607D8B", "#263238"]],
               hide: function(color) {
   							if(color !== null){
   								$("#removeColor").show();
