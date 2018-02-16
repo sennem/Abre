@@ -37,9 +37,15 @@ if(superadmin()){
       $group = "no assigned groups";
     }
     $required = $value['required'];
-    echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
-    echo "<td><b>$title</b> (".ucwords($group).")<td>";
-    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required'><i class='material-icons'>mode_edit</i></button></td>";
+    $color = $value['color'];
+    echo "<tr id='item-$id'>";
+    echo "<td style='width:30px;'>";
+    if($color != ""){
+        echo "<div class='btn-floating btn-flat' style='background-color:$color; cursor:default;'>";
+    }
+    echo "</div></td>";
+    echo "<td><b>$title</b> (".ucwords($group).")</td>";
+    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required' data-color='$color'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
   }
@@ -113,11 +119,32 @@ if(superadmin()){
           $('#required_stream').prop('checked', false);
         }
 
+        var color = $(this).data('color');
+        if(color != ""){
+          $("#removeColor").show();
+        }else{
+          $("#removeColor").hide();
+        }
         $('#addeditstream').openModal({
           in_duration: 0,
           out_duration: 0,
           ready: function() {
             $('.modal-content').scrollTop(0);
+            $("#stream_color").spectrum({
+              color: color,
+              allowEmpty: true,
+  						showPaletteOnly: true,
+  						showPalette: true,
+              palette: [["#F44336", "#E91E63", "#9C27B0", "#673AB7"],
+  											["#3F51B5", "#2196F3", "#03A9F4", "#00BCD4"],
+  											["#009688", "#4CAF50", "#8BC34A", "#CDDC39"],
+  											["#FFC107", "#FF9800", "#FF5722", "#795548"]],
+              hide: function(color) {
+  							if(color !== null){
+  								$("#removeColor").show();
+  						 }
+  					 }
+            });
           }
         });
       });
