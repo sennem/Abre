@@ -34,9 +34,9 @@
 		//Feed
 		echo "<div class='truncate' style='padding:16px 16px 0 16px; font-size: 12px; color: #999; font-weight: 500;'>";
 			if($color != ""){
-				echo "<a href='$feedlink' class='chip' style='background-color: $color; color: white; height:14px; line-height:14px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
+				echo "<a href='$feedlink' class='chip' style='background-color: $color; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
 			}else{
-				echo "<a href='$feedlink' style='background-color: white; color: #999; font-weight: 500;' target='_blank'>$feedtitle</a>";
+				echo "<a href='$feedlink' class='chip' style='background-color: #BDBDBD; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
 			}
 		echo "</div>";
 
