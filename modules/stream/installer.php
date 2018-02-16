@@ -32,6 +32,14 @@
 		}
 		$db->close();
 
+		//check for stream color column
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT color FROM streams LIMIT 1")){
+			$sql = "ALTER TABLE `streams` ADD `color` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Setup tables if new module
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreamscomments = $db->query("SELECT * FROM streams_comments LIMIT 1")){
