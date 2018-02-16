@@ -92,6 +92,9 @@
 					<input placeholder="Enter RSS Link" id="rss_link" name="rss_link" type="text" autocomplete="off" required>
 					<label for="rss_link" class="active">Link</label>
 				</div>
+				<div class='input-field col s12'>
+					Select a color: <input type='text' id="stream_color"><span class='pointer' id='removeColor' style='padding-left:5px; display:none'><a style='color:<?php echo getSiteColor() ?>;'>remove color</a></span>
+				</div>
 			</div>
 			<div class='row'>
 				<div class='col m4 s12'>
@@ -134,7 +137,11 @@
 	  <?php
 		if(superadmin()){
 		?>
-
+			$("#removeColor").off().on('click', function(event){
+				event.preventDefault();
+				$("#stream_color").spectrum("set", "");
+				$("#removeColor").hide();
+			})
 			//Add/Edit Stream
 			$('.modal-addeditstream').leanModal({
 				in_duration: 0,
@@ -149,6 +156,23 @@
 					$('#stream_students').prop('checked', false);
 					$('#stream_parents').prop('checked', false);
 					$('#required_stream').prop('checked', false);
+					$("#removeColor").hide();
+					$("#stream_color").spectrum({
+						color: "",
+						allowEmpty: true,
+						showPaletteOnly: true,
+						showPalette: true,
+						palette: [["#F44336", "#E91E63", "#9C27B0", "#673AB7"],
+											["#3F51B5", "#2196F3", "#03A9F4", "#00BCD4"],
+											["#009688", "#4CAF50", "#8BC34A", "#CDDC39"],
+											["#FFC107", "#FF9800", "#FF5722", "#795548"]],
+						hide: function(color) {
+							console.log(color);
+							if(color !== null){
+								$("#removeColor").show();
+						 }
+					 }
+					});
 				}
 			});
 
@@ -174,11 +198,18 @@
 				var streamid = $('#stream_id').val();
 				if($('#required_stream').is(':checked') == true){ var required = 1; }else{ var required = 0; }
 
+				var streamcolor = $("#stream_color").spectrum("get");
+				if(streamcolor === null){
+					streamcolor = "";
+				}else{
+					streamcolor = streamcolor.toHexString();
+				}
+
 				//Make the post request
 				$.ajax({
 					type: 'POST',
 					url: 'modules/profile/update_stream.php',
-					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
+					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required, color: streamcolor }
 				})
 				.done(function(){
 					$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });
