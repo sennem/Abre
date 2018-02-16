@@ -57,7 +57,11 @@
 			echo "</div>";
 
 		}else{
-			echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button at the bottom left to add a staff member.</p></div>";
+			if($_SESSION['usertype'] == "staff"){
+				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'></p></div>";
+			}else{
+				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button in the bottom right to add a staff member.</p></div>";
+			}
 		}
 
 		if($pageaccess == 1){ include "button.php"; }
