@@ -33,7 +33,7 @@
 	    $loginUrl = $helper->getLoginUrl($portal_root.'/core/abre_facebook_login_helper.php/', $permissions);
 	}
 
-	if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
+	if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== ''){
 		require_once('abre_parent_google_authentication.php');
 		$authUrl = $client->createAuthUrl();
 	}
