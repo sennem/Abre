@@ -45,14 +45,11 @@
 		//Retrieve Search Query
 		if(isset($_POST["searchquery"])){ $searchquery = strtolower(mysqli_real_escape_string($db, $_POST["searchquery"])); }else{ $searchquery = ""; }
 
-		//Display the Page
-		echo "<div class='row'>";
-
 		//filter results based on the query
 		if($searchquery != ""){
-			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0 ORDER BY firstname, lastname";
+			$querycount = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '%$searchquery%' OR LOWER(firstname) LIKE '%$searchquery%' OR LOWER(email) LIKE '%$searchquery%' OR LOWER(location) LIKE '%$searchquery%' OR LOWER(classification) LIKE '%$searchquery%') AND archived = 0 ORDER BY firstname, lastname";
 
-			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '$searchquery%' OR LOWER(firstname) LIKE '$searchquery%' OR LOWER(email) LIKE '$searchquery%' OR LOWER(location) LIKE '$searchquery%' OR LOWER(classification) LIKE '$searchquery%') AND archived = 0 ORDER BY firstname, lastname LIMIT $LowerBound, $PerPage";
+			$sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE (LOWER(lastname) LIKE '%$searchquery%' OR LOWER(firstname) LIKE '%$searchquery%' OR LOWER(email) LIKE '%$searchquery%' OR LOWER(location) LIKE '%$searchquery%' OR LOWER(classification) LIKE '%$searchquery%') AND archived = 0 ORDER BY firstname, lastname LIMIT $LowerBound, $PerPage";
 		}else{
 			$querycount = $sql = "SELECT id, firstname, lastname, location, email, title, picture, extension FROM directory WHERE archived = 0 ORDER BY firstname, lastname";
 
@@ -67,7 +64,22 @@
 		while($row = $result->fetch_assoc()){
 			$resultscounter++;
 			if($resultscounter == 1){
-				echo "<table id='myTable' class='tablesorter highlight pointer'><thead style='display:none'><tr><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead><tbody>";
+				//Display the Page
+				echo "<div class='page_container mdl-shadow--4dp'>";
+					echo "<div class='page'>";
+						echo "<div class='row'>";
+							echo "<table id='myTable' class='highlight'>";
+							echo "<thead>";
+							echo "<tr>";
+							echo "<th></th>";
+							echo "<th>Name</th>";
+							echo "<th class='hide-on-small-only'>Email</th>";
+							echo "<th class='hide-on-small-only'>Location</th>";
+							echo "<th class='hide-on-med-and-down'>Title</th>";
+							echo "<th class='hide-on-med-and-down'>Extension</th>";
+							echo "</tr>";
+							echo "</thead>";
+							echo "<tbody>";
 			}
 			$employeeid = htmlspecialchars($row["id"], ENT_QUOTES);
 			$firstname = htmlspecialchars($row["firstname"], ENT_QUOTES);
@@ -95,7 +107,7 @@
 			}
 
 			//display the results in table
-			echo "<tr class='employeeview' data-employeeid='$employeeid' data-searchquerysaved='$searchquery'>";
+			echo "<tr class='employeeview pointer' data-employeeid='$employeeid' data-searchquerysaved='$searchquery'>";
 				echo "<td width='75px;'><img src='$picture' class='profile-avatar-small' alt='Profile Picture' style='margin-left:5px;'></td>";
 				echo "<td><strong class='demotext_dark'>$firstname $lastname</strong></td>";
 				echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
@@ -104,59 +116,63 @@
 				if($extension == ""){
 					echo "<td class='hide-on-med-and-down demotext_dark'></td>";
 				}else{
-					echo "<td class='hide-on-med-and-down demotext_dark'>Ext. $extension</td>";
+					echo "<td class='hide-on-med-and-down demotext_dark'>$extension</td>";
 				}
 			echo "</tr>";
 
-			if($resultscounter == $resultscount){ echo "</tbody></table>"; }
-		}
+			if($resultscounter == $resultscount){
+				echo "</tbody></table>";
+				echo "</div>";
 
-		//getting count for pagination
-		$dbreturnpossible = databasequery($querycount);
-		$totalpossibleresults = count($dbreturnpossible);
+				//getting count for pagination
+				$dbreturnpossible = databasequery($querycount);
+				$totalpossibleresults = count($dbreturnpossible);
 
-		//Paging
-		$totalpages = ceil($totalpossibleresults / $PerPage);
-		if($totalpossibleresults > $PerPage){
-			$previouspage = $PageNumber-1;
-			$nextpage = $PageNumber+1;
-			if($PageNumber > 5){
-				if($totalpages > $PageNumber + 5){
-					$pagingstart = $PageNumber - 5;
-					$pagingend = $PageNumber + 5;
-				}else{
-					$pagingstart = $PageNumber - 5;
-					$pagingend = $totalpages;
-				}
-			}else{
-				if($totalpages >= 10){ $pagingstart = 1; $pagingend = 10; }else{ $pagingstart = 1; $pagingend = $totalpages; }
-			}
-
-			echo "<div class='row'><br>";
-			echo "<ul class='pagination center-align'>";
-				if($PageNumber != 1){ echo "<li class='pagebutton' data-page='$previouspage'><a href='#'><i class='material-icons'>chevron_left</i></a></li>"; }
-				for($x = $pagingstart; $x <= $pagingend; $x++){
-					if($PageNumber == $x){
-						echo "<li class='active pagebutton' style='background-color: ".getSiteColor().";' data-page='$x'><a href='#'>$x</a></li>";
+				//Paging
+				$totalpages = ceil($totalpossibleresults / $PerPage);
+				if($totalpossibleresults > $PerPage){
+					$previouspage = $PageNumber-1;
+					$nextpage = $PageNumber+1;
+					if($PageNumber > 5){
+						if($totalpages > $PageNumber + 5){
+							$pagingstart = $PageNumber - 5;
+							$pagingend = $PageNumber + 5;
+						}else{
+							$pagingstart = $PageNumber - 5;
+							$pagingend = $totalpages;
+						}
 					}else{
-						echo "<li class='waves-effect pagebutton' data-page='$x'><a href='#'>$x</a></li>";
+						if($totalpages >= 10){ $pagingstart = 1; $pagingend = 10; }else{ $pagingstart = 1; $pagingend = $totalpages; }
 					}
+
+					echo "<div class='row'><br>";
+					echo "<ul class='pagination center-align'>";
+						if($PageNumber != 1){ echo "<li class='pagebutton' data-page='$previouspage'><a href='#'><i class='material-icons'>chevron_left</i></a></li>"; }
+						for($x = $pagingstart; $x <= $pagingend; $x++){
+							if($PageNumber == $x){
+								echo "<li class='active pagebutton' style='background-color: ".getSiteColor().";' data-page='$x'><a href='#'>$x</a></li>";
+							}else{
+								echo "<li class='waves-effect pagebutton' data-page='$x'><a href='#'>$x</a></li>";
+							}
+						}
+						if($PageNumber != $totalpages){ echo "<li class='waves-effect pagebutton' data-page='$nextpage'><a href='#'><i class='material-icons'>chevron_right</i></a></li>"; }
+					echo "</ul>";
+					echo "</div>";
 				}
-				if($PageNumber != $totalpages){ echo "<li class='waves-effect pagebutton' data-page='$nextpage'><a href='#'><i class='material-icons'>chevron_right</i></a></li>"; }
-			echo "</ul>";
-			echo "</div>";
+				echo "</div>";
+				echo "</div>";
+			}
 		}
 
-		echo "</div>";
+		if($resultscount == 0){
+			echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Staff Found</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to create a directory entry.</p></div>";
+		}
+
 
 ?>
 <script>
 
 			$(document).ready(function(){
-
- 				$("#myTable").tablesorter({
-					sortList: [[1,0]]
-    			});
 
 			});
 

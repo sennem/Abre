@@ -38,7 +38,6 @@
 
 	//Find what streams to display
 	$query = "SELECT title, image, url, creationtime FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND liked = '1' ORDER BY ID DESC LIMIT $StreamStartResult, $StreamEndResult";
-	error_log($query);
 	$dbreturn = databasequery($query);
 	$counter = 0;
 	$lastUrl = NULL;

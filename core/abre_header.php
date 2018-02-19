@@ -50,7 +50,7 @@
 				//Windows icon
 				echo "<meta name='msapplication-TileImage' content='".getSiteLogo()."'>";
 				echo "<meta name='msapplication-TileColor' content='".getSiteColor()."'>";
-				
+
 				?>
 
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
@@ -61,6 +61,7 @@
 				<link rel='stylesheet' href='core/css/animate.min.css'>
 				<link rel='stylesheet' href='core/css/timepicker.min.css'>
 				<link rel='stylesheet' href='core/css/quill.snow.1.1.3.css'>
+				<link rel="stylesheet" href='core/css/spectrum.css'>
 				<link rel="stylesheet" href='modules/profile/css/calendar.css'>
 
 				<script src='core/js/jquery-3.1.1.min.js'></script>
@@ -71,6 +72,7 @@
 				<script src='core/js/jquery.tablesorter.min.js'></script>
 				<script src='core/js/jquery.timepicker.min.js'></script>
 				<script src='core/js/quill.min.1.1.3.js'></script>
+				<script src='core/js/spectrum.js'></script>
 				<script src='modules/profile/js/jquery-ui.multidatespicker.1.6.4.js'></script>
 				<script src='https://www.gstatic.com/charts/loader.js'></script>
 			</head>

@@ -30,7 +30,6 @@
 
 	//Determine total number of comments
 	$query = "SELECT COUNT(*) FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC";
-	error_log($query);
 	$result = $db->query($query);
 	$totalcomments = 0;
 	while($resultrow = $result->fetch_assoc()){
@@ -39,7 +38,6 @@
 
 	//Find what streams to display
 	$query = "SELECT title, image, url, creationtime  FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' ORDER BY ID DESC LIMIT $StreamStartResult, $StreamEndResult";
-	error_log($query);
 	$dbreturn = databasequery($query);
 	$counter = 0;
 	$lastUrl = NULL;

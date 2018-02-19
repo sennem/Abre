@@ -26,7 +26,7 @@
   $client->setClientId($client_id);
   $client_secret = getSiteGoogleClientSecret();
   $client->setClientSecret($client_secret);
-  $redirect_uri = $portal_root.'/core/abre_google_login_helper.php/';
+  $redirect_uri = $portal_root.'/core/abre_google_login_helper.php';
   $client->setRedirectUri($redirect_uri);
   $simple_api_key = constant("GOOGLE_API_KEY");
   $client->setDeveloperKey($simple_api_key);

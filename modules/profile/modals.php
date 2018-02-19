@@ -92,18 +92,21 @@
 					<input placeholder="Enter RSS Link" id="rss_link" name="rss_link" type="text" autocomplete="off" required>
 					<label for="rss_link" class="active">Link</label>
 				</div>
+				<div class='input-field col s12'>
+					Select a color: <input type='text' id="stream_color"><span class='pointer' id='removeColor' style='padding-left:5px; display:none'><a style='color:<?php echo getSiteColor() ?>;'>remove color</a></span>
+				</div>
 			</div>
 			<div class='row'>
 				<div class='col m4 s12'>
-						<input type="radio" name="streamradio" id="stream_staff" value="staff" required>
+						<input type="checkbox" class="filled-in" name="stream_staff" id="stream_staff" value="staff">
 						<label for="stream_staff">Staff</label>
 				</div>
 				<div class='col m4 s12'>
-					<input type="radio" name="streamradio" id="stream_students" value="student">
+					<input type="checkbox" class="filled-in" name="stream_students" id="stream_students" value="student">
 					<label for="stream_students">Students</label>
 				</div>
 				<div class='col m4 s12'>
-					<input type="radio" name="streamradio" id="stream_parents" value="parent">
+					<input type="checkbox" class="filled-in" name="stream_parents" id="stream_parents" value="parent">
 					<label for="stream_parents">Parents</label>
 				</div>
 			</div>
@@ -134,7 +137,11 @@
 	  <?php
 		if(superadmin()){
 		?>
-
+			$("#removeColor").off().on('click', function(event){
+				event.preventDefault();
+				$("#stream_color").spectrum("set", "");
+				$("#removeColor").hide();
+			})
 			//Add/Edit Stream
 			$('.modal-addeditstream').leanModal({
 				in_duration: 0,
@@ -149,6 +156,22 @@
 					$('#stream_students').prop('checked', false);
 					$('#stream_parents').prop('checked', false);
 					$('#required_stream').prop('checked', false);
+					$("#removeColor").hide();
+					$("#stream_color").spectrum({
+						color: "",
+						allowEmpty: true,
+						showPaletteOnly: true,
+						showPalette: true,
+						palette: [["#F44336", "#B71C1C", "#9C27B0", "#4A148C"],
+											["#2196F3", "#0D47A1", "#4CAF50", "#1B5E20"],
+											["#FF9800", "#E65100", "#607D8B", "#263238"]],
+						hide: function(color) {
+							console.log(color);
+							if(color !== null){
+								$("#removeColor").show();
+						 }
+					 }
+					});
 				}
 			});
 
@@ -158,16 +181,34 @@
 
 				var streamtitle = $('#stream_name').val();
 				var rsslink = $('#rss_link').val();
-				var streamgroup= $('input[name=streamradio]:checked').val();
+				var streamArray = [];
+				if($('input[id="stream_staff"]').is(':checked')){
+					streamArray.push("staff");
+				}
+				if($('input[id="stream_students"]').is(':checked')){
+					streamArray.push("student");
+				}
+				if($('input[id="stream_parents"]').is(':checked')){
+					streamArray.push("parents");
+				}
+
+				var streamgroup = streamArray.join(", ");
 
 				var streamid = $('#stream_id').val();
 				if($('#required_stream').is(':checked') == true){ var required = 1; }else{ var required = 0; }
+
+				var streamcolor = $("#stream_color").spectrum("get");
+				if(streamcolor === null){
+					streamcolor = "";
+				}else{
+					streamcolor = streamcolor.toHexString();
+				}
 
 				//Make the post request
 				$.ajax({
 					type: 'POST',
 					url: 'modules/profile/update_stream.php',
-					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required }
+					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required, color: streamcolor }
 				})
 				.done(function(){
 					$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });

@@ -32,28 +32,36 @@
 		$num_users = $resultrow["COUNT(*)"];
 
 		if($num_users > 0){
-			echo "<div class='page_container mdl-shadow--4dp'>";
-				echo "<div class='page'>";
 
-					//Search
-					echo "<form id='form-search' method='post' action='modules/directory/searchresults.php'>";
-						echo "<div class='row'>";
-							echo "<div class='input-field col s12'>";
-								echo "<input placeholder='Lastname or Building' id='searchquery' name='searchquery' autocomplete='off' type='text'>";
-								echo "<label for='searchquery' class='active'>Search</label>";
-							echo "</div>";
-						echo "</div>";
-					echo "</form>";
-
-					//Display Recent Searches
-					echo "<div id='searchresults'>";
-						include "searchresults.php";
+			//Search
+			echo "<div class='page_container'>";
+				echo "<div class='row'>";
+					echo "<div class='col l12 m12 s12' style='padding:0'>";
+						echo "<nav style='background-color:"; echo getSiteColor(); echo ";'>";
+								echo "<div class='nav-wrapper'>";
+									echo "<form id='form-search' method='post' action='modules/directory/searchresults.php'>";
+										echo "<div class='input-field'>";
+											echo "<input id='searchquery' type='search' placeholder='Search' autocomplete='off'>";
+											echo "<label class='label-icon' for='searchquery'><i class='material-icons'>search</i></label>";
+										echo "</div>";
+									echo "</form>";
+								echo "</div>";
+						echo "</nav>";
 					echo "</div>";
-
 				echo "</div>";
 			echo "</div>";
+
+			//Display Recent Searches
+			echo "<div id='searchresults'>";
+				include "searchresults.php";
+			echo "</div>";
+
 		}else{
-			echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button at the bottom left to add a staff member.</p></div>";
+			if($_SESSION['usertype'] == "staff"){
+				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'></p></div>";
+			}else{
+				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button in the bottom right to add a staff member.</p></div>";
+			}
 		}
 
 		if($pageaccess == 1){ include "button.php"; }
@@ -80,9 +88,10 @@
 			var form = $('#form-search');
 			$(form).submit(function(event) {
 				event.preventDefault();
+				var searchQuery = $('#searchquery').val();
 				$.ajax({
 				    type: 'POST',
-				    data: $('#searchquery').serialize(),
+				    data: {searchquery: searchQuery},
 				    url: $(form).attr('action'),
 				    success: function(data) {
 				    	$('#searchresults').html(data);

@@ -27,39 +27,38 @@
 			'app_secret' => getSiteFacebookClientSecret(),
 			'default_graph_version' => 'v2.9',
 		]);
-	
+
 	    $helper = $fb->getRedirectLoginHelper();
 	    $permissions = ['public_profile', 'email']; // Optional permissions
 	    $loginUrl = $helper->getLoginUrl($portal_root.'/core/abre_facebook_login_helper.php/', $permissions);
 	}
 
-	if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
+	if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== ''){
 		require_once('abre_parent_google_authentication.php');
 		$authUrl = $client->createAuthUrl();
 	}
-	$url = $portal_root . '/core/abre_microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent';
-	
+
 	//Display the Login
 	echo "<main>";
-	
+
 		//Overlay Div
 		echo "<div id='loadingcover' style='background-color:".getSiteColor()."; position:fixed; width:100%; height:100%; z-index:2'></div>";
-	
+
 		//Login Holder
 		echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre_pattern.png); '>";
 
 			echo "<div class='login_wrapper' style='z-index:100;'>";
 				echo "<div class='login-card-square mdl-card'>";
-					
+
 						//Site Logo
 						echo "<div style='margin:30px 40px 10px 40px; height:240px; width:240px; background:url(". getSiteLogo() .") center center no-repeat; margin-bottom:10px; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;'></div>";
-						
+
 						//Site Login Text
 						echo "<div class='mdl-card-text mdl-color-text--grey-600' style='text-align:center; margin:0 40px 10px 40px;'>Choose a sign in service</div>";
-						
+
 						//Logins
-						echo "<div class='loginholder'>"; 
-						
+						echo "<div class='loginholder'>";
+
 							//Display SSO Options
 							if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
 								echo "<div style='padding-top: 10px'>";
@@ -76,29 +75,29 @@
 									include "abre_button_microsoft.php";
 								echo "</div>";
 							}
-							
+
 							//Return Text
 							echo "<div class='mdl-color-text--grey-600' style='text-align:center; margin:30px 40px 10px 40px; font-size:13px;'><a href='/' class='mdl-color-text--grey-600' style='font-weight:400'>Return to Homepage</a></span></div>";
-							
+
 						echo "</div>";
-						
+
 				echo "</div>";
 			echo "</div>";
-			
+
 			include "abre_copyright.php";
-			
+
 		echo "</div>";
-	
+
 	echo "</main>";
-	
+
 ?>
 
 <script>
-	
+
 	$(function(){
-		
+
 		$("#loadingcover").delay(300).fadeOut();
-	
+
 		//Responsive login view
 		function loginWidthCheck(){
 			if ($(window).width() < 600){
@@ -109,10 +108,10 @@
 				$(".login-card").removeClass("mdl-color--white");
 			}
 		}
-	
+
 		loginWidthCheck();
 		$(window).resize(loginWidthCheck);
-		
+
 	});
 
 </script>

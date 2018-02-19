@@ -74,25 +74,27 @@
 				$streamValues = array_unique($streamValues, SORT_NUMERIC);
 
 				$dcount = 0;
-				$sql = "SELECT title, id FROM streams WHERE `group` = '".$_SESSION['usertype']."' AND `required` != 1 ORDER BY type, title";
+				$sql = "SELECT title, id, `group` FROM streams WHERE `required` != 1 ORDER BY type, title";
 				$dbreturn = databasequery($sql);
 				foreach($dbreturn as $row){
-					$title = htmlspecialchars($row['title'], ENT_QUOTES);
-					$id = htmlspecialchars($row['id'], ENT_QUOTES);
-					echo "<div class='col m4 s6'>";
+					if(strpos($row["group"], $_SESSION["usertype"]) !== false){
+						$title = htmlspecialchars($row['title'], ENT_QUOTES);
+						$id = htmlspecialchars($row['id'], ENT_QUOTES);
 
-					$returncount = 0;
-					foreach($streamValues as $value){
-						if($value == $id){
-							echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
-							$returncount = 1;
+						echo "<div class='col m4 s6'>";
+						$returncount = 0;
+						foreach($streamValues as $value){
+							if($value == $id){
+								echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+								$returncount = 1;
+							}
 						}
-					}
-					if($returncount == 0){ echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>"; }
+						if($returncount == 0){ echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>"; }
 						echo "</div>";
 						$dcount++;
-	    		}
-	    		if($dcount == 0){ echo "<div class='col s12'>No available streams</div>"; }
+					}
+	    	}
+	    	if($dcount == 0){ echo "<div class='col s12'>No available streams</div>"; }
 				echo "<div class='col s12'>";
 				echo "<input type='hidden' name='departmentcount' value='$dcount'><br>";
 				echo "</div>";

@@ -29,22 +29,23 @@
     $rsslink = $_POST["link"];
     $streamgroup = $_POST["group"];
     $required = $_POST["required"];
+    $color = $_POST["color"];
 
     if($streamid == ""){
       $stmt = $db->stmt_init();
       //needed to backtick because SQL doesn't like when you use reserved words
-      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`) VALUES (?, ?, ?,'flipboard', ?, ?);";
+      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`, `color`) VALUES (?, ?, ?,'flipboard', ?, ?, ?);";
       $stmt->prepare($sql);
-      $stmt->bind_param("ssssi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required);
+      $stmt->bind_param("ssssis", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color);
       $stmt->execute();
       $stmt->close();
     }else{
       //needed to backtick because SQL doesn't like when you use reserved words
       $stmt = $db->stmt_init();
       //needed to backtick because SQL doesn't like when you use reserved words
-      $sql = "UPDATE `streams` SET `group` = ?, `title` = ?, `slug` = ?, `type` = 'flipboard', `url` = ?, `required` = ? WHERE `id` = ?";
+      $sql = "UPDATE `streams` SET `group` = ?, `title` = ?, `slug` = ?, `type` = 'flipboard', `url` = ?, `required` = ?, `color` = ? WHERE `id` = ?";
       $stmt->prepare($sql);
-      $stmt->bind_param("ssssii", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $streamid);
+      $stmt->bind_param("ssssisi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color, $streamid);
       $stmt->execute();
       $stmt->close();
     }

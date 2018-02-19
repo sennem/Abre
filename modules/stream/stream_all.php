@@ -26,7 +26,7 @@
 	$query = "SELECT streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($query);
 	foreach($dbreturn as $value) {
-		$userstreams = htmlspecialchars($value ['streams'], ENT_QUOTES);
+		$userstreams = htmlspecialchars($value['streams'], ENT_QUOTES);
 	}
 
 	//Create the Feed Array & Count
@@ -37,21 +37,25 @@
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();
 	if(!empty($userstreams) != NULL){
-		$sql = "SELECT url FROM streams WHERE (required = 1 AND `group` = '".$_SESSION['usertype']."') OR id in ($userstreams)";
+		$sql = "SELECT url, `group`, color, title FROM streams WHERE required = 1 OR id IN ($userstreams)";
 	}else{
-		$sql = "SELECT url FROM streams WHERE `required` = 1 AND `group` = '".$_SESSION['usertype']."'";
+		$sql = "SELECT url, `group`, color FROM streams WHERE `required` = 1";
 	}
 
 	//Look for all streams that apply to user
 	$flipboardarray = array();
+	$colorArray = array();
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $value) {
-		$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
-		if($fburl != ""){
-			array_push($flipboardarray, $fburl);
+		if(strpos($value["group"], $_SESSION["usertype"]) !== false){
+			$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
+			$fburlNoRss = rtrim($fburl, ".rss");
+			if($fburl != ""){
+				$colorArray[$fburlNoRss] = $value['color'];
+				array_push($flipboardarray, $fburl);
+			}
 		}
 	}
-
 	$feed_flipboard->set_cache_duration(1800);
 	$feed_flipboard->set_stupidly_fast(true);
 	$feed_flipboard->set_feed_url($flipboardarray);
@@ -83,7 +87,8 @@
 		    if(isset($embededimage['src'])){ $image=$embededimage['src']; }
 		}
 
-		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$feedtitle","$feedlink"));
+		$color = $colorArray[$feedlink];
+		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$feedtitle","$feedlink", $color));
 		$totalcount++;
 	}
 
@@ -115,6 +120,8 @@
 		$image = $feeds[$cardcountloop][4];
 		$feedtitle = $feeds[$cardcountloop][5];
 		$feedlink = $feeds[$cardcountloop][6];
+		$color = "";
+		$color = $feeds[$cardcountloop][7];
 
 		//Add images to server to securely store and reference
 		include "stream_save_image.php";

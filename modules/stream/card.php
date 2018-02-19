@@ -33,7 +33,11 @@
 
 		//Feed
 		echo "<div class='truncate' style='padding:16px 16px 0 16px; font-size: 12px; color: #999; font-weight: 500;'>";
-			echo "<a href='$feedlink' style='color: #999; font-weight: 500;' target='_blank'>$feedtitle</a>";
+			if($color != ""){
+				echo "<a href='$feedlink' class='chip' style='background-color: $color; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
+			}else{
+				echo "<a href='$feedlink' class='chip' style='background-color: #BDBDBD; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
+			}
 		echo "</div>";
 
 		//Title
@@ -84,7 +88,7 @@
 				$dbreturn = $db->query($query);
 				$resultrow = $dbreturn->fetch_assoc();
 				$num_rows_like_current_user = $resultrow["COUNT(*)"];
-				
+
 				if($num_rows_like == 0){
 					echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-category='$feedtitle' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 				}else{
