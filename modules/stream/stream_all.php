@@ -52,7 +52,7 @@
 			$fburlNoRss = rtrim($fburl, ".rss");
 			if($fburl != ""){
 				//should be refactored. This is very hacky!
-				//Brandon Wilson did this painfully. 
+				//Brandon Wilson did this painfully.
 				if(strpos($fburlNoRss, "twitrss.me") !== false){
 					$parts = parse_url($fburlNoRss);
 					parse_str($parts['query'], $params);
@@ -85,11 +85,7 @@
 		$link = $item->get_link();
 		$date = $item->get_date();
 		$linkArray = $item->get_feed()->get_links();
-		foreach($linkArray as $url){
-			error_log("This is the feed:".$url);
-		}
 		$feedtitle = $item->get_feed()->get_title();
-		error_log($feedtitle);
 		$feedlink = $item->get_feed()->get_link();
 		$date = strtotime($date);
 		$excerpt = $item->get_description();
