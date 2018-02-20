@@ -29,7 +29,6 @@
   	include "abre_dbconnect.php";
 	$sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
 	$result = $db->query($sql);
-	$numrows = $result->num_rows;
 	while($row = $result->fetch_assoc()){
 		
 		$currentpicture = $row['picture'];
