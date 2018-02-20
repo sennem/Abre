@@ -27,7 +27,7 @@
   function addPicture(){
 	  
   	include "abre_dbconnect.php";
-	$sql = "SELECT count(*) FROM directory where email='".$_SESSION['useremail']."' and picture = ''";
+	$sql = "SELECT count(*) FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
 	$result = $db->query($sql);
 	$row = $result->fetch_assoc();
 	$count = $row['count(*)'];
