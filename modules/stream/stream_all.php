@@ -37,7 +37,7 @@
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();
 	if(!empty($userstreams) != NULL){
-		$sql = "SELECT url, `group`, color, title FROM streams WHERE required = 1 OR id IN ($userstreams)";
+		$sql = "SELECT url, `group`, color FROM streams WHERE required = 1 OR id IN ($userstreams)";
 	}else{
 		$sql = "SELECT url, `group`, color FROM streams WHERE `required` = 1";
 	}
@@ -51,7 +51,17 @@
 			$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
 			$fburlNoRss = rtrim($fburl, ".rss");
 			if($fburl != ""){
-				$colorArray[$fburlNoRss] = $value['color'];
+				//should be refactored. This is very hacky!
+				//Brandon Wilson did this painfully. 
+				if(strpos($fburlNoRss, "twitrss.me") !== false){
+					$parts = parse_url($fburlNoRss);
+					parse_str($parts['query'], $params);
+					$user = $params['user'];
+					$url = "https://twitter.com/".$user;
+					$colorArray[$url] = $value['color'];
+				}else{
+					$colorArray[$fburlNoRss] = $value['color'];
+				}
 				array_push($flipboardarray, $fburl);
 			}
 		}
@@ -74,7 +84,12 @@
 		$title = $item->get_title();
 		$link = $item->get_link();
 		$date = $item->get_date();
+		$linkArray = $item->get_feed()->get_links();
+		foreach($linkArray as $url){
+			error_log("This is the feed:".$url);
+		}
 		$feedtitle = $item->get_feed()->get_title();
+		error_log($feedtitle);
 		$feedlink = $item->get_feed()->get_link();
 		$date = strtotime($date);
 		$excerpt = $item->get_description();
