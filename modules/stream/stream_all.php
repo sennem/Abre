@@ -84,7 +84,6 @@
 		$title = $item->get_title();
 		$link = $item->get_link();
 		$date = $item->get_date();
-		$linkArray = $item->get_feed()->get_links();
 		$feedtitle = $item->get_feed()->get_title();
 		$feedlink = $item->get_feed()->get_link();
 		$date = strtotime($date);
