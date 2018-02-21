@@ -34,6 +34,7 @@
 		$siteadminemail = $_POST["siteadminemail"];
 		$studentdomain = $_POST["studentdomain"];
 		$studentdomainrequired = $_POST["studentdomainrequired"];
+		if(isset($_POST['staffandstudentdomainssame'])){ $abre_staffstudentdomainsame=$_POST['staffandstudentdomainssame']; }else{ $abre_staffstudentdomainsame=""; }
 		if(isset($_POST['abre_community'])){ $abre_community=$_POST['abre_community']; }else{ $abre_community=""; }
 		$community_first_name = $_POST['community_first_name'];
 		$community_last_name = $_POST['community_last_name'];
@@ -77,6 +78,7 @@
 					"sitelogo" => "$sitelogofilename",
 					"studentdomain" => "$studentdomain",
 					"studentdomainrequired" => "$studentdomainrequired",
+					"staffstudentdomainsame" => "$abre_staffstudentdomainsame",
 					"abre_community" => "$abre_community",
 					"community_first_name" => "$community_first_name",
 					"community_last_name" => "$community_last_name",

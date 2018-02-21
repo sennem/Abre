@@ -24,7 +24,9 @@
   $studentdomainrequired = getSiteStudentDomainRequired();
   
   //Add staff profile picture to directory if entry exists and picture is empty
-  function addPicture(){
+  function staffLogin(){
+	  
+	$_SESSION['usertype'] = "staff";
 	  
   	include "abre_dbconnect.php";
 	$sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
@@ -47,6 +49,33 @@
 	}
 	  
   }
+  
+  	function emailMatchCheck(){
+	  	
+		if(getStaffStudentMatch()=="checked"){
+			
+			//Check to see if email is in Abre_Staff table
+			include "abre_dbconnect.php";
+			$sql = "SELECT count(*) FROM Abre_Staff where EMail1='".$_SESSION['useremail']."'";
+			$result = $db->query($sql);
+			$row = $result->fetch_assoc();
+			$numrows = $row['count(*)'];
+			if($numrows==0){
+				$_SESSION['usertype'] = "student";
+			}
+			else
+			{
+				staffLogin();
+			}
+			
+			
+		}
+		else
+		{				
+			staffLogin();							
+		}
+		
+	}
 
 	//Try to login the user, if they have revoked Google access, request access again
 	try{
@@ -129,9 +158,9 @@
 					if(strcspn($username, $studentdomainrequired) != strlen($username)){
 						$_SESSION['usertype'] = "student";
 					}else if(strpos($site_domain, $userdomain) !== false || strpos($userdomain, $site_domain) !== false){
-						$_SESSION['usertype'] = "staff";
 						
-						addPicture();
+						//Check to see if settings page says staff and student emails are the same
+						emailMatchCheck();
 						
 					}
 				}else{
@@ -143,9 +172,9 @@
 			            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
 							$_SESSION['usertype'] = "student";
 						}else if(strpos($site_domain, $userdomain) !== false){
-							$_SESSION['usertype'] = "staff";
 							
-							addPicture();						
+							//Check to see if settings page says staff and student emails are the same
+							emailMatchCheck();						
 							
 						}
 		          	}

@@ -393,8 +393,8 @@
 	}
 	
 	function getStaffStudentMatch(){
-		$valuereturn = getSettingsDbValue('staffandstudentdomainssame');
-		if($valuereturn == ""){ $valuereturn = ""; }
+		$valuereturn = getSettingsDbValue('staffstudentdomainsame');
+		if($valuereturn == ""){ $valuereturn = "unchecked"; }
 
 		return $valuereturn;
 	}
