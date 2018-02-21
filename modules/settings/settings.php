@@ -92,6 +92,10 @@
 						    echo "<input placeholder='Enter Required Characters' value='".getSiteStudentDomainRequired()."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
 							echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
 						echo "</div>";
+						echo "<div class='col s12'>";
+						    echo "<input type='checkbox' class='filled-in' id = 'staffandstudentdomainssame' name='staffandstudentdomainssame' value='checked' ".getStaffStudentMatch()."/>";
+							echo "<label for='staffandstudentdomainssame' style = 'color:#000; margin-bottom:30px;'> The Staff and Student domains are the same with no required characters for students.</label>";
+						echo "</div>";
 					echo "</div>";
 
 					//Site Icon
