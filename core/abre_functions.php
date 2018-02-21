@@ -391,6 +391,13 @@
 
 		return $valuereturn;
 	}
+	
+	function getStaffStudentMatch(){
+		$valuereturn = getSettingsDbValue('staffandstudentdomainssame');
+		if($valuereturn == ""){ $valuereturn = ""; }
+
+		return $valuereturn;
+	}
 
 	function getSiteLogo(){
 		$valuereturn = getSettingsDbValue('sitelogo');
