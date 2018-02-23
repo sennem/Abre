@@ -4,4 +4,4 @@ Abre is a software platform that allows schools to manage and distribute web-bas
 
 ## Documentation
 
-Please visit <a href="https://abre.io/abredocs/" target="_blank">https://abre.io/abredocs/</a> for setup.
+Please visit <a href="https://abre.io/resources/" target="_blank">https://abre.io/resources/</a> for setup.
