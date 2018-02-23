@@ -106,10 +106,10 @@
 					<div class='col s12'>
 						<select id="app_icon" name="app_icon" class="image-picker browser-default" required>
 						<?php
-							$icons = scandir("$portal_path_root/core/images/");
+							$icons = scandir("$portal_path_root/core/images/apps/");
 							foreach($icons as $iconimage){
 								if (substr($iconimage, 0, 11) === 'icon_thumb_'){
-									echo "<option data-img-src='/core/images/$iconimage' value='$iconimage'></option>";
+									echo "<option data-img-src='/core/images/apps/$iconimage' value='$iconimage'></option>";
 								}
 							}
 						?>

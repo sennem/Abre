@@ -51,7 +51,7 @@
 				$permissionsList = implode(", ", $permissions);
 				$minor_disabled = $value['minor_disabled'];
 				echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
-					echo "<td style='width:60px'><img src='$portal_root/core/images/$icon' style='width:35px; height:35px;'></td>";
+					echo "<td style='width:60px'><img src='$portal_root/core/images/apps/$icon' style='width:35px; height:35px;'></td>";
 					if($permissionsList == ""){
 						echo "<td><b>$title</b><td>";
 					}else{

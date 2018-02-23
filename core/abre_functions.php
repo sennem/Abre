@@ -260,13 +260,13 @@
 				if($value == "studentdomain" && $valuereturn == ""){ $valuereturn = ""; }
 				if($value == "studentdomainrequired" && $valuereturn == ""){ $valuereturn = ""; }
 				if($value == "sitelogo" && $valuereturn !=""){
-					if($valuereturn != '/core/images/abre_glyph.png'){
+					if($valuereturn != '/core/images/abre/abre_glyph.png'){
 						$valuereturn = "/content/$valuereturn";
 					}else{
-						$valuereturn="/core/images/abre_glyph.png";
+						$valuereturn="/core/images/abre/abre_glyph.png";
 					}
 				}
-				if($value == "sitelogo" && $valuereturn == ""){ $valuereturn = "/core/images/abre_glyph.png"; }
+				if($value == "sitelogo" && $valuereturn == ""){ $valuereturn = "/core/images/abre/abre_glyph.png"; }
 				if($value == "googleclientid" && $valuereturn == ""){ $valuereturn = ""; }
 				if($value == "parentaccess" && $valuereturn == ""){ $valuereturn = "unchecked"; }
 				if($value == "googleclientsecret" && $valuereturn == ""){ $valuereturn = ""; }
@@ -402,12 +402,12 @@
 	function getSiteLogo(){
 		$valuereturn = getSettingsDbValue('sitelogo');
 		if($valuereturn == ""){
-			$valuereturn = "/core/images/abre_glyph.png";
+			$valuereturn = "/core/images/abre/abre_glyph.png";
 		}else{
-			if($valuereturn != '/core/images/abre_glyph.png'){
+			if($valuereturn != '/core/images/abre/abre_glyph.png'){
 				$valuereturn = "/content/$valuereturn";
 			}else{
-				$valuereturn="/core/images/abre_glyph.png";
+				$valuereturn="/core/images/abre/abre_glyph.png";
 			}
 		}
 
