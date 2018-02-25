@@ -26,7 +26,6 @@
 	if($building == "All"){
 		$sql = "SELECT firstname, lastname, email, title, picture FROM directory WHERE archived = 0 ORDER BY lastname";
 	}else{
-		$school = encrypt("$building", "");
 		$sql = "SELECT firstname, lastname, email, title, picture FROM directory WHERE location = '$school' and archived = 0 ORDER BY lastname";
 	}
 	$result = $db->query($sql);

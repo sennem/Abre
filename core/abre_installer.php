@@ -25,7 +25,7 @@
 
 		<!--Abre Setup Screen-->
 		<div class='row' style='margin-top:50px;'>
-			<img src='core/images/abre_logo.png' alt='Abre' style='display:block; margin-left:auto; margin-right:auto; width:200px; height:63px;'>
+			<img src='core/images/abre/abre_logo.png' alt='Abre' style='display:block; margin-left:auto; margin-right:auto; width:200px; height:63px;'>
 		</div>
 		<div style='margin-top:50px;'>
 			<div class='page_container page_container_limit mdl-shadow--4dp'>

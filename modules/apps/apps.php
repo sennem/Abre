@@ -86,7 +86,7 @@
 							$image = htmlspecialchars($row["image"], ENT_QUOTES);
 							$link = htmlspecialchars($row["link"], ENT_QUOTES);
 							echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+								echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 								echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
 							echo "</li>";
 						}
@@ -100,7 +100,7 @@
 						$image = htmlspecialchars($row["image"], ENT_QUOTES);
 						$link = htmlspecialchars($row["link"], ENT_QUOTES);
 						echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-							echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+							echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 							echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
 						echo "</li>";
 					}
@@ -121,7 +121,7 @@
 			$title = htmlspecialchars($row2["title"], ENT_QUOTES);
 			$image = htmlspecialchars($row2["image"], ENT_QUOTES);
 			$link = htmlspecialchars($row2["link"], ENT_QUOTES);
-			echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
+			echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/apps/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
 		}
 		echo "</div>";
 	}else{
@@ -135,7 +135,7 @@
 				$title=htmlspecialchars($row2["title"], ENT_QUOTES);
 				$image=htmlspecialchars($row2["image"], ENT_QUOTES);
 				$link=htmlspecialchars($row2["link"], ENT_QUOTES);
-				echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
+				echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/apps/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
 			}
 			echo "</div>";
 		}else{
@@ -198,7 +198,7 @@
 								$image = htmlspecialchars($row["image"], ENT_QUOTES);
 								$link = htmlspecialchars($row["link"], ENT_QUOTES);
 								echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-									echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+									echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 									echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
 								echo "</li>";
 							}
@@ -212,7 +212,7 @@
 							$image = htmlspecialchars($row["image"], ENT_QUOTES);
 							$link = htmlspecialchars($row["link"], ENT_QUOTES);
 							echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-								echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+								echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 								echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
 							echo "</li>";
 						}

@@ -55,7 +55,7 @@
 						$image = htmlspecialchars($row["image"], ENT_QUOTES);
 						$link = htmlspecialchars($row["link"], ENT_QUOTES);
 						echo "<div class='topapps' style='width:33.333%; float:left; text-align:center; margin:10px 0 10px 0;'>";
-							echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+							echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 							echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
 						echo "</div>";
 					}
@@ -72,7 +72,7 @@
 				$image = htmlspecialchars($row["image"], ENT_QUOTES);
 				$link = htmlspecialchars($row["link"], ENT_QUOTES);
 				echo "<div class='topapps' style='width:33.333%; float:left; text-align:center; margin:10px 0 10px 0;'>";
-					echo "<img src='$portal_root/core/images/$image' class='appicon_modal'>";
+					echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 					echo "<span><a href='$link' class='applink truncate'>$title</a></span>";
 				echo "</div>";
 			}
