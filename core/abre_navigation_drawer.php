@@ -43,10 +43,10 @@
 					$subpages = $modules[$modulecountloop][6];
 
 					if($pageview == 1 && $drawerhidden != 1){
-						
+
 						echo "<li style='display:block;'>";
 							echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";;
-									if($subpages!=NULL){ 
+									if($subpages!=NULL){
 										echo "<span class='mdl-navigation__link' ";
 									}else{
 										echo "<span class='mdl-navigation__link path' data-path='#$pagepath' ";
@@ -57,11 +57,11 @@
 									echo "<span class='truncate' style='margin-left:-10px;'>$pagetitle</span>";
 									echo "</span>";
 							echo "</div>";
-							
-							if($subpages!=NULL){	
-															
+
+							if($subpages!=NULL){
+
 								foreach ($subpages as $key => $sublinks){
-									
+
 									$pagepath=$sublinks['path'];
 									echo "<div class='collapsible-body pointer' style='border:0;'>";
 										echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
@@ -69,13 +69,13 @@
 											echo $sublinks['title'];
 										echo "</span></span>";
 									echo "</div>";
-									
+
 								}
-								
+
 							}
-							
-						echo "</li>";						
-						
+
+						echo "</li>";
+
 					}
 				}
 
@@ -83,7 +83,7 @@
 				if($_SESSION['usertype'] == "staff")
 				{
 					echo "<div class='mdl-menu__item--full-bleed-divider' style='margin:10px 0 10px 0'></div>";
-					
+
 					echo "<li style='display:block;'>";
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'>";
@@ -109,37 +109,37 @@
 				if(superadmin())
 				{
 					echo "<li style='display:block;'>";
-					
+
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<div class='mdl-navigation__link'>";
 							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>settings</i>";
 							echo "<span class='truncate' style='margin-left:-10px;'>Settings</span></div>";
 						echo "</div>";
-					
-						$subpages = array('General' => array('title' => 'General','path' => 'settings'),'Integrations'  => array('title' => 'Integrations','path' => 'settings/integrations'),'Parent Access'  => array('title' => 'Parent Access','path' => 'settings/parentaccess'),'Usage'  => array('title' => 'Usage','path' => 'settings/usage'));										
+
+						$subpages = array('General' => array('title' => 'General','path' => 'settings'),'Integrations'  => array('title' => 'Integrations','path' => 'settings/integrations'),'Authentication'  => array('title' => 'Authentication','path' => 'settings/authentication'),'Usage'  => array('title' => 'Usage','path' => 'settings/usage'));										
 						foreach ($subpages as $key => $sublinks){
-										
+
 								$pagepath=$sublinks['path'];
 								echo "<div class='collapsible-body pointer' style='border:0;'>";
 									echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
 									echo "<span class='truncate' style='margin-left:60px; font-weight:normal !important;'>";
 										echo $sublinks['title'];
 									echo "</span></span>";
-								echo "</div>";			
+								echo "</div>";
 						}
-						
+
 					echo "</li>";
 				}
 			?>
 		</nav>
 	</div>
-	
+
 <script>
 
 	$(function(){
-		
+
 		$('.collapse').collapsible();
-		
+
 		//Make Links Clickable
 		$(".path").unbind().click(function(){
 			var Path = $(this).data('path');
