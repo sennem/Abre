@@ -60,17 +60,17 @@
 						echo "<div class='loginholder'>";
 
 							//Display SSO Options
-							if(getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== '' ){
+							if(getSiteGoogleSignInGroups('parents') == "checked" && getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== ''){
 								echo "<div style='padding-top: 10px'>";
 									include "abre_button_google.php";
 								echo "</div>";
 							}
-					        if(getSiteFacebookClientId() !== '' && getSiteFacebookClientSecret() !== '' ){
+					    if(getSiteFacebookSignInGroups('parents') == "checked" && getSiteFacebookClientId() !== '' && getSiteFacebookClientSecret() !== ''){
 								echo "<div style='padding-top: 10px'>";
 									include "abre_button_facebook.php";
 								echo "</div>";
 							}
-							if(getSiteMicrosoftClientId() !== '' && getSiteMicrosoftClientSecret() !== '' ){
+							if(getSiteMicrosoftSignInGroups('parents') == "checked" && getSiteMicrosoftClientId() !== '' && getSiteMicrosoftClientSecret() !== ''){
 								echo "<div style='padding-top: 10px'>";
 									include "abre_button_microsoft.php";
 								echo "</div>";
