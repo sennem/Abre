@@ -22,9 +22,12 @@
 	require_once('functions.php');
 
 	if($_SESSION['usertype'] != 'parent'){
-
-		DisplayWidget('mail','mail','Mail','#F44336','https://mail.google.com');
-	
+		if($_SESSION['auth_service'] == "google"){
+			DisplayWidget('mail','mail','Mail','#F44336','https://mail.google.com');
+		}
+		if($_SESSION['auth_service'] == "microsoft"){
+			DisplayWidget('mail','mail','Mail','#F44336','https://outlook.live.com/');
+		}
 	}
-	
+
 ?>
