@@ -17,6 +17,6 @@
     */
 
 	//Google Auth Button
-	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#fff !important; color:#757575 !important;' href='https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".getSiteMicrosoftClientId()."&response_type=code&redirect_uri=".$portal_root."/core/abre_microsoft_login_helper.php&response_mode=form_post&scope=openid%20profile&state=12345&prompt=consent'><span class='loginicon' style='background: url(\"core/images/integrations/button_icon_microsoft.png\") no-repeat;'></span> Sign in with Microsoft</a>";
+	echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:#fff !important; color:#757575 !important;' href='/core/abre_microsoft_login_helper.php'><span class='loginicon' style='background: url(\"core/images/integrations/button_icon_microsoft.png\") no-repeat;'></span> Sign in with Microsoft</a>";
 
 ?>
