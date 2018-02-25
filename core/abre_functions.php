@@ -493,13 +493,13 @@
 		return $valuereturn;
 	}
 
-	function getParentAccessDbValue($value){
+	function getAuthenticationDbValue($value){
 		include "abre_dbconnect.php";
-		$sql2 = "SELECT parentaccess FROM settings LIMIT 1";
+		$sql2 = "SELECT authentication FROM settings LIMIT 1";
 		$result2 = $db->query($sql2);
 		if($result2){
 			$row = $result2->fetch_assoc();
-			$options = $row["parentaccess"];
+			$options = $row["authentication"];
 			if($options != ""){
 				$options = json_decode($options);
 				if(isset($options->$value)){
@@ -511,30 +511,47 @@
 				$valuereturn = "";
 			}
 		}else{
-			$sql = "ALTER TABLE `settings` ADD `parentaccess` text NOT NULL;";
+			$sql = "ALTER TABLE `settings` ADD `authentication` text NOT NULL;";
 			$db->multi_query($sql);
-			$valuereturn = "";
+
+			$array = [
+						"googleclientid" => constant("GOOGLE_CLIENT_ID"),
+						"googleclientsecret" => encrypt(constant("GOOGLE_CLIENT_SECRET"), ''),
+						"googlesigningroups" => ["staff", "students"]
+							];
+			$json = json_encode($array);
+
+			$stmt = $db->stmt_init();
+			$sql = "UPDATE settings SET authentication = ?";
+			$stmt->prepare($sql);
+			$stmt->bind_param("s", $json);
+			$stmt->execute();
+			$stmt->close();
+
+			if($value == "googleclientid"){
+				$valuereturn = constant("GOOGLE_CLIENT_ID");
+			}elseif($value == "googleclientsecret"){
+				$valuereturn = constant("GOOGLE_CLIENT_SECRET");
+			}elseif($value == 'googlesigningroups'){
+				$json = json_decode($json);
+				$valuereturn = $json->googlesigningroups;
+			}else{
+				$valuereturn = "";
+			}
 		}
 		$db->close();
 		return $valuereturn;
 	}
 
 	function getSiteGoogleClientId(){
-		$valuereturn = getParentAccessDbValue('googleclientid');
+		$valuereturn = getAuthenticationDbValue('googleclientid');
 		if($valuereturn == ""){ $valuereturn = ""; }
 
 		return $valuereturn;
 	}
 
-	function getSiteParentAccess(){
-		$valuereturn = getParentAccessDbValue('parentaccess');
-		if($valuereturn == ""){ $valuereturn = "unchecked"; }
-
-		return $valuereturn;
-	}
-
 	function getSiteGoogleClientSecret(){
-		$valuereturn = getParentAccessDbValue('googleclientsecret');
+		$valuereturn = getAuthenticationDbValue('googleclientsecret');
 		if($valuereturn == ""){
 			$valuereturn = "";
 		}else{
@@ -544,15 +561,29 @@
 		return $valuereturn;
 	}
 
+	function getSiteGoogleSignInGroups($group){
+		$valuereturn = getAuthenticationDbValue('googlesigningroups');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			if(in_array($group, $valuereturn)){
+				$valuereturn = "checked";
+			}else{
+				$valuereturn = "";
+			}
+		}
+		return $valuereturn;
+	}
+
 	function getSiteFacebookClientId(){
-		$valuereturn = getParentAccessDbValue('facebookclientid');
+		$valuereturn = getAuthenticationDbValue('facebookclientid');
 		if($valuereturn == ""){ $valuereturn = ""; }
 
 		return $valuereturn;
 	}
 
 	function getSiteFacebookClientSecret(){
-		$valuereturn = getParentAccessDbValue('facebookclientsecret');
+		$valuereturn = getAuthenticationDbValue('facebookclientsecret');
 		if($valuereturn == ""){
 			$valuereturn = "";
 		}else{
@@ -562,21 +593,49 @@
 		return $valuereturn;
 	}
 
+	function getSiteFacebookSignInGroups($group){
+		$valuereturn = getAuthenticationDbValue('facebooksigningroups');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			if(in_array($group, $valuereturn)){
+				$valuereturn = "checked";
+			}else{
+				$valuereturn = "";
+			}
+		}
+		return $valuereturn;
+	}
+
 	function getSiteMicrosoftClientId(){
-		$valuereturn = getParentAccessDbValue('microsoftclientid');
+		$valuereturn = getAuthenticationDbValue('microsoftclientid');
 		if($valuereturn == ""){ $valuereturn = ""; }
 
 		return $valuereturn;
 	}
 
 	function getSiteMicrosoftClientSecret(){
-		$valuereturn = getParentAccessDbValue('microsoftclientsecret');
+		$valuereturn = getAuthenticationDbValue('microsoftclientsecret');
 		if($valuereturn == ""){
 			$valuereturn = "";
 		}else{
 			$valuereturn = decrypt($valuereturn, '');
 		}
 
+		return $valuereturn;
+	}
+
+	function getSiteMicrosoftSignInGroups($group){
+		$valuereturn = getAuthenticationDbValue('microsoftsigningroups');
+		if($valuereturn == ""){
+			$valuereturn = "";
+		}else{
+			if(in_array($group, $valuereturn)){
+				$valuereturn = "checked";
+			}else{
+				$valuereturn = "";
+			}
+		}
 		return $valuereturn;
 	}
 
@@ -694,6 +753,38 @@
 		$result = curl_exec($ch);
 		$json = json_decode($result, true);
 		return $json["scope"];
+	}
+
+	//calls the microsoft graph api to get a active token and stores it in the session
+	function getActiveMicrosoftAccessToken(){
+		//token has expired, we need to get a new one
+		$fields = array(
+			'client_id' => urlencode(getSiteMicrosoftClientId()),
+			'redirect_uri' => urlencode(''),
+			'grant_type' => 'refresh_token',
+			'client_secret' => urlencode(getSiteMicrosoftClientSecret()),
+			'refresh_token' => $_SESSION['access_token']['refresh_token'],
+			'scope' => urlencode('openid profile user.read mail.read')
+		);
+
+		//url-ify the data for the POST
+		$fields_string = "";
+		foreach($fields as $key=>$value){
+			$fields_string .= $key.'='.$value.'&';
+		}
+		rtrim($fields_string, '&');
+
+		$ch = curl_init();
+		curl_setopt($ch, CURLOPT_URL, "https://login.microsoftonline.com/common/oauth2/v2.0/token");
+		curl_setopt($ch, CURLOPT_POST, count($fields));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		$result = curl_exec($ch);
+
+		$accessTokenArray = json_decode($result, true);
+		$_SESSION['access_token']['access_token'] = $accessTokenArray['access_token'];
 	}
 
 ?>
