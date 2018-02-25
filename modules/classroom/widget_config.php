@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -15,8 +15,9 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-    
+
     $pagetitle = "Classroom";
     $restrictions = "parent";
-    
+		$services = "google";
+
 ?>
