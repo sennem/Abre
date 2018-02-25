@@ -22,59 +22,45 @@
   //Load configuration settings
   $studentdomain = getSiteStudentDomain();
   $studentdomainrequired = getSiteStudentDomainRequired();
-  
+
   //Add staff profile picture to directory if entry exists and picture is empty
   function staffLogin(){
-	  
-	$_SESSION['usertype'] = "staff";
-	  
+    $_SESSION['usertype'] = "staff";
+
   	include "abre_dbconnect.php";
-	$sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
-		
-		$currentpicture = $row['picture'];
-		
-		if($currentpicture != $_SESSION['picture']){
-		
-			$stmt = $db->stmt_init();
+    $sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
+	  $result = $db->query($sql);
+	  while($row = $result->fetch_assoc()){
+      $currentpicture = $row['picture'];
+
+      if($currentpicture != $_SESSION['picture']){
+        $stmt = $db->stmt_init();
 		    $sql = "UPDATE directory SET picture = ? WHERE email = ?";
 		    $stmt->prepare($sql);
 		    $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
 		    $stmt->execute();
-		    $stmt->close();	 
-		    
-		}
-	    
-	}
-	  
+		    $stmt->close();
+      }
+    }
   }
-  
-  	function emailMatchCheck(){
-	  	
-		if(getStaffStudentMatch()=="checked"){
-			
-			//Check to see if email is in Abre_Staff table
+
+  function emailMatchCheck(){
+    if(getStaffStudentMatch() == "checked"){
+
+      //Check to see if email is in Abre_Staff table
 			include "abre_dbconnect.php";
 			$sql = "SELECT count(*) FROM Abre_Staff where EMail1='".$_SESSION['useremail']."'";
 			$result = $db->query($sql);
 			$row = $result->fetch_assoc();
 			$numrows = $row['count(*)'];
-			if($numrows==0){
+			if($numrows == 0){
 				$_SESSION['usertype'] = "student";
-			}
-			else
-			{
+			}else{
 				staffLogin();
 			}
-			
-			
+		}else{
+			staffLogin();
 		}
-		else
-		{				
-			staffLogin();							
-		}
-		
 	}
 
 	//Try to login the user, if they have revoked Google access, request access again
@@ -147,38 +133,33 @@
 				$_SESSION['useremail'] = $userEmail;
 				$userPicture = $userData['picture'];
 				$_SESSION['picture'] = $userPicture;
+        $_SESSION['auth_service'] = "google";
 				$_SESSION['usertype'] = NULL;
 
 				if($studentdomain == NULL){ $studentdomain = $site_domain; }
 		        $userdomain = substr($_SESSION['useremail'], strpos($_SESSION['useremail'], '@'));
 		        $username = substr($_SESSION['useremail'], 0, strpos($_SESSION['useremail'], '@'));
 				if($site_domain == $studentdomain){
-					
-					//Check for required chracters (if any)
+          //Check for required chracters (if any)
 					if(strcspn($username, $studentdomainrequired) != strlen($username)){
 						$_SESSION['usertype'] = "student";
 					}else if(strpos($site_domain, $userdomain) !== false || strpos($userdomain, $site_domain) !== false){
-						
-						//Check to see if settings page says staff and student emails are the same
+            //Check to see if settings page says staff and student emails are the same
 						emailMatchCheck();
-						
 					}
 				}else{
-					
+
 					if($studentdomainrequired == "" && (strpos($_SESSION['useremail'], $studentdomain) !== false)){
 						$_SESSION['usertype'] = "student";
-						
+
 					}else{
-			            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
+            if((strpos($_SESSION['useremail'], $studentdomain) !== false) && strcspn($username, $studentdomainrequired) != strlen($username)){
 							$_SESSION['usertype'] = "student";
 						}else if(strpos($site_domain, $userdomain) !== false){
-							
 							//Check to see if settings page says staff and student emails are the same
-							emailMatchCheck();						
-							
+							emailMatchCheck();
 						}
-		          	}
-		          	
+          }
 				}
 
 				if($_SESSION['usertype'] != "staff" && $_SESSION['usertype'] != "student"){
@@ -199,7 +180,7 @@
 		if(isset($_SESSION['access_token'])){
 			if($_SESSION['usertype'] != ""){
 				include "abre_dbconnect.php";
-				if($result = $db->query("SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%'")){
+				if($result = $db->query("SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND `refresh_token` LIKE '%refresh_token%' AND auth_service = '".$_SESSION['auth_service']."'")){
           $resultrow = $result->fetch_assoc();
           $count = $resultrow["COUNT(*)"];
 
@@ -213,16 +194,16 @@
 							if($refreshTokenKey != ""){
 								if(strpos($refreshTokenKey, 'refresh_token') !== false){
                   $stmt = $db->stmt_init();
-                  $sql = "UPDATE users SET refresh_token = ? WHERE email = ?";
+                  $sql = "UPDATE users SET refresh_token = ? WHERE email = ? AND auth_service = ?";
                   $stmt->prepare($sql);
-                  $stmt->bind_param("ss", $refreshTokenKey, $_SESSION['useremail']);
+                  $stmt->bind_param("sss", $refreshTokenKey, $_SESSION['useremail'], $_SESSION['auth_service']);
                   $stmt->execute();
                   $stmt->close();
 								}
 							}
 
 							//Get the token from the database
-							$getRefreshToken = mysqli_fetch_assoc(mysqli_query($db, "SELECT refresh_token FROM users WHERE email = '".$_SESSION['useremail']."'"));
+							$getRefreshToken = mysqli_fetch_assoc(mysqli_query($db, "SELECT refresh_token FROM users WHERE email = '".$_SESSION['useremail']."' AND auth_service = '".$_SESSION['auth_service']."'"));
 							$refreshtoken = $getRefreshToken['refresh_token'];
 							$client->setAccessToken($refreshtoken);
 							$refreshtoken = json_decode($refreshtoken, true);
@@ -241,9 +222,9 @@
 					}else{
 
             $stmt = $db->stmt_init();
-            $sql = "DELETE FROM users WHERE email = ?";
+            $sql = "DELETE FROM users WHERE email = ? AND auth_service = ?";
             $stmt->prepare($sql);
-            $stmt->bind_param("s", $_SESSION['useremail']);
+            $stmt->bind_param("ss", $_SESSION['useremail'], $_SESSION['auth_service']);
             $stmt->execute();
             $stmt->close();
 
@@ -257,9 +238,9 @@
 							$storetoken = $sha1useremail.$hash;
 
               $stmt = $db->stmt_init();
-              $sql = "INSERT INTO users (email, refresh_token, cookie_token) VALUES (?, ?, ?)";
+              $sql = "INSERT INTO users (email, refresh_token, cookie_token, auth_service) VALUES (?, ?, ?, ?)";
               $stmt->prepare($sql);
-              $stmt->bind_param("sss", $_SESSION['useremail'], $getTokenKeyOnly, $storetoken);
+              $stmt->bind_param("ssss", $_SESSION['useremail'], $getTokenKeyOnly, $storetoken, $_SESSION['auth_service']);
               $stmt->execute();
               $stmt->close();
 
