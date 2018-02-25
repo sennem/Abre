@@ -43,14 +43,15 @@
 				ga('set', 'page', '/#settings/integrations/');
 				ga('send', 'pageview');
 	    },
-	    'settings/parentaccess': function(name) {
+	    'settings/authentication': function(name) {
 		    $( '#navigation_top' ).hide();
 				$( '#content_holder' ).hide();
 				$( '#loader' ).show();
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
-				$( '#content_holder' ).load( 'modules/settings/parentaccess.php', function() { init_page(); });
-				ga('set', 'page', '/#settings/parentaccess/');
+				$( '#modal_holder' ).load( 'modules/settings/modals.php' );
+				$( '#content_holder' ).load( 'modules/settings/authentication.php', function() { init_page(); });
+				ga('set', 'page', '/#settings/authentication/');
 				ga('send', 'pageview');
 	    },
 	    'settings/usage': function(name) {
