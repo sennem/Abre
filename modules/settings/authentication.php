@@ -39,7 +39,7 @@
 
 					echo "<div class='row' id='googleAuthService'>";
 						echo "<div class='col s1 center-align'>";
-								echo "<img src='../../core/images/integrations/google.png' style='width:50px;height:50px;background-color:white;color:white;'>";
+								echo "<img class='circle' src='../../core/images/integrations/google.png' style='width:40px;height:40px;background-color:white;color:white;'>";
 						echo "</div>";
 						echo "<div class='col s9'>";
 								echo "<h5 style='padding-top:0px; margin:0px;'>Google Apps Authentication</h5><p>Let your district sign in with a Google account.</p>";
@@ -51,7 +51,7 @@
 
 					echo "<div class='row' id='microsoftAuthService'>";
 						echo "<div class='col s1 center-align'>";
-								echo "<img src='../../core/images/integrations/microsoft.png' style='width:50px;height:50px;background-color:white;color:white;'>";
+								echo "<img class='circle' src='../../core/images/integrations/microsoft.png' style='width:40px;height:40px;background-color:white;color:white;'>";
 						echo "</div>";
 						echo "<div class='col s9'>";
 								echo "<h5 style='padding-top:0px; margin:0px;'>Microsoft Authentication</h5><p>Let your district sign in with a Microsoft account.</p>";
@@ -63,7 +63,7 @@
 
 					echo "<div class='row' id='facebookAuthService'>";
 						echo "<div class='col s1 center-align'>";
-								echo "<img src='../../core/images/integrations/facebook.png' style='width:50px;height:50px;background-color:white;color:white;'>";
+								echo "<img class='circle' src='../../core/images/integrations/facebook.png' style='width:40px;height:40px;background-color:white;color:white;'>";
 						echo "</div>";
 						echo "<div class='col s9'>";
 								echo "<h5 style='padding-top:0px; margin:0px;'>Facebook Authentication</h5><p>Let your parents sign in with a Facebook account.</p>";
@@ -72,50 +72,19 @@
 								echo "<a id='exportkeys' href='#facebookAuthModal' class='modal-action waves-effect btn-flat white-text facebookAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
 						echo "</div>";
 					echo "</div>";
-
-						// echo "<div id='apiKeys'>";
-						// 	echo "<div class='col s12'><h6>Google</h6></div>";
-						// 	echo "<div class='input-field col s6'>";
-						// 		echo "<input placeholder='Enter Client ID' value='".getSiteGoogleClientId()."' id='googleclientid' name='googleclientid' type='text' autocomplete='off'>";
-						// 		echo "<label class='active' for='googleclientid'>Google Client ID</label>";
-						// 	echo "</div>";
-						// 	echo "<div class='input-field col s6'>";
-						// 		echo "<input placeholder='Enter Client Secret' value='".getSiteGoogleClientSecret()."' id='googleclientsecret' name='googleclientsecret' type='text' autocomplete='off'>";
-						// 		echo "<label class='active' for='googleclientsecret'>Google Client Secret</label>";
-						// 	echo "</div>";
-						// 	echo "<div class='col s12'> <h6>Facebook</h6></div>";
-						// 	echo "<div class='input-field col s6'>";
-						// 		echo "<input placeholder='Enter Client ID' value='".getSiteFacebookClientId()."' id='facebookclientid' name='facebookclientid' type='text' autocomplete='off'>";
-						// 		echo "<label class='active' for='facebookclientid'>Facebook Client ID</label>";
-						// 	echo "</div>";
-						// 	echo "<div class='input-field col s6'>";
-						// 		echo "<input placeholder='Enter Client Secret' value='".getSiteFacebookClientSecret()."' id='facebookclientsecret' name='facebookclientsecret' type='text' autocomplete='off'>";
-						// 		echo "<label class='active' for='facebookclientsecret'>Facebook Client Secret</label>";
-						// 	echo "</div>";
-						// 	echo "<div class='col s12'> <h6>Microsoft</h6></div>";
-						// 	echo "<div class='input-field col s6'>";
-						// 		echo "<input placeholder='Enter Client ID' value='".getSiteMicrosoftClientId()."' id='microsoftclientid' name='microsoftclientid' type='text' autocomplete='off'>";
-						// 		echo "<label class='active' for='microsoftclientid'>Microsoft Client ID</label>";
-						// 	echo "</div>";
-						// 	echo "<div class='input-field col s6'>";
-						// 		echo "<input placeholder='Enter Client Secret' value='".getSiteMicrosoftClientSecret()."' id='microsoftclientsecret' name='microsoftclientsecret' type='text' autocomplete='off'>";
-						// 		echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
-						// 	echo "</div>";
-							if($db->query("SELECT * FROM Abre_Students LIMIT 1") && $db->query("SELECT * FROM users_parent LIMIT 1") && superadmin()){
-								echo "<div class='row'>";
-									echo "<div class='input-field col l12 s12' style='margin-top:0;'>";
-										echo "<h4>Student Key Management</h4>";
-									echo "</div>";
-									echo "<div class='input-field col l12 s12'>";
-										echo "<a id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</a>";
-									echo "</div>";
-									echo "<div class='input-field col l12 s12'>";
-										echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Download All Keys</a>";
-									echo "</div>";
-								echo "</div>";
-							}
-						// echo "</div>";
-
+					if($db->query("SELECT * FROM Abre_Students LIMIT 1") && $db->query("SELECT * FROM users_parent LIMIT 1") && superadmin()){
+						echo "<div class='row'>";
+							echo "<div class='input-field col l12 s12' style='margin-top:0;'>";
+								echo "<h4>Student Key Management</h4>";
+							echo "</div>";
+							echo "<div class='input-field col l12 s12'>";
+								echo "<a id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</a>";
+							echo "</div>";
+							echo "<div class='input-field col l12 s12'>";
+								echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Download All Keys</a>";
+							echo "</div>";
+						echo "</div>";
+					}
 				echo "</div>";
 			echo "</div>";
 	}
