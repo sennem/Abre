@@ -22,7 +22,7 @@
 
   if(!isset($_POST['code'])){
     $clientId = getSiteMicrosoftClientId();
-    $url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".$clientId."&response_type=code&redirect_uri=".$portal_root."/core/abre_microsoft_login.php&response_mode=form_post&scope=openid%20profile%20offline_access%20user.read%20calendars.read%20files.read&state=12345";
+    $url = "https://login.microsoftonline.com/common/oauth2/v2.0/authorize?client_id=".$clientId."&response_type=code&redirect_uri=".$portal_root."/core/abre_microsoft_login.php&response_mode=form_post&scope=openid%20profile%20offline_access%20user.read%20calendars.read%20files.read%20mail.read&state=12345";
     header("Location: $url");
   }else{
     if(!isset($_SESSION['usertype'])){ $_SESSION['usertype'] = ""; }
@@ -40,7 +40,7 @@
       'grant_type' => urlencode('authorization_code'),
       'client_secret' => urlencode(getSiteMicrosoftClientSecret()),
       'code' => urlencode($_POST['code']),
-      'scope' => urlencode('openid profile user.read mail.read calendars.read files.read')
+      'scope' => urlencode('openid profile user.read mail.read calendars.read files.read offline_access')
     );
 
     //url-ify the data for the POST
