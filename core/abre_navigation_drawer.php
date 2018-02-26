@@ -116,7 +116,7 @@
 							echo "<span class='truncate' style='margin-left:-10px;'>Settings</span></div>";
 						echo "</div>";
 
-						if($SESSION['auth_service'] == 'google'){
+						if($_SESSION['auth_service'] == 'google'){
 							$subpages = array('General' => array('title' => 'General','path' => 'settings'),'Integrations' => array('title' => 'Integrations','path' => 'settings/integrations'),'Authentication' => array('title' => 'Authentication','path' => 'settings/authentication'),'Usage' => array('title' => 'Usage','path' => 'settings/usage'));
 						}
 						if($_SESSION['auth_service'] == 'microsoft'){
