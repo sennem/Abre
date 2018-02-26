@@ -54,7 +54,7 @@
 
 					echo "</div>";
 
-					//Form Fields
+					//General Settings
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter a Site Title' value='".getSiteTitle()."' id='sitetitle' name='sitetitle' type='text' autocomplete='off'>";
@@ -84,17 +84,23 @@
 						    echo "<input placeholder='Enter the Site Administrator Email' value='".getSiteAdminEmail()."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
 							echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
 						echo "</div>";
-						echo "<div class='input-field col s6'>";
-						    echo "<input placeholder='Enter Student Domain' value='".getSiteStudentDomain()."' id='studentdomain' name='studentdomain' type='text' autocomplete='off'>";
-							echo "<label class='active' for='studentdomain'>Student Domain</label>";
-						echo "</div>";
-						echo "<div class='input-field col s6'>";
-						    echo "<input placeholder='Enter Required Characters' value='".getSiteStudentDomainRequired()."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
-							echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
-						echo "</div>";
+					echo "</div>";
+						
+					echo "<div class='row'>";
 						echo "<div class='col s12'>";
+							echo "<h5 style='margin-top:0;'>Staff and Student Domains</h5>";
 						    echo "<input type='checkbox' class='filled-in' id = 'staffandstudentdomainssame' name='staffandstudentdomainssame' value='checked' ".getStaffStudentMatch()."/>";
-							echo "<label for='staffandstudentdomainssame' style = 'color:#000; margin-bottom:30px;'> The Staff and Student domains are the same with no required characters for students.</label>";
+							echo "<label for='staffandstudentdomainssame' style = 'color:#000; margin-bottom:30px;'> Staff and Student domains use the same domain and naming convention.</label>";
+						echo "</div>";
+						echo "<div id='staffandstudentdomainssame_information'>";
+							echo "<div class='input-field col s6'>";
+							    echo "<input placeholder='Enter Student Domain' value='".getSiteStudentDomain()."' id='studentdomain' name='studentdomain' type='text' autocomplete='off'>";
+								echo "<label class='active' for='studentdomain'>Student Domain</label>";
+							echo "</div>";
+							echo "<div class='input-field col s6'>";
+							    echo "<input placeholder='Enter Required Characters' value='".getSiteStudentDomainRequired()."' id='studentdomainrequired' name='studentdomainrequired' type='text' autocomplete='off'>";
+								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
+							echo "</div>";
 						echo "</div>";
 					echo "</div>";
 
@@ -206,7 +212,23 @@
 				location.reload();
 			})
 		});
+		
+		//Abre Staff/Student Domains
+		if($("#staffandstudentdomainssame").prop("checked")){
+			$("#staffandstudentdomainssame_information").hide();
+		}else{
+			$("#staffandstudentdomainssame_information").show();
+		}
 
+		$("#staffandstudentdomainssame").click(function() {
+			if($("#staffandstudentdomainssame").prop("checked")){
+				$("#staffandstudentdomainssame_information").hide();
+			}else{
+				$("#staffandstudentdomainssame_information").show();
+			}
+		});
+
+		//Abre Community
 		if($("#abre_community").prop("checked")){
 			$("#community_information").show();
 		}else{
