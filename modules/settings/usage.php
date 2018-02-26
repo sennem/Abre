@@ -87,7 +87,7 @@
 
 			//Page Title
 			echo "<div class='row'>";
-				echo "<div class='input-field col s8'>";
+				echo "<div class='input-field col s8' style='margin-top:0px;'>";
 					echo "<h4>Usage Analytics</h4>";
 					if(!$authenticated){
 						echo "<h6>To access Google Analytics, click below to give Google permission to access your usage.</h6>";

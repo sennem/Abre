@@ -31,54 +31,47 @@
 
 					//Page Title
 					echo "<div class='row'>";
-						echo "<div class='input-field col s12'>";
+						echo "<div class='input-field col s12' style='margin-top:0;'>";
 							echo "<h4>Authentication</h4>";
 							echo "<h6>Control single sign-on (SSO) services for staff, students, and parents.</h6>";
 						echo "</div>";
 					echo "</div>";
 
-					//Parent Access
-
-						// echo "<div class='col l12'>";
-						// 	echo "<input type='checkbox' class='formclick filled-in' id = 'parentaccess' name='parentaccess' value='checked' ".getSiteParentAccess()."/>";
-						// 	echo "<label for='parentaccess' style = 'color:#000;'> Allow Parent Access </label>";
-						// echo "</div>";
-
-						echo "<div class='row' id='googleAuthService'>";
-							echo "<div class='input-field col s1 center-align'>";
-									echo "<img src='../../core/images/button_icon_google.png'>";
-							echo "</div>";
-							echo "<div class='input-field col s9'>";
-									echo "<h5 style='padding-top:0px; margin:0px;'>Google Apps Authentication</h5><p>Let your district sign in with a Google account.</p>";
-							echo "</div>";
-							echo "<div class='input-field col s2'>";
-									echo "<a id='exportkeys' href='#googleAuthModal' class='modal-action waves-effect btn-flat white-text googleAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
-							echo "</div>";
+					echo "<div class='row' id='googleAuthService'>";
+						echo "<div class='col s1 center-align'>";
+								echo "<img src='../../core/images/integrations/google.png' style='width:50px;height:50px;background-color:white;color:white;'>";
 						echo "</div>";
-
-						echo "<div class='row' id='microsoftAuthService'>";
-							echo "<div class='input-field col s1 center-align'>";
-									echo "<img src='../../core/images/button_icon_microsoft.png'>";
-							echo "</div>";
-							echo "<div class='input-field col s9'>";
-									echo "<h5 style='padding-top:0px; margin:0px;'>Microsoft Authentication</h5><p>Let your district sign in with a Microsoft account.</p>";
-							echo "</div>";
-							echo "<div class='input-field col s2'>";
-									echo "<a id='exportkeys' href='#microsoftAuthModal' class='modal-action waves-effect btn-flat white-text microsoftAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
-							echo "</div>";
+						echo "<div class='col s9'>";
+								echo "<h5 style='padding-top:0px; margin:0px;'>Google Apps Authentication</h5><p>Let your district sign in with a Google account.</p>";
 						echo "</div>";
-
-						echo "<div class='row' id='facebookAuthService'>";
-							echo "<div class='input-field col s1 center-align'>";
-									echo "<img style='background-color:#3664a2 !important;' src='../../core/images/button_icon_facebook.png'>";
-							echo "</div>";
-							echo "<div class='input-field col s9'>";
-									echo "<h5 style='padding-top:0px; margin:0px;'>Facebook Authentication</h5><p>Let your parents sign in with a Facebook account.</p>";
-							echo "</div>";
-							echo "<div class='input-field col s2'>";
-									echo "<a id='exportkeys' href='#facebookAuthModal' class='modal-action waves-effect btn-flat white-text facebookAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
-							echo "</div>";
+						echo "<div class='col s2'>";
+								echo "<a id='exportkeys' href='#googleAuthModal' class='modal-action waves-effect btn-flat white-text googleAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
 						echo "</div>";
+					echo "</div>";
+
+					echo "<div class='row' id='microsoftAuthService'>";
+						echo "<div class='col s1 center-align'>";
+								echo "<img src='../../core/images/integrations/microsoft.png' style='width:50px;height:50px;background-color:white;color:white;'>";
+						echo "</div>";
+						echo "<div class='col s9'>";
+								echo "<h5 style='padding-top:0px; margin:0px;'>Microsoft Authentication</h5><p>Let your district sign in with a Microsoft account.</p>";
+						echo "</div>";
+						echo "<div class='col s2'>";
+								echo "<a id='exportkeys' href='#microsoftAuthModal' class='modal-action waves-effect btn-flat white-text microsoftAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
+						echo "</div>";
+					echo "</div>";
+
+					echo "<div class='row' id='facebookAuthService'>";
+						echo "<div class='col s1 center-align'>";
+								echo "<img src='../../core/images/integrations/facebook.png' style='width:50px;height:50px;background-color:white;color:white;'>";
+						echo "</div>";
+						echo "<div class='col s9'>";
+								echo "<h5 style='padding-top:0px; margin:0px;'>Facebook Authentication</h5><p>Let your parents sign in with a Facebook account.</p>";
+						echo "</div>";
+						echo "<div class='col s2'>";
+								echo "<a id='exportkeys' href='#facebookAuthModal' class='modal-action waves-effect btn-flat white-text facebookAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
+						echo "</div>";
+					echo "</div>";
 
 						// echo "<div id='apiKeys'>";
 						// 	echo "<div class='col s12'><h6>Google</h6></div>";
@@ -108,23 +101,20 @@
 						// 		echo "<input placeholder='Enter Client Secret' value='".getSiteMicrosoftClientSecret()."' id='microsoftclientsecret' name='microsoftclientsecret' type='text' autocomplete='off'>";
 						// 		echo "<label class='active' for='microsoftclientsecret'>Microsoft Client Secret</label>";
 						// 	echo "</div>";
-							// if($db->query("SELECT * FROM Abre_Students LIMIT 1") && $db->query("SELECT * FROM users_parent LIMIT 1") && superadmin()){
-							// 	echo "<div class='input-field col s12'>";
-							// 		echo "<a id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</a>";
-							// 	echo "</div>";
-							// 	echo "<div class='input-field col s12'>";
-							// 		echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Download All Keys</a>";
-							// 	echo "</div>";
-							// }
+							if($db->query("SELECT * FROM Abre_Students LIMIT 1") && $db->query("SELECT * FROM users_parent LIMIT 1") && superadmin()){
+								echo "<div class='row'>";
+									echo "<div class='input-field col l12 s12' style='margin-top:0;'>";
+										echo "<h4>Student Key Management</h4>";
+									echo "</div>";
+									echo "<div class='input-field col l12 s12'>";
+										echo "<a id='generateallkeys' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Generate Keys for All Students</a>";
+									echo "</div>";
+									echo "<div class='input-field col l12 s12'>";
+										echo "<a id='exportkeys' href='$portal_root/modules/settings/exportkeysfile.php'class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Download All Keys</a>";
+									echo "</div>";
+								echo "</div>";
+							}
 						// echo "</div>";
-
-
-					//Save Button
-					// echo "<div class='row'>";
-					// 	echo "<div class='col s12'>";
-					// 		echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: ".getSiteColor()."'>Save Changes</button>";
-					// 	echo "</div>";
-					// echo "</div>";
 
 				echo "</div>";
 			echo "</div>";
