@@ -80,15 +80,8 @@
           $_SESSION['useremail'] = $infoObject->preferred_username;
           $_SESSION['displayName'] = $infoObject->name;
           if($_SESSION["usertype"] != 'parent' || !isset($_SESSION["usertype"])){
-            // $ch = curl_init();
-            // curl_setopt($ch, CURLOPT_URL, "https://graph.microsoft.com/v1.0/me/photo/$value");
-            // curl_setopt($ch, CURLOPT_HTTPHEADER, array("Authorization: Bearer $accessToken"));
-            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // $result = curl_exec($ch);
-            // error_log($result);
 
-            //TODO: GET USER PHOTO FROM RETURN
-            //$_SESSION['picture'] =
+            $_SESSION['picture'] = $portal_root.'/core/images/abre/profile.png';
 
             //get usertype
             if($studentdomain == NULL){ $studentdomain = $site_domain; }
