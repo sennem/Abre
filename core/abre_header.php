@@ -55,7 +55,7 @@
 
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-				<link rel='stylesheet' href='core/css/materialize.0.97.7.min.css'>
+				<link rel='stylesheet' href='core/css/materialize.0.97.7.1.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
 				<link rel='stylesheet' href='core/css/abre.1.4.6.css'>
 				<link rel='stylesheet' href='core/css/animate.min.css'>
@@ -92,7 +92,7 @@
 
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
-				<link rel='stylesheet' href='core/css/materialize.0.97.7.min.css'>
+				<link rel='stylesheet' href='core/css/materialize.0.97.7.1.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
 				<link rel='stylesheet' href='core/css/abre.1.4.6.css'>
 
