@@ -30,6 +30,12 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/settings.php', function() { init_page(); });
+
+				$('#navigation_top').show();
+				$('#navigation_top').load('modules/".basename(__DIR__)."/menu.php', function() {
+					$('.tab_1').addClass('tabmenuover');
+				});
+
 				ga('set', 'page', '/#settings/');
 				ga('send', 'pageview');
 	    },
@@ -40,6 +46,12 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/integrations.php', function() { init_page(); });
+
+				$('#navigation_top').show();
+				$('#navigation_top').load('modules/".basename(__DIR__)."/menu.php', function() {
+					$('.tab_2').addClass('tabmenuover');
+				});
+
 				ga('set', 'page', '/#settings/integrations/');
 				ga('send', 'pageview');
 	    },
@@ -51,6 +63,12 @@
 				document.title = 'Settings';
 				$( '#modal_holder' ).load( 'modules/settings/modals.php' );
 				$( '#content_holder' ).load( 'modules/settings/authentication.php', function() { init_page(); });
+
+				$('#navigation_top').show();
+				$('#navigation_top').load('modules/".basename(__DIR__)."/menu.php', function() {
+					$('.tab_3').addClass('tabmenuover');
+				});
+
 				ga('set', 'page', '/#settings/authentication/');
 				ga('send', 'pageview');
 	    },
@@ -61,6 +79,12 @@
 				$( '#titletext' ).text('Settings');
 				document.title = 'Settings';
 				$( '#content_holder' ).load( 'modules/settings/usage.php', function() { init_page(); });
+
+				$('#navigation_top').show();
+				$('#navigation_top').load('modules/".basename(__DIR__)."/menu.php', function() {
+					$('.tab_4').addClass('tabmenuover');
+				});
+
 				ga('set', 'page', '/#settings/usage/');
 				ga('send', 'pageview');
 	    },";
