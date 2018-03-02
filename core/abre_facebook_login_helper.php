@@ -58,6 +58,7 @@
   // Set user access token. They are now logged in.
   $_SESSION['facebook_access_token'] = $accessToken->getValue();
   $pagelocation = $portal_root;
+  $_SESSION['auth_service'] = "facebook";
   if(isset($_SESSION["redirecturl"])){
     header("Location: $pagelocation/#".$_SESSION["redirecturl"]);
   }else{

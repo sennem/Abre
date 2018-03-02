@@ -39,6 +39,7 @@
         $client->setAccessToken($_SESSION['google_parent_access_token']);
         $userData = $Service_Oauth2->userinfo->get();
         $userEmail = $userData["email"];
+        $_SESSION['auth_service'] = "microsoft";
         $_SESSION['useremail'] = $userEmail;
         $_SESSION['picture'] = getSiteLogo();
         $_SESSION['usertype'] = 'parent';

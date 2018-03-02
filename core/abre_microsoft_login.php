@@ -71,7 +71,14 @@
     $infoString = base64_decode($info);
     $infoObject = json_decode($infoString);
     $_SESSION['access_token'] = $accessTokenArray;
+    $_SESSION['auth_service'] = "microsoft";
     $pagelocation = $portal_root;
+
+    if(isset($_SESSION["redirecturl"])){
+      header("Location: $pagelocation/#".$_SESSION["redirecturl"]);
+    }else{
+      header("Location: $pagelocation");
+    }
 
     try{
       if(isset($_SESSION['access_token'])){
@@ -107,6 +114,7 @@
             }
           }else{
             //we already know the user is a parent but set to ensure.
+            $_SESSION['auth_service'] = "microsoft";
             $_SESSION['usertype'] = "parent";
             $_SESSION['picture'] = getSiteLogo();
           }

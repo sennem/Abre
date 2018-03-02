@@ -111,6 +111,7 @@
 		if(isset($_GET['code'])){
 			$client->fetchAccessTokenWithAuthCode($_GET['code']);
 			$_SESSION['access_token'] = $client->getAccessToken();
+      $_SESSION['auth_service'] = "google";
 			$pagelocation = $portal_root;
 			if(isset($_SESSION["redirecturl"])){
         header("Location: $pagelocation/#".$_SESSION["redirecturl"]);
