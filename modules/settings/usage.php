@@ -90,8 +90,8 @@
 				echo "<div class='input-field col s8' style='margin-top:0px;'>";
 					echo "<h4>Usage Analytics</h4>";
 					if(!$authenticated){
-						echo "<h6>To access Google Analytics, click below to give Google permission to access your usage.</h6>";
-						echo "<a class='waves-effect waves-light btn-large mdl-color-text--white' style='text-align:left; text-transform:none; background-color:".getSiteColor()."; font-size:14px' href='$authUrl'><i class='fa fa-google material-icons left' style='width:20px'></i>Enable Google Analytics</a>";
+						echo "<p>To access Google Analytics, click below to give Google permission to access your usage.</p>";
+						echo "<a class='waves-effect btn-flat white-text' style='background-color:".getSiteColor().";' href='$authUrl'>Enable Google Analytics</a>";
 					}
 				echo "</div>";
 				if($authenticated && $viewId != ""){

@@ -35,7 +35,7 @@
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12' style='margin-top:0;'>";
 							echo "<h4>Integrations</h4>";
-							echo "<h6>Connect Abre to third party services</h6>";
+							echo "<p>Connect Abre to third party services</p>";
 						echo "</div>";
 					echo "</div>";
 

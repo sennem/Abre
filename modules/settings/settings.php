@@ -30,32 +30,30 @@
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
 
-					//Page Title
-					echo "<div class='row'>";
+					//Update Checker
+					$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
+					$context = stream_context_create($opts);
+					$content = file_get_contents("https://api.github.com/repos/abreio/Abre/releases/latest", false, $context);
+					$json = json_decode($content, true);
+					$currentversion = $json['name'];
 
-						//Update Abre if new version available
-						$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
-						$context = stream_context_create($opts);
-						$content = file_get_contents("https://api.github.com/repos/abreio/Abre/releases/latest", false, $context);
-						$json = json_decode($content, true);
-						$currentversion = $json['name'];
-
-						if($abre_version < $currentversion){
-							$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
+					if($abre_version < $currentversion){
+						$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
+						echo "<div class='row'>";
 							echo "<div class='col s12'>";
 								echo "<div id='updateabre' data-version='$currentlink' class='card white-text pointer' style='background-color:#4CAF50; padding:20px;'>A new version of Abre is available. <u>Click here to update to $currentversion.</u></div>";
 							echo "</div>";
-						}
-
-						echo "<div class='input-field col s12' style='margin-top:0;'>";
-							echo "<h4>General Settings</h4>";
-							echo "<h6>Adjust Abre site settings and preferences. You can also manage colors and icons.</h6>";
 						echo "</div>";
-
-					echo "</div>";
+					}
 
 					//General Settings
 					echo "<div class='row'>";
+					
+						echo "<div class='input-field col s12' style='margin-top:0;'>";
+							echo "<h4>General Settings</h4>";
+							echo "<p>Adjust Abre site settings and preferences. You can also manage colors and icons.</p><br>";
+						echo "</div>";					
+					
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter a Site Title' value='".getSiteTitle()."' id='sitetitle' name='sitetitle' type='text' autocomplete='off'>";
 							echo "<label class='active' for='sitetitle'>Site Title</label>";
@@ -84,11 +82,14 @@
 						    echo "<input placeholder='Enter the Site Administrator Email' value='".getSiteAdminEmail()."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
 							echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
 						echo "</div>";
-					echo "</div>";
 						
+					echo "</div>";
+					
+					//Staff and Student Domains
 					echo "<div class='row'>";
+					
 						echo "<div class='col s12'>";
-							echo "<h5 style='margin-top:0;'>Staff and Student Domains</h5>";
+							echo "<h4 style='margin-top:0;'>Staff and Student Domains</h4>";
 						    echo "<input type='checkbox' class='filled-in' id = 'staffandstudentdomainssame' name='staffandstudentdomainssame' value='checked' ".getStaffStudentMatch()."/>";
 							echo "<label for='staffandstudentdomainssame' style = 'color:#000; margin-bottom:30px;'> Staff and Student domains use the same domain and naming convention.</label>";
 						echo "</div>";
@@ -102,12 +103,14 @@
 								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
 							echo "</div>";
 						echo "</div>";
+						
 					echo "</div>";
 
 					//Site Icon
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
-							echo "<h5 style='margin-top:0;'>Site Icon</h5><p>Your site icon is used for the site login and favicon, where it’s useful in helping your users quickly identify your school. We recommend a square image with a resolution of 200px by 200px. The image should have a transparent or white background.</p>";
+							echo "<h4 style='margin-top:0;'>Site Icon</h4>";
+							echo "<p>Your site icon is used for the site login and favicon, where it’s useful in helping your users quickly identify your school. We recommend a square image with a resolution of 200px by 200px. The image should have a transparent or white background.</p>";
 							$sitelogoexisting = getSiteLogo();
 							if($sitelogoexisting != ""){
 								echo "<img class='sitelogobutton pointer' alt='Site Logo' src='$sitelogoexisting' width='125px' height='125px' style='margin-bottom:33px;'>";
@@ -121,7 +124,7 @@
 					//Abre Community
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
-							echo "<h5>Abre Community</h5>";
+							echo "<h4>Abre Community</h4>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".getSiteAbreCommunity()."/>";
 							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/community/' style='color:#000;' target='_blank'>Learn more</a></label>";
 						echo "</div>";
