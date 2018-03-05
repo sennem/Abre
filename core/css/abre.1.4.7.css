@@ -21,6 +21,11 @@ input[type="checkbox"]
     display:block !important;
 }
 
+/* necessary for pickadate js and google picker to coexist */
+.picker-dialog-content {
+position: relative;
+}
+
 button{ font-weight: 500; }
 hr{ padding:0; margin:0; display: block; height: 1px; border: 0; border-top: 1px solid #e6e6e6;  }
 textarea{ border:0; border-bottom:1px solid #949393; height:100px; outline: 0; }
