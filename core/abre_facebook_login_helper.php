@@ -58,6 +58,7 @@
   // Set user access token. They are now logged in.
   $_SESSION['facebook_access_token'] = $accessToken->getValue();
   $pagelocation = $portal_root;
+  $_SESSION['auth_service'] = "facebook";
   if(isset($_SESSION["redirecturl"])){
     header("Location: $pagelocation/#".$_SESSION["redirecturl"]);
   }else{
@@ -77,6 +78,7 @@
         $_SESSION['useremail'] = $user['email'];
         $_SESSION['usertype'] = 'parent';
         $_SESSION['displayName'] = $user['name'];
+        $_SESSION['auth_service'] = "facebook";
         $_SESSION['picture'] = getSiteLogo();
       }
       if($_SESSION['usertype'] != ""){
@@ -84,7 +86,7 @@
         if($result = $db->query("SELECT COUNT(*) FROM users_parent WHERE email = '".$_SESSION['useremail']."'")){
           $resultrow = $result->fetch_assoc();
           $count = $resultrow["COUNT(*)"];
-          
+
           if($count == 1){
             //If not already logged in, check and get a refresh token
             if(!isset($_SESSION['loggedin'])){

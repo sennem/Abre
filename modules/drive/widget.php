@@ -22,9 +22,13 @@
 	require_once('functions.php');
 
 	if($_SESSION['usertype'] != 'parent'){
-  		
-  		DisplayWidget('drive','cloud','Drive','#FF9800','https://drive.google.com');
-	
+  		if($_SESSION['auth_service'] == 'google'){
+				DisplayWidget('drive','cloud','Drive','#FF9800','https://drive.google.com');
+			}
+			if($_SESSION['auth_service'] == 'microsoft'){
+				DisplayWidget('drive','cloud','Drive','#FF9800','https://onedrive.live.com/');
+			}
+
 	}
-	
+
 ?>

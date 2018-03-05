@@ -22,9 +22,11 @@
 	require_once('functions.php');
 
 	if($_SESSION['usertype'] != 'parent'){
-  		
-  		DisplayWidget('classroom','class','Classroom','#4CAF50','https://classroom.google.com');
-	
+
+			if($_SESSION['auth_service'] == "google"){
+				DisplayWidget('classroom','class','Classroom','#4CAF50','https://classroom.google.com');
+			}
+
 	}
-	
+
 ?>

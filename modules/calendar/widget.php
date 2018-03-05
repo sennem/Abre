@@ -22,9 +22,12 @@
 	require_once('functions.php');
 
 	if($_SESSION['usertype'] != 'parent'){
-  		
-  		DisplayWidget('calendar','event','Calendar','#2196F3','https://calendar.google.com');
-	
+		if($_SESSION['auth_service'] == "google"){
+			DisplayWidget('calendar','event','Calendar','#2196F3','https://calendar.google.com');
+		}
+		if($_SESSION['auth_service'] == "microsoft"){
+			DisplayWidget('calendar','event','Calendar','#2196F3','https://outlook.live.com/');
+		}
 	}
-	
+
 ?>
