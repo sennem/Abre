@@ -31,11 +31,11 @@
 
 	  echo "<div class='col s12'>";
       echo "<ul class='tabs_2' style='background-color:".getSiteColor()."'>";
-        echo "<li class='tab col s3 tab_1 formmenu pointer'><a href='#settings'>General</a></li>";
-				echo "<li class='tab col s3 tab_2 formmenu pointer'><a href='#settings/integrations'>Integrations</a></li>";
-				echo "<li class='tab col s3 tab_3 formmenu pointer'><a href='#settings/authentication'>Authentication</a></li>";
+        echo "<li class='tab col s3 tab_1 settingsmenu pointer' data='#settings'><a href='#settings'>General</a></li>";
+				echo "<li class='tab col s3 tab_2 settingsmenu pointer' data='#settings/integrations'><a href='#settings/integrations'>Integrations</a></li>";
+				echo "<li class='tab col s3 tab_3 settingsmenu pointer' data='#settings/authentication'><a href='#settings/authentication'>Authentication</a></li>";
         if($_SESSION['auth_service'] == "google"){
-          echo "<li class='tab col s3 tab_4 formmenu pointer'><a href='#settings/usage'>Usage</a></li>";
+          echo "<li class='tab col s3 tab_4 settingsmenu pointer' data='#settings/usage'><a href='#settings/usage'>Usage</a></li>";
         }
 			echo "</ul>";
 		echo "</div>";
@@ -49,7 +49,7 @@
 
 	$(function()
 	{
-		$( ".formmenu" ).click(function()
+		$( ".settingsmenu" ).click(function()
 		{
 			window.open($(this).attr("data"), '_self');
 		});
