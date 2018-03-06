@@ -16,38 +16,39 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-  //Include required files
-  require_once(dirname(__FILE__) . '/../core/abre_functions.php');
+	  //Include required files
+	  require_once(dirname(__FILE__) . '/../core/abre_functions.php');
+	
+	  //Load configuration settings
+	  $studentdomain = getSiteStudentDomain();
+	  $studentdomainrequired = getSiteStudentDomainRequired();
+	
+	  //Add staff profile picture to directory if entry exists and picture is empty
+	  function staffLogin(){
+	    $_SESSION['usertype'] = "staff";
+	
+	  	include "abre_dbconnect.php";
+	    $sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
+		  $result = $db->query($sql);
+		  while($row = $result->fetch_assoc()){
+	      $currentpicture = $row['picture'];
+	
+	      if($currentpicture != $_SESSION['picture']){
+	        $stmt = $db->stmt_init();
+			    $sql = "UPDATE directory SET picture = ? WHERE email = ?";
+			    $stmt->prepare($sql);
+			    $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
+			    $stmt->execute();
+			    $stmt->close();
+	      }
+	    }
+	  }
 
-  //Load configuration settings
-  $studentdomain = getSiteStudentDomain();
-  $studentdomainrequired = getSiteStudentDomainRequired();
+  	function emailMatchCheck(){
+	  
+  		if(getStaffStudentMatch() == "checked" && !superadmin()){
 
-  //Add staff profile picture to directory if entry exists and picture is empty
-  function staffLogin(){
-    $_SESSION['usertype'] = "staff";
-
-  	include "abre_dbconnect.php";
-    $sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
-	  $result = $db->query($sql);
-	  while($row = $result->fetch_assoc()){
-      $currentpicture = $row['picture'];
-
-      if($currentpicture != $_SESSION['picture']){
-        $stmt = $db->stmt_init();
-		    $sql = "UPDATE directory SET picture = ? WHERE email = ?";
-		    $stmt->prepare($sql);
-		    $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
-		    $stmt->execute();
-		    $stmt->close();
-      }
-    }
-  }
-
-  function emailMatchCheck(){
-    if(getStaffStudentMatch() == "checked"){
-
-      //Check to see if email is in Abre_Staff table
+      		//Check to see if email is in Abre_Staff table
 			include "abre_dbconnect.php";
 			$sql = "SELECT count(*) FROM Abre_Staff where EMail1='".$_SESSION['useremail']."'";
 			$result = $db->query($sql);
@@ -58,6 +59,7 @@
 			}else{
 				staffLogin();
 			}
+			
 		}else{
 			staffLogin();
 		}
