@@ -53,8 +53,8 @@
 										echo "onclick='toggle_drawer()'";
 									}
 									echo ">";
-									echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>$pageicon</i>";
-									echo "<span class='truncate' style='margin-left:-10px;'>$pagetitle</span>";
+									echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>$pageicon</i>";
+									echo "<span class='truncate'>$pagetitle</span>";
 									echo "</span>";
 							echo "</div>";
 
@@ -87,8 +87,8 @@
 					echo "<li style='display:block;'>";
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'>";
-							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>help</i>";
-							echo "<span class='truncate' style='margin-left:-10px;'>Send Feedback</span></a>";
+							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>help</i>";
+							echo "<span class='truncate'>Send Feedback</span></a>";
 						echo "</div>";
 					echo "</li>";
 				}
@@ -99,8 +99,8 @@
 					echo "<li style='display:block;'>";
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#store' onclick='toggle_drawer()'>";
-							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>store</i>";
-							echo "<span class='truncate' style='margin-left:-10px;'>Store</span></span>";
+							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>store</i>";
+							echo "<span class='truncate'>Store</span></span>";
 						echo "</div>";
 					echo "</li>";
 				}
@@ -112,8 +112,8 @@
 
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#settings' onclick='toggle_drawer()'>";
-							echo "<i class='mdl-color-text--grey-500 material-icons drawericon' role='presentation'>settings</i>";
-							echo "<span class='truncate' style='margin-left:-10px;'>Settings</span></span>";
+							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>settings</i>";
+							echo "<span class='truncate'>Settings</span></span>";
 						echo "</div>";
 					echo "</li>";
 				}
