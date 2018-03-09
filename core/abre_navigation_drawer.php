@@ -65,7 +65,7 @@
 									$pagepath=$sublinks['path'];
 									echo "<div class='collapsible-body pointer' style='border:0;'>";
 										echo "<span class='mdl-navigation__link path' data-path='#$pagepath' onclick='toggle_drawer()'>";
-										echo "<span class='truncate' style='margin-left:60px; font-weight:normal !important;'>";
+										echo "<span class='truncate' style='margin-left:75px; font-weight:normal !important;'>";
 											echo $sublinks['title'];
 										echo "</span></span>";
 									echo "</div>";
