@@ -93,7 +93,7 @@
 					<label for="rss_link" class="active">Link</label>
 				</div>
 				<div class='input-field col s12'>
-					Select a color: <input type='text' id="stream_color"><span class='pointer' id='removeColor' style='padding-left:5px; display:none'><a style='color:<?php echo getSiteColor() ?>;'>remove color</a></span>
+					Select a color: <input type='text' id="stream_color"><span class='pointer' id='removeColor' style='padding-left:5px; display:none'><a style='color:#000'>remove color</a></span>
 				</div>
 			</div>
 			<div class='row'>
