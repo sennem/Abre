@@ -44,21 +44,21 @@
 		function init_page(loader) {
 			
 			//Selection State coloring for App Drawer
-			$('.mainapplink').css('background-color','#fff');
+			$('.mainapplink').css('background-color','#fdfdfd');
 			$('.mainapplink > span').css('color','#000');
-			$('.mainapplink > span > i').css('color','#737373');
+			$('.mainapplink > span > i').css('color','#747474');
 			if(window.location.hash) {
 				var hash = window.location.hash.substring(1);
 				hash = hash.split('/')[0];
 				if($("#abreapp_" + hash).length == 1){
-					$('#abreapp_' + hash).css('background-color','#eee');
+					$('#abreapp_' + hash).css('background-color','#f3f3f3');
 					$('#abreapp_' + hash + '> span').css('color','<?php echo getSiteColor(); ?>');
 					$('#abreapp_' + hash + '> span > i').css('color','<?php echo getSiteColor(); ?>');
 				}
 			}
 			else
 			{
-				$('#abreapp_').css('background-color','#eee');
+				$('#abreapp_').css('background-color','#f3f3f3');
 				$('#abreapp_ > span').css('color','<?php echo getSiteColor(); ?>');
 				$('#abreapp_ > span > i').css('color','<?php echo getSiteColor(); ?>');
 			}

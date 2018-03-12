@@ -31,7 +31,7 @@
 				echo "<span class='mdl-color-text--white truncate'>".$_SESSION['useremail']."</span>";
 			?>
 		</header>
-		<nav class='navigation collapse mdl-navigation mdl-color--white'>
+		<nav class='navigation collapse mdl-navigation' style='background-color: #fdfdfd;'>
 			<?php
 				//Load Modules
 				for($modulecountloop = 0; $modulecountloop < $modulecount; $modulecountloop++){
@@ -53,7 +53,7 @@
 										echo "onclick='toggle_drawer()' ";
 									}
 									echo ">";
-										echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>$pageicon</i>";
+										echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #747474' role='presentation'>$pageicon</i>";
 										echo "<span class='truncate'>$pagetitle</span>";
 									echo "</span>";
 							echo "</div>";
@@ -87,7 +87,7 @@
 					echo "<li style='display:block;'>";
 						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'>";
-							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>help</i>";
+							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #747474' role='presentation'>help</i>";
 							echo "<span class='truncate'>Send Feedback</span></a>";
 						echo "</div>";
 					echo "</li>";
@@ -99,7 +99,7 @@
 					echo "<li style='display:block;'>";
 						echo "<div class='collapsible-header mainapplink' id='abreapp_store' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#store' onclick='toggle_drawer()'>";
-							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>store</i>";
+							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #747474' role='presentation'>store</i>";
 							echo "<span class='truncate'>Store</span></span>";
 						echo "</div>";
 					echo "</li>";
@@ -112,7 +112,7 @@
 
 						echo "<div class='collapsible-header mainapplink' id='abreapp_settings' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#settings' onclick='toggle_drawer()'>";
-							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>settings</i>";
+							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #747474' role='presentation'>settings</i>";
 							echo "<span class='truncate'>Settings</span></span>";
 						echo "</div>";
 					echo "</li>";
