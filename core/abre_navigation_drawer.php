@@ -85,7 +85,7 @@
 					echo "<div class='mdl-menu__item--full-bleed-divider' style='margin:10px 0 10px 0'></div>";
 
 					echo "<li style='display:block;'>";
-						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
+						echo "<div class='collapsible-header mainapplink' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<a class='mdl-navigation__link modal-trigger' href='#feedback' onclick='toggle_drawer()'>";
 							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #747474' role='presentation'>help</i>";
 							echo "<span class='truncate'>Send Feedback</span></a>";
