@@ -45,16 +45,16 @@
 					if($pageview == 1 && $drawerhidden != 1){
 
 						echo "<li style='display:block;'>";
-							echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";;
+							echo "<div class='collapsible-header mainapplink' id='abreapp_$pagepath' style='padding:0; border-bottom: 0;'>";;
 									if($subpages!=NULL){
 										echo "<span class='mdl-navigation__link' ";
 									}else{
 										echo "<span class='mdl-navigation__link path' data-path='#$pagepath' ";
-										echo "onclick='toggle_drawer()'";
+										echo "onclick='toggle_drawer()' ";
 									}
 									echo ">";
-									echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>$pageicon</i>";
-									echo "<span class='truncate'>$pagetitle</span>";
+										echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>$pageicon</i>";
+										echo "<span class='truncate'>$pagetitle</span>";
 									echo "</span>";
 							echo "</div>";
 
@@ -97,7 +97,7 @@
 				if(superadmin())
 				{
 					echo "<li style='display:block;'>";
-						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
+						echo "<div class='collapsible-header mainapplink' id='abreapp_store' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#store' onclick='toggle_drawer()'>";
 							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>store</i>";
 							echo "<span class='truncate'>Store</span></span>";
@@ -110,7 +110,7 @@
 				{
 					echo "<li style='display:block;'>";
 
-						echo "<div class='collapsible-header' style='padding:0; background-color:none; border-bottom: 0;'>";
+						echo "<div class='collapsible-header mainapplink' id='abreapp_settings' style='padding:0; background-color:none; border-bottom: 0;'>";
 							echo "<span class='mdl-navigation__link path' data-path='#settings' onclick='toggle_drawer()'>";
 							echo "<i class='material-icons drawericon' style='margin-left:-3px; color: #737373' role='presentation'>settings</i>";
 							echo "<span class='truncate'>Settings</span></span>";
