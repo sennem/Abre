@@ -28,23 +28,30 @@
   $authorFirstName = $resultrow['firstname'];
   $authorLastName = $resultrow['lastname'];
 
-  if(isset($_POST['post_title'])){
+  if($_POST['post_title'] != ""){
     $postTitle = $_POST['post_title'];
   }else{
-
+		$response = array("status" => "Error", "message" => "Error! You did not provide a post title!");
+		header("Content-Type: application/json");
+		echo json_encode($response);
+		exit;
   }
-  if(isset($_POST['post_stream'])){
+  if($_POST['post_stream'] != ""){
     $postStream = $_POST['post_stream'];
   }else{
-
+		$response = array("status" => "Error", "message" => "Please provide a post stream!");
+		header("Content-Type: application/json");
+		echo json_encode($response);
+		exit;
   }
 
-	$sql = "SELECT `group`, staff_building_restrictions, student_building_restrictions FROM streams WHERE title = '$postStream' LIMIT 1";
+	$sql = "SELECT `group`, staff_building_restrictions, student_building_restrictions, color FROM streams WHERE title = '$postStream' LIMIT 1";
 	$result = $db->query($sql);
 	$value = $result->fetch_assoc();
 	$postGroup = $value['group'];
 	$staffRestrictions = $value['staff_building_restrictions'];
 	$studentRestrictions = $value['student_building_restrictions'];
+	$color = $value['color'];
 
 	if($staffRestrictions == ""){
 		$staffRestrictions = "No Restrictions";
@@ -54,17 +61,26 @@
 		$studentRestrictions = "No Restrictions";
 	}
 
-  if(isset($_POST['post_content'])){
+  if($_POST['post_content'] != ""){
     $postContent = $_POST['post_content'];
   }else{
-
+		$response = array("status" => "Error", "message" => "Please provide content for your post!");
+		header("Content-Type: application/json");
+		echo json_encode($response);
+		exit;
   }
 
   $stmt = $db->stmt_init();
-  $sql = "INSERT INTO stream_posts (post_author, author_firstname, author_lastname, post_groups, post_title, post_stream, post_content, staff_building_restrictions, student_building_restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  $sql = "INSERT INTO stream_posts (post_author, author_firstname, author_lastname, post_groups, post_title, post_stream, post_content, color, staff_building_restrictions, student_building_restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   $stmt->prepare($sql);
-  $stmt->bind_param("sssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $staffRestrictions, $studentRestrictions);
+  $stmt->bind_param("ssssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $color, $staffRestrictions, $studentRestrictions);
   $stmt->execute();
+	if($stmt->error != ""){
+		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again!");
+		header("Content-Type: application/json");
+		echo json_encode($response);
+		exit;
+	}
   $stmt->close();
 
   $db->close();
