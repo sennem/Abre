@@ -810,4 +810,21 @@
 		return $schoolCodeArray;
 	}
 
+	//Admin Check
+	function AdminCheck($email){
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		$contract = encrypt('Administrator', "");
+		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$email' AND contract = '$contract'";
+		$result = $db->query($sql);
+		$returnrow = $result->fetch_assoc();
+		$count = $returnrow["COUNT(*)"];
+		$db->close();
+		if($count >= 1){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 ?>
