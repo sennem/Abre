@@ -24,10 +24,10 @@
 
 	//Display Stream and Widgets
 	echo "<div class='row'>";
-	
+
 		//Stream
 		echo "<div id='streamstream'>";
-		
+
 			//Display Stream Buttons
 			require('stream_navigation.php');
 
@@ -35,112 +35,114 @@
 			echo "<div id='streamcards'>";
 
 				require('stream_all.php');
-				
+
 			echo "</div>";
-			
+
 			//Loader
 			echo "<div style='clear:both; height:60px;'><div id='showmorestream' style='display:none; position:relative; top:50%; left:50%; margin-left:-20px;'>";
 				echo "<div class='mdl-spinner mdl-js-spinner is-active'></div>";
 			echo "</div></div>";
-			
+
 			//Scroll to Top
 			echo "<div class='scrollbutton pointer' style='display:none; position:fixed; width:90px; left:50%; bottom:10px; margin-left:-45px; text-align:center; z-index:1000;'><a href ='#' style='font-size:12px; color:#fff; padding:5px 10px; border-radius:3px; background-color: ".getSiteColor()."; white-space: nowrap;'>Scroll To Top</a></div>";
-			
+
 		echo "</div>";
-		
+
 		//Widget
 		echo "<div id='streamwidgets'>";
 
 			//Display Widgets
 			require('widgets.php');
-			
+
 		echo "</div>";
-		
+
+		require "stream_fab.php";
+
 	echo "</div>";
-	
+
 ?>
 
 <script>
 
 	$(function(){
-		
+
 		//Variables
 		var Page = "all";
 		var StreamStart = 0;
 		var StreamEnd = 24;
 		var LoaderCheck = false;
-			
-		//Paging function	
+
+		//Paging function
 		function streamPaging(start,end){
-			
+
 			$.get('modules/stream/stream_'+Page+'.php?StreamStartResult='+start+'&StreamEndResult='+end, function(results){
 				$('#showmorestream').hide();
 			    $('#streamcards').append(results);
 			});
-			
+
 		}
-		
+
 		//Detect when at bottom of page
 		$('.mdl-layout__content').on('scroll', function(){
-			
+
 			if($(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight){
-				
+
 				LoaderCheck = $('#showmorestream').is(":visible");
-				
+
 				if(LoaderCheck === false){
-				    
+
 				    $('#showmorestream').show();
 				    StreamStart = StreamStart + 24;
 					StreamEnd = StreamEnd + 24;
 					streamPaging(StreamStart,StreamEnd);
-					
+
 				}
-			         
+
 			}
-			
+
     	})
-		
+
 		function pageChange(Page){
-			
+
 			StreamStart = 0;
 			StreamEnd = 24;
-			
+
 			$('#all, #likes, #comments').prop("disabled", false);
 			$('#streamnavigationloader').show();
 			$.get('modules/stream/stream_'+Page+'.php?StreamStartResult='+StreamStart+'&StreamEndResult='+StreamEnd, function(results){
 				$('#streamnavigationloader').hide();
 			    $('#streamcards').html(results);
 			});
-			
+
 		}
-		
+
 		//View All Streams
 		$( "#all" ).unbind().click(function(){
-			
+
 			pageChange("all");
 			Page = "all";
 			$("#all").attr( "disabled", "disabled" );
-			
+
 		});
-		
+
 		//View Likes
 		$("#likes").unbind().click(function(){
-			
+
 			pageChange("likes");
 			Page = "likes";
 			$("#likes").attr( "disabled", "disabled" );
-			
+
 		});
-		
+
 		//View Likes
 		$("#comments").unbind().click(function(){
-			
+
 			pageChange("comments");
 			Page = "comments";
 			$("#comments").attr( "disabled", "disabled" );
-			
+
 		});
-		
+
 		//Scroll to Top Functionality
 		$('.mdl-layout__content').scroll(function(){
 			if($(this).scrollTop() > 1000){
@@ -149,13 +151,32 @@
 				$(".scrollbutton").fadeOut();
 			}
 		});
-		
+
 		//Scroll to Top Button
 		$('.scrollbutton').click(function(){
 			$('.mdl-layout__content').animate({scrollTop : 0},500);
 			return false;
 		});
-		
+
+		$(".streampost").unbind().click(function(event){
+			event.preventDefault();
+			$("#post_title").val('');
+			$("#post_stream").val('');
+			$("#post_content").val('');
+			$("#postStudentRestrictions").val('No Restrictions');
+			$("#postStaffRestrictions").val('No Restrictions');
+			$("#postStudentRestrictionsDiv").hide();
+			$("#postStaffRestrictionsDiv").hide();
+
+			$('#streampost').openModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function(){
+					 $('select').material_select();
+				}
+			});
+		});
+
 
 	});
 
