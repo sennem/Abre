@@ -42,67 +42,67 @@
 					echo "</div></div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Job Titles";
 							if(!$dropdownArray['jobTitles'] == "" && isset($dropdownArray['jobTitles'])){
 								echo "<textarea class='materialize-textarea' placeholder='Enter Job Titles Separated by New Line' id='jobTitles' name='jobTitles'>".$dropdownArray['jobTitles']."</textarea>";
 							}else{
 								echo "<textarea class='materialize-textarea' placeholder='Enter Job Titles Separated by New Line' id='jobTitles' name='jobTitles'></textarea>";
 							}
+							echo "<label for='jobTitles' class='active'>Job Titles</label>";
 						echo "</div>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Contract Options";
 							if(!$dropdownArray['contractOptions'] == "" && isset($dropdownArray['contractOptions'])){
 								echo "<textarea class='materialize-textarea' placeholder='Enter Contract Options Separated by New Line' id='contractOptions' name='contractOptions'>".$dropdownArray['contractOptions']."</textarea>";
 							}
 							else{
 								echo "<textarea class='materialize-textarea' placeholder='Enter Contract Options Separated by New Line' id='contractOptions' name='contractOptions'></textarea>";
 							}
+							echo "<label for='jobOptions' class='active'>Contract Options</label>";
 						echo "</div>";
 					echo "</div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Classification Types";
 							if(!$dropdownArray['classificationTypes'] == "" && isset($dropdownArray['classificationTypes'])){
 								echo "<textarea class='materialize-textarea' placeholder='Enter Classificaton Types Separated by New Line' id='classificationTypes' name='classificationTypes'>".$dropdownArray['classificationTypes']."</textarea>";
 							}else{
 								echo "<textarea class='materialize-textarea' placeholder='Enter Classificaton Types Separated by New Line' id='classificationTypes' name='classificationTypes'></textarea>";
 							}
+							echo "<label for='classificationTypes' class='active'>Classification Types</label>";
 						echo "</div>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Home Buildings";
 							if(!$dropdownArray['homeBuildings'] == "" && isset($dropdownArray['homeBuildings'])){
 								echo "<textarea class='materialize-textarea' placeholder='Enter Buildings Separated by New Line' id='homeBuildings' name='homeBuildings'>".$dropdownArray['homeBuildings']."</textarea>";
 							}else{
 								echo "<textarea class='materialize-textarea' placeholder='Enter Buildings Separated by New Line' id='homeBuildings' name='homeBuildings'></textarea>";
 							}
+							echo "<label for='homeBuildings' class='active'>Home Buildings</label>";
 						echo "</div>";
 			  	echo "</div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Subjects";
 							if(!$dropdownArray['subjects'] == "" && isset($dropdownArray['subjects'])){
 								echo "<textarea class='materialize-textarea' placeholder='Enter Subjects Separated by New Line' id='subjects' name='subjects'>".$dropdownArray['subjects']."</textarea>";
 							}else{
 								echo "<textarea class='materialize-textarea' placeholder='Enter Subjects Separated by New Line' id='subjects' name='subjects'></textarea>";
 							}
+							echo "<label for='subjects' class='active'>Subjects</label>";
 						echo "</div>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Level of Education";
 							if(!$dropdownArray['educationLevel'] == "" && isset($dropdownArray['educationLevel'])){
 								echo "<textarea class='materialize-textarea' placeholder='Enter Levels of Education Separated by New Line' id='educationLevel' name='educationLevel' type='text'>".$dropdownArray['educationLevel']."</textarea>";
 							}else{
 								echo "<textarea class='materialize-textarea' placeholder='Enter Levels of Education Separated by New Line' id='educationLevel' name='educationLevel' type='text'></textarea>";
 							}
+							echo "<label for='educationLevel' class='active'>Level of Education</label>";
 						echo "</div>";
 					echo "</div>";
 					echo "<div class='row'>";
 						echo "<div class='input-field col l6 s12'>";
-							echo "Support Ticket Email";
 							if(!$dropdownArray['supportTicket'] == "" && isset($dropdownArray['supportTicket'])){
 								echo "<input type='text' class='materialize-input' placeholder='Enter Support Ticket Email Address' id='suportTicketEmail' name='supportTicket' value ='".$dropdownArray['supportTicket']."'>";
 							}else{
 								echo "<input type='text' class='materialize-input' placeholder='Enter Support Ticket Email Address' id='suportTicketEmail' name='supportTicket'>";
 							}
+							echo "<label for='supportTicket' class='active'>Support Ticket Email</label>";
 						echo "</div>";
 					echo "</div>";
 					echo "<div class='row'>";
