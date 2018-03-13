@@ -792,7 +792,7 @@
 		//get schools codes for the staff member
 		$schoolCodeArray = array();
 		if($_SESSION['usertype'] == "staff"){
-			$sql = "SELECT SchoolCode FROM Abre_Staff WHERE EMail1 = 'boes_k@fairfield-city.k12.oh.us'";
+			$sql = "SELECT SchoolCode FROM Abre_Staff WHERE EMail1 = '".$_SESSION['useremail']."'";
 			$resultrow = $db->query($sql);
 			$count = mysqli_num_rows($resultrow);
 			while($result = $resultrow->fetch_assoc()){
