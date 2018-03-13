@@ -26,15 +26,19 @@
 		<!--Feedback modal-->
 		<div id='feedback' class='modal modal-fixed-footer modal-mobile-full'>
 			<form class='col s12' id='form-feedback' method='post' action='core/abre_feedback_submit.php'>
-				<div class='modal-content'>
-					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-					<div class='row'>
-						<div class='col s12'>
-							<h4>Send Feedback</h4>
-							<p>We welcome problem reports, feature ideas and general comments.</p>
-							<textarea id='textarea' name='textarea' class='materialize-textarea' placeholder="Write a brief description" required></textarea>
-					    </div>
-					</div>
+				<div class='modal-content' style="padding: 0px !important;">
+          <div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+            <div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Send Feedback</span></div>
+            <div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+          </div>
+          <div style='padding: 0px 24px 0px 24px;'>
+  					<div class='row'>
+  						<div class='input-field col s12'>
+  							<textarea id='textarea' name='textarea' class='materialize-textarea' placeholder="Write a brief description" required></textarea>
+                <label class="active" for="textarea">We welcome problem reports, feature ideas and general comments.</label>
+  					    </div>
+  					</div>
+          </div>
 			  </div>
 			  <div class='modal-footer'>
 					<button type='submit' class='modal-action waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>'>Submit</button>
