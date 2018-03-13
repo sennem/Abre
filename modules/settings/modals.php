@@ -29,33 +29,35 @@
 	?>
 	<div id='googleAuthModal' class='modal modal-fixed-footer modal-mobile-full' style="width:90%">
 		<form id='googleAuthOptionsForm' method="post" action='#'>
-		<div class='modal-content'>
-			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-			<div class='row'>
-				<div class='col s12'><h4>Google Authentication Options</h4></div>
-        <div class='col s12'><h5>API Credentials</h5></div>
-				<div class='input-field col s12 l6'>
-					<input placeholder="Enter Client ID" id="googleclientid" value="<?php echo getSiteGoogleClientId() ?>" name="googleclientid" type="text" autocomplete="off">
-					<label for="googleclientid" class="active">Google Client ID</label>
-				</div>
-				<div class='input-field col s12 l6'>
-					<input placeholder="Enter Client Secret" id="googleclientsecret" value="<?php echo getSiteGoogleClientSecret() ?>" name="googleclientsecret" type="text" autocomplete="off">
-					<label for="googleclientsecret" class="active">Google Client Secret</label>
-				</div>
+		<div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Google Authentication Options</span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 			</div>
-			<div class='row'>
-        <div class='col s12'><h5>Enable Sign In For:</h5></div>
-				<div class='col m4 s12'>
-						<input type="checkbox" class="filled-in" name="google_staff" id="google_staff" value="staff" <?php echo getSiteGoogleSignInGroups('staff') ?>>
-						<label for="google_staff">Staff</label>
+			<div style='padding: 0px 24px 0px 24px;'>
+				<div class='row'>
+					<div class='input-field col s12 l6'>
+						<input placeholder="Enter Client ID" id="googleclientid" value="<?php echo getSiteGoogleClientId() ?>" name="googleclientid" type="text" autocomplete="off">
+						<label for="googleclientid" class="active">Google Client ID</label>
+					</div>
+					<div class='input-field col s12 l6'>
+						<input placeholder="Enter Client Secret" id="googleclientsecret" value="<?php echo getSiteGoogleClientSecret() ?>" name="googleclientsecret" type="text" autocomplete="off">
+						<label for="googleclientsecret" class="active">Google Client Secret</label>
+					</div>
 				</div>
-				<div class='col m4 s12'>
-					<input type="checkbox" class="filled-in" name="google_students" id="google_students" value="students" <?php echo getSiteGoogleSignInGroups('students') ?>>
-					<label for="google_students">Students</label>
-				</div>
-				<div class='col m4 s12'>
-					<input type="checkbox" class="filled-in" name="google_parents" id="google_parents" value="parents" <?php echo getSiteGoogleSignInGroups('parents') ?>>
-					<label for="google_parents">Parents</label>
+				<div class='row'>
+					<div class='col m4 s12'>
+							<input type="checkbox" class="filled-in" name="google_staff" id="google_staff" value="staff" <?php echo getSiteGoogleSignInGroups('staff') ?>>
+							<label for="google_staff">Staff</label>
+					</div>
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="google_students" id="google_students" value="students" <?php echo getSiteGoogleSignInGroups('students') ?>>
+						<label for="google_students">Students</label>
+					</div>
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="google_parents" id="google_parents" value="parents" <?php echo getSiteGoogleSignInGroups('parents') ?>>
+						<label for="google_parents">Parents</label>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -68,36 +70,38 @@
 
   <div id='microsoftAuthModal' class='modal modal-fixed-footer modal-mobile-full' style="width:90%">
     <form id='microsoftAuthOptionsForm' method="post" action='#'>
-    <div class='modal-content'>
-      <a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-      <div class='row'>
-        <div class='col s12'><h4>Microsoft Authentication Options</h4></div>
-        <div class='col s12'><h5>API Credentials</h5></div>
-        <div class='input-field col s12 l6'>
-          <input placeholder="Enter Application ID" id="microsoftclientid" value="<?php echo getSiteMicrosoftClientId() ?>" name="microsoftclientid" type="text" autocomplete="off">
-          <label for="microsoftclientid" class="active">Microsoft Application ID</label>
-        </div>
-        <div class='input-field col s12 l6'>
-          <input placeholder="Enter Application Secret" id="microsoftclientsecret" value="<?php echo getSiteMicrosoftClientSecret() ?>" name="microsoftclientsecret" type="text" autocomplete="off">
-          <label for="microsoftclientsecret" class="active">Microsoft Application Secret</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col s12'><h5>Enable Sign In For:</h5></div>
-        <div class='col m4 s12'>
-            <input type="checkbox" class="filled-in" name="microsoft_staff" id="microsoft_staff" value="staff" <?php echo getSiteMicrosoftSignInGroups('staff') ?>>
-            <label for="microsoft_staff">Staff</label>
-        </div>
-        <div class='col m4 s12'>
-          <input type="checkbox" class="filled-in" name="microsoft_students" id="microsoft_students" value="students" <?php echo getSiteMicrosoftSignInGroups('students') ?>>
-          <label for="microsoft_students">Students</label>
-        </div>
-        <div class='col m4 s12'>
-          <input type="checkbox" class="filled-in" name="microsoft_parents" id="microsoft_parents" value="parents" <?php echo getSiteMicrosoftSignInGroups('parents') ?>>
-          <label for="microsoft_parents">Parents</label>
-        </div>
-      </div>
-    </div>
+    <div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Microsoft Authentication Options</span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+			</div>
+			<div style='padding: 0px 24px 0px 24px;'>
+	      <div class='row'>
+	        <div class='input-field col s12 l6'>
+	          <input placeholder="Enter Application ID" id="microsoftclientid" value="<?php echo getSiteMicrosoftClientId() ?>" name="microsoftclientid" type="text" autocomplete="off">
+	          <label for="microsoftclientid" class="active">Microsoft Application ID</label>
+	        </div>
+	        <div class='input-field col s12 l6'>
+	          <input placeholder="Enter Application Secret" id="microsoftclientsecret" value="<?php echo getSiteMicrosoftClientSecret() ?>" name="microsoftclientsecret" type="text" autocomplete="off">
+	          <label for="microsoftclientsecret" class="active">Microsoft Application Secret</label>
+	        </div>
+	      </div>
+	      <div class='row'>
+	        <div class='col m4 s12'>
+	            <input type="checkbox" class="filled-in" name="microsoft_staff" id="microsoft_staff" value="staff" <?php echo getSiteMicrosoftSignInGroups('staff') ?>>
+	            <label for="microsoft_staff">Staff</label>
+	        </div>
+	        <div class='col m4 s12'>
+	          <input type="checkbox" class="filled-in" name="microsoft_students" id="microsoft_students" value="students" <?php echo getSiteMicrosoftSignInGroups('students') ?>>
+	          <label for="microsoft_students">Students</label>
+	        </div>
+	        <div class='col m4 s12'>
+	          <input type="checkbox" class="filled-in" name="microsoft_parents" id="microsoft_parents" value="parents" <?php echo getSiteMicrosoftSignInGroups('parents') ?>>
+	          <label for="microsoft_parents">Parents</label>
+	        </div>
+	      </div>
+	    </div>
+		</div>
     <div class='modal-footer'>
       <button type="submit" class='modal-action waves-effect btn-flat white-text' id='savemicrosoftauth' style='background-color: <?php echo getSiteColor(); ?>; font-weight:500;'>Save</button>
       <a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>; margin-right:5px;'>Cancel</a>
@@ -107,27 +111,29 @@
 
   <div id='facebookAuthModal' class='modal modal-fixed-footer modal-mobile-full' style="width:90%">
     <form id='facebookAuthOptionsForm' method="post" action='#'>
-    <div class='modal-content'>
-      <a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-      <div class='row'>
-        <div class='col s12'><h4>Facebook Authentication Options</h4></div>
-        <div class='col s12'><h5>API Credentials</h5></div>
-        <div class='input-field col s12 l6'>
-          <input placeholder="Enter App ID" id="facebookclientid" value="<?php echo getSiteFacebookClientId() ?>" name="facebookclientid" type="text" autocomplete="off">
-          <label for="facebookclientid" class="active">Facebook App ID</label>
-        </div>
-        <div class='input-field col s12 l6'>
-          <input placeholder="Enter App Secret" id="facebookclientsecret" value="<?php echo getSiteFacebookClientSecret() ?>" name="facebookclientsecret" type="text" autocomplete="off">
-          <label for="facebookclientsecret" class="active">Facebook App Secret</label>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col s12'><h5>Enable Sign In For:</h5></div>
-        <div class='col m4 s12'>
-          <input type="checkbox" class="filled-in" name="facebook_parents" id="facebook_parents" value="parents" <?php echo getSiteFacebookSignInGroups('parents') ?>>
-          <label for="facebook_parents">Parents</label>
-        </div>
-      </div>
+    <div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Facebook Authentication Options</span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+			</div>
+			<div style='padding: 0px 24px 0px 24px;'>
+	      <div class='row'>
+	        <div class='input-field col s12 l6'>
+	          <input placeholder="Enter App ID" id="facebookclientid" value="<?php echo getSiteFacebookClientId() ?>" name="facebookclientid" type="text" autocomplete="off">
+	          <label for="facebookclientid" class="active">Facebook App ID</label>
+	        </div>
+	        <div class='input-field col s12 l6'>
+	          <input placeholder="Enter App Secret" id="facebookclientsecret" value="<?php echo getSiteFacebookClientSecret() ?>" name="facebookclientsecret" type="text" autocomplete="off">
+	          <label for="facebookclientsecret" class="active">Facebook App Secret</label>
+	        </div>
+	      </div>
+	      <div class='row'>
+	        <div class='col m4 s12'>
+	          <input type="checkbox" class="filled-in" name="facebook_parents" id="facebook_parents" value="parents" <?php echo getSiteFacebookSignInGroups('parents') ?>>
+	          <label for="facebook_parents">Parents</label>
+	        </div>
+	      </div>
+			</div>
     </div>
     <div class='modal-footer'>
       <button type="submit" class='modal-action waves-effect btn-flat white-text' id='savefacebookauth' style='background-color: <?php echo getSiteColor(); ?>; font-weight:500;'>Save</button>
