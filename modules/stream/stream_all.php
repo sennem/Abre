@@ -94,7 +94,7 @@
 	}
 
 	$customPostArray = array();
-	$sql = "SELECT id, submission_time, post_title, post_stream, post_content, post_groups, post_url, post_image, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time DESC";
+	$sql = "SELECT id, submission_time, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time ASC";
 	$result = $db->query($sql);
 	while($value = $result->fetch_assoc()){
 		if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false){
@@ -137,22 +137,26 @@
 	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
 	$StreamEndResult = 24;
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
+	$customArraySize = sizeof($customPostArray);
+	date_default_timezone_set("EST");
 	foreach($feed_flipboard->get_items($StreamStartResult,$StreamEndResult) as $item){
-		$date = $item->get_gmdate();
+		$date = $item->get_date();
 		if(!empty($customPostArray)){
-			$comparisonElement = $customPostArray[0];
+			$comparisonElement = $customPostArray[$customArraySize - 1];
 			while(strtotime($date) < strtotime($comparisonElement['submission_time'])){
 				$postDate = $comparisonElement['submission_time'];
 				$postDate = strtotime($postDate);
 				$title = $comparisonElement['post_title'];
 				$excerpt = $comparisonElement['post_content'];
 				$feedtitle = $comparisonElement['post_stream'];
+				$color = $comparisonElement['color'];
 
-				array_push($feeds, array("$postDate", "$title", "$excerpt", "", "", "$feedtitle", "", ""));
+				array_push($feeds, array("$postDate", "$title", "$excerpt", "", "", "$feedtitle", "", "$color"));
 				$totalcount++;
-				array_shift($customPostArray);
+				array_pop($customPostArray);
+				$customArraySize--;
 				if(!empty($customPostArray)){
-					$comparisonElement = $customPostArray[0];
+					$comparisonElement = $customPostArray[$customArraySize - 1];
 				}else{
 					break;
 				}
