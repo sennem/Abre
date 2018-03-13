@@ -27,6 +27,9 @@
 		$discussionid = preg_replace("/[^0-9]/","",$discussionid);
 	}
 
+	$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
+	$schoolResults = databasequery($sql);
+
 ?>
 
 	<!-- Comments -->
@@ -36,24 +39,30 @@
 		<div id="addstreamcomment" class="modal modal-fixed-footer modal-mobile-full">
 			<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
 			<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
-				<div class="modal-content" id="modal-content-section">
-					<h4 name="streamTitle" id="streamTitle" style='margin-right:50px;'></h4>
-					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-
-					<div class="input-field" style="padding-bottom: 5px;">
-						<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
+				<div class="modal-content" id="modal-content-section" style="padding: 0px !important;">
+					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+						<div class='col s11'><span class="truncate" name="streamTitle" id="streamTitle" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;"></span></div>
+						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
+					<div style='padding: 0px 24px 0px 24px;'>
 
-					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
+						<div class="row">
+							<div class="input-field" style="padding-bottom: 5px;">
+								<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
+							</div>
+						</div>
 
-					<div name="streamComments" id="streamComments"></div>
+						<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
 
-					<input type="hidden" name="streamUrl" id="streamUrl">
-					<input type="hidden" name="streamTitleValue" id="streamTitleValue">
-					<input type="hidden" name="commentID" id="commentID">
-					<input type="hidden" name="streamImage" id="streamImage">
-					<input type="hidden" name="redirect" id="redirect">
-		    </div>
+						<div name="streamComments" id="streamComments"></div>
+
+						<input type="hidden" name="streamUrl" id="streamUrl">
+						<input type="hidden" name="streamTitleValue" id="streamTitleValue">
+						<input type="hidden" name="commentID" id="commentID">
+						<input type="hidden" name="streamImage" id="streamImage">
+						<input type="hidden" name="redirect" id="redirect">
+			    </div>
+				</div>
 			  <div class="modal-footer">
 					<button class="modal-action modal-close waves-effect btn-flat white-text" type="button" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
 				</div>
@@ -63,16 +72,64 @@
 		<!-- Social Sharing -->
 		<div id="sharecard" class="modal modal-fixed-footer modal-mobile-full" style="max-width: 600px;">
 			<form>
-				<div class="modal-content">
-					<h4>Share</h4>
-					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-					<div class="socialshare pointer" style="width:100%; background-color:#0084b4; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="http://twitter.com/share?url=">Twitter</div><br>
-					<div class="socialshare pointer" style="width:100%; background-color:#3B5998; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="http://www.facebook.com/sharer.php?u=">Facebook</div><br>
-					<div class="socialshare pointer" style="width:100%; background-color:#d34836; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="https://plus.google.com/share?url=">Google</div>
-					<input type="hidden" name="share_url" id="share_url">
+				<div class="modal-content" style="padding: 0px !important;">
+					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Share</span></div>
+						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+					</div>
+					<div style='padding: 0px 24px 0px 24px;'>
+						<div class="socialshare pointer" style="width:100%; background-color:#0084b4; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="http://twitter.com/share?url=">Twitter</div><br>
+						<div class="socialshare pointer" style="width:100%; background-color:#3B5998; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="http://www.facebook.com/sharer.php?u=">Facebook</div><br>
+						<div class="socialshare pointer" style="width:100%; background-color:#d34836; padding:15px; text-align: center; color:#fff; font-size:16px;" data-link="https://plus.google.com/share?url=">Google</div>
+						<input type="hidden" name="share_url" id="share_url">
+					</div>
 				</div>
 	   		</form>
 	 	</div>
+
+		<div id="streampost" class="modal modal-fixed-footer modal-mobile-full">
+			<form id="form-streampost" method="post" action="modules/stream/save_post.php">
+				<div class="modal-content" style="padding: 0px !important;">
+					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">New Post</span></div>
+						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+					</div>
+					<div style='padding: 0px 24px 0px 24px;'>
+						<div class="row">
+							<div class="input-field col s12">
+								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title">
+								<label for="post_title" class="active">Post Title</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<label for="post_stream" class="active">Post Stream</label>
+								<select id="post_stream" name="post_stream" required>
+									<option value="" disabled selected>Choose a Stream</option>
+									<?php
+										$sql = "SELECT title FROM streams";
+										$result = $db->query($sql);
+										while($value = $result->fetch_assoc()){
+											$streamTitle = $value['title'];
+											echo "<option value=$streamTitle>$streamTitle</option>";
+										}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<textarea placeholder="Enter your Post Content" id="post_content" name="post_content" class="materialize-textarea"></textarea>
+								<label for="post_content" class="active">Post Content</label>
+							</div>
+						</div>
+					</div>
+		    </div>
+			  <div class="modal-footer">
+					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
+				</div>
+			</form>
+		</div>
 
 	<?php
 
@@ -83,81 +140,87 @@
  	<!-- Edit Widgets -->
 	<div id="editwidgets" class="modal modal-mobile-full" style="max-width: 600px;">
 		<form>
-			<div class="modal-content">
-				<h4>Edit Widgets</h4>
-				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
+			<div class="modal-content" style="padding: 0px !important;">
+				<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+					<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Edit Widgets</span></div>
+					<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+				</div>
+				<div style='padding: 0px 24px 0px 24px;'>
+					<div class="row">
+						<div class="col s12">
+							<?php
 
-				<?php
+								//Check to see if there is hidden widgets
+								$sql = "SELECT widgets_hidden FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+								$result = $db->query($sql);
+								$widgets_order = NULL;
+								$widgets_hidden = NULL;
+								while($row = $result->fetch_assoc()) {
+									$widgets_hidden = htmlspecialchars($row["widgets_hidden"], ENT_QUOTES);
+								}
 
-					//Check to see if there is hidden widgets
-					$sql = "SELECT widgets_hidden FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-					$result = $db->query($sql);
-					$widgets_order = NULL;
-					$widgets_hidden = NULL;
-					while($row = $result->fetch_assoc()) {
-						$widgets_hidden = htmlspecialchars($row["widgets_hidden"], ENT_QUOTES);
-					}
+								//Show All Widgets
+								echo "<table class='bordered'>";
+								$widgetsdirectory = dirname(__FILE__) . '/../';
+								$widgetsfolders = scandir($widgetsdirectory);
+								$widgetcounter=0;
 
-					//Show All Widgets
-					echo "<table class='bordered'>";
-					$widgetsdirectory = dirname(__FILE__) . '/../';
-					$widgetsfolders = scandir($widgetsdirectory);
-					$widgetcounter=0;
+								foreach($widgetsfolders as $result){
 
-					foreach($widgetsfolders as $result){
+									$pagetitle = NULL;
+									$restrictions = NULL;
 
-						$pagetitle = NULL;
-						$restrictions = NULL;
+									if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
 
-						if(file_exists(dirname(__FILE__) . '/../'.$result.'/widget.php')){
+										include(dirname(__FILE__) . '/../'.$result.'/widget_config.php');
 
-							include(dirname(__FILE__) . '/../'.$result.'/widget_config.php');
+										if(strpos($restrictions,$_SESSION['usertype']) === false && strpos($services, $_SESSION['auth_service']) !== false){
 
-							if(strpos($restrictions,$_SESSION['usertype']) === false && strpos($services, $_SESSION['auth_service']) !== false){
+											$widgetcounter++;
 
-								$widgetcounter++;
+											echo "<tr>";
+												echo "<td><b>$pagetitle</b><td>";
+												echo "<td style='width:30px; text-align:right;'>";
 
-								echo "<tr>";
-									echo "<td><b>$pagetitle</b><td>";
-									echo "<td style='width:30px; text-align:right;'>";
+													echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
 
-										echo "<div class='switch'><label><input type='checkbox' class='widgetclick' name='$result' id='$result' value='1' ";
+													//Check if a widget should be hidden
+													if($widgets_hidden==NULL){
 
-										//Check if a widget should be hidden
-										if($widgets_hidden==NULL){
+														echo "checked";
 
-											echo "checked";
+													}
+													else
+													{
+
+														//Check to see if widget was hidden by use selection
+														$HiddenWidgets = explode(',',$widgets_hidden);
+														if(!in_array($result, $HiddenWidgets)){
+
+															echo "checked";
+
+														}
+
+													}
+
+													echo "/><span class='lever'></span></label></div>";
+
+												echo "</td>";
+											echo "</tr>";
 
 										}
-										else
-										{
 
-											//Check to see if widget was hidden by use selection
-											$HiddenWidgets = explode(',',$widgets_hidden);
-											if(!in_array($result, $HiddenWidgets)){
+									}
 
-												echo "checked";
+								}
 
-											}
+								if($widgetcounter==0){ echo "<tr><td colspan='2'>No widgets are currently available.</td></tr>"; }
+								echo "</table>";
 
-										}
-
-										echo "/><span class='lever'></span></label></div>";
-
-									echo "</td>";
-								echo "</tr>";
-
-							}
-
-						}
-
-					}
-
-					if($widgetcounter==0){ echo "<tr><td colspan='2'>No widgets are currently available.</td></tr>"; }
-					echo "</table>";
-
-				?>
-
+							?>
+						</div>
+					</div>
+				</div>
 			</div>
    		</form>
  	</div>
@@ -234,6 +297,47 @@
 			})
 		});
 
+		$("#post_staff").change(function(){
+			if($(this).is(':checked')){
+				$("#postStaffRestrictionsDiv").show();
+			}else{
+				$("#postStaffRestrictionsDiv").hide();
+			}
+		});
+
+		$("#post_students").change(function(){
+			if($(this).is(':checked')){
+				$("#postStudentRestrictionsDiv").show();
+			}else{
+				$("#postStudentRestrictionsDiv").hide();
+			}
+		});
+
+		$('select').material_select();
+
+		$("#form-streampost").submit(function(event) {
+			event.preventDefault();
+			var title = $("#post_title").val();
+			var stream = $("#post_stream").val();
+			var content = $("#post_content").val();
+
+			$.ajax({
+				type: 'POST',
+				url: $(this).attr('action'),
+				data: { post_title: title, post_stream: stream, post_content: content }
+			})
+			.done(function(response){
+				if(response.status == "Success"){
+					$('#streampost').closeModal({ in_duration: 0, out_duration: 0, });
+					var notification = document.querySelector('.mdl-js-snackbar');
+					var data = { message: response.message };
+					notification.MaterialSnackbar.showSnackbar(data);
+				}
+				if(response.status == "Error"){
+
+				}
+			});
+		});
 	});
 
 </script>
