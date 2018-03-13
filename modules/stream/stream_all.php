@@ -22,6 +22,10 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
+	$schoolCodeArray = getRestrictions();
+	$codeArraySize = sizeof($schoolCodeArray);
+
+
 	//Find what streams to display
 	$query = "SELECT streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($query);
@@ -37,18 +41,28 @@
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();
 	if(!empty($userstreams) != NULL){
-		$sql = "SELECT url, `group`, color FROM streams WHERE required = 1 OR id IN ($userstreams)";
+		$sql = "SELECT title, url, `group`, color, staff_building_restrictions, student_building_restrictions FROM streams WHERE required = 1 OR id IN ($userstreams)";
 	}else{
-		$sql = "SELECT url, `group`, color FROM streams WHERE `required` = 1";
+		$sql = "SELECT title, url, `group`, color, staff_building_restrictions, student_building_restrictions FROM streams WHERE `required` = 1";
 	}
 
 	//Look for all streams that apply to user
 	$flipboardarray = array();
-	$colorArray = array();
+	$infoArray = array();
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $value) {
 		if(strpos($value["group"], $_SESSION["usertype"]) !== false){
 			$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
+
+			if($_SESSION['usertype'] == "staff"){
+				$restrictions = $value['staff_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+			}
+			if($_SESSION['usertype'] == "student"){
+				$restrictions = $value['student_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+			}
+
 			$fburlNoRss = rtrim($fburl, ".rss");
 			if($fburl != ""){
 				//should be refactored. This is very hacky!
@@ -58,14 +72,57 @@
 					parse_str($parts['query'], $params);
 					$user = $params['user'];
 					$url = "https://twitter.com/".$user;
-					$colorArray[$url] = $value['color'];
+					$infoArray[$url] = array("color" => $value['color'], "title" => $value['title']);
 				}else{
-					$colorArray[$fburlNoRss] = $value['color'];
+					$infoArray[$fburlNoRss] = array("color" => $value['color'], "title" => $value['title']);
 				}
-				array_push($flipboardarray, $fburl);
+
+				if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+					array_push($flipboardarray, $fburl);
+				}else{
+					if($codeArraySize >= 1){
+						foreach($schoolCodeArray as $code){
+							if(in_array($code, $restrictionsArray)){
+									array_push($flipboardarray, $fburl);
+									break;
+							}
+						}
+					}
+				}
 			}
 		}
 	}
+
+	$customPostArray = array();
+	$sql = "SELECT id, submission_time, post_title, post_stream, post_content, post_groups, post_url, post_image, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time DESC";
+	$result = $db->query($sql);
+	while($value = $result->fetch_assoc()){
+		if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false){
+
+			if($_SESSION['usertype'] == "staff"){
+				$restrictions = $value['staff_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+			}
+			if($_SESSION['usertype'] == "student"){
+				$restrictions = $value['student_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+			}
+
+			if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+				array_push($customPostArray, $value);
+			}else{
+				if($codeArraySize >= 1){
+					foreach($schoolCodeArray as $code){
+						if(in_array($code, $restrictionsArray)){
+								array_push($customPostArray, $value);
+								break;
+						}
+					}
+				}
+			}
+		}
+	}
+
 	$feed_flipboard->set_cache_duration(1800);
 	$feed_flipboard->set_stupidly_fast(true);
 	$feed_flipboard->set_feed_url($flipboardarray);
@@ -81,9 +138,28 @@
 	$StreamEndResult = 24;
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 	foreach($feed_flipboard->get_items($StreamStartResult,$StreamEndResult) as $item){
+		$date = $item->get_gmdate();
+		if(!empty($customPostArray)){
+			$comparisonElement = $customPostArray[0];
+			while(strtotime($date) < strtotime($comparisonElement['submission_time'])){
+				$postDate = $comparisonElement['submission_time'];
+				$postDate = strtotime($postDate);
+				$title = $comparisonElement['post_title'];
+				$excerpt = $comparisonElement['post_content'];
+				$feedtitle = $comparisonElement['post_stream'];
+
+				array_push($feeds, array("$postDate", "$title", "$excerpt", "", "", "$feedtitle", "", ""));
+				$totalcount++;
+				array_shift($customPostArray);
+				if(!empty($customPostArray)){
+					$comparisonElement = $customPostArray[0];
+				}else{
+					break;
+				}
+			}
+		}
 		$title = $item->get_title();
 		$link = $item->get_link();
-		$date = $item->get_date();
 		$feedtitle = $item->get_feed()->get_title();
 		$feedlink = $item->get_feed()->get_link();
 		$date = strtotime($date);
@@ -93,11 +169,12 @@
 		}
 
 		if($image == ""){
-		    preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $excerpt, $embededimage);
-		    if(isset($embededimage['src'])){ $image=$embededimage['src']; }
+				preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $excerpt, $embededimage);
+				if(isset($embededimage['src'])){ $image=$embededimage['src']; }
 		}
 
-		$color = $colorArray[$feedlink];
+		$color = $infoArray[$feedlink]['color'];
+		$feedtitle = $infoArray[$feedlink]['title'];
 		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$feedtitle","$feedlink", $color));
 		$totalcount++;
 	}
