@@ -22,7 +22,7 @@
 
 ?>
 
-	<div class='fixed-action-btn buttonpin'>
+	<div class='fixed-action-btn buttonpin pointer'>
 		<a class='btn-floating btn-large waves-effect waves-light streampost' id="streamFab" style='background-color: <?php echo getSiteColor(); ?>' href='#streampost'><i class='large material-icons'>add</i></a>
 		<div class="mdl-tooltip mdl-tooltip--left" for="streamFab">New Post</div>
 	</div>
