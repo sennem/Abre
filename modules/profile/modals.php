@@ -21,6 +21,8 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
+	$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
+	$schoolResults = databasequery($sql);
 ?>
 
 	<!--Work Schedule-->
@@ -62,14 +64,18 @@
 	?>
 
 	<div id='streameditor' class='modal modal-fixed-footer modal-mobile-full'>
-		<div class='modal-content'>
-			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-			<div class='row'>
-				<div class='col s12'>
-					<h4>Stream Editor</h4>
-					<?php
-						include "stream_editor_content.php";
-					?>
+		<div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Stream Editor</span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+			</div>
+			<div style='padding: 0px 24px 0px 24px;'>
+				<div class='row'>
+					<div class='col s12'>
+						<?php
+							include "stream_editor_content.php";
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -80,43 +86,88 @@
 
 	<div id='addeditstream' class='modal modal-fixed-footer modal-mobile-full' style="width: 90%">
 		<form id='addeditstreamform' method="post" action='#'>
-		<div class='modal-content' id="viewstreammodal">
-			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-			<div class='row'>
-				<div class='col s12'><h4 id='editstreammodaltitle'></h4></div>
-				<div class='input-field col s12'>
-					<input placeholder="Enter Stream Name" id="stream_name" name="stream_name" type="text" autocomplete="off" required>
-					<label for="stream_name" class="active">Name</label>
-				</div>
-				<div class='input-field col s12'>
-					<input placeholder="Enter RSS Link" id="rss_link" name="rss_link" type="text" autocomplete="off" required>
-					<label for="rss_link" class="active">Link</label>
-				</div>
-				<div class='input-field col s12'>
-					Select a color: <input type='text' id="stream_color"><span class='pointer' id='removeColor' style='padding-left:5px; display:none'><a style='color:#000'>remove color</a></span>
-				</div>
+		<div class='modal-content' id="viewstreammodal" style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" id='editstreammodaltitle' style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;"></span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 			</div>
-			<div class='row'>
-				<div class='col m4 s12'>
-						<input type="checkbox" class="filled-in" name="stream_staff" id="stream_staff" value="staff">
-						<label for="stream_staff">Staff</label>
+			<div style='padding: 0px 24px 0px 24px;'>
+				<div class='row'>
+					<div class='input-field col s12'>
+						<input placeholder="Enter Stream Name" id="stream_name" name="stream_name" type="text" autocomplete="off" required>
+						<label class="active" for="stream_name">Name</label>
+					</div>
 				</div>
-				<div class='col m4 s12'>
-					<input type="checkbox" class="filled-in" name="stream_students" id="stream_students" value="student">
-					<label for="stream_students">Students</label>
+				<div class="row">
+					<div class='input-field col s12'>
+						<input placeholder="Enter RSS Link" id="rss_link" name="rss_link" type="text" autocomplete="off" required>
+						<label class="active" for="rss_link">Link</label>
+					</div>
 				</div>
-				<div class='col m4 s12'>
-					<input type="checkbox" class="filled-in" name="stream_parents" id="stream_parents" value="parent">
-					<label for="stream_parents">Parents</label>
+				<div class="row">
+					<div class='col s12' style="padding-bottom: 13px;">
+						<label for="stream_color">Select a Color</label><br>
+						<input type='text' id="stream_color"><span class='pointer' id='removeColor' style='padding-left:5px; display:none'><a style='color:<?php echo getSiteColor() ?>;'>remove color</a></span>
+					</div>
 				</div>
+				<div class='row'>
+					<div class='col m4 s12'>
+							<input type="checkbox" class="filled-in" name="stream_staff" id="stream_staff" value="staff">
+							<label for="stream_staff">Staff</label>
+							<br><br>
+							<div id='streamStaffRestrictionsDiv'>
+								<label>Staff Building Restrictions</label>
+								<select name="staffRestriction[]" id="streamStaffRestrictions" multiple>
+									<option value="No Restrictions">All Buildings</option>
+									<?php
+									$lastSchoolCode = "";
+									foreach($schoolResults as $school){
+										if($school['SchoolCode'] == $lastSchoolCode){
+											continue;
+										}else{
+											echo "<option value='".$school['SchoolCode']."'>".ucwords(strtolower($school['SchoolName']))."</option>";
+											$lastSchoolCode = $school['SchoolCode'];
+										}
+									}
+									?>
+								</select>
+							</div>
+					</div>
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="stream_students" id="stream_students" value="student">
+						<label for="stream_students">Students</label>
+						<br><br>
+						<div id='streamStudentRestrictionsDiv'>
+							<label>Student Building Restrictions</label>
+							<select name="studentRestriction[]" id="streamStudentRestrictions" multiple>
+								<option value="No Restrictions">All Buildings</option>
+								<?php
+								$lastSchoolCode = "";
+								foreach($schoolResults as $school){
+									if($school['SchoolCode'] == $lastSchoolCode){
+										continue;
+									}else{
+										echo "<option value='".$school['SchoolCode']."'>".ucwords(strtolower($school['SchoolName']))."</option>";
+										$lastSchoolCode = $school['SchoolCode'];
+									}
+								}
+								?>
+							</select>
+						</div>
+					</div>
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="stream_parents" id="stream_parents" value="parent">
+						<label for="stream_parents">Parents</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="streamradio" id="required_stream" value="1">
+						<label for="required_stream">Require Stream</label>
+					</div>
+				</div>
+				<input id="stream_id" name="stream_id" type="hidden">
 			</div>
-			<div class='row'>
-				<div class='col m4 s12'>
-					<input type="checkbox" class="filled-in" name="streamradio" id="required_stream" value="1">
-					<label for="required_stream">Require Stream</label>
-				</div>
-			</div>
-			<input id="stream_id" name="stream_id" type="hidden">
 		</div>
 		<div class='modal-footer'>
 			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveupdatestream' style='background-color: <?php echo getSiteColor(); ?>;'>Save</button>
@@ -132,6 +183,22 @@
 
 	$(function(){
 
+		$("#stream_staff").change(function(){
+			if($(this).is(':checked')){
+				$("#streamStaffRestrictionsDiv").show();
+			}else{
+				$("#streamStaffRestrictionsDiv").hide();
+			}
+		});
+
+		$("#stream_students").change(function(){
+			if($(this).is(':checked')){
+				$("#streamStudentRestrictionsDiv").show();
+			}else{
+				$("#streamStudentRestrictionsDiv").hide();
+			}
+		});
+
 	  $('select').material_select();
 
 	  <?php
@@ -143,36 +210,44 @@
 				$("#removeColor").hide();
 			})
 			//Add/Edit Stream
-			$('.modal-addeditstream').leanModal({
-				in_duration: 0,
-				out_duration: 0,
-				ready: function(){
-					$(".modal-content").scrollTop(0);
-					$("#editstreammodaltitle").text('Add New Stream');
-					$("#stream_name").val('');
-					$("#rss_link").val('');
-					$("#stream_id").val('');
-					$('#stream_staff').prop('checked', false);
-					$('#stream_students').prop('checked', false);
-					$('#stream_parents').prop('checked', false);
-					$('#required_stream').prop('checked', false);
-					$("#removeColor").hide();
-					$("#stream_color").spectrum({
-						color: "",
-						allowEmpty: true,
-						showPaletteOnly: true,
-						showPalette: true,
-						palette: [["#F44336", "#B71C1C", "#9C27B0", "#4A148C"],
-											["#2196F3", "#0D47A1", "#4CAF50", "#1B5E20"],
-											["#FF9800", "#E65100", "#607D8B", "#263238"]],
-						hide: function(color) {
-							console.log(color);
-							if(color !== null){
-								$("#removeColor").show();
-						 }
+			$(".modal-addeditstream").unbind().click(function(event){
+				event.preventDefault();
+				$(".modal-content").scrollTop(0);
+				$("#editstreammodaltitle").text('Add New Stream');
+				$("#stream_name").val('');
+				$("#rss_link").val('');
+				$("#stream_id").val('');
+				$('#stream_staff').prop('checked', false);
+				$('#stream_students').prop('checked', false);
+				$('#stream_parents').prop('checked', false);
+				$('#required_stream').prop('checked', false);
+				$("#removeColor").hide();
+				$("#streamStudentRestrictions").val('No Restrictions');
+				$("#streamStaffRestrictions").val('No Restrictions');
+				$("#streamStudentRestrictionsDiv").hide();
+				$("#streamStaffRestrictionsDiv").hide();
+				$("#stream_color").spectrum({
+					color: "",
+					allowEmpty: true,
+					showPaletteOnly: true,
+					showPalette: true,
+					palette: [["#F44336", "#B71C1C", "#9C27B0", "#4A148C"],
+										["#2196F3", "#0D47A1", "#4CAF50", "#1B5E20"],
+										["#FF9800", "#E65100", "#607D8B", "#263238"]],
+					hide: function(color) {
+						if(color !== null){
+							$("#removeColor").show();
 					 }
-					});
-				}
+				 }
+				});
+
+				$('.modal-addeditstream').leanModal({
+					in_duration: 0,
+					out_duration: 0,
+					ready: function(){
+						$("#stream_color").spectrum("set", "");
+					}
+				});
 			});
 
 			//Save/Update Stream
@@ -203,12 +278,14 @@
 				}else{
 					streamcolor = streamcolor.toHexString();
 				}
+				var staffRestrictions = $("#streamStaffRestrictions").val();
+				var studentRestrictions = $("#streamStudentRestrictions").val();
 
 				//Make the post request
 				$.ajax({
 					type: 'POST',
 					url: 'modules/profile/update_stream.php',
-					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required, color: streamcolor }
+					data: { title: streamtitle, link: rsslink, id: streamid, group: streamgroup, required: required, color: streamcolor, staffRestrictions: staffRestrictions, studentRestrictions: studentRestrictions }
 				})
 				.done(function(){
 					$('#addeditstream').closeModal({ in_duration: 0, out_duration: 0 });

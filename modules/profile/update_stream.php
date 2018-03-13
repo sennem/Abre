@@ -31,21 +31,38 @@
     $required = $_POST["required"];
     $color = $_POST["color"];
 
+    if(isset($_POST['staffRestrictions'])){
+      $staffRestrictions = $_POST['staffRestrictions'];
+      $staffRestrictions = implode(",", $staffRestrictions);
+    }else{
+      $staffRestrictions = "No Restrictions";
+    }
+    if(isset($_POST['studentRestrictions'])){
+      $studentRestrictions = $_POST['studentRestrictions'];
+      $studentRestrictions = implode(",", $studentRestrictions);
+    }else{
+      $studentRestrictions = "No Restrictions";
+    }
+
     if($streamid == ""){
       $stmt = $db->stmt_init();
       //needed to backtick because SQL doesn't like when you use reserved words
-      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`, `color`) VALUES (?, ?, ?,'flipboard', ?, ?, ?);";
+      $sql = "INSERT INTO `streams` (`group`,`title`,`slug`,`type`,`url`,`required`, `color`, `staff_building_restrictions`, `student_building_restrictions`) VALUES (?, ?, ?,'flipboard', ?, ?, ?, ?, ?);";
       $stmt->prepare($sql);
-      $stmt->bind_param("ssssis", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color);
+      $stmt->bind_param("ssssisss", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color, $staffRestrictions, $studentRestrictions);
       $stmt->execute();
       $stmt->close();
     }else{
       //needed to backtick because SQL doesn't like when you use reserved words
       $stmt = $db->stmt_init();
-      //needed to backtick because SQL doesn't like when you use reserved words
-      $sql = "UPDATE `streams` SET `group` = ?, `title` = ?, `slug` = ?, `type` = 'flipboard', `url` = ?, `required` = ?, `color` = ? WHERE `id` = ?";
+      $sql = "UPDATE `streams` SET `group` = ?, `title` = ?, `slug` = ?, `type` = 'flipboard', `url` = ?, `required` = ?, `color` = ?, `staff_building_restrictions` = ?, `student_building_restrictions` = ? WHERE `id` = ?";
       $stmt->prepare($sql);
-      $stmt->bind_param("ssssisi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color, $streamid);
+      $stmt->bind_param("ssssisssi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color, $staffRestrictions, $studentRestrictions, $streamid);
+      $stmt->execute();
+
+      $sql = "UPDATE `stream_posts` SET `post_groups` = ?, staff_building_restrictions = ?, student_building_restrictions = ? WHERE post_stream = ?";
+      $stmt->prepare($sql);
+      $stmt->bind_param("ssss", $streamgroup, $staffRestrictions, $studentRestrictions, $streamtitle);
       $stmt->execute();
       $stmt->close();
     }
