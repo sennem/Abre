@@ -391,7 +391,7 @@
 
 		return $valuereturn;
 	}
-	
+
 	function getStaffStudentMatch(){
 		$valuereturn = getSettingsDbValue('staffstudentdomainsame');
 		if($valuereturn == ""){ $valuereturn = "unchecked"; }
@@ -785,6 +785,29 @@
 
 		$accessTokenArray = json_decode($result, true);
 		$_SESSION['access_token']['access_token'] = $accessTokenArray['access_token'];
+	}
+
+	function getRestrictions(){
+		include "abre_dbconnect.php";
+		//get schools codes for the staff member
+		$schoolCodeArray = array();
+		if($_SESSION['usertype'] == "staff"){
+			$sql = "SELECT SchoolCode FROM Abre_Staff WHERE EMail1 = 'boes_k@fairfield-city.k12.oh.us'";
+			$resultrow = $db->query($sql);
+			$count = mysqli_num_rows($resultrow);
+			while($result = $resultrow->fetch_assoc()){
+					array_push($schoolCodeArray, $result['SchoolCode']);
+			}
+		}
+
+		if($_SESSION['usertype'] == "student"){
+			$sql = "SELECT SchoolCode FROM Abre_Students WHERE Email = '".$_SESSION['useremail']."' LIMIT 1";
+			$resultrow = $db->query($sql);
+			$result = $resultrow->fetch_assoc();
+			array_push($schoolCodeArray, $result['SchoolCode']);
+		}
+
+		return $schoolCodeArray;
 	}
 
 ?>
