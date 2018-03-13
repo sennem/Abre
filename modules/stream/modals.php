@@ -97,7 +97,7 @@
 					<div style='padding: 0px 24px 0px 24px;'>
 						<div class="row">
 							<div class="input-field col s12">
-								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title">
+								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title" required>
 								<label for="post_title" class="active">Post Title</label>
 							</div>
 						</div>
@@ -111,7 +111,7 @@
 										$result = $db->query($sql);
 										while($value = $result->fetch_assoc()){
 											$streamTitle = $value['title'];
-											echo "<option value=$streamTitle>$streamTitle</option>";
+											echo "<option value='$streamTitle'>$streamTitle</option>";
 										}
 									?>
 								</select>
@@ -119,7 +119,7 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea placeholder="Enter your Post Content" id="post_content" name="post_content" class="materialize-textarea"></textarea>
+								<textarea placeholder="Enter your Post Content" id="post_content" name="post_content" class="materialize-textarea" required></textarea>
 								<label for="post_content" class="active">Post Content</label>
 							</div>
 						</div>
@@ -127,6 +127,7 @@
 		    </div>
 			  <div class="modal-footer">
 					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
+					<p id="errorMessage" style="display:none; float:right; color:red; margin:6px 0; padding-right:10px;"></p>
 				</div>
 			</form>
 		</div>
@@ -317,6 +318,7 @@
 
 		$("#form-streampost").submit(function(event) {
 			event.preventDefault();
+			$("errorMessage").hide();
 			var title = $("#post_title").val();
 			var stream = $("#post_stream").val();
 			var content = $("#post_content").val();
@@ -329,12 +331,18 @@
 			.done(function(response){
 				if(response.status == "Success"){
 					$('#streampost').closeModal({ in_duration: 0, out_duration: 0, });
-					var notification = document.querySelector('.mdl-js-snackbar');
-					var data = { message: response.message };
-					notification.MaterialSnackbar.showSnackbar(data);
+					$.get('modules/stream/stream_all.php?StreamStartResult=0&StreamEndResult=24', function(results){
+						$('#showmorestream').hide();
+						console.log("Hello");
+						$('#streamcards').html(results);
+						var notification = document.querySelector('.mdl-js-snackbar');
+						var data = { message: response.message };
+						notification.MaterialSnackbar.showSnackbar(data);
+					});
 				}
 				if(response.status == "Error"){
-
+					$("#errorMessage").html(response.message);
+					$("#errorMessage").show();
 				}
 			});
 		});
