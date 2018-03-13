@@ -812,7 +812,7 @@
 
 	//Admin Check
 	function AdminCheck($email){
-		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		include "abre_dbconnect.php";
 		$contract = encrypt('Administrator', "");
 		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$email' AND contract = '$contract'";
 		$result = $db->query($sql);
