@@ -60,9 +60,9 @@
       $stmt->bind_param("ssssisssi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color, $staffRestrictions, $studentRestrictions, $streamid);
       $stmt->execute();
 
-      $sql = "UPDATE `stream_posts` SET `post_groups` = ?, staff_building_restrictions = ?, student_building_restrictions = ? WHERE post_stream = ?";
+      $sql = "UPDATE `stream_posts` SET `post_groups` = ?, color = ?, staff_building_restrictions = ?, student_building_restrictions = ? WHERE post_stream = ?";
       $stmt->prepare($sql);
-      $stmt->bind_param("ssss", $streamgroup, $staffRestrictions, $studentRestrictions, $streamtitle);
+      $stmt->bind_param("sssss", $streamgroup, $color, $staffRestrictions, $studentRestrictions, $streamtitle);
       $stmt->execute();
       $stmt->close();
     }
