@@ -32,6 +32,9 @@
 
 	//used for routing after verifying a student.
 	$url = $portal_root .'/#mystudents';
+
+	$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
+	$schoolResults = databasequery($sql);
 ?>
 
 	<!--Apps modal-->
@@ -52,15 +55,18 @@
 	<script src='core/js/image-picker.0.0.3.min.js'></script>
 
 	<div id='appeditor' class='modal modal-fixed-footer modal-mobile-full'>
-
-		<div class='modal-content'>
-			<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-			<div class='row'>
-				<div class='col s12'>
-					<h4>App Editor</h4>
-					<?php
-						include "app_editor_content.php";
-					?>
+		<div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">App Editor</span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+			</div>
+			<div style='padding: 0px 24px 0px 24px;'>
+				<div class='row'>
+					<div class='col s12'>
+						<?php
+							include "app_editor_content.php";
+						?>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -71,51 +77,90 @@
 
 	<div id='addeditapp' class='modal modal-fixed-footer modal-mobile-full' style="width: 90%">
 		<form id='addeditappform' method="post" action='#'>
-			<div class='modal-content'>
-				<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-				<div class='row'>
-					<div class='col s12'><h4 id='editmodaltitle'></h4></div>
-					<div class='input-field col s12'>
-						<input placeholder="Enter App Name" id="app_name" name="app_name" type="text" autocomplete="off" required>
-						<label for="app_name">Name</label>
-					</div>
-					<div class='input-field col s12'>
-						<input placeholder="Enter App Link" id="app_link" name="app_link" type="text" autocomplete="off" required>
-						<label for="app_link">Link</label>
-					</div>
+			<div class='modal-content' style="padding: 0px !important;">
+				<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+					<div class='col s11'><span class="truncate" id='editmodaltitle' style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;"></span></div>
+					<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 				</div>
-				<div class='row'>
-					<div class='col m3 s12'>
-						<input type="checkbox" id="app_staff" class="filled-in" value="1" />
-						<label for="app_staff">Available for staff</label>
+				<div style='padding: 0px 24px 0px 24px;'>
+					<div class='row'>
+						<div class='input-field col s12'>
+							<input placeholder="Enter App Name" id="app_name" name="app_name" type="text" autocomplete="off" required>
+							<label class="active" for="app_name">Name</label>
+						</div>
 					</div>
-					<div class='col m3 s12'>
-						<input type="checkbox" id="app_students" class="filled-in" value="1" />
-						<label for="app_students">Available for students</label>
+					<div class='row'>
+						<div class='input-field col s12'>
+							<input placeholder="Enter App Link" id="app_link" name="app_link" type="text" autocomplete="off" required>
+							<label class="active" for="app_link">Link</label>
+						</div>
 					</div>
-					<div class='col m3 s12'>
-						<input type="checkbox" id="app_parents" class="filled-in" value="1" />
-						<label for="app_parents">Available for parents</label>
+					<div class='row'>
+						<div class='col m3 s12'>
+							<input type="checkbox" id="app_staff" class="filled-in" value="1" />
+							<label for="app_staff">Available for staff</label>
+							<br><br>
+							<div id='appsStaffRestrictionsDiv'>
+								<label>Staff Building Restrictions</label>
+								<select name="staffRestriction[]" id="appsStaffRestrictions" multiple>
+									<option value="No Restrictions">All Buildings</option>
+									<?php
+									$lastSchoolCode = "";
+									foreach($schoolResults as $school){
+										if($school['SchoolCode'] == $lastSchoolCode){
+											continue;
+										}else{
+											echo "<option value='".$school['SchoolCode']."'>".ucwords(strtolower($school['SchoolName']))."</option>";
+											$lastSchoolCode = $school['SchoolCode'];
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class='col m3 s12'>
+							<input type="checkbox" id="app_students" class="filled-in" value="1" />
+							<label for="app_students">Available for students</label>
+							<br><br>
+							<div id='appsStudentRestrictionsDiv'>
+								<label>Staff Building Restrictions</label>
+								<select name="studentRestriction[]" id="appsStudentRestrictions" multiple>
+									<option value="No Restrictions">All Buildings</option>
+									<?php
+									$lastSchoolCode = "";
+									foreach($schoolResults as $school){
+										if($school['SchoolCode'] == $lastSchoolCode){
+											continue;
+										}else{
+											echo "<option value='".$school['SchoolCode']."'>".ucwords(strtolower($school['SchoolName']))."</option>";
+											$lastSchoolCode = $school['SchoolCode'];
+										}
+									}
+									?>
+								</select>
+							</div>
+						</div>
+						<div class='col m3 s12'>
+							<input type="checkbox" id="app_parents" class="filled-in" value="1" />
+							<label for="app_parents">Available for parents</label>
+						</div>
 					</div>
-					<div class='col m3 s12'>
-						<input type="checkbox" id="app_minors" class="filled-in" value="1" />
-						<label for="app_minors">Disable for minors</label>
-					</div>
-				</div>
-				<div class='row'>
-					<div class='col s12'>
-						<select id="app_icon" name="app_icon" class="image-picker browser-default" required>
-						<?php
-							$icons = scandir("$portal_path_root/core/images/apps/");
-							foreach($icons as $iconimage){
-								if (substr($iconimage, 0, 11) === 'icon_thumb_'){
-									echo "<option data-img-src='/core/images/apps/$iconimage' value='$iconimage'></option>";
+					<div class='row'>
+						<div class='col s12'>
+							<label>Select an Icon</label>
+							<select id="app_icon" name="app_icon" class="image-picker browser-default" required>
+							<?php
+								$icons = scandir("$portal_path_root/core/images/apps/");
+								foreach($icons as $iconimage){
+									if (substr($iconimage, 0, 11) === 'icon_thumb_'){
+										echo "<option data-img-src='/core/images/apps/$iconimage' value='$iconimage'></option>";
+									}
 								}
-							}
-						?>
-						</select>
+							?>
+							</select>
+						</div>
+						<input id="app_id" name="app_id" type="hidden">
 					</div>
-					<input id="app_id" name="app_id" type="hidden">
 				</div>
 			</div>
 			<div class='modal-footer'>
@@ -132,13 +177,19 @@
 		<!-- Student Token Modal -->
 		<div id="verifystudent" class="modal modal-fixed-footer modal-mobile-full">
 			<form class="col s12" id="form-verifystudent" method="post" action="<?php echo basename(__DIR__); ?>/../../core/abre_verifystudent_process.php">
-				<div class="modal-content">
-					<h4>Enter Student Access Code</h4>
-					<a class="modal-close black-text" style='position:absolute; right:20px; top:25px;'><i class='material-icons'>clear</i></a>
-					<div class="input-field col s6">
-						<input id="studenttoken" name="studenttoken" type="text" maxlength="20" placeholder="Enter your student token" autocomplete="off" required>
+				<div class="modal-content" style="padding: 0px !important;">
+					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Enter Student Access Code</span></div>
+						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
-					<div id="errormessage" style="color:#F44336"></div>
+					<div style='padding: 0px 24px 0px 24px;'>
+						<div class="row">
+							<div class="input-field col s6">
+								<input id="studenttoken" name="studenttoken" type="text" maxlength="20" placeholder="Enter your student token" autocomplete="off" required>
+							</div>
+							<div id="errormessage" style="color:#F44336"></div>
+						</div>
+					</div>
 				</div>
 				<div class="modal-footer">
 					<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor();?>'>Verify</button>
@@ -150,6 +201,25 @@
 <script>
 
 	$(function(){
+
+		$("#app_staff").change(function(){
+			if($(this).is(':checked')){
+				$("#appsStaffRestrictionsDiv").show();
+			}else{
+				$("#appsStaffRestrictionsDiv").hide();
+			}
+		});
+
+		$("#app_students").change(function(){
+			if($(this).is(':checked')){
+				$("#appsStudentRestrictionsDiv").show();
+			}else{
+				$("#appsStudentRestrictionsDiv").hide();
+			}
+		});
+
+		$('select').material_select();
+
 		//Student Token Modal
 		$('.modal-verifystudent').leanModal({
 			in_duration: 0,
@@ -245,9 +315,13 @@
 					$('#app_staff').prop('checked', false);
 					$('#app_students').prop('checked', false);
 					$('#app_parents').prop('checked', false);
-					$('#app_minors').prop('checked', false);
 					$('[name=app_icon]').val('');
 					$("select").imagepicker();
+					$("#appsStudentRestrictions").val('No Restrictions');
+					$("#appsStaffRestrictions").val('No Restrictions');
+					$("#appsStudentRestrictionsDiv").hide();
+					$("#appsStaffRestrictionsDiv").hide();
+					$('select').material_select();
 				}
 			});
 
@@ -258,10 +332,11 @@
 				var appname = $('#app_name').val();
 				var applink = $('#app_link').val();
 				var appicon = $('#app_icon').val();
-				if($('#app_staff').is(':checked') == true){ var appstaff = 1; }else{ var appstaff = 0; }
-				if($('#app_students').is(':checked') == true){ var appstudents = 1; }else{ var appstudents = 0; }
-				if($('#app_parents').is(':checked') == true){ var appparents = 1; }else{ var appparents = 0; }
-				if($('#app_minors').is(':checked') == true){ var appminors = 1; }else{ var appminors = 0; }
+				if($('#app_staff').is(':checked')){ var appstaff = 1; }else{ var appstaff = 0; }
+				if($('#app_students').is(':checked')){ var appstudents = 1; }else{ var appstudents = 0; }
+				if($('#app_parents').is(':checked')){ var appparents = 1; }else{ var appparents = 0; }
+				var staffRestrictions = $("#appsStaffRestrictions").val();
+				var studentRestrictions = $("#appsStudentRestrictions").val();
 
 				var appid = $('#app_id').val();
 				$("select").imagepicker();
@@ -270,7 +345,7 @@
 				$.ajax({
 					type: 'POST',
 					url: 'modules/apps/update_app.php',
-					data: { name: appname, link: applink, icon: appicon, id: appid, staff: appstaff, students: appstudents, parents: appparents, minors: appminors }
+					data: { name: appname, link: applink, icon: appicon, id: appid, staff: appstaff, students: appstudents, parents: appparents, staffRestrictions: staffRestrictions, studentRestrictions: studentRestrictions }
 				})
 				.done(function(){
 					$('#addeditapp').closeModal({ in_duration: 0, out_duration: 0 });

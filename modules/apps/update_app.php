@@ -32,21 +32,31 @@
 		$appstaff = $_POST["staff"];
 		$appstudents = $_POST["students"];
 		$appparents = $_POST["parents"];
-		$appminors = $_POST["minors"];
-
+		if(isset($_POST['staffRestrictions'])){
+			$staffRestrictions = $_POST['staffRestrictions'];
+			$staffRestrictions = implode(",", $staffRestrictions);
+		}else{
+			$staffRestrictions = "No Restrictions";
+		}
+		if(isset($_POST['studentRestrictions'])){
+			$studentRestrictions = $_POST['studentRestrictions'];
+			$studentRestrictions = implode(",", $studentRestrictions);
+		}else{
+			$studentRestrictions = "No Restrictions";
+		}
 
 		if($appid == ""){
 			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO apps (title,link,icon,image,staff,student,minor_disabled,required,parent) VALUES (?, ?, ?, ?, ?, ?, ?, '1', ?);";
+			$sql = "INSERT INTO apps (title,link,icon,image,staff,student,required,parent,staff_building_restrictions,student_building_restrictions) VALUES (?, ?, ?, ?, ?, ?, '1', ?, ?, ?);";
 			$stmt->prepare($sql);
-			$stmt->bind_param("ssssiiii", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appminors, $appparents);
+			$stmt->bind_param("ssssiiiss", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appparents, $staffRestrictions, $studentRestrictions);
 			$stmt->execute();
 			$stmt->close();
 		}else{
 			$stmt = $db->stmt_init();
-			$sql = "UPDATE apps SET title = ?, link = ?, icon = ?, image = ?, staff = ?, student = ?, minor_disabled = ?, parent = ? WHERE id = ?;";
+			$sql = "UPDATE apps SET title = ?, link = ?, icon = ?, image = ?, staff = ?, student = ?, parent = ?, staff_building_restrictions = ?, student_building_restrictions = ? WHERE id = ?;";
 			$stmt->prepare($sql);
-			$stmt->bind_param("ssssiiiii", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appminors, $appparents, $appid);
+			$stmt->bind_param("ssssiiissi", $appname, $applink, $appicon, $appicon, $appstaff, $appstudents, $appparents, $staffRestrictions, $studentRestrictions, $appid);
 			$stmt->execute();
 			$stmt->close();
 		}

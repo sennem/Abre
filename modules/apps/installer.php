@@ -95,18 +95,26 @@
 		}
 		$db->close();
 
-		//Check for minor_disabled field
-		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT minor_disabled FROM apps LIMIT 1")){
-			$sql = "ALTER TABLE `apps` ADD `minor_disabled` int(11) NOT NULL DEFAULT '0';";
-			$db->multi_query($sql);
-		}
-		$db->close();
-
 		//Check for parent field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT parent FROM apps LIMIT 1")){
 			$sql = "ALTER TABLE `apps` ADD `parent` int(11) NOT NULL DEFAULT '0';";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for staff building restriction field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT staff_building_restrictions FROM apps LIMIT 1")){
+			$sql = "ALTER TABLE `apps` ADD `staff_building_restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for student building restriction field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT student_building_restrictions FROM apps LIMIT 1")){
+			$sql = "ALTER TABLE `apps` ADD `student_building_restrictions` text NOT NULL;";
 			$db->multi_query($sql);
 		}
 		$db->close();

@@ -22,12 +22,15 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
+	$schoolCodeArray = getRestrictions();
+	$codeArraySize = sizeof($schoolCodeArray);
+
 	//Display customized apps for staff
 	if($_SESSION['usertype'] == "staff"){
 
 		//Display Staff Apps
-		echo "<div class='row'><p style='text-align:center; font-weight:600;'>Staff Apps</p><hr style='margin-bottom:20px;'>";
-		$sql = "SELECT title, image, link, minor_disabled FROM apps WHERE staff = 1 AND required = 1 ORDER BY sort";
+		echo "<div class='row'><p style='text-align:center; font-weight:600;'>My Staff Apps</p><hr style='margin-bottom:20px;'>";
+		$sql = "SELECT title, image, link, staff_building_restrictions FROM apps WHERE staff = 1 AND required = 1 ORDER BY sort";
 		$result = $db->query($sql);
 		$item = array();
 
@@ -35,74 +38,118 @@
 			$title = htmlspecialchars($row["title"], ENT_QUOTES);
 			$image = htmlspecialchars($row["image"], ENT_QUOTES);
 			$link = htmlspecialchars($row["link"], ENT_QUOTES);
-			$minor_disabled = htmlspecialchars($row["minor_disabled"], ENT_QUOTES);
 			echo "<ul class='appssort'>";
-			if((studentaccess() != false) or ($minor_disabled != 1)){
-				$required = array();
 
-				//Get App preference settings (if they exist)
-				$sql2 = "SELECT apps_order FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-				$result2 = $db->query($sql2);
-				$apps_order = NULL;
-				while($row2 = $result2->fetch_assoc()) {
-					$apps_order = htmlspecialchars($row2["apps_order"], ENT_QUOTES);
-				}
+			$required = array();
 
-				//Build Array of Required Apps
-				$sql = "SELECT id FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
-				$result = $db->query($sql);
-				while($row = $result->fetch_assoc()){
-					$id = htmlspecialchars($row["id"], ENT_QUOTES);
+			//Get App preference settings (if they exist)
+			$sql2 = "SELECT apps_order FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+			$result2 = $db->query($sql2);
+			$apps_order = NULL;
+			while($row2 = $result2->fetch_assoc()) {
+				$apps_order = htmlspecialchars($row2["apps_order"], ENT_QUOTES);
+			}
+
+			//Build Array of Required Apps
+			$sql = "SELECT id, staff_building_restrictions FROM apps WHERE staff = 1 AND required = 1";
+			$result = $db->query($sql);
+			while($row = $result->fetch_assoc()){
+				$id = htmlspecialchars($row["id"], ENT_QUOTES);
+				$restrictions = $row['staff_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+				if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 					array_push($required, $id);
-				}
-
-				//Display default order, unless they have saved prefrences
-				if($apps_order != NULL){
-					$order = explode(',', $apps_order);
 				}else{
-					$order = array();
-				}
-
-				//Compare
-				foreach($required as $requiredvalue){
-					$hit = NULL;
-					foreach($order as $ordervalue){
-						if($requiredvalue == $ordervalue){
-							$hit = "yes";
+					if($codeArraySize >= 1){
+						foreach($schoolCodeArray as $code){
+							if(in_array($code, $restrictionsArray)){
+								array_push($required, $id);
+								break;
+							}
 						}
 					}
-					if($hit == NULL)
-					{
-						array_push($order, $requiredvalue);
+				}
+			}
+
+			//Display default order, unless they have saved prefrences
+			if($apps_order != NULL){
+				$order = explode(',', $apps_order);
+			}else{
+				$order = array();
+			}
+
+			//Compare
+			foreach($required as $requiredvalue){
+				$hit = NULL;
+				foreach($order as $ordervalue){
+					if($requiredvalue == $ordervalue){
+						$hit = "yes";
 					}
 				}
-				if($apps_order != NULL){
-					foreach($order as $value){
-						$sql = "SELECT id, title, image, link FROM apps WHERE id = '$value' AND staff = 1";
-						$result = $db->query($sql);
-						while($row = $result->fetch_assoc()){
-							$id = htmlspecialchars($row["id"], ENT_QUOTES);
-							$title = htmlspecialchars($row["title"], ENT_QUOTES);
-							$image = htmlspecialchars($row["image"], ENT_QUOTES);
-							$link = htmlspecialchars($row["link"], ENT_QUOTES);
-							echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-								echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
-								echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
-							echo "</li>";
-						}
-					}
-				}else{
-					$sql = "SELECT id, title, image, link FROM apps WHERE staff = 1 ORDER BY sort";
+				if($hit == NULL)
+				{
+					array_push($order, $requiredvalue);
+				}
+			}
+			if($apps_order != NULL){
+				foreach($order as $value){
+					$sql = "SELECT id, title, image, link, staff_building_restrictions FROM apps WHERE id = '$value' AND staff = 1";
 					$result = $db->query($sql);
 					while($row = $result->fetch_assoc()){
 						$id = htmlspecialchars($row["id"], ENT_QUOTES);
 						$title = htmlspecialchars($row["title"], ENT_QUOTES);
 						$image = htmlspecialchars($row["image"], ENT_QUOTES);
 						$link = htmlspecialchars($row["link"], ENT_QUOTES);
+						$restrictions = $row["staff_building_restrictions"];
+						$restrictionsArray = explode(",", $restrictions);
+						if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+							echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+								echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
+								echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+							echo "</li>";
+						}
+						else{
+							if($codeArraySize >= 1){
+								foreach($schoolCodeArray as $code){
+									if(in_array($code, $restrictionsArray)){
+										echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+											echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
+											echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+										echo "</li>";
+										break;
+									}
+								}
+							}
+						}
+					}
+				}
+			}else{
+				$sql = "SELECT id, title, image, link, staff_building_restrictions FROM apps WHERE staff = 1 ORDER BY sort";
+				$result = $db->query($sql);
+				while($row = $result->fetch_assoc()){
+					$id = htmlspecialchars($row["id"], ENT_QUOTES);
+					$title = htmlspecialchars($row["title"], ENT_QUOTES);
+					$image = htmlspecialchars($row["image"], ENT_QUOTES);
+					$link = htmlspecialchars($row["link"], ENT_QUOTES);
+					$restrictions = $row["staff_building_restrictions"];
+					$restrictionsArray = explode(",", $restrictions);
+					if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 						echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
 							echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 							echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
 						echo "</li>";
+					}else{
+						if($codeArraySize >= 1){
+							foreach($schoolCodeArray as $code){
+								if(in_array($code, $restrictionsArray)){
+									echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+										echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
+										echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+									echo "</li>";
+									break;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -128,93 +175,149 @@
 		if($_SESSION['usertype'] == "staff"){
 			//Display uneditable student apps
 			echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
-			$sql2 = "SELECT id, title, image, link FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
+			$sql2 = "SELECT id, title, image, link, student_building_restrictions FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
 			$result2 = $db->query($sql2);
 			while($row2 = $result2->fetch_assoc()){
 				$id=htmlspecialchars($row2["id"], ENT_QUOTES);
 				$title=htmlspecialchars($row2["title"], ENT_QUOTES);
 				$image=htmlspecialchars($row2["image"], ENT_QUOTES);
 				$link=htmlspecialchars($row2["link"], ENT_QUOTES);
-				echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/apps/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
+				$restrictions = $row["student_building_restrictions"];
+				$restrictionsArray = explode(",", $restrictions);
+				if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+					echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/apps/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
+				}else{
+					if($codeArraySize >= 1){
+						foreach($schoolCodeArray as $code){
+							if(in_array($code, $restrictionsArray)){
+								echo "<div class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'><div><img src='$portal_root/core/images/apps/$image' class='appicon_modal'></div><span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span></div>";
+								break;
+							}
+						}
+					}
+				}
 			}
 			echo "</div>";
 		}else{
 			//Display editable student apps
 			echo "<div class='row'><p style='text-align:center; font-weight:600;'>Student Apps</p><hr style='margin-bottom:20px;'>";
-			$sql = "SELECT title, image, link, minor_disabled FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
+			$sql = "SELECT title, image, link FROM apps WHERE student = 1 AND required = 1 ORDER BY sort";
 			$result = $db->query($sql);
-			$item=array();
+			$item = array();
 			while($row = $result->fetch_assoc()){
 				$title = htmlspecialchars($row["title"], ENT_QUOTES);
 				$image = htmlspecialchars($row["image"], ENT_QUOTES);
 				$link = htmlspecialchars($row["link"], ENT_QUOTES);
-				$minor_disabled = htmlspecialchars($row["minor_disabled"], ENT_QUOTES);
 				echo "<ul class='appssort'>";
-				if((studentaccess() != false) or ($minor_disabled != 1)){
-					$required = array();
 
-					//Get App preference settings (if they exist)
-					$sql2 = "SELECT apps_order FROM profiles WHERE email = '".$_SESSION['useremail']."'";
-					$result2 = $db->query($sql2);
-					$apps_order = NULL;
-					while($row2 = $result2->fetch_assoc()) {
-						$apps_order = htmlspecialchars($row2["apps_order"], ENT_QUOTES);
-					}
+				$required = array();
 
-					//Build Array of Required Apps
-					$sql = "SELECT id FROM apps WHERE ".$_SESSION['usertype']." = 1 AND required = 1";
-					$result = $db->query($sql);
-					while($row = $result->fetch_assoc()){
-						$id = htmlspecialchars($row["id"], ENT_QUOTES);
+				//Get App preference settings (if they exist)
+				$sql2 = "SELECT apps_order FROM profiles WHERE email = '".$_SESSION['useremail']."'";
+				$result2 = $db->query($sql2);
+				$apps_order = NULL;
+				while($row2 = $result2->fetch_assoc()) {
+					$apps_order = htmlspecialchars($row2["apps_order"], ENT_QUOTES);
+				}
+
+				//Build Array of Required Apps
+				$sql = "SELECT id, student_building_restrictions FROM apps WHERE student = 1 AND required = 1";
+				$result = $db->query($sql);
+				while($row = $result->fetch_assoc()){
+					$id = htmlspecialchars($row["id"], ENT_QUOTES);
+					$restrictions = $row['student_building_restrictions'];
+					$restrictionsArray = explode(",", $restrictions);
+					if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 						array_push($required, $id);
-					}
-
-					//Display default order, unless they have saved prefrences
-					if($apps_order != NULL){
-						$order = explode(',', $apps_order);
 					}else{
-						$order = array();
-					}
-
-					//Compare
-					foreach($required as $requiredvalue){
-						$hit = NULL;
-						foreach($order as $ordervalue){
-							if($requiredvalue == $ordervalue){
-								$hit = "yes";
+						if($codeArraySize >= 1){
+							foreach($schoolCodeArray as $code){
+								if(in_array($code, $restrictionsArray)){
+									array_push($required, $id);
+									break;
+								}
 							}
 						}
-						if($hit == NULL){
-							array_push($order, $requiredvalue);
+					}
+				}
+
+				//Display default order, unless they have saved prefrences
+				if($apps_order != NULL){
+					$order = explode(',', $apps_order);
+				}else{
+					$order = array();
+				}
+
+				//Compare
+				foreach($required as $requiredvalue){
+					$hit = NULL;
+					foreach($order as $ordervalue){
+						if($requiredvalue == $ordervalue){
+							$hit = "yes";
 						}
 					}
-					if($apps_order != NULL){
-						foreach($order as $value){
-							$sql = "SELECT id, title, image, link FROM apps WHERE id= '$value' AND student = 1";
-							$result = $db->query($sql);
-							while($row = $result->fetch_assoc()){
-								$id = htmlspecialchars($row["id"], ENT_QUOTES);
-								$title = htmlspecialchars($row["title"], ENT_QUOTES);
-								$image = htmlspecialchars($row["image"], ENT_QUOTES);
-								$link = htmlspecialchars($row["link"], ENT_QUOTES);
-								echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
-									echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
-									echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
-								echo "</li>";
-							}
-						}
-					}else{
-						$sql = "SELECT id, title, image, link FROM apps WHERE student = 1 ORDER BY sort";
+					if($hit == NULL){
+						array_push($order, $requiredvalue);
+					}
+				}
+				if($apps_order != NULL){
+					foreach($order as $value){
+						$sql = "SELECT id, title, image, link, student_building_restrictions FROM apps WHERE id= '$value' AND student = 1";
 						$result = $db->query($sql);
 						while($row = $result->fetch_assoc()){
 							$id = htmlspecialchars($row["id"], ENT_QUOTES);
 							$title = htmlspecialchars($row["title"], ENT_QUOTES);
 							$image = htmlspecialchars($row["image"], ENT_QUOTES);
 							$link = htmlspecialchars($row["link"], ENT_QUOTES);
+							$restrictions = $row['student_building_restrictions'];
+							$restrictionsArray = explode(",", $restrictions);
+							if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+								echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+									echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
+									echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+								echo "</li>";
+							}else{
+								if($codeArraySize >= 1){
+									foreach($schoolCodeArray as $code){
+										if(in_array($code, $restrictionsArray)){
+											echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+												echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
+												echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+											echo "</li>";
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+				}else{
+					$sql = "SELECT id, title, image, link FROM apps WHERE student = 1 ORDER BY sort";
+					$result = $db->query($sql);
+					while($row = $result->fetch_assoc()){
+						$id = htmlspecialchars($row["id"], ENT_QUOTES);
+						$title = htmlspecialchars($row["title"], ENT_QUOTES);
+						$image = htmlspecialchars($row["image"], ENT_QUOTES);
+						$link = htmlspecialchars($row["link"], ENT_QUOTES);
+						$restrictions = $row['student_building_restrictions'];
+						$restrictionsArray = explode(",", $restrictions);
+						if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 							echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
 								echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
 								echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
 							echo "</li>";
+						}else{
+							if($codeArraySize >= 1){
+								foreach($schoolCodeArray as $code){
+									if(in_array($code, $restrictionsArray)){
+										echo "<li id='item_$id' class='col s4 app' style='display:block; height:110px; overflow:hidden; word-wrap: break-word; margin:0 0 10px 0 !important;'>";
+											echo "<img src='$portal_root/core/images/apps/$image' class='appicon_modal'>";
+											echo "<span><a href='$link' class='applink truncate' style='display:block;'>$title</a></span>";
+										echo "</li>";
+										break;
+									}
+								}
+							}
 						}
 					}
 				}
