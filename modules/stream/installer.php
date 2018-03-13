@@ -138,6 +138,14 @@
 		}
 		$db->close();
 
+		//Check for color field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT color FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `color` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Check for staff building restriction field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT staff_building_restrictions FROM stream_posts LIMIT 1")){
