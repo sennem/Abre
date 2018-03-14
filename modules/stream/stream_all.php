@@ -49,6 +49,7 @@
 	//Look for all streams that apply to user
 	$flipboardarray = array();
 	$infoArray = array();
+	$enrolledStreams = array();
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $value) {
 		if(strpos($value["group"], $_SESSION["usertype"]) !== false){
@@ -79,11 +80,13 @@
 
 				if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 					array_push($flipboardarray, $fburl);
+					array_push($enrolledStreams, $value["title"]);
 				}else{
 					if($codeArraySize >= 1){
 						foreach($schoolCodeArray as $code){
 							if(in_array($code, $restrictionsArray)){
 									array_push($flipboardarray, $fburl);
+									array_push($enrolledStreams, $value["title"]);
 									break;
 							}
 						}
@@ -97,29 +100,8 @@
 	$sql = "SELECT id, submission_time, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time ASC";
 	$result = $db->query($sql);
 	while($value = $result->fetch_assoc()){
-		if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false){
-
-			if($_SESSION['usertype'] == "staff"){
-				$restrictions = $value['staff_building_restrictions'];
-				$restrictionsArray = explode(",", $restrictions);
-			}
-			if($_SESSION['usertype'] == "student"){
-				$restrictions = $value['student_building_restrictions'];
-				$restrictionsArray = explode(",", $restrictions);
-			}
-
-			if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
-				array_push($customPostArray, $value);
-			}else{
-				if($codeArraySize >= 1){
-					foreach($schoolCodeArray as $code){
-						if(in_array($code, $restrictionsArray)){
-								array_push($customPostArray, $value);
-								break;
-						}
-					}
-				}
-			}
+		if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
+			array_push($customPostArray, $value);
 		}
 	}
 
