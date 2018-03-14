@@ -38,6 +38,9 @@
 			}else{
 				echo "<a href='$feedlink' class='chip' style='background-color: #BDBDBD; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
 			}
+			if($type == "custom"){
+				echo "<div class='right-align pointer' style='float:right; position:absolute; right:15px; top:18px; z-index:5;'><a class='removepost' data-id='$id'><i class='material-icons' style='font-size: 16px;'>clear</i></a></div>";
+			}
 		echo "</div>";
 
 		//Title
