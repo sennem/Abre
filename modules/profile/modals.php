@@ -94,7 +94,7 @@
 			<div style='padding: 0px 24px 0px 24px;'>
 				<div class='row'>
 					<div class='input-field col s12'>
-						<input placeholder="Enter Stream Name" id="stream_name" name="stream_name" type="text" autocomplete="off" required>
+						<input placeholder="Enter Stream Name" id="stream_name" name="stream_name" type="text" autocomplete="off" maxlength="30" required>
 						<label class="active" for="stream_name">Name</label>
 					</div>
 				</div>
