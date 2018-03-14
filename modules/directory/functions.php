@@ -22,67 +22,24 @@
 	require('permissions.php');
 	require_once('../../core/abre_functions.php');
 
-	//Predict Email
+	//Send email to notifiy a new user has been added
 	function emailPrediction($first, $last){
-		//Construct Email Address
-		$firstfirstchar = $first[0];
-		$firstsecondchar = $first[1];
-		$firstthirdchar = $first[2];
-		$predictedemail = $firstfirstchar.$last.SITE_GAFE_DOMAIN;
-		$predictedemail = strtolower($predictedemail);
-
-		//Check to make sure email doesn't already exist
-		include "../../configuration.php";
-		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemail'";
-		$result = $db->query($sql);
-		$resultrow = $result->fetch_assoc();
-		$count = $resultrow["COUNT(*)"];
-
-		if($count == 1){
-			$firstsecondchar = $first[1];
-			$predictedemail = $firstfirstchar.$firstsecondchar.$last.SITE_GAFE_DOMAIN;
-			$predictedemail = strtolower($predictedemail);
-
-			//Check again
-			$count=0;
-			include "../../configuration.php";
-			include "../../core/abre_dbconnect.php";
-			$sql = "SELECT COUNT(*) FROM directory WHERE email = '$predictedemail'";
-			$result = $db->query($sql);
-			$resultrow = $result->fetch_assoc();
-			$count = $resultrow["COUNT(*)"];
-
-			if($count == 1){
-				$predictedemail = $firstfirstchar.$firstsecondchar.$firstthirdchar.$last.SITE_GAFE_DOMAIN;
-				$predictedemail = strtolower($predictedemail);
-				sendSupportTicket($first, $last, $predictedemail);
-				return $predictedemail;
-			}else{
-				sendSupportTicket($first, $last, $predictedemail);
-				return $predictedemail;
-			}
-		}else{
-			sendSupportTicket($first, $last, $predictedemail);
-			return $predictedemail;
-		}
+		sendSupportTicket($first, $last);
 	}
 
-	function sendSupportTicket($first, $last, $predictedemail){
-		//Send the VarTek Ticket to have account created.
+	function sendSupportTicket($first, $last){
 		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT options FROM directory_settings where dropdownID = 'supportTicket'";
+		$sql = "SELECT options FROM directory_settings WHERE dropdownID = 'supportTicket'";
 		$result = $db->query($sql);
 		while($row = $result->fetch_assoc()){
 			$email = $row["options"];
 		}
 
 		if($email != ''){
-			//$to = "helpdesk@vartek.com";
 			$to = $email;
 			$subject = "New User Account Needed for $first $last";
-			$message = "Please create a new user account for:\n\n$first $last ($predictedemail).";
-			$headers = "From: web@hcsdoh.org";
+			$message = "Please create a new user account for:\n\n$first $last.";
+			$headers = "From: noreply@abre.io";
 			mail($to, $subject, $message, $headers);
 		}
 	}
