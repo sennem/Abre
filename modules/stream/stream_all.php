@@ -132,11 +132,13 @@
 				$excerpt = $comparisonElement['post_content'];
 				$feedtitle = $comparisonElement['post_stream'];
 				$color = $comparisonElement['color'];
+				$id = $comparisonElement['id'];
 
-				array_push($feeds, array("$postDate", "$title", "$excerpt", "", "", "$feedtitle", "", "$color"));
+				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id"));
 				$totalcount++;
 				array_pop($customPostArray);
 				$customArraySize--;
+
 				if(!empty($customPostArray)){
 					$comparisonElement = $customPostArray[$customArraySize - 1];
 				}else{
@@ -161,7 +163,7 @@
 
 		$color = $infoArray[$feedlink]['color'];
 		$feedtitle = $infoArray[$feedlink]['title'];
-		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$feedtitle","$feedlink", $color));
+		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => ""));
 		$totalcount++;
 	}
 
@@ -170,8 +172,8 @@
 	$feeds = array_reverse($feeds);
 	$cardcount = 0;
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){
-		$date = $feeds[$cardcountloop][0];
-		$title = $feeds[$cardcountloop][1];
+		$date = $feeds[$cardcountloop]['date'];
+		$title = $feeds[$cardcountloop]['title'];
 		$title = str_replace("<p>", " ", $title);
 		$title = strip_tags(html_entity_decode($title));
 		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
@@ -179,7 +181,7 @@
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
 		$title = str_replace('—',"-",$title);
-		$excerpt = $feeds[$cardcountloop][2];
+		$excerpt = $feeds[$cardcountloop]['excerpt'];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));
 		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
@@ -189,12 +191,16 @@
 		$excerpt = str_replace('—',"-",$excerpt);
 		$excerpt = filter_var($excerpt, FILTER_SANITIZE_STRING);
 		if($excerpt == ""){ $excerpt = $title; }
-		$linkraw = $feeds[$cardcountloop][3];
-		$image = $feeds[$cardcountloop][4];
-		$feedtitle = $feeds[$cardcountloop][5];
-		$feedlink = $feeds[$cardcountloop][6];
+		$linkraw = $feeds[$cardcountloop]['link'];
+		$image = $feeds[$cardcountloop]['image'];
+		$feedtitle = $feeds[$cardcountloop]['feedtitle'];
+		$feedlink = $feeds[$cardcountloop]['feedlink'];
 		$color = "";
-		$color = $feeds[$cardcountloop][7];
+		$color = $feeds[$cardcountloop]['color'];
+		$type = "";
+		$type = $feeds[$cardcountloop]['type'];
+		$id = "";
+		$id = $feeds[$cardcountloop]['id'];
 
 		//Add images to server to securely store and reference
 		include "stream_save_image.php";
@@ -282,7 +288,7 @@
 
 		//Fill comment modal
 		$(".shareinfo").unbind().click(function(){
-		    event.preventDefault();
+			event.preventDefault();
 			var Article_URL = $(this).data('url');
 			Article_URL = atob(Article_URL);
 			$(".modal-content #share_url").val(Article_URL);
@@ -320,6 +326,30 @@
 			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
 				$("#commentloader").hide();
 			});
+		});
+
+		//Fill comment modal
+		$(".removepost").unbind().click(function (event){
+			event.preventDefault();
+			var id = $(this).data('id');
+			var result = confirm("Are you sure you want to remove this post?");
+			if(result){
+				//Make the post request
+				$.ajax({
+					type: 'POST',
+					url: 'modules/stream/remove_post.php',
+					data: { id: id }
+				})
+				.done(function(response){
+					$.get('modules/stream/stream_all.php?StreamStartResult=0&StreamEndResult=24', function(results){
+						$('#showmorestream').hide();
+						$('#streamcards').html(results);
+						var notification = document.querySelector('.mdl-js-snackbar');
+						var data = { message: response.message };
+						notification.MaterialSnackbar.showSnackbar(data);
+					});
+				});
+			}
 		});
 
 	});
