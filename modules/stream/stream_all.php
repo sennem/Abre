@@ -97,7 +97,7 @@
 	}
 
 	$customPostArray = array();
-	$sql = "SELECT id, submission_time, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time ASC";
+	$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time ASC";
 	$result = $db->query($sql);
 	while($value = $result->fetch_assoc()){
 		if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
@@ -133,8 +133,9 @@
 				$feedtitle = $comparisonElement['post_stream'];
 				$color = $comparisonElement['color'];
 				$id = $comparisonElement['id'];
+				$owner = $comparisonElement['post_author'];
 
-				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id"));
+				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
 				$totalcount++;
 				array_pop($customPostArray);
 				$customArraySize--;
@@ -163,7 +164,7 @@
 
 		$color = $infoArray[$feedlink]['color'];
 		$feedtitle = $infoArray[$feedlink]['title'];
-		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => ""));
+		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
 		$totalcount++;
 	}
 
@@ -201,6 +202,8 @@
 		$type = $feeds[$cardcountloop]['type'];
 		$id = "";
 		$id = $feeds[$cardcountloop]['id'];
+		$owner = "";
+		$owner = $feeds[$cardcountloop]['owner'];
 
 		//Add images to server to securely store and reference
 		include "stream_save_image.php";
