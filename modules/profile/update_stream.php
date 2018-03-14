@@ -53,6 +53,12 @@
       $stmt->execute();
       $stmt->close();
     }else{
+      //need to index stream posts by old stream title incase it has changed
+      $sql = "SELECT title FROM streams WHERE id = '$streamid'";
+      $result = $db->query($sql);
+      $value = $result->fetch_assoc();
+      $oldStreamTitle = $value['title'];
+
       //needed to backtick because SQL doesn't like when you use reserved words
       $stmt = $db->stmt_init();
       $sql = "UPDATE `streams` SET `group` = ?, `title` = ?, `slug` = ?, `type` = 'flipboard', `url` = ?, `required` = ?, `color` = ?, `staff_building_restrictions` = ?, `student_building_restrictions` = ? WHERE `id` = ?";
@@ -60,9 +66,9 @@
       $stmt->bind_param("ssssisssi", $streamgroup, $streamtitle, $streamtitle, $rsslink, $required, $color, $staffRestrictions, $studentRestrictions, $streamid);
       $stmt->execute();
 
-      $sql = "UPDATE `stream_posts` SET `post_groups` = ?, color = ?, staff_building_restrictions = ?, student_building_restrictions = ? WHERE post_stream = ?";
+      $sql = "UPDATE `stream_posts` SET post_stream = ?, `post_groups` = ?, color = ?, staff_building_restrictions = ?, student_building_restrictions = ? WHERE post_stream = ?";
       $stmt->prepare($sql);
-      $stmt->bind_param("sssss", $streamgroup, $color, $staffRestrictions, $studentRestrictions, $streamtitle);
+      $stmt->bind_param("ssssss", $streamtitle, $streamgroup, $color, $staffRestrictions, $studentRestrictions, $oldStreamTitle);
       $stmt->execute();
       $stmt->close();
     }
