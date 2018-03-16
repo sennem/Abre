@@ -40,9 +40,6 @@
 
 		if(isset($_POST['groupArray'])){
 			$groupArray = $_POST['groupArray'];
-			foreach($groupArray as $item){
-				error_log($item);
-			}
 		}else{
 			$groupArray = "";
 		}

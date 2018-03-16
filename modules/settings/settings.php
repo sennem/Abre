@@ -48,28 +48,37 @@
 
 					//General Settings
 					echo "<div class='row'>";
-					
 						echo "<div class='input-field col s12' style='margin-top:0;'>";
 							echo "<h4>General Settings</h4>";
-							echo "<p>Adjust Abre site settings and preferences. You can also manage colors and icons.</p><br>";
-						echo "</div>";					
-					
+							echo "<p>Adjust Abre site settings and preferences. You can also manage colors and icons.</p>";
+						echo "</div>";
+					echo "</div>";
+
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter a Site Title' value='".getSiteTitle()."' id='sitetitle' name='sitetitle' type='text' autocomplete='off'>";
 							echo "<label class='active' for='sitetitle'>Site Title</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter a Site Description' value='".getSiteDescription()."' id='sitedescription' name='sitedescription' type='text' autocomplete='off'>";
 							echo "<label class='active' for='sitedescription'>Site Description</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter the Site Login Text' value='".getSiteLoginText()."' id='sitelogintext' name='sitelogintext' type='text' autocomplete='off'>";
 							echo "<label class='active' for='sitedescription'>Site Login Text</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter a Site Color' value='".getSiteColor()."' id='sitecolor' name='sitecolor' type='text' autocomplete='off'>";
 							echo "<label class='active' for='sitecolor'>Site Color</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s6'>";
 						    echo "<input placeholder='Enter the Google Analytics ID' value='".getSiteAnalytics()."' id='siteanalytics' name='siteanalytics' type='text' autocomplete='off'>";
 							echo "<label class='active' for='siteanalytics'>Google Analytics ID</label>";
@@ -78,16 +87,17 @@
 								echo "<input placeholder='Enter the Google Analytics View ID' value='".getSiteAnalyticsViewId()."' id='analyticsViewId' name='analyticsViewId' type='text' autocomplete='off'>";
 							echo "<label class='active' for='analyticsViewId'>Google Analytics View ID</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 						    echo "<input placeholder='Enter the Site Administrator Email' value='".getSiteAdminEmail()."' id='siteadminemail' name='siteadminemail' type='text' autocomplete='off'>";
 							echo "<label class='active' for='siteadminemail'>Site Administrator Email</label>";
 						echo "</div>";
-						
 					echo "</div>";
-					
+
 					//Staff and Student Domains
 					echo "<div class='row'>";
-					
+
 						echo "<div class='col s12'>";
 							echo "<h4 style='margin-top:0;'>Staff and Student Domains</h4>";
 						    echo "<input type='checkbox' class='filled-in' id = 'staffandstudentdomainssame' name='staffandstudentdomainssame' value='checked' ".getStaffStudentMatch()."/>";
@@ -103,7 +113,7 @@
 								echo "<label class='active' for='studentdomainrequired'>Student Domain Required Characters</label>";
 							echo "</div>";
 						echo "</div>";
-						
+
 					echo "</div>";
 
 					//Site Icon
@@ -126,24 +136,28 @@
 						echo "<div class='col s12'>";
 							echo "<h4>Abre Community</h4>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".getSiteAbreCommunity()."/>";
-							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.  <a href='https://abre.io/community/' style='color:#000;' target='_blank'>Learn more</a></label>";
+							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.<a href='https://abre.io/community/' style='color:#000;' target='_blank'> Learn more</a></label>";
 						echo "</div>";
 						echo "<div id='community_information'>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter a First Name' value='".getSiteCommunityFirstName()."' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_first_name'>First Name</label>";
+							echo "<div class='row'>";
+								echo "<div class='input-field col s6'>";
+									echo "<input placeholder='Enter a First Name' value='".getSiteCommunityFirstName()."' id='community_first_name' name='community_first_name' type='text' autocomplete='off'>";
+									echo "<label class='active' for='community_first_name'>First Name</label>";
+								echo "</div>";
+								echo "<div class='input-field col s6'>";
+									echo "<input placeholder='Enter a Last Name' id='community_last_name' value='".getSiteCommunityLastName()."' name='community_last_name' type='text' autocomplete='off'>";
+									echo "<label class='active' for='community_last_name'>Last Name</label>";
+								echo "</div>";
 							echo "</div>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter a Last Name' id='community_last_name' value='".getSiteCommunityLastName()."' name='community_last_name' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_last_name'>Last Name</label>";
-							echo "</div>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter an Email' id='community_email' value='".getSiteCommunityEmail()."' name='community_email' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_email'>Community Email Address</label>";
-							echo "</div>";
-							echo "<div class='input-field col s6'>";
-								echo "<input placeholder='Enter Number of Users' id='community_users' value='".getSiteCommunityUsers()."' name='community_users' type='text' autocomplete='off'>";
-								echo "<label class='active' for='community_users'>Number of System Users</label>";
+							echo "<div class='row'>";
+								echo "<div class='input-field col s6'>";
+									echo "<input placeholder='Enter an Email' id='community_email' value='".getSiteCommunityEmail()."' name='community_email' type='text' autocomplete='off'>";
+									echo "<label class='active' for='community_email'>Community Email Address</label>";
+								echo "</div>";
+								echo "<div class='input-field col s6'>";
+									echo "<input placeholder='Enter Number of Users' id='community_users' value='".getSiteCommunityUsers()."' name='community_users' type='text' autocomplete='off'>";
+									echo "<label class='active' for='community_users'>Number of System Users</label>";
+								echo "</div>";
 							echo "</div>";
 						echo "</div>";
 					echo "</div>";
@@ -215,7 +229,7 @@
 				location.reload();
 			})
 		});
-		
+
 		//Abre Staff/Student Domains
 		if($("#staffandstudentdomainssame").prop("checked")){
 			$("#staffandstudentdomainssame_information").hide();

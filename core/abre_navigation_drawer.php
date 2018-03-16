@@ -42,10 +42,13 @@
 					$drawerhidden = $modules[$modulecountloop][5];
 					$subpages = $modules[$modulecountloop][6];
 
+					$pagepathArray = explode('/', $pagepath);
+					$pageHighlighting = $pagepathArray[0];
+
 					if($pageview == 1 && $drawerhidden != 1){
 
 						echo "<li style='display:block;'>";
-							echo "<div class='collapsible-header mainapplink' id='abreapp_$pagepath' style='padding:0; border-bottom: 0;'>";;
+							echo "<div class='collapsible-header mainapplink' id='abreapp_$pageHighlighting' style='padding:0; border-bottom: 0;'>";;
 									if($subpages!=NULL){
 										echo "<span class='mdl-navigation__link' ";
 									}else{

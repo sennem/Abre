@@ -26,6 +26,12 @@ License: MIT
     user-select: none;
 }
 
+/* Search and Date Picker Placeholder Color for Navigation */
+.nav-wrapper input::-webkit-input-placeholder{ color:#fff !important; }
+.nav-wrapper input::-moz-placeholder{ color:#fff !important; }
+.nav-wrapper input::-moz-placeholder{ color:#fff !important; }
+.nav-wrapper input::-ms-input-placeholder{ color:#fff !important; }
+
 .sp-container.sp-input-disabled .sp-input-container {
     display: none;
 }
@@ -53,8 +59,8 @@ License: MIT
     border-radius: 0;
     background-color: #E0E0E0;
     padding: 0;
-    -moz-border-radius: 3px; 
-	-webkit-border-radius: 3px; 
+    -moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }
 
@@ -109,8 +115,8 @@ License: MIT
     float:left;
     z-index: 0;
     background-color: #bdbdbd;
-    -moz-border-radius: 15px; 
-	-webkit-border-radius: 15px; 
+    -moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
 	border-radius: 15px;
 }
 
@@ -126,7 +132,7 @@ License: MIT
     top:0;left:0;bottom:0;right:0;
     width:30px;
     height:30px;
-    -moz-border-radius: 15px; 
-	-webkit-border-radius: 15px; 
+    -moz-border-radius: 15px;
+	-webkit-border-radius: 15px;
 	border-radius: 15px;
 }

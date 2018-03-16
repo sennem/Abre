@@ -391,7 +391,7 @@
 
 		return $valuereturn;
 	}
-	
+
 	function getStaffStudentMatch(){
 		$valuereturn = getSettingsDbValue('staffstudentdomainsame');
 		if($valuereturn == ""){ $valuereturn = "unchecked"; }
@@ -785,6 +785,46 @@
 
 		$accessTokenArray = json_decode($result, true);
 		$_SESSION['access_token']['access_token'] = $accessTokenArray['access_token'];
+	}
+
+	function getRestrictions(){
+		include "abre_dbconnect.php";
+		//get schools codes for the staff member
+		$schoolCodeArray = array();
+		if($_SESSION['usertype'] == "staff"){
+			$sql = "SELECT SchoolCode FROM Abre_Staff WHERE EMail1 = '".$_SESSION['useremail']."'";
+			$resultrow = $db->query($sql);
+			$count = mysqli_num_rows($resultrow);
+			while($result = $resultrow->fetch_assoc()){
+					array_push($schoolCodeArray, $result['SchoolCode']);
+			}
+		}
+
+		if($_SESSION['usertype'] == "student"){
+			$sql = "SELECT SchoolCode FROM Abre_Students WHERE Email = '".$_SESSION['useremail']."' LIMIT 1";
+			$resultrow = $db->query($sql);
+			$result = $resultrow->fetch_assoc();
+			array_push($schoolCodeArray, $result['SchoolCode']);
+		}
+
+		return $schoolCodeArray;
+	}
+
+	//Admin Check
+	function AdminCheck($email){
+		include "abre_dbconnect.php";
+		$contract = encrypt('Administrator', "");
+		$sql = "SELECT COUNT(*) FROM directory WHERE email = '$email' AND contract = '$contract'";
+		$result = $db->query($sql);
+		$returnrow = $result->fetch_assoc();
+		$count = $returnrow["COUNT(*)"];
+		$db->close();
+		if($count >= 1){
+			return true;
+		}
+		else{
+			return false;
+		}
 	}
 
 ?>

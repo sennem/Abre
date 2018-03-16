@@ -17,31 +17,12 @@
     */
 
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require('permissions.php');
-	require_once('../../core/abre_functions.php');
-
-	//Send email to notifiy a new user has been added
-	function emailPrediction($first, $last){
-		sendSupportTicket($first, $last);
-	}
-
-	function sendSupportTicket($first, $last){
-		include "../../core/abre_dbconnect.php";
-		$sql = "SELECT options FROM directory_settings WHERE dropdownID = 'supportTicket'";
-		$result = $db->query($sql);
-		while($row = $result->fetch_assoc()){
-			$email = $row["options"];
-		}
-
-		if($email != ''){
-			$to = $email;
-			$subject = "New User Account Needed for $first $last";
-			$message = "Please create a new user account for:\n\n$first $last.";
-			$headers = "From: noreply@abre.io";
-			mail($to, $subject, $message, $headers);
-		}
-	}
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 ?>
+
+	<div class='fixed-action-btn buttonpin pointer'>
+		<a class='btn-floating btn-large waves-effect waves-light streampost' id="streamFab" style='background-color: <?php echo getSiteColor(); ?>' href='#streampost'><i class='large material-icons'>add</i></a>
+		<div class="mdl-tooltip mdl-tooltip--left" for="streamFab">New Post</div>
+	</div>

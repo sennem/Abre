@@ -24,7 +24,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 if(superadmin()){
 
   echo "<table class='bordered' id='streamsort'>";
-  $query = "SELECT * FROM streams ORDER BY title";
+  $query = "SELECT id, title, url, `group`, required, color, staff_building_restrictions, student_building_restrictions FROM streams ORDER BY title";
   $dbreturn = databasequery($query);
   foreach($dbreturn as $value){
     $id = $value['id'];
@@ -37,6 +37,8 @@ if(superadmin()){
       $group = "no assigned groups";
     }
     $required = $value['required'];
+    $staffRestrictions = $value['staff_building_restrictions'];
+    $studentRestrictions = $value['student_building_restrictions'];
     $color = $value['color'];
     echo "<tr id='item-$id'>";
     echo "<td style='width:30px;'>";
@@ -47,11 +49,12 @@ if(superadmin()){
     }
     echo "</div></td>";
     echo "<td><b>$title</b> (".ucwords($group).")</td>";
-    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required' data-color='$color'><i class='material-icons'>mode_edit</i></button></td>";
+    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required' data-color='$color' data-staffrestrictions='$staffRestrictions' data-studentRestrictions='$studentRestrictions'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
   }
   echo "</table>";
+  $db->close();
 }
 
 ?>
@@ -121,6 +124,45 @@ if(superadmin()){
           $('#required_stream').prop('checked', false);
         }
 
+        if($("#stream_staff").is(':checked')){
+          $("#streamStaffRestrictionsDiv").show();
+        }else{
+          $("#streamStaffRestrictionsDiv").hide();
+        }
+
+        if($("#stream_students").is(':checked')){
+          $("#streamStudentRestrictionsDiv").show();
+        }else{
+          $("#streamStudentRestrictionsDiv").hide();
+        }
+
+        var staffRestrictions = $(this).data('staffrestrictions');
+        if(staffRestrictions != ""){
+          if(staffRestrictions.indexOf(',') >= 0){
+            var dataarray = staffRestrictions.split(",");
+            $("#streamStaffRestrictions").val(dataarray);
+          }else{
+            $("#streamStaffRestrictions").val(staffRestrictions);
+          }
+        }else{
+          $("#streamStaffRestrictions").val('No Restrictions');
+        }
+
+        var studentRestrictions = $(this).data('studentrestrictions');
+        if(studentRestrictions != ""){
+          if(studentRestrictions.indexOf(',') >= 0){
+            var dataarray = studentRestrictions.split(",");
+            for(var i = 0; i < dataarray.length; i++){
+              dataarray[i] = dataarray[i].trim();
+            }
+            $("#streamStudentRestrictions").val(dataarray);
+          }else{
+            $("#streamStudentRestrictions").val(studentRestrictions);
+          }
+        }else{
+          $("#streamStudentRestrictions").val('No Restrictions');
+        }
+
         var color = $(this).data('color');
         if(color != ""){
           $("#removeColor").show();
@@ -131,6 +173,7 @@ if(superadmin()){
           in_duration: 0,
           out_duration: 0,
           ready: function() {
+            $('select').material_select();
             $('.modal-content').scrollTop(0);
             $("#stream_color").spectrum({
               color: color,

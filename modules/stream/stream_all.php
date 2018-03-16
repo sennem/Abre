@@ -22,6 +22,10 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
+	$schoolCodeArray = getRestrictions();
+	$codeArraySize = sizeof($schoolCodeArray);
+
+
 	//Find what streams to display
 	$query = "SELECT streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($query);
@@ -37,18 +41,30 @@
 	require_once('simplepie/autoloader.php');
 	$feed_flipboard = new SimplePie();
 	if(!empty($userstreams) != NULL){
-		$sql = "SELECT url, `group`, color FROM streams WHERE required = 1 OR id IN ($userstreams)";
+		$sql = "SELECT title, url, `group`, color, staff_building_restrictions, student_building_restrictions FROM streams WHERE required = 1 OR id IN ($userstreams)";
 	}else{
-		$sql = "SELECT url, `group`, color FROM streams WHERE `required` = 1";
+		$sql = "SELECT title, url, `group`, color, staff_building_restrictions, student_building_restrictions FROM streams WHERE `required` = 1";
 	}
 
 	//Look for all streams that apply to user
 	$flipboardarray = array();
-	$colorArray = array();
+	$infoArray = array();
+	$enrolledStreams = array();
 	$dbreturn = databasequery($sql);
-	foreach($dbreturn as $value) {
+	foreach($dbreturn as $value){
 		if(strpos($value["group"], $_SESSION["usertype"]) !== false){
+
 			$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
+
+			if($_SESSION['usertype'] == "staff"){
+				$restrictions = $value['staff_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+			}
+			if($_SESSION['usertype'] == "student"){
+				$restrictions = $value['student_building_restrictions'];
+				$restrictionsArray = explode(",", $restrictions);
+			}
+
 			$fburlNoRss = rtrim($fburl, ".rss");
 			if($fburl != ""){
 				//should be refactored. This is very hacky!
@@ -58,14 +74,38 @@
 					parse_str($parts['query'], $params);
 					$user = $params['user'];
 					$url = "https://twitter.com/".$user;
-					$colorArray[$url] = $value['color'];
+					$infoArray[$url] = array("color" => $value['color'], "title" => $value['title']);
 				}else{
-					$colorArray[$fburlNoRss] = $value['color'];
+					$infoArray[$fburlNoRss] = array("color" => $value['color'], "title" => $value['title']);
 				}
+			}
+
+			if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 				array_push($flipboardarray, $fburl);
+				array_push($enrolledStreams, $value["title"]);
+			}else{
+				if($codeArraySize >= 1){
+					foreach($schoolCodeArray as $code){
+						if(in_array($code, $restrictionsArray)){
+								array_push($flipboardarray, $fburl);
+								array_push($enrolledStreams, $value["title"]);
+								break;
+						}
+					}
+				}
 			}
 		}
 	}
+
+	$customPostArray = array();
+	$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts ORDER BY submission_time ASC";
+	$result = $db->query($sql);
+	while($value = $result->fetch_assoc()){
+		if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
+			array_push($customPostArray, $value);
+		}
+	}
+
 	$feed_flipboard->set_cache_duration(1800);
 	$feed_flipboard->set_stupidly_fast(true);
 	$feed_flipboard->set_feed_url($flipboardarray);
@@ -80,10 +120,36 @@
 	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
 	$StreamEndResult = 24;
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
+	$customArraySize = sizeof($customPostArray);
+	date_default_timezone_set("EST");
 	foreach($feed_flipboard->get_items($StreamStartResult,$StreamEndResult) as $item){
+		$date = $item->get_date();
+		if(!empty($customPostArray)){
+			$comparisonElement = $customPostArray[$customArraySize - 1];
+			while(strtotime($date) < strtotime($comparisonElement['submission_time'])){
+				$postDate = $comparisonElement['submission_time'];
+				$postDate = strtotime($postDate);
+				$title = $comparisonElement['post_title'];
+				$excerpt = $comparisonElement['post_content'];
+				$feedtitle = $comparisonElement['post_stream'];
+				$color = $comparisonElement['color'];
+				$id = $comparisonElement['id'];
+				$owner = $comparisonElement['post_author'];
+
+				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
+				$totalcount++;
+				array_pop($customPostArray);
+				$customArraySize--;
+
+				if(!empty($customPostArray)){
+					$comparisonElement = $customPostArray[$customArraySize - 1];
+				}else{
+					break;
+				}
+			}
+		}
 		$title = $item->get_title();
 		$link = $item->get_link();
-		$date = $item->get_date();
 		$feedtitle = $item->get_feed()->get_title();
 		$feedlink = $item->get_feed()->get_link();
 		$date = strtotime($date);
@@ -93,12 +159,13 @@
 		}
 
 		if($image == ""){
-		    preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $excerpt, $embededimage);
-		    if(isset($embededimage['src'])){ $image=$embededimage['src']; }
+				preg_match('/<img.+src=[\'"](?P<src>.+?)[\'"].*>/i', $excerpt, $embededimage);
+				if(isset($embededimage['src'])){ $image=$embededimage['src']; }
 		}
 
-		$color = $colorArray[$feedlink];
-		array_push($feeds, array("$date","$title","$excerpt","$link","$image","$feedtitle","$feedlink", $color));
+		$color = $infoArray[$feedlink]['color'];
+		$feedtitle = $infoArray[$feedlink]['title'];
+		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
 		$totalcount++;
 	}
 
@@ -107,8 +174,8 @@
 	$feeds = array_reverse($feeds);
 	$cardcount = 0;
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){
-		$date = $feeds[$cardcountloop][0];
-		$title = $feeds[$cardcountloop][1];
+		$date = $feeds[$cardcountloop]['date'];
+		$title = $feeds[$cardcountloop]['title'];
 		$title = str_replace("<p>", " ", $title);
 		$title = strip_tags(html_entity_decode($title));
 		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
@@ -116,7 +183,7 @@
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
 		$title = str_replace('—',"-",$title);
-		$excerpt = $feeds[$cardcountloop][2];
+		$excerpt = $feeds[$cardcountloop]['excerpt'];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));
 		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
@@ -126,12 +193,18 @@
 		$excerpt = str_replace('—',"-",$excerpt);
 		$excerpt = filter_var($excerpt, FILTER_SANITIZE_STRING);
 		if($excerpt == ""){ $excerpt = $title; }
-		$linkraw = $feeds[$cardcountloop][3];
-		$image = $feeds[$cardcountloop][4];
-		$feedtitle = $feeds[$cardcountloop][5];
-		$feedlink = $feeds[$cardcountloop][6];
+		$linkraw = $feeds[$cardcountloop]['link'];
+		$image = $feeds[$cardcountloop]['image'];
+		$feedtitle = $feeds[$cardcountloop]['feedtitle'];
+		$feedlink = $feeds[$cardcountloop]['feedlink'];
 		$color = "";
-		$color = $feeds[$cardcountloop][7];
+		$color = $feeds[$cardcountloop]['color'];
+		$type = "";
+		$type = $feeds[$cardcountloop]['type'];
+		$id = "";
+		$id = $feeds[$cardcountloop]['id'];
+		$owner = "";
+		$owner = $feeds[$cardcountloop]['owner'];
 
 		//Add images to server to securely store and reference
 		include "stream_save_image.php";
@@ -219,7 +292,7 @@
 
 		//Fill comment modal
 		$(".shareinfo").unbind().click(function(){
-		    event.preventDefault();
+			event.preventDefault();
 			var Article_URL = $(this).data('url');
 			Article_URL = atob(Article_URL);
 			$(".modal-content #share_url").val(Article_URL);
@@ -239,6 +312,7 @@
 		//Fill comment modal
 		$(document).off().on("click", ".modal-addstreamcomment", function (event){
 			event.preventDefault();
+			var type = $(this).data('type');
 			$("#commentloader").show();
 			$("#streamComments").empty();
 			var Stream_Title = $(this).data('title');
@@ -253,10 +327,108 @@
 			$(".modal-content #streamImage").val(streamImage);
 			var redirect = $(this).data('redirect');
 			$(".modal-content #redirect").val(redirect);
+			var excerpt = $(this).data('excerpt');
+			$(".modal-content #streamContent").html(excerpt);
+			var image = $(this).data('image');
+			if(image != ""){
+				$(".modal-content #streamPhoto").addClass("mdl-card__media");
+				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
+			}else{
+				$(".modal-content #streamPhoto").removeAttr('style');
+				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
+			}
+			if(type == "custom"){
+				$(".modal-content #streamLink").attr("href", "");
+				$(".modal-content #streamLink").hide();
+			}else{
+				$(".modal-content #streamLink").show();
+				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
+			}
 
 			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
 				$("#commentloader").hide();
 			});
+
+			$('.modal-content').animate({
+				scrollTop: $("#streamComments").offset().top},
+				0);
+		});
+
+		$(".modal-readstream").unbind().click(function(event){
+			event.preventDefault();
+			var type = $(this).data('type');
+			$("#commentloader").show();
+			$("#streamComments").empty();
+			var Stream_Title = $(this).data('title');
+			Stream_Title_Decoded = atob(Stream_Title);
+			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
+			$(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
+			var Stream_Url = $(this).data('url');
+			$(".modal-content #streamUrl").val(Stream_Url);
+			var commentID = $(this).data('commenticonid');
+			$(".modal-content #commentID").val(commentID);
+			var streamImage = $(this).data('image');
+			$(".modal-content #streamImage").val(streamImage);
+			var redirect = $(this).data('redirect');
+			$(".modal-content #redirect").val(redirect);
+			var excerpt = $(this).data('excerpt');
+			$(".modal-content #streamContent").html(excerpt);
+			var image = $(this).data('image');
+			if(image != ""){
+				$(".modal-content #streamPhoto").addClass("mdl-card__media");
+				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
+			}else{
+				$(".modal-content #streamPhoto").removeAttr('style');
+				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
+			}
+			if(type == "custom"){
+				$(".modal-content #streamLink").attr("href", "");
+				$(".modal-content #streamLink").hide();
+			}else{
+				$(".modal-content #streamLink").show();
+				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
+			}
+
+			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
+				$("#commentloader").hide();
+			});
+
+			$('#addstreamcomment').openModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function(){}
+			});
+
+			$('.modal-content').animate({
+				scrollTop: 0},
+				0);
+
+		});
+
+		//Fill comment modal
+		$(".removepost").unbind().click(function (event){
+			event.preventDefault();
+			var id = $(this).data('id');
+			var result = confirm("Are you sure you want to remove this post?");
+			if(result){
+				//Make the post request
+				$.ajax({
+					type: 'POST',
+					url: 'modules/stream/remove_post.php',
+					data: { id: id }
+				})
+				.done(function(response){
+					$.get('modules/stream/stream_all.php?StreamStartResult=0&StreamEndResult=24', function(results){
+						$('#showmorestream').hide();
+						$('#streamcards').html(results);
+						var notification = document.querySelector('.mdl-js-snackbar');
+						var data = { message: response.message };
+						notification.MaterialSnackbar.showSnackbar(data);
+					});
+				});
+			}
 		});
 
 	});

@@ -23,6 +23,9 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
+	$schoolCodeArray = getRestrictions();
+	$codeArraySize = sizeof($schoolCodeArray);
+
 	//Get profile information
 	$sql = "SELECT startup, streams FROM profiles WHERE email = '".$_SESSION['useremail']."'";
 	$dbreturn = databasequery($sql);
@@ -74,24 +77,62 @@
 				$streamValues = array_unique($streamValues, SORT_NUMERIC);
 
 				$dcount = 0;
-				$sql = "SELECT title, id, `group` FROM streams WHERE `required` != 1 ORDER BY type, title";
+				$sql = "SELECT title, id, `group`, staff_building_restrictions, student_building_restrictions FROM streams WHERE `required` != 1 ORDER BY type, title";
 				$dbreturn = databasequery($sql);
 				foreach($dbreturn as $row){
 					if(strpos($row["group"], $_SESSION["usertype"]) !== false){
 						$title = htmlspecialchars($row['title'], ENT_QUOTES);
 						$id = htmlspecialchars($row['id'], ENT_QUOTES);
 
-						echo "<div class='col m4 s6'>";
+						if($_SESSION['usertype'] == "staff"){
+							$restrictions = $row['staff_building_restrictions'];
+							$restrictionsArray = explode(",", $restrictions);
+						}
+						if($_SESSION['usertype'] == "student"){
+							$restrictions = $row['student_building_restrictions'];
+							$restrictionsArray = explode(",", $restrictions);
+						}
+
+
 						$returncount = 0;
-						foreach($streamValues as $value){
-							if($value == $id){
-								echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
-								$returncount = 1;
+						if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+							foreach($streamValues as $value){
+								if($value == $id){
+									echo "<div class='col m4 s6'>";
+										echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+									echo "</div>";
+									$returncount = 1;
+								}
+							}
+							if($returncount == 0){
+								echo "<div class='col m4 s6'>";
+									echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+								echo "</div>";
+							}
+							$dcount++;
+						}else{
+							if($codeArraySize >= 1){
+								foreach($schoolCodeArray as $code){
+									if(in_array($code, $restrictionsArray)){
+										foreach($streamValues as $value){
+											if($value == $id){
+												echo "<div class='col m4 s6'>";
+													echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' checked='checked' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+												echo "</div>";
+												$returncount = 1;
+											}
+										}
+										if($returncount == 0){
+											echo "<div class='col m4 s6'>";
+												echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>";
+											echo "</div>";
+										}
+										$dcount++;
+										break;
+									}
+								}
 							}
 						}
-						if($returncount == 0){ echo "<input type='checkbox' class='formclick filled-in streamtopic' id='checkbox_$dcount' name='checkbox_$dcount' value='$id' /><label for='checkbox_$dcount' style='color:#000;'>$title</label>"; }
-						echo "</div>";
-						$dcount++;
 					}
 	    	}
 	    	if($dcount == 0){ echo "<div class='col s12'>No available streams</div>"; }

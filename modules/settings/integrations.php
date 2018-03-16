@@ -29,7 +29,6 @@
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updateintegrationsettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
-				echo "<div class='row'>";
 
 					//Page Title
 					echo "<div class='row'>";
@@ -42,21 +41,22 @@
 					//Form Fields
 					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
-						    echo "<input placeholder='Enter VendorLink Host URL' value='".getSoftwareAnswersURL()."' id='softwareanswersurl' name='softwareanswersurl' type='text' autocomplete='off'>";
+							echo "<input placeholder='Enter VendorLink Host URL' value='".getSoftwareAnswersURL()."' id='softwareanswersurl' name='softwareanswersurl' type='text' autocomplete='off'>";
 							echo "<label class='active' for='softwareanswersurl'>Software Answers VendorLink URL</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
 							echo "<input placeholder='Enter VendorLink Identifier' value='".getSoftwareAnswersIdentifier()."' id='softwareanswersidentifier' name='softwareanswersidentifier' type='text' autocomplete='off'>";
 							echo "<label class='active' for='softwareanswersidentifier'>Software Answers VendorLink Identifier</label>";
 						echo "</div>";
+					echo "</div>";
+					echo "<div class='row'>";
 						echo "<div class='input-field col s12'>";
-						    echo "<input placeholder='Enter VendorLink Key' value='".getSoftwareAnswersKey()."' id='softwareanswerskey' name='softwareanswerskey' type='text' autocomplete='off'>";
+						  echo "<input placeholder='Enter VendorLink Key' value='".getSoftwareAnswersKey()."' id='softwareanswerskey' name='softwareanswerskey' type='text' autocomplete='off'>";
 							echo "<label class='active' for='softwareanswerskey'>Software Answers VendorLink Key</label>";
 						echo "</div>";
 					echo "</div>";
-
-			echo "</div>";
-
 
 			//Save Button
 			echo "<div class='row'>";

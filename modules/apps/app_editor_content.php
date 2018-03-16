@@ -24,7 +24,7 @@
 	if(superadmin()){
 
 		echo "<table class='bordered' id='appsort'>";
-			$query = "SELECT id, title, link, icon, staff, student, parent, minor_disabled FROM apps ORDER BY sort";
+			$query = "SELECT id, title, link, icon, staff, student, parent, staff_building_restrictions, student_building_restrictions FROM apps ORDER BY sort";
 			$dbreturn = databasequery($query);
 			foreach ($dbreturn as $value){
 				$id = $value['id'];
@@ -49,7 +49,8 @@
 					array_push($permissions, 'Parents');
 				}
 				$permissionsList = implode(", ", $permissions);
-				$minor_disabled = $value['minor_disabled'];
+				$staffRestrictions = $value['staff_building_restrictions'];
+				$studentRestrictions = $value['student_building_restrictions'];
 				echo "<tr id='item-$id' style='background-color:#f9f9f9'>";
 					echo "<td style='width:60px'><img src='$portal_root/core/images/apps/$icon' style='width:35px; height:35px;'></td>";
 					if($permissionsList == ""){
@@ -57,7 +58,7 @@
 					}else{
 						echo "<td><b>$title</b> (".$permissionsList.")<td>";
 					}
-					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appminors='$minor_disabled' data-appparents='$parent'><i class='material-icons'>mode_edit</i></button></td>";
+					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appparents='$parent' data-staffrestrictions='$staffRestrictions' data-studentRestrictions='$studentRestrictions'><i class='material-icons'>mode_edit</i></button></td>";
 					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteapp' data-appid='$id'><i class='material-icons'>delete</i></button></td>";
 					echo "<td style='width:30px'><div class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 handle'><i class='material-icons'>reorder</i></div></td>";
 				echo "</tr>";
@@ -160,17 +161,50 @@
 						$('#app_parents').prop('checked', false);
 					}
 
-					var appminors = $(this).data('appminors');
-					if(appminors == 1){
-						$('#app_minors').prop('checked', true);
+					if($("#app_staff").is(':checked')){
+						$("#appsStaffRestrictionsDiv").show();
 					}else{
-						$('#app_minors').prop('checked', false);
+						$("#appsStaffRestrictionsDiv").hide();
+					}
+
+					if($("#app_students").is(':checked')){
+						$("#appsStudentRestrictionsDiv").show();
+					}else{
+						$("#appsStudentRestrictionsDiv").hide();
+					}
+
+					var staffRestrictions = $(this).data('staffrestrictions');
+					if(staffRestrictions != ""){
+						if(staffRestrictions.indexOf(',') >= 0){
+							var dataarray = staffRestrictions.split(",");
+							$("#appsStaffRestrictions").val(dataarray);
+						}else{
+							$("#appsStaffRestrictions").val(staffRestrictions);
+						}
+					}else{
+						$("#appsStaffRestrictions").val('No Restrictions');
+					}
+
+					var studentRestrictions = $(this).data('studentrestrictions');
+					if(studentRestrictions != ""){
+						if(studentRestrictions.indexOf(',') >= 0){
+							var dataarray = studentRestrictions.split(",");
+							for(var i = 0; i < dataarray.length; i++){
+								dataarray[i] = dataarray[i].trim();
+							}
+							$("#appsStudentRestrictions").val(dataarray);
+						}else{
+							$("#appsStudentRestrictions").val(studentRestrictions);
+						}
+					}else{
+						$("#appsStudentRestrictions").val('No Restrictions');
 					}
 
 					$('#addeditapp').openModal({
 						in_duration: 0,
 						out_duration: 0,
 						ready: function() {
+							$('select').material_select();
 							$('.modal-content').scrollTop(0);
 					  },
 					});

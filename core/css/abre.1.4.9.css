@@ -16,6 +16,12 @@
 
 html, body { font-family: 'Roboto', 'Helvetica', sans-serif; background-color: #f1f1f1 !important; }
 
+label {
+  font-size: 14px !important;
+  font-weight:500;
+  color: #000 !important;
+}
+
 input[type="checkbox"]
 {
     display:block !important;

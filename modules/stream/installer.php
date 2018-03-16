@@ -40,6 +40,128 @@
 		}
 		$db->close();
 
+		//Check for staff building restriction field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT staff_building_restrictions FROM streams LIMIT 1")){
+			$sql = "ALTER TABLE `streams` ADD `staff_building_restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for student building restriction field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT student_building_restrictions FROM streams LIMIT 1")){
+			$sql = "ALTER TABLE `streams` ADD `student_building_restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Setup stream_posts table
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT * FROM stream_posts LIMIT 1")){
+			$sql = "CREATE TABLE `stream_posts` (`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$sql .= "ALTER TABLE `stream_posts` ADD PRIMARY KEY (`id`);";
+			$sql .= "ALTER TABLE `stream_posts` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+			if ($db->multi_query($sql) === TRUE) { }
+		}
+		$db->close();
+
+		//Check for submission time field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT submission_time FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `submission_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for post author field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT post_author FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `post_author` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for author first name field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT author_firstname FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `author_firstname` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for author last name field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT author_lastname FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `author_lastname` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for post groups field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT post_groups FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `post_groups` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for post title field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT post_title FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `post_title` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for post stream field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT post_stream FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `post_stream` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for post content field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT post_content FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `post_content` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for post image field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT post_image FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `post_image` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for color field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT color FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `color` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for staff building restriction field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT staff_building_restrictions FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `staff_building_restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for student building restriction field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT student_building_restrictions FROM stream_posts LIMIT 1")){
+			$sql = "ALTER TABLE `stream_posts` ADD `student_building_restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Setup tables if new module
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$resultstreamscomments = $db->query("SELECT * FROM streams_comments LIMIT 1")){
