@@ -47,6 +47,13 @@
 					<div style='padding: 0px 24px 0px 24px;'>
 
 						<div class="row">
+							<div class="mdl-card__media" id="streamPhoto" class="center-align" style="height: 200px;"></div>
+						</div>
+						<div class="row">
+							<p id="streamContent"></p>
+							<a id="streamLink" href='' style="color: <?php echo getSiteColor(); ?>;" target="_blank">Read the full article</a>
+						</div>
+						<div class="row">
 							<div class="input-field" style="padding-bottom: 5px;">
 								<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
 							</div>
