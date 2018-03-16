@@ -335,7 +335,7 @@
 				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
 				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
 			}else{
-				$(".modal-content #streamPhoto").attr('style', '');
+				$(".modal-content #streamPhoto").removeAttr('style');
 				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
 			}
 			if(type == "custom"){
@@ -380,7 +380,7 @@
 				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
 				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
 			}else{
-				$(".modal-content #streamPhoto").attr('style', '');
+				$(".modal-content #streamPhoto").removeAttr('style');
 				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
 			}
 			if(type == "custom"){
