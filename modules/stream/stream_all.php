@@ -51,8 +51,9 @@
 	$infoArray = array();
 	$enrolledStreams = array();
 	$dbreturn = databasequery($sql);
-	foreach($dbreturn as $value) {
+	foreach($dbreturn as $value){
 		if(strpos($value["group"], $_SESSION["usertype"]) !== false){
+
 			$fburl = htmlspecialchars($value['url'], ENT_QUOTES);
 
 			if($_SESSION['usertype'] == "staff"){
@@ -77,18 +78,18 @@
 				}else{
 					$infoArray[$fburlNoRss] = array("color" => $value['color'], "title" => $value['title']);
 				}
+			}
 
-				if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
-					array_push($flipboardarray, $fburl);
-					array_push($enrolledStreams, $value["title"]);
-				}else{
-					if($codeArraySize >= 1){
-						foreach($schoolCodeArray as $code){
-							if(in_array($code, $restrictionsArray)){
-									array_push($flipboardarray, $fburl);
-									array_push($enrolledStreams, $value["title"]);
-									break;
-							}
+			if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
+				array_push($flipboardarray, $fburl);
+				array_push($enrolledStreams, $value["title"]);
+			}else{
+				if($codeArraySize >= 1){
+					foreach($schoolCodeArray as $code){
+						if(in_array($code, $restrictionsArray)){
+								array_push($flipboardarray, $fburl);
+								array_push($enrolledStreams, $value["title"]);
+								break;
 						}
 					}
 				}
@@ -311,6 +312,7 @@
 		//Fill comment modal
 		$(document).off().on("click", ".modal-addstreamcomment", function (event){
 			event.preventDefault();
+			var type = $(this).data('type');
 			$("#commentloader").show();
 			$("#streamComments").empty();
 			var Stream_Title = $(this).data('title');
@@ -325,10 +327,84 @@
 			$(".modal-content #streamImage").val(streamImage);
 			var redirect = $(this).data('redirect');
 			$(".modal-content #redirect").val(redirect);
+			var excerpt = $(this).data('excerpt');
+			$(".modal-content #streamContent").html(excerpt);
+			var image = $(this).data('image');
+			if(image != ""){
+				$(".modal-content #streamPhoto").addClass("mdl-card__media");
+				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
+			}else{
+				$(".modal-content #streamPhoto").attr('style', '');
+				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
+			}
+			if(type == "custom"){
+				$(".modal-content #streamLink").attr("href", "");
+				$(".modal-content #streamLink").hide();
+			}else{
+				$(".modal-content #streamLink").show();
+				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
+			}
 
 			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
 				$("#commentloader").hide();
 			});
+
+			$('.modal-content').animate({
+				scrollTop: $("#streamComments").offset().top},
+				0);
+		});
+
+		$(".modal-readstream").unbind().click(function(event){
+			event.preventDefault();
+			var type = $(this).data('type');
+			$("#commentloader").show();
+			$("#streamComments").empty();
+			var Stream_Title = $(this).data('title');
+			Stream_Title_Decoded = atob(Stream_Title);
+			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
+			$(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
+			var Stream_Url = $(this).data('url');
+			$(".modal-content #streamUrl").val(Stream_Url);
+			var commentID = $(this).data('commenticonid');
+			$(".modal-content #commentID").val(commentID);
+			var streamImage = $(this).data('image');
+			$(".modal-content #streamImage").val(streamImage);
+			var redirect = $(this).data('redirect');
+			$(".modal-content #redirect").val(redirect);
+			var excerpt = $(this).data('excerpt');
+			$(".modal-content #streamContent").html(excerpt);
+			var image = $(this).data('image');
+			if(image != ""){
+				$(".modal-content #streamPhoto").addClass("mdl-card__media");
+				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
+			}else{
+				$(".modal-content #streamPhoto").attr('style', '');
+				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
+			}
+			if(type == "custom"){
+				$(".modal-content #streamLink").attr("href", "");
+				$(".modal-content #streamLink").hide();
+			}else{
+				$(".modal-content #streamLink").show();
+				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
+			}
+
+			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
+				$("#commentloader").hide();
+			});
+
+			$('#addstreamcomment').openModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function(){}
+			});
+
+			$('.modal-content').animate({
+				scrollTop: 0},
+				0);
+
 		});
 
 		//Fill comment modal
