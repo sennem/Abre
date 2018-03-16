@@ -101,7 +101,7 @@
 				<div class="row">
 					<div class='input-field col s12'>
 						<input placeholder="Enter RSS Link" id="rss_link" name="rss_link" type="text" autocomplete="off">
-						<label class="active" for="rss_link">Link</label>
+						<label class="active" for="rss_link">Link to Automated RSS Posts (Optional)</label>
 					</div>
 				</div>
 				<div class="row">
