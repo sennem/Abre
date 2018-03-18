@@ -37,14 +37,16 @@
 	}
 
 	//Find what streams to display
-	$query = "SELECT title, image, url, creationtime FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND liked = '1' ORDER BY ID DESC LIMIT $StreamStartResult, $StreamEndResult";
+	$query = "SELECT title, image, url, creationtime, excerpt FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND liked = '1' ORDER BY url DESC LIMIT $StreamStartResult, $StreamEndResult";
 	$dbreturn = databasequery($query);
 	$counter = 0;
 	$lastUrl = NULL;
 	foreach($dbreturn as $value){
-		if($lastUrl == mysqli_real_escape_string($db, $value['url'])){
+		$link = mysqli_real_escape_string($db, $value['url']);
+		if($lastUrl == $link && $link != ""){
 			continue;
 		}
+		$lastUrl = $link;
 		$title = $value['title'];
 		$titleencoded = base64_encode($title);
 		$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
@@ -52,10 +54,9 @@
 		$imagebase = base64_encode($image);
 		$linkbase = base64_encode($value['url']);
 		$linkescaped = htmlspecialchars($value['url'], ENT_QUOTES);
-		$link = mysqli_real_escape_string($db, $value['url']);
-		$lastUrl = $link;
 		$creationtime = $value['creationtime'];
 		$creationtime = date('F jS, Y',strtotime($creationtime));
+		$excerpt = htmlspecialchars($value['excerpt'], ENT_QUOTES);
 		$counter++;
 
 		//Comment count
@@ -78,7 +79,7 @@
 
 			//Title
 			echo "<div class='cardtitle' style='height:60px; padding:5px 16px 0 16px;'>";
-				echo "<div class='mdl-card__title-text ellipsis-multiline cardclick pointer' data-link='$linkescaped' style='font-weight:700; font-size:20px; line-height:24px;'>$titlewithoutlongwords</div>";
+				echo "<div class='mdl-card__title-text ellipsis-multiline modal-readstream pointer' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' style='font-weight:700; font-size:20px; line-height:24px;'>$titlewithoutlongwords</div>";
 			echo "</div>";
 
 			//Date
@@ -86,21 +87,21 @@
 
 			//Card Image
 			if($image != ""){
-				echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' data-link='$linkescaped' style='height:200px; background-image: url($image);'></div>";
+				echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand modal-readstream pointer' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' style='height:200px; background-image: url($image);'></div>";
 			}
 			else
 			{
 
-				if(strlen($title) > 100){
-					$body = substr($title, 0, strrpos( substr($title , 0, 100), ' ' ));
-					$body = substr($title, 0, 97) . ' ...';
+				if(strlen($excerpt) > 100){
+					$body = substr($excerpt, 0, strrpos( substr($excerpt , 0, 100), ' ' ));
+					$body = substr($excerpt, 0, 97) . ' ...';
 				}
 				else
 				{
-					$body = $title;
+					$body = $excerpt;
 				}
 
-				echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper cardclick pointer' data-link='$linkescaped' style='height:200px; background-image: url(/core/images/abre/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
+				echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper modal-readstream pointer' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' style='height:200px; background-image: url(/core/images/abre/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
 					echo "<span style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
 				echo "</div>";
 
@@ -110,7 +111,7 @@
 			echo "<div class='mdl-card__actions'>";
 
 				//Read Button
-				echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='$linkescaped' style='color: ".getSiteColor()."' target='_blank'>Read</a>";
+				echo "<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect modal-readstream' data-commenticonid='comment_$counter' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' style='color: ".getSiteColor()."'>Read</a>";
 
 				//Share, Likes, Comments for Staff Only
 				if($_SESSION['usertype'] == 'staff'){
@@ -127,20 +128,20 @@
 					$num_rows_like_current_user = $resultrow["COUNT(*)"];
 
 					if($num_rows_like == 0){
-						echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
+						echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 					}else{
 						if($num_rows_like_current_user == 0){
-							echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
+							echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 						}else{
-							echo "<a class='material-icons mdl-color-text--red likeicon' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--red' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
+							echo "<a class='material-icons mdl-color-text--red likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--red' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 						}
 					}
 
 					//Comments
 					if($num_rows_comment == 0){
-						echo "<a class='material-icons mdl-color-text--grey-600 modal-addstreamcomment commenticon' data-commenticonid='comment_$counter' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a><span id='comment_$counter' style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color:grey'>$num_rows_comment</span>";
+						echo "<a class='material-icons mdl-color-text--grey-600 modal-addstreamcomment commenticon' data-commenticonid='comment_$counter' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a><span id='comment_$counter' style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color:grey'>$num_rows_comment</span>";
 					}else{
-						echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".getSiteColor().";' data-commenticonid='comment_$counter' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span id='comment_$counter' style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".getSiteColor()."'>$num_rows_comment</span>";
+						echo "<a class='material-icons modal-addstreamcomment commenticon' style='color: ".getSiteColor().";' data-commenticonid='comment_$counter' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='likes' data-title='$titleencoded' data-url='$linkbase' title='Add a comment' href='#addstreamcomment'>insert_comment</a> <span id='comment_$counter' style='font-size:12px; font-weight:600; width:30px; padding-left:5px; color: ".getSiteColor()."'>$num_rows_comment</span>";
 					}
 				}
 
@@ -184,12 +185,13 @@
 				var Stream_Title = $(this).data('title');
 				var Stream_Url = $(this).data('url');
 				var Stream_Image = $(this).data('image');
+				var excerpt = $(this).data('excerpt');
 
 				var elementCount = $(this).next();
 				var elementIcon = $(this);
 				var card = $(this).closest('.card_stream');
 
-				$.post("modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image)
+				$.post("modules/stream/stream_like.php", { url: Stream_Url, title: Stream_Title, image: Stream_Image, excerpt: excerpt })
 				.done(function(data) {
 					$.post( "modules/<?php echo basename(__DIR__); ?>/update_card.php", {url: Stream_Url, type: "like"})
 					.done(function(data) {
@@ -238,8 +240,19 @@
 		//Fill comment modal
 		$(document).off().on("click", ".modal-addstreamcomment", function (event){
 			event.preventDefault();
+
 			$("#commentloader").show();
 			$("#streamComments").empty();
+			$(".modal-content #streamTitle").text('');
+			$(".modal-content #streamTitle").val('');
+			$(".modal-content #streamUrl").val('');
+			$(".modal-content #commentID").val('');
+			$(".modal-content #streamImage").val('');
+			$(".modal-content #redirect").val('');
+			$(".modal-content #streamExcerpt").val('');
+			$(".modal-content #streamExcerptDisplay").html('');
+
+
 			var Stream_Title = $(this).data('title');
 			Stream_Title_Decoded = atob(Stream_Title);
 			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
@@ -252,10 +265,92 @@
 			$(".modal-content #streamImage").val(streamImage);
 			var redirect = $(this).data('redirect');
 			$(".modal-content #redirect").val(redirect);
+			var excerpt = $(this).data('excerpt');
+			$(".modal-content #streamExcerpt").val(excerpt);
+			$(".modal-content #streamExcerptDisplay").html(excerpt);
+			if(streamImage != ""){
+				$(".modal-content #streamPhoto").addClass("mdl-card__media");
+				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(streamImage)+")");
+			}else{
+				$(".modal-content #streamPhoto").removeAttr('style');
+				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
+			}
+			if(!isNaN(parseInt(atob(Stream_Url)))){
+				$(".modal-content #streamLink").attr("href", "");
+				$(".modal-content #streamLink").hide();
+			}else{
+				$(".modal-content #streamLink").show();
+				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
+			}
 
 			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
 				$("#commentloader").hide();
 			});
+
+			$('.modal-content').animate({
+				scrollTop: $("#streamComments").offset().top},
+				0);
+		});
+
+		$(".modal-readstream").unbind().click(function(event){
+			event.preventDefault();
+
+			$("#commentloader").show();
+			$("#streamComments").empty();
+			$(".modal-content #streamTitle").text('');
+			$(".modal-content #streamTitle").val('');
+			$(".modal-content #streamUrl").val('');
+			$(".modal-content #commentID").val('');
+			$(".modal-content #streamImage").val('');
+			$(".modal-content #redirect").val('');
+			$(".modal-content #streamExcerpt").val('');
+			$(".modal-content #streamExcerptDisplay").html('');
+
+			var Stream_Title = $(this).data('title');
+			Stream_Title_Decoded = atob(Stream_Title);
+			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
+			$(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
+			var Stream_Url = $(this).data('url');
+			$(".modal-content #streamUrl").val(Stream_Url);
+			var commentID = $(this).data('commenticonid');
+			$(".modal-content #commentID").val(commentID);
+			var streamImage = $(this).data('image');
+			$(".modal-content #streamImage").val(streamImage);
+			var redirect = $(this).data('redirect');
+			$(".modal-content #redirect").val(redirect);
+			var excerpt = $(this).data('excerpt');
+			$(".modal-content #streamExcerpt").val(excerpt);
+			$(".modal-content #streamExcerptDisplay").html(excerpt);
+			if(streamImage != ""){
+				$(".modal-content #streamPhoto").addClass("mdl-card__media");
+				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(streamImage)+")");
+			}else{
+				$(".modal-content #streamPhoto").removeAttr('style');
+				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
+			}
+			if(!isNaN(parseInt(atob(Stream_Url)))){
+				$(".modal-content #streamLink").attr("href", "");
+				$(".modal-content #streamLink").hide();
+			}else{
+				$(".modal-content #streamLink").show();
+				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
+			}
+
+			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
+				$("#commentloader").hide();
+			});
+
+			$('#addstreamcomment').openModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function(){}
+			});
+
+			$('.modal-content').animate({
+				scrollTop: 0},
+				0);
 		});
 
 	});

@@ -274,11 +274,12 @@
 			var Stream_Title = $(this).data('title');
 			var Stream_Url = $(this).data('url');
 			var Stream_Image = $(this).data('image');
+			var excerpt = $(this).data('excerpt');
 
 			var elementCount = $(this).next();
 			var elementIcon = $(this);
 
-			$.post("modules/stream/stream_like.php?url="+Stream_Url+"&title="+Stream_Title+"&image="+Stream_Image)
+			$.post("modules/stream/stream_like.php", { url: Stream_Url, title: Stream_Title, image: Stream_Image, excerpt: excerpt })
 			.done(function(data) {
 				$.post( "modules/<?php echo basename(__DIR__); ?>/update_card.php", {url: Stream_Url, type: "like"})
 				.done(function(data) {
@@ -329,9 +330,19 @@
 		//Fill comment modal
 		$(document).off().on("click", ".modal-addstreamcomment", function (event){
 			event.preventDefault();
-			var type = $(this).data('type');
+
 			$("#commentloader").show();
 			$("#streamComments").empty();
+			$(".modal-content #streamTitle").text('');
+			$(".modal-content #streamTitle").val('');
+			$(".modal-content #streamUrl").val('');
+			$(".modal-content #commentID").val('');
+			$(".modal-content #streamImage").val('');
+			$(".modal-content #redirect").val('');
+			$(".modal-content #streamExcerpt").val('');
+			$(".modal-content #streamExcerptDisplay").html('');
+
+			var type = $(this).data('type');
 			var Stream_Title = $(this).data('title');
 			Stream_Title_Decoded = atob(Stream_Title);
 			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
@@ -345,12 +356,12 @@
 			var redirect = $(this).data('redirect');
 			$(".modal-content #redirect").val(redirect);
 			var excerpt = $(this).data('excerpt');
-			$(".modal-content #streamContent").html(excerpt);
-			var image = $(this).data('image');
-			if(image != ""){
+			$(".modal-content #streamExcerpt").val(excerpt);
+			$(".modal-content #streamExcerptDisplay").html(excerpt);
+			if(streamImage != ""){
 				$(".modal-content #streamPhoto").addClass("mdl-card__media");
 				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
-				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(streamImage)+")");
 			}else{
 				$(".modal-content #streamPhoto").removeAttr('style');
 				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
@@ -374,9 +385,19 @@
 
 		$(".modal-readstream").unbind().click(function(event){
 			event.preventDefault();
-			var type = $(this).data('type');
+
 			$("#commentloader").show();
 			$("#streamComments").empty();
+			$(".modal-content #streamTitle").text('');
+			$(".modal-content #streamTitle").val('');
+			$(".modal-content #streamUrl").val('');
+			$(".modal-content #commentID").val('');
+			$(".modal-content #streamImage").val('');
+			$(".modal-content #redirect").val('');
+			$(".modal-content #streamExcerpt").val('');
+			$(".modal-content #streamExcerptDisplay").html('');
+
+			var type = $(this).data('type');
 			var Stream_Title = $(this).data('title');
 			Stream_Title_Decoded = atob(Stream_Title);
 			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
@@ -390,12 +411,12 @@
 			var redirect = $(this).data('redirect');
 			$(".modal-content #redirect").val(redirect);
 			var excerpt = $(this).data('excerpt');
-			$(".modal-content #streamContent").html(excerpt);
-			var image = $(this).data('image');
-			if(image != ""){
+			$(".modal-content #streamExcerpt").val(excerpt);
+			$(".modal-content #streamExcerptDisplay").html(excerpt);
+			if(streamImage != ""){
 				$(".modal-content #streamPhoto").addClass("mdl-card__media");
 				$(".modal-content #streamPhoto").attr('style', 'height:200px;');
-				$(".modal-content #streamPhoto").css("background-image", "url("+atob(image)+")");
+				$(".modal-content #streamPhoto").css("background-image", "url("+atob(streamImage)+")");
 			}else{
 				$(".modal-content #streamPhoto").removeAttr('style');
 				$(".modal-content #streamPhoto").removeClass("mdl-card__media");
@@ -421,7 +442,6 @@
 			$('.modal-content').animate({
 				scrollTop: 0},
 				0);
-
 		});
 
 		//Fill comment modal
