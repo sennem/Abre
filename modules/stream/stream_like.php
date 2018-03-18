@@ -22,9 +22,10 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
-	$streamUrl = $_REQUEST['url'];
-	$streamTitle = $_REQUEST['title'];
-	$streamImage = $_REQUEST['image'];
+	$streamUrl = $_POST['url'];
+	$streamTitle = $_POST['title'];
+	$streamImage = $_POST['image'];
+	$streamExcerpt = $_POST['excerpt'];
 	$streamUrldecoded = base64_decode($streamUrl);
 	$streamQuery = mysqli_real_escape_string($db, $streamUrldecoded);
 	$streamTitledecoded = base64_decode($streamTitle);
@@ -46,9 +47,9 @@
 		if($num_rows_like_count == 0){
 			//Insert comment into database
 			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO streams_comments (url, title, image, user, liked) VALUES (?, ?, ?, ?, '1');";
+			$sql = "INSERT INTO streams_comments (url, title, image, user, liked, excerpt) VALUES (?, ?, ?, ?, '1', ?);";
 			$stmt->prepare($sql);
-			$stmt->bind_param("ssss", $streamUrldecoded, $streamTitledecoded, $trimmedimageurl, $userposter);
+			$stmt->bind_param("sssss", $streamUrldecoded, $streamTitledecoded, $trimmedimageurl, $userposter, $streamExcerpt);
 			$stmt->execute();
 			$stmt->close();
 			$db->close();
