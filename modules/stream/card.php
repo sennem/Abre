@@ -96,9 +96,9 @@
 					echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 				}else{
 					if($num_rows_like_current_user == 0){
-						echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
+						echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 					}else{
-						echo "<a class='material-icons mdl-color-text--red likeicon' data-title='$titleencoded' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--red' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
+						echo "<a class='material-icons mdl-color-text--red likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' href='#'>favorite</a> <span class='mdl-color-text--red' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";
 					}
 				}
 

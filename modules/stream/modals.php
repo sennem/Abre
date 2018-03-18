@@ -41,17 +41,21 @@
 			<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
 				<div class="modal-content" id="modal-content-section" style="padding: 0px !important;">
 					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
-						<div class='col s11'><span class="truncate" name="streamTitle" id="streamTitle" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;"></span></div>
+						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Read Post</span></div>
 						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
 					<div style='padding: 0px 24px 0px 24px;'>
 
+						<div class="row truncate">
+							<div id="streamTitle" style="font-weight:700; font-size:20px; line-height:24px;"></div>
+						</div>
 						<div class="row">
 							<div class="mdl-card__media" id="streamPhoto" class="center-align" style="height: 200px;"></div>
 						</div>
 						<div class="row">
-							<p id="streamContent"></p>
-							<a id="streamLink" href='' style="color: <?php echo getSiteColor(); ?>;" target="_blank">Read the full article</a>
+							<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px;"></p>
+							<input id="streamExcerpt" name="streamExcerpt" type="hidden">
+							<a class="mdl-button mdl-js-button mdl-js-ripple-effect" id="streamLink" href='' style="background-color: <?php echo getSiteColor(); ?>; color:#fff;" target="_blank">Read the full article</a>
 						</div>
 						<div class="row">
 							<div class="input-field" style="padding-bottom: 5px;">

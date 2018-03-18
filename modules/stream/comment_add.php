@@ -29,6 +29,7 @@
 		$streamComment = htmlspecialchars($streamComment, ENT_QUOTES);
 		$streamImage = $_POST["streamImage"];
 		$streamImagedecoded = base64_decode($streamImage);
+		$streamExcerpt = $_POST["streamExcerpt"];
 
 		$portal_root_path = $portal_root.'/';
 		$trimmedimageurl = str_replace($portal_root_path, '', $streamImagedecoded);
@@ -37,9 +38,9 @@
 
 		if($streamComment != "" && $streamTitleValue != ""){
 			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO streams_comments (url, title, image, user, comment) VALUES (?, ?, ?, ?, ?);";
+			$sql = "INSERT INTO streams_comments (url, title, image, user, comment, excerpt) VALUES (?, ?, ?, ?, ?, ?);";
 			$stmt->prepare($sql);
-			$stmt->bind_param("sssss", $streamUrldecoded, $streamTitleValue, $trimmedimageurl, $userposter, $streamComment);
+			$stmt->bind_param("ssssss", $streamUrldecoded, $streamTitleValue, $trimmedimageurl, $userposter, $streamComment, $streamExcerpt);
 			$stmt->execute();
 			$stmt->close();
 			$db->close();
