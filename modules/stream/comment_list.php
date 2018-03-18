@@ -35,7 +35,7 @@
 		}
 
 		//Display comments
-		echo "<div id='commentthreadbox'>";
+		echo "<div class='row' id='commentthreadbox'>";
 			$dbreturn = databasequery($sql);
 			$commentcount=count($dbreturn);
 			$counter=0;
@@ -71,7 +71,7 @@
 					$lastname = stripslashes($lastname);
 					$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
 				}
-				
+
 				if (strpos($picture, 'http') === false) {
 
 					if(empty($picture)){
@@ -79,11 +79,11 @@
 					}else{
 						$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
 					}
-					
+
 				}
 
 					//Display Each Comment
-					echo "<div class='commentwrapper' style='overflow:hidden;'>";
+					echo "<div class='commentwrapper col s12' style='overflow:hidden;'>";
 						echo "<div style='padding:10px 0 10px 0;'>";
 
 							echo "<div style='float:left; width:50px;'>";

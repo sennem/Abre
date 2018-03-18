@@ -47,23 +47,32 @@
 					<div style='padding: 0px 24px 0px 24px;'>
 
 						<div class="row truncate">
-							<div id="streamTitle" style="font-weight:700; font-size:20px; line-height:24px;"></div>
+							<div class='input-field col s12' id="streamTitle" style="font-weight:700; font-size:20px; line-height:24px;"></div>
 						</div>
 						<div class="row">
-							<div class="mdl-card__media" id="streamPhoto" class="center-align" style="height: 200px;"></div>
+							<div class="input-field col s12">
+								<div id="streamPhoto" class="center-align" style="height: 200px;"></div>
+							</div>
 						</div>
 						<div class="row">
-							<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px;"></p>
-							<input id="streamExcerpt" name="streamExcerpt" type="hidden">
-							<a class="mdl-button mdl-js-button mdl-js-ripple-effect" id="streamLink" href='' style="background-color: <?php echo getSiteColor(); ?>; color:#fff;" target="_blank">Read the full article</a>
+							<div class='input-field col s12'>
+								<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px;"></p>
+							</div>
+							<div class='input-field col s12'>
+								<a class="mdl-button mdl-js-button mdl-js-ripple-effect" id="streamLink" href='' style="background-color: <?php echo getSiteColor(); ?>; color:#fff;" target="_blank">Read the full article</a>
+							</div>
 						</div>
 						<div class="row">
-							<div class="input-field" style="padding-bottom: 5px;">
+							<div class="input-field col s12" style="padding-bottom: 5px;">
 								<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
 							</div>
 						</div>
 
-						<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
+						<div class="row">
+							<div class="input-field col s12" style="padding-bottom: 5px;">
+								<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
+							</div>
+						</div>
 
 						<div name="streamComments" id="streamComments"></div>
 
@@ -72,6 +81,7 @@
 						<input type="hidden" name="commentID" id="commentID">
 						<input type="hidden" name="streamImage" id="streamImage">
 						<input type="hidden" name="redirect" id="redirect">
+						<input id="streamExcerpt" name="streamExcerpt" type="hidden">
 			    </div>
 				</div>
 			  <div class="modal-footer">

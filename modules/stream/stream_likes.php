@@ -37,7 +37,7 @@
 	}
 
 	//Find what streams to display
-	$query = "SELECT title, image, url, creationtime, excerpt FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND liked = '1' ORDER BY url DESC LIMIT $StreamStartResult, $StreamEndResult";
+	$query = "SELECT title, image, url, creationtime, excerpt FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND liked = '1' ORDER BY ID DESC LIMIT $StreamStartResult, $StreamEndResult";
 	$dbreturn = databasequery($query);
 	$counter = 0;
 	$lastUrl = NULL;
@@ -91,7 +91,9 @@
 			}
 			else
 			{
-
+				if($excerpt == ""){
+					$excerpt = $title;
+				}
 				if(strlen($excerpt) > 100){
 					$body = substr($excerpt, 0, strrpos( substr($excerpt , 0, 100), ' ' ));
 					$body = substr($excerpt, 0, 97) . ' ...';
@@ -119,7 +121,9 @@
 					echo "<div class='mdl-layout-spacer'></div>";
 
 					//Share
-					echo "<a class='material-icons mdl-color-text--grey-600 modal-sharecard commenticon shareinfo' style='margin-right:30px;' data-url='$linkbase' title='Share' href='#sharecard'>share</a>";
+					if(!is_numeric($link)){
+						echo "<a class='material-icons mdl-color-text--grey-600 modal-sharecard commenticon shareinfo' style='margin-right:30px;' data-url='$linkbase' title='Share' href='#sharecard'>share</a>";
+					}
 
 					//Likes
 					$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
@@ -225,6 +229,15 @@
 					});
 				});
 			}
+		});
+
+		//Fill comment modal
+		$(".shareinfo").unbind().click(function(){
+			event.preventDefault();
+			var Article_URL = $(this).data('url');
+			Article_URL = atob(Article_URL);
+			$(".modal-content #share_url").val(Article_URL);
+			$('#sharecard').openModal({ in_duration: 0, out_duration: 0 });
 		});
 
 		//Comment Modal

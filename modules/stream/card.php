@@ -55,7 +55,7 @@
 
 		//Card Image
 		if($image != ""){
-			echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer modal-readstream' data-commenticonid='comment_$cardcountloop' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='height:200px; background-image: url($image);'></div>";
+			echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand pointer modal-readstream' data-commenticonid='comment_$cardcountloop' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='height:200px; background-image: url($image);'></div>";
 		}
 		else
 		{
@@ -66,7 +66,7 @@
 				$body = substr($body, 0, 97) . ' ...';
 			}
 
-			echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper cardclick pointer' data-link='$linkescaped' style='height:200px; background-image: url(/core/images/abre/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
+			echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper pointer modal-readstream' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='height:200px; background-image: url(/core/images/abre/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
 				echo "<span style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
 			echo "</div>";
 
@@ -84,7 +84,9 @@
 				echo "<div class='mdl-layout-spacer'></div>";
 
 				//Share
-				echo "<a class='material-icons mdl-color-text--grey-600 modal-sharecard commenticon shareinfo' style='margin-right:30px;' data-url='$linkbase' title='Share' href='#sharecard'>share</a>";
+				if($type != "custom"){
+					echo "<a class='material-icons mdl-color-text--grey-600 modal-sharecard commenticon shareinfo' style='margin-right:30px;' data-url='$linkbase' title='Share' href='#sharecard'>share</a>";
+				}
 
 				//Likes
 				$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";

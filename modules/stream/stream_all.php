@@ -308,7 +308,6 @@
 
 		});
 
-		//Fill comment modal
 		$(".shareinfo").unbind().click(function(){
 			event.preventDefault();
 			var Article_URL = $(this).data('url');
