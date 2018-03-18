@@ -32,7 +32,7 @@
 
 ?>
 
-	<!-- Comments -->
+	<!-- Read and Comment Modal -->
 	<?php
 	if($_SESSION['usertype']=='staff'){
 	?>
@@ -46,20 +46,20 @@
 					</div>
 					<div style='padding: 0px 24px 0px 24px;'>
 
-						<div class="row truncate">
-							<div class='input-field col s12' id="streamTitle" style="font-weight:700; font-size:20px; line-height:24px;"></div>
+						<div class="row" style='margin-bottom:0;'>
+							<div class='input-field col s12' id="streamTitle" style="font-weight:700; font-size:24px; line-height:32px;"></div>
 						</div>
-						<div class="row">
+						<div class="row" id='streamPhotoHolder'>
 							<div class="input-field col s12">
-								<div id="streamPhoto" class="center-align" style="height: 200px;"></div>
+								<div id="streamPhoto" class="center-align"></div>
 							</div>
 						</div>
 						<div class="row">
 							<div class='input-field col s12'>
-								<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px;"></p>
+								<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px; line-height:1.8em"></p>
 							</div>
 							<div class='input-field col s12'>
-								<a class="mdl-button mdl-js-button mdl-js-ripple-effect" id="streamLink" href='' style="background-color: <?php echo getSiteColor(); ?>; color:#fff;" target="_blank">Read the full article</a>
+								<a id="streamLink" href="" style="text-decoration: underline; color: <?php echo getSiteColor(); ?>;" target="_blank">View full article</a>
 							</div>
 						</div>
 						<div class="row">
@@ -108,6 +108,7 @@
 	   		</form>
 	 	</div>
 
+	 	<!-- Custom Stream Post -->
 		<div id="streampost" class="modal modal-fixed-footer modal-mobile-full">
 			<form id="form-streampost" method="post" action="modules/stream/save_post.php">
 				<div class="modal-content" style="padding: 0px !important;">
