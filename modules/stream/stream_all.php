@@ -116,17 +116,20 @@
 	$feed_flipboard->init();
 	$feed_flipboard->handle_content_type();
 
+	$isFeeds = false;
 	$StreamStartResult = 0;
-	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
 	$StreamEndResult = 24;
+	if(isset($_GET["StreamStartResult"])){ $StreamStartResult = $_GET["StreamStartResult"]; }
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 	$customArraySize = sizeof($customPostArray);
 	date_default_timezone_set("EST");
 	foreach($feed_flipboard->get_items($StreamStartResult,$StreamEndResult) as $item){
+		$isFeeds = true;
 		$date = $item->get_date();
 		if(!empty($customPostArray)){
 			$comparisonElement = $customPostArray[$customArraySize - 1];
 			while(strtotime($date) < strtotime($comparisonElement['submission_time'])){
+				$comparisonElement = array_pop($customPostArray);
 				$postDate = $comparisonElement['submission_time'];
 				$postDate = strtotime($postDate);
 				$title = $comparisonElement['post_title'];
@@ -138,12 +141,9 @@
 
 				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
 				$totalcount++;
-				array_pop($customPostArray);
 				$customArraySize--;
 
-				if(!empty($customPostArray)){
-					$comparisonElement = $customPostArray[$customArraySize - 1];
-				}else{
+				if(empty($customPostArray)){
 					break;
 				}
 			}
@@ -167,6 +167,23 @@
 		$feedtitle = $infoArray[$feedlink]['title'];
 		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
 		$totalcount++;
+	}
+
+	if(!$isFeeds){
+		while(!empty($customPostArray)){
+			$comparisonElement = array_pop($customPostArray);
+			$postDate = $comparisonElement['submission_time'];
+			$postDate = strtotime($postDate);
+			$title = $comparisonElement['post_title'];
+			$excerpt = $comparisonElement['post_content'];
+			$feedtitle = $comparisonElement['post_stream'];
+			$color = $comparisonElement['color'];
+			$id = $comparisonElement['id'];
+			$owner = $comparisonElement['post_author'];
+
+			array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
+			$totalcount++;
+		}
 	}
 
 	//Display the Feeds

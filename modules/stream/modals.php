@@ -50,7 +50,7 @@
 							<div class="mdl-card__media" id="streamPhoto" class="center-align" style="height: 200px;"></div>
 						</div>
 						<div class="row">
-							<p id="streamContent"></p>
+							<p id="streamContent" style="font-size:16px;"></p>
 							<a id="streamLink" href='' style="color: <?php echo getSiteColor(); ?>;" target="_blank">Read the full article</a>
 						</div>
 						<div class="row">
