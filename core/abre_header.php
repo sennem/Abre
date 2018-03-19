@@ -50,7 +50,9 @@
 				//Windows icon
 				echo "<meta name='msapplication-TileImage' content='".getSiteLogo()."'>";
 				echo "<meta name='msapplication-TileColor' content='".getSiteColor()."'>";
-
+				
+				//Theme Color
+				echo "<meta name='theme-color' content='".getSiteColor()."'>";
 				?>
 
 				<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100' rel='stylesheet' type='text/css'>
