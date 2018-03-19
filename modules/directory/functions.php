@@ -25,6 +25,7 @@
 	//Send email to notifiy a new user has been added
 	function emailPrediction($first, $last){
 		sendSupportTicket($first, $last);
+		return "";
 	}
 
 	function sendSupportTicket($first, $last){
