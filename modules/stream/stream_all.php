@@ -65,22 +65,9 @@
 				$restrictionsArray = explode(",", $restrictions);
 			}
 
-			$search = array(".rss", "rss/", "?format=feed&amp;type=rss");
-			$fburlNoRss = str_replace($search, "", $fburl);
-			if($fburl != ""){
-				//should be refactored. This is very hacky!
-				//Brandon Wilson did this painfully.
-				if(strpos($fburlNoRss, "twitrss.me") !== false){
-					$parts = parse_url($fburlNoRss);
-					parse_str($parts['query'], $params);
-					$user = $params['user'];
-					$url = "https://twitter.com/".$user;
-					$infoArray[$url] = array("color" => $value['color'], "title" => $value['title']);
-				}else{
-					error_log("Getting put in array: ".$fburlNoRss);
-					$infoArray[$fburlNoRss] = array("color" => $value['color'], "title" => $value['title']);
-				}
-			}
+			$protocols = array("https://", "http://");
+			$fbArrayValue = str_replace($protocols, "", $fburl);
+			$infoArray[$fbArrayValue] = array("color" => $value['color'], "title" => $value['title']);
 
 			if($restrictions == NULL || in_array("No Restrictions", $restrictionsArray)){
 				array_push($flipboardarray, $fburl);
@@ -154,6 +141,7 @@
 		$link = $item->get_link();
 		$feedtitle = $item->get_feed()->get_title();
 		$feedlink = $item->get_feed()->get_link();
+
 		$date = strtotime($date);
 		$excerpt = $item->get_description();
 		if($enclosure = $item->get_enclosure()){
@@ -165,9 +153,12 @@
 				if(isset($embededimage['src'])){ $image=$embededimage['src']; }
 		}
 
-		error_log($feedlink);
-		$color = $infoArray[$feedlink]['color'];
-		$feedtitle = $infoArray[$feedlink]['title'];
+		$indexLink = $item->get_feed()->get_link(0, 'self');
+		$protocols = array("https://", "http://");
+		$indexLinkValue = str_replace($protocols, "", $indexLink);
+
+		$color = $infoArray[$indexLinkValue]['color'];
+		$feedtitle = $infoArray[$indexLinkValue]['title'];
 		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
 		$totalcount++;
 	}
