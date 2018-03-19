@@ -65,7 +65,8 @@
 				$restrictionsArray = explode(",", $restrictions);
 			}
 
-			$fburlNoRss = rtrim($fburl, ".rss");
+			$search = array(".rss", "rss/", "?format=feed&amp;type=rss");
+			$fburlNoRss = str_replace($search, "", $fburl);
 			if($fburl != ""){
 				//should be refactored. This is very hacky!
 				//Brandon Wilson did this painfully.
@@ -76,6 +77,7 @@
 					$url = "https://twitter.com/".$user;
 					$infoArray[$url] = array("color" => $value['color'], "title" => $value['title']);
 				}else{
+					error_log("Getting put in array: ".$fburlNoRss);
 					$infoArray[$fburlNoRss] = array("color" => $value['color'], "title" => $value['title']);
 				}
 			}
@@ -163,6 +165,7 @@
 				if(isset($embededimage['src'])){ $image=$embededimage['src']; }
 		}
 
+		error_log($feedlink);
 		$color = $infoArray[$feedlink]['color'];
 		$feedtitle = $infoArray[$feedlink]['title'];
 		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
