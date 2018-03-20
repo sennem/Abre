@@ -110,19 +110,14 @@
 
 	 	<!-- Custom Stream Post -->
 		<div id="streampost" class="modal modal-fixed-footer modal-mobile-full">
-			<form id="form-streampost" method="post" action="modules/stream/save_post.php">
+			<form id="form-streampost" method="post" enctype='multipart/form-data' action="modules/stream/save_post.php">
 				<div class="modal-content" style="padding: 0px !important;">
 					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
 						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">New Post</span></div>
 						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
 					<div style='padding: 0px 24px 0px 24px;'>
-						<div class="row">
-							<div class="input-field col s12">
-								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title" required>
-								<label for="post_title" class="active">Post Title</label>
-							</div>
-						</div>
+						
 						<div class="row">
 							<div class="input-field col s12">
 								<label for="post_stream" class="active">Post Stream</label>
@@ -141,16 +136,33 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
+								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title" required>
+								<label for="post_title" class="active">Post Title</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
 								<textarea placeholder="Enter your Post Content" id="post_content" name="post_content" class="materialize-textarea" required></textarea>
 								<label for="post_content" class="active">Post Content</label>
 							</div>
 						</div>
+						
+						<div class='row'>
+							<div class='col s12'>
+								<label for="post_image" class="active">Post Image</label>
+								<br>
+								<img class='custompostimage pointer' style='max-width: 100%' alt='Post Image' src='/core/images/abre/abre_glyph.png'>
+								<input type='file' name='customimage' id='customimage' style='display:none;'>
+							</div>
+						</div>
+				
 					</div>
-		    </div>
-			  <div class="modal-footer">
-					<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
-					<p id="errorMessage" style="display:none; float:right; color:red; margin:6px 0; padding-right:10px;"></p>
-				</div>
+						
+			</div>
+			<div class="modal-footer">
+				<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
+				<p id="errorMessage" style="display:none; float:right; color:red; margin:6px 0; padding-right:10px;"></p>
+			</div>
 			</form>
 		</div>
 
@@ -251,6 +263,26 @@
 <script>
 
 	$(function(){
+		
+		//Material Design Dropdown Selects
+		$('select').material_select();
+		
+		//Provide image upload on icon click
+		$(".custompostimage").unbind().click(function(event){
+			event.preventDefault();
+			$("#customimage").click();
+	  	});
+	  	
+		//Submit form if image if changed
+		$("#customimage").change(function (){
+			if (this.files && this.files[0]){
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('.custompostimage').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+	  	});
 
 		//Social Share
 		$(".socialshare").unbind().click(function(e){
@@ -319,7 +351,7 @@
 				});
 			})
 		});
-
+		
 		$("#post_staff").change(function(){
 			if($(this).is(':checked')){
 				$("#postStaffRestrictionsDiv").show();
@@ -336,23 +368,21 @@
 			}
 		});
 
-		$('select').material_select();
-
+		//Submit the Custom Post
 		$("#form-streampost").submit(function(event) {
 			event.preventDefault();
 			$("errorMessage").hide();
 			var title = $("#post_title").val();
 			var stream = $("#post_stream").val();
 			var content = $("#post_content").val();
+			$('.custompostimage').attr('src', '/core/images/abre/abre_glyph.png');
+			var data = new FormData($(this)[0]);
 
-			$.ajax({
-				type: 'POST',
-				url: $(this).attr('action'),
-				data: { post_title: title, post_stream: stream, post_content: content }
-			})
+			$.ajax({ type: 'POST', url: $(this).attr('action'), data: data, contentType: false, processData: false })
 			.done(function(response){
 				if(response.status == "Success"){
 					$('#streampost').closeModal({ in_duration: 0, out_duration: 0, });
+					$('#all').trigger('click');
 					$.get('modules/stream/stream_all.php?StreamStartResult=0&StreamEndResult=24', function(results){
 						$('#showmorestream').hide();
 						$('#streamcards').html(results);
@@ -367,6 +397,8 @@
 				}
 			});
 		});
+		
+		
 	});
 
 </script>

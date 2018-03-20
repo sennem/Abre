@@ -57,7 +57,7 @@
 		echo "</div>";
 
 		if(superadmin() || adminCheck($_SESSION['useremail'])){
-			//require "stream_fab.php";
+			require "stream_fab.php";
 		}
 
 	echo "</div>";
@@ -160,6 +160,7 @@
 			return false;
 		});
 
+		//Add a Custom Post
 		$(".streampost").unbind().click(function(event){
 			event.preventDefault();
 			$("#post_title").val('');
