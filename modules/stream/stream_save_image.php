@@ -27,7 +27,7 @@
 			
 			$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$image;
 			if (file_exists($filename)){
-				$fileExtension = pathinfo($file_name, PATHINFO_EXTENSION);
+				$fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
 				$image = $portal_root."/modules/stream/stream_serve_image.php?file=$image&ext=$fileExtension";
 			}
 			else

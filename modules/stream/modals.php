@@ -383,13 +383,9 @@
 				if(response.status == "Success"){
 					$('#streampost').closeModal({ in_duration: 0, out_duration: 0, });
 					$('#all').trigger('click');
-					$.get('modules/stream/stream_all.php?StreamStartResult=0&StreamEndResult=24', function(results){
-						$('#showmorestream').hide();
-						$('#streamcards').html(results);
-						var notification = document.querySelector('.mdl-js-snackbar');
-						var data = { message: response.message };
-						notification.MaterialSnackbar.showSnackbar(data);
-					});
+					var notification = document.querySelector('.mdl-js-snackbar');
+					var data = { message: response.message };
+					notification.MaterialSnackbar.showSnackbar(data);
 				}
 				if(response.status == "Error"){
 					$("#errorMessage").html(response.message);

@@ -72,26 +72,30 @@
   
   
   	//Save POST Image
-  	$customimagefilename = "";
+  	$image_file_name = "";
 	if($_FILES['customimage']['name']){
+		
 		//Get file information
 		$file = $_FILES['customimage']['name'];
 		$fileextention = pathinfo($file, PATHINFO_EXTENSION);
 		$cleanfilename = basename($file);
-		$customimagefilename = time() . "post." . $fileextention;
-		$file_name = preg_replace('/[^a-zA-Z0-9_.]/', '', $$customimagefilename);
-		$uploaddir = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $file_name;
+		$image_file_name = time() . "_post." . $fileextention;
+		$uploaddir = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $image_file_name;
 	
 		//Upload new image
-		$sitelogo = $uploaddir . $customimagefilename;
-		move_uploaded_file($_FILES['customimage']['tmp_name'], $sitelogo);
+		$postimage = $uploaddir;
+		move_uploaded_file($_FILES['customimage']['tmp_name'], $postimage);
+		
+		//Resize image
+		//resize_image('max',"$portal_private_root/stream/cache/images/$image_file_name","$portal_private_root/stream/cache/images/$image_file_name",100,100);
+		
 	}
   
 
   $stmt = $db->stmt_init();
   $sql = "INSERT INTO stream_posts (post_author, author_firstname, author_lastname, post_groups, post_title, post_stream, post_content, post_image, color, staff_building_restrictions, student_building_restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   $stmt->prepare($sql);
-  $stmt->bind_param("sssssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $customimagefilename, $color, $staffRestrictions, $studentRestrictions);
+  $stmt->bind_param("sssssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $image_file_name, $color, $staffRestrictions, $studentRestrictions);
   $stmt->execute();
 	if($stmt->error != ""){
 		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again!");
@@ -102,7 +106,7 @@
   $stmt->close();
 
   $db->close();
-  $response = array("status" => "Success", "message" => "Your post was saved successfully!");
+  $response = array("status" => "Success", "message" => "Your post was saved successfully! $image_file_name");
   header("Content-Type: application/json");
   echo json_encode($response);
 
