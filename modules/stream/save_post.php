@@ -19,6 +19,7 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 
   $postAuthor = $_SESSION['useremail'];
@@ -87,7 +88,7 @@
 		move_uploaded_file($_FILES['customimage']['tmp_name'], $postimage);
 		
 		//Resize image
-		//resize_image('max',"$portal_private_root/stream/cache/images/$image_file_name","$portal_private_root/stream/cache/images/$image_file_name",100,100);
+		ResizeImage($uploaddir, "1000", "90");
 		
 	}
   
@@ -98,7 +99,7 @@
   $stmt->bind_param("sssssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $image_file_name, $color, $staffRestrictions, $studentRestrictions);
   $stmt->execute();
 	if($stmt->error != ""){
-		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again!");
+		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again.");
 		header("Content-Type: application/json");
 		echo json_encode($response);
 		exit;
@@ -106,7 +107,7 @@
   $stmt->close();
 
   $db->close();
-  $response = array("status" => "Success", "message" => "Your post was saved successfully! $image_file_name");
+  $response = array("status" => "Success", "message" => "Your post was saved successfully!");
   header("Content-Type: application/json");
   echo json_encode($response);
 

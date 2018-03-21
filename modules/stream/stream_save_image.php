@@ -18,6 +18,7 @@
 
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	//Check for feed image
 	if($image != ""){
@@ -68,8 +69,10 @@
 					}else{
 						//Make sure file is an image
 						if(@exif_imagetype($image)){
+							
 							//Save image to server
-							$local_file = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $date.$file_name;
+							$fileExtension = pathinfo($image, PATHINFO_EXTENSION);
+							$local_file = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $date.$file_name .".$fileExtension";
 							$remote_file = $image;
 							$ch = curl_init();
 							$fp = fopen ($local_file, 'w+');
@@ -81,6 +84,10 @@
 							curl_exec($ch);
 							curl_close($ch);
 							fclose($fp);
+							
+							//Resize image
+							ResizeImage($local_file, "1000", "90");
+							
 						}else{
 							$image = "";
 						}
