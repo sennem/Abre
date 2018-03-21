@@ -120,7 +120,7 @@
 						
 						<div class="row">
 							<div class="input-field col s12">
-								<label for="post_stream" class="active">Post Stream</label>
+								<label for="post_stream" class="active">Stream Category</label>
 								<select id="post_stream" name="post_stream" required>
 									<option value="" disabled selected>Choose a Stream</option>
 									<?php
@@ -137,21 +137,21 @@
 						<div class="row">
 							<div class="input-field col s12">
 								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title" required>
-								<label for="post_title" class="active">Post Title</label>
+								<label for="post_title" class="active">Title</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
 								<textarea placeholder="Enter your Post Content" id="post_content" name="post_content" class="materialize-textarea" required></textarea>
-								<label for="post_content" class="active">Post Content</label>
+								<label for="post_content" class="active">Content</label>
 							</div>
 						</div>
 						
 						<div class='row'>
 							<div class='col s12'>
-								<label for="post_image" class="active">Post Image</label>
-								<br>
-								<img class='custompostimage pointer' style='max-width: 100%' alt='Post Image' src='/core/images/abre/abre_glyph.png'>
+								<img id='post_image' style='max-width: 100%; display:none;' alt='Post Image' src=''>
+								<div class='custompostimage pointer' style='width:100%; background-color:#E0E0E0; text-align:center; padding:50px;'>
+									<i class="material-icons">crop_original</i><br><b>Click to choose image</b></div>
 								<input type='file' name='customimage' id='customimage' style='display:none;'>
 							</div>
 						</div>
@@ -160,7 +160,7 @@
 						
 			</div>
 			<div class="modal-footer">
-				<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
+				<button class="btn waves-effect btn-flat white-text" id='custompostbutton' type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
 				<p id="errorMessage" style="display:none; float:right; color:red; margin:6px 0; padding-right:10px;"></p>
 			</div>
 			</form>
@@ -278,7 +278,8 @@
 			if (this.files && this.files[0]){
 				var reader = new FileReader();
 				reader.onload = function (e) {
-					$('.custompostimage').attr('src', e.target.result);
+					$('#post_image').show();
+					$('#post_image').attr('src', e.target.result);
 				}
 				reader.readAsDataURL(this.files[0]);
 			}
@@ -372,14 +373,15 @@
 		$("#form-streampost").submit(function(event) {
 			event.preventDefault();
 			$("errorMessage").hide();
+			$('#custompostbutton').html("Posting...");
 			var title = $("#post_title").val();
 			var stream = $("#post_stream").val();
 			var content = $("#post_content").val();
-			$('.custompostimage').attr('src', '/core/images/abre/abre_glyph.png');
 			var data = new FormData($(this)[0]);
 
 			$.ajax({ type: 'POST', url: $(this).attr('action'), data: data, contentType: false, processData: false })
 			.done(function(response){
+				$('#custompostbutton').html("Post");
 				if(response.status == "Success"){
 					$('#streampost').closeModal({ in_duration: 0, out_duration: 0, });
 					$('#all').trigger('click');

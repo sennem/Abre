@@ -166,6 +166,8 @@
 			$("#post_title").val('');
 			$("#post_stream").val('');
 			$("#post_content").val('');
+			$("#customimage").val('');
+			$('#post_image').hide();
 			$("#postStudentRestrictions").val('No Restrictions');
 			$("#postStaffRestrictions").val('No Restrictions');
 			$("#postStudentRestrictionsDiv").hide();
@@ -175,6 +177,7 @@
 				in_duration: 0,
 				out_duration: 0,
 				ready: function(){
+					$('.modal-content').animate({ scrollTop: 0}, 0);
 					 $('select').material_select();
 				}
 			});
