@@ -124,11 +124,12 @@
 				$title = $comparisonElement['post_title'];
 				$excerpt = $comparisonElement['post_content'];
 				$feedtitle = $comparisonElement['post_stream'];
+				$feedimage = $comparisonElement['post_image'];
 				$color = $comparisonElement['color'];
 				$id = $comparisonElement['id'];
 				$owner = $comparisonElement['post_author'];
 
-				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
+				array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "$feedimage", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
 				$totalcount++;
 				$customArraySize--;
 
@@ -171,11 +172,12 @@
 			$title = $comparisonElement['post_title'];
 			$excerpt = $comparisonElement['post_content'];
 			$feedtitle = $comparisonElement['post_stream'];
+			$feedimage = $comparisonElement['post_image'];
 			$color = $comparisonElement['color'];
 			$id = $comparisonElement['id'];
 			$owner = $comparisonElement['post_author'];
 
-			array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
+			array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "$feedimage", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
 			$totalcount++;
 		}
 	}

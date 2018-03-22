@@ -826,5 +826,20 @@
 			return false;
 		}
 	}
+	
+	//Resize Image
+	function ResizeImage($image, $maxsize, $quality){
+		$mime = getimagesize($image);
+		if($mime['mime'] == 'image/jpeg'){ $imagecreated = imagecreatefromjpeg($image); }
+		if($mime['mime'] == 'image/jpg'){ $imagecreated = imagecreatefromjpeg($image); }
+		if($mime['mime'] == 'image/png'){ $imagecreated = imagecreatefrompng($image); }
+		if($mime['mime'] == 'image/gif'){ $imagecreated = imagecreatefromgif($image); }
+		$imageScaled = imagescale($imagecreated, $maxsize);
+		if($mime['mime'] == 'image/jpeg'){ imagejpeg($imageScaled, $image, $quality); }
+		if($mime['mime'] == 'image/jpg'){ imagejpeg($imageScaled, $image, $quality); }
+		if($mime['mime'] == 'image/png'){ imagepng($imageScaled, $image, "8"); }
+		if($mime['mime'] == 'image/gif'){ imagegif($imageScaled, $image, $quality); }
+		imagedestroy($imagecreated);
+	}
 
 ?>

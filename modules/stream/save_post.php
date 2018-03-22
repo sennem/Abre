@@ -19,6 +19,7 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 
   $postAuthor = $_SESSION['useremail'];
@@ -69,14 +70,36 @@
 		echo json_encode($response);
 		exit;
   }
+  
+  
+  	//Save POST Image
+  	$image_file_name = "";
+	if($_FILES['customimage']['name']){
+		
+		//Get file information
+		$file = $_FILES['customimage']['name'];
+		$fileextention = pathinfo($file, PATHINFO_EXTENSION);
+		$cleanfilename = basename($file);
+		$image_file_name = time() . "_post." . $fileextention;
+		$uploaddir = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $image_file_name;
+	
+		//Upload new image
+		$postimage = $uploaddir;
+		move_uploaded_file($_FILES['customimage']['tmp_name'], $postimage);
+		
+		//Resize image
+		ResizeImage($uploaddir, "1000", "90");
+		
+	}
+  
 
   $stmt = $db->stmt_init();
-  $sql = "INSERT INTO stream_posts (post_author, author_firstname, author_lastname, post_groups, post_title, post_stream, post_content, color, staff_building_restrictions, student_building_restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  $sql = "INSERT INTO stream_posts (post_author, author_firstname, author_lastname, post_groups, post_title, post_stream, post_content, post_image, color, staff_building_restrictions, student_building_restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
   $stmt->prepare($sql);
-  $stmt->bind_param("ssssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $color, $staffRestrictions, $studentRestrictions);
+  $stmt->bind_param("sssssssssss", $postAuthor, $authorFirstName, $authorLastName, $postGroup, $postTitle, $postStream, $postContent, $image_file_name, $color, $staffRestrictions, $studentRestrictions);
   $stmt->execute();
 	if($stmt->error != ""){
-		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again!");
+		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again.");
 		header("Content-Type: application/json");
 		echo json_encode($response);
 		exit;
