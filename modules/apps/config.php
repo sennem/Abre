@@ -33,12 +33,13 @@
 	//used for routing after verifying a student.
 	$url = $portal_root .'/#mystudents';
 
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
 		$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
 		$schoolResults = databasequery($sql);
-		if(!isset($schoolResults)){
-			$schoolResults = array();
-		}
+	}
+	if(!isset($schoolResults)){
+		$schoolResults = array();
 	}
 ?>
 
