@@ -18,52 +18,54 @@
 
 	  //Include required files
 	  require_once(dirname(__FILE__) . '/../core/abre_functions.php');
-	
+
 	  //Load configuration settings
 	  $studentdomain = getSiteStudentDomain();
 	  $studentdomainrequired = getSiteStudentDomainRequired();
-	
+
 	  //Add staff profile picture to directory if entry exists and picture is empty
 	  function staffLogin(){
 	    $_SESSION['usertype'] = "staff";
-	
+
 	  	include "abre_dbconnect.php";
-	    $sql = "SELECT picture FROM directory where email='".$_SESSION['useremail']."' and (picture = '' or picture LIKE '%http%')";
-		  $result = $db->query($sql);
-		  while($row = $result->fetch_assoc()){
-	      $currentpicture = $row['picture'];
-	
-	      if($currentpicture != $_SESSION['picture']){
-	        $stmt = $db->stmt_init();
-			    $sql = "UPDATE directory SET picture = ? WHERE email = ?";
-			    $stmt->prepare($sql);
-			    $stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
-			    $stmt->execute();
-			    $stmt->close();
-	      }
-	    }
+			if($db->query("SELECT * FROM directory LIMIT 1")){
+				$sql = "SELECT picture FROM directory WHERE email = '".$_SESSION['useremail']."' AND (picture = '' OR picture LIKE '%http%')";
+				$result = $db->query($sql);
+				while($row = $result->fetch_assoc()){
+					$currentpicture = $row['picture'];
+
+					if($currentpicture != $_SESSION['picture']){
+						$stmt = $db->stmt_init();
+						$sql = "UPDATE directory SET picture = ? WHERE email = ?";
+						$stmt->prepare($sql);
+						$stmt->bind_param("ss", $_SESSION['picture'], $_SESSION['useremail']);
+						$stmt->execute();
+						$stmt->close();
+					}
+				}
+			}
 	  }
 
   	function emailMatchCheck(){
-	  
-  		if(getStaffStudentMatch() == "checked" && !superadmin()){
 
-      		//Check to see if email is in Abre_Staff table
-			include "abre_dbconnect.php";
-			$sql = "SELECT count(*) FROM Abre_Staff where EMail1='".$_SESSION['useremail']."'";
-			$result = $db->query($sql);
-			$row = $result->fetch_assoc();
-			$numrows = $row['count(*)'];
-			if($numrows == 0){
-				$_SESSION['usertype'] = "student";
+  		if(getStaffStudentMatch() == "checked" && !superadmin()){
+				//Check to see if email is in Abre_Staff table
+				include "abre_dbconnect.php";
+				if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
+					$sql = "SELECT count(*) FROM Abre_Staff WHERE EMail1 = '".$_SESSION['useremail']."'";
+					$result = $db->query($sql);
+					$row = $result->fetch_assoc();
+					$numrows = $row['count(*)'];
+					if($numrows == 0){
+						$_SESSION['usertype'] = "student";
+					}else{
+						staffLogin();
+					}
+				}
 			}else{
 				staffLogin();
 			}
-			
-		}else{
-			staffLogin();
 		}
-	}
 
 	//Try to login the user, if they have revoked Google access, request access again
 	try{
