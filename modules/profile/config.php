@@ -86,7 +86,7 @@
 				<div class='row' id="confirmationDisplayDiv" style="display:none;">
 					<div class='col s12'>
 							<input type="checkbox" class="filled-in" name="headline_confirmation" id="headline_confirmation" value="confirmed">
-							<label for="headline_confirmation">By checking this box, I verify I have read or watched and understand the above information</label>
+							<label for="headline_confirmation">By checking this box, I verify I have read or watched and understand the above information.</label>
 					</div>
 				</div>
 				<input id="headline_id" name="headline_id" type="hidden">
