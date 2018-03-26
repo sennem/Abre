@@ -21,8 +21,10 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
-	$schoolResults = databasequery($sql);
+	if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+		$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
+		$schoolResults = databasequery($sql);
+	}
 ?>
 
 	<!--Work Schedule-->
@@ -175,6 +177,123 @@
 		</div>
 		</form>
 	</div>
+
+	<div id='headlineseditor' class='modal modal-fixed-footer modal-mobile-full'>
+		<div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Headlines Editor</span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+			</div>
+			<div style='padding: 0px 24px 0px 24px;'>
+				<div class='row'>
+					<div class='col s12'>
+						<?php
+							include "headline_editor_content.php";
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class='modal-footer'>
+			<a class='modal-action waves-effect btn-flat white-text modal-addeditheadline' href='#addeditheadline' data-streamtitle='Add New Stream' style='background-color: <?php echo getSiteColor(); ?>'>Add</a>
+		</div>
+	</div>
+
+
+	<div id='addeditheadline' class='modal modal-fixed-footer modal-mobile-full'>
+		<form id='addeditheadlineform' method="post" action='#'>
+		<div class='modal-content' style="padding: 0px !important;">
+			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+				<div class='col s11'><span class="truncate" id='addeditheadlinetitle' style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;"></span></div>
+				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+			</div>
+			<div style='padding: 0px 24px 0px 24px;'>
+				<div class='row'>
+					<div class='input-field col s12'>
+						<input placeholder="Enter Headline Title" id="headlineTitle" name="headlineTitle" type="text" autocomplete="off" required>
+						<label class="active" for="headlineTitle">Title</label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='input-field col l6 s12'>
+						<input type="date" placeholder="Headline Start Date" class="datepickerformatted" name="headlineStartDate" id="headlineStartDate" required>
+						<label class="active" for="headlineStartDate">Start Date</label>
+					</div>
+					<div class='input-field col l6 s12'>
+						<input type="date" placeholder="Headline End Date" class="datepickerformatted" name="headlineEndDate" id="headlineEndDate" required>
+						<label class="active" for="headlineEndDate">End Date</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class='input-field col s12'>
+						<textarea placeholder="Enter your Headline Content" id="headlineContent" name="headlineContent" class="materialize-textarea"></textarea>
+						<label for="headlineContent" class="active">Description</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class='input-field col s12'>
+						<label for="headlinePurpose" class="active">Purpose</label>
+						<select id="headlinePurpose" name="headlinePurpose">
+							<option value="text" selected>Deliver a Message</option>
+							<option value="video">Deliver a Youtube Video</option>
+							<?php if($db->query("SELECT * FROM forms LIMIT 1")){
+								echo "<option value='form'>Deliver a Form</option>";
+							} ?>
+						</select>
+					</div>
+				</div>
+				<div class="row" id="headlineFormDiv" style="display:none;">
+					<div class='input-field col s12'>
+						<label for="headlineForm" class="active">Form</label>
+						<select id="headlineForm" name="headlinForm">
+							<option value="" disabled selected>Attach a Form</option>
+							<?php if($db->query("SELECT * FROM forms LIMIT 1")){
+								$sql = "SELECT ID, Name FROM forms";
+								$result = $db->query($sql);
+								while($value = $result->fetch_assoc()){
+									$formID = $value['ID'];
+									$formName = $value['Name'];
+									echo "<option value='$formID'>$formName</option>";
+								}
+							}?>
+						</select>
+					</div>
+				</div>
+				<div class="row" id="headlineVideoDiv" style="display:none;">
+					<div class='input-field col s12'>
+						<input placeholder="Enter Headline Video Link" id="headlineVideo" name="headlineVideo" type="text" autocomplete="off">
+						<label class="active" for="headlineVideo">Link</label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col m4 s12'>
+							<input type="checkbox" class="filled-in" name="headline_staff" id="headline_staff" value="staff">
+							<label for="headline_staff">Staff</label>
+					</div>
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="headline_students" id="headline_students" value="student">
+						<label for="headline_students">Students</label>
+					</div>
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="headline_parents" id="headline_parents" value="parent">
+						<label for="headline_parents">Parents</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class='col m4 s12'>
+						<input type="checkbox" class="filled-in" name="streamradio" id="headlineRequired" value="1">
+						<label for="headlineRequired">Action Required</label>
+					</div>
+				</div>
+				<input id="headline_id" name="headline_id" type="hidden">
+			</div>
+		</div>
+		<div class='modal-footer'>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveheadline' style='background-color: <?php echo getSiteColor(); ?>;'>Save</button>
+			<a class='modal-action modal-close waves-effect btn-flat white-text' style='background-color: <?php echo getSiteColor(); ?>; margin-right:5px;'>Cancel</a>
+		</div>
+		</form>
+	</div>
 	<?php
  	}
  	?>
@@ -182,6 +301,29 @@
 <script>
 
 	$(function(){
+
+		$("#headlinePurpose").change(function(){
+			var purpose = $("#headlinePurpose").val();
+			switch(purpose){
+				case "form":
+					$("#headlineFormDiv").show();
+					$("#headlineVideoDiv").hide();
+					break;
+				case "text":
+					$("#headlineFormDiv").hide();
+					$("#headlineVideoDiv").hide();
+					break;
+				case "video":
+					$("#headlineFormDiv").hide();
+					$("#headlineVideoDiv").show();
+					break;
+				default:
+					$("#headlineFormDiv").hide();
+					$("#headlineVideoDiv").hide();
+			}
+		});
+
+		$('.datepickerformatted').pickadate({ container: 'body', format: 'yyyy-mm-dd', selectMonths: true, selectYears: 15 });
 
 		$("#stream_staff").change(function(){
 			if($(this).is(':checked')){
@@ -241,11 +383,49 @@
 				 }
 				});
 
-				$('.modal-addeditstream').leanModal({
+				$('#addeditstream').openModal({
 					in_duration: 0,
 					out_duration: 0,
 					ready: function(){
 						$("#stream_color").spectrum("set", "");
+					}
+				});
+			});
+
+			//Add/Edit headline
+			$(".modal-addeditheadline").unbind().click(function(event){
+				event.preventDefault();
+
+				$("#addeditheadlinetitle").text("New Headline");
+				$("#headlineTitle").val('');
+
+				var d = new Date();
+				var picker = $('#headlineStartDate').pickadate('picker');
+				picker.set('select', d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+				$('#headlineStartDate').val('');
+
+				var picker2 = $('#headlineEndDate').pickadate('picker');
+				picker2.set('select', d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
+				$('#headlineEndDate').val('');
+
+				$("#headlinePurpose").val('text');
+				$("#headlineContentDiv").hide();
+				$("#headlineFormDiv").hide();
+				$("#headlineVideoDiv").hide();
+
+				$("#headlineContent").val('');
+				$("#headlineForm").val('');
+				$('#headline_staff').prop('checked', false);
+				$('#headline_students').prop('checked', false);
+				$('#headline_parents').prop('checked', false);
+				$('#headlineRequired').prop('checked', false);
+				$("#headline_id").val('');
+
+				$('#addeditheadline').openModal({
+					in_duration: 0,
+					out_duration: 0,
+					ready: function(){
+						$('select').material_select();
 					}
 				});
 			});
@@ -293,6 +473,47 @@
 					$('#content_holder').load( 'modules/profile/profile.php');
 				});
 			});
+
+			//Save/Update Headline
+			$('#addeditheadline').submit(function(event){
+				event.preventDefault();
+
+				var headlineTitle = $('#headlineTitle').val();
+				var headlineStartDate = $('#headlineStartDate').val();
+				var headlineEndDate = $("#headlineEndDate").val();
+				var headlinePurpose = $("#headlinePurpose").val();
+				var headlineContent = $("#headlineContent").val();
+				var headlineForm = $("#headlineForm").val();
+				var headlineVideo = $("#headlineVideo").val();
+
+				var headlineArray = [];
+				if($('input[id="headline_staff"]').is(':checked')){
+					headlineArray.push("staff");
+				}
+				if($('input[id="headline_students"]').is(':checked')){
+					headlineArray.push("student");
+				}
+				if($('input[id="headline_parents"]').is(':checked')){
+					headlineArray.push("parents");
+				}
+
+				var headlinegroup = headlineArray.join(", ");
+
+				if($('#headlineRequired').is(':checked') == true){ var required = 1; }else{ var required = 0; }
+				var headlineid = $('#headline_id').val();
+
+				//Make the post request
+				$.ajax({
+					type: 'POST',
+					url: 'modules/profile/save_headline.php',
+					data: { title: headlineTitle, startDate: headlineStartDate, endDate: headlineEndDate, purpose: headlinePurpose, content: headlineContent, form: headlineForm, video: headlineVideo, groups: headlinegroup, required: required, id: headlineid }
+				})
+				.done(function(){
+					$('#addeditheadline').closeModal({ in_duration: 0, out_duration: 0 });
+					$('#headlinestable').load('modules/profile/headline_editor_content.php');
+				});
+			});
+
 		<?php
 		}
 		?>
