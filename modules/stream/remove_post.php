@@ -28,17 +28,17 @@
     echo json_encode($response);
     exit;
   }
-  
+
   	//Look Up Post and Delete Image from Server if one exists
   	$query = "SELECT post_image FROM stream_posts WHERE id = '$id'";
 	$result = $db->query($query);
 	while($resultrow = $result->fetch_assoc()){
 		$post_image = $resultrow["post_image"];
-		
+
 		$filepath = "$portal_path_root/../$portal_private_root/stream/cache/images/$post_image";
 		if(file_exists($filepath)){
 			unlink($filepath);
-		}		
+		}
 	}
 
   //Delete Post
@@ -48,6 +48,8 @@
   $stmt->bind_param("i", $id);
   $stmt->execute();
   if($stmt->error != ""){
+		$stmt->close();
+		$db->close();
     $response = array("status" => "Error", "message" => "There was a problem deleting your post.");
     header("Content-Type: application/json");
     echo json_encode($response);
