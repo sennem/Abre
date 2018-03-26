@@ -146,6 +146,21 @@
 		echo "</div>";
 		echo "</div>";
 
+		if(superadmin()){
+			echo "<div id='startupcontainer' class='page_container page_container_limit mdl-shadow--4dp'>";
+			echo "<div class='page'>";
+				echo "<div class='row'>";
+					echo "<div class='col s12'><h3>Headlines</h3></div>";
+					echo "<div class='col s12'><p>Create information to show users upon login.</p></div>";
+					echo "<div class='col s12'><div id='startuperror'></div></div>";
+				echo "</div>";
+				echo "<div class='row'>";
+				echo "</div>";
+				echo "<div class='row'><div class='col s12'><a class='modal-editheadlines waves-effect btn-flat white-text' href='#headlineseditor' style='background-color: "; echo getSiteColor(); echo "'>Manage</a></div></div>";
+			echo "</div>";
+			echo "</div>";
+		}
+
 
 		//Work Calendar
 		if($_SESSION['usertype'] == "staff"){
@@ -177,44 +192,55 @@
 
 <script>
 
-	//Work Schedule Modal
-	$('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
-	$('.modal-editstreams').leanModal({
-		in_duration: 0,
-		out_duration: 0,
-		ready: function(){
-			$(".modal-content").scrollTop(0);
-		}
-	});
+	$(function(){
+		//Work Schedule Modal
+		$('.modal-viewschedule').leanModal({ in_duration: 0, out_duration: 0 });
+		$('.modal-editstreams').leanModal({
+			in_duration: 0,
+			out_duration: 0,
+			ready: function(){
+				$(".modal-content").scrollTop(0);
+			}
+		});
 
-	$(".formclick").click(function() {
+		$('.modal-editheadlines').unbind().click(function(event){
+			event.preventDefault();
+			$('#headlineseditor').openModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function(){}
+			});
+		});
 
-	<?php if($_SESSION['usertype'] == "student" || $_SESSION['usertype'] == 'parent' || $_SESSION['usertype'] == 'staff'){ ?>
-			$('.modal-viewapps').show();
-			var formData = $('#form-profile').serialize();
-			$.ajax({
-				type: 'POST',
-				url: $('#form-profile').attr('action'),
-				data: formData
-			})
-			//Show the notification
-			.done(function(response) {
-				$('#streamerror').show();
-				$('#streamerror').html("<h6 style='color: <?php echo getSiteColor(); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo getSiteColor(); ?>'>Done</a></h6>");
-				var notification = document.querySelector('.mdl-js-snackbar');
-				var data = { message: 'Your changes have been saved.' };
-				notification.MaterialSnackbar.showSnackbar(data);
-			})
-	<?php } ?>
-	});
+		$(".formclick").click(function() {
 
-	//Print Spcific Div
-	$(".printbutton").click(function(e){
-		e.preventDefault();
-		var win = window.open('','printwindow');
-		win.document.write('<html><head><title>Print Work Calendar</title><link rel="stylesheet" type="text/css" href="https://hcsdoh.org/modules/profile/css/calendar.css"><link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100" rel="stylesheet" type="text/css"></head><body>');
-		win.document.write($("#workcalendardisplay").html());
-		win.document.write('</body></html>');
+		<?php if($_SESSION['usertype'] == "student" || $_SESSION['usertype'] == 'parent' || $_SESSION['usertype'] == 'staff'){ ?>
+				$('.modal-viewapps').show();
+				var formData = $('#form-profile').serialize();
+				$.ajax({
+					type: 'POST',
+					url: $('#form-profile').attr('action'),
+					data: formData
+				})
+				//Show the notification
+				.done(function(response) {
+					$('#streamerror').show();
+					$('#streamerror').html("<h6 style='color: <?php echo getSiteColor(); ?>'>Great picks! Follow more topics or hit Done to see your Stream. <a href='#' class='waves-effect waves-light btn mdl-color-text--white' style='background-color: <?php echo getSiteColor(); ?>'>Done</a></h6>");
+					var notification = document.querySelector('.mdl-js-snackbar');
+					var data = { message: 'Your changes have been saved.' };
+					notification.MaterialSnackbar.showSnackbar(data);
+				})
+		<?php } ?>
+		});
+
+		//Print Spcific Div
+		$(".printbutton").click(function(e){
+			e.preventDefault();
+			var win = window.open('','printwindow');
+			win.document.write('<html><head><title>Print Work Calendar</title><link rel="stylesheet" type="text/css" href="https://hcsdoh.org/modules/profile/css/calendar.css"><link href="https://fonts.googleapis.com/css?family=Roboto:400,300,500,700,900,100" rel="stylesheet" type="text/css"></head><body>');
+			win.document.write($("#workcalendardisplay").html());
+			win.document.write('</body></html>');
+		});
 	});
 
 </script>
