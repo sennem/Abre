@@ -33,6 +33,140 @@
     }
     $db->close();
 
+		//Setup headlines table
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT * FROM headlines LIMIT 1")){
+			$sql = "CREATE TABLE `headlines` (`id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$sql .= "ALTER TABLE `headlines` ADD PRIMARY KEY (`id`);";
+			$sql .= "ALTER TABLE `headlines` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
+			if ($db->multi_query($sql) === TRUE) { }
+		}
+		$db->close();
+
+		//Check for owner field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT owner FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `owner` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for submission time field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT submission_time FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `submission_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for title field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT title FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `title` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for content field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT content FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `content` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for purpose field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT purpose FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `purpose` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for form_id field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT form_id FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `form_id` int(11);";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for video_url field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT video_url FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `video_url` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for groups field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT groups FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `groups` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for start date field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT start_date FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `start_date` date DEFAULT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for end date field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT end_date FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `end_date` date DEFAULT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for required field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT required FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `required` int(11);";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for headline_responses table
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT * FROM headline_responses LIMIT 1")){
+			$sql = "CREATE TABLE `headline_responses` (`response_id` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$sql .= "ALTER TABLE `headline_responses` ADD PRIMARY KEY (`response_id`);";
+			$sql .= "ALTER TABLE `headline_responses` MODIFY `response_id` int(11) NOT NULL AUTO_INCREMENT;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for headline_id field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT headline_id FROM headline_responses LIMIT 1")){
+			$sql = "ALTER TABLE `headline_responses` ADD `headline_id` int(11) NOT NULL;";
+			$sql .= "ALTER TABLE `headline_responses` ADD FOREIGN KEY (`headline_id`) REFERENCES headlines(`id`);";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for email field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT email FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headline_responses` ADD `email` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for submission time field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT submission_time FROM headline_responses LIMIT 1")){
+			$sql = "ALTER TABLE `headline_responses` ADD `submission_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+
 		//Write the Setup File
 		$myfile = fopen("$portal_path_root/modules/profile/setup.txt", "w");
 		fwrite($myfile, '');
