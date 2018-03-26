@@ -30,6 +30,9 @@
 	if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
 		$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
 		$schoolResults = databasequery($sql);
+		if(!isset($schoolResults)){
+			$schoolResults = array();
+		}
 	}
 
 ?>
@@ -119,7 +122,7 @@
 						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
 					<div style='padding: 0px 24px 0px 24px;'>
-						
+
 						<div class="row">
 							<div class="input-field col s12">
 								<label for="post_stream" class="active">Stream Category</label>
@@ -148,7 +151,7 @@
 								<label for="post_content" class="active">Content</label>
 							</div>
 						</div>
-						
+
 						<div class='row'>
 							<div class='col s12'>
 								<img id='post_image' style='max-width: 100%; display:none;' alt='Post Image' src=''>
@@ -157,9 +160,9 @@
 								<input type='file' name='customimage' id='customimage' style='display:none;'>
 							</div>
 						</div>
-				
+
 					</div>
-						
+
 			</div>
 			<div class="modal-footer">
 				<button class="btn waves-effect btn-flat white-text" id='custompostbutton' type="submit" name="action" style='background-color:<?php echo getSiteColor(); ?>'>Post</button>
@@ -265,16 +268,16 @@
 <script>
 
 	$(function(){
-		
+
 		//Material Design Dropdown Selects
 		$('select').material_select();
-		
+
 		//Provide image upload on icon click
 		$(".custompostimage").unbind().click(function(event){
 			event.preventDefault();
 			$("#customimage").click();
 	  	});
-	  	
+
 		//Submit form if image if changed
 		$("#customimage").change(function (){
 			if (this.files && this.files[0]){
@@ -354,7 +357,7 @@
 				});
 			})
 		});
-		
+
 		$("#post_staff").change(function(){
 			if($(this).is(':checked')){
 				$("#postStaffRestrictionsDiv").show();
@@ -397,8 +400,8 @@
 				}
 			});
 		});
-		
-		
+
+
 	});
 
 </script>

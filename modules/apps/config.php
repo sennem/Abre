@@ -36,6 +36,9 @@
 	if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
 		$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
 		$schoolResults = databasequery($sql);
+		if(!isset($schoolResults)){
+			$schoolResults = array();
+		}
 	}
 ?>
 
