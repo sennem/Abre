@@ -76,8 +76,8 @@
 					<div class='input-field col s12'>
 						<!-- insert video here -->
 						<iframe id="headlineVideoIframe" type="text/html"
-    					width="640"
-    					height="385"
+    					width="100%"
+    					height="500"
     					src=""
     					frameborder="0">
 						</iframe>
@@ -95,7 +95,7 @@
 			</div>
 		</div>
 		<div class='modal-footer'>
-			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveheadline' style='background-color: <?php echo getSiteColor(); ?>;'>Save</button>
+			<button type="submit" class='modal-action waves-effect btn-flat white-text' id='saveheadlineresponse' style='background-color: <?php echo getSiteColor(); ?>;'>Finish</button>
 			<p id="headlineErrorMessage" style="display:none; float:right; color:red; margin:6px 0; padding-right:10px;"></p>
 		</div>
 		</form>
@@ -107,7 +107,7 @@
 	$usertype = $_SESSION['usertype'];
 	$email = $_SESSION['useremail'];
 	$requiredHeadlines = array();
-	$sql = "SELECT id, title, content, form_id, video_url, purpose, required FROM headlines WHERE start_date < '$today' AND end_date > '$today' AND groups LIKE '%$usertype%'";
+	$sql = "SELECT id, title, content, form_id, video_id, purpose, required FROM headlines WHERE start_date < '$today' AND end_date > '$today' AND groups LIKE '%$usertype%'";
 	$resultArray = databasequery($sql);
 	$resultSize = sizeof($resultArray);
 	if($resultSize > 0){
@@ -119,7 +119,7 @@
 			if($responseSize == 0){
 				if($startup['purpose'] == "form"){
 					$formID = $startup['form_id'];
-					if($db->query("SELECT * FROM forms LIMIT 1")){
+					if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
 						$sql = "SELECT FormFields FROM forms WHERE ID = '$formID'";
 						$row = $db->query($sql);
 						$result = $row->fetch_assoc();
@@ -134,9 +134,10 @@
 
 	$requiredHeadlinesJSON = json_encode($requiredHeadlines);
 
+	if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
 ?>
-
 <script src="/modules/Abre-Forms/js/form-render.min.js"></script>
+<?php } ?>
 <script>
 
 	$(function(){
@@ -151,9 +152,9 @@
 						$('.fb-render-headline').empty();
 						$("#headlineVideoIframe").attr("src", "");
 						if(size == 1){
-							$("#saveheadline").html('Finish');
+							$("#saveheadlineresponse").text('Finish');
 						}else{
-							$("#saveheadline").html('Proceed');
+							$("#saveheadlineresponse").text('Proceed');
 						}
 						if(array[0]['required'] == "1"){
 							$("#confirmationDisplayDiv").show();
@@ -173,9 +174,9 @@
 						$("#confirmationDisplayDiv").hide();
 						$("#headline_confirmation").prop('required', false);
 						if(size == 1){
-							$("#saveheadline").html('Submit Form and Finish');
+							$("#saveheadlineresponse").text('Submit Form and Finish');
 						}else{
-							$("#saveheadline").html('Submit Form and Proceed');
+							$("#saveheadlineresponse").text('Submit Form and Proceed');
 						}
 						//Disable Auto-Complete
 						$("form").attr('autocomplete', 'off');
@@ -191,11 +192,11 @@
 						$("#headlineDisplayFormDiv").hide();
 						$("#headlineDisplayVideoDiv").show();
 						$('.fb-render-headline').empty();
-						$("#headlineVideoIframe").attr("src", "https://www.youtube.com/embed/"+array[0]['video_url']);
+						$("#headlineVideoIframe").attr("src", "https://www.youtube.com/embed/"+array[0]['video_id']);
 						if(size == 1){
-							$("#saveheadline").html('Finish');
+							$("#saveheadlineresponse").text('Finish');
 						}else{
-							$("#saveheadline").html('Proceed');
+							$("#saveheadlineresponse").text('Proceed');
 						}
 
 						if(array[0]['required'] == "1"){
@@ -270,9 +271,10 @@
 				if(response.status == "Success"){
 					headlineArray.shift();
 					headlineArraySize = headlineArray.length;
+					console.log(headlineArraySize);
 					getNextHeadline(headlineArray, headlineArraySize, 0);
 				}else if(response.status == "Error"){
-					$("#headlineErrorMessage").html(respnse.message);
+					$("#headlineErrorMessage").html(response.message);
 					$("#headlineErrorMessage").show();
 				}
 			});

@@ -27,11 +27,12 @@ if(superadmin()){
   echo "<tr>";
   echo "<th>Title</th>";
   echo "<th>Groups</th>";
-  echo "<th>Efffective Dates</th>";
+  echo "<th class='center-align'>Active</th>";
   echo "<th></th>";
   echo "<th></th>";
   echo "</tr>";
-  $query = "SELECT id, title, purpose, content, form_id, video_url, groups, start_date, end_date, required FROM headlines ORDER BY start_date";
+  $today = date("Y-m-d");
+  $query = "SELECT id, title, purpose, content, form_id, video_id, groups, start_date, end_date, required FROM headlines ORDER BY start_date";
   $dbreturn = databasequery($query);
   foreach($dbreturn as $value){
     $id = $value['id'];
@@ -39,7 +40,7 @@ if(superadmin()){
     $titleencoded = htmlspecialchars($title, ENT_QUOTES);
     $purpose = $value['purpose'];
     $content = htmlspecialchars($value['content'], ENT_QUOTES);
-    $video_url = htmlspecialchars($value['video_url'], ENT_QUOTES);
+    $video_id = htmlspecialchars($value['video_id'], ENT_QUOTES);
     $form_id = $value['form_id'];
     $groups = $value['groups'];
     $start_date = $value['start_date'];
@@ -54,8 +55,12 @@ if(superadmin()){
     echo "<tr>";
     echo "<td>$title</td>";
     echo "<td>".ucwords($groups)."</td>";
-    echo "<td>".date('m/d/Y',strtotime($start_date))." - ".date('m/d/Y',strtotime($end_date))."</td>";
-    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passheadlinedata' data-id='$id' data-headlinetitle='$titleencoded' data-purpose='$purpose' data-groups='$groups' data-formid='$form_id' data-video='$video_url' data-required='$required' data-content='$content' data-startdate='$start_date' data-enddate='$end_date'><i class='material-icons'>mode_edit</i></button></td>";
+    if($start_date < $today && $today < $end_date){
+      echo "<td class='center-align'><i class='material-icons' style='color:#4CAF50;'>brightness_1</i></td>";
+    }else{
+      echo "<td class='center-align'><i class='material-icons' style='color:#F44336;'>brightness_1</i></td>";
+    }
+    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passheadlinedata' data-id='$id' data-headlinetitle='$titleencoded' data-purpose='$purpose' data-groups='$groups' data-formid='$form_id' data-video='$video_id' data-required='$required' data-content='$content' data-startdate='$start_date' data-enddate='$end_date'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteheadline' data-headlineid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
   }
@@ -131,8 +136,8 @@ if(superadmin()){
         $("#headlineContent").val(headlineContent);
         var form_id = $(this).data('formid');
         $("#headlineForm").val(form_id);
-        var video_url = $(this).data('video');
-        $("#headlineVideo").val(video_url);
+        var video_id = $(this).data('video');
+        $("#headlineVideo").val(video_id);
         var groups = $(this).data('groups');
 
         if(groups.indexOf('staff') != -1){

@@ -28,7 +28,7 @@
 	    $_SESSION['usertype'] = "staff";
 
 	  	include "abre_dbconnect.php";
-			if($db->query("SELECT * FROM directory LIMIT 1")){
+			if(file_exists("$portal_path_root/modules/directory/setup.txt")){
 				$sql = "SELECT picture FROM directory WHERE email = '".$_SESSION['useremail']."' AND (picture = '' OR picture LIKE '%http%')";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){

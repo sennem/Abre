@@ -64,14 +64,14 @@
 
     if($headlineid == ""){
       $stmt = $db->stmt_init();
-      $sql = "INSERT INTO headlines (id, owner, title, content, purpose, form_id, video_url, groups, start_date, end_date, required) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      $sql = "INSERT INTO headlines (id, owner, title, content, purpose, form_id, video_id, groups, start_date, end_date, required) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt->prepare($sql);
       $stmt->bind_param("issssissssi", $headlineid, $owner, $headlineTitle, $headlineContent, $headlinePurpose, $headlineForm, $headlineVideo, $headlineGroup, $headlineStartDate, $headlineEndDate, $headlineRequired);
       $stmt->execute();
       $stmt->close();
     }else{
       $stmt = $db->stmt_init();
-      $sql = "UPDATE `headlines` SET title = ?, content = ?, purpose = ?, form_id = ?, video_url = ?, groups = ?, start_date = ?, end_date = ?, required = ? WHERE id = ?";
+      $sql = "UPDATE `headlines` SET title = ?, content = ?, purpose = ?, form_id = ?, video_id = ?, groups = ?, start_date = ?, end_date = ?, required = ? WHERE id = ?";
       $stmt->prepare($sql);
       $stmt->bind_param("sssissssii", $headlineTitle, $headlineContent, $headlinePurpose, $headlineForm, $headlineVideo, $headlineGroup, $headlineStartDate, $headlineEndDate, $headlineRequired, $headlineid);
       $stmt->execute();

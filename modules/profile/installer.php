@@ -91,10 +91,10 @@
 		}
 		$db->close();
 
-		//Check for video_url field
+		//Check for video_id field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT video_url FROM headlines LIMIT 1")){
-			$sql = "ALTER TABLE `headlines` ADD `video_url` text NOT NULL;";
+		if(!$db->query("SELECT video_id FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `video_id` text NOT NULL;";
 			$db->multi_query($sql);
 		}
 		$db->close();

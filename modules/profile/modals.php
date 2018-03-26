@@ -239,7 +239,7 @@
 						<select id="headlinePurpose" name="headlinePurpose">
 							<option value="text" selected>Deliver a Message</option>
 							<option value="video">Deliver a Youtube Video</option>
-							<?php if($db->query("SELECT * FROM forms LIMIT 1")){
+							<?php if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
 								echo "<option value='form'>Deliver a Form</option>";
 							} ?>
 						</select>
@@ -250,7 +250,7 @@
 						<label for="headlineForm" class="active">Form</label>
 						<select id="headlineForm" name="headlinForm">
 							<option value="" disabled selected>Attach a Form</option>
-							<?php if($db->query("SELECT * FROM forms LIMIT 1")){
+							<?php if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
 								$sql = "SELECT ID, Name FROM forms";
 								$result = $db->query($sql);
 								while($value = $result->fetch_assoc()){
