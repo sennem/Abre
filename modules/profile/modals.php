@@ -264,8 +264,8 @@
 				</div>
 				<div class="row" id="headlineVideoDiv" style="display:none;">
 					<div class='input-field col s12'>
-						<input placeholder="Enter Headline Video Link" id="headlineVideo" name="headlineVideo" type="text" autocomplete="off">
-						<label class="active" for="headlineVideo">Link</label>
+						<input placeholder="The video ID of https://www.youtube.com/watch?v=6EbWHc7WS9z is 6EbWHc7WS9z" id="headlineVideo" name="headlineVideo" type="text" autocomplete="off">
+						<label class="active" for="headlineVideo">Video ID</label>
 					</div>
 				</div>
 				<div class='row'>
@@ -429,6 +429,7 @@
 					out_duration: 0,
 					ready: function(){
 						$('select').material_select();
+						$(".modal-content").scrollTop(0);
 					}
 				});
 			});

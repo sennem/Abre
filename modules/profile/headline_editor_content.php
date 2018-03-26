@@ -169,6 +169,7 @@ if(superadmin()){
           ready: function() {
             $('select').material_select();
             $('.datepickerformatted').pickadate({ container: 'body', format: 'yyyy-mm-dd', selectMonths: true, selectYears: 15 });
+            $(".modal-content").scrollTop(0);
           }
         });
       });

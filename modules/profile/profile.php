@@ -208,7 +208,9 @@
 			$('#headlineseditor').openModal({
 				in_duration: 0,
 				out_duration: 0,
-				ready: function(){}
+				ready: function(){
+					$(".modal-content").scrollTop(0);
+				}
 			});
 		});
 

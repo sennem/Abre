@@ -30,10 +30,6 @@
     $headlineContent = $_POST['content'];
     $headlineForm = $_POST['form'];
     $headlineVideo = $_POST['video'];
-    if($headlineVideo != ""){
-      parse_str(parse_url($headlineVideo, PHP_URL_QUERY), $urlArray);
-      $headlineVideo = $urlArray['v'];
-    }
     $headlineGroup = $_POST['groups'];
     $headlineRequired = $_POST['required'];
 

@@ -271,7 +271,6 @@
 				if(response.status == "Success"){
 					headlineArray.shift();
 					headlineArraySize = headlineArray.length;
-					console.log(headlineArraySize);
 					getNextHeadline(headlineArray, headlineArraySize, 0);
 				}else if(response.status == "Error"){
 					$("#headlineErrorMessage").html(response.message);
