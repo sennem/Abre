@@ -145,19 +145,19 @@
 	}
 
 	$customPostArray = array();
-	if(!$scrolling){
-		//get all custom posts before date of last stream post
-		$queryDate = $preliminaryFeeds[$totalcount - 1]["date"];
-		$queryDate = date('Y-m-d H:i:s', $queryDate);
-		$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time > '$queryDate' ORDER BY submission_time ASC";
-		$result = $db->query($sql);
-		while($value = $result->fetch_assoc()){
-			if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
-				array_push($customPostArray, $value);
+	if($totalcount > 0){
+		if(!$scrolling){
+			//get all custom posts before date of last stream post
+			$queryDate = $preliminaryFeeds[$totalcount - 1]["date"];
+			$queryDate = date('Y-m-d H:i:s', $queryDate);
+			$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time > '$queryDate' ORDER BY submission_time ASC";
+			$result = $db->query($sql);
+			while($value = $result->fetch_assoc()){
+				if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
+					array_push($customPostArray, $value);
+				}
 			}
-		}
-	}else{
-		if($totalcount > 0){
+		}else{
 			$queryDate = $preliminaryFeeds[0]["date"];
 			$queryDate = date('Y-m-d H:i:s', $queryDate);
 			$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time < '$queryDate' ORDER BY submission_time ASC";
