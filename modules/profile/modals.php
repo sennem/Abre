@@ -251,7 +251,7 @@
 						<select id="headlineForm" name="headlinForm">
 							<option value="" disabled selected>Attach a Form</option>
 							<?php if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
-								$sql = "SELECT ID, Name FROM forms";
+								$sql = "SELECT ID, Name FROM forms WHERE Owner = '".$_SESSION['useremail']."'";
 								$result = $db->query($sql);
 								while($value = $result->fetch_assoc()){
 									$formID = $value['ID'];
