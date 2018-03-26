@@ -792,19 +792,23 @@
 		//get schools codes for the staff member
 		$schoolCodeArray = array();
 		if($_SESSION['usertype'] == "staff"){
-			$sql = "SELECT SchoolCode FROM Abre_Staff WHERE EMail1 = '".$_SESSION['useremail']."'";
-			$resultrow = $db->query($sql);
-			$count = mysqli_num_rows($resultrow);
-			while($result = $resultrow->fetch_assoc()){
-					array_push($schoolCodeArray, $result['SchoolCode']);
+			if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
+				$sql = "SELECT SchoolCode FROM Abre_Staff WHERE EMail1 = '".$_SESSION['useremail']."'";
+				$resultrow = $db->query($sql);
+				$count = mysqli_num_rows($resultrow);
+				while($result = $resultrow->fetch_assoc()){
+						array_push($schoolCodeArray, $result['SchoolCode']);
+				}
 			}
 		}
 
 		if($_SESSION['usertype'] == "student"){
-			$sql = "SELECT SchoolCode FROM Abre_Students WHERE Email = '".$_SESSION['useremail']."' LIMIT 1";
-			$resultrow = $db->query($sql);
-			$result = $resultrow->fetch_assoc();
-			array_push($schoolCodeArray, $result['SchoolCode']);
+			if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+				$sql = "SELECT SchoolCode FROM Abre_Students WHERE Email = '".$_SESSION['useremail']."' LIMIT 1";
+				$resultrow = $db->query($sql);
+				$result = $resultrow->fetch_assoc();
+				array_push($schoolCodeArray, $result['SchoolCode']);
+			}
 		}
 
 		return $schoolCodeArray;
@@ -826,7 +830,7 @@
 			return false;
 		}
 	}
-	
+
 	//Resize Image
 	function ResizeImage($image, $maxsize, $quality){
 		$mime = getimagesize($image);
@@ -840,6 +844,151 @@
 		if($mime['mime'] == 'image/png'){ imagepng($imageScaled, $image, "8"); }
 		if($mime['mime'] == 'image/gif'){ imagegif($imageScaled, $image, $quality); }
 		imagedestroy($imagecreated);
+	}
+
+	//Get Staff Name Given Email
+	function GetStaffName($email){
+		include "abre_dbconnect.php";
+		if($email == $_SESSION['useremail']){
+			return "Me";
+		}else{
+			$email = strtolower($email);
+			if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
+				$query = "SELECT FirstName, LastName FROM Abre_Staff WHERE EMail1 LIKE '$email' LIMIT 1";
+				$dbreturn = databasequery($query);
+				foreach ($dbreturn as $value){
+					$FirstName = htmlspecialchars($value["FirstName"], ENT_QUOTES);
+					$LastName = htmlspecialchars($value["LastName"], ENT_QUOTES);
+					return "$FirstName $LastName";
+				}
+			}
+			$db->close();
+			return $email;
+		}
+	}
+
+	//Get Staff FirstName Given Email
+	function GetStaffFirstName($email){
+		include "abre_dbconnect.php";
+		$email = strtolower($email);
+		if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
+			$query = "SELECT FirstName FROM Abre_Staff WHERE EMail1 LIKE '$email' LIMIT 1";
+			$dbreturn = databasequery($query);
+			foreach ($dbreturn as $value){
+				$FirstName = htmlspecialchars($value["FirstName"], ENT_QUOTES);
+				return $FirstName;
+			}
+		}
+
+		$query = "SELECT firstname FROM directory WHERE email LIKE '$email' LIMIT 1";
+		$dbreturn = databasequery($query);
+		foreach ($dbreturn as $value){
+			$FirstName = htmlspecialchars($value["firstname"], ENT_QUOTES);
+			return $FirstName;
+		}
+		$db->close();
+		return "";
+	}
+
+	//Get Staff LastName Given Email
+	function GetStaffLastName($email){
+		include "abre_dbconnect.php";
+		$email = strtolower($email);
+		if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
+			$query = "SELECT LastName FROM Abre_Staff WHERE EMail1 LIKE '$email' LIMIT 1";
+			$dbreturn = databasequery($query);
+			foreach ($dbreturn as $value){
+				$LastName = htmlspecialchars($value["LastName"], ENT_QUOTES);
+				return $LastName;
+			}
+		}
+
+		$query = "SELECT lastname FROM directory WHERE email LIKE '$email' LIMIT 1";
+		$dbreturn = databasequery($query);
+		foreach ($dbreturn as $value){
+			$LastName = htmlspecialchars($value["lastname"], ENT_QUOTES);
+			return $LastName;
+		}
+		$db->close();
+		return "";
+	}
+
+	//Get Staff UniqueID Given Email
+	function GetStaffUniqueID($email){
+		include "abre_dbconnect.php";
+		$email = strtolower($email);
+		if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
+			$query = "SELECT StaffID FROM Abre_Staff WHERE EMail1 LIKE '$email' LIMIT 1";
+			$dbreturn = databasequery($query);
+			foreach ($dbreturn as $value){
+				$StaffID = htmlspecialchars($value["StaffID"], ENT_QUOTES);
+				return $StaffID;
+			}
+		}
+		$db->close();
+		return "";
+	}
+
+	//Get Student FirstName Given Email
+	function GetStudentFirstName($email){
+		include "abre_dbconnect.php";
+		$email = strtolower($email);
+		if($db->query("SELECT * FROM Abre_AD LIMIT 1")){
+			$query = "SELECT StudentID FROM Abre_AD WHERE Email LIKE '$email' LIMIT 1";
+			$dbreturn = databasequery($query);
+			if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+				foreach ($dbreturn as $value){
+					$StudentID = htmlspecialchars($value["StudentID"], ENT_QUOTES);
+					$query2 = "SELECT FirstName FROM Abre_Students WHERE StudentId = '$StudentID' LIMIT 1";
+					$dbreturn2 = databasequery($query2);
+					foreach ($dbreturn2 as $value2){
+						$FirstName = htmlspecialchars($value2["FirstName"], ENT_QUOTES);
+					}
+					return $FirstName;
+				}
+			}
+		}
+		$db->close();
+		return "";
+	}
+
+	//Get Student LastName Given Email
+	function GetStudentLastName($email){
+		include "abre_dbconnect.php";
+		$email = strtolower($email);
+		if($db->query("SELECT * FROM Abre_AD LIMIT 1")){
+		$query = "SELECT StudentID FROM Abre_AD WHERE Email LIKE '$email' LIMIT 1";
+			$dbreturn = databasequery($query);
+			if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+				foreach ($dbreturn as $value){
+					$StudentID = htmlspecialchars($value["StudentID"], ENT_QUOTES);
+					$query2 = "SELECT LastName FROM Abre_Students WHERE StudentId = '$StudentID' LIMIT 1";
+					$dbreturn2 = databasequery($query2);
+					foreach ($dbreturn2 as $value2){
+						$LastName = htmlspecialchars($value2["LastName"], ENT_QUOTES);
+					}
+					return $LastName;
+				}
+			}
+		}
+		$db->close();
+		return "";
+	}
+
+	//Get Student UniqueID Given Email
+	function GetStudentUniqueID($email){
+		include "abre_dbconnect.php";
+		$email = strtolower($email);
+		if($db->query("SELECT * FROM Abre_AD LIMIT 1")){
+			$query = "SELECT StudentID FROM Abre_AD WHERE Email LIKE '$email' LIMIT 1";
+			$dbreturn = databasequery($query);
+			foreach ($dbreturn as $value){
+				$StudentID = htmlspecialchars($value["StudentID"], ENT_QUOTES);
+				return $StudentID;
+			}
+		}
+		$db->close();
+		return "";
 	}
 
 ?>
