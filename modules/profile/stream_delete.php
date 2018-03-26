@@ -23,13 +23,21 @@
 
 	if(superadmin()){
 
-		$streamid = $_GET["id"];
+		$streamid = $_GET['id'];
+		$streamtitle = base64_decode($_GET['title']);
 
 		//Delete the Stream
 		$stmt = $db->stmt_init();
 		$sql = "DELETE FROM streams WHERE id = ?";
 		$stmt->prepare($sql);
 		$stmt->bind_param("i", $streamid);
+		$stmt->execute();
+		$stmt->close();
+
+		$stmt = $db->stmt_init();
+		$sql = "DELETE FROM stream_posts WHERE post_stream = ?";
+		$stmt->prepare($sql);
+		$stmt->bind_param("s", $streamtitle);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();
