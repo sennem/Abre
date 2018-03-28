@@ -26,7 +26,7 @@
 			DisplayWidget('mail','mail','Mail','#F44336','https://mail.google.com');
 		}
 		if($_SESSION['auth_service'] == "microsoft"){
-			DisplayWidget('mail','mail','Mail','#F44336','https://outlook.live.com/');
+			DisplayWidget('mail','mail','Mail','#F44336','https://outlook.office.com/');
 		}
 	}
 
