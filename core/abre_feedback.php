@@ -35,7 +35,7 @@
   					<div class='row'>
   						<div class='input-field col s12'>
   							<textarea id='textarea' name='textarea' class='materialize-textarea' placeholder="Write a brief description" required></textarea>
-                <label class="active" for="textarea">We welcome problem reports, feature ideas and general comments.</label>
+                <label class="active" for="textarea">We welcome problem reports, feature ideas and general comments!</label>
   					    </div>
   					</div>
           </div>
