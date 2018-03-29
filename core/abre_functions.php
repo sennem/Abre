@@ -994,8 +994,10 @@
 	function sendFormEmailNotification($ownerEmail, $formName, $url){
 		$to = $ownerEmail;
 		$subject = "New Response";
-		$message = "Your form, $formName, has a new response.<a href='$url'> View it now!</a>";
+		$message = 'Your form, '.$formName.', has a new response. <a href='.$url.'>View all responses now!</a>';
 		$headers = "From: noreply@abre.io";
+		$headers  .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-type: text/html; charset=iso-8859-1\r\n";
 		mail($to,$subject,$message,$headers);
 	}
 
