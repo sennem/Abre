@@ -136,7 +136,7 @@
 						echo "<div class='col s12'>";
 							echo "<h4>Abre Community</h4>";
 							echo "<input type='checkbox' class='formclick filled-in' id = 'abre_community' name='abre_community' value='checked' ".getSiteAbreCommunity()."/>";
-							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.<a href='https://abre.io/community/' style='color:#000;' target='_blank'> Learn more</a></label>";
+							echo "<label for='abre_community' style = 'color:#000; margin-bottom:30px;'> Join the Abre Community.<a href='https://abre.io/community/' style='color:".getSiteColor().";' target='_blank'> Learn more</a></label>";
 						echo "</div>";
 						echo "<div id='community_information'>";
 							echo "<div class='row'>";
