@@ -19,7 +19,7 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
-	$staffStudentLoginServiceEnabled = false;
+	$studentLoginServiceEnabled = false;
 
 	//Display the login
 	echo "<main>";
@@ -44,24 +44,22 @@
 
 							//Staff Login
 							if(getSiteGoogleSignInGroups('staff') == "checked" || getSiteMicrosoftSignInGroups('staff') == "checked"){
-								echo "<div style='padding-top: 10px'>";
-									echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in as Staff</a>";
-							  echo "</div>";
-								$staffStudentLoginServiceEnabled = true;
+								if(getSiteGoogleSignInGroups('students') == "checked" || getSiteMicrosoftSignInGroups('students') == "checked"){
+									echo "<div style='padding-top: 10px'>";
+										echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in as Staff</a>";
+									echo "</div>";
+									$studentLoginServiceEnabled = true;
+								}else{
+									echo "<div style='padding-top: 10px'>";
+										echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in</a>";
+									echo "</div>";
+								}
 							}
 
 					  	//Student Login
-							if(getSiteGoogleSignInGroups('students') == "checked" || getSiteMicrosoftSignInGroups('students') == "checked"){
+							if($studentLoginServiceEnabled){
 								echo "<div style='padding-top: 10px'>";
 									echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Student'>Sign in as Student</a>";
-								echo "</div>";
-								$staffStudentLoginServiceEnabled = true;
-							}
-
-							//Display Generic login button if no staff or student login services enabled
-							if(!$staffStudentLoginServiceEnabled){
-								echo "<div style='padding-top: 10px'>";
-									echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in</a>";
 								echo "</div>";
 							}
 
