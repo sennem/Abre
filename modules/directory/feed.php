@@ -26,7 +26,7 @@
 	if($building == "All"){
 		$sql = "SELECT firstname, lastname, email, title, picture FROM directory WHERE archived = 0 ORDER BY lastname";
 	}else{
-		$sql = "SELECT firstname, lastname, email, title, picture FROM directory WHERE location = '$school' and archived = 0 ORDER BY lastname";
+		$sql = "SELECT firstname, lastname, email, title, picture FROM directory WHERE location = '$building' and archived = 0 ORDER BY lastname";
 	}
 	$result = $db->query($sql);
 	$numberofrows = $result->num_rows;
