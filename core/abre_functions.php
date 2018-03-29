@@ -991,4 +991,12 @@
 		return "";
 	}
 
+	function sendFormEmailNotification($ownerEmail, $formName, $url){
+		$to = $ownerEmail;
+		$subject = "New Response";
+		$message = "Your form, $formName, has a new response.<a href='$url'> View it now!</a>";
+		$headers = "From: noreply@abre.io";
+		mail($to,$subject,$message,$headers);
+	}
+
 ?>

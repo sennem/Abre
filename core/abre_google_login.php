@@ -17,7 +17,7 @@
     */
 
 	  //Include required files
-	  require_once(dirname(__FILE__) . '/../core/abre_functions.php');
+	  require_once('abre_functions.php');
 
 	  //Load configuration settings
 	  $studentdomain = getSiteStudentDomain();
@@ -28,7 +28,7 @@
 	    $_SESSION['usertype'] = "staff";
 
 	  	include "abre_dbconnect.php";
-			if(file_exists("$portal_path_root/modules/directory/setup.txt")){
+			if($db->query("SELECT * FROM directory LIMIT 1")){
 				$sql = "SELECT picture FROM directory WHERE email = '".$_SESSION['useremail']."' AND (picture = '' OR picture LIKE '%http%')";
 				$result = $db->query($sql);
 				while($row = $result->fetch_assoc()){
