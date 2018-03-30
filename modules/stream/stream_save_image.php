@@ -55,7 +55,7 @@
 	
 				//If it already saved, read from local server
 				if (file_exists($filename)){
-					$imagefile = $date.$file_name;
+					$imagefile = $date.$file_name.".$fileExtension";
 					$image = $portal_root."/modules/stream/stream_serve_image.php?file=$imagefile&ext=$fileExtension";
 					if(filesize($filename) < 1000){
 						$image = "";
