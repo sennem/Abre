@@ -45,17 +45,17 @@
 			if($url['scheme'] == 'https' xor $url['scheme'] == 'http'){
 	
 				//Get the name and sanatize the file name
+				$fileExtension = pathinfo($image, PATHINFO_EXTENSION);
 				$file_name = basename($image);
 				$file_name = str_replace("+", "_", $file_name);
 				$file_name = str_replace("%", "_", $file_name);
 				$file_name = str_replace(".", "_", $file_name);
 				$file_name = preg_replace('/[^a-zA-Z0-9_.]/', '', $file_name);
-				$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$date.$file_name;
+				$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" . $date.$file_name .".$fileExtension";
 	
 				//If it already saved, read from local server
 				if (file_exists($filename)){
 					$imagefile = $date.$file_name;
-					$fileExtension = pathinfo($image, PATHINFO_EXTENSION);
 					$image = $portal_root."/modules/stream/stream_serve_image.php?file=$imagefile&ext=$fileExtension";
 					if(filesize($filename) < 1000){
 						$image = "";
