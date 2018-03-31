@@ -145,11 +145,14 @@
 	}
 
 	$customPostArray = array();
-	if($totalcount > 0){
 		if(!$scrolling){
-			//get all custom posts before date of last stream post
-			$queryDate = $preliminaryFeeds[$totalcount - 1]["date"];
-			$queryDate = date('Y-m-d H:i:s', $queryDate);
+			if($totalcount == 0){
+				$queryDate = "";
+			}else{
+				//get all custom posts before date of last stream post
+				$queryDate = $preliminaryFeeds[$totalcount - 1]["date"];
+				$queryDate = date('Y-m-d H:i:s', $queryDate);
+			}
 			$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time > '$queryDate' ORDER BY submission_time ASC";
 			$result = $db->query($sql);
 			while($value = $result->fetch_assoc()){
@@ -158,17 +161,18 @@
 				}
 			}
 		}else{
-			$queryDate = $preliminaryFeeds[0]["date"];
-			$queryDate = date('Y-m-d H:i:s', $queryDate);
-			$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time < '$queryDate' ORDER BY submission_time ASC";
-			$result = $db->query($sql);
-			while($value = $result->fetch_assoc()){
-				if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
-					array_push($customPostArray, $value);
+			if($totalcount > 0){
+				$queryDate = $preliminaryFeeds[0]["date"];
+				$queryDate = date('Y-m-d H:i:s', $queryDate);
+				$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time < '$queryDate' ORDER BY submission_time ASC";
+				$result = $db->query($sql);
+				while($value = $result->fetch_assoc()){
+					if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
+						array_push($customPostArray, $value);
+					}
 				}
 			}
 		}
-	}
 
 	if(!empty($customPostArray)){
 		$customArraySize = sizeof($customPostArray);
@@ -189,11 +193,12 @@
 					$title = $comparisonElement['post_title'];
 					$excerpt = $comparisonElement['post_content'];
 					$feedtitle = $comparisonElement['post_stream'];
+					$feedimage = $comparisonElement['post_image'];
 					$color = $comparisonElement['color'];
 					$id = $comparisonElement['id'];
 					$owner = $comparisonElement['post_author'];
 
-					array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
+					array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "$feedimage", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
 					$totalcount++;
 					$customArraySize--;
 
@@ -216,7 +221,7 @@
 			$feeds = $preliminaryFeeds;
 		}
 	}
-
+	
 	if(!$hasFeeds){
 		while(!empty($customPostArray)){
 			$comparisonElement = array_pop($customPostArray);
