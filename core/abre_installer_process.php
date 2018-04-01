@@ -243,6 +243,12 @@
 		$txt = "if(!defined('STREAM_CACHE')){ define('STREAM_CACHE', 'true'); }";
 		fwrite($myfile, $txt);
 
+		//Write site mode
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('SITE_MODE')){ define('SITE_MODE', 'PRODUCTION'); }";
+		fwrite($myfile, $txt);
+
 		//End PHP file
 		$txt = "\n\n?>";
 		fwrite($myfile, $txt);
