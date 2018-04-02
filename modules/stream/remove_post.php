@@ -36,6 +36,8 @@
   $stmt->bind_param("i", $id);
   $stmt->execute();
   if($stmt->error != ""){
+		$stmt->close();
+		$db->close();
     $response = array("status" => "Error", "message" => "There was a problem deleting your post.");
     header("Content-Type: application/json");
     echo json_encode($response);

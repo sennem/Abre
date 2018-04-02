@@ -28,7 +28,7 @@
 	$streamExcerpt = $_POST['excerpt'];
 	$streamUrldecoded = base64_decode($streamUrl);
 	$streamQuery = mysqli_real_escape_string($db, $streamUrldecoded);
-	$streamTitledecoded = base64_decode($streamTitle);
+	$streamTitledecoded = $streamTitle;
 	$streamImagedecoded = base64_decode($streamImage);
 
 	$portal_root_path = $portal_root.'/';

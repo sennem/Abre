@@ -17,17 +17,28 @@
     */
 
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once('functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if($_SESSION['usertype'] != 'parent'){
-		if($_SESSION['auth_service'] == "google"){
-			DisplayWidget('mail','mail','Mail','#F44336','https://mail.google.com');
-		}
-		if($_SESSION['auth_service'] == "microsoft"){
-			DisplayWidget('mail','mail','Mail','#F44336','https://outlook.office.com/');
-		}
+	if(superadmin()){
+    $headlineid = $_GET["id"];
+
+    $stmt = $db->stmt_init();
+    $sql = "DELETE FROM headline_responses WHERE headline_id = ?";
+    $stmt->prepare($sql);
+    $stmt->bind_param("i", $headlineid);
+    $stmt->execute();
+    $stmt->close();
+
+		//Delete the headline
+		$stmt = $db->stmt_init();
+		$sql = "DELETE FROM headlines WHERE id = ?";
+		$stmt->prepare($sql);
+		$stmt->bind_param("i", $headlineid);
+		$stmt->execute();
+		$stmt->close();
+		$db->close();
 	}
 
 ?>

@@ -29,14 +29,17 @@
 				$('#titletext').text('Staff Directory');
 				document.title = 'Staff Directory';
 				$('#content_holder').load( 'modules/directory/directory.php', function() { init_page(); });
-				$( '#modal_holder' ).load( 'modules/".basename(__DIR__)."/modals.php' );
+				$( '#modal_holder' ).load( 'modules/".basename(__DIR__)."/modals.php' );";
 
-				$( '#navigation_top' ).show();
-				$( '#navigation_top' ).load( 'modules/directory/menu.php', function() {
-					$( '#navigation_top' ).show();
-					$('.tab_1').addClass('tabmenuover');
-				});
-				ga('set', 'page', '/#directory/');
+				if(CONSTANT('SITE_MODE') != "DEMO"){
+					echo "$( '#navigation_top' ).show();
+					$( '#navigation_top' ).load( 'modules/directory/menu.php', function() {
+						$( '#navigation_top' ).show();
+						$('.tab_1').addClass('tabmenuover');
+					});";
+				}
+
+				echo "ga('set', 'page', '/#directory/');
 				ga('send', 'pageview');
 	    },
 			'directory/archived': function(name) {

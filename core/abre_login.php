@@ -19,6 +19,7 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 	require_once('abre_functions.php');
+	$studentLoginServiceEnabled = false;
 
 	//Display the login
 	echo "<main>";
@@ -42,14 +43,25 @@
 						echo "<div class='loginholder_large'>";
 
 							//Staff Login
-							echo "<div style='padding-top: 10px'>";
-						  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in as Staff</a>";
-						  	echo "</div>";
+							if(getSiteGoogleSignInGroups('staff') == "checked" || getSiteMicrosoftSignInGroups('staff') == "checked"){
+								if(getSiteGoogleSignInGroups('students') == "checked" || getSiteMicrosoftSignInGroups('students') == "checked"){
+									echo "<div style='padding-top: 10px'>";
+										echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in as Staff</a>";
+									echo "</div>";
+									$studentLoginServiceEnabled = true;
+								}else{
+									echo "<div style='padding-top: 10px'>";
+										echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Staff'>Sign in</a>";
+									echo "</div>";
+								}
+							}
 
-						  	//Student Login
-						  	echo "<div style='padding-top: 10px'>";
-						  		echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Student'>Sign in as Student</a>";
-						  	echo "</div>";
+					  	//Student Login
+							if($studentLoginServiceEnabled){
+								echo "<div style='padding-top: 10px'>";
+									echo "<a class='waves-effect waves-light btn-large mdl-color-text--white loginbutton' style='background-color:".getSiteColor()." !important; color:#fff !important; text-align:center;' href='?usertype=Student'>Sign in as Student</a>";
+								echo "</div>";
+							}
 
 							//Parent Login
 							if(getSiteGoogleSignInGroups('parents') == "checked" || getSiteMicrosoftSignInGroups('parents') == "checked" || getSiteFacebookSignInGroups('parents') == "checked"){

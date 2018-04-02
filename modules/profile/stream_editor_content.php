@@ -50,11 +50,10 @@ if(superadmin()){
     echo "</div></td>";
     echo "<td><b>$title</b> (".ucwords($group).")</td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passstreamdata' data-streamtitle='$titleencoded' data-rsslink='$linkencoded' data-streamid='$id' data-streamgroup='$group' data-required='$required' data-color='$color' data-staffrestrictions='$staffRestrictions' data-studentRestrictions='$studentRestrictions'><i class='material-icons'>mode_edit</i></button></td>";
-    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
+    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deletestream' data-streamtitle='$titleencoded' data-streamid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
   }
   echo "</table>";
-  $db->close();
 }
 
 ?>
@@ -70,16 +69,17 @@ if(superadmin()){
       //Delete stream
       $(".deletestream").unbind().click(function() {
         event.preventDefault();
-        var result = confirm("Are you sure you want to delete this stream?");
+        var result = confirm("This will delete all custom posts associated with this stream. Are you sure you want to delete this stream?");
         if(result){
 
           $(this).closest("tr").hide();
           var streamid = $(this).data('streamid');
+          var streamtitle = $(this).data('streamtitle')
 
           //Make the post request
           $.ajax({
             type: 'POST',
-            url: 'modules/profile/stream_delete.php?id='+streamid,
+            url: 'modules/profile/stream_delete.php?id='+streamid+'&title='+streamtitle,
             data: '',
           })
           .done(function(){

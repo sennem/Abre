@@ -25,7 +25,7 @@
 	$linkescaped = htmlspecialchars($linkraw, ENT_QUOTES);
 	$imagebase = base64_encode($image);
 	$displaydate = date("F jS, Y", $date);
-	$titleencoded = base64_encode($title);
+	$titleencoded = htmlspecialchars($title, ENT_QUOTES);
 	$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
 
 	//Display Card
@@ -38,7 +38,7 @@
 			}else{
 				echo "<a href='#addstreamcomment' class='chip modal-readstream' data-commenticonid='comment_$cardcountloop' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='background-color: #BDBDBD; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
 			}
-			if($type == "custom" && $owner == $_SESSION['useremail']){
+			if($type == "custom" && ($owner == $_SESSION['useremail'] || superadmin())){
 				echo "<div class='right-align pointer' style='float:right; position:absolute; right:15px; top:18px; z-index:5;'><a class='removepost' data-id='$id'><i class='material-icons' style='font-size: 16px; color: #333;'>clear</i></a></div>";
 			}
 		echo "</div>";

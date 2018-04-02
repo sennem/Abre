@@ -23,48 +23,60 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 
-	//Show the Search and Last 10 Modified Users
-	if($pageaccess == 1 or $_SESSION['usertype'] == "staff"){
+	if(CONSTANT('SITE_MODE') == "DEMO"){
+		echo "<div style='padding:30px; text-align:center; width:100%;'>";
+			echo "<div class='row'>";
+				echo "<span style='font-size: 22px; font-weight:700'>Learn more about the Directory App!</span>";
+			echo "</div>";
+			echo "<div class='row'>";
+				echo "<p style='font-size:16px; margin:20px 0 0 0;'>For more information about the Abre Platform visit <a href='https://www.abre.io/' style='color:".getSiteColor().";' target='_blank'>our website</p>";
+			echo "</div>";
+		echo "</div>";
+	}else{
+		//Show the Search and Last 10 Modified Users
+		if($pageaccess == 1 or $_SESSION['usertype'] == "staff"){
 
-		$sql = "SELECT COUNT(*) FROM directory WHERE archived = 0";
-		$dbreturn = $db->query($sql);
-		$resultrow = $dbreturn->fetch_assoc();
-		$num_users = $resultrow["COUNT(*)"];
+			$sql = "SELECT COUNT(*) FROM directory WHERE archived = 0";
+			$dbreturn = $db->query($sql);
+			$resultrow = $dbreturn->fetch_assoc();
+			$num_users = $resultrow["COUNT(*)"];
 
-		if($num_users > 0){
+			if($num_users > 0){
 
-			//Search
-			echo "<div class='page_container'>";
-				echo "<div class='row'>";
-					echo "<div class='col l12 m12 s12' style='padding:0'>";
-						echo "<nav style='background-color:"; echo getSiteColor(); echo ";'>";
-								echo "<div class='nav-wrapper'>";
-									echo "<form id='form-search' method='post' action='modules/directory/searchresults.php'>";
-										echo "<div class='input-field'>";
-											echo "<input id='searchquery' type='search' placeholder='Search' autocomplete='off'>";
-											echo "<label class='label-icon' for='searchquery'><i class='material-icons'>search</i></label>";
-										echo "</div>";
-									echo "</form>";
-								echo "</div>";
-						echo "</nav>";
+				//Search
+				echo "<div class='page_container'>";
+					echo "<div class='row'>";
+						echo "<div class='col l12 m12 s12' style='padding:0'>";
+							echo "<nav style='background-color:"; echo getSiteColor(); echo ";'>";
+									echo "<div class='nav-wrapper'>";
+										echo "<form id='form-search' method='post' action='modules/directory/searchresults.php'>";
+											echo "<div class='input-field'>";
+												echo "<input id='searchquery' type='search' placeholder='Search' autocomplete='off'>";
+												echo "<label class='label-icon' for='searchquery'><i class='material-icons'>search</i></label>";
+											echo "</div>";
+										echo "</form>";
+									echo "</div>";
+							echo "</nav>";
+						echo "</div>";
 					echo "</div>";
 				echo "</div>";
-			echo "</div>";
 
-			//Display Recent Searches
-			echo "<div id='searchresults'>";
-				include "searchresults.php";
-			echo "</div>";
+				//Display Recent Searches
+				echo "<div id='searchresults'>";
+					include "searchresults.php";
+				echo "</div>";
 
-		}else{
-			if($_SESSION['usertype'] == "staff"){
-				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'></p></div>";
 			}else{
-				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button in the bottom right to add a staff member.</p></div>";
+				if($_SESSION['usertype'] == "staff"){
+					echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'></p></div>";
+				}else{
+					echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Active Staff</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button in the bottom right to add a staff member.</p></div>";
+				}
 			}
-		}
 
-		if($pageaccess == 1){ include "button.php"; }
+			if($pageaccess == 1){ include "button.php"; }
+		}
+	}
 ?>
 
 <script>
@@ -102,7 +114,3 @@
 		});
 
 </script>
-
-<?php
-	}
-?>

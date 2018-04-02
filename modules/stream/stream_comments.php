@@ -47,7 +47,7 @@
 			continue;
 		}
 		$title = $value['title'];
-		$titleencoded = base64_encode($title);
+		$titleencoded = htmlspecialchars($title, ENT_QUOTES);
 		$titlewithoutlongwords = preg_replace('~\b\S{30,}\b~', '', $title);
 		$image = htmlspecialchars($value ['image'], ENT_QUOTES);
 		$imagebase = base64_encode($image);
@@ -256,9 +256,8 @@
 
 
 			var Stream_Title = $(this).data('title');
-			Stream_Title_Decoded = atob(Stream_Title);
-			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
-			$(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
+			$(".modal-content #streamTitle").text(Stream_Title);
+			$(".modal-content #streamTitleValue").val(Stream_Title);
 			var Stream_Url = $(this).data('url');
 			$(".modal-content #streamUrl").val(Stream_Url);
 			var commentID = $(this).data('commenticonid');
@@ -312,9 +311,8 @@
 			$(".modal-content #streamExcerptDisplay").html('');
 
 			var Stream_Title = $(this).data('title');
-			Stream_Title_Decoded = atob(Stream_Title);
-			$(".modal-content #streamTitle").text(Stream_Title_Decoded);
-			$(".modal-content #streamTitleValue").val(Stream_Title_Decoded);
+			$(".modal-content #streamTitle").text(Stream_Title);
+			$(".modal-content #streamTitleValue").val(Stream_Title);
 			var Stream_Url = $(this).data('url');
 			$(".modal-content #streamUrl").val(Stream_Url);
 			var commentID = $(this).data('commenticonid');

@@ -93,9 +93,9 @@
 
 				if(LoaderCheck === false){
 
-				    $('#showmorestream').show();
-				    StreamStart = StreamStart + 24;
-					StreamEnd = StreamEnd + 24;
+				  $('#showmorestream').show();
+				  StreamStart = StreamStart + 24;
+					StreamEnd = 24;
 					streamPaging(StreamStart,StreamEnd);
 
 				}
@@ -120,7 +120,6 @@
 
 		//View All Streams
 		$( "#all" ).unbind().click(function(){
-
 			pageChange("all");
 			Page = "all";
 			$("#all").attr( "disabled", "disabled" );
