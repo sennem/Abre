@@ -29,20 +29,22 @@
 					echo "<button class='mdl-button mdl-js-button mdl-js-ripple-effect' id='all' disabled>";
 					echo "<i class='material-icons' style='font-size:16px; padding:0 4px 2px 0;'>dashboard</i><span class='hide-on-small-only'>Latest</span></button>";
 				echo "</div>";
-				echo "<div class='streamnavholder'>";
-					echo "<button class='mdl-button mdl-js-button mdl-js-ripple-effect' id='likes'>";
-					echo "<i class='material-icons' style='font-size:16px; padding:0 4px 2px 0;'>favorite</i><span class='hide-on-small-only'>Likes</span></button>";
-				echo "</div>";
-				echo "<div class='streamnavholder'>";
-					echo "<button class='mdl-button mdl-js-button mdl-js-ripple-effect' id='comments'>";
-					echo "<i class='material-icons' style='font-size:16px; padding:0 4px 2px 0;'>comment</i><span class='hide-on-small-only'>Comments</span></button>";
-				echo "</div>";
+				if($_SESSION['usertype'] == "staff"){
+					echo "<div class='streamnavholder'>";
+						echo "<button class='mdl-button mdl-js-button mdl-js-ripple-effect' id='likes'>";
+						echo "<i class='material-icons' style='font-size:16px; padding:0 4px 2px 0;'>favorite</i><span class='hide-on-small-only'>Likes</span></button>";
+					echo "</div>";
+					echo "<div class='streamnavholder'>";
+						echo "<button class='mdl-button mdl-js-button mdl-js-ripple-effect' id='comments'>";
+						echo "<i class='material-icons' style='font-size:16px; padding:0 4px 2px 0;'>comment</i><span class='hide-on-small-only'>Comments</span></button>";
+					echo "</div>";
+				}
 			echo "</div>";
-			echo "<div class='col m4 s6 hide-on-small-only' style='text-align:right;'>";	
+			echo "<div class='col m4 s6 hide-on-small-only' style='text-align:right;'>";
 				echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' href='#profile'>My Streams</a>";
 			echo "</div>";
 		echo "</div>";
 	echo "</div>";
 	echo "<div id='streamnavigationloader' style='margin:8px; display:none;'><div class='progress'><div class='indeterminate'></div></div></div>";
-	
+
 ?>
