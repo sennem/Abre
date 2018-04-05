@@ -55,7 +55,7 @@ if(superadmin()){
     echo "<tr>";
     echo "<td>$title</td>";
     echo "<td>".ucwords($groups)."</td>";
-    if($start_date < $today && $today < $end_date){
+    if($start_date <= $today && $today <= $end_date){
       echo "<td class='center-align'><i class='material-icons' style='color:#4CAF50;'>brightness_1</i></td>";
     }else{
       echo "<td class='center-align'><i class='material-icons' style='color:#F44336;'>brightness_1</i></td>";
