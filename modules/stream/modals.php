@@ -37,63 +37,9 @@
 
 ?>
 
-	<!-- Read and Comment Modal -->
 	<?php
-	if($_SESSION['usertype']=='staff'){
+	if($_SESSION['usertype'] == 'staff'){
 	?>
-		<div id="addstreamcomment" class="modal modal-fixed-footer modal-mobile-full">
-			<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
-			<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
-				<div class="modal-content" id="modal-content-section" style="padding: 0px !important;">
-					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
-						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Read Post</span></div>
-						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
-					</div>
-					<div style='padding: 0px 24px 0px 24px;'>
-
-						<div class="row" style='margin-bottom:0;'>
-							<div class='input-field col s12' id="streamTitle" style="font-weight:700; font-size:24px; line-height:32px;"></div>
-						</div>
-						<div class="row" id='streamPhotoHolder'>
-							<div class="input-field col s12">
-								<div id="streamPhoto" class="center-align"></div>
-							</div>
-						</div>
-						<div class="row">
-							<div class='input-field col s12'>
-								<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px; line-height:1.8em"></p>
-							</div>
-							<div class='input-field col s12'>
-								<a id="streamLink" href="" style="text-decoration: underline; color: <?php echo getSiteColor(); ?>;" target="_blank">View full article</a>
-							</div>
-						</div>
-						<div class="row">
-							<div class="input-field col s12" style="padding-bottom: 5px;">
-								<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
-							</div>
-						</div>
-
-						<div class="row">
-							<div class="input-field col s12" style="padding-bottom: 5px;">
-								<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
-							</div>
-						</div>
-
-						<div name="streamComments" id="streamComments"></div>
-
-						<input type="hidden" name="streamUrl" id="streamUrl">
-						<input type="hidden" name="streamTitleValue" id="streamTitleValue">
-						<input type="hidden" name="commentID" id="commentID">
-						<input type="hidden" name="streamImage" id="streamImage">
-						<input type="hidden" name="redirect" id="redirect">
-						<input id="streamExcerpt" name="streamExcerpt" type="hidden">
-			    </div>
-				</div>
-			  <div class="modal-footer">
-					<button class="modal-action modal-close waves-effect btn-flat white-text" type="button" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
-				</div>
-			</form>
-		</div>
 
 		<!-- Social Sharing -->
 		<div id="sharecard" class="modal modal-fixed-footer modal-mobile-full" style="max-width: 600px;">
@@ -172,10 +118,69 @@
 		</div>
 
 	<?php
-
 	}
-
 	?>
+
+	<!-- Read and Comment Modal -->
+	<div id="addstreamcomment" class="modal modal-fixed-footer modal-mobile-full">
+		<div id="commentloader" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%"></div>
+		<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
+			<div class="modal-content" id="modal-content-section" style="padding: 0px !important;">
+				<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+					<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Read Post</span></div>
+					<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+				</div>
+				<div style='padding: 0px 24px 0px 24px;'>
+
+					<div class="row" style='margin-bottom:0;'>
+						<div class='input-field col s12' id="streamTitle" style="font-weight:700; font-size:24px; line-height:32px;"></div>
+					</div>
+					<div class="row" id='streamPhotoHolder'>
+						<div class="input-field col s12">
+							<div id="streamPhoto" class="center-align"></div>
+						</div>
+					</div>
+					<div class="row">
+						<div class='input-field col s12'>
+							<p id="streamExcerptDisplay" name="streamExcerptDisplay" style="font-size:16px; line-height:1.8em"></p>
+						</div>
+						<div class='input-field col s12'>
+							<a id="streamLink" href="" style="text-decoration: underline; color: <?php echo getSiteColor(); ?>;" target="_blank">View full article</a>
+						</div>
+					</div>
+					<?php
+					if($_SESSION['usertype'] == 'staff'){
+					?>
+						<div class="row">
+							<div class="input-field col s12" style="padding-bottom: 5px;">
+								<textarea placeholder="Add a comment..." id="streamComment" name="streamComment" class="materialize-textarea" required></textarea>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12" style="padding-bottom: 5px;">
+								<button class="btn waves-effect btn-flat white-text" type="submit" name="action" style='margin-top:-20px; background-color:<?php echo getSiteColor(); ?>'>Post</button><br><br>
+							</div>
+						</div>
+
+						<div name="streamComments" id="streamComments"></div>
+					<?php
+					}
+					?>
+
+					<input type="hidden" name="streamUrl" id="streamUrl">
+					<input type="hidden" name="streamTitleValue" id="streamTitleValue">
+					<input type="hidden" name="commentID" id="commentID">
+					<input type="hidden" name="streamImage" id="streamImage">
+					<input type="hidden" name="redirect" id="redirect">
+					<input id="streamExcerpt" name="streamExcerpt" type="hidden">
+				</div>
+			</div>
+			<div class="modal-footer">
+				<button class="modal-action modal-close waves-effect btn-flat white-text" type="button" style='background-color: <?php echo getSiteColor(); ?>'>Close</button>
+			</div>
+		</form>
+	</div>
 
  	<!-- Edit Widgets -->
 	<div id="editwidgets" class="modal modal-mobile-full" style="max-width: 600px;">

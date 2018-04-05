@@ -221,7 +221,7 @@
 			$feeds = $preliminaryFeeds;
 		}
 	}
-	
+
 	if(!$hasFeeds){
 		while(!empty($customPostArray)){
 			$comparisonElement = array_pop($customPostArray);
@@ -484,9 +484,19 @@
 				$(".modal-content #streamLink").attr("href", atob(Stream_Url));
 			}
 
+			<?php
+			if($_SESSION['usertype'] == 'staff'){
+			?>
 			$( "#streamComments" ).load( "modules/stream/comment_list.php?url="+Stream_Url, function() {
 				$("#commentloader").hide();
 			});
+			<?php
+			}else{
+			?>
+			$("#commentloader").hide();
+			<?php
+			}
+			?>
 
 			$('#addstreamcomment').openModal({
 				in_duration: 0,
