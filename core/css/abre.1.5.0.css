@@ -22,6 +22,11 @@ label {
   color: #000 !important;
 }
 
+blockquote {
+  padding-left: 0px !important;
+  border-left: none !important;
+}
+
 input[type="checkbox"]
 {
     display:block !important;

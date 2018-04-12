@@ -50,7 +50,7 @@
 				//Windows icon
 				echo "<meta name='msapplication-TileImage' content='".getSiteLogo()."'>";
 				echo "<meta name='msapplication-TileColor' content='".getSiteColor()."'>";
-				
+
 				//Theme Color
 				echo "<meta name='theme-color' content='".getSiteColor()."'>";
 				?>
@@ -59,7 +59,7 @@
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 				<link rel='stylesheet' href='core/css/materialize.0.97.7.2.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
-				<link rel='stylesheet' href='core/css/abre.1.4.9.css'>
+				<link rel='stylesheet' href='core/css/abre.1.5.0.css'>
 				<link rel='stylesheet' href='core/css/animate.min.css'>
 				<link rel='stylesheet' href='core/css/timepicker.min.css'>
 				<link rel='stylesheet' href='core/css/quill.snow.1.1.3.css'>
@@ -77,6 +77,8 @@
 				<script src='core/js/spectrum.js'></script>
 				<script src='modules/profile/js/jquery-ui.multidatespicker.1.6.4.js'></script>
 				<script src='https://www.gstatic.com/charts/loader.js'></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+				<script src='core/js/chartjs-plugin-datalabels.min.js'></script>
 			</head>
 			<body>
 			<script>google.charts.load('current', {'packages':['corechart']});</script>
@@ -96,7 +98,7 @@
 				<link href='https://fonts.googleapis.com/icon?family=Material+Icons' rel='stylesheet'>
 				<link rel='stylesheet' href='core/css/materialize.0.97.7.2.min.css'>
 				<link rel='stylesheet' href='core/css/material.1.2.1.min.css'>
-				<link rel='stylesheet' href='core/css/abre.1.4.9.css'>
+				<link rel='stylesheet' href='core/css/abre.1.5.0.css'>
 
 				<script src='core/js/jquery-3.1.1.min.js'></script>
 				<script src='core/js/jquery-ui.1.12.1.min.js'></script>
