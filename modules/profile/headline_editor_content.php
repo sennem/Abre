@@ -25,7 +25,7 @@ if(superadmin()){
 
   echo "<table class='bordered' id='headlinestable'>";
   $today = date("Y-m-d");
-  $query = "SELECT id, title, purpose, content, form_id, video_id, groups, start_date, end_date, required FROM headlines ORDER BY start_date";
+  $query = "SELECT id, title, purpose, content, form_id, video_id, groups, date_restriction, start_date, end_date, required FROM headlines ORDER BY start_date";
   $dbreturn = databasequery($query);
   $i = 0;
   foreach($dbreturn as $value){
@@ -37,6 +37,7 @@ if(superadmin()){
     $video_id = htmlspecialchars($value['video_id'], ENT_QUOTES);
     $form_id = $value['form_id'];
     $groups = $value['groups'];
+    $date_restriction = $value['date_restriction'];
     $start_date = $value['start_date'];
     $end_date = $value['end_date'];
     $required = $value['required'];
@@ -58,12 +59,12 @@ if(superadmin()){
     echo "<tr>";
     echo "<td>$title</td>";
     echo "<td>".ucwords($groups)."</td>";
-    if($start_date <= $today && $today <= $end_date){
+    if($date_restriction == 0 || ($start_date <= $today && $today <= $end_date)){
       echo "<td class='center-align'><i class='material-icons' style='color:#4CAF50;'>brightness_1</i></td>";
     }else{
       echo "<td class='center-align'><i class='material-icons' style='color:#F44336;'>brightness_1</i></td>";
     }
-    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passheadlinedata' data-id='$id' data-headlinetitle='$titleencoded' data-purpose='$purpose' data-groups='$groups' data-formid='$form_id' data-video='$video_id' data-required='$required' data-content='$content' data-startdate='$start_date' data-enddate='$end_date'><i class='material-icons'>mode_edit</i></button></td>";
+    echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passheadlinedata' data-id='$id' data-headlinetitle='$titleencoded' data-purpose='$purpose' data-groups='$groups' data-formid='$form_id' data-video='$video_id' data-required='$required' data-content='$content' data-startdate='$start_date' data-enddate='$end_date' data-daterestriction='$date_restriction'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteheadline' data-headlineid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
     $i++;
@@ -110,6 +111,21 @@ if(superadmin()){
         var headlineTitle = $(this).data('headlinetitle');
         $("#addeditheadlinetitle").text(headlineTitle);
         $("#headlineTitle").val(headlineTitle);
+        var date_restriction = $(this).data('daterestriction');
+        if(date_restriction == 1){
+          $("#headlineDateRestriction").prop('checked', true);
+        }else{
+          $("#headlineDateRestriction").prop('checked', false);
+        }
+
+        if(date_restriction == 1){
+          $("#headlineStartDateDiv").show();
+          $("#headlineEndDateDiv").show();
+        }else{
+          $("#headlineStartDateDiv").hide();
+          $("#headlineEndDateDiv").hide();
+        }
+
         var headlineStartDate = $(this).data('startdate');
         var picker = $('#headlineStartDate').pickadate('picker');
         picker.set('select', headlineStartDate);

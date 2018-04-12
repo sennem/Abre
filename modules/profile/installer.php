@@ -107,6 +107,14 @@
 		}
 		$db->close();
 
+		//Check for required field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT date_restriction FROM headlines LIMIT 1")){
+			$sql = "ALTER TABLE `headlines` ADD `date_restriction` int(11) NOT NULL DEFAULT 0;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Check for start date field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT start_date FROM headlines LIMIT 1")){

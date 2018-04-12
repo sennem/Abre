@@ -217,16 +217,6 @@
 						<label class="active" for="headlineTitle">Title</label>
 					</div>
 				</div>
-				<div class='row'>
-					<div class='input-field col l6 s12'>
-						<input type="date" placeholder="Headline Start Date" class="datepickerformatted" name="headlineStartDate" id="headlineStartDate" required>
-						<label class="active" for="headlineStartDate">Start Date</label>
-					</div>
-					<div class='input-field col l6 s12'>
-						<input type="date" placeholder="Headline End Date" class="datepickerformatted" name="headlineEndDate" id="headlineEndDate" required>
-						<label class="active" for="headlineEndDate">End Date</label>
-					</div>
-				</div>
 				<div class="row">
 					<div class='input-field col s12'>
 						<textarea placeholder="Enter your Headline Content" id="headlineContent" name="headlineContent" class="materialize-textarea"></textarea>
@@ -266,6 +256,20 @@
 					<div class='input-field col s12'>
 						<input placeholder="The video ID of https://www.youtube.com/watch?v=6EbWHc7WS9z is 6EbWHc7WS9z" id="headlineVideo" name="headlineVideo" type="text" autocomplete="off">
 						<label class="active" for="headlineVideo">Video ID</label>
+					</div>
+				</div>
+				<div class='row'>
+					<div class='col s12'>
+						<input type="checkbox" class="filled-in" name="headlineDateRestriction" id="headlineDateRestriction" value="1">
+						<label for="headlineDateRestriction">Set Start and End Date</label>
+					</div>
+					<div class='input-field col l6 s12' id="headlineStartDateDiv" style='display:none; margin-top: 2em;'>
+						<input type="date" placeholder="Headline Start Date" class="datepickerformatted" name="headlineStartDate" id="headlineStartDate">
+						<label class="active" for="headlineStartDate">Start Date</label>
+					</div>
+					<div class='input-field col l6 s12' id="headlineEndDateDiv" style='display:none; margin-top: 2em;'>
+						<input type="date" placeholder="Headline End Date" class="datepickerformatted" name="headlineEndDate" id="headlineEndDate">
+						<label class="active" for="headlineEndDate">End Date</label>
 					</div>
 				</div>
 				<div class='row'>
@@ -327,6 +331,16 @@
 		});
 
 		$('.datepickerformatted').pickadate({ container: 'body', format: 'yyyy-mm-dd', selectMonths: true, selectYears: 15 });
+
+		$("#headlineDateRestriction").change(function(){
+			if($(this).is(':checked')){
+				$("#headlineStartDateDiv").show();
+				$("#headlineEndDateDiv").show();
+			}else{
+				$("#headlineStartDateDiv").hide();
+				$("#headlineEndDateDiv").hide();
+			}
+		});
 
 		$("#stream_staff").change(function(){
 			if($(this).is(':checked')){
@@ -402,6 +416,10 @@
 				$("#addeditheadlinetitle").text("New Headline");
 				$("#headlineTitle").val('');
 
+				$("#headlineDateRestriction").prop('checked', false);
+				$("#headlineStartDateDiv").hide();
+				$("#headlineEndDateDiv").hide();
+
 				var d = new Date();
 				var picker = $('#headlineStartDate').pickadate('picker');
 				picker.set('select', d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate());
@@ -418,6 +436,7 @@
 
 				$("#headlineContent").val('');
 				$("#headlineForm").val('');
+
 				$('#headline_staff').prop('checked', false);
 				$('#headline_students').prop('checked', false);
 				$('#headline_parents').prop('checked', false);
@@ -490,6 +509,11 @@
 				var headlineForm = $("#headlineForm").val();
 				var headlineVideo = $("#headlineVideo").val();
 
+				var dateRestriction = 0;
+				if($('input[id="headlineDateRestriction"]').is(':checked')){
+					dateRestriction = 1;
+				}
+
 				var headlineArray = [];
 				if($('input[id="headline_staff"]').is(':checked')){
 					headlineArray.push("staff");
@@ -503,14 +527,14 @@
 
 				var headlinegroup = headlineArray.join(", ");
 
-				if($('#headlineRequired').is(':checked') == true){ var required = 1; }else{ var required = 0; }
+				if($('#headlineRequired').is(':checked')){ var required = 1; }else{ var required = 0; }
 				var headlineid = $('#headline_id').val();
 
 				//Make the post request
 				$.ajax({
 					type: 'POST',
 					url: 'modules/profile/save_headline.php',
-					data: { title: headlineTitle, startDate: headlineStartDate, endDate: headlineEndDate, purpose: headlinePurpose, content: headlineContent, form: headlineForm, video: headlineVideo, groups: headlinegroup, required: required, id: headlineid }
+					data: { title: headlineTitle, dateRestriction: dateRestriction, startDate: headlineStartDate, endDate: headlineEndDate, purpose: headlinePurpose, content: headlineContent, form: headlineForm, video: headlineVideo, groups: headlinegroup, required: required, id: headlineid }
 				})
 				.done(function(){
 					$('#addeditheadline').closeModal({ in_duration: 0, out_duration: 0 });
