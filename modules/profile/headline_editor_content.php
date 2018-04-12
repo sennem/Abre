@@ -24,16 +24,10 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 if(superadmin()){
 
   echo "<table class='bordered' id='headlinestable'>";
-  echo "<tr>";
-  echo "<th>Title</th>";
-  echo "<th>Groups</th>";
-  echo "<th class='center-align'>Active</th>";
-  echo "<th></th>";
-  echo "<th></th>";
-  echo "</tr>";
   $today = date("Y-m-d");
   $query = "SELECT id, title, purpose, content, form_id, video_id, groups, start_date, end_date, required FROM headlines ORDER BY start_date";
   $dbreturn = databasequery($query);
+  $i = 0;
   foreach($dbreturn as $value){
     $id = $value['id'];
     $title = $value['title'];
@@ -52,6 +46,15 @@ if(superadmin()){
     }else{
       $requiredText = "No";
     }
+    if($i == 0){
+      echo "<tr>";
+      echo "<th>Title</th>";
+      echo "<th>Groups</th>";
+      echo "<th class='center-align'>Active</th>";
+      echo "<th></th>";
+      echo "<th></th>";
+      echo "</tr>";
+    }
     echo "<tr>";
     echo "<td>$title</td>";
     echo "<td>".ucwords($groups)."</td>";
@@ -63,6 +66,7 @@ if(superadmin()){
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passheadlinedata' data-id='$id' data-headlinetitle='$titleencoded' data-purpose='$purpose' data-groups='$groups' data-formid='$form_id' data-video='$video_id' data-required='$required' data-content='$content' data-startdate='$start_date' data-enddate='$end_date'><i class='material-icons'>mode_edit</i></button></td>";
     echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteheadline' data-headlineid='$id'><i class='material-icons'>delete</i></button></td>";
     echo "</tr>";
+    $i++;
   }
   echo "</table>";
 }
@@ -92,7 +96,7 @@ if(superadmin()){
             data: '',
           })
           .done(function(){
-
+            $('#headlinestable').load('modules/profile/headline_editor_content.php');
           });
         }
       });
