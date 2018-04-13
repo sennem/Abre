@@ -107,7 +107,7 @@
 	$usertype = $_SESSION['usertype'];
 	$email = $_SESSION['useremail'];
 	$requiredHeadlines = array();
-	$sql = "SELECT id, title, content, form_id, video_id, purpose, required FROM headlines WHERE start_date <= '$today' AND end_date >= '$today' AND groups LIKE '%$usertype%'";
+	$sql = "SELECT id, title, content, form_id, video_id, purpose, required FROM headlines WHERE (start_date <= '$today' AND end_date >= '$today') OR date_restriction = '0' AND groups LIKE '%$usertype%'";
 	$resultArray = databasequery($sql);
 	$resultSize = sizeof($resultArray);
 	if($resultSize > 0){
