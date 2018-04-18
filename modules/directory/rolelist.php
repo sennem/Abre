@@ -23,6 +23,31 @@
 
 	echo "<option value='' disabled selected>Choose a Role</option>";
 
+	//Conduct Roles
+	if(file_exists("$portal_path_root/modules/Abre-Conduct/setup.txt")){
+		if(strpos($role, 'Conduct Administrator') !== false){
+			echo "<option value='Conduct Administrator' selected='selected'>Conduct Administrator</option>";
+		}else{
+			echo "<option value='Conduct Administrator'>Conduct Administrator</option>";
+		}
+
+		if(strpos($role, 'Conduct Verification Monitor') !== false){
+			echo "<option value='Conduct Verification Monitor' selected='selected'>Conduct Verification Monitor</option>";
+		}else{
+			echo "<option value='Conduct Verification Monitor'>Conduct Verification Monitor</option>";
+		}
+	}
+
+	//Curriculum Roles
+	if(file_exists("$portal_path_root/modules/Abre-Curriculum/setup.txt")){
+		if(strpos($role, 'Curriculum Administrator') !== false){
+			echo "<option value='Curriculum Administrator' selected='selected'>Curriculum Administrator</option>";
+		}else{
+			echo "<option value='Curriculum Administrator'>Curriculum Administrator</option>";
+		}
+	}
+
+	//Directory Roles
 	if(strpos($role, 'Directory Administrator') !== false){
 		echo "<option value='Directory Administrator' selected='selected'>Directory Administrator</option>";
 	}else{
@@ -41,16 +66,20 @@
 		echo "<option value='Directory Advisor'>Directory Advisor</option>";
 	}
 
-	if(strpos($role, 'Conduct Verification Monitor') !== false){
-		echo "<option value='Conduct Verification Monitor' selected='selected'>Conduct Verification Monitor</option>";
-	}else{
-		echo "<option value='Conduct Verification Monitor'>Conduct Verification Monitor</option>";
+	//Plans Roles
+	if(file_exists("$portal_path_root/modules/Abre-Plans/setup.txt")){
+		if(strpos($role, 'Plans Administrator') !== false){
+			echo "<option value='Plans Administrator' selected='selected'>Plans Administrator</option>";
+		}else{
+			echo "<option value='Plans Administrator'>Plans Administrator</option>";
+		}
 	}
 
-	if(strpos($role, 'Conduct Administrator') !== false){
-		echo "<option value='Conduct Administrator' selected='selected'>Conduct Administrator</option>";
+	//Stream and Headline Roles
+	if(strpos($role, 'Stream and Headline Administrator') !== false){
+		echo "<option value='Stream and Headline Administrator' selected='selected'>Stream and Headline Administrator</option>";
 	}else{
-		echo "<option value='Conduct Administrator'>Conduct Administrator</option>";
+		echo "<option value='Stream and Headline Administrator'>Stream and Headline Administrator</option>";
 	}
 
 ?>
