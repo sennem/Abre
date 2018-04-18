@@ -302,8 +302,7 @@
                 "header" => [
                              "Authorization: Bearer " . $accessToken,
                              "X-Requested-With: XMLHttpRequest",
-                             "Content-Type: application/json"],
-                "content" => $data
+                             "Content-Type: application/json"]
             ]];
             $context = stream_context_create($options);
             

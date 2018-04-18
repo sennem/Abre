@@ -21,6 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once(dirname(__FILE__) . '/../../api/streams-api.php');
 
   $link = base64_decode($_POST["url"]);
 	$link = mysqli_real_escape_string($db, $link);
@@ -29,18 +30,34 @@
 		$redirect = $_POST["redirect"];
 	}
 
+	if (useAPI()) {
+		$apiValue = apiStreams::getStreamContentsByUrl(json_encode(array("url"=>$link)));
+		$result = $apiValue['result'];
+	}
+
   if($type == "comment"){
-    $query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' and comment != ''";
-    $dbreturn = $db->query($query);
-		$resultrow = $dbreturn->fetch_assoc();
-    $num_rows_comment = $resultrow["COUNT(*)"];
+
+		if (useAPI()) {
+			$num_rows_comment = $result['counts']['comments'];
+		}
+		else {
+			$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' and comment != ''";
+			$dbreturn = $db->query($query);
+			$resultrow = $dbreturn->fetch_assoc();
+			$num_rows_comment = $resultrow["COUNT(*)"];	
+		}
 
 		if(isset($redirect)){
 			if($redirect == "comments"){
-				$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND comment != '' AND user = '".$_SESSION['useremail']."'";
-				$dbreturn = $db->query($query);
-				$row = $dbreturn->fetch_assoc();
-				$num_rows_comment_current_user = $row["COUNT(*)"];
+				if (useAPI()) {
+					$num_rows_comment_current_user = $result['counts']['userComments'];
+				}
+				else {
+					$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND comment != '' AND user = '".$_SESSION['useremail']."'";
+					$dbreturn = $db->query($query);
+					$row = $dbreturn->fetch_assoc();
+					$num_rows_comment_current_user = $row["COUNT(*)"];
+				}
 
 				$query = "SELECT COUNT(*) FROM streams_comments WHERE user = '".$_SESSION['useremail']."' AND comment != '' GROUP BY url ORDER BY ID DESC";
 				$dbreturn = $db->query($query);
@@ -64,6 +81,11 @@
   }
   if($type == "like"){
 
+	if (useAPI()) {
+		$num_rows_like = $result['counts']['likes'];                            
+		$num_rows_like_current_user = $result['counts']['userLikes'];
+	}
+	else {
 		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND comment = '' AND liked = '1'";
 		$dbreturn = $db->query($query);
 		$resultrow = $dbreturn->fetch_assoc();
@@ -73,10 +95,11 @@
 		$dbreturn = $db->query($query);
 		$resultrow = $dbreturn->fetch_assoc();
 		$num_rows_like_current_user = $resultrow["COUNT(*)"];
+	}
 
-		$json = array("count"=>$num_rows_like, "currentusercount"=>$num_rows_like_current_user);
-		header("Content-Type: application/json");
-		echo json_encode($json);
+	$json = array("count"=>$num_rows_like, "currentusercount"=>$num_rows_like_current_user);
+	header("Content-Type: application/json");
+	echo json_encode($json);
   }
 
 ?>
