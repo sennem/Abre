@@ -77,7 +77,7 @@
 				<script src='core/js/spectrum.js'></script>
 				<script src='modules/profile/js/jquery-ui.multidatespicker.1.6.4.js'></script>
 				<script src='https://www.gstatic.com/charts/loader.js'></script>
-				<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.min.js"></script>
+				<script src='core/js/chart.2.7.0.min.js'></script>
 				<script src='core/js/chartjs-plugin-datalabels.min.js'></script>
 			</head>
 			<body>
