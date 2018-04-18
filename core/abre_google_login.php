@@ -18,6 +18,7 @@
 
 	  //Include required files
 	  require_once('abre_functions.php');
+	  require_once(dirname(__FILE__) . '/../api/authentication-api.php');
 
 	  //Load configuration settings
 	  $studentdomain = getSiteStudentDomain();
@@ -267,6 +268,11 @@
 						}
 					}
 				}
+				if (isset($api_url)) {
+					$_SESSION['api_url']=$api_url;
+					ApiConnection::signIn();
+				}
+
 				//Abre setup - set first login to admin
 				mysqli_query($db, "UPDATE users SET superadmin = 1 WHERE id = 1") or die (mysqli_error($db));
 				$db->close();

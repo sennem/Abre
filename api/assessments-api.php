@@ -49,7 +49,7 @@
             $accessToken = $_SESSION['api_token'];
                                                             
             $options = ["http" => [
-                "method" => "GET",
+                "method" => "POST",
                 "header" => [
                              "Authorization: Bearer " . $accessToken,
                              "X-Requested-With: XMLHttpRequest",

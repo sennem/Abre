@@ -25,8 +25,6 @@
                 
         function signIn() {
 
-            logToFile("signin");
-
             $baseUrl = $_SESSION['api_url'];
             
             $sha1useremail = sha1($_SESSION['useremail']);
@@ -44,8 +42,6 @@
                 "cookie_token" => $storetoken
             ));
             
-            logToFile("signin");
-
             $options = ["http" => [
                 "method" => "POST",
                 "header" => [
@@ -60,7 +56,6 @@
             $value = file_get_contents($url, false, $context);
             $_SESSION['api_token']=$value;
                         
-            logToFile($value);
             return $value;
         }
     }
@@ -79,7 +74,6 @@
 
                     $_SESSION['api_token']=$token;
 
-                    logToFile($value1);
                     break;
                 }
             }

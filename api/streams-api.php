@@ -166,6 +166,35 @@
             return json_decode($value, true);
         }
 
+        // Delete stream like by URL for authenticated user
+        // $data: json
+        //  url (required)
+        public static function deleteStreamLike($data){
+            
+            self::initialize();
+            $accessToken = $_SESSION['api_token'];
+                                                            
+            $options = ["http" => [
+                "method" => "POST",
+                "header" => [
+                             "Authorization: Bearer " . $accessToken,
+                             "X-Requested-With: XMLHttpRequest",
+                             "Content-Type: application/json"],
+                "content" => $data
+            ]];
+            $context = stream_context_create($options);
+            
+            $url = self::$baseUrl."stream/stream-like-delete";
+
+            $value = file_get_contents($url, false, $context);
+
+            if (!$value) ApiConnection::signIn();
+            ApiConnection::refresh($http_response_header);
+
+            return json_decode($value, true);
+        }
+
+
         // Update stream comment by ID for authenticated user
         // $data: json
         //  id (required)
@@ -198,11 +227,12 @@
         // Save stream comment
         // $data: json
         //  url (required)
+        //  title (required)
         //  image (required)
-        //  comment (required)
-        //  creationtime (required)
         //  liked (required)
-        public static function saveStreamCommentById($data){
+        //  excerpt (required)
+        //  comment (optional)
+        public static function saveStreamCommentByUser($data){
             
             self::initialize();
             $accessToken = $_SESSION['api_token'];
@@ -295,8 +325,6 @@
             
             self::initialize();
             $accessToken = $_SESSION['api_token'];
-
-            logToFile("streams ".$accessToken);
                                                             
             $options = ["http" => [
                 "method" => "GET",

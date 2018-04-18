@@ -19,6 +19,18 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 
+	function useApi() {
+
+        $url = $_SESSION['api_url'];
+
+        if(isset($url)) {
+            
+            return true;
+        }
+                
+        return false;
+	}
+
 	//Encryption function
 	function encrypt($string, $encryption_key){
 		$encryption_key = constant("DB_KEY");
