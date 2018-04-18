@@ -292,7 +292,7 @@
 						}
 					}
 				}else{
-					$sql = "SELECT id, title, image, link FROM apps WHERE student = 1 ORDER BY sort";
+					$sql = "SELECT id, title, image, link, student_building_restrictions FROM apps WHERE student = 1 ORDER BY sort";
 					$result = $db->query($sql);
 					while($row = $result->fetch_assoc()){
 						$id = htmlspecialchars($row["id"], ENT_QUOTES);

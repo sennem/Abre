@@ -28,6 +28,7 @@
     $headlineid = $_POST['id'];
     $headlinePurpose = $_POST['purpose'];
     $headlineContent = $_POST['content'];
+    $dateRestriction = $_POST['dateRestriction'];
     $headlineForm = $_POST['form'];
     $headlineVideo = $_POST['video'];
     $headlineGroup = $_POST['groups'];
@@ -41,35 +42,34 @@
       echo json_encode($response);
       exit;
     }
-    if($_POST['startDate'] != ""){
-      $headlineStartDate = $_POST['startDate'];
+    if($dateRestriction == 1){
+      if($_POST['startDate'] != ""){
+        $headlineStartDate = $_POST['startDate'];
+      }else{
+        $_POST['startDate'] = NULL;
+      }
+      if($_POST['endDate'] != ""){
+        $headlineEndDate = $_POST['endDate'];
+      }else{
+        $_POST['endDate'] = NULL;
+      }
     }else{
-      $response = array("status" => "Error", "message" => "Please provide a headline start date!");
-      header("Content-Type: application/json");
-      echo json_encode($response);
-      exit;
-    }
-    if($_POST['endDate'] != ""){
-      $headlineEndDate = $_POST['endDate'];
-    }else{
-      $response = array("status" => "Error", "message" => "Please provide a headline end date!");
-      header("Content-Type: application/json");
-      echo json_encode($response);
-      exit;
+      $_POST['startDate'] = NULL;
+      $_POST['endDate'] = NULL;
     }
 
     if($headlineid == ""){
       $stmt = $db->stmt_init();
-      $sql = "INSERT INTO headlines (id, owner, title, content, purpose, form_id, video_id, groups, start_date, end_date, required) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+      $sql = "INSERT INTO headlines (id, owner, title, content, purpose, form_id, video_id, groups, date_restriction, start_date, end_date, required) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
       $stmt->prepare($sql);
-      $stmt->bind_param("issssissssi", $headlineid, $owner, $headlineTitle, $headlineContent, $headlinePurpose, $headlineForm, $headlineVideo, $headlineGroup, $headlineStartDate, $headlineEndDate, $headlineRequired);
+      $stmt->bind_param("issssississi", $headlineid, $owner, $headlineTitle, $headlineContent, $headlinePurpose, $headlineForm, $headlineVideo, $headlineGroup, $dateRestriction, $headlineStartDate, $headlineEndDate, $headlineRequired);
       $stmt->execute();
       $stmt->close();
     }else{
       $stmt = $db->stmt_init();
-      $sql = "UPDATE `headlines` SET title = ?, content = ?, purpose = ?, form_id = ?, video_id = ?, groups = ?, start_date = ?, end_date = ?, required = ? WHERE id = ?";
+      $sql = "UPDATE `headlines` SET title = ?, content = ?, purpose = ?, form_id = ?, video_id = ?, groups = ?, date_restriction = ?, start_date = ?, end_date = ?, required = ? WHERE id = ?";
       $stmt->prepare($sql);
-      $stmt->bind_param("sssissssii", $headlineTitle, $headlineContent, $headlinePurpose, $headlineForm, $headlineVideo, $headlineGroup, $headlineStartDate, $headlineEndDate, $headlineRequired, $headlineid);
+      $stmt->bind_param("sssississii", $headlineTitle, $headlineContent, $headlinePurpose, $headlineForm, $headlineVideo, $headlineGroup, $dateRestriction, $headlineStartDate, $headlineEndDate, $headlineRequired, $headlineid);
       $stmt->execute();
     }
     $db->close();
