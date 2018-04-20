@@ -19,6 +19,7 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once(dirname(__FILE__) . '/../../api/streams-api.php');
 
 	//Encode Links
 	$linkbase = base64_encode($linkraw);
@@ -89,10 +90,17 @@
 				}
 
 				//Likes
-				$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
-				$dbreturn = $db->query($query);
-				$resultrow = $dbreturn->fetch_assoc();
-				$num_rows_like_current_user = $resultrow["COUNT(*)"];
+				if (useAPI()) {
+					$apiValue = apiStreams::getStreamContentsByUrl(json_encode(array("url"=>$link)));
+					$result = $apiValue['result'];
+					$num_rows_like_current_user = $result['counts']['userLikes'];
+				}
+				else {
+					$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$link' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
+					$dbreturn = $db->query($query);
+					$resultrow = $dbreturn->fetch_assoc();
+					$num_rows_like_current_user = $resultrow["COUNT(*)"];
+				}
 
 				if($num_rows_like == 0){
 					echo "<a class='material-icons mdl-color-text--grey-600 likeicon' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-image='$imagebase' title='Like' href='#'>favorite</a> <span class='mdl-color-text--grey-600' style='font-size:12px; font-weight:600; width:30px; padding-left:5px;'>$num_rows_like</span>";

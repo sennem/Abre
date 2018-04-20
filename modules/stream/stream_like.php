@@ -21,6 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../api/streams-api.php');
 
 	$streamUrl = $_POST['url'];
 	$streamTitle = $_POST['title'];
@@ -39,29 +40,48 @@
 	if($streamUrldecoded != "" && $streamTitledecoded != ""){
 
 		//Check to see if like already exists for this user
-		$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$streamQuery' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
-		$dbreturn = $db->query($query);
-		$resultrow = $dbreturn->fetch_assoc();
-		$num_rows_like_count = $resultrow["COUNT(*)"];
+		if (useAPI()) {
+			$apiValue = apiStreams::getStreamContentsByUrl(json_encode(array("url"=>$streamQuery)));
+			$result = $apiValue['result'];
+			$num_rows_like_count = $result['counts']['userLikes'];
+		}
+		else {
+			$query = "SELECT COUNT(*) FROM streams_comments WHERE url = '$streamQuery' AND liked = '1' AND user = '".$_SESSION['useremail']."'";
+			$dbreturn = $db->query($query);
+			$resultrow = $dbreturn->fetch_assoc();
+			$num_rows_like_count = $resultrow["COUNT(*)"];
+		}
 
 		if($num_rows_like_count == 0){
 			//Insert comment into database
-			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO streams_comments (url, title, image, user, liked, excerpt) VALUES (?, ?, ?, ?, '1', ?);";
-			$stmt->prepare($sql);
-			$stmt->bind_param("sssss", $streamUrldecoded, $streamTitledecoded, $trimmedimageurl, $userposter, $streamExcerpt);
-			$stmt->execute();
-			$stmt->close();
-			$db->close();
+			if (useAPI()) {		
+				$in = array("url"=>$streamUrldecoded, "title"=>$streamTitledecoded, "image"=>$trimmedimageurl,
+						"liked"=>1, "excerpt"=>$streamExcerpt);
+				$apiValue = apiStreams::saveStreamCommentByUser(json_encode($in));
+			}
+			else {
+				$stmt = $db->stmt_init();
+				$sql = "INSERT INTO streams_comments (url, title, image, user, liked, excerpt) VALUES (?, ?, ?, ?, '1', ?);";
+				$stmt->prepare($sql);
+				$stmt->bind_param("sssss", $streamUrldecoded, $streamTitledecoded, $trimmedimageurl, $userposter, $streamExcerpt);
+				$stmt->execute();
+				$stmt->close();
+				$db->close();	
+			}
 		}else{
 			//Remove commment from database
-			$stmt = $db->stmt_init();
-			$sql = "DELETE FROM streams_comments WHERE url = ? AND liked = '1' AND user = ?";
-			$stmt->prepare($sql);
-			$stmt->bind_param("ss", $streamUrldecoded, $_SESSION['useremail']);
-			$stmt->execute();
-			$stmt->close();
-			$db->close();
+			if (useAPI()) {	
+				$apiValue = apiStreams::deleteStreamLike(json_encode(array("url"=>$streamUrldecoded)));
+			}
+			else {
+				$stmt = $db->stmt_init();
+				$sql = "DELETE FROM streams_comments WHERE url = ? AND liked = '1' AND user = ?";
+				$stmt->prepare($sql);
+				$stmt->bind_param("ss", $streamUrldecoded, $_SESSION['useremail']);
+				$stmt->execute();
+				$stmt->close();
+				$db->close();
+			}
 		}
 	}
 
