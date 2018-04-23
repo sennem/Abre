@@ -21,7 +21,7 @@
 
 	function useApi() {
 
-		if(isset($_SESSION['api_url']){
+		if(isset($_SESSION['api_url'])){
 			$url = $_SESSION['api_url'];
 			return true;
 		}
