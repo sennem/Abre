@@ -31,12 +31,23 @@
 		$sql = "INSERT INTO directory (firstname,lastname,middlename,title,contract,address,city,state,zip,email,phone,extension,cellphone,ss,dob,gender,ethnicity,classification,location,grade,subject,doh,senioritydate,effectivedate,rategroup,step,educationlevel,salary,hours,stateeducatorid,licensetype1,licenseissuedate1,licenseexpirationdate1,licenseterm1,licensetype2,licenseissuedate2,licenseexpirationdate2,licenseterm2,licensetype3,licenseissuedate3,licenseexpirationdate3,licenseterm3,licensetype4,licenseissuedate4,licenseexpirationdate4,licenseterm4,licensetype5,licenseissuedate5,licenseexpirationdate5,licenseterm5,licensetype6,licenseissuedate6,licenseexpirationdate6,licenseterm6,probationreportdate,statebackgroundcheck,federalbackgroundcheck) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		$stmt->prepare($sql);
 
+		$dupFound = 0;
 		//Upload and Process CSV File
 		if($_FILES['file']['tmp_name']){
 			$handle = fopen($_FILES['file']['tmp_name'], "r");
 			$counter = 0;
-			while(($data = fgetcsv($handle, 5000, ",")) !== FALSE){
+			while(($data = fgetcsv($handle, 0, ",")) !== FALSE){
 				if($counter > 0){
+					$email = "";
+					$email = $data[9];
+					$duplicateCheck = "SELECT COUNT(*) FROM directory WHERE email = '$email' LIMIT 1";
+					$query = $db->query($duplicateCheck);
+					$row = $query->fetch_assoc();
+					$count = $row['COUNT(*)'];
+					if($email == "" || $count != 0){
+						$dupFound = 1;
+						continue;
+					}
 					$firstname = $data[0];
 					$lastname = $data[1];
 					$middlename = $data[2];
@@ -51,7 +62,6 @@
 					$state = encrypt($state, "");
 					$zip = $data[8];
 					$zip = encrypt($zip, "");
-					$email = $data[9];
 					$phone = $data[10];
 					$phone = encrypt($phone, "");
 					$extension = $data[11];
@@ -152,7 +162,11 @@
 			$db->close();
 
 			//Response Message
-			echo "Import Complete!";
+			if($dupFound == 1){
+				echo "Import complete. One or more entries were not added due to unlisted or conflicting email!";
+			}else{
+				echo "Import complete!";
+			}
 		}else{
 			echo "No file was chosen.";
 		}
