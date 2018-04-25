@@ -75,6 +75,15 @@
 		}
 	}
 
+	//Forms Roles
+	if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
+		if(strpos($role, 'Forms Administrator') !== false){
+			echo "<option value='Forms Administrator' selected='selected'>Forms Administrator</option>";
+		}else{
+			echo "<option value='Forms Administrator'>Forms Administrator</option>";
+		}
+	}
+
 	//Stream and Headline Roles
 	if(strpos($role, 'Stream and Headline Administrator') !== false){
 		echo "<option value='Stream and Headline Administrator' selected='selected'>Stream and Headline Administrator</option>";
