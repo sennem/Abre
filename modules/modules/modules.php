@@ -61,6 +61,7 @@
 						echo "<th>Title</th>";
 						echo "<th>Description</th>";
 						echo "<th>Version</th>";
+						echo "<th class='center-align'>Active</th>";
 						echo "<th style='width:30px'></th>";
 						echo "<th style='width:30px'></th>";
 						echo "</tr>";
@@ -73,6 +74,7 @@
 				$description = NULL;
 				$version = NULL;
 				$repo = NULL;
+				$uniquename = $result;
 				require_once('../../modules/'.$result.'/config.php');
 				if($description == NULL){ $description = "No Description"; }
 				if($version == NULL){ $version = "No Version"; }
@@ -81,6 +83,16 @@
 					echo "<td>$pagetitle</td>";
 					echo "<td>$description</td>";
 					echo "<td>$version</td>";
+
+					//Active Status
+					echo "<td class='center-align'>";
+						echo "<div class='switch'>";
+					    echo "<label>";
+					      echo "<input id='app_$pagetitle' data-uniquename='$uniquename' class='activeswitch' type='checkbox' checked>";
+					      echo "<span class='lever'></span>";
+					    echo "</label>";
+					  echo "</div>";
+					echo "</td>";
 
 					//Update Module if new version available
 					if($repo != NULL){
@@ -107,7 +119,7 @@
 			}
 
 			if($modulecount == 0){
-				echo "<div class='row center-align'><div class='col s12'><h6>Add-On Apps</h6></div><div class='col s12'>Click the '+' button at the bottom right to add an app.</div></div>";
+				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Abre Apps</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' button at the bottom right to add an app.</p></div>";
 			}else{
 				echo "</tbody>";
 				echo "</table>";
@@ -124,6 +136,36 @@
 <script>
 
 				$(function(){
+
+					//Turn App on/off
+					$(".activeswitch").unbind().click(function(event) {
+
+						var UniqueName = $(this).data('uniquename');
+						AppStatus = $(this).is(':checked');
+
+						if(AppStatus == true)
+						{
+							var result = confirm("Are you sure you want to turn the app on?");
+						}
+						else
+						{
+							var result = confirm("Are you sure you want to turn the app off?");
+						}
+
+		        if(result){
+
+							$.post("modules/modules/action_updateactive.php", { uniquename: UniqueName }, function(){ })
+							.done(function() {
+								location.reload();
+					  	})
+
+						}
+						else {
+							event.preventDefault();
+						}
+
+					});
+
 					//Update module
 					$(".updatemodule").click(function(event) {
 						event.preventDefault();
