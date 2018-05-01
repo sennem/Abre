@@ -27,19 +27,19 @@
 		//Get POST Variables
 		$uniqueappname=$_POST["uniquename"];
 		$activestate=$_POST["activestate"];
-		if($activestate==false){
-			$activestate=0;
-		}
-		else {
-			$activestate=1;
-		}
+
+		//Check if record exists
+		$apprecordexists = 0;
+		$sqlcountcheck = "SELECT COUNT(*) FROM apps_abre WHERE app='$uniqueappname' LIMIT 1";
+		$sqlcountcheckresult = $db->query($sqlcountcheck);
+		$sqlcountcheckreturn = $sqlcountcheckresult->fetch_assoc();
+		$apprecordexists = $sqlcountcheckreturn["COUNT(*)"];
 
 		//If app exists, change active state
-		mysqli_query($db, "UPDATE apps_abre SET active='$activestate' WHERE app='$uniqueappname'") or die (mysqli_error($db));
-		$rowsupdated = mysqli_affected_rows($db);
+		if($apprecordexists != 0){
+			mysqli_query($db, "UPDATE apps_abre SET active='$activestate' WHERE app='$uniqueappname'") or die (mysqli_error($db));
 
-		//If app does not exist, insert it and set state
-		if($rowsupdated==0){
+		}else{
 
 			$stmt = $db->stmt_init();
 			$sql = "INSERT INTO apps_abre (app, active) VALUES ('$uniqueappname', '0');";

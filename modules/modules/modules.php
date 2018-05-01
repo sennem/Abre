@@ -152,15 +152,16 @@
 						if(AppStatus == true)
 						{
 							var result = confirm("Are you sure you want to turn the app on?");
+							AppStatusValue = 1;
 						}
 						else
 						{
 							var result = confirm("Are you sure you want to turn the app off?");
+							AppStatusValue = 0;
 						}
 
 		        if(result){
-							alert(AppStatus);
-							$.post("modules/modules/action_updateactive.php", { uniquename: UniqueName, activestate: AppStatus }, function(){ })
+							$.post("modules/modules/action_updateactive.php", { uniquename: UniqueName, activestate: AppStatusValue }, function(){ })
 							.done(function() {
 								location.reload();
 					  	})
