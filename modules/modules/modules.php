@@ -135,6 +135,9 @@
 				echo "</div>";
 			}
 
+			//Close Database
+			$db->close();
+
 			include "addmodule.php";
 
 ?>
@@ -149,14 +152,14 @@
 						var UniqueName = $(this).data('uniquename');
 						AppStatus = $(this).is(':checked');
 
-						if(AppStatus == true)
+						if(AppStatus)
 						{
-							var result = confirm("Are you sure you want to turn the app on?");
+							var result = confirm("Turn on this app?");
 							AppStatusValue = 1;
 						}
 						else
 						{
-							var result = confirm("Are you sure you want to turn the app off?");
+							var result = confirm("Turn off this app?");
 							AppStatusValue = 0;
 						}
 

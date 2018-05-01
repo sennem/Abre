@@ -136,8 +136,11 @@
 								include(dirname(__FILE__) . '/../modules/'.$result.'/routing.php');
 							}
 						}
-						
+
 					}
+					
+					//Close Database
+					$db->close();
 
 				}
 			?>

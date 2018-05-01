@@ -57,6 +57,11 @@
 			}
 
 		}
+
 	}
+
+	//Close Database
+	$db->close();
+
 	sort($modules, SORT_DESC);
 ?>
