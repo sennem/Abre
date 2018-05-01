@@ -24,15 +24,34 @@
 
 	if(superadmin()){
 
-		$sql = "SELECT StudentID FROM Abre_ParentContacts WHERE Email1 LIKE '".$_SESSION['useremail']."'";
-		$result = $db->query($sql);
-		while($row = $result->fetch_assoc()){
+		//Get POST Variables
+		$uniqueappname=$_POST["uniquename"];
+		$activestate=$_POST["activestate"];
+		if($activestate==false){
+			$activestate=0;
+		}
+		else {
+			$activestate=1;
+		}
 
-			
+		//If app exists, change active state
+		mysqli_query($db, "UPDATE apps_abre SET active='$activestate' WHERE app='$uniqueappname'") or die (mysqli_error($db));
+		$rowsupdated = mysqli_affected_rows($db);
+
+		//If app does not exist, insert it and set state
+		if($rowsupdated==0){
+
+			$stmt = $db->stmt_init();
+			$sql = "INSERT INTO apps_abre (app, active) VALUES ('$uniqueappname', '0');";
+			$stmt->prepare($sql);
+			$stmt->execute();
+			$stmt->close();
 
 		}
 
-	}
+		//Close Database
+		$db->close();
 
+	}
 
 ?>

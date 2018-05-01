@@ -40,14 +40,6 @@
 		}
 		$db->close();
 
-		//Check for repo field
-		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-		if(!$db->query("SELECT repo FROM apps_abre LIMIT 1")){
-			$sql = "ALTER TABLE `apps_abre` ADD `repo` text NOT NULL;";
-			$db->multi_query($sql);
-		}
-		$db->close();
-
 		//Check for active field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT active FROM apps_abre LIMIT 1")){
