@@ -85,10 +85,16 @@
 					echo "<td>$version</td>";
 
 					//Active Status
+					$sql = "SELECT COUNT(*) FROM apps_abre WHERE app='$uniquename' AND active='0'";
+					$query = $db->query($sql);
+					$returnrow = $query->fetch_assoc();
+					$activecount = $returnrow["COUNT(*)"];
+					if($activecount==0){ $checkstatus="checked"; }else{ $checkstatus=""; }
+
 					echo "<td class='center-align'>";
 						echo "<div class='switch'>";
 					    echo "<label>";
-					      echo "<input id='app_$pagetitle' data-uniquename='$uniquename' class='activeswitch' type='checkbox' checked>";
+					      echo "<input id='app_$pagetitle' data-uniquename='$uniquename' class='activeswitch' type='checkbox' $checkstatus>";
 					      echo "<span class='lever'></span>";
 					    echo "</label>";
 					  echo "</div>";
@@ -153,8 +159,8 @@
 						}
 
 		        if(result){
-
-							$.post("modules/modules/action_updateactive.php", { uniquename: UniqueName }, function(){ })
+							alert(AppStatus);
+							$.post("modules/modules/action_updateactive.php", { uniquename: UniqueName, activestate: AppStatus }, function(){ })
 							.done(function() {
 								location.reload();
 					  	})
