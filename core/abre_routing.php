@@ -19,6 +19,8 @@
 	//Include required files
 	require_once('abre_verification.php');
 	require_once('abre_functions.php');
+	require('abre_dbconnect.php');
+
 ?>
 
 <script>
@@ -42,7 +44,7 @@
 
 		//Start the page
 		function init_page(loader) {
-			
+
 			//Selection State coloring for App Drawer
 			$('.mainapplink').css('background-color','#fdfdfd');
 			$('.mainapplink > span').css('color','#000');
@@ -120,11 +122,23 @@
 				if(isset($_SESSION['useremail'])){
 					$moduledirectory = dirname(__FILE__) . '/../modules';
 					$modulefolders = scandir($moduledirectory);
+
 					foreach($modulefolders as $result){
-						if(file_exists(dirname(__FILE__) . '/../modules/'.$result.'/routing.php')){
-							include(dirname(__FILE__) . '/../modules/'.$result.'/routing.php');
+
+						//Check if app is turned on
+						$sqlcountcheck = "SELECT COUNT(*) FROM apps_abre WHERE app='$result' AND active='0' LIMIT 1";
+						$sqlcountcheckresult = $db->query($sqlcountcheck);
+						$sqlcountcheckreturn = $sqlcountcheckresult->fetch_assoc();
+						$apprecordexists = $sqlcountcheckreturn["COUNT(*)"];
+						if($apprecordexists == 0)
+						{
+							if(file_exists(dirname(__FILE__) . '/../modules/'.$result.'/routing.php')){
+								include(dirname(__FILE__) . '/../modules/'.$result.'/routing.php');
+							}
 						}
+						
 					}
+
 				}
 			?>
 			'privacy': function(){

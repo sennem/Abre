@@ -18,6 +18,7 @@
 
 	//Include required files
 	require_once('abre_verification.php');
+	require('abre_dbconnect.php');
 
 	//Used to load modals
 	echo "<div id='modal_holder'></div>";
@@ -39,12 +40,22 @@
 			$pagerestrictions = NULL;
 			$subpages = NULL;
 
-			require_once(dirname(__FILE__) . '/../modules/'.$result.'/config.php');
-			$access = strpos($pagerestrictions, $_SESSION['usertype']);
-			if($access === false){
-				array_push($modules, array($pageorder, $pagetitle, $pageview, $pageicon, $pagepath, $drawerhidden, $subpages));
-				$modulecount++;
+			//Load Abre app only if not turned off
+			$sqlcountcheck = "SELECT COUNT(*) FROM apps_abre WHERE app='$result' AND active='0' LIMIT 1";
+			$sqlcountcheckresult = $db->query($sqlcountcheck);
+			$sqlcountcheckreturn = $sqlcountcheckresult->fetch_assoc();
+			$apprecordexists = $sqlcountcheckreturn["COUNT(*)"];
+
+			if($apprecordexists == 0)
+			{
+				require_once(dirname(__FILE__) . '/../modules/'.$result.'/config.php');
+				$access = strpos($pagerestrictions, $_SESSION['usertype']);
+				if($access === false){
+					array_push($modules, array($pageorder, $pagetitle, $pageview, $pageicon, $pagepath, $drawerhidden, $subpages));
+					$modulecount++;
+				}
 			}
+
 		}
 	}
 	sort($modules, SORT_DESC);
