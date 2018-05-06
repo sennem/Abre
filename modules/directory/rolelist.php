@@ -68,10 +68,16 @@
 
 	//Plans Roles
 	if(file_exists("$portal_path_root/modules/Abre-Plans/setup.txt")){
-		if(strpos($role, 'Plans Administrator') !== false){
-			echo "<option value='Plans Administrator' selected='selected'>Plans Administrator</option>";
+		if(strpos($role, 'District Plans Administrator') !== false){
+			echo "<option value='District Plans Administrator' selected='selected'>District Plans Administrator</option>";
 		}else{
-			echo "<option value='Plans Administrator'>Plans Administrator</option>";
+			echo "<option value='District Plans Administrator'>District Plans Administrator</option>";
+		}
+
+		if(strpos($role, 'Building Plans Administrator') !== false){
+			echo "<option value='Building Plans Administrator' selected='selected'>Building Plans Administrator</option>";
+		}else{
+			echo "<option value='Building Plans Administrator'>Building Plans Administrator</option>";
 		}
 	}
 
