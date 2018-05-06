@@ -55,7 +55,6 @@
 
 	}
 
-	require('abre_dbconnect.php');
 	//Used to load modals
 	echo "<div id='modal_holder'></div>";
 
@@ -76,6 +75,7 @@
 			$pagerestrictions = NULL;
 			$subpages = NULL;
 
+			require('abre_dbconnect.php');
 			//Load Abre app only if not turned off
 			$sqlcountcheck = "SELECT COUNT(*) FROM apps_abre WHERE app='$result' AND active='0' LIMIT 1";
 			$sqlcountcheckresult = $db->query($sqlcountcheck);
