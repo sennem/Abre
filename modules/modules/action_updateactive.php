@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
-	if(superadminPrivileges()){
+	if(admin()){
 
 		//Get POST Variables
 		$uniqueappname=$_POST["uniquename"];

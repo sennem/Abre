@@ -111,7 +111,7 @@
 			$coursecount++;
 		}
 
-		if($coursecount==0 && superadminPrivileges())
+		if($coursecount==0 && admin())
 		{
 			echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Inventory</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' at the bottom to upload a book.</p></div>";
 		}

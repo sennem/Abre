@@ -56,7 +56,7 @@
 	}
 
 	//Find user ID given an email
-	function superadminPrivileges(){
+	function admin(){
 		include "abre_dbconnect.php";
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
 		$result = $db->query($sql);

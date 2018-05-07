@@ -83,7 +83,7 @@
 					$("#previousOffences").hide();
 					$("#archiveIncident").hide();
 					Materialize.updateTextFields();
-					<?php if(superadminPrivileges() || conductAdminCheck($_SESSION['useremail'])){ ?>
+					<?php if(admin() || conductAdminCheck($_SESSION['useremail'])){ ?>
 									$("#conduct_consequence").show();
 									$(".Consequence").prop("disabled", false);
 									$("#addconsequencebutton").show();

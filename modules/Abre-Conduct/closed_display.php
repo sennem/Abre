@@ -31,11 +31,11 @@
 		$AdminSchoolCode = htmlspecialchars($value["SchoolCode"], ENT_QUOTES);
 		$buildingfilter = "$buildingfilter OR  SchoolCode='$AdminSchoolCode'";
 	}
-	if(superadminPrivileges())
+	if(admin())
 	{
 		$buildingfilter = "SchoolCode='' OR  SchoolCode = 'HA' OR  SchoolCode = 'HABP' OR  SchoolCode = 'HABW' OR  SchoolCode = 'HACW' OR  SchoolCode = 'HAFS' OR  SchoolCode = 'HAFW' OR  SchoolCode = 'HAGA' OR  SchoolCode = 'HAHL' OR  SchoolCode = 'HAHS' OR  SchoolCode = 'HALN' OR  SchoolCode = 'HARV' OR  SchoolCode = 'HARW' OR  SchoolCode = 'HAWI'";
 	}
-	if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']))
+	if(admin() or conductAdminCheck($_SESSION['useremail']))
 	{
 		$useremailaccess = "";
 	}
@@ -275,7 +275,7 @@
 			var Type = $(this).data('type');
 			if(Type === "Office"){ $('#office').prop('checked',true); }
 			if(Type === "Personal"){ $('#personal').prop('checked',true); }
-			<?php if(conductAdminCheck($_SESSION['useremail']) || superadminPrivileges()){ ?> $('#archiveIncident').show(); <?php } ?>
+			<?php if(conductAdminCheck($_SESSION['useremail']) || admin()){ ?> $('#archiveIncident').show(); <?php } ?>
 
 			//Fill Hidden Fields
 			var Submission_ID = $(this).data('submissionid');
@@ -341,7 +341,7 @@
 
 			//Disable the Fields
 			<?php
-			if(!superadminPrivileges() && !conductAdminCheck($_SESSION['useremail']))
+			if(!admin() && !conductAdminCheck($_SESSION['useremail']))
 			{
 			?>
 				if(Type=="Office"){

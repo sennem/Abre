@@ -507,7 +507,7 @@
 							include "profile_licenses.php";
 
 							//Permissions
-							if(superadminPrivileges()){
+							if(admin()){
 
 								echo "<div class='row'><div class='col l12'><h5>Permissions</h5></div></div>";
 								echo "<div class='row'>";
@@ -526,7 +526,7 @@
 										echo "<label>Curriculum</label>";
 									echo "</div>";
 
-									if(superadminPrivileges()){
+									if(admin()){
 										echo "<div class='col l6 s12'>";
 											 if($sysadmin == 1){
 												 echo "<input type='checkbox' id='sysadmin' name='sysadmin' class='filled-in' value='1' checked/>";

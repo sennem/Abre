@@ -39,7 +39,7 @@
 		$pagerestrictions="";
 	}
 
-	if(superadminPrivileges()){
+	if(admin()){
 		$pagerestrictionsedit="";
 	}
 

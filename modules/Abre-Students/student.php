@@ -125,7 +125,7 @@
 
 							//Student Email
 							echo "<b>Email:</b> ";
-							if(superadminPrivileges()){
+							if(admin()){
 								if($Student_Email!=""){
 									echo "<span class='input-field'><input id='studentemail' type='text' value='$Student_Email'></span><br>";
 								}else{
@@ -142,7 +142,7 @@
 						echo "</p>";
 
 						//Save Button for Email
-						if(superadminPrivileges()){
+						if(admin()){
 							echo "<button class='waves-effect btn-flat white-text' id='updateemail' style='width:100%; background-color:"; echo getSiteColor(); echo "'>Save Email</button>";
 						}
 
@@ -226,7 +226,7 @@
 					}
 
 					//Parent Access Token
-					if(superadminPrivileges() or AdminCheck($_SESSION['useremail']))
+					if(admin() or AdminCheck($_SESSION['useremail']))
 					{
 						if($db->query("SELECT * FROM student_tokens LIMIT 1"))
 						{

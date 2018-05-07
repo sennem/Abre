@@ -86,11 +86,11 @@
 														echo "<li class='mdl-menu__item copystudentlink' data-clipboard-text='$Student_Link'><a href='#' class='mdl-color-text--black' style='font-weight:400'>Give</a></li>";
 														echo "<li class='mdl-menu__item mdl-menu__item--full-bleed-divider'><a href='#assessments/results/$Assessment_ID' class='mdl-color-text--black' style='font-weight:400'>Results</a></li>";
 													}
-													if((superadminPrivileges() or $SharedEditable==1) or $Verified==0)
+													if((admin() or $SharedEditable==1) or $Verified==0)
 													{
 														echo "<li class='mdl-menu__item exploreassessment'><a href='#assessments/$Assessment_ID' class='mdl-color-text--black' style='font-weight:400'>Edit</a></li>";
 													}
-													if($Verified==0 or superadminPrivileges())
+													if($Verified==0 or admin())
 													{
 														echo "<li class='mdl-menu__item duplicateassessment' data-assessmentid='$Assessment_ID'>Make a Copy</a></li>";
 													}
@@ -103,7 +103,7 @@
 														$resultquestioncount = $db->query($sqlquestion);
 														$returnrow = $resultquestioncount->fetch_assoc();
 														$rowcountresultquestioncount = $returnrow["COUNT(*)"];
-														if($Verified==0 or ($Verified!=0 && $rowcountresultquestioncount==0) or superadminPrivileges())
+														if($Verified==0 or ($Verified!=0 && $rowcountresultquestioncount==0) or admin())
 														{
 															echo "<li class='mdl-menu__item deleteassessment'><a href='modules/".basename(__DIR__)."/assessment_delete.php?assessmentid=".$Assessment_ID."' class='mdl-color-text--black' style='font-weight:400'>Delete</a></li>";
 														}
@@ -174,12 +174,12 @@
 			if(Assessment_Verified=='1')
 			{
 				$(".modal-content #assessment_verified").prop('checked',true);
-				<?php if(!superadminPrivileges()){ ?> $(".advancedsettings").css("display", "none"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
+				<?php if(!admin()){ ?> $(".advancedsettings").css("display", "none"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
 			}
 			else
 			{
 				$(".modal-content #assessment_verified").prop('checked',false);
-				<?php if(!superadminPrivileges()){ ?> $(".advancedsettings").css("display", "block"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
+				<?php if(!admin()){ ?> $(".advancedsettings").css("display", "block"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
 			}
 			var Assessment_shared = $(this).data('shared');
 			if(Assessment_shared=='1')

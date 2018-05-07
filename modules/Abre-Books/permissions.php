@@ -25,7 +25,7 @@
 	//Check for Admin Authentication
 	$pagerestrictions="";
 	$booksadmin=0;
-	if(superadminPrivileges())
+	if(admin())
 	{
 		$booksadmin=1;
 	}

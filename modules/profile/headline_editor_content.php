@@ -21,7 +21,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-if(superadminPrivileges()){
+if(admin()){
 
   echo "<table class='bordered' id='headlinestable'>";
   $today = date("Y-m-d");
@@ -78,7 +78,7 @@ if(superadminPrivileges()){
 
   $(function(){
     <?php
-    if(superadminPrivileges()){
+    if(admin()){
     ?>
 
       //Delete headline

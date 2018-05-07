@@ -113,7 +113,7 @@
         </div>
 
   			<?php
-  			if(superadminPrivileges())
+  			if(admin())
   			{
           echo "<div class='row'>";
     				echo "<div class='col s12'>";

@@ -25,7 +25,7 @@
 	echo "<link rel='stylesheet' href='modules/".basename(__DIR__)."/css/style.1.0.css'>";
 
 	//Check for installation
-	if(superadminPrivileges()){ require('installer.php'); }
+	if(admin()){ require('installer.php'); }
 
 	$pageview=1;
 	$pageorder=2;

@@ -23,7 +23,7 @@
 	require_once(dirname(__FILE__) . '/../../../core/abre_functions.php');
 	require_once('../functions.php');
 
-	if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
+	if(admin() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
 
 
 		$query_encoded = $_GET["query"];

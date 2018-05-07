@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadminPrivileges()){
+	if(admin()){
 		$appid = $_GET["id"];
 
 		//Delete the App

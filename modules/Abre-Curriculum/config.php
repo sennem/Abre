@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
 	//Check for installation
-	if(superadminPrivileges()){ require('installer.php'); }
+	if(admin()){ require('installer.php'); }
 
 	$pageview=1;
 	$drawerhidden=0;

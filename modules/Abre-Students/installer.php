@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadminPrivileges() && !file_exists("$portal_path_root/modules/Abre-Students/setup.txt"))
+	if(admin() && !file_exists("$portal_path_root/modules/Abre-Students/setup.txt"))
 	{
 		//Check for students_groups table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');

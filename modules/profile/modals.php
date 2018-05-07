@@ -65,7 +65,7 @@
 
 <!--Stream Editor-->
 	<?php
-	if(superadminPrivileges()){
+	if(admin()){
 	?>
 
 	<div id='streameditor' class='modal modal-fixed-footer modal-mobile-full'>
@@ -361,7 +361,7 @@
 	  $('select').material_select();
 
 	  <?php
-		if(superadminPrivileges()){
+		if(admin()){
 		?>
 			$("#removeColor").off().on('click', function(event){
 				event.preventDefault();

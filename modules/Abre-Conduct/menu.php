@@ -30,11 +30,11 @@
 				echo "<li class='tab col s3 tab_1 curriculummenu pointer' data='#conduct/discipline/open'><a href='#conduct/discipline/open' class='mdl-color-text--white'>Open</a></li>";
 
 				//Check to see if District Adminstrator
-				if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail'])){
+				if(admin() or conductAdminCheck($_SESSION['useremail'])){
 					echo "<li class='tab col s3 tab_2 curriculummenu pointer' data='#conduct/discipline/queue'><a href='#conduct/discipline/queue' class='mdl-color-text--white'>Queue</a></li>";
 				}
 				//check for conduct monitor. They should have access to verification page
-				if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
+				if(admin() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
 					echo "<li class='tab col s3 tab_3 curriculummenu pointer' data='#conduct/discipline/verification'><a href='#conduct/discipline/verification' class='mdl-color-text--white'>Verification</a></li>";
 				}
 			?>
@@ -43,7 +43,7 @@
 			<?php
 
 				//Check to see if District Adminstrator
-				if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
+				if(admin() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
 					echo "<li class='tab col s3 tab_5 curriculummenu pointer' data='#conduct/discipline/reports'><a href='#conduct/discipline/reports' class='mdl-color-text--white'>Reports</a></li>";
 				}
 			?>

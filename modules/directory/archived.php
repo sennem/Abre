@@ -85,7 +85,7 @@
 									echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
 									echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";
 									echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 restoreuser'><a href='modules/directory/restoreuser.php?id=$id'></a><i class='material-icons'>cached</i></button></td>";
-									if(superadminPrivileges()){
+									if(admin()){
 										echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteuser'><a href='modules/directory/permdeleteuser.php?id=$id'></a><i class='material-icons'>delete</i></button></td>";
 									}
 								echo "</tr>";

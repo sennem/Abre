@@ -23,7 +23,7 @@
 	require_once('functions.php');
 	require_once('permissions.php');
 
-	if(superadminPrivileges())
+	if(admin())
 	{
 
 		$Email=$_POST["Email"];

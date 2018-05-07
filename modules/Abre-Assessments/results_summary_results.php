@@ -51,8 +51,8 @@
 		$returnrow = $result->fetch_assoc();
 		$owner = $returnrow["COUNT(*)"];
 
-		//If superadminPrivileges or Admin Make an Owner
-		if(superadminPrivileges() or AdminCheck($_SESSION['useremail'])){ $owner=1; }
+		//If admin or Admin Make an Owner
+		if(admin() or AdminCheck($_SESSION['useremail'])){ $owner=1; }
 
 		if(isset($_GET["course"]))
 		{

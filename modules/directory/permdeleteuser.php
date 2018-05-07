@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
 
-	if(superadminPrivileges()){
+	if(admin()){
 
 		$id = $_GET["id"];
 

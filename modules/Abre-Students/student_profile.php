@@ -88,7 +88,7 @@
 				}
 
 				//Show Parent Access Token
-				if(superadminPrivileges() or AdminCheck($_SESSION['useremail']))
+				if(admin() or AdminCheck($_SESSION['useremail']))
 				{
 
 					if($db->query("SELECT * FROM student_tokens LIMIT 1"))

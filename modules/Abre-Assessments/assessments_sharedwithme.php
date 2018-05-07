@@ -98,7 +98,7 @@
 
 										echo "<li class='mdl-menu__item mdl-menu__item--full-bleed-divider clicklink'><a href='#assessments/results/$Assessment_ID' class='mdl-color-text--black' style='font-weight:400'>Results</a></li>";
 
-										if($Verified==0 or superadminPrivileges())
+										if($Verified==0 or admin())
 										{
 											echo "<li class='mdl-menu__item duplicateassessment' data-assessmentid='$Assessment_ID'>Make a Copy</a></li>";
 										}

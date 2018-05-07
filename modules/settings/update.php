@@ -23,8 +23,8 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
-	//Verify superadminPrivileges
-	if(superadminPrivileges()){
+	//Verify admin
+	if(admin()){
 		//Retrieve last repo link and zip file
 		$link = $_POST["link"];
 		$linkfile = basename($link);
@@ -111,8 +111,11 @@
 		rcopy("$portal_path_root/update/modules/modules/","$portal_path_root/modules/modules/");
 		rcopy("$portal_path_root/update/core/","$portal_path_root/core/");
 
+
 		if(!file_exists("$portal_path_root/api/")){ mkdir("$portal_path_root/api/"); }
 		rcopy("$portal_path_root/update/api/","$portal_path_root/api/");
+
+
 
 		//Replace core files
 		copy("$portal_path_root/update/configuration-sample.php", "$portal_path_root/configuration-sample.php");

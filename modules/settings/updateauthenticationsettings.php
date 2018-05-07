@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Update system settings
-	if(superadminPrivileges()){
+	if(admin()){
 
 		//Get Post Fields
 		if(isset($_POST['clientid'])){

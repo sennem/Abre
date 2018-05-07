@@ -23,7 +23,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('functions.php');
 
-	if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
+	if(admin() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
 
 		//Filter admin results by access buildings
 		$query = "SELECT SchoolCode FROM Abre_Staff where EMail1 = '".$_SESSION['useremail']."'";
@@ -34,7 +34,7 @@
 			$buildingfilter = "$buildingfilter OR SchoolCode = '$AdminSchoolCode'";
 		}
 
-		if(superadminPrivileges()){
+		if(admin()){
 			$buildingfilter = "SchoolCode = '' OR SchoolCode = 'HA' OR SchoolCode = 'HABP' OR SchoolCode = 'HABW' OR SchoolCode = 'HACW' OR SchoolCode = 'HAFS' OR SchoolCode = 'HAFW' OR SchoolCode = 'HAGA' OR SchoolCode = 'HAHL' OR SchoolCode = 'HAHS' OR SchoolCode = 'HALN' OR SchoolCode = 'HARV' OR SchoolCode = 'HARW' OR SchoolCode = 'HAWI'";
 		}
 
