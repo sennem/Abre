@@ -56,6 +56,27 @@
 	}
 
 	//Find user ID given an email
+	function superadminPrivileges(){
+		include "abre_dbconnect.php";
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
+		$result = $db->query($sql);
+		$resultrow = $result->fetch_assoc();
+		$count = $resultrow["COUNT(*)"];
+		if($count > 0){
+			return true;
+		}
+
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND admin = 1";
+		$result = $db->query($sql);
+		$resultrow = $result->fetch_assoc();
+		$count = $resultrow["COUNT(*)"];
+		if($count > 0){
+			return true;
+		}
+
+		return false;
+	}
+
 	function superadmin(){
 		include "abre_dbconnect.php";
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
@@ -65,6 +86,8 @@
 		if($count > 0){
 			return true;
 		}
+
+		return false;
 	}
 
 	//Find user ID given an email
