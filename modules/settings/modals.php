@@ -25,7 +25,7 @@
 
 <!--Stream Editor-->
 	<?php
-	if(superadmin()){
+	if(superadminPrivileges()){
 	?>
 	<div id='googleAuthModal' class='modal modal-fixed-footer modal-mobile-full' style="width:90%">
 		<form id='googleAuthOptionsForm' method="post" action='#'>

@@ -79,7 +79,7 @@
 		if($returncountoffice==0){ echo "<div class='row'><h6>No reported office referrals</h6></div>"; }
 
 		//Personal Referrals
-		if(AdminCheck($_SESSION['useremail']) or superadmin()){
+		if(AdminCheck($_SESSION['useremail']) or superadminPrivileges()){
 			echo "<h4>Documentation Reports</h4>";
 			$query = "SELECT ID, Owner_Name, Incident_Date, Offence FROM conduct_discipline WHERE StudentID='$Student_ID' AND Type='Personal' AND Archived!='1' ORDER BY Submission_Time DESC";
 			$dbreturn = databasequery($query);

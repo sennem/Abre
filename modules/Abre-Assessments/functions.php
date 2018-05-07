@@ -496,7 +496,7 @@
 				array_push($CSVExportArray,"$studentfinalpercentage");
 
 				//Delete Assessment Button
-				if($owner==1 or superadmin())
+				if($owner==1 or superadminPrivileges())
 				{
 					echo "<td class='center-align'><a href='modules/".basename(__DIR__)."/openstudentresult.php?assessmentid=".$Assessment_ID."&student=".$User."' class='mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey-600 refreshresult'><i class='material-icons'>refresh</i></a></td>";
 					echo "<td class='center-align'><a href='modules/".basename(__DIR__)."/removestudentresult.php?assessmentid=".$Assessment_ID."&student=".$User."' class='mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey-600 removeresult'><i class='material-icons'>delete</i></a></td>";

@@ -75,12 +75,12 @@
 			if(Assessment_Verified=='1')
 			{
 				$(".modal-content #assessment_verified").prop('checked',true);
-				<?php if(!superadmin()){ ?> $(".advancedsettings").css("display", "none"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
+				<?php if(!superadminPrivileges()){ ?> $(".advancedsettings").css("display", "none"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
 			}
 			else
 			{
 				$(".modal-content #assessment_verified").prop('checked',false);
-				<?php if(!superadmin()){ ?> $(".advancedsettings").css("display", "block"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
+				<?php if(!superadminPrivileges()){ ?> $(".advancedsettings").css("display", "block"); $(".modal-content #assessment_verified").val(Assessment_Verified); <?php } ?>
 			}
 			var Assessment_shared = $(this).data('shared');
 			if(Assessment_shared=='1')

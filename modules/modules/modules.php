@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Modules
-	if(superadmin()){
+	if(superadminPrivileges()){
 
 		//List all modules
 		$modules = array();

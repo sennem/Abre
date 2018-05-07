@@ -21,7 +21,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-if(superadmin()){
+if(superadminPrivileges()){
 
   echo "<table class='bordered' id='streamsort'>";
   $query = "SELECT id, title, url, `group`, required, color, staff_building_restrictions, student_building_restrictions FROM streams ORDER BY title";
@@ -63,7 +63,7 @@ if(superadmin()){
   $(function(){
 
     <?php
-    if(superadmin()){
+    if(superadminPrivileges()){
     ?>
 
       //Delete stream

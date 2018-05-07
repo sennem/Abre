@@ -42,7 +42,7 @@
 			$Assessment_Level=mysqli_real_escape_string($db, $row2["Level"]);
 			$Assessment_Verified=mysqli_real_escape_string($db, $row2["Verified"]);
 
-			if(!superadmin()){ if($Assessment_Verified==1){ $Assessment_Verified=$Assessment_ID; }  }
+			if(!superadminPrivileges()){ if($Assessment_Verified==1){ $Assessment_Verified=$Assessment_ID; }  }
 
 			$timedate=time();
 			$string=$timedate.$_SESSION['useremail'];

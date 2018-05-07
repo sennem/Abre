@@ -23,7 +23,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('functions.php');
 
-	if(superadmin() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
+	if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
 
 		$SubmissionID = $_POST["SubmissionID"];
 		$ConsequenceID = $_POST["ConsequenceID"];

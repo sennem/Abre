@@ -104,8 +104,6 @@
 					ga('send', 'pageview');
 			    },";
 
-			//if(superadmin() or conductAdminCheck($_SESSION['useremail']))
-			//{
 			echo "
 			  'conduct/discipline/queue': function(name)
 				{

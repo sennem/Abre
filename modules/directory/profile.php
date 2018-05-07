@@ -167,10 +167,10 @@
 				echo "<div id='workcalendardisplay' style='display:none;'>Calendar for $firstname $lastname</div>";
 
 			}
-			$sql = "SELECT superadmin FROM users WHERE email = '$email'";
+			$sql = "SELECT admin FROM users WHERE email = '$email'";
 			$result = $db->query($sql);
 			while($row = $result->fetch_assoc()){
-				$sysadmin = $row["superadmin"];
+				$sysadmin = $row["admin"];
 			}
 		}else{
 
@@ -507,7 +507,7 @@
 							include "profile_licenses.php";
 
 							//Permissions
-							if($superadmin = 1){
+							if(superadminPrivileges()){
 
 								echo "<div class='row'><div class='col l12'><h5>Permissions</h5></div></div>";
 								echo "<div class='row'>";
@@ -526,7 +526,7 @@
 										echo "<label>Curriculum</label>";
 									echo "</div>";
 
-									if(superadmin()){
+									if(superadminPrivileges()){
 										echo "<div class='col l6 s12'>";
 											 if($sysadmin == 1){
 												 echo "<input type='checkbox' id='sysadmin' name='sysadmin' class='filled-in' value='1' checked/>";

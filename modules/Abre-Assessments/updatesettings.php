@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Update system settings
-	if(superadmin())
+	if(superadminPrivileges())
 	{
 		//Retrieve settings and group as json
 		$certicabaseurl=$_POST["certicabaseurl"];

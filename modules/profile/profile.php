@@ -140,13 +140,13 @@
 				echo "<input type='hidden' name='departmentcount' value='$dcount'><br>";
 				echo "</div>";
 			echo "</div>";
-			if(superadmin() && $_SESSION['usertype'] == 'staff'){
+			if(superadminPrivileges() && $_SESSION['usertype'] == 'staff'){
 				echo "<div class='row'><div class='col s12'><a class='modal-editstreams waves-effect btn-flat white-text' href='#streameditor' style='background-color: "; echo getSiteColor(); echo "'>Manage</a></div></div>";
 			}
 		echo "</div>";
 		echo "</div>";
 
-		if(superadmin()){
+		if(superadminPrivileges()){
 			echo "<div id='startupcontainer' class='page_container page_container_limit mdl-shadow--4dp'>";
 			echo "<div class='page'>";
 				echo "<div class='row'>";

@@ -20,7 +20,7 @@
 	require_once('abre_verification.php');
 	require_once('abre_functions.php');
 
-	if(superadmin() && !file_exists("$portal_path_root/modules/modules/setup.txt")){
+	if(superadminPrivileges() && !file_exists("$portal_path_root/modules/modules/setup.txt")){
 
 		//Check for apps table
 		require('abre_dbconnect.php');

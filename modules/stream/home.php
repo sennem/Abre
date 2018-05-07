@@ -56,7 +56,7 @@
 
 		echo "</div>";
 
-		if(superadmin() || adminCheck($_SESSION['useremail'])){
+		if(superadminPrivileges() || AdminCheck($_SESSION['useremail'])){
 			require "stream_fab.php";
 		}
 

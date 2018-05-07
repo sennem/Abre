@@ -23,7 +23,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('functions.php');
 
-	if(superadmin()){
+	if(superadminPrivileges()){
 
 		//Delete existing data from Conduct Discipline
 		$stmt = $db->stmt_init();

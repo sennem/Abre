@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin() && !file_exists("$portal_path_root/modules/apps/setup.txt")){
+	if(superadminPrivileges() && !file_exists("$portal_path_root/modules/apps/setup.txt")){
 		//Check for apps table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM apps LIMIT 1")){

@@ -457,7 +457,7 @@
 
   		//Type Change
 		<?php
-		if(!superadmin())
+		if(!superadminPrivileges())
 		{
 		?>
 	    	$("#office").change(function()
@@ -587,7 +587,7 @@
 						$("#archiveIncident").hide();
 						$('select').material_select();
 						Materialize.updateTextFields();
-						<?php if(superadmin() || conductAdminCheck($_SESSION['useremail'])){ ?>
+						<?php if(superadminPrivileges() || conductAdminCheck($_SESSION['useremail'])){ ?>
 										$("#conduct_consequence").show();
 										$(".Consequence").prop("disabled", false);
 										$("#addconsequencebutton").show();
@@ -596,7 +596,7 @@
 										$(".NumberOfDaysServed").prop("disabled", false);
 										$(".servedCheckbox").prop("disabled", false);
 						<?php }
-						 			if(!superadmin() && !conductAdminCheck($_SESSION["useremail"])){ ?>
+						 			if(!superadminPrivileges() && !conductAdminCheck($_SESSION["useremail"])){ ?>
 										$("#office").prop("disabled", true);
 						<?php } ?>
 						for(var i = 0; i < 8; i++){

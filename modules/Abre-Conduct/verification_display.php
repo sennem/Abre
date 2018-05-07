@@ -23,7 +23,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('functions.php');
 
-	if(superadmin() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
+	if(superadminPrivileges() or conductAdminCheck($_SESSION['useremail']) or conductMonitor($_SESSION['useremail'])){
 
 		//Filter admin results by access buildings
 		$query = "SELECT SchoolCode FROM Abre_Staff where EMail1 = '".$_SESSION['useremail']."'";
@@ -34,7 +34,7 @@
 			$buildingfilter = "$buildingfilter  OR SchoolCode = '$AdminSchoolCode'";
 		}
 
-		if(superadmin()){
+		if(superadminPrivileges()){
 			$buildingfilter = "SchoolCode = ''  OR SchoolCode = 'HA'  OR SchoolCode = 'HABP'  OR SchoolCode = 'HABW'  OR SchoolCode = 'HACW'  OR SchoolCode = 'HAFS'  OR SchoolCode = 'HAFW'  OR SchoolCode = 'HAGA'  OR SchoolCode = 'HAHL'  OR SchoolCode = 'HAHS'  OR SchoolCode = 'HALN'  OR SchoolCode = 'HARV'  OR SchoolCode = 'HARW'  OR SchoolCode = 'HAWI'";
 		}
 
@@ -284,7 +284,7 @@
 			var Type = $(this).data('type');
 			if(Type === "Personal"){ $('#personal').prop('checked',true); }
 			if(Type === "Office"){ $('#office').prop('checked',true); }
-			<?php if(conductAdminCheck($_SESSION['useremail']) || superadmin()){ ?> $('#archiveIncident').show(); <?php } ?>
+			<?php if(conductAdminCheck($_SESSION['useremail']) || superadminPrivileges()){ ?> $('#archiveIncident').show(); <?php } ?>
 
 			//Fill Hidden Fields
 			var Submission_ID = $(this).data('submissionid');

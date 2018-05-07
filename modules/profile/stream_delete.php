@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin()){
+	if(superadminPrivileges()){
 
 		$streamid = $_GET['id'];
 		$streamtitle = base64_decode($_GET['title']);

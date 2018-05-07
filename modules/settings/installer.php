@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin() && !file_exists("$portal_path_root/modules/settings/setup.txt")){
+	if(superadminPrivileges() && !file_exists("$portal_path_root/modules/settings/setup.txt")){
 
 		//Ping Update
 		require(dirname(__FILE__) . '/../../core/abre_ping.php');

@@ -23,8 +23,8 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
-	//Verify Superadmin
-	if(superadmin()){
+	//Verify superadminPrivileges
+	if(superadminPrivileges()){
 		//Retrieve last repo link and zip file
 		$link = $_POST["link"];
 		$linkfile = basename($link);

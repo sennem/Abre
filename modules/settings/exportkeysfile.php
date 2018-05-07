@@ -19,10 +19,9 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once('permissions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin()){
+	if(superadminPrivileges()){
 
 		header('Content-Type: text/csv; charset=utf-8');
 		header('Content-Disposition: attachment; filename=tokendata.csv');

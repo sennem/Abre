@@ -335,7 +335,7 @@
 			if(($IncidentReload == "" || $IncidentReload == "open") && $Type == "Office"){
 				sendAdminConductEmail($StudentBuildingCode, $StudentFirstName, $StudentLastName, $inVerification);
 			}
-			if($incidentServed == 1 && (superadmin() || conductAdminCheck($_SESSION['useremail']))){
+			if($incidentServed == 1 && (superadminPrivileges() || conductAdminCheck($_SESSION['useremail']))){
 				if($IncidentReload == ""){
 					sendOwnerConductEmail($_SESSION['useremail'], $StudentFirstName, $StudentLastName);
 				}else{
@@ -344,11 +344,11 @@
 				$IncidentReload = "closed";
 			}elseif($Type == "Personal" && $incidentServed == 1){
 				$IncidentReload = "closed";
-			}elseif($Type == "Office" && $inVerification && (superadmin() || conductAdminCheck($_SESSION['useremail']) || conductMonitor($_SESSION['useremail']))){
+			}elseif($Type == "Office" && $inVerification && (superadminPrivileges() || conductAdminCheck($_SESSION['useremail']) || conductMonitor($_SESSION['useremail']))){
 				$IncidentReload = "verification";
-			}elseif(($IncidentReload == "" || $IncidentReload == "open") && $Type == "Office" && (superadmin() || conductAdminCheck($_SESSION['useremail']))){
+			}elseif(($IncidentReload == "" || $IncidentReload == "open") && $Type == "Office" && (superadminPrivileges() || conductAdminCheck($_SESSION['useremail']))){
 				$IncidentReload = "queue";
-			}elseif($Type == "Office" && (superadmin() || conductAdminCheck($_SESSION['useremail']))){
+			}elseif($Type == "Office" && (superadminPrivileges() || conductAdminCheck($_SESSION['useremail']))){
 				$IncidentReload = "queue";
 			}else{
 				$IncidentReload = "open";

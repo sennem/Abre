@@ -26,7 +26,7 @@
 	require_once(dirname(__FILE__).'/../../core/google/vendor/autoload.php');
 
 
-	if(superadmin()){
+	if(superadminPrivileges()){
 
 		//Create Client request to access Google API
 		$client = new Google_Client();

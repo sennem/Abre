@@ -51,8 +51,8 @@
 		$returnrow = $result->fetch_assoc();
 		$owner = $returnrow["COUNT(*)"];
 
-		//If Superadmin or Admin Make an Owner
-		if(superadmin() or AdminCheck($_SESSION['useremail'])){ $owner=1; }
+		//If superadminPrivileges or Admin Make an Owner
+		if(superadminPrivileges() or AdminCheck($_SESSION['useremail'])){ $owner=1; }
 
 		if(isset($_GET["staffid"]))
 		{

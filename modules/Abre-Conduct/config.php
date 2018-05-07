@@ -21,7 +21,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Check for installation
-	if(superadmin()){ require('installer.php'); }
+	if(superadminPrivileges()){ require('installer.php'); }
 
 	echo "<link rel='stylesheet' type='text/css' href='/modules/Abre-Conduct/style/style.0.0.8.css'>";
 

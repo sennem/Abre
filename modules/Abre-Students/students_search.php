@@ -49,7 +49,7 @@
 		{
 			$group_search = mysqli_real_escape_string($db, $group_search);
 
-			if(superadmin() or AdminCheck($_SESSION['useremail'])==1)
+			if(superadminPrivileges() or AdminCheck($_SESSION['useremail'])==1)
 			{
 				$query = "SELECT FirstName, LastName, StudentId, SchoolName, CurrentGrade FROM Abre_Students WHERE (LastName LIKE '$group_search%' OR FirstName LIKE '$group_search%' OR StudentId LIKE '$group_search%') AND Status!='I' GROUP BY StudentId ORDER BY LastName LIMIT 50";
 			}

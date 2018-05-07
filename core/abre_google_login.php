@@ -49,7 +49,7 @@
 
   	function emailMatchCheck(){
 
-  		if(getStaffStudentMatch() == "checked" && !superadmin()){
+  		if(getStaffStudentMatch() == "checked" && !superadminPrivileges()){
 				//Check to see if email is in Abre_Staff table
 				include "abre_dbconnect.php";
 				if($db->query("SELECT * FROM Abre_Staff LIMIT 1")){
