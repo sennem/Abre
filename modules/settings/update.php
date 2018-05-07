@@ -111,11 +111,30 @@
 		rcopy("$portal_path_root/update/modules/modules/","$portal_path_root/modules/modules/");
 		rcopy("$portal_path_root/update/core/","$portal_path_root/core/");
 
-
+		//check for/replace api folder and Abre apps
 		if(!file_exists("$portal_path_root/api/")){ mkdir("$portal_path_root/api/"); }
-		rcopy("$portal_path_root/update/api/","$portal_path_root/api/");
+		rcopy("$portal_path_root/update/api/", "$portal_path_root/api/");
 
+		if(!file_exists("$portal_path_root/modules/Abre-Assessments")){ mkdir("$portal_path_root/modules/Abre-Assessments"); }
+		rcopy("$portal_path_root/update/modules/Abre-Assessments", "$portal_path_root/modules/Abre-Assessments");
 
+		if(!file_exists("$portal_path_root/modules/Abre-Books")){ mkdir("$portal_path_root/modules/Abre-Books"); }
+		rcopy("$portal_path_root/update/modules/Abre-Books", "$portal_path_root/modules/Abre-Books");
+
+		if(!file_exists("$portal_path_root/modules/Abre-Conduct")){ mkdir("$portal_path_root/modules/Abre-Conduct"); }
+		rcopy("$portal_path_root/update/modules/Abre-Conduct", "$portal_path_root/modules/Abre-Conduct");
+
+		if(!file_exists("$portal_path_root/modules/Abre-Curriculum")){ mkdir("$portal_path_root/modules/Abre-Curriculum"); }
+		rcopy("$portal_path_root/update/modules/Abre-Curriculum", "$portal_path_root/modules/Abre-Curriculum");
+
+		if(!file_exists("$portal_path_root/modules/Abre-Forms")){ mkdir("$portal_path_root/modules/Abre-Forms"); }
+		rcopy("$portal_path_root/update/modules/Abre-Forms", "$portal_path_root/modules/Abre-Forms");
+
+		if(!file_exists("$portal_path_root/modules/Abre-Guided-Learning")){ mkdir("$portal_path_root/modules/Abre-Guided-Learning"); }
+		rcopy("$portal_path_root/update/modules/Abre-Guided-Learning", "$portal_path_root/modules/Abre-Guided-Learning");
+
+		if(!file_exists("$portal_path_root/modules/Abre-Students")){ mkdir("$portal_path_root/modules/Abre-Students"); }
+		rcopy("$portal_path_root/update/modules/Abre-Students", "$portal_path_root/modules/Abre-Students");
 
 		//Replace core files
 		copy("$portal_path_root/update/configuration-sample.php", "$portal_path_root/configuration-sample.php");
