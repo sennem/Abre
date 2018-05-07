@@ -101,6 +101,21 @@
 		}
 	}
 
+	//determine if user is stream and headline administrator
+	function isStreamHeadlineAdministrator(){
+		$email = $_SESSION['useremail'];
+		include "abre_dbconnect.php";
+		$sql = "SELECT role FROM directory WHERE email = '$email'";
+		$result = $db->query($sql);
+		while($row = $result->fetch_assoc()){
+			$role = decrypt($row["role"], "");
+			if(strpos($role, 'Stream and Headline Administrator') !== false) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	//Determine the grades that students do not have email access
 	function studentaccess(){
 		$email = $_SESSION['useremail'];
@@ -724,7 +739,7 @@
 	}
 
 	//Insert into the database
-	function vendorLinkPost($call,$fields){
+	function vendorLinkPost($call, $fields){
 		$VendorLinkURL = getSoftwareAnswersURL();
 		$vendorIdentifier = getSoftwareAnswersIdentifier();
 		$vendorKey = getSoftwareAnswersKey();
@@ -751,7 +766,7 @@
 	}
 
 	//Insert into the database
-	function vendorLinkPut($call,$fields){
+	function vendorLinkPut($call, $fields){
 		$VendorLinkURL = getSoftwareAnswersURL();
 		$vendorIdentifier = getSoftwareAnswersIdentifier();
 		$vendorKey = getSoftwareAnswersKey();

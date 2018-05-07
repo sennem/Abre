@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(admin()){
+	if(admin() || isStreamHeadlineAdministrator()){
     $headlineid = $_GET["id"];
 
     $stmt = $db->stmt_init();

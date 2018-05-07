@@ -72,8 +72,8 @@
   }
 
 
-  	//Save POST Image
-  	$image_file_name = "";
+  //Save POST Image
+  $image_file_name = "";
 	if($_FILES['customimage']['name']){
 
 		//Get file information

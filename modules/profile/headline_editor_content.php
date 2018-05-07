@@ -21,7 +21,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-if(admin()){
+if(admin() || isStreamHeadlineAdministrator()){
 
   echo "<table class='bordered' id='headlinestable'>";
   $today = date("Y-m-d");
@@ -78,7 +78,7 @@ if(admin()){
 
   $(function(){
     <?php
-    if(admin()){
+    if(admin() || isStreamHeadlineAdministrator()){
     ?>
 
       //Delete headline
