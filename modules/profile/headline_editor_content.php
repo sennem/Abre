@@ -81,7 +81,7 @@ if(superadmin()){
     if(superadmin()){
     ?>
 
-      //Delete stream
+      //Delete headline
       $(".deleteheadline").unbind().click(function() {
         event.preventDefault();
         var result = confirm("All responses with this headline will be deleted. Are you sure you want to delete this headline?");

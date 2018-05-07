@@ -167,7 +167,7 @@
 				echo "<div id='workcalendardisplay' style='display:none;'>Calendar for $firstname $lastname</div>";
 
 			}
-			$sql = "SELECT superadmin FROM users where email = '$email'";
+			$sql = "SELECT superadmin FROM users WHERE email = '$email'";
 			$result = $db->query($sql);
 			while($row = $result->fetch_assoc()){
 				$sysadmin = $row["superadmin"];
@@ -247,13 +247,13 @@
 			}
 
 			if (strpos($picture, 'http') === false) {
-				
+
 				if($picture == ""){
 					$pictureserver = $portal_root."/modules/directory/images/user.png";
 				}else{
 					$pictureserver = $portal_root."/modules/directory/serveimage.php?file=$picture";
 				}
-				
+
 			}
 			else
 			{

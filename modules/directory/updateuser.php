@@ -258,7 +258,7 @@
 		if($rowcount == 0){
 			include "../../core/abre_dbconnect.php";
 			$stmt = $db->stmt_init();
-			$sql = "INSERT INTO users (email, superadmin) VALUES (?, ?);";
+			$sql = "INSERT INTO users (email, admin) VALUES (?, ?);";
 			$stmt->prepare($sql);
 			$stmt->bind_param("si", $email, $sysadmin);
 			$stmt->execute();
@@ -267,7 +267,7 @@
 		}else{
 			include "../../core/abre_dbconnect.php";
 			$stmt = $db->stmt_init();
-			$sql = "UPDATE users SET superadmin = ? WHERE email = ?;";
+			$sql = "UPDATE users SET admin = ? WHERE email = ?;";
 			$stmt->prepare($sql);
 			$stmt->bind_param("is", $sysadmin, $email);
 			$stmt->execute();
