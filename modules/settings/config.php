@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Check for installation
-	if(superadmin()){ require('installer.php'); }
+	if(admin()){ require('installer.php'); }
 
 	$pageview = 1;
 	$drawerhidden = 1;

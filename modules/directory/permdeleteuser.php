@@ -19,9 +19,10 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
 
-	if($superadmin == 1){
+	if(admin()){
 
 		$id = $_GET["id"];
 

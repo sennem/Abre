@@ -328,8 +328,8 @@
 	}
 	$db->close();
 
-	//Display Apps Editor if superadmin
-	if(superadmin() && $_SESSION['usertype'] == 'staff'){
+	//Display Apps Editor if admin
+	if(admin() && $_SESSION['usertype'] == 'staff'){
 		echo "<div class='row center-align'><a href='#appeditor' class='modal-editapps waves-effect btn-flat white-text' style='background-color: "; echo getSiteColor(); echo "'>Manage</a></div>";
 	}
 ?>
@@ -384,7 +384,7 @@
 
 		//Apps Modal
 		<?php
-		if(superadmin()){
+		if(admin()){
 		?>
 		    $('.modal-editapps').leanModal({
 					in_duration: 0,

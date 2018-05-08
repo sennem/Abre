@@ -109,7 +109,7 @@
 				}
 
 				//Settings link
-				if(superadmin())
+				if(admin())
 				{
 					echo "<li style='display:block;'>";
 

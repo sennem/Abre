@@ -32,7 +32,7 @@
 					echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
 				echo "</div>";
 				echo "<div class='col s6'>";
-				if(superadmin()){
+				if(admin()){
 					echo "<h5>Imports</h5>";
 					echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
 	        echo "<input name='csv_data' type='file' id='csv_data' />";

@@ -24,7 +24,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Settings
-	if(superadmin()){
+	if(admin()){
 
 		echo "<form id='form-settings' method='post' enctype='multipart/form-data' action='modules/settings/updategeneralsettings.php'>";
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";

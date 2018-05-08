@@ -24,18 +24,16 @@
 
 	//Check for Admin Authentication
 	$pageaccess = 0;
-	$superadmin = 0;
 	$sql = "SELECT * FROM directory WHERE email = '".$_SESSION['useremail']."' AND admin = 1 AND archived = 0";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
 		$pageaccess = 1;
 	}
 
-	$sql = "SELECT superadmin FROM users WHERE email='".$_SESSION['useremail']."' AND superadmin = 1";
+	$sql = "SELECT superadmin FROM users WHERE email='".$_SESSION['useremail']."' AND (superadmin = 1 OR admin = 1)";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
 		$pageaccess = 1;
-		$superadmin = htmlspecialchars($row["superadmin"], ENT_QUOTES);
 	}
 
 	$sql = "SELECT * FROM directory WHERE email = '".$_SESSION['useremail']."' AND admin = 2 AND archived = 0";

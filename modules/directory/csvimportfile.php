@@ -22,7 +22,7 @@
 	require_once('permissions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin()){
+	if(admin()){
 
 		//connect to the database
 		include "../../core/abre_dbconnect.php";

@@ -23,8 +23,8 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
-	//Verify Superadmin
-	$sql = "SELECT *  FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
+	//Verify superadmin
+	$sql = "SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
 	$result = $db->query($sql);
 	while($row = $result->fetch_assoc()){
 

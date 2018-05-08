@@ -67,7 +67,7 @@
 								$prd = htmlspecialchars($row["probationreportdate"], ENT_QUOTES);
 								$prd = stripslashes(htmlspecialchars(decrypt($prd, ""), ENT_QUOTES));
 								$picture = htmlspecialchars($row["picture"], ENT_QUOTES);
-								
+
 								if (strpos($picture, 'http') === false) {
 									if($picture == ""){
 										$picture = $portal_root."/modules/directory/images/user.png";
@@ -75,7 +75,7 @@
 										$picture = $portal_root."/modules/directory/serveimage.php?file=$picture";
 									}
 								}
-								
+
 								$senioritydate = htmlspecialchars($row["senioritydate"], ENT_QUOTES);
 								$senioritydate = stripslashes(htmlspecialchars(decrypt($senioritydate, ""), ENT_QUOTES));
 								$id = htmlspecialchars($row["id"], ENT_QUOTES);
@@ -85,7 +85,7 @@
 									echo "<td class='hide-on-small-only demotext_dark'>$email</td>";
 									echo "<td class='hide-on-med-and-down demotext_dark'>$title</td>";
 									echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 restoreuser'><a href='modules/directory/restoreuser.php?id=$id'></a><i class='material-icons'>cached</i></button></td>";
-									if($superadmin == 1){
+									if(admin()){
 										echo "<td width=30px><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteuser'><a href='modules/directory/permdeleteuser.php?id=$id'></a><i class='material-icons'>delete</i></button></td>";
 									}
 								echo "</tr>";

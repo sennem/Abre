@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
-	if(superadmin()){ require('installer.php'); }
+	if(admin()){ require('installer.php'); }
 
 	$pageview = 1;
 	$drawerhidden = 0;

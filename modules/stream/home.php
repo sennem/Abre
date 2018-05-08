@@ -56,7 +56,7 @@
 
 		echo "</div>";
 
-		if(superadmin() || adminCheck($_SESSION['useremail'])){
+		if(admin() || AdminCheck($_SESSION['useremail']) || isStreamHeadlineAdministrator()){
 			require "stream_fab.php";
 		}
 

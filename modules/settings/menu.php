@@ -24,7 +24,7 @@
 
 <?php
 
-	if(superadmin()){
+	if(admin()){
 
     //Get Variables Passed to Page
 		if(isset($_GET["id"])){ $id = htmlspecialchars($_GET["id"], ENT_QUOTES); }else{ $id = ""; }

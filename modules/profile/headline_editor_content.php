@@ -21,7 +21,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-if(superadmin()){
+if(admin() || isStreamHeadlineAdministrator()){
 
   echo "<table class='bordered' id='headlinestable'>";
   $today = date("Y-m-d");
@@ -78,10 +78,10 @@ if(superadmin()){
 
   $(function(){
     <?php
-    if(superadmin()){
+    if(admin() || isStreamHeadlineAdministrator()){
     ?>
 
-      //Delete stream
+      //Delete headline
       $(".deleteheadline").unbind().click(function() {
         event.preventDefault();
         var result = confirm("All responses with this headline will be deleted. Are you sure you want to delete this headline?");

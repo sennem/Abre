@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	//Check for installation
-	if(superadmin()){ require('installer.php'); }
+	if(admin()){ require('installer.php'); }
 
 	$pageview = 1;
 	$drawerhidden = 1;
@@ -54,7 +54,7 @@
 
 	<!--Apps Editor-->
 	<?php
-	if(superadmin()){
+	if(admin()){
 	?>
 
 	<link rel="stylesheet" href='core/css/image-picker.0.3.0.css'>
@@ -302,7 +302,7 @@
 		});
 
 	  <?php
-		if(superadmin()){
+		if(admin()){
 		?>
 
 			//Call ImagePicker

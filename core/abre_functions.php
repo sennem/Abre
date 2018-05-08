@@ -56,6 +56,27 @@
 	}
 
 	//Find user ID given an email
+	function admin(){
+		include "abre_dbconnect.php";
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
+		$result = $db->query($sql);
+		$resultrow = $result->fetch_assoc();
+		$count = $resultrow["COUNT(*)"];
+		if($count > 0){
+			return true;
+		}
+
+		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND admin = 1";
+		$result = $db->query($sql);
+		$resultrow = $result->fetch_assoc();
+		$count = $resultrow["COUNT(*)"];
+		if($count > 0){
+			return true;
+		}
+
+		return false;
+	}
+
 	function superadmin(){
 		include "abre_dbconnect.php";
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
@@ -65,6 +86,8 @@
 		if($count > 0){
 			return true;
 		}
+
+		return false;
 	}
 
 	//Find user ID given an email
@@ -76,6 +99,21 @@
 			$id = $row["id"];
 			return $id;
 		}
+	}
+
+	//determine if user is stream and headline administrator
+	function isStreamHeadlineAdministrator(){
+		$email = $_SESSION['useremail'];
+		include "abre_dbconnect.php";
+		$sql = "SELECT role FROM directory WHERE email = '$email'";
+		$result = $db->query($sql);
+		while($row = $result->fetch_assoc()){
+			$role = decrypt($row["role"], "");
+			if(strpos($role, 'Stream and Headline Administrator') !== false) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	//Determine the grades that students do not have email access
@@ -701,7 +739,7 @@
 	}
 
 	//Insert into the database
-	function vendorLinkPost($call,$fields){
+	function vendorLinkPost($call, $fields){
 		$VendorLinkURL = getSoftwareAnswersURL();
 		$vendorIdentifier = getSoftwareAnswersIdentifier();
 		$vendorKey = getSoftwareAnswersKey();
@@ -728,7 +766,7 @@
 	}
 
 	//Insert into the database
-	function vendorLinkPut($call,$fields){
+	function vendorLinkPut($call, $fields){
 		$VendorLinkURL = getSoftwareAnswersURL();
 		$vendorIdentifier = getSoftwareAnswersIdentifier();
 		$vendorKey = getSoftwareAnswersKey();

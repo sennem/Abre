@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin()){
+	if(admin()){
 
 		echo "<table class='bordered' id='appsort'>";
 			$query = "SELECT id, title, link, icon, staff, student, parent, staff_building_restrictions, student_building_restrictions FROM apps ORDER BY sort";
@@ -72,7 +72,7 @@
 		$(function(){
 
 		   	<?php
-			if(superadmin()){
+			if(admin()){
 			?>
 				//Save Default App Order
 				var fixHelper = function(e, ui) {

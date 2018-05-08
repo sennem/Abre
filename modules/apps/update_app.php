@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(superadmin()){
+	if(admin()){
 
 		//Add the app
 		$appid = $_POST["id"];

@@ -39,7 +39,7 @@
 			}else{
 				echo "<a href='#addstreamcomment' class='chip modal-readstream' data-commenticonid='comment_$cardcountloop' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='background-color: #BDBDBD; color: white; height:20px; line-height:20px; margin-bottom: 0px; font-weight: 500;' target='_blank'>$feedtitle</a>";
 			}
-			if($type == "custom" && ($owner == $_SESSION['useremail'] || superadmin())){
+			if($type == "custom" && ($owner == $_SESSION['useremail'] || admin())){
 				echo "<div class='right-align pointer' style='float:right; position:absolute; right:15px; top:18px; z-index:5;'><a class='removepost' data-id='$id'><i class='material-icons' style='font-size: 16px; color: #333;'>clear</i></a></div>";
 			}
 		echo "</div>";
