@@ -123,7 +123,7 @@
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
 							echo "<input type='checkbox' class='filled-in' id='plan' name='plan' value='checked' ".getFormsSettingsPlan($id)."/>";
-							echo "<label for='template' style='color:#000;'> Make this form a plan</label>";
+							echo "<label for='plan' style='color:#000;'> Make this form a plan</label>";
 						echo "</div>";
 					echo "</div>";
 				}
