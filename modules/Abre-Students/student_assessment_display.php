@@ -215,7 +215,6 @@
 		   	var StudentID = $(this).data('studentid');
 				var Assessment = $(this).data('assessment');
 				var termName = encodeURIComponent($(this).data('term'));
-				console.log(termName);
 
 
 	   		$('#assessmentlook').openModal({ in_duration: 0, out_duration: 0,
