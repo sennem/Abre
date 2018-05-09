@@ -24,7 +24,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Verify admin
-	if(admin()){
+	if(superadmin()){
 		//Retrieve last repo link and zip file
 		$link = $_POST["link"];
 		$linkfile = basename($link);
