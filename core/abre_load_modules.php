@@ -20,7 +20,7 @@
 	require_once('abre_verification.php');
 	require_once('abre_functions.php');
 
-	if(admin() && !file_exists("$portal_path_root/modules/modules/setup.txt")){
+	if(superadmin() && getUpdateRequiredDbValue()){
 
 		//Check for apps table
 		require('abre_dbconnect.php');
@@ -48,10 +48,42 @@
 		}
 		$db->close();
 
-		//Write the Setup File
-		$myfile = fopen("$portal_path_root/modules/modules/setup.txt", "w");
-		fwrite($myfile, '');
-		fclose($myfile);
+		//Check for installed field
+		require('abre_dbconnect.php');
+		if(!$db->query("SELECT installed FROM apps_abre LIMIT 1")){
+			$sql = "ALTER TABLE `apps_abre` ADD `installed` int(11) NOT NULL DEFAULT '0';";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		$apps_abre = array("Abre-Assessments", "Abre-Books", "Abre-Conduct", "Abre-Curriculum", "Abre-Forms", "Abre-Guided-Learning", "Abre-Students", "apps", "directory", "profile", "settings", "stream");
+
+		require('abre_dbconnect.php');
+		$stmt = $db->stmt_init();
+		$insertSql = "INSERT INTO apps_abre (app, active, installed) VALUES (?, ?, ?)";
+		$stmt->prepare($insertSql);
+		$active = 1;
+		$installed = 0;
+		foreach($apps_abre as $app){
+			$sql = "SELECT COUNT(*) FROM apps_abre WHERE app = '$app'";
+			$query = $db->query($sql);
+			$result = $query->fetch_assoc();
+			$count = $result["COUNT(*)"];
+			if($count == 0){
+				$stmt->bind_param("sii", $app, $active, $installed);
+				$stmt->execute();
+			}
+		}
+		$stmt->close();
+
+		$stmt = $db->stmt_init();
+		$sql = "UPDATE settings SET update_required = ?";
+		$stmt->prepare($sql);
+		$i = 0;
+		$stmt->bind_param("i", $i);
+		$stmt->execute();
+		$stmt->close();
+		$db->close();
 
 	}
 
