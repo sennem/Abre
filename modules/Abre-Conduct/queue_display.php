@@ -247,7 +247,7 @@
 			var Reload = $(this).data('reload');
 			$("#Incident_Reload").val(Reload);
 			var StudentName = $(this).data('studentname');
-			<?php if(file_exists("$portal_path_root/modules/Abre-Students/setup.txt")){ ?>
+			<?php if(isAppActive("Abre-Students")){ ?>
 								$("#conducttitle").html(StudentName+' <a class="modal-studentlook" data-studentid="'+Student_ID+'" href="#studentlook" style="color:#fff;"><i class="material-icons">remove_red_eye</i></a>');
 			<?php }else{ ?>
 								$("#conducttitle").html(StudentName);
