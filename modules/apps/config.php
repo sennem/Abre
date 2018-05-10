@@ -258,7 +258,7 @@
 						out_duration: 0,
 					});
 					var url;
-					<?php if(file_exists(realpath(dirname(__FILE__) . '/../Abre-Students/'))){ ?>
+					<?php if(isAppActive("Abre-Students")){ ?>
 						url = "<?php echo $url ?>";
 					<?php }else{ ?>
 						url = "<?php echo $portal_root ?>";

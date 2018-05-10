@@ -119,7 +119,7 @@
 			if($responseSize == 0){
 				if($startup['purpose'] == "form"){
 					$formID = $startup['form_id'];
-					if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
+					if(isAppActive("Abre-Forms")){
 						$sql = "SELECT FormFields FROM forms WHERE ID = '$formID'";
 						$row = $db->query($sql);
 						$result = $row->fetch_assoc();
@@ -134,7 +134,7 @@
 
 	$requiredHeadlinesJSON = json_encode($requiredHeadlines);
 
-	if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
+	if(isAppActive("Abre-Forms")){
 ?>
 <script src="/modules/Abre-Forms/js/form-render.min.js"></script>
 <?php } ?>

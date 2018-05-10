@@ -29,7 +29,7 @@
 	$pagetitle="Assessments";
 	$description="Create & deliver standards-aligned assessments";
 	$version="1.4.8";
-	$repo="abreio/Abre-Assessments";
+	$repo= NULL;
 	$pageicon="assessment";
 	$pagepath="assessments";
 	require_once('permissions.php');

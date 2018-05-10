@@ -30,7 +30,7 @@
 	$pagetitle="Books";
 	$description="An ePub reader for digital books.";
 	$version="2.2.2";
-	$repo="abreio/Abre-Books";
+	$repo=NULL;
 	$pageicon="local_library";
 	$pagepath="books";
 

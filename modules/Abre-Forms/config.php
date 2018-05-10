@@ -32,7 +32,7 @@
 	$pagetitle="Forms";
 	$description="Create forms and collect data from staff, students, and parents.";
 	$version="0.2.3";
-	$repo="abreio/Abre-Forms";
+	$repo=NULL;
 	$pageicon="assignment_turned_in";
 	$pagepath="forms";
 

@@ -32,7 +32,7 @@
 	$pagetitle="Students";
 	$description="A student data dashboard for staff and parents.";
 	$version="1.4.9";
-	$repo="abreio/Abre-Students";
+	$repo=NULL;
 	$pageicon="supervisor_account";
 	if($isParent){
 		$pagepath = "mystudents";

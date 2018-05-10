@@ -30,7 +30,7 @@
 	$pagetitle="Guided Learning";
 	$description="Secure lesson builder for delivering a focused lesson with Guided Learning App or Guided Learning Extension.";
 	$version="1.1.1";
-	$repo="abreio/Abre-Guided-Learning";
+	$repo=NULL;
 	$pageicon="directions";
 	$pagepath="guide";
 

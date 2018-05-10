@@ -28,7 +28,7 @@
 	$pagetitle="Curriculum";
 	$description="A curriculum organizer and lesson planner for teachers.";
 	$version="2.2.4";
-	$repo="abreio/Abre-Curriculum";
+	$repo=NULL;
 	$pageicon="layers";
 	$pagepath="curriculum";
 

@@ -31,7 +31,7 @@
 	$pagetitle="Conduct";
 	$description="Record, store, & track student behavior.";
 	$version="0.5.8";
-	$repo="abreio/Abre-Conduct";
+	$repo=NULL;
 	$pageicon="gavel";
 	$pagepath="conduct/discipline/open";
 	require_once('permissions.php');
