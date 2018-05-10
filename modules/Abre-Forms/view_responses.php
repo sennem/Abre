@@ -62,13 +62,12 @@
 					echo "<div class='widget' style='padding:30px; text-align:center; width:100%;'><p style='font-size: 22px; font-weight:700;'>No Responses Yet</p></div>";
 			echo "</div>";
 		}
-
-
+		
 	}
 	else
 	{
 
-		echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>You Do Not Have Response Access</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Please contact the form owner to request access.</p></div>";
+		echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>You Do Not Have Response Access</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Please request access from the form owner.</p></div>";
 
 	}
 ?>
