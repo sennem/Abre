@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 ?>
 
-	<!-- Book Code Modal -->
+	<!-- Add module modal -->
 	<div id="addmodule" class="modal modal-fixed-footer modal-mobile-full">
 		<form class="col s12" id="form-addmodule" method="post" action="modules/<?php echo basename(__DIR__); ?>/githubmoduleadd_process.php">
 		<div class="modal-content" style="padding: 0px !important;">
