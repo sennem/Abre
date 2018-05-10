@@ -144,6 +144,14 @@
 		//Create content folder if one doesn't exist
 		if(!file_exists("$portal_path_root/content/")){ mkdir("$portal_path_root/content/"); }
 
+		$sql = "UPDATE apps_abre SET installed = 0";
+		$db->multi_query($sql);
+
+		$sql = "UPDATE settings SET update_required = 1";
+		$db->multi_query($sql);
+		
+		$db->close();
+
 		//Delete the update directory
 		deleteDirectory("$portal_path_root/update/");
 	}
