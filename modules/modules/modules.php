@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
 	//Modules
-	if(admin()){
+	if(superadmin()){
 
 		//List all modules
 		$modules = array();
@@ -85,11 +85,11 @@
 					echo "<td>$version</td>";
 
 					//Active Status
-					$sql = "SELECT COUNT(*) FROM apps_abre WHERE app='$uniquename' AND active='0'";
+					$sql = "SELECT active FROM apps_abre WHERE app='$uniquename'";
 					$query = $db->query($sql);
 					$returnrow = $query->fetch_assoc();
-					$activecount = $returnrow["COUNT(*)"];
-					if($activecount==0){ $checkstatus="checked"; }else{ $checkstatus=""; }
+					$active = $returnrow["active"];
+					if($active == 1){ $checkstatus = "checked"; }else{ $checkstatus = ""; }
 
 					echo "<td class='center-align'>";
 						echo "<div class='switch'>";
@@ -115,12 +115,12 @@
 						}else{
 							echo "<td width=30px></td>";
 						}
+						//Delete module
+						echo "<td width=30px><button class='deletemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-module='$project'><i class='material-icons'>delete</i></button></td>";
 					}else{
 						echo "<td width=30px></td>";
+						echo "<td width=30px></td>";
 					}
-
-					//Delete module
-					echo "<td width=30px><button class='deletemodule mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600' data-module='$project'><i class='material-icons'>delete</i></button></td>";
 				echo "</tr>";
 			}
 
