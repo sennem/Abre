@@ -53,6 +53,10 @@
  * @package SimplePie
  * @subpackage Caching
  */
+
+//Required configuration files 
+require(dirname(__FILE__) . '/../../../../../../configuration.php');
+ 
 class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 {
 	/**
@@ -99,12 +103,27 @@ class SimplePie_Cache_MySQL extends SimplePie_Cache_DB
 		
 		$this->options = SimplePie_Misc::array_merge_recursive($this->options, SimplePie_Cache::parse_URL($location));
 
+		$this->options['extras']['prefix'] = 'sp_';
+		$db_user = constant("DB_USER");
+		$db_password = constant("DB_PASSWORD");
+		$db_name = constant("DB_NAME");
+		$db_socket = constant("DB_SOCKET");
+		$db_host = constant("DB_HOST");
+		$cloudsetting=constant("USE_GOOGLE_CLOUD");
+		
 		// Path is prefixed with a "/"
 		$this->options['dbname'] = substr($this->options['path'], 1);
 
 		try
 		{
-			$this->mysql = new PDO("mysql:dbname={$this->options['dbname']};host={$this->options['host']};port={$this->options['port']}", $this->options['user'], $this->options['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+			if ($cloudsetting=="true")
+				$dsn = "mysql:dbname={$db_name};unix_socket={$db_socket}";
+			else
+				$dsn = "mysql:dbname={$db_name};host={$db_host}";
+
+			$this->mysql = new PDO($dsn, $db_user, $db_password, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+
+			//$this->mysql = new PDO("mysql:dbname={$this->options['dbname']};host={$this->options['host']};port={$this->options['port']}", $this->options['user'], $this->options['pass'], array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 		}
 		catch (PDOException $e)
 		{

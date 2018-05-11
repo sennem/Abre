@@ -100,7 +100,7 @@
 	$feed_flipboard->set_stupidly_fast(true);
 	$feed_flipboard->set_feed_url($flipboardarray);
 	$streamcachesetting=constant("STREAM_CACHE");
-	$location = $_SERVER['DOCUMENT_ROOT'] . "/../$portal_private_root/stream/cache/feed/";
+	$location = 'mysql://'.$db_user.':'.$db_password.'@hostname:port/database?prefix=sp_';
 	$feed_flipboard->set_cache_location($location);
 	$feed_flipboard->enable_cache($streamcachesetting);
 	$feed_flipboard->init();
