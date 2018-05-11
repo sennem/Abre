@@ -33,8 +33,6 @@
 				$link = $value['link'];
 				$linkencoded = base64_encode($link);
 				$icon = $value['icon'];
-				$icon_end = substr($icon, 5);
-				$icon_final = "icon_thumb_$icon_end";
 				$staff = $value['staff'];
 				$student = $value['student'];
 				$parent = $value['parent'];
@@ -58,7 +56,7 @@
 					}else{
 						echo "<td><b>$title</b> (".$permissionsList.")<td>";
 					}
-					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon_final' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appparents='$parent' data-staffrestrictions='$staffRestrictions' data-studentRestrictions='$studentRestrictions'><i class='material-icons'>mode_edit</i></button></td>";
+					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 passappdata' data-apptitle='$titleencoded' data-applink='$linkencoded' data-appicon='$icon' data-appid='$id' data-appstaff='$staff' data-appstudents='$student' data-appparents='$parent' data-staffrestrictions='$staffRestrictions' data-studentRestrictions='$studentRestrictions'><i class='material-icons'>mode_edit</i></button></td>";
 					echo "<td style='width:30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 deleteapp' data-appid='$id'><i class='material-icons'>delete</i></button></td>";
 					echo "<td style='width:30px'><div class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 handle'><i class='material-icons'>reorder</i></div></td>";
 				echo "</tr>";
