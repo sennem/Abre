@@ -729,6 +729,27 @@
 		return false;
 	}
 
+	function activateApp($appName){
+		include "abre_dbconnect.php";
+		$active = 1;
+		$installed = 0;
+
+		$stmt = $db->stmt_init();
+		$insertSql = "INSERT INTO apps_abre (app, active, installed) VALUES (?, ?, ?)";
+		$stmt->prepare($insertSql);
+
+		$sql = "SELECT COUNT(*) FROM apps_abre WHERE app = '$appName'";
+		$query = $db->query($sql);
+		$result = $query->fetch_assoc();
+		$count = $result["COUNT(*)"];
+		if($count == 0){
+			$stmt->bind_param("sii", $appName, $active, $installed);
+			$stmt->execute();
+		}
+		$stmt->close();
+		$db->close();
+	}
+
 	function linkify($value, $protocols = array('http', 'mail'), array $attributes = array()){
 		// Link attributes
 		$attr = '';
