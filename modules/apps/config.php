@@ -58,7 +58,7 @@
 	?>
 
 	<link rel="stylesheet" href='core/css/image-picker.0.3.0.css'>
-	<script src='core/js/image-picker.0.0.3.min.js'></script>
+	<script src='core/js/image-picker.0.3.0.min.js'></script>
 
 	<div id='appeditor' class='modal modal-fixed-footer modal-mobile-full'>
 		<div class='modal-content' style="padding: 0px !important;">
@@ -158,8 +158,8 @@
 							<?php
 								$icons = scandir("$portal_path_root/core/images/apps/");
 								foreach($icons as $iconimage){
-									if (substr($iconimage, 0, 11) === 'icon_thumb_'){
-										echo "<option data-img-src='/core/images/apps/$iconimage' value='$iconimage'></option>";
+									if(strpos($iconimage, ".png") !== false ){
+										echo "<option data-img-src='/core/images/apps/$iconimage' data-img-class='appiconsholderpicker' value='$iconimage'></option>";
 									}
 								}
 							?>

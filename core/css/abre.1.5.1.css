@@ -156,6 +156,7 @@ tbody > tr { border-bottom-color: #e9e9e9 !important; }
 .apps_modal{ width:320px; top:60px !important; left:auto !important; right:25px !important; }
 #viewapps_arrow{ width:20px; height:10px; position:absolute; right:78px; top:52px; background-image: url("../images/abre/arrow.png"); z-index:1000; display:none; }
 #viewprofile_arrow{ width:20px; height:10px; position:absolute; right:30px; top:52px; background-image: url("../images/abre/arrow.png"); z-index:1000; display:none; }
+.appiconsholderpicker img{ width:35px !important; height:35px !important; }
 
 /* Notifications */
 .notification{ position: fixed; bottom: 0; left:0; right:0; max-width: 700px; margin: 0 auto; padding:15px; color: #fff; background-color: #2B2B2B; margin: 0 auto; border-top-left-radius: 3px; border-top-right-radius: 3px; z-index: 100; display: none;}
