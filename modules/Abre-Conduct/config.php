@@ -19,20 +19,21 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Check for installation
 	if(admin()){ require('installer.php'); }
 
 	echo "<link rel='stylesheet' type='text/css' href='/modules/Abre-Conduct/style/style.0.0.8.css'>";
 
-	$pageview=1;
-	$drawerhidden=1;
-	$pageorder=4;
-	$pagetitle="Conduct";
-	$description="Record, store, & track student behavior.";
-	$version="0.5.8";
-	$repo=NULL;
-	$pageicon="gavel";
-	$pagepath="conduct/discipline/open";
+	$pageview = 1;
+	$drawerhidden = 1;
+	$pageorder = 4;
+	$pagetitle = "Conduct";
+	$description = "Record, store, & track student behavior.";
+	$version = $abre_version;
+	$repo = NULL;
+	$pageicon = "gavel";
+	$pagepath = "conduct/discipline/open";
 	require_once('permissions.php');
 ?>

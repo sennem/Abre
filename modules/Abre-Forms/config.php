@@ -20,20 +20,21 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Check for installation
 	if(admin()){ require('installer.php'); }
 
 	echo "<link rel='stylesheet' href='/modules/Abre-Forms/css/style_0.0.8.css'>";
 
-	$pageview=1;
-	$pageorder=2;
-	$drawerhidden=0;
-	$pagetitle="Forms";
-	$description="Create forms and collect data from staff, students, and parents.";
-	$version="0.2.3";
-	$repo=NULL;
-	$pageicon="assignment_turned_in";
-	$pagepath="forms";
+	$pageview = 1;
+	$pageorder = 2;
+	$drawerhidden = 0;
+	$pagetitle = "Forms";
+	$description = "Create forms and collect data from staff, students, and parents.";
+	$version = $abre_version;
+	$repo = NULL;
+	$pageicon = "assignment_turned_in";
+	$pagepath = "forms";
 
 ?>

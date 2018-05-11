@@ -20,19 +20,20 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Check for installation
 	if(admin()){ require('installer.php'); }
 
-	$pageview=1;
-	$drawerhidden=0;
-	$pageorder=10;
-	$pagetitle="Guided Learning";
-	$description="Secure lesson builder for delivering a focused lesson with Guided Learning App or Guided Learning Extension.";
-	$version="1.1.1";
-	$repo=NULL;
-	$pageicon="directions";
-	$pagepath="guide";
+	$pageview = 1;
+	$drawerhidden = 0;
+	$pageorder = 10;
+	$pagetitle = "Guided Learning";
+	$description = "Secure lesson builder for delivering a focused lesson with Guided Learning App or Guided Learning Extension.";
+	$version = $abre_version;
+	$repo = NULL;
+	$pageicon = "directions";
+	$pagepath = "guide";
 
 	require_once('permissions.php');
 

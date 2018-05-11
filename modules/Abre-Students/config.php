@@ -21,19 +21,20 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	echo "<link rel='stylesheet' href='modules/".basename(__DIR__)."/css/style.1.0.css'>";
 
 	//Check for installation
 	if(admin()){ require('installer.php'); }
 
-	$pageview=1;
-	$pageorder=2;
-	$pagetitle="Students";
-	$description="A student data dashboard for staff and parents.";
-	$version="1.4.9";
-	$repo=NULL;
-	$pageicon="supervisor_account";
+	$pageview = 1;
+	$pageorder = 2;
+	$pagetitle = "Students";
+	$description = "A student data dashboard for staff and parents.";
+	$version = $abre_version;
+	$repo = NULL;
+	$pageicon = "supervisor_account";
 	if($isParent){
 		$pagepath = "mystudents";
 	}else{
