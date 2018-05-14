@@ -26,12 +26,8 @@
 ?>
 
 		<div class='fixed-action-btn buttonpin'>
-			<?php
-			if(GetStaffID($_SESSION["useremail"]) != "ABREDEMO") {
-				echo "<a class='modal-studentgroup btn-floating btn-large waves-effect waves-light' style='background-color:".getSiteColor()."' id='studentgroup_button' href='#studentgroup'><i class='large material-icons'>add</i></a>";
-				echo "<div class='mdl-tooltip mdl-tooltip--left' for='studentgroup_button'>New Student Group</div>";
-			}
-			?>
+				<a class='modal-studentgroup btn-floating btn-large waves-effect waves-light' style='background-color:<?php echo getSiteColor() ?>' id='studentgroup_button' href='#studentgroup'><i class='large material-icons'>add</i></a>
+				<div class='mdl-tooltip mdl-tooltip--left' for='studentgroup_button'>New Student Group</div>
 		</div>
 
 <?php
