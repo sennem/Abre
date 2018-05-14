@@ -30,7 +30,7 @@
 	{
 
 		//Get Student Profile Information
-		$query = "SELECT FirstName, LastName, EthnicityDescription, DateOfBirth, Gender, IEP, Gifted, ELL, StudentId, CurrentGrade, SchoolName FROM Abre_Students WHERE StudentId='$Student_ID' LIMIT 1";
+		$query = "SELECT FirstName, LastName, EthnicityDescription, DateOfBirth, Gender, IEP, Gifted, ELL, StudentId, CurrentGrade, SchoolName, Username, Password FROM Abre_Students WHERE StudentId='$Student_ID' LIMIT 1";
 		$dbreturn = databasequery($query);
 		foreach ($dbreturn as $value)
 		{
@@ -48,6 +48,8 @@
 			$CurrentGrade=htmlspecialchars($value["CurrentGrade"], ENT_QUOTES);
 			$SchoolName=htmlspecialchars($value["SchoolName"], ENT_QUOTES);
 			$StudentPicture="/modules/".basename(__DIR__)."/image.php?student=$Student_ID";
+			$Username = $value['Username'];
+			$Password = $value["Password"];
 		}
 
 		//Find Students Email
@@ -105,13 +107,20 @@
 					echo "<div class='center-align'><img src='$StudentPicture' class='circle' style='width:100px; height:100px;'></div>";
 					echo "<h4 class='center-align'>$Student_FirstName $Student_LastName</h4>";
 					echo "<p class='center-align'>";
-						if($SchoolName!=""){ echo "$SchoolName<br>"; }
-						if($Student_ID!=""){ echo "ID: <span id='studentid'>$Student_ID</span>"; }
+						if($SchoolName != ""){ echo "$SchoolName</br>"; }
+						if($Student_ID != ""){ echo "ID: <span id='studentid'>$Student_ID</span>"; }
 					echo "</p>";
 
 					//Break
 					echo "<hr>";
-
+					if($Password != "" && $Username != "" && $_SESSION['usertype'] == "staff"){
+						echo "<h5>Student Login<i class='pointer material-icons' id='displayInfo' style='float:right;'>visibility</i></h5>";
+						echo "<p id='loginInformation' style='display:none;'>";
+							echo "<b>Username:</b> $Username<br>";
+							echo "<b>Password:</b> <span id='studentPassword'></span><br>";
+						echo "</p>";
+						echo "<hr>";
+					}
 					//Basic Information
 					echo "<h5>Student Information</h5>";
 
@@ -126,14 +135,14 @@
 							//Student Email
 							echo "<b>Email:</b> ";
 							if(admin()){
-								if($Student_Email!=""){
+								if($Student_Email != ""){
 									echo "<span class='input-field'><input id='studentemail' type='text' value='$Student_Email'></span><br>";
 								}else{
 									echo "<span class='input-field'><input id='studentemail' type='text' placeholder='No Associated Email'></span><br>";
 								}
 							}
 							else{
-								if($Student_Email!=""){
+								if($Student_Email != ""){
 									echo "<span>$Student_Email</span><br>";
 								}else{
 									echo "<span>No Associated Email</span><br>";
@@ -143,7 +152,7 @@
 
 						//Save Button for Email
 						if(admin()){
-							echo "<button class='waves-effect btn-flat white-text' id='updateemail' style='width:100%; background-color:"; echo getSiteColor(); echo "'>Save Email</button>";
+							echo "<button class='waves-effect btn-flat white-text' id='updateemail' style='width:100%; background-color:"; echo getSiteColor(); echo "; margin-bottom:20px;'>Save Email</button>";
 						}
 
 					//Break
@@ -304,8 +313,21 @@
 				var data = { message: "Email Updated" };
 				notification.MaterialSnackbar.showSnackbar(data);
   			});
-
 		});
+
+		var isOpen = false;
+		$("#displayInfo").off().on('click', function(){
+			isOpen = !isOpen;
+			if(isOpen){
+				$("#loginInformation").show();
+				$("#studentPassword").text("<?php echo decrypt($Password, '');?>");
+				$("#displayInfo").text('visibility_off');
+			}else{
+				$("#loginInformation").hide();
+				$("#studentPassword").text("");
+				$("#displayInfo").text('visibility');
+			}
+		})
 
 	});
 
