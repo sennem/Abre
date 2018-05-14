@@ -33,7 +33,10 @@
 	
 	//MySQL Host
 	if (!defined('DB_HOST')){ define('DB_HOST','localhost'); }
-	
+
+	//MySQL Socket
+	if (!defined('DB_SOCKET')){ define('DB_SOCKET','/cloudsql/socket'); }
+
 	//MySQL Username
 	if (!defined('DB_USER')){ define('DB_USER','username'); }
 	
@@ -80,5 +83,7 @@
 	}
 	
 	if (!defined('STREAM_CACHE')){ define('STREAM_CACHE','true'); }
-	
+
+	if (!defined('USE_GOOGLE_CLOUD')){ define('USE_GOOGLE_CLOUD','false'); }
+
 ?>
