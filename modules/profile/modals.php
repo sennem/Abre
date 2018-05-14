@@ -229,7 +229,7 @@
 						<select id="headlinePurpose" name="headlinePurpose">
 							<option value="text" selected>Deliver a Message</option>
 							<option value="video">Deliver a Youtube Video</option>
-							<?php if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
+							<?php if(isAppActive("Abre-Forms")){
 								echo "<option value='form'>Deliver a Form</option>";
 							} ?>
 						</select>
@@ -240,7 +240,7 @@
 						<label for="headlineForm" class="active">Form</label>
 						<select id="headlineForm" name="headlinForm">
 							<option value="" disabled selected>Attach a Form</option>
-							<?php if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
+							<?php if(isAppActive("Abre-Forms")){
 								$sql = "SELECT ID, Name FROM forms WHERE Owner = '".$_SESSION['useremail']."'";
 								$result = $db->query($sql);
 								while($value = $result->fetch_assoc()){

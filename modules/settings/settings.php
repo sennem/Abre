@@ -30,6 +30,7 @@
 			echo "<div class='page_container page_container_limit mdl-shadow--4dp'>";
 				echo "<div class='page'>";
 
+				if(superadmin()){
 					//Update Checker
 					$opts = ['http' => ['method' => 'GET','header' => ['User-Agent: PHP']]];
 					$context = stream_context_create($opts);
@@ -41,10 +42,11 @@
 						$currentlink = "https://github.com/abreio/Abre/archive/".$currentversion.".zip";
 						echo "<div class='row'>";
 							echo "<div class='col s12'>";
-								echo "<div id='updateabre' data-version='$currentlink' class='card white-text pointer' style='background-color:#4CAF50; padding:20px;'>A new version of Abre is available. <u>Click here to update to $currentversion.</u></div>";
+								echo "<div id='updateabre' data-version='$currentlink' class='card white-text pointer' style='background-color:".getSiteColor()."; padding:20px;'>A new version of Abre is available. <u>Click here to update to $currentversion.</u></div>";
 							echo "</div>";
 						echo "</div>";
 					}
+				}
 
 					//General Settings
 					echo "<div class='row'>";

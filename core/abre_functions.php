@@ -687,6 +687,69 @@
 		return $valuereturn;
 	}
 
+	function getUpdateRequiredDbValue(){
+		include "abre_dbconnect.php";
+		$sql2 = "SELECT `update_required` FROM settings LIMIT 1";
+		$result2 = $db->query($sql2);
+		if($result2){
+			$row = $result2->fetch_assoc();
+			if($row["update_required"] == 0){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			$sql = "ALTER TABLE `settings` ADD `update_required` int(11) NOT NULL DEFAULT '1';";
+			$db->multi_query($sql);
+			return true;
+		}
+	}
+
+	function isAppInstalled($appName){
+		include "abre_dbconnect.php";
+		$sql = "SELECT COUNT(*) FROM apps_abre WHERE app='$appName' AND installed = 1";
+		$query = $db->query($sql);
+		$result = $query->fetch_assoc();
+		$count = $result["COUNT(*)"];
+		if($count == 1){
+			return true;
+		}
+		return false;
+	}
+
+	function isAppActive($appName){
+		include "abre_dbconnect.php";
+		$sql = "SELECT COUNT(*) FROM apps_abre WHERE app='$appName' AND active = 1";
+		$query = $db->query($sql);
+		$result = $query->fetch_assoc();
+		$count = $result["COUNT(*)"];
+		if($count == 1){
+			return true;
+		}
+		return false;
+	}
+
+	function activateApp($appName){
+		include "abre_dbconnect.php";
+		$active = 1;
+		$installed = 0;
+
+		$stmt = $db->stmt_init();
+		$insertSql = "INSERT INTO apps_abre (app, active, installed) VALUES (?, ?, ?)";
+		$stmt->prepare($insertSql);
+
+		$sql = "SELECT COUNT(*) FROM apps_abre WHERE app = '$appName'";
+		$query = $db->query($sql);
+		$result = $query->fetch_assoc();
+		$count = $result["COUNT(*)"];
+		if($count == 0){
+			$stmt->bind_param("sii", $appName, $active, $installed);
+			$stmt->execute();
+		}
+		$stmt->close();
+		$db->close();
+	}
+
 	function linkify($value, $protocols = array('http', 'mail'), array $attributes = array()){
 		// Link attributes
 		$attr = '';

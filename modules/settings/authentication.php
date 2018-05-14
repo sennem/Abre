@@ -72,7 +72,7 @@
 								echo "<a id='exportkeys' href='#facebookAuthModal' class='modal-action waves-effect btn-flat white-text facebookAuthModal' style='background-color: ".getSiteColor()."'>Configure</a>";
 						echo "</div>";
 					echo "</div>";
-					if($db->query("SELECT * FROM Abre_Students LIMIT 1") && file_exists("$portal_path_root/modules/settings/setup.txt") && admin()){
+					if($db->query("SELECT * FROM Abre_Students LIMIT 1") && isAppActive("settings") && admin()){
 						echo "<div class='row'>";
 							echo "<div class='input-field col l12 s12' style='margin-top:0;'>";
 								echo "<h4>Student Key Management</h4>";

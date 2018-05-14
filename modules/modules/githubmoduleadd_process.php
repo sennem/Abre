@@ -24,9 +24,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Verify superadmin
-	$sql = "SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
+	if(superadmin()){
 
 		//Retrieve the repo
 		$repoaddress = $_POST["repoaddress"];
@@ -54,6 +52,31 @@
 
 		//Delete zipped files
     unlink("$portal_path_root/modules/$project.zip");
+
+		$app = str_replace("/", "", $project);
+		$sql = "SELECT COUNT(*) FROM apps_abre WHERE app = '$app'";
+		$query = $db->query($sql);
+		$result = $query->fetch_assoc();
+		$count = $result["COUNT(*)"];
+		
+		$active = 1;
+		$installed = 0;
+		if($count == 0){
+			$stmt = $db->stmt_init();
+			$insertSql = "INSERT INTO apps_abre (app, active, installed) VALUES (?, ?, ?)";
+			$stmt->prepare($insertSql);
+			$stmt->bind_param("sii", $app, $active, $installed);
+			$stmt->execute();
+			$stmt->close();
+		}else{
+			$stmt = $db->stmt_init();
+			$insertSql = "UPDATE apps_abre SET active = ?, installed = ? WHERE app = ?";
+			$stmt->prepare($insertSql);
+			$stmt->bind_param("iis", $active, $installed, $app);
+			$stmt->execute();
+			$stmt->close();
+		}
+		$db->close();
 
 		echo "Module Added";
 	}

@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(admin() && !file_exists("$portal_path_root/modules/apps/setup.txt")){
+	if(superadmin() && !isAppInstalled("apps")){
 		//Check for apps table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM apps LIMIT 1")){
@@ -119,9 +119,10 @@
 		}
 		$db->close();
 
-		//Write the Setup File
-		$myfile = fopen("$portal_path_root/modules/apps/setup.txt", "w");
-		fwrite($myfile, '');
-		fclose($myfile);
+		//Mark app as installed
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		$sql = "UPDATE apps_abre SET installed = 1 WHERE app = 'apps'";
+		$db->multi_query($sql);
+		$db->close();
 	}
 ?>

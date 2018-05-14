@@ -24,7 +24,7 @@
 	echo "<option value='' disabled selected>Choose a Role</option>";
 
 	//Conduct Roles
-	if(file_exists("$portal_path_root/modules/Abre-Conduct/setup.txt")){
+	if(isAppActive("Abre-Conduct")){
 		if(strpos($role, 'Conduct Administrator') !== false){
 			echo "<option value='Conduct Administrator' selected='selected'>Conduct Administrator</option>";
 		}else{
@@ -39,7 +39,7 @@
 	}
 
 	//Curriculum Roles
-	if(file_exists("$portal_path_root/modules/Abre-Curriculum/setup.txt")){
+	if(isAppActive("Abre-Curriculum")){
 		if(strpos($role, 'Curriculum Administrator') !== false){
 			echo "<option value='Curriculum Administrator' selected='selected'>Curriculum Administrator</option>";
 		}else{
@@ -67,7 +67,7 @@
 	}
 
 	//Plans Roles
-	if(file_exists("$portal_path_root/modules/Abre-Plans/setup.txt")){
+	if(isAppActive("Abre-Plans")){
 		if(strpos($role, 'District Plans Administrator') !== false){
 			echo "<option value='District Plans Administrator' selected='selected'>District Plans Administrator</option>";
 		}else{
@@ -82,7 +82,7 @@
 	}
 
 	//Forms Roles
-	if(file_exists("$portal_path_root/modules/Abre-Forms/setup.txt")){
+	if(isAppActive("Abre-Forms")){
 		if(strpos($role, 'Forms Administrator') !== false){
 			echo "<option value='Forms Administrator' selected='selected'>Forms Administrator</option>";
 		}else{

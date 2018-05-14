@@ -69,7 +69,7 @@
 							echo "<li class='tab col s3'><a href='#assessments'><i class='material-icons hide-on-large-only'>assessment</i><span class='hide-on-med-and-down'>Assessments</span></a></li>";
 							echo "<li class='tab col s3'><a href='#schedule'><i class='material-icons hide-on-large-only'>schedule</i><span class='hide-on-med-and-down'>Schedule</span></a></li>";
 							echo "<li class='tab col s3'><a href='#attendance'><i class='material-icons hide-on-large-only'>alarm</i><span class='hide-on-med-and-down'>Attendance</span></a></li>";
-							if(file_exists("$portal_path_root/modules/Abre-Conduct/setup.txt")){
+							if(isAppActive("Abre-Conduct")){
 								echo "<li class='tab col s3'><a href='#conduct'><i class='material-icons hide-on-large-only'>gavel</i><span class='hide-on-med-and-down'>Conduct</span></a></li>";
 							}
 						echo "</ul>";
@@ -89,7 +89,7 @@
 					echo "</div>";
 
 					echo "<div id='conduct'>";
-						if(file_exists("$portal_path_root/modules/Abre-Conduct/setup.txt")){
+						if(isAppActive("Abre-Conduct")){
 							include "student_conduct.php";
 						}
 					echo "</div>";

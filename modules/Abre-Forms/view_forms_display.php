@@ -51,10 +51,10 @@
 
 		if($searchquery == ""){
 			$querycount = "SELECT COUNT(*) FROM forms WHERE Owner = '".$_SESSION['useremail']."'";
-			$sql = "SELECT ID, Name, Owner, LastModified FROM forms WHERE Owner = '".$_SESSION['useremail']."' LIMIT $LowerBound, $PerPage";
+			$sql = "SELECT ID, Name, Owner, LastModified FROM forms WHERE Owner = '".$_SESSION['useremail']."' ORDER BY LastModified DESC LIMIT $LowerBound, $PerPage";
 		}else{
 			$querycount = "SELECT COUNT(*) FROM forms WHERE (LOWER(Name) LIKE '%$searchquery%') AND Owner = '".$_SESSION['useremail']."'";
-			$sql = "SELECT ID, Name, Owner, LastModified FROM forms WHERE (LOWER(Name) LIKE '%$searchquery%') AND Owner = '".$_SESSION['useremail']."' LIMIT $LowerBound, $PerPage";
+			$sql = "SELECT ID, Name, Owner, LastModified FROM forms WHERE (LOWER(Name) LIKE '%$searchquery%') AND Owner = '".$_SESSION['useremail']."' ORDER BY LastModified DESC LIMIT $LowerBound, $PerPage";
 		}
 
 		$result = $db->query($sql);

@@ -119,7 +119,7 @@
 						echo "<label for='template' style='color:#000;'> Make this form a district template</label>";
 					echo "</div>";
 				echo "</div>";
-				if(file_exists("$portal_path_root/modules/Abre-Plans/setup.txt")){
+				if(isAppActive("Abre-Plans")){
 					echo "<div class='row'>";
 						echo "<div class='col s12'>";
 							echo "<input type='checkbox' class='filled-in' id='plan' name='plan' value='checked' ".getFormsSettingsPlan($id)."/>";

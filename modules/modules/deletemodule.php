@@ -39,13 +39,19 @@
 	}
 
 	//Verify superadmin
-	$sql = "SELECT * FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
-	$result = $db->query($sql);
-	while($row = $result->fetch_assoc()){
+	if(superadmin()){
 		//Retrieve last repo link and zip file
 		$module=$_POST["link"];
 
 		//Delete module
 		rrmdir(realpath(dirname(__FILE__))."/../$module");
+
+		$stmt = $db->stmt_init();
+		$sql = "DELETE FROM apps_abre WHERE app = ?";
+		$stmt->prepare($sql);
+		$stmt->bind_param("s", $module);
+		$stmt->execute();
+		$stmt->close();
+		$db->close();
 	}
 ?>

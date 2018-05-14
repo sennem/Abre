@@ -19,19 +19,20 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Check for installation
 	if(admin()){ require('installer.php'); }
 
-	$pageview=1;
-	$drawerhidden=1;
-	$pageorder=4;
-	$pagetitle="Assessments";
-	$description="Create & deliver standards-aligned assessments";
-	$version="1.4.8";
-	$repo="abreio/Abre-Assessments";
-	$pageicon="assessment";
-	$pagepath="assessments";
+	$pageview = 1;
+	$drawerhidden = 1;
+	$pageorder = 4;
+	$pagetitle = "Assessments";
+	$description = "Create & deliver standards-aligned assessments";
+	$version = $abre_version;
+	$repo = NULL;
+	$pageicon = "assessment";
+	$pagepath = "assessments";
 	require_once('permissions.php');
 
 	echo "<link rel='stylesheet' type='text/css' href='/modules/".basename(__DIR__)."/css/style_0.0.2.css'>";

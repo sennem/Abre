@@ -70,7 +70,7 @@
 				$('.mdl-layout__content').animate({scrollTop:0}, 0);
 				var currentPage = $(this).data('page');
 				var searchQuery = $('#searchquery').val();
-				$.post( "modules/Abre-Forms/view_template_display.php", {page: currentPage, searchquery: searchQuery})
+				$.post( "modules/Abre-Forms/view_recommended_display.php", {page: currentPage, searchquery: searchQuery})
 				.done(function(data){
 					$("#displayforms").html(data);
 					mdlregister();

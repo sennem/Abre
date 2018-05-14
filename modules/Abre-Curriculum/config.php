@@ -18,19 +18,20 @@
 
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require(dirname(__FILE__) . '/../../core/abre_version.php');
 
 	//Check for installation
 	if(admin()){ require('installer.php'); }
 
-	$pageview=1;
-	$drawerhidden=0;
-	$pageorder=3;
-	$pagetitle="Curriculum";
-	$description="A curriculum organizer and lesson planner for teachers.";
-	$version="2.2.4";
-	$repo="abreio/Abre-Curriculum";
-	$pageicon="layers";
-	$pagepath="curriculum";
+	$pageview = 1;
+	$drawerhidden = 0;
+	$pageorder = 3;
+	$pagetitle = "Curriculum";
+	$description = "A curriculum organizer and lesson planner for teachers.";
+	$version = $abre_version;
+	$repo = NULL;
+	$pageicon = "layers";
+	$pagepath = "curriculum";
 
 	require_once('permissions.php');
 
