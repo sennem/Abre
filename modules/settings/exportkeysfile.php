@@ -24,25 +24,27 @@
 	if(admin()){
 
 		header('Content-Type: text/csv; charset=utf-8');
-		header('Content-Disposition: attachment; filename=tokendata.csv');
+		header('Content-Disposition: attachment; filename=Parent_Tokens.csv');
 
 		$output = fopen('php://output', 'w');
 
-		fputcsv($output, array('Student ID','First Name','Last Name','Token'));
+		fputcsv($output, array('Student ID','Building','First Name','Last Name','Grade','Token'));
 		include "../../core/abre_dbconnect.php";
 		$rows = mysqli_query($db, 'SELECT studentId, token FROM student_tokens');
 
 		while($row = mysqli_fetch_assoc($rows)) {
-			$sql = mysqli_query($db, "SELECT FirstName, LastName FROM Abre_Students WHERE StudentId = '".$row['studentId']."'");
+			$sql = mysqli_query($db, "SELECT FirstName, LastName, SchoolName, CurrentGrade FROM Abre_Students WHERE StudentId = '".$row['studentId']."'");
 			$row2 = mysqli_fetch_assoc($sql);
 
 			$studentid = htmlspecialchars($row["studentId"], ENT_QUOTES);
 			$firstname = $row2["FirstName"];
 			$lastname = $row2["LastName"];
+			$schoolname = $row2["SchoolName"];
+			$currentgrade = $row2["CurrentGrade"];
 			$token = htmlspecialchars($row["token"], ENT_QUOTES);
 			$token = decrypt($token, "");
 
-			$data = ["$studentid", "$firstname", "$lastname", "$token"];
+			$data = ["$studentid", "$schoolname", "$firstname", "$lastname", "$currentgrade", "$token"];
 			fputcsv($output, $data);
 		}
 		fclose($output);
