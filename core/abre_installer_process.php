@@ -147,6 +147,12 @@
 		$txt = "if(!defined('DB_HOST')){ define('DB_HOST', '".$_POST['db_host']."'); }";
 		fwrite($myfile, $txt);
 
+		//Write MySQL cloud socket
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('DB_SOCKET')){ define('DB_SOCKET', '".$_POST['db_socket']."'); }";
+		fwrite($myfile, $txt);
+		
 		//Write MySQL name
 		$txt = "\n";
 		fwrite($myfile, $txt);
@@ -247,6 +253,12 @@
 		$txt = "\n";
 		fwrite($myfile, $txt);
 		$txt = "if(!defined('SITE_MODE')){ define('SITE_MODE', 'PRODUCTION'); }";
+		fwrite($myfile, $txt);
+
+		//Write use google cloud setting
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('USE_GOOGLE_CLOUD')){ define('USE_GOOGLE_CLOUD', 'false'); }";
 		fwrite($myfile, $txt);
 
 		//End PHP file
