@@ -191,19 +191,18 @@
 				        $pdfOptionid = "pdfOption".$i;
 				        echo "<select class='pdfOption' name='$pdfOptionid' id='$pdfOptionid'>";
 				          echo "<option value='' selected>Choose a PDF</option>";
-				          echo "<option value='HCSD_BIC'>BIC</option>";
-						  		echo "<option value='HCSD_Bus_Boot_Camp'>Bus Boot Camp Document</option>";
-						  		echo "<option value='HCSD_Bus_Suspension'>Bus Suspension</option>";
-				          echo "<option value='HCSD_Chemical_Abuse'>Drug Paperwork</option>";
-				          echo "<option value='HCSD_Emergency_Removal'>Emergency Removal</option>";
-				          echo "<option value='HCSD_Expulsion_Reinstatement'>Expulsion Reinstatement</option>";
-				          echo "<option value='HCSD_Extended_Day'>Extended Day Detention</option>";
-				          echo "<option value='HCSD_HASP_Paperwork'>HASP Paperwork</option>";
-				          echo "<option value='HCSD_No_Contract'>No Contract Order</option>";
-				          echo "<option value='HCSD_Suspension'>Out of School Suspension</option>";
-				          echo "<option value='HCSD_Recommendation_for_Expulsion'>Recommendation for Expulsion</option>";
-				          echo "<option value='HCSD_Summary_Report'>Summary Report</option>";
-									echo "<option value='HCSD_Threat_Assessment'>Threat Assessment</option>";
+									$sql = "SELECT districtID, pdf_options FROM conduct_settings LIMIT 1";
+									$query = $db->query($sql);
+									$row = $query->fetch_assoc();
+									$districtID = $row["districtID"];
+									if($row["pdf_options"] != ""){
+										$pdfOptions = explode(PHP_EOL, $row['pdf_options']);
+										foreach($pdfOptions as $option){
+											$display = str_replace(array("\n\r", "\n", "\r"), '', $option);
+											$val = str_replace(" ", "_", $display);
+											echo "<option value ='$val'>$display</option>";
+										}
+									}
 				        echo "</select>";
 				      echo "</td>";
 							echo "<td style='text-align:center'>";
@@ -409,7 +408,7 @@
 										consequenceElement.val(consequenceid);
 									}
 
-									var pdfurl = "./content/Abre-Conduct/generatePDF.php?id="+response.incidentid+"&pdfOption="+selectValue+"&ConsequenceID="+consequenceid;
+									var pdfurl = "./modules/Abre-Conduct/generatePDF.php?id="+response.incidentid+"&pdfOption="+selectValue+"&ConsequenceID="+consequenceid+"&districtID=<?php echo $districtID ?>";
 									window.open(pdfurl);
 
 									var query = $("#conductsearchquery").val();
