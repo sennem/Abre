@@ -70,7 +70,7 @@
 				echo "</tbody></table>";
 
 				if($pagerestrictions == ""){
-					echo "<div class='row'><a class='waves-effect btn-flat white-text' href='/modules/Abre-Students/conduct_download.php?StudentID=$Student_ID' target='_blank' style='background-color:"; echo getSiteColor(); echo "'>Download Report</a></div>";
+					echo "<div class='row'><a class='waves-effect btn-flat white-text' href='/modules/Abre-Students/conduct_download.php?StudentID=$Student_ID' style='background-color:"; echo getSiteColor(); echo "'>Download Report</a></div>";
 				}
 			}
 
