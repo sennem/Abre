@@ -82,6 +82,8 @@
 					  <div id="deletebutton" style='display:none;'><a href="#" class="waves-effect btn-flat white-text deletegroup pointer" style='background-color: <?php echo getSiteColor(); ?>'>Delete</a></div>
 					</div>
 				<?php }else{ ?>
+						</div>
+					</div>
 					<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Staff ID Found</span><br><p style='font-size:16px; margin:20px 0 0 0;'>You need to have be a registered staff member in the SIS to create groups!</p></div>
 				<?php } ?>
 			</form>
