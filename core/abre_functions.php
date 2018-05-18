@@ -914,11 +914,17 @@
 		}
 
 		if($_SESSION['usertype'] == "student"){
-			if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
-				$sql = "SELECT SchoolCode FROM Abre_Students WHERE Email = '".$_SESSION['useremail']."' LIMIT 1";
-				$resultrow = $db->query($sql);
-				$result = $resultrow->fetch_assoc();
-				array_push($schoolCodeArray, $result['SchoolCode']);
+			$sql = "SELECT StudentID FROM Abre_AD WHERE Email = '".$_SESSION['useremail']."'";
+			$query = $db->query($sql);
+			$result = $query->fetch_assoc();
+			$studentID = $result["StudentID"];
+			if(isset($studentID)){
+				if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+					$sql = "SELECT SchoolCode FROM Abre_Students WHERE StudentId = '$studentID' LIMIT 1";
+					$resultrow = $db->query($sql);
+					$result = $resultrow->fetch_assoc();
+					array_push($schoolCodeArray, $result['SchoolCode']);
+				}
 			}
 		}
 
