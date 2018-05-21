@@ -320,7 +320,7 @@
 			isOpen = !isOpen;
 			if(isOpen){
 				$("#loginInformation").show();
-				$("#studentPassword").text("<?php echo decrypt($Password, '');?>");
+				$("#studentPassword").text("<?php if($Password != ""){ echo decrypt($Password, ''); }else{ echo ""; }?>");
 				$("#displayInfo").text('visibility_off');
 			}else{
 				$("#loginInformation").hide();
