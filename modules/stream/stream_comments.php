@@ -31,7 +31,7 @@
 
 	if (useAPI()) {
 
-		$apiValue = apiStreams::getStreamCardsForComments($StreamStartResult, $StreamEndResult);  
+		$apiValue = apiStreams::getStreamCardsForComments($StreamStartResult, $StreamEndResult);
 
 		$result = $apiValue['result']['comments'];
 		$totalcomments =  $apiValue['result']['totalCards'];
@@ -56,9 +56,9 @@
 
 			//Counts
 			$num_rows_like_current_user = $result['counts']['userLikes'];
-			$num_rows_like = $result['counts']['likes'];                            
+			$num_rows_like = $result['counts']['likes'];
 			$num_rows_comment = $result['counts']['comments'];
-			
+
 			//Display Card
 			echo "<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>";
 
@@ -92,7 +92,7 @@
 					}
 
 					echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper modal-readstream pointer' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='comments' data-title='$titleencoded' data-url='$linkbase' style='height:200px; background-image: url(/core/images/abre/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
-						echo "<span style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
+						echo "<span class='wrap-links' style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
 					echo "</div>";
 
 				}
@@ -216,7 +216,7 @@
 					}
 
 					echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper modal-readstream pointer' data-excerpt='$excerpt' data-image='$imagebase' data-redirect='comments' data-title='$titleencoded' data-url='$linkbase' style='height:200px; background-image: url(/core/images/abre/abre_pattern.png); background-color: ".getSiteColor()." !important; overflow:hidden;'>";
-						echo "<span style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
+						echo "<span class='wrap-links' style='width:100%; color:#fff; padding:32px; font-size:18px; line-height:normal; font-weight:700; text-align:center;'>$body</span>";
 					echo "</div>";
 
 				}
