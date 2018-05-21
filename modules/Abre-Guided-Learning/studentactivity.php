@@ -29,15 +29,20 @@
 
       echo "<div class='page_container' style='text-align:center;'>";
 
-        $sql = "SELECT FirstName, LastName, StudentId, SchoolName, student_email FROM guide_activity LEFT JOIN Abre_Students ON guide_activity.student_email = Abre_Students.Email WHERE guide_activity.activity_code = '$code' AND guide_activity.ID = '$id' LIMIT 1";
+        $sql = "SELECT StudentID, student_email FROM guide_activity LEFT JOIN Abre_AD ON guide_activity.student_email = Abre_AD.Email WHERE guide_activity.activity_code = '$code' AND guide_activity.ID = '$id' LIMIT 1";
         $query = $db->query($sql);
         $return = $query->fetch_assoc();
 
         $studentEmail = $return["student_email"];
-        $Student_FirstName = htmlspecialchars($return["FirstName"], ENT_QUOTES);
-        $Student_LastName = htmlspecialchars($return["LastName"], ENT_QUOTES);
-        $Student_ID = htmlspecialchars($return["StudentId"], ENT_QUOTES);
-        $SchoolName = htmlspecialchars($return["SchoolName"], ENT_QUOTES);
+        $Student_ID = htmlspecialchars($return["StudentID"], ENT_QUOTES);
+
+        $sql = "SELECT FirstName, LastName, SchoolName FROM Abre_Students WHERE StudentId = '$Student_ID'";
+        $query = $db->query($sql);
+        $result = $query->fetch_assoc();
+
+        $Student_FirstName = htmlspecialchars($result["FirstName"], ENT_QUOTES);
+        $Student_LastName = htmlspecialchars($result["LastName"], ENT_QUOTES);
+        $SchoolName = htmlspecialchars($result  ["SchoolName"], ENT_QUOTES);
         $StudentPicture = "/modules/".basename(__DIR__)."/image.php?student=$Student_ID";
 
         echo "<div class='mdl_card mdl-shadow--2dp' style='background-color:#fff; padding:30px 35px 15px 35px;'>";

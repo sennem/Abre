@@ -129,7 +129,7 @@
 							<label for="app_students">Available for students</label>
 							<br><br>
 							<div id='appsStudentRestrictionsDiv'>
-								<label>Staff Building Restrictions</label>
+								<label>Student Building Restrictions</label>
 								<select name="studentRestriction[]" id="appsStudentRestrictions" multiple>
 									<option value="No Restrictions">All Buildings</option>
 									<?php

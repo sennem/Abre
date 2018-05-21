@@ -459,6 +459,32 @@
 		}
 		$db->close();
 
+		//Check for conduct_settings table
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT * FROM conduct_settings LIMIT 1")){
+			$sql = "CREATE TABLE `conduct_settings` (`ID` int(11) NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+			$sql .= "ALTER TABLE `conduct_settings` ADD PRIMARY KEY (`ID`);";
+			$sql .= "ALTER TABLE `conduct_settings` MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for districtID field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT districtID FROM conduct_settings LIMIT 1")){
+			$sql = "ALTER TABLE `conduct_settings` ADD `districtID` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for districtID field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT pdf_options FROM conduct_settings LIMIT 1")){
+			$sql = "ALTER TABLE `conduct_settings` ADD `pdf_options` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Mark app as installed
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		$sql = "UPDATE apps_abre SET installed = 1 WHERE app = 'Abre-Conduct'";

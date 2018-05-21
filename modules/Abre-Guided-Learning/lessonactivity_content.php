@@ -24,7 +24,7 @@
 
     if($pagerestrictions == ""){
       $code = $_GET["code"];
-      $sql = "SELECT guide_activity.ID, student_email, history, active, FirstName, LastName, StudentId, SchoolName FROM guide_activity LEFT JOIN Abre_Students ON guide_activity.student_email = Abre_Students.Email WHERE activity_code = $code";
+      $sql = "SELECT guide_activity.ID, student_email, history, active, Abre_AD.StudentID FROM guide_activity LEFT JOIN Abre_AD ON guide_activity.student_email = Abre_AD.Email WHERE activity_code = $code";
       $dbreturn = databasequery($sql);
       $count = count($dbreturn);
 
@@ -34,11 +34,15 @@
         $studentEmail = $value["student_email"];
         $historyJSON = $value["history"];
         $historyArray = json_decode($historyJSON, true);
+        $Student_ID = htmlspecialchars($value["StudentID"], ENT_QUOTES);
 
-        $Student_FirstName = htmlspecialchars($value["FirstName"], ENT_QUOTES);
-        $Student_LastName = htmlspecialchars($value["LastName"], ENT_QUOTES);
-        $Student_ID = htmlspecialchars($value["StudentId"], ENT_QUOTES);
-        $SchoolName = htmlspecialchars($value["SchoolName"], ENT_QUOTES);
+        $sql = "SELECT FirstName, LastName, SchoolName FROM Abre_Students WHERE StudentId = '$Student_ID'";
+        $query = $db->query($sql);
+        $result = $query->fetch_assoc();
+
+        $Student_FirstName = htmlspecialchars($result["FirstName"], ENT_QUOTES);
+        $Student_LastName = htmlspecialchars($result["LastName"], ENT_QUOTES);
+        $SchoolName = htmlspecialchars($result["SchoolName"], ENT_QUOTES);
         $StudentPicture = "/modules/".basename(__DIR__)."/image.php?student=$Student_ID";
 
           echo "<div class='mdl-card mdl-shadow--2dp card_stream' style='background-color:#fff; padding:30px 35px 15px 35px; float:left;'>";

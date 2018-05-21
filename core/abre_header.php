@@ -65,6 +65,7 @@
 				<link rel='stylesheet' href='core/css/quill.snow.1.1.3.css'>
 				<link rel="stylesheet" href='core/css/spectrum.0.0.1.css'>
 				<link rel="stylesheet" href='modules/profile/css/calendar.css'>
+				<link rel="stylesheet" href='core/css/style.php'>
 
 				<script src='core/js/jquery-3.1.1.min.js'></script>
 				<script src='core/js/jquery-ui.1.12.1.min.js'></script>

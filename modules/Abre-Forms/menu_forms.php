@@ -33,19 +33,19 @@
 
 				echo "<li class='tab col s3 tab_2 formmenu pointer' data='#forms/sharedforms'><a href='#forms/sharedforms'>";
 					echo "<span class='hide-on-small-only'>Shared With Me</span>";
-					echo "<i class='material-icons hide-on-med-and-up'>assignment_turned_in</i>";
+					echo "<i class='material-icons hide-on-med-and-up'>people_outline</i>";
 				echo "</a></li>";
 
 				echo "<li class='tab col s3 tab_3 formmenu pointer' data='#forms/recommended'><a href='#forms/recommended'>";
 					echo "<span class='hide-on-small-only'>"; echo $_SESSION['usertype']; echo " Forms</span>";
-					echo "<i class='material-icons hide-on-med-and-up'>verified_user</i>";
+					echo "<i class='material-icons hide-on-med-and-up'>bookmark</i>";
 				echo "</a></li>";
 			}
 
 			if(admin() || isFormsAdministrator()){
 				echo "<li class='tab col s3 tab_4 formmenu pointer' data='#forms/templates'><a href='#forms/templates'>";
 					echo "<span class='hide-on-small-only'>Templates</span>";
-					echo "<i class='material-icons hide-on-med-and-up'>thumb_up</i>";
+					echo "<i class='material-icons hide-on-med-and-up'>verified_user</i>";
 				echo "</a></li>";
 			}
 

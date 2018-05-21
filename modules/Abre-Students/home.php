@@ -253,16 +253,18 @@
 
     	$('.modal-studentgroup').leanModal({
 	    	in_duration: 0,
-			out_duration: 0,
+				out_duration: 0,
 	    	ready: function()
 	    	{
 		    	$('.modal-content').scrollTop(0);
-				$("#group_name").focus();
+					$("#group_name").focus();
 
 			   	//Load the Search Modal
-			    $.post("modules/<?php echo basename(__DIR__); ?>/group_process.php", function(data) {
-					$(".modal-content #group_id").val(data.groupid);
-				});
+					<?php if(GetStaffID($_SESSION['useremail']) != "ABREDEMO"){ ?>
+				    $.post("modules/<?php echo basename(__DIR__); ?>/group_process.php", function(data) {
+							$(".modal-content #group_id").val(data.groupid);
+						});
+					<?php }?>
 				$(".modal-content #group_name").val('');
 				$(".modal-footer #deletebutton").css("display", "none");
 		   },
@@ -313,7 +315,7 @@
     	{
 	    	mdlregister();
 	    	$("#searchresults").hide();
-			$("#searchloader").show();
+				$("#searchloader").show();
 
 	    	delay(function()
 	    	{
