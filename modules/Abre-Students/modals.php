@@ -30,63 +30,64 @@
 
 		<!-- Add Group Modal -->
 		<div id="studentgroup" class="fullmodal modal modal-fixed-footer modal-mobile-full">
+			<?php if(GetStaffID($_SESSION['useremail']) != "ABREDEMO"){ ?>
+				<form class="col s12" id="form-studentgroup" method="post" action="modules/<?php echo basename(__DIR__); ?>/group_process.php">
+			<?php } ?>
 				<div class="modal-content" style="padding: 0px !important;">
 					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
 						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Student Group</span></div>
 						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
 					<div style='padding: 0px 24px 0px 24px;'>
-						<?php if(GetStaffID($_SESSION['useremail']) != "ABREDEMO"){
-							echo "<form class='col s12' id='form-studentgroup' method='post' action='modules/<?php echo basename(__DIR__); ?>/group_process.php'>";
-							echo "<div class='row'>";
-								echo "<div class='input-field col s12'><input id='group_name' name='group_name' placeholder='Name of the Group' type='text' required></div>";
-							echo "</div>";
+						<?php if(GetStaffID($_SESSION['useremail']) != "ABREDEMO"){ error_log("yes");?>
+							<div class="row">
+								<div class="input-field col s12"><input id="group_name" name="group_name" placeholder="Name of the Group" type="text" required></div>
+							</div>
 
-							//Tabs
-							echo "<div class='row'>";
-							echo "<ul class='tabs' style='background-color:".getSiteColor().">";
-						    	echo "<li class='tab col s3' id='searchtab'><a class='active' href='#search'>Search</a></li>";
-						        echo "<li class='tab col s3'><a href='#roster'>Roster</a></li>";
-						    echo "</ul>";
-							echo "</div>";
+							<!--Tabs-->
+							<div class="row">
+							<ul class="tabs" style='background-color: <?php echo getSiteColor(); ?>'>
+						    	<li class="tab col s3" id='searchtab'><a class="active" href="#search">Search</a></li>
+						        <li class="tab col s3"><a href="#roster">Roster</a></li>
+						    </ul>
+							</div>
 
-							echo "<div class='row' id='search'>";
-								echo "<div class='row'>";
-									echo "<div class='input-field col s12'>";
-									    echo "<input placeholder='Enter a Student' name='group_search' id='group_search' type='text' style='width:100%;'>";
-										echo "<label for='group_search' class='active'>Search</label>";
-									echo "</div>";
-								echo "</div>";
-								echo "<div class='row'>";
-								echo "<div class='input-field col s12'>";
-									echo "<div id='topicLoader'><div id='p2' class='mdl-progress mdl-js-progress mdl-progress__indeterminate' style='width:100%;'></div></div>";
-									echo "<div id='topicFiles'></div>";
-								echo "</div>";
-								echo "</div>";
-							echo "</div>";
+							<div class="row" id="search">
+								<div class="row">
+									<div class="input-field col s12">
+									    <input placeholder="Enter a Student" name='group_search' id="group_search" type="text" style='width:100%;'>
+										<label for="group_search" class="active">Search</label>
+									</div>
+								</div>
+								<div class="row">
+								<div class="input-field col s12">
+									<div id="topicLoader"><div id="p2" class="mdl-progress mdl-js-progress mdl-progress__indeterminate" style="width:100%;"></div></div>
+									<div id="topicFiles"></div>
+								</div>
+								</div>
+							</div>
 
-							echo "<div class='row' id='roster'>";
-								echo "<div class='row'>";
-								echo "<div class='col s12'>";
-									echo "<div id='currentRoster'></div>";
-								echo "</div>";
-								echo "</div>";
-							echo "</div>";
+							<div class="row" id="roster">
+								<div class="row">
+								<div class="col s12">
+									<div id="currentRoster"></div>
+								</div>
+								</div>
+							</div>
 
-							echo "<input type='hidden' name='group_id' id='group_id'>";
-						echo "</div>";
-			    echo "</div>";
-				 	echo "<div class='modal-footer'>";
-						echo "<button type='submit' class='modal-action waves-effect btn-flat white-text' style='margin-left:5px; background-color:".getSiteColor().">Save</button>";
-					  echo "<a class='modal-close waves-effect btn-flat white-text' style='margin-left:5px; background-color:".getSiteColor().">Close</a>";
-					  echo "<div id='deletebutton' style='display:none;'><a href='#' class='waves-effect btn-flat white-text deletegroup pointer' style='background-color:".getSiteColor().">Delete</a></div>";
-					echo "</div>";
-				echo "</div>";
-				}else{
-						echo "</div>";
-						echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Staff ID Found</span><br><p style='font-size:16px; margin:20px 0 0 0;'>You need to have be a registered staff member in the SIS to create groups!</p></div>";
-					echo "</div>";
-				} ?>
+							<input type="hidden" name="group_id" id="group_id">
+						</div>
+			    </div>
+				 	<div class="modal-footer">
+						<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Save</button>
+					  <a class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Close</a>
+					  <div id="deletebutton" style='display:none;'><a href="#" class="waves-effect btn-flat white-text deletegroup pointer" style='background-color: <?php echo getSiteColor(); ?>'>Delete</a></div>
+					</div>
+				<?php }else{ ?>
+						<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Staff ID Found</span><br><p style='font-size:16px; margin:20px 0 0 0;'>You need to have be a registered staff member in the SIS to create groups!</p></div>
+						</div>
+					</div>
+				<?php } ?>
 			</form>
 		</div>
 
