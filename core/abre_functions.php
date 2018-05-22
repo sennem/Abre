@@ -19,6 +19,12 @@
 	//Include required files
 	require_once(dirname(__FILE__) . '/../configuration.php');
 
+	$cloudsetting=constant("USE_GOOGLE_CLOUD");
+	if ($cloudsetting=="true") 
+		require(dirname(__FILE__). '/../vendor/autoload.php');
+	use Google\Cloud\Storage\StorageClient;
+
+
 	function useApi() {
 
 		if(isset($_SESSION['api_url'])){
@@ -257,10 +263,39 @@
 
 		//Save image to server
 		$im = imagecreatefromstring($data);
-		if(!file_exists("../../../$portal_private_root/guide")){
-			mkdir("../../../$portal_private_root/guide", 0777, true);
+
+		if ($cloudsetting=="true") {
+
+			$storage = new StorageClient([
+				'projectId' => constant("GC_PROJECT")
+			]);	
+			$bucket = $storage->bucket(constant("GC_BUCKET"));	
+
+			$cloud_dir = "private_html/guide/";
+
+			ob_start (); 
+			imagejpeg($im);
+			$image_data = ob_get_contents (); 
+			ob_end_clean ();
+
+			$options = [
+				'resumable' => true,
+				'name' => $cloud_dir . $fileName,
+				'metadata' => [
+					'contentLanguage' => 'en'
+				]
+			];
+			$upload = $bucket->upload(
+				$image_data,
+				$options
+			);
 		}
-		imagejpeg($im, "../../../$portal_private_root/guide/$filename");
+		else {
+			if(!file_exists("../../../$portal_private_root/guide")){
+				mkdir("../../../$portal_private_root/guide", 0777, true);
+			}	
+			imagejpeg($im, "../../../$portal_private_root/guide/$filename");
+		}
 	}
 
 	//Retrieve Site Title
@@ -453,7 +488,15 @@
 			$valuereturn = "/core/images/abre/abre_glyph.png";
 		}else{
 			if($valuereturn != '/core/images/abre/abre_glyph.png'){
-				$valuereturn = "/content/$valuereturn";
+
+				$cloudsetting=constant("USE_GOOGLE_CLOUD");
+				if ($cloudsetting=="true") {
+					$bucket = constant("GC_BUCKET");
+					$valuereturn = "https://storage.googleapis.com/$bucket/content/$valuereturn";
+				}
+				else {
+					$valuereturn = "/content/$valuereturn";
+				}			
 			}else{
 				$valuereturn="/core/images/abre/abre_glyph.png";
 			}

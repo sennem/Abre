@@ -49,6 +49,12 @@
 	//MySQL (The Encryption Key Used to Store Encrypted Data. Must be a 32 Randomly Generated Key)
 	if (!defined('DB_KEY')){ define('DB_KEY','XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'); }
 
+	//Google Cloud Project ID
+	if (!defined('GC_PROJECT')){ define('GC_PROJECT','project_id'); }
+
+	//Google Cloud Storage Bucket
+	if (!defined('GC_BUCKET')){ define('GC_BUCKET','bucket_name'); }
+
 	//Google Console Client ID
 	if (!defined('GOOGLE_CLIENT_ID')){ define('GOOGLE_CLIENT_ID','XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'); }
 

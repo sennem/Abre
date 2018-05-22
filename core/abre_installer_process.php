@@ -179,6 +179,18 @@
 		$txt = "if(!defined('DB_KEY')){ define('DB_KEY', '$randommysqlkey'); }";
 		fwrite($myfile, $txt);
 
+		//Write Google Project ID
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('GC_PROJECT')){ define('GC_PROJECT', '".$_POST['google_project_id']."'); }";
+		fwrite($myfile, $txt);
+
+		//Write Google Storage Bucket
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('GC_BUCKET')){ define('GC_BUCKET', '".$_POST['google_bucket_name']."'); }";
+		fwrite($myfile, $txt);
+		
 		//Write Google Console client ID
 		$txt = "\n";
 		fwrite($myfile, $txt);
