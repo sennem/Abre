@@ -99,22 +99,24 @@
 				}
 		}
 
-		//Make a Copy of ePUB,extract,delete
-		copy("$portal_path_root/../$portal_private_root/books/$sitelogofilename", "$portal_path_root/content/books/$sitelogofilename");
-		$zip = new ZipArchive;
-		$res = $zip->open("$portal_path_root/content/books/$sitelogofilename");
-		if($res === TRUE) {
-			$zip->extractTo("$portal_path_root/content/books/$uniquetime");
-			$zip->close();
-		}
-		unlink("$portal_path_root/content/books/$sitelogofilename");
+		if ($cloudsetting!="true") {
+			//Make a Copy of ePUB,extract,delete
+			copy("$portal_path_root/../$portal_private_root/books/$sitelogofilename", "$portal_path_root/content/books/$sitelogofilename");
+			$zip = new ZipArchive;
+			$res = $zip->open("$portal_path_root/content/books/$sitelogofilename");
+			if($res === TRUE) {
+				$zip->extractTo("$portal_path_root/content/books/$uniquetime");
+				$zip->close();
+			}
+			unlink("$portal_path_root/content/books/$sitelogofilename");
 
-		//Unzip the file
-		$zip = new ZipArchive;
-		$res = $zip->open($portal_path_root."/../$portal_private_root/books/".$uniquetime.'.epub');
-		if($res === TRUE) {
-			$zip->extractTo($portal_path_root."/../$portal_private_root/books/".$uniquetime.'/');
-			$zip->close();
+			//Unzip the file
+			$zip = new ZipArchive;
+			$res = $zip->open($portal_path_root."/../$portal_private_root/books/".$uniquetime.'.epub');
+			if($res === TRUE) {
+				$zip->extractTo($portal_path_root."/../$portal_private_root/books/".$uniquetime.'/');
+				$zip->close();
+			}
 		}
 
 		//Create coupon code
@@ -136,11 +138,20 @@
 				$fileextention=pathinfo($file, PATHINFO_EXTENSION);
 				$cleanfilename=basename($file);
 				$sitelogofilename = $uniquetime . ".png";
-				$uploaddir = $portal_path_root."/../$portal_private_root/books/";
+				if ($cloudsetting=="true") {
+					$storage = new StorageClient([
+						'projectId' => constant("GC_PROJECT")
+					]);	
+					$bucket = $storage->bucket(constant("GC_BUCKET"));
+				}
+				else {
+					$uploaddir = $portal_path_root."/../$portal_private_root/books/";
 
-				//Upload new image
-				$sitelogo = $uploaddir . $sitelogofilename;
-				move_uploaded_file($_FILES['bookcover']['tmp_name'], $sitelogo);
+					//Upload new image
+					$sitelogo = $uploaddir . $sitelogofilename;
+					move_uploaded_file($_FILES['bookcover']['tmp_name'], $sitelogo);
+
+				}
 		}    
 	}
 	else

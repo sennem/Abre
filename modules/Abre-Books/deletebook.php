@@ -76,12 +76,6 @@
 					$cloud_book = "private_html/books/books/" . $Slug . '.png';
 					$object = $bucket->object($cloud_book);
 					$object->delete();
-
-					//Delete extracted epub folder
-					$cloud_book = "private_html/books/books/" . $Slug;
-					$object = $bucket->object($cloud_book);
-					$object->delete();
-
 				}
 				else {			
 					//Delete epub
