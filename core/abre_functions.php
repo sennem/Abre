@@ -55,7 +55,7 @@
 		}
 	}
 
-	//Find user ID given an email
+	//Determine if users is superadmin or district admin
 	function admin(){
 		include "abre_dbconnect.php";
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
@@ -77,6 +77,7 @@
 		return false;
 	}
 
+	//Determine if a user is a superadmin
 	function superadmin(){
 		include "abre_dbconnect.php";
 		$sql = "SELECT COUNT(*) FROM users WHERE email = '".$_SESSION['useremail']."' AND superadmin = 1";
@@ -131,6 +132,44 @@
 		}else{
 			return true;
 		}
+	}
+
+	//returns an array containing all school codes and school names for a given
+	//district
+	function getAllSchoolCodesAndNames(){
+		require('abre_dbconnect.php');
+		$schoolResults = array();
+		if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+			$sql = "SELECT SchoolCode, SchoolName FROM Abre_Students ORDER BY SchoolCode";
+			$query = $db->query($sql);
+			while($results = $query->fetch_assoc()){
+				if($results['SchoolCode'] == ''){
+					continue;
+				}else{
+					$schoolResults[$results['SchoolCode']] = $results['SchoolName'];
+				}
+			}
+		}
+		$db->close();
+		return $schoolResults;
+	}
+
+	//returns an array containing all school codes for a district
+	function getAllSchoolCodes(){
+		require('abre_dbconnect.php');
+		$schoolCodes = array();
+		if($db->query("SELECT * FROM Abre_Students LIMIT 1")){
+			$sql = "SELECT SchoolCode FROM Abre_Students ORDER BY SchoolCode";
+			$query = $db->query($sql);
+			while($results = $query->fetch_assoc()){
+					array_push($schoolCodes, $results['SchoolCode']);
+				}
+			}
+		if(sizeof($schoolCodes) != 0){
+			$schoolCodes = array_unique($schoolCodes, SORT_REGULAR);
+		}
+		$db->close();
+		return $schoolCodes;
 	}
 
 	//set verified session data for parent
@@ -718,6 +757,10 @@
 	}
 
 	function isAppActive($appName){
+		//return true if any of these apps are checked. This is primarily used for the edit widgets view.
+		if($appName == "calendar" || $appName == "classroom" || $appName == "drive" || $appName == "mail"){
+			return true;
+		}
 		include "abre_dbconnect.php";
 		$sql = "SELECT COUNT(*) FROM apps_abre WHERE app='$appName' AND active = 1";
 		$query = $db->query($sql);
