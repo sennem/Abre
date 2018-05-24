@@ -17,8 +17,8 @@
     */
 
     echo "<div class='copyrighttext' style='position: fixed; bottom:10px; width:100%; text-align:center;'>";
-    	echo " <a class='copyrighttext' href='https://abre.io' target='_blank'>";
-        echo "Powered by ";
+    	echo " <a href='https://abre.io' target='_blank'>";
+        echo "<span class='copyrighttext'>Powered by <span>";
         echo "<img class='hide-on-small-only' src='/core/images/abre/abre_logo_negative.png' style='margin-left:2px; margin-bottom:3px;' height='20' width='63'>";
         echo "<img class='hide-on-med-and-up' src='/core/images/abre/abre_logo.png' style='margin-left:2px; margin-bottom:3px;' height='20' width='63'>";
       echo "</a>";
