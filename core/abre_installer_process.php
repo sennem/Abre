@@ -111,7 +111,7 @@
 	    }
 
 			//Create required database tables
-		$sql = "CREATE TABLE `users` (`id` int(11) NOT NULL,`email` text NOT NULL,`superadmin` int(11) NOT NULL DEFAULT '0',`admin` int(11) NOT NULL DEFAULT '0',`refresh_token` text NOT NULL,`cookie_token` text NOT NULL, `auth_service` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1;";
+		$sql = "CREATE TABLE `users` (`id` int(11) NOT NULL,`email` text NOT NULL,`superadmin` int(11) NOT NULL DEFAULT '0',`admin` int(11) NOT NULL DEFAULT '0',`refresh_token` text NOT NULL,`cookie_token` text NOT NULL, `auth_service` text NOT NULL) ENGINE=InnoDB DEFAULT CHARSET=latin1";
 		$sql .= "ALTER TABLE `users` ADD PRIMARY KEY (`id`);";
 		$sql .= "ALTER TABLE `users` MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;";
 
@@ -152,7 +152,7 @@
 		fwrite($myfile, $txt);
 		$txt = "if(!defined('DB_SOCKET')){ define('DB_SOCKET', '".$_POST['db_socket']."'); }";
 		fwrite($myfile, $txt);
-		
+
 		//Write MySQL name
 		$txt = "\n";
 		fwrite($myfile, $txt);
@@ -240,7 +240,7 @@
 		//Write Google scopes
 		$txt = "\n";
 		fwrite($myfile, $txt);
-		$txt = "if(!defined('GOOGLE_SCOPES')){ define('GOOGLE_SCOPES', serialize (array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/gmail.modify', 'https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.rosters.readonly'))); }";
+		$txt = "if(!defined('GOOGLE_SCOPES')){ define('GOOGLE_SCOPES', serialize (array('https://www.googleapis.com/auth/userinfo.email','https://www.googleapis.com/auth/gmail.modify', 'https://www.googleapis.com/auth/drive.readonly', 'https://www.googleapis.com/auth/calendar.readonly', 'https://www.googleapis.com/auth/classroom.courses.readonly', 'https://www.googleapis.com/auth/classroom.rosters.readonly'))); }";
 		fwrite($myfile, $txt);
 
 		//Write stream cache setting

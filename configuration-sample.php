@@ -74,7 +74,6 @@
 
 	if (!defined('GOOGLE_SCOPES')){ define('GOOGLE_SCOPES',serialize (array(
 		'https://www.googleapis.com/auth/userinfo.email',
-		'https://www.googleapis.com/auth/plus.login',
 		'https://www.googleapis.com/auth/gmail.modify',
 		'https://www.googleapis.com/auth/drive.readonly',
 		'https://www.googleapis.com/auth/calendar.readonly',
