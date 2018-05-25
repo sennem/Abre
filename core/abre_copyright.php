@@ -22,6 +22,6 @@
         echo "<img class='hide-on-small-only' src='/core/images/abre/abre_logo_negative.png' style='margin-left:2px; margin-bottom:3px;' height='20' width='63'>";
         echo "<img class='hide-on-med-and-up' src='/core/images/abre/abre_logo.png' style='margin-left:2px; margin-bottom:3px;' height='20' width='63'>";
       echo "</a>";
-    echo "</a>";
+    echo "</div>";
 
 ?>
