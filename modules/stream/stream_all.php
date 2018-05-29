@@ -290,7 +290,11 @@
 		$owner = $feeds[$cardcountloop]['owner'];
 
 		//Add images to server to securely store and reference
-		include "stream_save_image.php";
+		$cloudsetting=constant("USE_GOOGLE_CLOUD");
+		if ($cloudsetting=="true") 
+			include "stream_save_image_gc.php";
+		else
+			include "stream_save_image.php";
 
 		$link = mysqli_real_escape_string($db, $linkraw);
 		if (useAPI()) {

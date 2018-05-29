@@ -150,7 +150,7 @@
 		//Write MySQL cloud socket
 		$txt = "\n";
 		fwrite($myfile, $txt);
-		$txt = "if(!defined('DB_SOCKET')){ define('DB_SOCKET', '".$_POST['db_socket']."'); }";
+		$txt = "if(!defined('DB_SOCKET')){ define('DB_SOCKET', NULL); }";
 		fwrite($myfile, $txt);
 		
 		//Write MySQL name
@@ -179,6 +179,18 @@
 		$txt = "if(!defined('DB_KEY')){ define('DB_KEY', '$randommysqlkey'); }";
 		fwrite($myfile, $txt);
 
+		//Write Google Project ID
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('GC_PROJECT')){ define('GC_PROJECT', NULL); }";
+		fwrite($myfile, $txt);
+
+		//Write Google Storage Bucket
+		$txt = "\n";
+		fwrite($myfile, $txt);
+		$txt = "if(!defined('GC_BUCKET')){ define('GC_BUCKET', NULL); }";
+		fwrite($myfile, $txt);
+		
 		//Write Google Console client ID
 		$txt = "\n";
 		fwrite($myfile, $txt);

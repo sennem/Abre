@@ -20,16 +20,29 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
+	$cloudsetting=constant("USE_GOOGLE_CLOUD");
+	if ($cloudsetting=="true") 
+		require(dirname(__FILE__). '/../../vendor/autoload.php');
+	use Google\Cloud\Storage\StorageClient;
+	
+
 	//Check for feed image
 	if($image != ""){
-		
+
+		$storage = new StorageClient([
+			'projectId' => constant("GC_PROJECT")
+		]);	
+		$bucket = $storage->bucket(constant("GC_BUCKET"));	
+			
 		//Determine if Custom or Feed Post
 		if ($type=="custom"){
 			
-			$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$image;
-			if (file_exists($filename)){
+			//$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/" .$image;
+			$cloud_file = "private_html/stream/cache/images/$image";
+			if ($bucket->object($cloud_file)->exists()){
+
 				$fileExtension = pathinfo($filename, PATHINFO_EXTENSION);
-				$image = $portal_root."/modules/stream/stream_serve_image.php?file=$image&ext=$fileExtension";
+				$image = $portal_root."/modules/stream/stream_serve_image.php?file=$cloud_file&ext=$fileExtension";
 			}
 			else
 			{
@@ -47,14 +60,18 @@
 				$fileExtension = substr($fileExtension, 0, 3);
 				if($fileExtension == "jpe"){ $fileExtension="jpeg"; }
 				$imagefile = $date."_rss.$fileExtension";
-				$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/$imagefile";
-	
-				//If it already saved, read from local server
-				if (file_exists($filename)){
+				//$filename = $portal_path_root . "/../$portal_private_root/stream/cache/images/$imagefile";
 
-					$image = $portal_root."/modules/stream/stream_serve_image.php?file=$imagefile&ext=$fileExtension";
-					if(filesize($filename) < 1000){
-						$image = "";
+				$cloud_file = "private_html/stream/cache/images/$imagefile";
+
+				//If it already saved, read from local server
+				if ($bucket->object($cloud_file)->exists()){
+
+					$image = $portal_root."/modules/stream/stream_serve_image.php?file=$cloud_file&ext=$fileExtension";
+
+					$info = $bucket->object($cloud_file)->info();
+					if ($info['size'] < 1000) {
+						$image = "";						
 					}
 				}else{
 					//Check for 404 and 403 errors
@@ -65,25 +82,34 @@
 					}else{
 						//Make sure file is an image
 						if(@exif_imagetype($image)){
-							
-							//Save image to server
-							$fileExtension = pathinfo($image, PATHINFO_EXTENSION);
-							$local_file = $portal_path_root . "/../$portal_private_root/stream/cache/images/$imagefile";
 							$remote_file = $image;
+
 							$ch = curl_init();
-							$fp = fopen ($local_file, 'w+');
-							$ch = curl_init($remote_file);
-							curl_setopt($ch, CURLOPT_TIMEOUT, 50);
-							curl_setopt($ch, CURLOPT_FILE, $fp);
-							curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-							curl_setopt($ch, CURLOPT_ENCODING, "");
-							curl_exec($ch);
+							curl_setopt($ch, CURLOPT_URL, $remote_file);
+							curl_setopt($ch, CURLOPT_HEADER, 0);
+							curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+							curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+							$picture = curl_exec($ch);
+							$contentType = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
 							curl_close($ch);
-							fclose($fp);
-							
+
+							$options = [
+								'resumable' => true,
+								'name' => $cloud_file,
+								'metadata' => [
+									'contentLanguage' => 'en',
+									'contentType' => $contentType
+								]
+							];
+
+							$object = $bucket->upload(
+								$picture,
+								$options
+							);
+
 							//Resize image
-							ResizeImage($local_file, "1000", "90");
-							
+							//ResizeImage($local_file, "1000", "90");
+													
 						}else{
 							$image = "";
 						}
