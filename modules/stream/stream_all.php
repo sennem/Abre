@@ -255,18 +255,21 @@
 	$cardcount = 0;
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){
 		$date = $feeds[$cardcountloop]['date'];
+
+		//Title
 		$title = $feeds[$cardcountloop]['title'];
 		$title = str_replace("<p>", " ", $title);
 		$title = strip_tags(html_entity_decode($title));
-		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
 		$title = str_replace("'",'"',$title);
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
 		$title = str_replace('—',"-",$title);
+		$title = preg_replace('/\b((https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', ' ', $title);
+
+		//Excerpt
 		$excerpt = $feeds[$cardcountloop]['excerpt'];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));
-		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
 		$excerpt = str_replace("'",'"',$excerpt);
 		$excerpt = str_replace('"',"'",$excerpt);
 		$excerpt = str_replace('’',"'",$excerpt);
@@ -296,7 +299,7 @@
 
 			//Counts
 			$num_rows_comment = $result['counts']['comments'];
-			$num_rows_like = $result['counts']['likes'];                            
+			$num_rows_like = $result['counts']['likes'];
 		}
 		else {
 			//Comment count
