@@ -219,7 +219,7 @@
 
 										include(dirname(__FILE__) . '/../'.$result.'/widget_config.php');
 
-										if(strpos($restrictions,$_SESSION['usertype']) === false && strpos($services, $_SESSION['auth_service']) !== false){
+										if(strpos($restrictions,$_SESSION['usertype']) === false && strpos($services, $_SESSION['auth_service']) !== false && isAppActive($result)){
 
 											$widgetcounter++;
 

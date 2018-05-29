@@ -19,15 +19,11 @@
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once('functions.php');
+  require_once(dirname(__FILE__) . '/../../modules/stream/functions.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if($_SESSION['usertype'] != 'parent'){
-		if($_SESSION['auth_service'] == "google"){
-			DisplayWidget('calendar','event','Calendar','#2196F3','https://calendar.google.com', true);
-		}
-		if($_SESSION['auth_service'] == "microsoft"){
-			DisplayWidget('calendar','event','Calendar','#2196F3','https://outlook.live.com/', true);
-		}
+	if($_SESSION['usertype'] == 'staff' && isAppActive("Abre-Assessments")){
+		DisplayWidget('Abre-Assessments','assessment','Assessments','#009688', $portal_root.'/#assessments', false);
 	}
 
 ?>

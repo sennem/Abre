@@ -16,18 +16,8 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once('functions.php');
-
-	if($_SESSION['usertype'] != 'parent'){
-		if($_SESSION['auth_service'] == "google"){
-			DisplayWidget('calendar','event','Calendar','#2196F3','https://calendar.google.com', true);
-		}
-		if($_SESSION['auth_service'] == "microsoft"){
-			DisplayWidget('calendar','event','Calendar','#2196F3','https://outlook.live.com/', true);
-		}
-	}
+    $pagetitle = "Forms";
+    $restrictions = "";
+		$services = "google, microsoft, facebook";
 
 ?>
