@@ -29,7 +29,7 @@
 		//Login Holder
 		echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre/abre_pattern.png); '>";
 
-			echo "<div class='login_wrapper' style='z-index:100;'>";
+			echo "<div class='login_wrapper' style='z-index:1;'>";
 				echo "<div class='login-card-square mdl-card'>";
 
 						//Site Logo
