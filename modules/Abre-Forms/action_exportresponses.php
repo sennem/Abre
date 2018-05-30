@@ -25,14 +25,13 @@
 	if($_SESSION['usertype'] == "staff" || admin() || isFormsAdministrator())
 	{
 
-		//Get POST Data
+		//Get GET Data
 		if(isset($_GET["formid"])){
       $formId = htmlspecialchars($_GET["formid"], ENT_QUOTES);
     }else{
       $formId = "";
     }
 
-		//Add or update the course
 		if($formId == ""){
       echo "There was an error retrieving the form ID. Please try again!";
 		}else{
