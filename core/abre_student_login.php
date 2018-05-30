@@ -42,9 +42,11 @@
 						echo "<div class='loginholder'>";
 
 							//Display SSO Options
-							echo "<div style='padding-top: 10px'>";
-								include "abre_button_google.php";
-							echo "</div>";
+							if(getSiteGoogleSignInGroups('students') == "checked" && getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== ''){
+								echo "<div style='padding-top: 10px'>";
+									include "abre_button_google.php";
+								echo "</div>";
+							}
 							if(getSiteMicrosoftSignInGroups('students') == "checked" && getSiteMicrosoftClientId() !== '' && getSiteMicrosoftClientSecret() !== ''){
 								echo "<div style='padding-top: 10px'>";
 									include "abre_button_microsoft.php";
