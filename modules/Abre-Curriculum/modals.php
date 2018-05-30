@@ -89,6 +89,24 @@
 							<label for="course_hidden">Hide Course</label>
 						</div>
 					</div>
+					<?php if(isAppActive("Abre-Learn")){ ?>
+						<div class="row">
+							<div class="col s12">
+								<input type="checkbox" class="filled-in" id="learn_course" name="learn_course" value="1" />
+								<label for="learn_course">Make course available in the Learn App</label>
+								<br><br>
+								<div id='learnRestrictionsDiv'>
+									<label>Limit course to</label>
+									<select name="learnRestrictions[]" id="learnRestrictions" multiple>
+										<option value='' disabled>Choose a role</option>
+										<option value='staff'>Staff</option>
+										<option value='student'>Students</option>
+										<option value='parent'>Parents</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
 
 					<input type="hidden" name="course_id" id="course_id">
 				</div>
@@ -431,6 +449,14 @@
 
 	$(function()
 	{
+
+		$("#learn_course").change(function(){
+			if($(this).is(':checked')){
+				$("#learnRestrictionsDiv").show();
+			}else{
+				$("#learnRestrictionsDiv").hide();
+			}
+		});
 
 		$('select').material_select();
 

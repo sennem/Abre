@@ -50,18 +50,18 @@
 		if($searchquery == ""){
 			if($pagerestrictionsedit == ""){
 				$querycount = "SELECT COUNT(*) FROM curriculum_course";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors FROM curriculum_course ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}else{
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE Hidden = '0'";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors FROM curriculum_course WHERE Hidden = '0' ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE Hidden = '0' ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}
 		}else{
 			if($pagerestrictionsedit == ""){
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery')";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}else{
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE Hidden = '0' AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery')";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors FROM curriculum_course WHERE Hidden = '0'AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE Hidden = '0'AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}
 		}
 
@@ -99,6 +99,8 @@
 			$Grade = htmlspecialchars($row["Grade"], ENT_QUOTES);
 			$Image = htmlspecialchars($row["Image"], ENT_QUOTES);
 			$Editors = htmlspecialchars($row["Editors"], ENT_QUOTES);
+			$Learn_Course = $row['Learn_Course'];
+			$Restrictions = htmlspecialchars($row['Restrictions'], ENT_QUOTES);
 			if($Image == ""){ $Image = "course.jpg"; }
 
 			echo "<tr class='courserow pointer'>";
@@ -125,7 +127,7 @@
 						}
 
 						if($pagerestrictionsedit == ""){
-							echo "<li class='mdl-menu__item modal-addcourse' href='#curriculumcourse' data-title='$Title' data-grade='$Grade' data-subject='$Subject' data-courseid='$Course_ID' data-editors='$Editors' data-coursehidden='$Course_Hidden' style='font-weight:400'>Edit</a></li>";
+							echo "<li class='mdl-menu__item modal-addcourse' href='#curriculumcourse' data-title='$Title' data-grade='$Grade' data-subject='$Subject' data-courseid='$Course_ID' data-editors='$Editors' data-coursehidden='$Course_Hidden' data-learncourse='$Learn_Course' data-restrictions='$Restrictions' style='font-weight:400'>Edit</a></li>";
 							echo "<li class='mdl-menu__item duplicatecourse' data-courseid='$Course_ID'>Duplicate</li>";
 							echo "<li class='mdl-menu__item deletecourse' data-courseid='$Course_ID'>Delete</li>";
 						}
@@ -253,6 +255,13 @@
 			}else{
 				$(".modal-content #course_hidden").prop('checked',false);
 			}
+			var Learn_Course = $(this).data('learncourse');
+			if(Learn_Course == '1'){
+				$(".modal-content #learn_course").prop('checked',true);
+			}else{
+				$(".modal-content #learn_course").prop('checked',false);
+			}
+
 			var Course_ID = $(this).data('courseid');
 			$(".modal-content #course_id").val(Course_ID);
 			var Course_Title = $(this).data('title');
@@ -278,10 +287,28 @@
 				$("#course_subject option[value='']").prop('selected',true);
 			}
 
+			var restrictions = $(this).data('restrictions');
+			if(restrictions != ""){
+				if(restrictions.indexOf(',') >= 0){
+					var dataarray = restrictions.split(",");
+					$("#learnRestrictions").val(dataarray);
+				}else{
+					$("#learnRestrictions").val(restrictions);
+				}
+			}else{
+				$("#learnRestrictions").val('');
+			}
+
+			if($("#learn_course").is(':checked')){
+				$("#learnRestrictionsDiv").show();
+			}else{
+				$("#learnRestrictionsDiv").hide();
+			}
+
 			$('#curriculumcourse').openModal({
 				in_duration: 0,
 				out_duration: 0,
-				ready: function() { $("#course_title").focus(); }
+				ready: function() { $("#course_title").focus(); $('.modal-content').scrollTop(0); $('select').material_select(); }
 			});
 
 		});
