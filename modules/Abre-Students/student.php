@@ -90,11 +90,11 @@
 						include "student_attendance.php";
 					echo "</div>";
 
-					echo "<div id='conduct'>";
-						if(isAppActive("Abre-Conduct")){
+					if(isAppActive("Abre-Conduct")){
+						echo "<div id='conduct'>";
 							include "student_conduct.php";
-						}
-					echo "</div>";
+						echo "</div>";
+					}
 				echo "</div>";
 
 			echo "</div>";
@@ -113,7 +113,7 @@
 
 					//Break
 					echo "<hr>";
-					if($Password != "" && $Username != "" && $_SESSION['usertype'] == "staff"){
+					if($Password != "" && $Username != "" && $pagerestrictions == ""){
 						echo "<h5>Student Login<i class='pointer material-icons' id='displayInfo' style='float:right;'>visibility</i></h5>";
 						echo "<p id='loginInformation' style='display:none;'>";
 							echo "<b>Username:</b> $Username<br>";
@@ -129,7 +129,13 @@
 							if($Gender!=""){ echo "<b>Gender:</b> $Gender<br>"; }
 							if($CurrentGrade!=""){ echo "<b>Grade:</b> $CurrentGrade<br>"; }
 							if($IEP!=""){ echo "<b>IEP Status:</b> $IEP<br>"; }
-							if($Gifted!=""){ echo "<b>Gifted Status:</b> $Gifted<br>"; }
+							if($Gifted!=""){
+								if($Gifted == "Y" && $pagerestrictions == ""){
+									echo "<b>Gifted Status:</b> $Gifted<i class='pointer material-icons' id='displayGiftedDetails' style='float:right;'>visibility</i><br>";
+								}else{
+									echo "<b>Gifted Status:</b> $Gifted<br>";
+								}
+							}
 							if($ELL!=""){ echo "<b>ELL Status:</b> $ELL<br>"; }
 
 							//Student Email
@@ -327,7 +333,19 @@
 				$("#studentPassword").text("");
 				$("#displayInfo").text('visibility');
 			}
-		})
+		});
+
+		$("#displayGiftedDetails").off().on('click', function(){
+			var studentID = "<?php echo $Student_ID ?>";
+
+			$('#giftedDetailsModal').openModal({
+				in_duration: 0,
+				out_duration: 0,
+				ready: function() {
+					$("#giftedDetails").load('/modules/Abre-Students/gifteddetails.php?studentID='+studentID);
+				}
+			});
+		});
 
 	});
 
