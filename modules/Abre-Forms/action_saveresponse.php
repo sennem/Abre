@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	$cloudsetting=constant("USE_GOOGLE_CLOUD");
-	if ($cloudsetting=="true") 
+	if ($cloudsetting=="true")
 		require(dirname(__FILE__). '/../../vendor/autoload.php');
 	use Google\Cloud\Storage\StorageClient;
 
@@ -32,6 +32,18 @@
 			$formDataArray = json_decode($_POST['json'], true);
 		}else{
 			$formDataArray = "";
+		}
+
+		if(isset($formDataArray['formid'])){
+			$formid = $formDataArray['formid'];
+			unset($formDataArray["formid"]);
+		}else{
+			$formid = '';
+		}
+
+		if(isset($formDataArray['headline_formID'])){
+			$formid = $formDataArray['headline_formID'];
+			unset($formDataArray['headline_formID']);
 		}
 
 		foreach($_FILES as $key=>$value){
@@ -44,10 +56,10 @@
 					if ($cloudsetting=="true") {
 						$storage = new StorageClient([
 							'projectId' => constant("GC_PROJECT")
-						]);	
-						$bucket = $storage->bucket(constant("GC_BUCKET"));				
-						$uploaddir = "private_html/Abre-Forms/".$formDataArray['formid']."/" . $file_name;
-						$upload = "private_html/Abre-Forms/".$formDataArray['formid']."/";
+						]);
+						$bucket = $storage->bucket(constant("GC_BUCKET"));
+						$uploaddir = "private_html/Abre-Forms/".$formid."/" . $file_name;
+						$upload = "private_html/Abre-Forms/".$formid."/";
 						if (!$bucket->object($upload)->exists()){
 						}
 
@@ -72,7 +84,7 @@
 								$filename = $fileNameNoExtension." ($i).".$fileextension;
 								$hashedFileName = sha1($filename);
 								$file_name = $hashedFileName.".".$fileextension;
-								$uploaddir = "private_html/Abre-Forms/".$formDataArray['formid']."/" . $file_name;
+								$uploaddir = "private_html/Abre-Forms/".$formid."/" . $file_name;
 								$i++;
 							}
 
@@ -90,9 +102,9 @@
 						}
 					}
 					else {
-						$uploaddir = $portal_path_root . "/../$portal_private_root/Abre-Forms/".$formDataArray['formid']."/" . $file_name;
-						if(!file_exists($portal_path_root . "/../$portal_private_root/Abre-Forms/".$formDataArray['formid']."/")){
-							mkdir($portal_path_root . "/../$portal_private_root/Abre-Forms/".$formDataArray['formid']."/", 0775);
+						$uploaddir = $portal_path_root . "/../$portal_private_root/Abre-Forms/".$formid."/" . $file_name;
+						if(!file_exists($portal_path_root . "/../$portal_private_root/Abre-Forms/".$formid."/")){
+							mkdir($portal_path_root . "/../$portal_private_root/Abre-Forms/".$formid."/", 0775);
 						}
 						if(!file_exists($uploaddir)){
 							move_uploaded_file($value['tmp_name'], $uploaddir);
@@ -103,11 +115,11 @@
 								$filename = $fileNameNoExtension." ($i).".$fileextension;
 								$hashedFileName = sha1($filename);
 								$file_name = $hashedFileName.".".$fileextension;
-								$uploaddir = $portal_path_root . "/../$portal_private_root/Abre-Forms/".$formDataArray['formid']."/" . $file_name;
+								$uploaddir = $portal_path_root . "/../$portal_private_root/Abre-Forms/".$formid."/" . $file_name;
 								$i++;
 							}
 							move_uploaded_file($value['tmp_name'], $uploaddir);
-						}	
+						}
 					}
 
 					$fileFieldName = str_replace("_", " ", $key);
@@ -118,12 +130,7 @@
 				}
 			}
 		}
-		if(isset($formDataArray['formid'])){
-			$formid = $formDataArray['formid'];
-			unset($formDataArray["formid"]);
-		}else{
-			$formid = '';
-		}
+
 		if(isset($formDataArray['formsubmitter'])){
 			$formsubmitter = $formDataArray['formsubmitter'];
 			unset($formDataArray['formsubmitter']);
@@ -147,6 +154,17 @@
 			unset($formDataArray['formName']);
 		}else{
 			$formName = '';
+		}
+
+		if(isset($formDataArray['headline_purpose'])){
+			unset($formDataArray['headline_purpose']);
+		}
+		if(isset($formDataArray['headline_id'])){
+			unset($formDataArray['headline_id']);
+		}
+
+		if($formsubmitter == ""){
+			$formsubmitter = $_SESSION['useremail'];
 		}
 
 		$response = json_encode($formDataArray);

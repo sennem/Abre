@@ -262,6 +262,23 @@
 				}
 			});
 
+			if($("#headline_purpose").val() == "form"){
+				var formData = new FormData(this);
+				formData.append('json', JSON.stringify(output));
+
+				$.ajax({
+					url: '/modules/Abre-Forms/action_saveresponse.php',
+					type:"POST",
+					enctype: 'multipart/form-data',
+					processData:false,
+					contentType: false,
+					data: formData,
+				})
+				.done(function (response){
+
+				});
+			}
+
 			$.ajax({
 				type: 'POST',
 				url: 'modules/profile/save_headline_reponse.php',
