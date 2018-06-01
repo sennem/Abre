@@ -44,20 +44,24 @@
 		$restrictions = '';
 	}
 
+	if(isset($_POST['course_tags'])){ $course_tags = $_POST['course_tags']; }else{ $course_tags = ""; }
+
+	if(isset($_POST['course_description'])){ $course_description = $_POST['course_description']; }else{ $course_description = ""; }
+
 	//Add or update the course
 	if($course_id == ""){
 		$stmt = $db->stmt_init();
-		$sql = "INSERT INTO curriculum_course (Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO curriculum_course (Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt->prepare($sql);
-		$stmt->bind_param("isssssis", $course_hidden, $course_title, $course_subject, $course_grade, $course_image, $course_editors, $learn_course, $restrictions);
+		$stmt->bind_param("issssssiss", $course_hidden, $course_title, $course_description, $course_subject, $course_grade, $course_image, $course_editors, $learn_course, $restrictions, $course_tags);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();
 	}else{
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE curriculum_course SET Hidden = ?, Title = ?, Subject = ?, Grade = ?, Editors = ?, Learn_Course = ?, Restrictions = ? WHERE ID = ?";
+		$sql = "UPDATE curriculum_course SET Hidden = ?, Title = ?, Description = ?, Subject = ?, Grade = ?, Editors = ?, Learn_Course = ?, Restrictions = ?, Tags = ? WHERE ID = ?";
 		$stmt->prepare($sql);
-		$stmt->bind_param("issssisi", $course_hidden, $course_title, $course_subject, $course_grade, $course_editors, $learn_course, $restrictions, $course_id);
+		$stmt->bind_param("isssssissi", $course_hidden, $course_title, $course_description, $course_subject, $course_grade, $course_editors, $learn_course, $restrictions, $course_tags, $course_id);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();

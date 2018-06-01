@@ -50,18 +50,18 @@
 		if($searchquery == ""){
 			if($pagerestrictionsedit == ""){
 				$querycount = "SELECT COUNT(*) FROM curriculum_course";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags FROM curriculum_course ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}else{
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE Hidden = '0'";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE Hidden = '0' ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags FROM curriculum_course WHERE Hidden = '0' ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}
 		}else{
 			if($pagerestrictionsedit == ""){
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery')";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}else{
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE Hidden = '0' AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery')";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE Hidden = '0'AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags FROM curriculum_course WHERE Hidden = '0'AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}
 		}
 
@@ -101,6 +101,8 @@
 			$Editors = htmlspecialchars($row["Editors"], ENT_QUOTES);
 			$Learn_Course = $row['Learn_Course'];
 			$Restrictions = htmlspecialchars($row['Restrictions'], ENT_QUOTES);
+			$Description = htmlspecialchars($row['Description'], ENT_QUOTES);
+			$Tags = htmlspecialchars($row['Tags'], ENT_QUOTES);
 			if($Image == ""){ $Image = "course.jpg"; }
 
 			echo "<tr class='courserow pointer'>";
@@ -127,7 +129,7 @@
 						}
 
 						if($pagerestrictionsedit == ""){
-							echo "<li class='mdl-menu__item modal-addcourse' href='#curriculumcourse' data-title='$Title' data-grade='$Grade' data-subject='$Subject' data-courseid='$Course_ID' data-editors='$Editors' data-coursehidden='$Course_Hidden' data-learncourse='$Learn_Course' data-restrictions='$Restrictions' style='font-weight:400'>Edit</a></li>";
+							echo "<li class='mdl-menu__item modal-addcourse' href='#curriculumcourse' data-title='$Title' data-grade='$Grade' data-subject='$Subject' data-courseid='$Course_ID' data-editors='$Editors' data-coursehidden='$Course_Hidden' data-learncourse='$Learn_Course' data-restrictions='$Restrictions' data-description='$Description' data-tags='$Tags' style='font-weight:400'>Edit</a></li>";
 							echo "<li class='mdl-menu__item duplicatecourse' data-courseid='$Course_ID'>Duplicate</li>";
 							echo "<li class='mdl-menu__item deletecourse' data-courseid='$Course_ID'>Delete</li>";
 						}
@@ -266,6 +268,8 @@
 			$(".modal-content #course_id").val(Course_ID);
 			var Course_Title = $(this).data('title');
 			$(".modal-content #course_title").val(Course_Title);
+			var Course_Description = $(this).data('description');
+			$(".modal-content #course_description").val(Course_Description);
 			var Course_Grade = $(this).data('grade');
 			var Course_Editors = $(this).data('editors');
 			$(".modal-content #course_editors").val(Course_Editors);
@@ -298,6 +302,9 @@
 			}else{
 				$("#learnRestrictions").val('');
 			}
+
+			var tags = $(this).data('tags');
+			$(".modal-content #course_tags").val(tags);
 
 			if($("#learn_course").is(':checked')){
 				$("#learnRestrictionsDiv").show();

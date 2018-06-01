@@ -32,88 +32,102 @@
 				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 			</div>
 			<div style='padding: 0px 24px 0px 24px;'>
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="course_title" name="course_title" placeholder="Title of the Course" type="text" required>
-							<label class="active" id="course_title">Course Title</label>
-						</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="course_title" name="course_title" placeholder="Title of the Course" type="text" required>
+						<label class="active" id="course_title">Course Title</label>
 					</div>
-					<div class="row">
-						<div class="col s6">
-							<label class="active">Grade Level</label>
-							<select name='course_grade[]' id='course_grade' class="browser-default" style='height: 100px;' required='required' multiple>
-								<option value='Pre-K'>Pre-K</option>
-								<option value='K'>K</option>
-							  <option value='1'>1</option>
-							  <option value='2'>2</option>
-							  <option value='3'>3</option>
-							  <option value='4'>4</option>
-								<option value='5'>5</option>
-							  <option value='6'>6</option>
-							  <option value='7'>7</option>
-							  <option value='8'>8</option>
-							  <option value='9'>9</option>
-							  <option value='10'>10</option>
-							  <option value='11'>11</option>
-							  <option value='12'>12</option>
-						  </select>
-						</div>
-						<div class="col s6">
-							<label class="active">Subject</label>
-							<select name='course_subject' id='course_subject' class="browser-default" required>
-								<option value=''></option>
-								<option value='Arts'>Arts</option>
-								<option value='English Language Arts'>English Language Arts</option>
-								<option value='Health & Physical Education'>Health & Physical Education</option>
-								<option value='Mathematics'>Mathematics</option>
-								<option value='Professional Development'>Professional Development</option>
-							  <option value='Science'>Science</option>
-							  <option value='Social Studies'>Social Studies</option>
-								<option value='Special Education'>Special Education</option>
-							  <option value='Technology'>Technology</option>
-							  <option value='Miscellaneous'>Miscellaneous</option>
-						  </select>
-						</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<textarea class="materialize-textarea" id="course_description" name="course_description" placeholder="Description of the Course (limit 240 char)" maxlength="240"></textarea>
+						<label class="active" id="course_description">Course Description</label>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col s6">
+						<label class="active">Grade Level</label>
+						<select name='course_grade[]' id='course_grade' class="browser-default" style='height: 100px;' required='required' multiple>
+							<option value='staff'>Staff</option>
+							<option value='Pre-K'>Pre-K</option>
+							<option value='K'>K</option>
+						  <option value='1'>1</option>
+						  <option value='2'>2</option>
+						  <option value='3'>3</option>
+						  <option value='4'>4</option>
+							<option value='5'>5</option>
+						  <option value='6'>6</option>
+						  <option value='7'>7</option>
+						  <option value='8'>8</option>
+						  <option value='9'>9</option>
+						  <option value='10'>10</option>
+						  <option value='11'>11</option>
+						  <option value='12'>12</option>
+					  </select>
+					</div>
+					<div class="col s6">
+						<label class="active">Subject</label>
+						<select name='course_subject' id='course_subject' class="browser-default" required>
+							<option value=''></option>
+							<option value='Arts'>Arts</option>
+							<option value='English Language Arts'>English Language Arts</option>
+							<option value='Health & Physical Education'>Health & Physical Education</option>
+							<option value='Mathematics'>Mathematics</option>
+							<option value='Professional Development'>Professional Development</option>
+						  <option value='Science'>Science</option>
+						  <option value='Social Studies'>Social Studies</option>
+							<option value='Special Education'>Special Education</option>
+						  <option value='Technology'>Technology</option>
+						  <option value='Miscellaneous'>Miscellaneous</option>
+					  </select>
+					</div>
+				</div>
 
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="course_editors" name="course_editors" placeholder="Course Editors (Emails Separated by Commas)" type="text">
-							<label class="active" for="course_editors">Course Editors</label>
-						</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="course_editors" name="course_editors" placeholder="Course Editors (Emails Separated by Commas)" type="text">
+						<label class="active" for="course_editors">Course Editors</label>
 					</div>
+				</div>
 
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="course_tags" name="course_tags" placeholder="Course Categories/Tags (Separated by Commas)" type="text">
+						<label class="active" id="course_tags">Course Tags</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col s12">
+						<input type="checkbox" class="filled-in" id="course_hidden" name="course_hidden" value="1" />
+						<label for="course_hidden">Hide Course</label>
+					</div>
+				</div>
+				<?php if(isAppActive("Abre-Learn")){ ?>
 					<div class="row">
 						<div class="col s12">
-							<input type="checkbox" class="filled-in" id="course_hidden" name="course_hidden" value="1" />
-							<label for="course_hidden">Hide Course</label>
-						</div>
-					</div>
-					<?php if(isAppActive("Abre-Learn")){ ?>
-						<div class="row">
-							<div class="col s12">
-								<input type="checkbox" class="filled-in" id="learn_course" name="learn_course" value="1" />
-								<label for="learn_course">Make course available in the Learn App</label>
-								<br><br>
-								<div id='learnRestrictionsDiv'>
-									<label>Limit course to</label>
-									<select name="learnRestrictions[]" id="learnRestrictions" multiple>
-										<option value='' disabled>Choose a role</option>
-										<option value='staff'>Staff</option>
-										<option value='student'>Students</option>
-										<option value='parent'>Parents</option>
-									</select>
-								</div>
+							<input type="checkbox" class="filled-in" id="learn_course" name="learn_course" value="1" />
+							<label for="learn_course">Make course available in the Learn App</label>
+							<br><br>
+							<div id='learnRestrictionsDiv'>
+								<label>Limit course to</label>
+								<select name="learnRestrictions[]" id="learnRestrictions" multiple>
+									<option value='' disabled>Choose a role</option>
+									<option value='staff'>Staff</option>
+									<option value='student'>Students</option>
+									<option value='parent'>Parents</option>
+								</select>
 							</div>
 						</div>
-					<?php } ?>
+					</div>
+				<?php } ?>
 
-					<input type="hidden" name="course_id" id="course_id">
-				</div>
-    	</div>
-	    <div class="modal-footer">
-				<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Save</button>
-				<a class="modal-close waves-effect btn-flat white-text"  style='background-color: <?php echo getSiteColor(); ?>'>Cancel</a>
+				<input type="hidden" name="course_id" id="course_id">
+			</div>
+  	</div>
+    <div class="modal-footer">
+			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Save</button>
+			<a class="modal-close waves-effect btn-flat white-text"  style='background-color: <?php echo getSiteColor(); ?>'>Cancel</a>
 		</div>
 		</form>
 	</div>
