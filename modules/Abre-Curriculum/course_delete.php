@@ -24,42 +24,36 @@
 
 	//Delete Course from libraries
 	$stmt = $db->stmt_init();
-	$sql = "Delete from curriculum_libraries where Course_ID='$librarycourseid'";
+	$sql = "DELETE FROM curriculum_libraries WHERE Course_ID = '$librarycourseid'";
 	$stmt->prepare($sql);
 	$stmt->execute();
-	$stmt->store_result();
-	$num_rows = $stmt->num_rows;
 	$stmt->close();
 
 	//Delete course
 	$stmt = $db->stmt_init();
-	$sql = "Delete from curriculum_course where id='$librarycourseid' LIMIT 1";
+	$sql = "DELETE FROM curriculum_course WHERE id = '$librarycourseid' LIMIT 1";
 	$stmt->prepare($sql);
 	$stmt->execute();
-	$stmt->store_result();
-	$num_rows = $stmt->num_rows;
 	$stmt->close();
 
 	//Delete resources for topics
-	$sqllookup2 = "SELECT ID FROM curriculum_unit WHERE Course_ID='$librarycourseid'";
+	$sqllookup2 = "SELECT ID FROM curriculum_unit WHERE Course_ID = '$librarycourseid'";
 	$result3 = $db->query($sqllookup2);
 	$unitcount=mysqli_num_rows($result3);
 	while($row2 = $result3->fetch_assoc())
 	{
 		if (!empty($row2["ID"])){ $Unit_ID=stripslashes($row2["ID"]); }
 		$stmt = $db->stmt_init();
-		$sql = "Delete from curriculum_resources where TopicID='$Unit_ID'";
+		$sql = "DELETE FROM curriculum_resources WHERE TopicID = '$Unit_ID'";
 		$stmt->prepare($sql);
 		$stmt->execute();
 	}
 
 	//Delete topics in course
 	$stmt = $db->stmt_init();
-	$sql = "Delete from curriculum_unit where Course_ID='$librarycourseid'";
+	$sql = "DELETE FROM curriculum_unit WHERE Course_ID = '$librarycourseid'";
 	$stmt->prepare($sql);
 	$stmt->execute();
-	$stmt->store_result();
-	$num_rows = $stmt->num_rows;
 	$stmt->close();
 
 	$db->close();
