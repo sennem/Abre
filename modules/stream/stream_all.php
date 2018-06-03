@@ -264,7 +264,6 @@
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
 		$title = str_replace('—',"-",$title);
-		$title = preg_replace('/\b((https?|ftp|file):\/\/|www\.)[-A-Z0-9+&@#\/%?=~_|$!:,.;]*[A-Z0-9+&@#\/%=~_|$]/i', ' ', $title);
 
 		//Excerpt
 		$excerpt = $feeds[$cardcountloop]['excerpt'];
