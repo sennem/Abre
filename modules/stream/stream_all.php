@@ -106,14 +106,11 @@
 	$feed_flipboard->init();
 	$feed_flipboard->handle_content_type();
 
-	$hasFeeds = false;
-	$scrolling = false;
 	$StreamStartResult = 0;
 	$StreamEndResult = 24;
 	if(isset($_GET["StreamStartResult"])){
 		if($_GET["StreamStartResult"] > 0){
-			$StreamStartResult = $_GET["StreamStartResult"] - 1;
-			$scrolling = true;
+			$StreamStartResult = $_GET["StreamStartResult"];
 		}else{
 			$StreamStartResult = $_GET["StreamStartResult"];
 		}
@@ -121,7 +118,6 @@
 	if(isset($_GET["StreamEndResult"])){ $StreamEndResult = $_GET["StreamEndResult"]; }
 	date_default_timezone_set("EST");
 	foreach($feed_flipboard->get_items($StreamStartResult,$StreamEndResult) as $item){
-		$hasFeeds = true;
 		$date = $item->get_date();
 		$title = $item->get_title();
 		$link = $item->get_link();
@@ -149,104 +145,8 @@
 		if($feedtitle == ""){
 			$feedtitle = "Stream Name";
 		}
-		array_push($preliminaryFeeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
+		array_push($feeds, array("date" => "$date", "title" => "$title", "excerpt" => "$excerpt", "link" => "$link", "image" => "$image", "feedtitle" => "$feedtitle", "feedlink" => "$feedlink", "color" => "$color", "type" => "stream", "id" => "", "owner" => ""));
 		$totalcount++;
-	}
-
-	$customPostArray = array();
-		if(!$scrolling){
-			if($totalcount == 0){
-				$queryDate = "";
-			}else{
-				//get all custom posts before date of last stream post
-				$queryDate = $preliminaryFeeds[$totalcount - 1]["date"];
-				$queryDate = date('Y-m-d H:i:s', $queryDate);
-			}
-			$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time > '$queryDate' ORDER BY submission_time ASC";
-			$result = $db->query($sql);
-			while($value = $result->fetch_assoc()){
-				if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
-					array_push($customPostArray, $value);
-				}
-			}
-		}else{
-			if($totalcount > 0){
-				$queryDate = $preliminaryFeeds[0]["date"];
-				$queryDate = date('Y-m-d H:i:s', $queryDate);
-				$sql = "SELECT id, submission_time, post_author, post_title, post_stream, post_content, post_groups, post_image, color, staff_building_restrictions, student_building_restrictions FROM stream_posts WHERE submission_time < '$queryDate' ORDER BY submission_time ASC";
-				$result = $db->query($sql);
-				while($value = $result->fetch_assoc()){
-					if(strpos($value["post_groups"], $_SESSION["usertype"]) !== false && in_array($value['post_stream'], $enrolledStreams)){
-						array_push($customPostArray, $value);
-					}
-				}
-			}
-		}
-
-	if(!empty($customPostArray)){
-		$customArraySize = sizeof($customPostArray);
-		$totalcount = 0;
-		$length = sizeof($preliminaryFeeds);
-		if($scrolling){
-			$i = 1;
-		}else{
-			$i = 0;
-		}
-		$comparisonElement = $customPostArray[$customArraySize - 1];
-		for($i; $i < $length; $i++){
-				$dateUnixTime = strtotime(date("Y-m-d H:i:s",$preliminaryFeeds[$i]["date"]));
-				while($dateUnixTime < strtotime($comparisonElement['submission_time'])){
-					$comparisonElement = array_pop($customPostArray);
-					$postDate = $comparisonElement['submission_time'];
-					$postDate = strtotime($postDate);
-					$title = $comparisonElement['post_title'];
-					$excerpt = $comparisonElement['post_content'];
-					$feedtitle = $comparisonElement['post_stream'];
-					$feedimage = $comparisonElement['post_image'];
-					$color = $comparisonElement['color'];
-					$id = $comparisonElement['id'];
-					$owner = $comparisonElement['post_author'];
-
-					array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "$feedimage", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
-					$totalcount++;
-					$customArraySize--;
-
-					if(empty($customPostArray)){
-						break;
-					}else{
-						$comparisonElement = $customPostArray[$customArraySize - 1];
-					}
-				}
-
-				array_push($feeds, $preliminaryFeeds[$i]);
-				$totalcount++;
-		}
-	}else{
-		if($scrolling){
-			array_shift($preliminaryFeeds);
-			$feeds = $preliminaryFeeds;
-			$totalcount--;
-		}else{
-			$feeds = $preliminaryFeeds;
-		}
-	}
-
-	if(!$hasFeeds){
-		while(!empty($customPostArray)){
-			$comparisonElement = array_pop($customPostArray);
-			$postDate = $comparisonElement['submission_time'];
-			$postDate = strtotime($postDate);
-			$title = $comparisonElement['post_title'];
-			$excerpt = $comparisonElement['post_content'];
-			$feedtitle = $comparisonElement['post_stream'];
-			$feedimage = $comparisonElement['post_image'];
-			$color = $comparisonElement['color'];
-			$id = $comparisonElement['id'];
-			$owner = $comparisonElement['post_author'];
-
-			array_push($feeds, array("date" => "$postDate", "title" => "$title", "excerpt" => "$excerpt", "link" => "$id", "image" => "$feedimage", "feedtitle" => "$feedtitle", "feedlink" => "", "color" => "$color", "type" => "custom", "id" => "$id", "owner" => "$owner"));
-			$totalcount++;
-		}
 	}
 
 	//Display the Feeds
@@ -260,6 +160,7 @@
 		$title = $feeds[$cardcountloop]['title'];
 		$title = str_replace("<p>", " ", $title);
 		$title = strip_tags(html_entity_decode($title));
+		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
 		$title = str_replace("'",'"',$title);
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
@@ -269,6 +170,7 @@
 		$excerpt = $feeds[$cardcountloop]['excerpt'];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));
+		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
 		$excerpt = str_replace("'",'"',$excerpt);
 		$excerpt = str_replace('"',"'",$excerpt);
 		$excerpt = str_replace('’',"'",$excerpt);
@@ -290,7 +192,7 @@
 
 		//Add images to server to securely store and reference
 		$cloudsetting=constant("USE_GOOGLE_CLOUD");
-		if ($cloudsetting=="true") 
+		if ($cloudsetting=="true")
 			include "stream_save_image_gc.php";
 		else
 			include "stream_save_image.php";
@@ -532,30 +434,6 @@
 			$('.modal-content').animate({
 				scrollTop: 0},
 				0);
-		});
-
-		//Fill comment modal
-		$(".removepost").unbind().click(function (event){
-			event.preventDefault();
-			var id = $(this).data('id');
-			var result = confirm("Are you sure you want to remove this post?");
-			if(result){
-				//Make the post request
-				$.ajax({
-					type: 'POST',
-					url: 'modules/stream/remove_post.php',
-					data: { id: id }
-				})
-				.done(function(response){
-					$.get('modules/stream/stream_all.php?StreamStartResult=0&StreamEndResult=24', function(results){
-						$('#showmorestream').hide();
-						$('#streamcards').html(results);
-						var notification = document.querySelector('.mdl-js-snackbar');
-						var data = { message: response.message };
-						notification.MaterialSnackbar.showSnackbar(data);
-					});
-				});
-			}
 		});
 
 	});

@@ -34,7 +34,7 @@
 			//Display Stream
 			echo "<div id='streamcards'>";
 
-				require('stream_all.php');
+				require('stream_announcements.php');
 
 			echo "</div>";
 
@@ -69,7 +69,7 @@
 	$(function(){
 
 		//Variables
-		var Page = "all";
+		var Page = "announcements";
 		var StreamStart = 0;
 		var StreamEnd = 24;
 		var LoaderCheck = false;
@@ -102,14 +102,14 @@
 
 			}
 
-    	})
+    });
 
 		function pageChange(Page){
 
 			StreamStart = 0;
 			StreamEnd = 24;
 
-			$('#all, #likes, #comments').prop("disabled", false);
+			$('#news, #likes, #comments, #announcements').prop("disabled", false);
 			$('#streamnavigationloader').show();
 			$.get('modules/stream/stream_'+Page+'.php?StreamStartResult='+StreamStart+'&StreamEndResult='+StreamEnd, function(results){
 				$('#streamnavigationloader').hide();
@@ -119,10 +119,10 @@
 		}
 
 		//View All Streams
-		$( "#all" ).unbind().click(function(){
+		$( "#news" ).unbind().click(function(){
 			pageChange("all");
 			Page = "all";
-			$("#all").attr( "disabled", "disabled" );
+			$("#news").attr( "disabled", "disabled" );
 
 		});
 
@@ -141,6 +141,15 @@
 			pageChange("comments");
 			Page = "comments";
 			$("#comments").attr( "disabled", "disabled" );
+
+		});
+
+		//View Likes
+		$("#announcements").unbind().click(function(){
+
+			pageChange("announcements");
+			Page = "announcements";
+			$("#announcements").attr( "disabled", "disabled" );
 
 		});
 
@@ -177,7 +186,7 @@
 				out_duration: 0,
 				ready: function(){
 					$('.modal-content').animate({ scrollTop: 0}, 0);
-					 $('select').material_select();
+					$('select').material_select();
 				}
 			});
 		});
