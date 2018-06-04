@@ -61,10 +61,10 @@
 
 	 	<!-- Custom Stream Post -->
 		<div id="streampost" class="modal modal-fixed-footer modal-mobile-full">
-			<form id="form-streampost" method="post" enctype='multipart/form-data' action="modules/stream/save_post.php">
+			<form id="form-streampost" method="post" enctype='multipart/form-data' action="modules/stream/save_announcement.php">
 				<div class="modal-content" style="padding: 0px !important;">
 					<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
-						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">New Post</span></div>
+						<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">New Announcement</span></div>
 						<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 					</div>
 					<div style='padding: 0px 24px 0px 24px;'>
@@ -87,13 +87,13 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter a Post Title" required>
+								<input type="text" name="post_title" id="post_title" autocomplete="off" placeholder="Enter an announcement title" required>
 								<label for="post_title" class="active">Title</label>
 							</div>
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea placeholder="Enter your Post Content" id="post_content" name="post_content" class="materialize-textarea" required></textarea>
+								<textarea placeholder="Enter your announcement content" id="post_content" name="post_content" class="materialize-textarea" required></textarea>
 								<label for="post_content" class="active">Content</label>
 							</div>
 						</div>
@@ -394,7 +394,7 @@
 				$('#custompostbutton').html("Post");
 				if(response.status == "Success"){
 					$('#streampost').closeModal({ in_duration: 0, out_duration: 0, });
-					$('#all').trigger('click');
+					$('#announcements').trigger('click');
 					var notification = document.querySelector('.mdl-js-snackbar');
 					var data = { message: response.message };
 					notification.MaterialSnackbar.showSnackbar(data);
