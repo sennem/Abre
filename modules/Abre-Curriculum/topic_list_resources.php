@@ -103,7 +103,7 @@
 	}
 	if($resourcecount!=0){ echo "</table>"; }
 
-	$LessonLookup_Query = "SELECT ID, Title, `Number`, Standards_WYSIWYG, Resources_WYSIWYG, Anticipatory_WYSIWYG, Objectives_WYSIWYG, DirectInstruction_WYSIWYG, GuidedPractice_WYSIWYG, IndependentPractice_WYSIWYG, FormativeAssessment_WYSIWYG, Closure_WYSIWYG FROM curriculum_lesson WHERE TopicID=$topicid";
+	$LessonLookup_Query = "SELECT ID, Title, Body, Standards, Resources, Anticipatory, Objectives, DirectInstruction, GuidedPractice, IndependentPractice, FormativeAssessment, Closure FROM curriculum_lesson WHERE TopicID=$topicid";
 	$LessonResults = $db->query($LessonLookup_Query);
 	$LessonCount=mysqli_num_rows($LessonResults);
 	if($LessonCount!=0){ echo "<table style='width:100%;'>"; }
@@ -111,74 +111,81 @@
 	{
 			if (!empty($LessonRows["ID"])){ $Unit_Resource_ID=htmlspecialchars($LessonRows["ID"], ENT_QUOTES); }
 			if (!empty($LessonRows["Title"])){ $Unit_Resource_Title=htmlspecialchars($LessonRows["Title"], ENT_QUOTES); }
-			if (!empty($LessonRows["Number"])){ $Unit_Resource_Number=htmlspecialchars($LessonRows["Number"], ENT_QUOTES); }
-			if (!empty($LessonRows["Standards_WYSIWYG"]))
+			if (!empty($LessonRows["Body"]))
 			{
-				$Unit_Resource_Standards=$LessonRows["Standards_WYSIWYG"];
+				$Unit_Resource_Body=$LessonRows["Body"];
+				if($Unit_Resource_Body!="")
+				{
+					$Unit_Resource_Body=base64_encode($Unit_Resource_Body);
+				}
+			}
+			if (!empty($LessonRows["Standards"]))
+			{
+				$Unit_Resource_Standards=$LessonRows["Standards"];
 				if($Unit_Resource_Standards!="")
 				{
 					$Unit_Resource_Standards=base64_encode($Unit_Resource_Standards);
 				}
 			}
-			if (!empty($LessonRows["Resources_WYSIWYG"]))
+			if (!empty($LessonRows["Resources"]))
 			{
-				$Unit_Resource_Resources=$LessonRows["Resources_WYSIWYG"];
+				$Unit_Resource_Resources=$LessonRows["Resources"];
 				if($Unit_Resource_Resources!="")
 				{
 					$Unit_Resource_Resources=base64_encode($Unit_Resource_Resources);
 				}
 			}
-			if (!empty($LessonRows["Anticipatory_WYSIWYG"]))
+			if (!empty($LessonRows["Anticipatory"]))
 			{
-				$Unit_Resource_Anticipatory=$LessonRows["Anticipatory_WYSIWYG"];
+				$Unit_Resource_Anticipatory=$LessonRows["Anticipatory"];
 				if($Unit_Resource_Anticipatory!="")
 				{
 					$Unit_Resource_Anticipatory=base64_encode($Unit_Resource_Anticipatory);
 				}
 			}
-			if (!empty($LessonRows["Objectives_WYSIWYG"]))
+			if (!empty($LessonRows["Objectives"]))
 			{
-				$Unit_Resource_Objectives=$LessonRows["Objectives_WYSIWYG"];
+				$Unit_Resource_Objectives=$LessonRows["Objectives"];
 				if($Unit_Resource_Objectives!="")
 				{
 					$Unit_Resource_Objectives=base64_encode($Unit_Resource_Objectives);
 				}
 			}
-			if (!empty($LessonRows["DirectInstruction_WYSIWYG"]))
+			if (!empty($LessonRows["DirectInstruction"]))
 			{
-				$Unit_Resource_DirectInstruction=$LessonRows["DirectInstruction_WYSIWYG"];
+				$Unit_Resource_DirectInstruction=$LessonRows["DirectInstruction"];
 				if($Unit_Resource_DirectInstruction!="")
 				{
 					$Unit_Resource_DirectInstruction=base64_encode($Unit_Resource_DirectInstruction);
 				}
 			}
-			if (!empty($LessonRows["GuidedPractice_WYSIWYG"]))
+			if (!empty($LessonRows["GuidedPractice"]))
 			{
-				$Unit_Resource_GuidedPractice=$LessonRows["GuidedPractice_WYSIWYG"];
+				$Unit_Resource_GuidedPractice=$LessonRows["GuidedPractice"];
 				if($Unit_Resource_GuidedPractice!="")
 				{
 					$Unit_Resource_GuidedPractice=base64_encode($Unit_Resource_GuidedPractice);
 				}
 			}
-			if (!empty($LessonRows["IndependentPractice_WYSIWYG"]))
+			if (!empty($LessonRows["IndependentPractice"]))
 			{
-				$Unit_Resource_IndependentPractice=$LessonRows["IndependentPractice_WYSIWYG"];
+				$Unit_Resource_IndependentPractice=$LessonRows["IndependentPractice"];
 				if($Unit_Resource_IndependentPractice!="")
 				{
 					$Unit_Resource_IndependentPractice=base64_encode($Unit_Resource_IndependentPractice);
 				}
 			}
-			if (!empty($LessonRows["FormativeAssessment_WYSIWYG"]))
+			if (!empty($LessonRows["FormativeAssessment"]))
 			{
-				$Unit_Resource_FormativeAssessment=$LessonRows["FormativeAssessment_WYSIWYG"];
+				$Unit_Resource_FormativeAssessment=$LessonRows["FormativeAssessment"];
 				if($Unit_Resource_FormativeAssessment!="")
 				{
 					$Unit_Resource_FormativeAssessment=base64_encode($Unit_Resource_FormativeAssessment);
 				}
 			}
-			if (!empty($LessonRows["Closure_WYSIWYG"]))
+			if (!empty($LessonRows["Closure"]))
 			{
-				$Unit_Resource_Closure=$LessonRows["Closure_WYSIWYG"];
+				$Unit_Resource_Closure=$LessonRows["Closure"];
 				if($Unit_Resource_Closure!="")
 				{
 					$Unit_Resource_Closure=base64_encode($Unit_Resource_Closure);
@@ -194,7 +201,7 @@
 			}
 		echo "<tr class='attachwrapper'><td style='border:1px solid #e1e1e1; width:70px; background-color:".getSiteColor()."'><i class='material-icons' style='padding:18px; margin:0; color:#fff; font-size: 24px; line-height:0;'>$icon</i></td><td style='background-color:#F5F5F5; border-left:1px solid #e1e1e1; border-top:1px solid #e1e1e1; border-bottom:1px solid #e1e1e1; padding:10px;'>";
 			echo "<a href='#curriculum/lesson/$topicid/$Course_ID/$Unit_Resource_ID' class='mdl-color-text--black clickonlesson'>$Unit_Resource_Title</a>";
-			echo "</td><td style='background-color:#F5F5F5; border:1px solid #e1e1e1; padding:12px 10px 10px 22px; width:70px;'><a class='modal-lessontopic' style='color: ".getSiteColor()."' href='#' data-courseid='$Course_ID' data-topicid='$topicid' data-resourceid='$Unit_Resource_ID' data-title='$Unit_Resource_Title' data-standards='$Unit_Resource_Standards' data-number='$Unit_Resource_Number' data-resources='$Unit_Resource_Resources' data-anticipatory='$Unit_Resource_Anticipatory' data-objectives='$Unit_Resource_Objectives' data-directinstruction='$Unit_Resource_DirectInstruction' data-guidedpractice='$Unit_Resource_GuidedPractice' data-independentpractice='$Unit_Resource_IndependentPractice' data-formativeassessment='$Unit_Resource_FormativeAssessment' data-closure='$Unit_Resource_Closure'><i class='material-icons'>mode_edit</i></a></td>";
+			echo "</td><td style='background-color:#F5F5F5; border:1px solid #e1e1e1; padding:12px 10px 10px 22px; width:70px;'><a class='modal-lessontopic' style='color: ".getSiteColor()."' href='#' data-courseid='$Course_ID' data-topicid='$topicid' data-resourceid='$Unit_Resource_ID' data-title='$Unit_Resource_Title' data-body='$Unit_Resource_Body' data-standards='$Unit_Resource_Standards' data-resources='$Unit_Resource_Resources' data-anticipatory='$Unit_Resource_Anticipatory' data-objectives='$Unit_Resource_Objectives' data-directinstruction='$Unit_Resource_DirectInstruction' data-guidedpractice='$Unit_Resource_GuidedPractice' data-independentpractice='$Unit_Resource_IndependentPractice' data-formativeassessment='$Unit_Resource_FormativeAssessment' data-closure='$Unit_Resource_Closure'><i class='material-icons'>mode_edit</i></a></td>";
 
 			echo "</td><td style='background-color:#F5F5F5; border:1px solid #e1e1e1; padding:12px 10px 10px 22px; width:70px;'><a href='modules/".basename(__DIR__)."/topic_lesson_remove.php?resourceid=".$Unit_Resource_ID."' class='attachdeletebutton' style='color: ".getSiteColor()."'><i class='material-icons'>clear</i></a></td></tr>";
 

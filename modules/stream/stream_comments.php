@@ -286,11 +286,6 @@
 			$("#noCommentsMessage").hide();
 		}
 
-	  	//Make Streams Feeds Clickable
-		$( ".cardclick" ).unbind().click(function(){
-			window.open($(this).data('link'), '_blank');
-		});
-
 		//Like a Stream Post
 		$(".likeicon").unbind().click(function(){
 

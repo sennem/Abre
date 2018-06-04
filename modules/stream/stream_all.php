@@ -290,7 +290,7 @@
 
 		//Add images to server to securely store and reference
 		$cloudsetting=constant("USE_GOOGLE_CLOUD");
-		if ($cloudsetting=="true") 
+		if ($cloudsetting=="true")
 			include "stream_save_image_gc.php";
 		else
 			include "stream_save_image.php";
@@ -339,11 +339,6 @@
 <script>
 
 	$(function(){
-
-	  	//Make Streams Feeds Clickable
-		$( ".cardclick" ).unbind().click(function(){
-			window.open($(this).data('link'), '_blank');
-		});
 
 		//Like a Stream Post
 		$(".likeicon").unbind().click(function(){
