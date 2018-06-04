@@ -39,7 +39,9 @@
 	$dbreturn = databasequery($sql);
 	foreach($dbreturn as $row){
 		$contractdays = htmlspecialchars($row['contractdays'], ENT_QUOTES);
-		$contractdays = decrypt($contractdays, "");
+		if($contractdays != ""){
+			$contractdays = decrypt($contractdays, "");
+		}
 	}
 
 	//Profile form
