@@ -255,20 +255,18 @@
 	$cardcount = 0;
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){
 		$date = $feeds[$cardcountloop]['date'];
-
-		//Title
 		$title = $feeds[$cardcountloop]['title'];
 		$title = str_replace("<p>", " ", $title);
 		$title = strip_tags(html_entity_decode($title));
+		$title = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $title);
 		$title = str_replace("'",'"',$title);
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
 		$title = str_replace('—',"-",$title);
-
-		//Excerpt
 		$excerpt = $feeds[$cardcountloop]['excerpt'];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));
+		$excerpt = preg_replace('/(\.)([[:alpha:]]{2,})/', '$1 $2', $excerpt);
 		$excerpt = str_replace("'",'"',$excerpt);
 		$excerpt = str_replace('"',"'",$excerpt);
 		$excerpt = str_replace('’',"'",$excerpt);
@@ -339,6 +337,11 @@
 <script>
 
 	$(function(){
+
+	  	//Make Streams Feeds Clickable
+		$( ".cardclick" ).unbind().click(function(){
+			window.open($(this).data('link'), '_blank');
+		});
 
 		//Like a Stream Post
 		$(".likeicon").unbind().click(function(){

@@ -325,7 +325,7 @@ html, body{ display: none; }
 /* Stream */
 @media only screen and (max-width: 600px){
 .card_stream{ width:100%; margin:0 0 8px 0; }
-.streamnavholder{ float:left; width:33.333%; text-align: center; }
+.streamnavholder{ float:left; width:25%; text-align: center; }
 #streamwidgets{ display:none; }
 #streamstream{ width:100%; float:left; }
 #streamnavigation{ min-height:0; width:100%; margin:0 0 8px 0; }

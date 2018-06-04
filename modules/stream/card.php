@@ -50,8 +50,8 @@
 		echo "</div>";
 
 		//Date
-		echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 12px; color: #999;'>";
-			echo "<a class='modal-readstream' href='#addstreamcomment' data-commenticonid='comment_$cardcountloop' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='color: #999; font-weight: 400;' target='_blank'>$displaydate</a>";
+		echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 14px;'>";
+			echo "<a class='modal-readstream' href='#addstreamcomment' data-commenticonid='comment_$cardcountloop' data-image='$imagebase' data-redirect='latest' data-title='$titleencoded' data-excerpt='$excerpt' data-url='$linkbase' data-type='$type' style='color: #9E9E9E;' target='_blank'>$displaydate</a>";
 		echo "</div>";
 
 		//Card Image
