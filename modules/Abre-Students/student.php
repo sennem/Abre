@@ -130,7 +130,7 @@
 							if($CurrentGrade!=""){ echo "<b>Grade:</b> $CurrentGrade<br>"; }
 							if($IEP!=""){ echo "<b>IEP Status:</b> $IEP<br>"; }
 							if($Gifted!=""){
-								if($Gifted == "Y" && $pagerestrictions == ""){
+								if($Gifted == "Y" && $pagerestrictions == "" && $db->query("SELECT * FROM Abre_Gifted LIMIT 1")){
 									echo "<b>Gifted Status:</b> $Gifted<i class='pointer material-icons' id='displayGiftedDetails' style='float:right;'>visibility</i><br>";
 								}else{
 									echo "<b>Gifted Status:</b> $Gifted<br>";
