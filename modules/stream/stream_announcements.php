@@ -194,6 +194,13 @@
     }
   }
 
+	if($cardcount == 0 && $StreamStartResult == 0){
+		echo "<div class='row center-align'>";
+			echo "<div class='widget' style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Welcome to Your Announcements</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Announcements from administrators will be displayed here.<br></p></div>";
+			echo "<a class='mdl-button mdl-js-button mdl-js-ripple-effect' style='background-color:".getSiteColor()."; color:#fff;' href='#profile'>View Available Streams</a>";
+		echo "</div>";
+	}
+
 ?>
 <script>
 
