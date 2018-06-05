@@ -45,6 +45,12 @@
 					</div>
 				</div>
 				<div class="row">
+					<div class="input-field col s12">
+						<input id="course_tags" name="course_tags" placeholder="Course Categories/Tags (Separated by Commas)" type="text">
+						<label class="active" id="course_tags">Course Tags</label>
+					</div>
+				</div>
+				<div class="row">
 					<div class="col s6">
 						<label class="active">Grade Level</label>
 						<select name='course_grade[]' id='course_grade' class="browser-default" style='height: 100px;' required='required' multiple>
@@ -82,45 +88,38 @@
 					  </select>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="input-field col s12">
 						<input id="course_editors" name="course_editors" placeholder="Course Editors (Emails Separated by Commas)" type="text">
 						<label class="active" for="course_editors">Course Editors</label>
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="input-field col s12">
-						<input id="course_tags" name="course_tags" placeholder="Course Categories/Tags (Separated by Commas)" type="text">
-						<label class="active" id="course_tags">Course Tags</label>
-					</div>
-				</div>
-
 				<div class="row">
 					<div class="col s12">
 						<input type="checkbox" class="filled-in" id="course_hidden" name="course_hidden" value="1" />
 						<label for="course_hidden">Hide Course</label>
 					</div>
 				</div>
-				<?php if(isAppActive("Abre-Learn")){ ?>
+				<?php //if(isAppActive("Abre-Learn")){ ?>
 					<div class="row">
 						<div class="col s12">
 							<input type="checkbox" class="filled-in" id="learn_course" name="learn_course" value="1" />
-							<label for="learn_course">Make course available in the Learn App</label>
+							<label for="learn_course">Make course available in the Learn app</label>
 							<br><br>
 							<div id='learnRestrictionsDiv'>
-								<label>Limit course to</label>
+								<label>Make course available to</label>
 								<select name="learnRestrictions[]" id="learnRestrictions" multiple>
 									<option value='' disabled>Choose a role</option>
 									<option value='staff'>Staff</option>
 									<option value='student'>Students</option>
 									<option value='parent'>Parents</option>
 								</select>
+								<input type="checkbox" class="filled-in" id="learn_sequential" name="learn_sequential" value="1" />
+								<label for="learn_sequential">Require sequential completion</label>
 							</div>
 						</div>
 					</div>
-				<?php } ?>
+				<?php //} ?>
 
 				<input type="hidden" name="course_id" id="course_id">
 			</div>
@@ -467,8 +466,13 @@
 		$("#learn_course").change(function(){
 			if($(this).is(':checked')){
 				$("#learnRestrictionsDiv").show();
+				$("#sequentialDiv").show();
+				$('.modal-content').animate({
+   				scrollTop: $("#learnRestrictionsDiv").offset().top }, {duration: 2000}
+				);
 			}else{
 				$("#learnRestrictionsDiv").hide();
+				$("#sequentialDiv").hide();
 			}
 		});
 

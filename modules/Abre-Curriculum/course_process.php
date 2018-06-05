@@ -45,23 +45,23 @@
 	}
 
 	if(isset($_POST['course_tags'])){ $course_tags = $_POST['course_tags']; }else{ $course_tags = ""; }
-
 	if(isset($_POST['course_description'])){ $course_description = $_POST['course_description']; }else{ $course_description = ""; }
+	if(isset($_POST['learn_sequential'])){ $learn_sequential = $_POST['learn_sequential']; }else{ $learn_sequential = 0; }
 
 	//Add or update the course
 	if($course_id == ""){
 		$stmt = $db->stmt_init();
-		$sql = "INSERT INTO curriculum_course (Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		$sql = "INSERT INTO curriculum_course (Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags, Sequential) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt->prepare($sql);
-		$stmt->bind_param("issssssiss", $course_hidden, $course_title, $course_description, $course_subject, $course_grade, $course_image, $course_editors, $learn_course, $restrictions, $course_tags);
+		$stmt->bind_param("issssssissi", $course_hidden, $course_title, $course_description, $course_subject, $course_grade, $course_image, $course_editors, $learn_course, $restrictions, $course_tags, $learn_sequential);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();
 	}else{
 		$stmt = $db->stmt_init();
-		$sql = "UPDATE curriculum_course SET Hidden = ?, Title = ?, Description = ?, Subject = ?, Grade = ?, Editors = ?, Learn_Course = ?, Restrictions = ?, Tags = ? WHERE ID = ?";
+		$sql = "UPDATE curriculum_course SET Hidden = ?, Title = ?, Description = ?, Subject = ?, Grade = ?, Editors = ?, Learn_Course = ?, Restrictions = ?, Tags = ?, Sequential = ? WHERE ID = ?";
 		$stmt->prepare($sql);
-		$stmt->bind_param("isssssissi", $course_hidden, $course_title, $course_description, $course_subject, $course_grade, $course_editors, $learn_course, $restrictions, $course_tags, $course_id);
+		$stmt->bind_param("isssssissii", $course_hidden, $course_title, $course_description, $course_subject, $course_grade, $course_editors, $learn_course, $restrictions, $course_tags, $learn_sequential, $course_id);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();

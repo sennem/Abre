@@ -132,6 +132,15 @@
 		}
 		$db->close();
 
+		//Check for Learn_Course field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Sequential FROM curriculum_course LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_course` ADD `Sequential` int(11) NOT NULL DEFAULT '0';";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Check for curriculum_lesson table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM curriculum_lesson LIMIT 1"))
