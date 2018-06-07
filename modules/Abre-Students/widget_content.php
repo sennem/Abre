@@ -96,13 +96,13 @@
 					$StudentCount = $resultrow["count"];
 
 					if($StudentCount == 0){
-						$description = "0 students are enrolled in this class.";
+						$description = "No students are enrolled";
 					}
 					if($StudentCount == 1){
-						$description = "1 student is enrolled in this class.";
+						$description = "1 student is enrolled";
 					}
 					if($StudentCount > 1){
-						$description = "$StudentCount students are enrolled in this class.";
+						$description = "$StudentCount students are enrolled";
 					}
 				}
 
