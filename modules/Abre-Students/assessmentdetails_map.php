@@ -39,9 +39,13 @@
           $testName = $value["TestName"];
           if(strpos($testName, "Math") !== false){
             echo "<li class='tab col s3' data-testname='$testName' data-studentid='$Student_ID' data-term='$termName'><a href=''>Math</a></li>";
-          }elseif(strpos($testName, "Reading") !== false){
-              echo "<li class='tab col s3' data-testname='$testName' data-studentid='$Student_ID' data-term='$termName'><a href=''>Reading</a></li>";
-          }
+          }elseif(strpos($testName, "Algebra") !== false){
+            echo "<li class='tab col s3' data-testname='$testName' data-studentid='$Student_ID' data-term='$termName'><a href=''>Algebra</a></li>";
+          }elseif(strpos($testName, "Geometry") !== false){
+            echo "<li class='tab col s3' data-testname='$testName' data-studentid='$Student_ID' data-term='$termName'><a href=''>Geometry</a></li>";
+					}elseif(strpos($testName, "Reading") !== false){
+            echo "<li class='tab col s3' data-testname='$testName' data-studentid='$Student_ID' data-term='$termName'><a href=''>Reading</a></li>";
+					}
     		}
         echo "</ul>";
       echo "</div>";
