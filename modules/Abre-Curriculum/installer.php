@@ -592,6 +592,12 @@
 		}
 		$db->close();
 
+		if(!file_exists($portal_path_root . "/../$portal_private_root/Abre-Curriculum/")){
+			if(mkdir($portal_path_root . "/../$portal_private_root/Abre-Curriculum/", 0775)){
+				mkdir($portal_path_root . "/../$portal_private_root/Abre-Curriculum/images", 0775);
+			}
+		}
+
 		//Mark app as installed
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		$sql = "UPDATE apps_abre SET installed = 1 WHERE app = 'Abre-Curriculum'";

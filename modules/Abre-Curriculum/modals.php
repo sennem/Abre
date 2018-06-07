@@ -100,7 +100,7 @@
 						<label for="course_hidden">Hide Course</label>
 					</div>
 				</div>
-				<?php //if(isAppActive("Abre-Learn")){ ?>
+				<?php if(isAppActive("Abre-Learn")){ ?>
 					<div class="row">
 						<div class="col s12">
 							<input type="checkbox" class="filled-in" id="learn_course" name="learn_course" value="1" />
@@ -119,7 +119,16 @@
 							</div>
 						</div>
 					</div>
-				<?php //} ?>
+				<?php } ?>
+
+				<div class='row'>
+					<div class='col s12'>
+						<img id='curriculum_image_holder' style='max-width: 100%; max-height:200px; display:none;' alt='Post Image' src=''>
+							<div style='padding-top: 15px;'><button class='customCurriculumImage pointer modal-action waves-effect btn-flat white-text' style='background-color:<?php echo getSiteColor(); ?>; '>Click to choose image</button></div>
+						<input type='hidden' name='curriculumImageExisting' value=''>
+						<input type='file' name='curriculumImage' id='curriculumImage' style='display:none;'>
+					</div>
+				</div>
 
 				<input type="hidden" name="course_id" id="course_id">
 			</div>
@@ -463,6 +472,24 @@
 	$(function()
 	{
 
+		//Provide image upload on icon click
+		$(".customCurriculumImage").unbind().click(function(event){
+			event.preventDefault();
+			$("#curriculumImage").click();
+		});
+
+		//Submit form if image if changed
+		$("#curriculumImage").change(function (){
+			if (this.files && this.files[0]){
+				var reader = new FileReader();
+				reader.onload = function (e) {
+					$('#curriculum_image_holder').show();
+					$('#curriculum_image_holder').attr('src', e.target.result);
+				}
+				reader.readAsDataURL(this.files[0]);
+			}
+		});
+
 		$("#learn_course").change(function(){
 			if($(this).is(':checked')){
 				$("#learnRestrictionsDiv").show();
@@ -513,7 +540,6 @@
 					if (pickerApiLoaded && oauthToken) {
 						var view = new google.picker.DocsView(google.picker.ViewId.DOCS)
 											.setIncludeFolders(true)
-											//.setEnableTeamDrives(true);
 											.setOwnedByMe(true);
 						var view2 = new google.picker.DocsView(google.picker.ViewId.DOCS)
 											.setIncludeFolders(true)
@@ -759,11 +785,13 @@
 				in_duration: 0,
 				out_duration: 0,
 			});
-			var formData = $(form).serialize();
+			var formData = new FormData($(this)[0]);
 			$.ajax({
 				type: 'POST',
 				url: $(form).attr('action'),
-				data: formData
+				data: formData,
+				contentType: false,
+				processData: false
 			})
 
 			//Show the notification
