@@ -567,6 +567,10 @@
 			$("#lessonmodalcontentholder").scrollTop(0);
 			var New = $(this).data('new');
 
+			//Clear out Lesson content
+			$("#wysiwyg_body").html('');
+			tinymce.get("wysiwyg_body").setContent('');
+
 
 			//Fill Lesson Content
 			if(New!=1){
