@@ -59,7 +59,7 @@
 	   		</form>
 	 	</div>
 
-	 	<!-- Custom Stream Post -->
+	 	<!-- Stream Announcement -->
 		<div id="streampost" class="modal modal-fixed-footer modal-mobile-full">
 			<form id="form-streampost" method="post" enctype='multipart/form-data' action="modules/stream/save_announcement.php">
 				<div class="modal-content" style="padding: 0px !important;">
@@ -93,8 +93,8 @@
 						</div>
 						<div class="row">
 							<div class="input-field col s12">
-								<textarea placeholder="Enter your announcement content" id="post_content" name="post_content" class="materialize-textarea" required></textarea>
-								<label for="post_content" class="active">Content</label>
+								<p class='black-text' style="font-weight: 500;">Content</p>
+								<textarea placeholder="Enter your announcement content" id="post_content" name="post_content" class='wysiwyg'></textarea>
 							</div>
 						</div>
 
@@ -102,7 +102,7 @@
 							<div class='col s12'>
 								<img id='post_image' style='max-width: 100%; display:none;' alt='Post Image' src=''>
 								<div class='custompostimage pointer' style='width:100%; background-color:#E0E0E0; text-align:center; padding:50px;'>
-									<i class="material-icons">crop_original</i><br><b>Click to choose image</b></div>
+									<i class="material-icons">crop_original</i><br><b>Click to choose a Featured Image</b></div>
 								<input type='file' name='customimage' id='customimage' style='display:none;'>
 							</div>
 						</div>
@@ -276,6 +276,15 @@
 
 		//Material Design Dropdown Selects
 		$('select').material_select();
+
+		//Start TinyMCE
+		tinymce.init({
+			selector: '.wysiwyg', branding: false, height:200, menubar:false, resize: false, statusbar: false, autoresize_min_height: 200, autoresize_max_height: 400,
+			content_css : "/core/css/tinymce.0.0.5.css?" + new Date().getTime(),
+			oninit : "setPlainText",
+			plugins: 'paste print preview fullpage autolink fullscreen image link media template codesample charmap hr nonbreaking toc insertdatetime advlist lists textcolor imagetools contextmenu textpattern autoresize',
+			toolbar: 'bold italic underline link | numlist bullist | media | removeformat',
+			image_advtab: true });
 
 		//Provide image upload on icon click
 		$(".custompostimage").unbind().click(function(event){

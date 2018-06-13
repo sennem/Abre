@@ -108,6 +108,14 @@
 	if(isset($_POST['course_description'])){ $course_description = $_POST['course_description']; }else{ $course_description = ""; }
 	if(isset($_POST['learn_sequential'])){ $learn_sequential = $_POST['learn_sequential']; }else{ $learn_sequential = 0; }
 
+	if(isset($_POST['learn_course'])){ $learn_course = $_POST['learn_course']; }else{ $learn_course = 0; }
+	if(isset($_POST['learnRestrictions'])){
+		$restrictions = $_POST['learnRestrictions'];
+		$restrictions = implode(",", $restrictions);
+	}else{
+		$restrictions = '';
+	}
+
 	//Add or update the course
 	if($course_id == ""){
 		$stmt = $db->stmt_init();
@@ -118,7 +126,7 @@
 		$stmt->close();
 		$db->close();
 	}else{
-
+    
 		//delete old image
 		$sql = "SELECT Image FROM curriculum_course WHERE ID = $course_id";
 		$query = $db->query($sql);

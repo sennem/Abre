@@ -179,6 +179,15 @@
 		}
 		$db->close();
 
+		//Check for Body field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Body FROM curriculum_lesson LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_lesson` ADD `Body` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Check for Standards_WYSIWYG field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT Standards_WYSIWYG FROM curriculum_lesson LIMIT 1"))

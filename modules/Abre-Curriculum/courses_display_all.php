@@ -115,7 +115,7 @@
 					$imageLink = $portal_root."/modules/Abre-Curriculum/serveimage.php?file=$Image&ext=png";
 				}
 			}
-
+      
 			echo "<tr class='courserow pointer'>";
 				echo "<td class='hide-on-med-and-down explorecourse' data-href='#curriculum/0/$Course_ID'>";
 					echo "<img src='$imageLink' class='profile-avatar-small' style='object-fit:cover;'>";
@@ -313,7 +313,7 @@
 			}else{
 				$("#learnRestrictions").val('');
 			}
-
+      
 			var tags = $(this).data('tags');
 			$(".modal-content #course_tags").val(tags);
 			var sequential = $(this).data('sequential');

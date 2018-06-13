@@ -155,8 +155,6 @@
 	$cardcount = 0;
 	for($cardcountloop = 0; $cardcountloop < $totalcount; $cardcountloop++){
 		$date = $feeds[$cardcountloop]['date'];
-
-		//Title
 		$title = $feeds[$cardcountloop]['title'];
 		$title = str_replace("<p>", " ", $title);
 		$title = strip_tags(html_entity_decode($title));
@@ -165,8 +163,6 @@
 		$title = str_replace('"',"'",$title);
 		$title = str_replace('’',"'",$title);
 		$title = str_replace('—',"-",$title);
-
-		//Excerpt
 		$excerpt = $feeds[$cardcountloop]['excerpt'];
 		$excerpt = str_replace("<p>", " ", $excerpt);
 		$excerpt = strip_tags(html_entity_decode($excerpt));

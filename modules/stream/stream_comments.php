@@ -71,7 +71,7 @@
 				echo "</div>";
 
 				//Date
-				echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 12px; color: #999;'>$creationtime</div>";
+				echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 14px; color: #9E9E9E;'>$creationtime</div>";
 
 				//Card Image
 				if($image != ""){
@@ -195,7 +195,7 @@
 				echo "</div>";
 
 				//Date
-				echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 12px; color: #999;'>$creationtime</div>";
+				echo "<div class='truncate' style='padding:0 16px 10px 16px; font-size: 14px; color: #9E9E9E;'>$creationtime</div>";
 
 				//Card Image
 				if($image != ""){
@@ -285,11 +285,6 @@
 		}else{
 			$("#noCommentsMessage").hide();
 		}
-
-	  	//Make Streams Feeds Clickable
-		$( ".cardclick" ).unbind().click(function(){
-			window.open($(this).data('link'), '_blank');
-		});
 
 		//Like a Stream Post
 		$(".likeicon").unbind().click(function(){

@@ -173,7 +173,8 @@
 			event.preventDefault();
 			$("#post_title").val('');
 			$("#post_stream").val('');
-			$("#post_content").val('');
+			$("#post_content").html('');
+			tinymce.get("post_content").setContent('');
 			$("#customimage").val('');
 			$('#post_image').hide();
 			$("#postStudentRestrictions").val('No Restrictions');
