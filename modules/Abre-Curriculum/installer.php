@@ -96,6 +96,24 @@
 		}
 		$db->close();
 
+		//Check for Learn_Course field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Learn_Course FROM curriculum_course LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_course` ADD `Learn_Course` int(11) NOT NULL DEFAULT '0';";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for Restrictions field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Restrictions FROM curriculum_course LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_course` ADD `Restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Check for curriculum_lesson table
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT * FROM curriculum_lesson LIMIT 1"))
@@ -130,6 +148,15 @@
 		if(!$db->query("SELECT Number FROM curriculum_lesson LIMIT 1"))
 		{
 			$sql = "ALTER TABLE `curriculum_lesson` ADD `Number` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for Body field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Body FROM curriculum_lesson LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_lesson` ADD `Body` text NOT NULL;";
 			$db->multi_query($sql);
 		}
 		$db->close();

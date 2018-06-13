@@ -34,7 +34,7 @@
 			<div style='padding: 0px 24px 0px 24px;'>
 					<div class="row">
 						<div class="input-field col s12">
-							<input id="course_title" name="course_title" placeholder="Title of the Course" type="text" required>
+							<input id="course_title" name="course_title" placeholder="Title of the Course" autocomplete="off" type="text" required>
 							<label class="active" id="course_title">Course Title</label>
 						</div>
 					</div>
@@ -78,7 +78,7 @@
 
 					<div class="row">
 						<div class="input-field col s12">
-							<input id="course_editors" name="course_editors" placeholder="Course Editors (Emails Separated by Commas)" type="text">
+							<input id="course_editors" name="course_editors" placeholder="Course Editors (Emails Separated by Commas)" autocomplete="off" type="text">
 							<label class="active" for="course_editors">Course Editors</label>
 						</div>
 					</div>
@@ -89,6 +89,24 @@
 							<label for="course_hidden">Hide Course</label>
 						</div>
 					</div>
+					<?php if(isAppActive("Abre-Learn")){ ?>
+						<div class="row">
+							<div class="col s12">
+								<input type="checkbox" class="filled-in" id="learn_course" name="learn_course" value="1" />
+								<label for="learn_course">Make course available in the Learn App</label>
+								<br><br>
+								<div id='learnRestrictionsDiv'>
+									<label>Limit course to</label>
+									<select name="learnRestrictions[]" id="learnRestrictions" multiple>
+										<option value='' disabled>Choose a role</option>
+										<option value='staff'>Staff</option>
+										<option value='student'>Students</option>
+										<option value='parent'>Parents</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					<?php } ?>
 
 					<input type="hidden" name="course_id" id="course_id">
 				</div>
@@ -101,7 +119,7 @@
 	</div>
 
 	<!-- Create Topic -->
-	<div id="curriculumtopic" class="modal modal-fixed-footer modal-mobile-full">
+	<div id="curriculumtopic" class="fullmodal modal modal-fixed-footer modal-mobile-full" style="max-width: 800px;">
 		<form class="col s12" id="form-addtopic" method="post" action="modules/<?php echo basename(__DIR__); ?>/topic_process.php">
 		<div class="modal-content" style="padding: 0px !important;">
 			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
@@ -111,13 +129,13 @@
 			<div style='padding: 0px 24px 0px 24px;'>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="topic_title" name="topic_title" type="text" placeholder="Enter a title" required>
+						<input id="topic_title" name="topic_title" type="text" placeholder="Enter a title" autocomplete="off" required>
 						<label class="active" for="topic_title">Topic Title</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="topic_theme" name="topic_theme" type="text" placeholder="Enter a theme" required>
+						<input id="topic_theme" name="topic_theme" type="text" placeholder="Enter a theme" autocomplete="off" required>
 						<label class="active" for="topic_theme">Topic Theme</label>
 					</div>
 				</div>
@@ -127,7 +145,7 @@
 							<label class="active" for="topic_start_time">Topic Start Time</label>
 					</div>
 					<div class="input-field col s6">
-						<input type="number" name="topic_estimated_days" placeholder="Enter Duration of Topic" id="topic_estimated_days">
+						<input type="number" name="topic_estimated_days" placeholder="Enter Duration of Topic" autocomplete="off" id="topic_estimated_days">
 						<label class="active" for="topic_estimated_days">Estimated Days</label>
 					</div>
 				</div>
@@ -149,7 +167,7 @@
 				<a class="mdl-button mdl-js-button mdl-button--icon google-drive" href='#'><img class="material-icons" src='../../core/images/abre/google-drive-dark.png'></a>
 				<a class="mdl-button mdl-js-button mdl-button--icon modal-standardtopic" href='#standardtotopic'><i class="material-icons">trending_up</i></a>
 				<a class="mdl-button mdl-js-button mdl-button--icon modal-texttopic" href='#texttotopic'><i class="material-icons">subject</i></a>
-				<a class="mdl-button mdl-js-button mdl-button--icon modal-lessontopic" href='#lessontotopic'><i class="material-icons">school</i></a>
+				<a class="mdl-button mdl-js-button mdl-button--icon modal-lessontopic" data-new='1' href='#lessontotopic'><i class="material-icons">school</i></a>
 			</div>
 		</div>
 		</form>
@@ -177,13 +195,13 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="topic_link_title" name="topic_link_title" placeholder="Enter the title of the link" type="text" required>
+						<input id="topic_link_title" name="topic_link_title" placeholder="Enter the title of the link" autocomplete="off" type="text" required>
 						<label class="active" for="topic_link_title">Link Title</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="topic_link_url" name="topic_link_url" placeholder="Enter or paste a link" type="url" required>
+						<input id="topic_link_url" name="topic_link_url" placeholder="Enter or paste a link" autocomplete="off" type="url" required>
 						<label class="active" for="topic_link_url">Link URL</label>
 					</div>
 				</div>
@@ -219,13 +237,13 @@
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<input id="topic_text_title" name="topic_text_title" type="text" placeholder="Enter a title" required>
+						<input id="topic_text_title" name="topic_text_title" autocomplete="off" type="text" placeholder="Enter a title" required>
 						<label class="active" for="topic_text_title">Note Title</label>
 					</div>
 				</div>
 				<div class="row">
 					<div class="input-field col s12">
-						<textarea id="topic_text_content" name="topic_text_content" class="materialize-textarea" placeholder="Enter body content" required></textarea>
+						<textarea id="topic_text_content" name="topic_text_content" class="materialize-textarea" autocomplete="off" placeholder="Enter body content" required></textarea>
 						<label class="active" for="topic_text_content">Note Content</label>
 					</div>
 				</div>
@@ -241,104 +259,80 @@
 	</div>
 
 	<!-- Add lesson to topic -->
-	<div id="lessontotopic" class="fullmodal modal modal-fixed-footer modal-mobile-full" style="width: 90%">
+	<div id="lessontotopic" class="fullmodal modal modal-fixed-footer modal-mobile-full" style="width: 95%">
 		<form class="col s12" id="form-addlessontotopic" method="post" action="modules/<?php echo basename(__DIR__); ?>/topic_lesson_process.php">
-		<div class="modal-content" style="padding: 0px !important;">
+		<div class="modal-content" id='lessonmodalcontentholder' style="padding: 0px !important;">
 			<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
-				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Model Lesson</span></div>
+				<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Add Lesson</span></div>
 				<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 			</div>
 			<div style='padding: 0px 24px 0px 24px;'>
-				<div id='quillboundry'>
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="topic_lesson_title" name="topic_lesson_title" type="text" placeholder="Enter a title for the lesson" required>
-							<label class='active' for="topic_lesson_title">Lesson Title</label>
-						</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="topic_lesson_title" name="topic_lesson_title" type="text" placeholder="Enter a title for the lesson" autocomplete="off" required>
+						<label class='active' for="topic_lesson_title">Lesson Title</label>
 					</div>
-					<div class="row">
-						<div class="input-field col s6">
-							<input id="lesson_number_text_content" placeholder="Enter a number for the lesson" name="lesson_number_text_content" type="number" required>
-							<label class='active' for="lesson_number_text_content">Lesson Number</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col s12">
-							<p class='black-text' style="font-weight: 500;">Standards</p>
-							<input name="lesson_standards_text_content" name="lesson_standards_text_content" type="hidden">
-							<input name="lesson_standards_text_content_html" name="lesson_standards_text_content_html" type="hidden">
-							<div id="quill_standards" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Resources/Materials</p>
-							<input name="lesson_resources_text_content" name="lesson_resources_text_content" type="hidden">
-							<input name="lesson_resources_text_content_html" name="lesson_resources_text_content_html" type="hidden">
-							<div id="quill_resources" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Anticipatory Set</p>
-							<input name="lesson_anticipatory_set_text_content" name="lesson_anticipatory_set_text_content" type="hidden">
-							<input name="lesson_anticipatory_set_text_content_html" name="lesson_anticipatory_set_text_content_html" type="hidden">
-							<div id="quill_anticipatory" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Learning Objectives/Goals</p>
-							<input name="lesson_learning_objectives_text_content" name="lesson_learning_objectives_text_content" type="hidden">
-							<input name="lesson_learning_objectives_text_content_html" name="lesson_learning_objectives_text_content_html" type="hidden">
-							<div id="quill_objectives" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Direct Instruction</p>
-							<input name="lesson_direct_instruction_text_content" name="lesson_direct_instruction_text_content" type="hidden">
-							<input name="lesson_direct_instruction_text_content_html" name="lesson_direct_instruction_text_content_html" type="hidden">
-							<div id="quill_direct" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Guided Practice</p>
-							<input name="lesson_guided_practice_text_content" name="lesson_guided_practice_text_content" type="hidden">
-							<input name="lesson_guided_practice_text_content_html" name="lesson_guided_practice_text_content_html" type="hidden">
-							<div id="quill_guided" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Independent Practice</p>
-							<input name="lesson_independent_practice_text_content" name="lesson_independent_practice_text_content" type="hidden">
-							<input name="lesson_independent_practice_text_content_html" name="lesson_independent_practice_text_content_html" type="hidden">
-							<div id="quill_independent" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Formative Assessment(s)</p>
-							<input name="lesson_formative_assessment_text_content" name="lesson_formative_assessment_text_content" type="hidden">
-							<input name="lesson_formative_assessment_text_content_html" name="lesson_formative_assessment_text_content_html" type="hidden">
-							<div id="quill_formative" style='height:200px;'></div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<p class='black-text' style="font-weight: 500;">Closure</p>
-							<input name="lesson_closure_text_content" name="lesson_closure_text_content" type="hidden">
-							<input name="lesson_closure_text_content_html" name="lesson_closure_text_content_html" type="hidden">
-							<div id="quill_closure" style='height:200px;'></div>
-						</div>
+					<div class="col s12">
+						<p class='black-text' style="font-weight: 500;">Lesson Body</p>
+						<textarea class='wysiwyg' id="wysiwyg_body" name="wysiwyg_body"></textarea>
 					</div>
 				</div>
-				<input type='hidden' name="topicID" id="topicID">
-				<input type="hidden" name="courseID" id="courseID">
-				<input type="hidden" name="resourceID" id="resourceID">
+				<div class="row" id="advancedlessonoptions" style="display:none;">
+					<div class="col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Standards</p>
+						<textarea class='wysiwyg' id="wysiwyg_standards" name="wysiwyg_standards"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Resources/Materials</p>
+						<textarea class='wysiwyg' id="wysiwyg_resources" name="wysiwyg_resources"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Anticipatory Set</p>
+						<textarea class='wysiwyg' id="wysiwyg_anticipatory" name="wysiwyg_anticipatory"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Learning Objectives/Goals</p>
+						<textarea class='wysiwyg' id="wysiwyg_objectives" name="wysiwyg_objectives"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Direct Instruction</p>
+						<textarea class='wysiwyg' id="wysiwyg_directinstruction" name="wysiwyg_directinstruction"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Guided Practice</p>
+						<textarea class='wysiwyg' id="wysiwyg_guidedpractice" name="wysiwyg_guidedpractice"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Independent Practice</p>
+						<textarea class='wysiwyg' id="wysiwyg_independentpractice" name="wysiwyg_independentpractice"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Formative Assessment(s)</p>
+						<textarea class='wysiwyg' id="wysiwyg_formativeassessment" name="wysiwyg_formativeassessment"></textarea>
+					</div>
+					<div class="input-field col s12">
+						<br>
+						<p class='black-text' style="font-weight: 500;">Closure</p>
+						<textarea class='wysiwyg' id="wysiwyg_closure" name="wysiwyg_closure"></textarea>
+					</div>
+				</div>
+				<div class='row'>
+					<div class="input-field col s12 center-align">
+						<a href='#' class="waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>;' id='advancedlessonoptionsbutton'>Show Advanced Option</a>
+					</div>
+				</div>
 			</div>
+			<input type='hidden' name="topicID" id="topicID">
+			<input type="hidden" name="courseID" id="courseID">
+			<input type="hidden" name="resourceID" id="resourceID">
   	</div>
 	  <div class="modal-footer">
 			<button type="submit" class="modal-action waves-effect btn-flat white-text" style='background-color: <?php echo getSiteColor(); ?>'>Save Lesson</button>
@@ -427,20 +421,51 @@
 		</form>
 	</div>
 
+<script src='core/tinymce/js/tinymce/tinymce.min.js'></script>
+
 <script>
 
 	$(function()
 	{
 
+		//Material Select
 		$('select').material_select();
+
+		//Start TinyMCE
+		tinymce.init({
+			selector: '.wysiwyg', branding: false, height:300, menubar:false, resize: false, statusbar: false, autoresize_min_height: 300, autoresize_max_height: 1000,
+			content_css : "/core/css/tinymce.0.0.5.css?" + new Date().getTime(),
+			oninit : "setPlainText",
+			plugins: 'paste print preview fullpage autolink fullscreen image link media template codesample charmap hr nonbreaking toc insertdatetime advlist lists textcolor imagetools contextmenu textpattern autoresize',
+			toolbar: 'bold italic underline link | alignleft aligncenter alignright | numlist bullist | media | removeformat print fullscreen',
+			image_advtab: true });
 
 		//Date Picker
 		$('.topic_starttime').pickadate({ container: 'body', selectMonths: true, selectYears: 15 });
 
-		//Attachment modals
+		//Modals
 		$('.modal-linktopic').leanModal({ in_duration: 0, out_duration: 0, ready: function() { } });
 		$('.modal-standardtopic').leanModal({ in_duration: 0, out_duration: 0, ready: function() { } });
 
+		//Learn Course Dropdown
+		$("#learn_course").change(function(){
+			if($(this).is(':checked')){
+				$("#learnRestrictionsDiv").show();
+			}else{
+				$("#learnRestrictionsDiv").hide();
+			}
+		});
+
+		//Advanced Lesson Options
+		$("#advancedlessonoptionsbutton").off().on("click", function(event){
+			event.preventDefault();
+			$("#advancedlessonoptions").toggle();
+
+			$(this).text($(this).text() == 'Hide Advanced Options' ? 'Show Advanced Options' : 'Hide Advanced Options');
+
+		});
+
+		//Google Drive
 		$(".google-drive").off().on("click", function(event){
 			event.preventDefault();
 			var developerKey = "<?php echo CONSTANT('GOOGLE_API_KEY') ?>";
@@ -534,78 +559,95 @@
 			});
 		});
 
-		//Start Quill
-		var options = { modules: { toolbar: [[ 'bold', 'italic', { header: '1' }, 'blockquote', 'link', 'video', { list: 'ordered' }, { list: 'bullet' }]]}, theme: 'snow', bounds: '#quillboundry'};
-		var quill_standards = document.getElementById('quill_standards'); var quill_standards_data = new Quill(quill_standards, options);
-		var quill_resources = document.getElementById('quill_resources'); var quill_resources_data = new Quill(quill_resources, options);
-		var quill_anticipatory = document.getElementById('quill_anticipatory'); var quill_anticipatory_data = new Quill(quill_anticipatory, options);
-		var quill_objectives = document.getElementById('quill_objectives'); var quill_objectives_data = new Quill(quill_objectives, options);
-		var quill_direct = document.getElementById('quill_direct'); var quill_direct_data = new Quill(quill_direct, options);
-		var quill_guided = document.getElementById('quill_guided'); var quill_guided_data = new Quill(quill_guided, options);
-		var quill_independent= document.getElementById('quill_independent'); var quill_independent_data = new Quill(quill_independent, options);
-		var quill_formative = document.getElementById('quill_formative'); var quill_formative_data = new Quill(quill_formative, options);
-		var quill_closure = document.getElementById('quill_closure'); var quill_closure_data = new Quill(quill_closure, options);
-
 		//Fill in Lesson Topic Data
 		$("body").off().on("click", ".modal-lessontopic", function ()
 		{
-			var Resource_ID= $(this).data('resourceid');
-			$(".modal-content #resourceID").val(Resource_ID);
-			var Lesson_Title= $(this).data('title'); $(".modal-content #topic_lesson_title").val(Lesson_Title);
-			var Lesson_Number= $(this).data('number'); $(".modal-content #lesson_number_text_content").val(Lesson_Number);
-			var Lesson_Standards = $(this).data('standards');
-			if(Lesson_Standards){
-				Lesson_Standards = atob(Lesson_Standards);
-				Lesson_Standards = jQuery.parseJSON(Lesson_Standards);
-				quill_standards_data.setContents(Lesson_Standards); }else{ quill_standards_data.setContents([ ]); }
 
-			var Lesson_Resources= $(this).data('resources');
-			if(Lesson_Resources){
-				Lesson_Resources = atob(Lesson_Resources);
-				Lesson_Resources = jQuery.parseJSON(Lesson_Resources);
-				quill_resources_data.setContents(Lesson_Resources); }else{ quill_resources_data.setContents([ ]); }
+			//Scroll to top of div
+			$("#lessonmodalcontentholder").scrollTop(0);
+			var New = $(this).data('new');
 
-			var Lesson_Anticipatory= $(this).data('anticipatory');
-			if(Lesson_Anticipatory){
-				Lesson_Anticipatory = atob(Lesson_Anticipatory);
-				Lesson_Anticipatory = jQuery.parseJSON(Lesson_Anticipatory);
-				quill_anticipatory_data.setContents(Lesson_Anticipatory); }else{ quill_anticipatory_data.setContents([ ]); }
+			//Clear out Lesson content
+			$("#wysiwyg_body").html('');
+			tinymce.get("wysiwyg_body").setContent('');
 
-			var Lesson_Objectives= $(this).data('objectives');
-			if(Lesson_Objectives){
-				Lesson_Objectives = atob(Lesson_Objectives);
-				Lesson_Objectives = jQuery.parseJSON(Lesson_Objectives);
-				quill_objectives_data.setContents(Lesson_Objectives); }else{ quill_objectives_data.setContents([ ]); }
 
-			var Lesson_DirectInstruction= $(this).data('directinstruction');
-			if(Lesson_DirectInstruction){
-				Lesson_DirectInstruction = atob(Lesson_DirectInstruction);
-				Lesson_DirectInstruction = jQuery.parseJSON(Lesson_DirectInstruction);
-				quill_direct_data.setContents(Lesson_DirectInstruction); }else{ quill_direct_data.setContents([ ]); }
+			//Fill Lesson Content
+			if(New!=1){
 
-			var Lesson_GuidedPractice= $(this).data('guidedpractice');
-			if(Lesson_GuidedPractice){
-				Lesson_GuidedPractice = atob(Lesson_GuidedPractice);
-				Lesson_GuidedPractice = jQuery.parseJSON(Lesson_GuidedPractice);
-				quill_guided_data.setContents(Lesson_GuidedPractice); }else{ quill_guided_data.setContents([ ]); }
+				var Resource_ID = $(this).data('resourceid');
+				$(".modal-content #resourceID").val(Resource_ID);
+				var Lesson_Title = $(this).data('title');
+				$(".modal-content #topic_lesson_title").val(Lesson_Title);
+				var Lesson_Number = $(this).data('number');
+				$(".modal-content #lesson_number_text_content").val(Lesson_Number);
 
-			var Lesson_IndependentPractice= $(this).data('independentpractice'); $(".modal-content #lesson_independent_practice_text_content").val(Lesson_IndependentPractice);
-			if(Lesson_IndependentPractice){
-				Lesson_IndependentPractice = atob(Lesson_IndependentPractice);
-				Lesson_IndependentPractice = jQuery.parseJSON(Lesson_IndependentPractice);
-				quill_independent_data.setContents(Lesson_IndependentPractice); }else{ quill_independent_data.setContents([ ]); }
+				var WYSIWYG_Body = $(this).data('body');
+				var WYSIWYG_Body = atob(WYSIWYG_Body);
+				$('.wysiwyg_body').html(WYSIWYG_Body);
+				tinymce.get("wysiwyg_body").setContent(WYSIWYG_Body);
 
-			var Lesson_FormativeAssessment= $(this).data('formativeassessment'); $(".modal-content #lesson_formative_assessment_text_content").val(Lesson_FormativeAssessment);
-			if(Lesson_FormativeAssessment){
-				Lesson_FormativeAssessment = atob(Lesson_FormativeAssessment);
-				Lesson_FormativeAssessment = jQuery.parseJSON(Lesson_FormativeAssessment);
-				quill_formative_data.setContents(Lesson_FormativeAssessment); }else{ quill_formative_data.setContents([ ]); }
+				var WYSIWYG_Standards = $(this).data('standards');
+				var WYSIWYG_Standards = atob(WYSIWYG_Standards);
+				$('.wysiwyg_standards').html(WYSIWYG_Standards);
+				tinymce.get("wysiwyg_standards").setContent(WYSIWYG_Standards);
 
-			var Lesson_Closure= $(this).data('closure'); $(".modal-content #lesson_closure_text_content").val(Lesson_Closure);
-			if(Lesson_Closure){
-				Lesson_Closure = atob(Lesson_Closure);
-				Lesson_Closure = jQuery.parseJSON(Lesson_Closure);
-				quill_closure_data.setContents(Lesson_Closure); }else{ quill_closure_data.setContents([ ]); }
+				var WYSIWYG_Resources = $(this).data('resources');
+				var WYSIWYG_Resources = atob(WYSIWYG_Resources);
+				$('.wysiwyg_resources').html(WYSIWYG_Resources);
+				tinymce.get("wysiwyg_resources").setContent(WYSIWYG_Resources);
+
+				var WYSIWYG_Anticipatory = $(this).data('anticipatory');
+				var WYSIWYG_Anticipatory = atob(WYSIWYG_Anticipatory);
+				$('.wysiwyg_anticipatory').html(WYSIWYG_Anticipatory);
+				tinymce.get("wysiwyg_anticipatory").setContent(WYSIWYG_Anticipatory);
+
+				var WYSIWYG_Objectives = $(this).data('objectives');
+				var WYSIWYG_Objectives = atob(WYSIWYG_Objectives);
+				$('.wysiwyg_objectives').html(WYSIWYG_Objectives);
+				tinymce.get("wysiwyg_objectives").setContent(WYSIWYG_Objectives);
+
+				var WYSIWYG_DirectInstruction = $(this).data('directinstruction');
+				var WYSIWYG_DirectInstruction = atob(WYSIWYG_DirectInstruction);
+				$('.wysiwyg_directinstruction').html(WYSIWYG_DirectInstruction);
+				tinymce.get("wysiwyg_directinstruction").setContent(WYSIWYG_DirectInstruction);
+
+				var WYSIWYG_GuidedPractice = $(this).data('guidedpractice');
+				var WYSIWYG_GuidedPractice = atob(WYSIWYG_GuidedPractice);
+				$('.wysiwyg_guidedpractice').html(WYSIWYG_GuidedPractice);
+				tinymce.get("wysiwyg_guidedpractice").setContent(WYSIWYG_GuidedPractice);
+
+				var WYSIWYG_IndependentPractice = $(this).data('independentpractice');
+				var WYSIWYG_IndependentPractice = atob(WYSIWYG_IndependentPractice);
+				$('.wysiwyg_independentpractice').html(WYSIWYG_IndependentPractice);
+				tinymce.get("wysiwyg_independentpractice").setContent(WYSIWYG_IndependentPractice);
+
+				var WYSIWYG_FormativeAssessment = $(this).data('formativeassessment');
+				var WYSIWYG_FormativeAssessment = atob(WYSIWYG_FormativeAssessment);
+				$('.wysiwyg_formativeassessment').html(WYSIWYG_FormativeAssessment);
+				tinymce.get("wysiwyg_formativeassessment").setContent(WYSIWYG_FormativeAssessment);
+
+				var WYSIWYG_Closure = $(this).data('closure');
+				var WYSIWYG_Closure = atob(WYSIWYG_Closure);
+				$('.wysiwyg_closure').html(WYSIWYG_Closure);
+				tinymce.get("wysiwyg_closure").setContent(WYSIWYG_Closure);
+
+			}
+			else {
+
+				$(".modal-content #resourceID").val('');
+				$(".modal-content #topic_lesson_title").val('');
+				$(".modal-content #lesson_number_text_content").val('');
+				tinymce.get("wysiwyg_standards").setContent('');
+				tinymce.get("wysiwyg_resources").setContent('');
+				tinymce.get("wysiwyg_anticipatory").setContent('');
+				tinymce.get("wysiwyg_objectives").setContent('');
+				tinymce.get("wysiwyg_directinstruction").setContent('');
+				tinymce.get("wysiwyg_guidedpractice").setContent('');
+				tinymce.get("wysiwyg_independentpractice").setContent('');
+				tinymce.get("wysiwyg_formativeassessment").setContent('');
+				tinymce.get("wysiwyg_closure").setContent('');
+			}
 
 		});
 
@@ -842,68 +884,16 @@
 		$('#form-addlessontotopic').submit(function(event){
 			event.preventDefault();
 
+			tinyMCE.triggerSave();
+
 			var form = $('#form-addlessontotopic');
 			var formMessages = $('#form-messages');
 
 			$("#topicLoader").show();
-			$('#lessontotopic').closeModal({
-				in_duration: 0,
-				out_duration: 0,
-			});
-
-			//Move Quill Content to Hidden Divs
-			var Standards_WYSIWYG=document.querySelector('input[name=lesson_standards_text_content]');
-			Standards_WYSIWYG.value = JSON.stringify(quill_standards_data.getContents());
-			var Standards_HTML = quill_standards_data.root.innerHTML;
-			$('input[name="lesson_standards_text_content_html"]').val(Standards_HTML);
-
-			var Resources_WYSIWYG=document.querySelector('input[name=lesson_resources_text_content]');
-			Resources_WYSIWYG.value = JSON.stringify(quill_resources_data.getContents());
-			var Resources_HTML = quill_resources_data.root.innerHTML;
-			$('input[name="lesson_resources_text_content_html"]').val(Resources_HTML);
-
-			var Anticipatory_WYSIWYG=document.querySelector('input[name=lesson_anticipatory_set_text_content]');
-			Anticipatory_WYSIWYG.value = JSON.stringify(quill_anticipatory_data.getContents());
-			var Anticipatory_HTML = quill_anticipatory_data.root.innerHTML;
-			$('input[name="lesson_anticipatory_set_text_content_html"]').val(Anticipatory_HTML);
-
-			var Objectives_WYSIWYG=document.querySelector('input[name=lesson_learning_objectives_text_content]');
-			Objectives_WYSIWYG.value = JSON.stringify(quill_objectives_data.getContents());
-			var Objectives_HTML = quill_objectives_data.root.innerHTML;
-			$('input[name="lesson_learning_objectives_text_content_html"]').val(Objectives_HTML);
-
-			var Direct_WYSIWYG=document.querySelector('input[name=lesson_direct_instruction_text_content]');
-			Direct_WYSIWYG.value = JSON.stringify(quill_direct_data.getContents());
-			var Direct_HTML = quill_direct_data.root.innerHTML;
-			$('input[name="lesson_direct_instruction_text_content_html"]').val(Direct_HTML);
-
-			var Guided_WYSIWYG=document.querySelector('input[name=lesson_guided_practice_text_content]');
-			Guided_WYSIWYG.value = JSON.stringify(quill_guided_data.getContents());
-			var Guided_HTML = quill_guided_data.root.innerHTML;
-			$('input[name="lesson_guided_practice_text_content_html"]').val(Guided_HTML);
-
-			var Independent_WYSIWYG=document.querySelector('input[name=lesson_independent_practice_text_content]');
-			Independent_WYSIWYG.value = JSON.stringify(quill_independent_data.getContents());
-			var Independent_HTML = quill_independent_data.root.innerHTML;
-			$('input[name="lesson_independent_practice_text_content_html"]').val(Independent_HTML);
-
-			var Formative_WYSIWYG=document.querySelector('input[name=lesson_formative_assessment_text_content]');
-			Formative_WYSIWYG.value = JSON.stringify(quill_formative_data.getContents());
-			var Formative_HTML = quill_formative_data.root.innerHTML;
-			$('input[name="lesson_formative_assessment_text_content_html"]').val(Formative_HTML);
-
-			var Closure_WYSIWYG=document.querySelector('input[name=lesson_closure_text_content]');
-			Closure_WYSIWYG.value = JSON.stringify(quill_closure_data.getContents());
-			var Closure_HTML = quill_closure_data.root.innerHTML;
-			$('input[name="lesson_closure_text_content_html"]').val(Closure_HTML);
-
+			$('#lessontotopic').closeModal({ in_duration: 0, out_duration: 0 });
 
 			var formData = $(form).serialize();
-			$.ajax({
-				type: 'POST',
-				url: $(form).attr('action'),
-				data: formData
-			})
+			$.ajax({ type: 'POST', url: $(form).attr('action'), data: formData })
 
 			//Show the notification
 			.done(function(response) {

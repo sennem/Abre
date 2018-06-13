@@ -53,7 +53,12 @@
 			$(document).on("click", ".modal-lessontopic", function ()
 			{
 				event.preventDefault();
-				$('#lessontotopic').openModal({ in_duration: 0, out_duration: 0, ready: function() { $('.modal-content').scrollTop(0); } });
+				$('#lessontotopic').openModal({ in_duration: 0, out_duration: 0, ready: function()
+				{
+					$('#lessonmodalcontentholder').scrollTop(0);
+				},
+				complete: function() {  },
+				});
 			});
 
 		});

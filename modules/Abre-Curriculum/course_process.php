@@ -36,19 +36,31 @@
 	$course_hidden=isset($_POST["course_hidden"]);
 	if($course_hidden==""){ $course_hidden="0"; }
 
+	if(isset($_POST['learn_course'])){ $learn_course = $_POST['learn_course']; }else{ $learn_course = 0; }
+	if(isset($_POST['learnRestrictions'])){
+		$restrictions = $_POST['learnRestrictions'];
+		$restrictions = implode(",", $restrictions);
+	}else{
+		$restrictions = '';
+	}
+
 	//Add or update the course
-	if($course_id=="")
-	{
+	if($course_id == ""){
 		$stmt = $db->stmt_init();
-		$sql = "INSERT INTO curriculum_course (Hidden, Title, Subject, Grade, Image, Editors) VALUES ('$course_hidden', '$course_title', '$course_subject', '$course_grade', '$course_image', '$course_editors');";
+		$sql = "INSERT INTO curriculum_course (Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 		$stmt->prepare($sql);
+		$stmt->bind_param("isssssis", $course_hidden, $course_title, $course_subject, $course_grade, $course_image, $course_editors, $learn_course, $restrictions);
 		$stmt->execute();
 		$stmt->close();
 		$db->close();
-	}
-	else
-	{
-		mysqli_query($db, "UPDATE curriculum_course set Hidden='$course_hidden', Title='$course_title', Subject='$course_subject', Grade='$course_grade', Editors='$course_editors' where ID='$course_id'") or die (mysqli_error($db));
+	}else{
+		$stmt = $db->stmt_init();
+		$sql = "UPDATE curriculum_course SET Hidden = ?, Title = ?, Subject = ?, Grade = ?, Editors = ?, Learn_Course = ?, Restrictions = ? WHERE ID = ?";
+		$stmt->prepare($sql);
+		$stmt->bind_param("issssisi", $course_hidden, $course_title, $course_subject, $course_grade, $course_editors, $learn_course, $restrictions, $course_id);
+		$stmt->execute();
+		$stmt->close();
+		$db->close();
 	}
 
 	//Give message

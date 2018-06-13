@@ -88,7 +88,7 @@
 						$Current_Month = date('M');
 						$Previous_Month = date('M', strtotime('-1 month'));
 						$FormattedMonth=strtoupper($Unit_Start_Month);
-						$PreviewDate=strtoupper("$Unit_Start_Month $Unit_Start_Day, $Unit_Start_Time_Year");
+						if($Unit_Start_Time_Year!=""){ $PreviewDate=strtoupper("$Unit_Start_Month $Unit_Start_Day, $Unit_Start_Time_Year"); }else{ $PreviewDate=""; }
 
 						echo "<li style='position:relative' class='topicholder'>";
 
