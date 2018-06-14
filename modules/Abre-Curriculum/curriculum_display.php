@@ -50,10 +50,19 @@
 					$Subject=htmlspecialchars($row["Subject"], ENT_QUOTES);
 					$Grade=htmlspecialchars($row["Grade"], ENT_QUOTES);
 					$Image=htmlspecialchars($row["Image"], ENT_QUOTES);
-					if($Image==""){ $Image="course.jpg"; }
+					if($Image == ""){
+						$Image = "generic.jpg";
+					}else{
+						$imageCheck = $portal_path_root."/modules/".basename(__DIR__)."/images/".$Image;
+						if(file_exists($imageCheck)){
+							$Image = "/modules/".basename(__DIR__)."/images/".$Image;
+						}else{
+							$Image = $portal_root."/modules/Abre-Curriculum/serveimage.php?file=$Image&ext=png";
+						}
+					}
 
 					echo "<div class='mdl-card mdl-shadow--2dp card_courses'>";
-						echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand' style='height:120px; background-image: url(modules/".basename(__DIR__)."/images/$Image);'></div>";
+						echo "<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand' style='height:120px; background-image: url($Image);'></div>";
 						echo "<div class='mdl-card__title'><div class='mdl-card__title-text truncate'><span class='truncate'>$Title</span></div></div>";
 						echo "<div class='mdl-card__supporting-text truncate'>Grade Level: $Grade</div>";
 						echo "<div class='mdl-card__actions'>";

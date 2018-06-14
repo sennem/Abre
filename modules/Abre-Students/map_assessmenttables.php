@@ -38,20 +38,20 @@
         echo "<div class='collapsible-header active'><b>Test Information</b></div>";
         echo "<div class='collapsible-body'><br>";
           echo "<div class='row'>";
-            echo "<div class='col s12 l3'><b>Test Name:</b> ".$testName."</div>";
-            echo "<div class='col s12 l3'><b>Test Start Date:</b> ".$dbreturn[0]['TestStartDate']."</div>";
-            echo "<div class='col s12 l3'><b>Test Start Time:</b> ".date( "g:i A", strtotime($dbreturn[0]['TestStartTime']))."</div>";
+            echo "<div class='col s12 l3'><b>Name:</b> ".$testName."</div>";
+            echo "<div class='col s12 l3'><b>Start Date:</b> ".$dbreturn[0]['TestStartDate']."</div>";
+            echo "<div class='col s12 l3'><b>Start Time:</b> ".date( "g:i A", strtotime($dbreturn[0]['TestStartTime']))."</div>";
             if(isset($dbreturn[0]['TestDurationMinutes']) && $dbreturn[0]['TestDurationMinutes'] != ""){
-                echo "<div class='col s12 l3'><b>Test Duration:</b> ".$dbreturn[0]['TestDurationMinutes']." minutes</div>";
+                echo "<div class='col s12 l3'><b>Duration:</b> ".$dbreturn[0]['TestDurationMinutes']." minutes</div>";
             }else{
-              echo "<div class='col s12 l3'><b>Test Duration:</b></div>";
+              echo "<div class='col s12 l3'><b>Duration:</b></div>";
             }
           echo "</div>";
           echo "<div class='row'>";
-            echo "<div class='col s12 l3'><b>Test RIT Score:</b> ".$dbreturn[0]['TestRITScore']."</div>";
-            echo "<div class='col s12 l3'><b>Test Percent Correct:</b> ".$dbreturn[0]['PercentCorrect']."</div>";
-            echo "<div class='col s12 l3'><b>Test Standard Error:</b> ".$dbreturn[0]['TestStandardError']."</div>";
-            echo "<div class='col s12 l3'><b>Test Percentile:</b> ".$dbreturn[0]['TestPercentile']."</div>";
+            echo "<div class='col s12 l3'><b>RIT Score:</b> ".$dbreturn[0]['TestRITScore']."</div>";
+            echo "<div class='col s12 l3'><b>Percent Correct:</b> ".$dbreturn[0]['PercentCorrect']."</div>";
+            echo "<div class='col s12 l3'><b>Standard Error:</b> ".$dbreturn[0]['TestStandardError']."</div>";
+            echo "<div class='col s12 l3'><b>Percentile:</b> ".$dbreturn[0]['TestPercentile']."</div>";
           echo "</div>";
           echo "<div class='row'>";
             if(isset($dbreturn[0]['Accommodations']) && $dbreturn[0]['Accommodations'] != ""){

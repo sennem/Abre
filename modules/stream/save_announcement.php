@@ -22,7 +22,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	$cloudsetting=constant("USE_GOOGLE_CLOUD");
-	if ($cloudsetting=="true") 
+	if ($cloudsetting=="true")
 		require(dirname(__FILE__). '/../../vendor/autoload.php');
 	use Google\Cloud\Storage\StorageClient;
 
@@ -36,7 +36,7 @@
   if($_POST['post_title'] != ""){
     $postTitle = $_POST['post_title'];
   }else{
-		$response = array("status" => "Error", "message" => "Error! You did not provide a post title!");
+		$response = array("status" => "Error", "message" => "Error! You did not provide an announcement title!");
 		header("Content-Type: application/json");
 		echo json_encode($response);
 		exit;
@@ -44,7 +44,7 @@
   if($_POST['post_stream'] != ""){
     $postStream = $_POST['post_stream'];
   }else{
-		$response = array("status" => "Error", "message" => "Please provide a post stream!");
+		$response = array("status" => "Error", "message" => "Please provide an announcement stream!");
 		header("Content-Type: application/json");
 		echo json_encode($response);
 		exit;
@@ -69,7 +69,7 @@
   if($_POST['post_content'] != ""){
     $postContent = $_POST['post_content'];
   }else{
-		$response = array("status" => "Error", "message" => "Please provide content for your post!");
+		$response = array("status" => "Error", "message" => "Please provide content for your announcement!");
 		header("Content-Type: application/json");
 		echo json_encode($response);
 		exit;
@@ -89,9 +89,9 @@
 		if ($cloudsetting=="true") {
 			$storage = new StorageClient([
 				'projectId' => constant("GC_PROJECT")
-			]);	
+			]);
 			$bucket = $storage->bucket(constant("GC_BUCKET"));
-	
+
 			$uploaddir = "private_html/stream/cache/images/" . $image_file_name;
 			//Upload new image
 			$postimage = $uploaddir;
@@ -113,10 +113,10 @@
 			//Upload new image
 			$postimage = $uploaddir;
 			move_uploaded_file($_FILES['customimage']['tmp_name'], $postimage);
-	
+
 			//Resize image
-			ResizeImage($uploaddir, "1000", "90");	
-		}	
+			ResizeImage($uploaddir, "1000", "90");
+		}
 	}
 
 
@@ -128,7 +128,7 @@
 	if($stmt->error != ""){
 		$stmt->close();
 		$db->close();
-		$response = array("status" => "Error", "message" => "There was a problem saving your post. Please try again.");
+		$response = array("status" => "Error", "message" => "There was a problem saving your announcement. Please try again.");
 		header("Content-Type: application/json");
 		echo json_encode($response);
 		exit;
@@ -136,7 +136,7 @@
   $stmt->close();
 
   $db->close();
-  $response = array("status" => "Success", "message" => "Your post was saved successfully!");
+  $response = array("status" => "Success", "message" => "Your announcement was saved successfully!");
   header("Content-Type: application/json");
   echo json_encode($response);
 

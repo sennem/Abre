@@ -113,6 +113,11 @@
 			controlOrder: ['header', 'paragraph', 'text', 'textarea', 'radio-group', 'checkbox-group', 'select', 'date', 'number', 'file'],
 			disableFields: ['autocomplete', 'button', 'file', 'hidden', 'paragraph', 'text', 'textarea', 'radio-group', 'header', 'select', 'checkbox-group', 'date', 'number'],
 			disabledAttrs: ['access', 'className','placeholder', 'name', 'description', 'inline', 'toggle', 'value', 'maxlength', 'rows'],
+			typeUserDisabledAttrs: {
+				'textarea': [
+						'subtype'
+				]
+			}
 		};
 		var formBuilder = $('#formbuilder').formBuilder(options);
 

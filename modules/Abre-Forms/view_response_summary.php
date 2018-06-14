@@ -105,51 +105,55 @@
 	    }
 	  }
 
-	  echo "<div class='page_container page_container_limit mdl-color--white mdl-shadow--2dp' style='max-width: 750px;'>";
-	    echo "<div class='page'>";
-	      foreach($formFieldsArray as $element){
-	        if($element["type"] == "text" || $element["type"] == "textarea" || $element["type"] == "select" || $element["type"] == "radio-group" || $element["type"] == "checkbox-group"){
-	          if($element["type"] == "checkbox-group"){
-	            $id = $element['name']."[]";
-	          }else{
-	            $id = $element['name'];
-	          }
+		if(!empty($formFieldsArray)){
+		  echo "<div class='page_container page_container_limit mdl-color--white mdl-shadow--2dp' style='max-width: 750px;'>";
+		    echo "<div class='page'>";
+		      foreach($formFieldsArray as $element){
+		        if($element["type"] == "text" || $element["type"] == "textarea" || $element["type"] == "select" || $element["type"] == "radio-group" || $element["type"] == "checkbox-group"){
+		          if($element["type"] == "checkbox-group"){
+		            $id = $element['name']."[]";
+		          }else{
+		            $id = $element['name'];
+		          }
 
-	          echo "<div class='row'>";
-	            echo "<div class='col s12'>";
-	              echo "<h5>".$element['label']."</h5>";
-	              if(isset($resultsSummaryArray[$id]['totalAnswers'])){
-	                echo "<p>".$resultsSummaryArray[$id]['totalAnswers']." Responses</p>";
-	              }else{
-	                echo "<p>0 Responses</p>";
-	              }
-	            echo "</div>";
-	          echo "</div>";
-	          echo "<div class='row'>";
-	            echo "<div class='col s12'>";
-	            if(!isset($resultsSummaryArray[$id]['totalAnswers'])){
-	              echo "<p style='font-size:16px; margin-left: 24px;'>No responses yet for this question.</p>";
-	            }else{
-	              if($element["type"] == "select" || $element["type"] == "radio-group"){
-	                echo "<canvas id='".$id."' style='max-width:400px; max-height:400px; display:block; margin-left:auto; margin-right:auto;'></canvas>";
-	              }else if($element["type"] == "textarea"){
-	                echo "<table id='".$id."' class='striped'>";
-	                  echo "<tbody id='".$id."Body'>";
-	                  echo "</tbody>";
-	                echo "</table>";
-	              }else{
-	                echo "<canvas id='".$id."' style='max-width:600px; max-height: 500px; display:block; margin-left:auto; margin-right:auto;'></canvas>";
-	              }
-	            }
-	            echo "</div>";
-	          echo "</div>";
-	        }
-	        if(isset($id) && isset($resultsSummaryArray[$id]['totalAnswers'])){
-						unset($resultsSummaryArray[$id]['totalAnswers']);
-					}
-	      }
-	    echo "</div>";
-	  echo "</div>";
+		          echo "<div class='row'>";
+		            echo "<div class='col s12'>";
+		              echo "<h5>".$element['label']."</h5>";
+		              if(isset($resultsSummaryArray[$id]['totalAnswers'])){
+		                echo "<p>".$resultsSummaryArray[$id]['totalAnswers']." Responses</p>";
+		              }else{
+		                echo "<p>0 Responses</p>";
+		              }
+		            echo "</div>";
+		          echo "</div>";
+		          echo "<div class='row'>";
+		            echo "<div class='col s12'>";
+		            if(!isset($resultsSummaryArray[$id]['totalAnswers'])){
+		              echo "<p style='font-size:16px; margin-left: 24px;'>No responses yet for this question.</p>";
+		            }else{
+		              if($element["type"] == "select" || $element["type"] == "radio-group"){
+		                echo "<canvas id='".$id."' style='max-width:400px; max-height:400px; display:block; margin-left:auto; margin-right:auto;'></canvas>";
+		              }else if($element["type"] == "textarea"){
+		                echo "<table id='".$id."' class='striped'>";
+		                  echo "<tbody id='".$id."Body'>";
+		                  echo "</tbody>";
+		                echo "</table>";
+		              }else{
+		                echo "<canvas id='".$id."' style='max-width:600px; max-height: 500px; display:block; margin-left:auto; margin-right:auto;'></canvas>";
+		              }
+		            }
+		            echo "</div>";
+		          echo "</div>";
+		        }
+		        if(isset($id) && isset($resultsSummaryArray[$id]['totalAnswers'])){
+							unset($resultsSummaryArray[$id]['totalAnswers']);
+						}
+		      }
+		    echo "</div>";
+		  echo "</div>";
+		}else{
+			echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Form Questions</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Details about form responses will be shown here.</p></div>";
+		}
 
 		$resultsSummaryJSON = json_encode($resultsSummaryArray);
 	}else{

@@ -23,7 +23,7 @@
   if($_POST['id'] != ""){
     $id = $_POST['id'];
   }else{
-    $response = array("status" => "Error", "message" => "There was a problem deleting your post. Try again!");
+    $response = array("status" => "Error", "message" => "There was a problem deleting your announcement. Try again!");
     header("Content-Type: application/json");
     echo json_encode($response);
     exit;
@@ -38,15 +38,22 @@
   if($stmt->error != ""){
 		$stmt->close();
 		$db->close();
-    $response = array("status" => "Error", "message" => "There was a problem deleting your post.");
+    $response = array("status" => "Error", "message" => "There was a problem deleting your announcement.");
     header("Content-Type: application/json");
     echo json_encode($response);
     exit;
   }
   $stmt->close();
-  $db->close();
 
-  $response = array("status" => "Success", "message" => "Your post has been deleted.");
+	$stmt = $db->stmt_init();
+	$sql = "DELETE FROM streams_comments WHERE url = ?";
+	$stmt->prepare($sql);
+	$stmt->bind_param("s", $id);
+	$stmt->execute();
+	$stmt->close();
+	$db->close();
+
+  $response = array("status" => "Success", "message" => "Your announcement has been deleted.");
   header("Content-Type: application/json");
   echo json_encode($response);
 

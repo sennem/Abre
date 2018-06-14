@@ -25,7 +25,7 @@
 ?>
 
 		<div class='fixed-action-btn buttonpin'>
-			<a class='modal-addcourse btn-floating btn-large waves-effect waves-light' style='background-color: <?php echo getSiteColor(); ?>' id="createcourse" data-grade='blank' data-subject='blank' data-position='left' data-title='' data-learncourse='0' data-restrictions='' href='#curriculumcourse'><i class='large material-icons'>add</i></a>
+			<a class='modal-addcourse btn-floating btn-large waves-effect waves-light' style='background-color: <?php echo getSiteColor(); ?>' id="createcourse" data-grade='blank' data-subject='blank' data-position='left' data-title='' data-learncourse='0' data-restrictions='' data-description='' data-tags='' data-sequential='0' data-image='' data-imagelink='' href='#curriculumcourse'><i class='large material-icons'>add</i></a>
 			<div class="mdl-tooltip mdl-tooltip--left" for="createcourse">Create Course</div>
 		</div>
 

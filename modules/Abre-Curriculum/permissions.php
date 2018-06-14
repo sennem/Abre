@@ -24,6 +24,8 @@
 	//Check for Admin Authentication
 	$pagerestrictions="students";
 	$pagerestrictionsedit="staff, students";
+
+	//conditional required for fresh install
 	$permissionsetting=encrypt("Administrator", "");
 	if($db->query("SELECT * FROM directory LIMIT 1")){
 		$sql = "SELECT * FROM directory WHERE email = '".$_SESSION['useremail']."' AND permissions = '$permissionsetting'";

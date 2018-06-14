@@ -34,52 +34,6 @@
 
   $submitter = $_SESSION['useremail'];
 
-  if($headlinePurpose == "form"){
-    //User Information
-		$usertype = $_SESSION['usertype'];
-		$firstname = "";
-		$lastname = "";
-		$uniqueid = "";
-
-		//Get Staff Information
-		if($usertype == 'staff'){
-			$firstname = GetStaffFirstName($submitter);
-			$lastname = GetStaffLastName($submitter);
-			$uniqueid = GetStaffUniqueID($submitter);
-		}
-
-		//Get Student Information
-		if($usertype == 'student'){
-			$firstname = GetStudentFirstName($submitter);
-			$lastname = GetStudentLastName($submitter);
-			$uniqueid = GetStudentUniqueID($submitter);
-		}
-
-		//Get Staff Information
-		if($usertype == 'parent' or ($firstname == "" && $lastname == "")){
-			$name = $_SESSION['displayName'];
-			$name = explode(" ", $name);
-			$firstname = $name[0];
-			$lastname = $name[1];
-		}
-
-		//Add entry to responses
-		$stmt = $db->stmt_init();
-		$sql = "INSERT INTO forms_responses (FormID, Submitter, FirstName, LastName, UniqueID, UserType, Response) VALUES (?, ?, ?, ?, ?, ?, ?);";
-		$stmt->prepare($sql);
-		$stmt->bind_param("issssss", $headlineFormID, $submitter, $firstname, $lastname, $uniqueid, $usertype, $headlineInformationJSON);
-		$stmt->execute();
-    if($stmt->error != ""){
-      $response = array("status" => "Error", "message" => "There was a problem saving your form response!");
-      header("Content-Type: application/json");
-      echo json_encode($response);
-      $stmt->close();
-      $db->close();
-      exit;
-    }
-		$stmt->close();
-  }
-
 	//Insert the headline_response
 	$stmt = $db->stmt_init();
 	$sql = "INSERT INTO headline_responses (headline_id, email) VALUES (?, ?)";

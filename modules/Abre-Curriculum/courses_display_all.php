@@ -50,18 +50,18 @@
 		if($searchquery == ""){
 			if($pagerestrictionsedit == ""){
 				$querycount = "SELECT COUNT(*) FROM curriculum_course";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags, Sequential FROM curriculum_course ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}else{
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE Hidden = '0'";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE Hidden = '0' ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags, Sequential FROM curriculum_course WHERE Hidden = '0' ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}
 		}else{
 			if($pagerestrictionsedit == ""){
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery')";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags, Sequential FROM curriculum_course WHERE (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}else{
 				$querycount = "SELECT COUNT(*) FROM curriculum_course WHERE Hidden = '0' AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery')";
-				$sql = "SELECT ID, Hidden, Title, Subject, Grade, Image, Editors, Learn_Course, Restrictions FROM curriculum_course WHERE Hidden = '0'AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
+				$sql = "SELECT ID, Hidden, Title, Description, Subject, Grade, Image, Editors, Learn_Course, Restrictions, Tags, Sequential FROM curriculum_course WHERE Hidden = '0'AND (LOWER(Title) LIKE '%$searchquery%' OR LOWER(Subject) = '$searchquery') ORDER BY Title LIMIT $LowerBound, $PerPage";
 			}
 		}
 
@@ -101,11 +101,24 @@
 			$Editors = htmlspecialchars($row["Editors"], ENT_QUOTES);
 			$Learn_Course = $row['Learn_Course'];
 			$Restrictions = htmlspecialchars($row['Restrictions'], ENT_QUOTES);
-			if($Image == ""){ $Image = "course.jpg"; }
-
+			$Description = htmlspecialchars($row['Description'], ENT_QUOTES);
+			$Tags = htmlspecialchars($row['Tags'], ENT_QUOTES);
+			$Sequential = $row['Sequential'];
+			if($Image == ""){
+				$imageLink = "/modules/".basename(__DIR__)."/images/generic.jpg";
+				$image = 'generic.jpg';
+			}else{
+				$imageCheck = $portal_path_root."/modules/".basename(__DIR__)."/images/".$Image;
+				if(file_exists($imageCheck)){
+					$imageLink = "/modules/".basename(__DIR__)."/images/".$Image;
+				}else{
+					$imageLink = $portal_root."/modules/Abre-Curriculum/serveimage.php?file=$Image&ext=png";
+				}
+			}
+      
 			echo "<tr class='courserow pointer'>";
 				echo "<td class='hide-on-med-and-down explorecourse' data-href='#curriculum/0/$Course_ID'>";
-					echo "<img src='$portal_root/modules/".basename(__DIR__)."/images/$Image' class='profile-avatar-small' style='object-fit:cover;'>";
+					echo "<img src='$imageLink' class='profile-avatar-small' style='object-fit:cover;'>";
 					echo "</td>";
 					echo "<td class='explorecourse' data-href='#curriculum/0/$Course_ID'>$Title</td>";
 					echo "<td class='hide-on-med-and-down explorecourse' data-href='#curriculum/0/$Course_ID'>$Subject</td>";
@@ -127,7 +140,7 @@
 						}
 
 						if($pagerestrictionsedit == ""){
-							echo "<li class='mdl-menu__item modal-addcourse' href='#curriculumcourse' data-title='$Title' data-grade='$Grade' data-subject='$Subject' data-courseid='$Course_ID' data-editors='$Editors' data-coursehidden='$Course_Hidden' data-learncourse='$Learn_Course' data-restrictions='$Restrictions' style='font-weight:400'>Edit</a></li>";
+							echo "<li class='mdl-menu__item modal-addcourse' href='#curriculumcourse' data-title='$Title' data-grade='$Grade' data-subject='$Subject' data-courseid='$Course_ID' data-editors='$Editors' data-coursehidden='$Course_Hidden' data-learncourse='$Learn_Course' data-restrictions='$Restrictions' data-description='$Description' data-tags='$Tags' data-sequential='$Sequential' data-image='$Image' data-imagelink='$imageLink' style='font-weight:400'>Edit</a></li>";
 							echo "<li class='mdl-menu__item duplicatecourse' data-courseid='$Course_ID'>Duplicate</li>";
 							echo "<li class='mdl-menu__item deletecourse' data-courseid='$Course_ID'>Delete</li>";
 						}
@@ -266,6 +279,8 @@
 			$(".modal-content #course_id").val(Course_ID);
 			var Course_Title = $(this).data('title');
 			$(".modal-content #course_title").val(Course_Title);
+			var Course_Description = $(this).data('description');
+			$(".modal-content #course_description").val(Course_Description);
 			var Course_Grade = $(this).data('grade');
 			var Course_Editors = $(this).data('editors');
 			$(".modal-content #course_editors").val(Course_Editors);
@@ -297,6 +312,25 @@
 				}
 			}else{
 				$("#learnRestrictions").val('');
+			}
+      
+			var tags = $(this).data('tags');
+			$(".modal-content #course_tags").val(tags);
+			var sequential = $(this).data('sequential');
+			if(sequential == '1'){
+				$(".modal-content #learn_sequential").prop('checked', true);
+			}else{
+				$(".modal-content #learn_sequential").prop('checked', false);
+			}
+
+			var image = $(this).data('image');
+			var imageLink = $(this).data('imagelink');
+			$('#curriculum_image_holder').attr('src', imageLink);
+			$('#curriculumImageExisting').val(image);
+			if(image != ""){
+				$('#curriculum_image_holder').show();
+			}else{
+				$('#curriculum_image_holder').hide()
 			}
 
 			if($("#learn_course").is(':checked')){

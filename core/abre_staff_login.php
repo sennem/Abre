@@ -29,7 +29,7 @@
 		//Login Holder
 		echo "<div class='mdl-layout mdl-js-layout login-card' style='background-color:".getSiteColor()."; background-image: url(/core/images/abre/abre_pattern.png); '>";
 
-			echo "<div class='login_wrapper'>";
+			echo "<div class='login_wrapper' style='z-index:1;'>";
 				echo "<div class='login-card-square mdl-card'>";
 
 						//Site Logo
@@ -42,9 +42,11 @@
 						echo "<div class='loginholder'>";
 
 							//Display SSO Options
-							echo "<div style='padding-top: 10px'>";
-								include "abre_button_google.php";
-							echo "</div>";
+							if(getSiteGoogleSignInGroups('staff') == "checked" && getSiteGoogleClientId() !== '' && getSiteGoogleClientSecret() !== ''){
+								echo "<div style='padding-top: 10px'>";
+									include "abre_button_google.php";
+								echo "</div>";
+							}
 							if(getSiteMicrosoftSignInGroups('staff') == "checked" && getSiteMicrosoftClientId() !== '' && getSiteMicrosoftClientSecret() !== ''){
 								echo "<div style='padding-top: 10px'>";
 									include "abre_button_microsoft.php";

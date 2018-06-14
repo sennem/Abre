@@ -23,21 +23,22 @@
 
 	if($pageaccess == 1){
 
+		$color = getSiteColor();
 		echo "<div class='row'><div class='col s12'>";
 			echo "<div class='row'>";
 				echo "<div class='col s6'>";
 					echo "<h5>Downloads</h5>";
-					echo "<a href='$portal_root/modules/directory/csvexportfile.php' class='mdl-color-text--black'>Staff - All Active Staff</a><br>";
-					echo "<a href='$portal_root/modules/directory/csvexportfile_licenseexpiring.php' class='mdl-color-text--black'>Staff - License Expiring</a><br>";
-					echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' class='mdl-color-text--black'>Staff - Work Calendars</a>";
+					echo "<a href='$portal_root/modules/directory/csvexportfile.php' style='color:$color'>Staff - All Active Staff</a><br>";
+					echo "<a href='$portal_root/modules/directory/csvexportfile_licenseexpiring.php' style='color:$color'>Staff - License Expiring</a><br>";
+					echo "<a href='$portal_root/modules/directory/csvexportfile_workcalendars.php' style='color:$color'>Staff - Work Calendars</a>";
 				echo "</div>";
 				echo "<div class='col s6'>";
 				if(admin()){
 					echo "<h5>Imports</h5>";
 					echo "<form action='modules/directory/csvimportfile.php' method='post' enctype='multipart/form-data' name='form-upload' id='form-upload'>";
 	        echo "<input name='csv_data' type='file' id='csv_data' />";
-	        echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color: ".getSiteColor()."' name='Submit' value='Import' />";
-				  echo "<br><br><a href='$portal_root/modules/directory/directoryTemplate.csv' style='color:".getSiteColor()."'>Download template file</a>";
+	        echo "<br><br><input type='submit' class='mdl-button mdl-js-button mdl-button--raised mdl-button--colored' style='background-color:$color' name='Submit' value='Import' />";
+				  echo "<br><br><a href='$portal_root/modules/directory/directoryTemplate.csv' style='color:$color'>Download template file</a>";
 	        echo "</form>";
 	      }
 			 echo "</div>";

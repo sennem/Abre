@@ -51,6 +51,15 @@
 		}
 		$db->close();
 
+		//Check for Description field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Description FROM curriculum_course LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_course` ADD `Description` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
 		//Check for Level field
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 		if(!$db->query("SELECT Level FROM curriculum_course LIMIT 1"))
@@ -110,6 +119,24 @@
 		if(!$db->query("SELECT Restrictions FROM curriculum_course LIMIT 1"))
 		{
 			$sql = "ALTER TABLE `curriculum_course` ADD `Restrictions` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for Tags field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Tags FROM curriculum_course LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_course` ADD `Tags` text NOT NULL;";
+			$db->multi_query($sql);
+		}
+		$db->close();
+
+		//Check for Learn_Course field
+		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+		if(!$db->query("SELECT Sequential FROM curriculum_course LIMIT 1"))
+		{
+			$sql = "ALTER TABLE `curriculum_course` ADD `Sequential` int(11) NOT NULL DEFAULT '0';";
 			$db->multi_query($sql);
 		}
 		$db->close();
@@ -573,6 +600,12 @@
 			$db->multi_query($sql);
 		}
 		$db->close();
+
+		if(!file_exists($portal_path_root . "/../$portal_private_root/Abre-Curriculum/")){
+			if(mkdir($portal_path_root . "/../$portal_private_root/Abre-Curriculum/", 0775)){
+				mkdir($portal_path_root . "/../$portal_private_root/Abre-Curriculum/images", 0775);
+			}
+		}
 
 		//Mark app as installed
 		require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');

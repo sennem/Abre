@@ -24,8 +24,7 @@
 	require_once('functions.php');
 	require_once('permissions.php');
 
-	if($pagerestrictions=="")
-	{
+	if($pagerestrictions==""){
 
 		$token=getCerticaToken();
 
@@ -40,8 +39,7 @@
 		//Find Out Level of Assessment and if Assessment is a District Assessment
 		$sql = "SELECT Level, Verified, Owner, Editors, Locked FROM assessments WHERE ID='$Assessment_ID'";
 		$result = $db->query($sql);
-		while($row = $result->fetch_assoc())
-		{
+		while($row = $result->fetch_assoc()){
 			$assessmentlevel=htmlspecialchars($row["Level"], ENT_QUOTES);
 			$assessmentverified=htmlspecialchars($row["Verified"], ENT_QUOTES);
 			$Owner=htmlspecialchars($row["Owner"], ENT_QUOTES);
@@ -50,17 +48,17 @@
 
 			//Check to see if allowed to edit
 			$access=0;
-			if($Owner==$_SESSION['useremail']){ $access=1; }
+			$creator = 0;
+			$lockShown = 0;
+			if($Owner==$_SESSION['useremail']){ $access=1; $creator = 1; }
 			if(strpos($Editors, $_SESSION['useremail']) !== false){ $access=1; }
 
-			if($access!=0)
-			{
+			if($access!=0){
 				if($assessmentlevel=="Core"){ $totallowlevel=7; $totalmediumlevel=10; $totalhighlevel=3; }
 				if($assessmentlevel=="College Preparatory"){ $totallowlevel=5; $totalmediumlevel=10; $totalhighlevel=5; }
 				if($assessmentlevel=="Honors"){ $totallowlevel=3; $totalmediumlevel=10; $totalhighlevel=7; }
 
-				if($assessmentverified==1)
-				{
+				if($assessmentverified==1){
 
 					//Check to see how many questions of each level
 					$sql = "SELECT Difficulty FROM assessments_questions WHERE Assessment_ID='$Assessment_ID'";
@@ -68,8 +66,7 @@
 					$numoflow=0;
 					$numofhigh=0;
 					$numofmedium=0;
-					while($row = $result->fetch_assoc())
-					{
+					while($row = $result->fetch_assoc()){
 						$difficulty=htmlspecialchars($row["Difficulty"], ENT_QUOTES);
 						if($difficulty=="Low"){ $numoflow++; }
 						if($difficulty=="High"){ $numofhigh++; }
@@ -81,61 +78,53 @@
 
 						//Overview cards
 						echo "<div class='col m4 s12'><div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; background-color:"; echo getSiteColor(); echo "'>";
-							if($numoflow==$totallowlevel)
-							{
+							if($numoflow==$totallowlevel){
 								echo "<span class='center-align truncate'><i class='material-icons' style='font-size:70px; line-height:80px;'>check_circle</i></span>";
 								echo "<span class='center-align truncate'>$numoflow Low Questions</span>";
-							}
-							else
-							{
+							}else{
 								echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>$numoflow</span>";
 								echo "<span class='center-align truncate'>of $totallowlevel Low Questions</span>";
 							}
 						echo "</div></div>";
 						echo "<div class='col m4 s12'><div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; background-color:"; echo getSiteColor(); echo "'>";
-							if($numofmedium==$totalmediumlevel)
-							{
+							if($numofmedium==$totalmediumlevel){
 								echo "<span class='center-align truncate'><i class='material-icons' style='font-size:70px; line-height:80px;'>check_circle</i></span>";
 								echo "<span class='center-align truncate'>$numofmedium Medium Questions</span>";
-							}
-							else
-							{
+							}else{
 								echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>$numofmedium</span>";
 								echo "<span class='center-align truncate'>of $totalmediumlevel Medium Questions</span>";
 							}
 						echo "</div></div>";
 						echo "<div class='col m4 s12'><div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; background-color:"; echo getSiteColor(); echo "'>";
-							if($numofhigh==$totalhighlevel)
-							{
+							if($numofhigh==$totalhighlevel){
 								echo "<span class='center-align truncate'><i class='material-icons' style='font-size:70px; line-height:80px;'>check_circle</i></span>";
 								echo "<span class='center-align truncate'>$numofhigh High Questions</span>";
-							}
-							else
-							{
+							}else{
 								echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>$numofhigh</span>";
 								echo "<span class='center-align truncate'>of $totalhighlevel High Questions</span>";
 							}
 						echo "</div></div>";
 
 					echo "</div></div>";
-
 				}
 			}
 		}
 
+		if($Locked == 1 && $creator != 1 && $access != 0){
+			echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>The assessment is locked.</span><br><p style='font-size:16px; margin:20px 0 0 0;'>The owner must unlock this assessment before it can be modified.</p></div>";
+			$lockShown = 1;
+		}
+
 		//Loop through each assessment question
-		if($access!=0)
-		{
+		if($access!=0){
 			$sql = "SELECT Bank_ID, Points, ID, Vendor_ID, Type, Difficulty, Standard FROM assessments_questions WHERE Assessment_ID='$Assessment_ID' ORDER BY Question_Order";
 			$result = $db->query($sql);
 			$numrows = $result->num_rows;
 			$questioncount=0;
-			while($row = $result->fetch_assoc())
-			{
+			while($row = $result->fetch_assoc()){
 				$questioncount++;
 
-				if($questioncount==1)
-				{
+				if($questioncount==1){
 					echo "<div class='page_container mdl-shadow--4dp'>";
 					echo "<div class='page'>";
 					echo "<div class='row'><div class='col s12'>";
@@ -147,8 +136,7 @@
 					echo "<th class='hide-on-med-and-down'>Type</th>";
 					echo "<th class='center-align'>Difficulty</th>";
 					echo "<th class='center-align hide-on-small-only'>Points</th>";
-					if($Locked!=1 && $access==1)
-					{
+					if(($Locked != 1 && $access == 1) || $creator == 1){
 						echo "<th></th>";
 						echo "<th></th>";
 						echo "<th class='hide-on-small-only'></th>";
@@ -193,17 +181,13 @@
 					echo "<td class='hide-on-med-and-down'>$Standard_Text</td>";
 					echo "<td class='hide-on-med-and-down'>$type</td>";
 					echo "<td bgcolor='$questioncolor' class='center-align'>$difficulty</td>";
-					if($Locked!=1 && $access==1)
-					{
+					if(($Locked != 1 && $access == 1) || $creator == 1){
 						echo "<td width='100px' class='center-align hide-on-small-only'><input class='questionpoints' id='$questionid' type='number' min='1' style='text-align:center; width:50px;' value='$Points'></td>";
-					}
-					else
-					{
+					}else{
 						echo "<td class='center-align' class='hide-on-small-only'>$Points</td>";
 					}
 					echo "<td width='30px'><button class='mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey-600 previewquestion' data-question='$Bank_ID'><i class='material-icons'>visibility</i></button></td>";
-					if($Locked!=1 && $access==1)
-					{
+					if(($Locked != 1 && $access == 1) || $creator == 1){
 						echo "<td width='30px'><a href='modules/".basename(__DIR__)."/question_remove_process.php?questionid=".$questionid."' class='mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect mdl-color-text--grey-600 removequestion'><i class='material-icons'>delete</i></button></td>";
 						echo "<td width='30px' class='hide-on-small-only'><span class='mdl-button mdl-js-button mdl-button--icon mdl-color-text--grey-600 handle' data-question='$Bank_ID'><i class='material-icons'>reorder</i></button></td>";
 					}
@@ -211,30 +195,23 @@
 			}
 		}
 
-		if($access!=0)
-		{
-			if($numrows==$questioncount)
-			{
+		if($access!=0){
+			if($numrows==$questioncount){
 				echo "</tbody>";
 				echo "</table>";
 				echo "</div></div>";
 				echo "</div></div>";
 			}
 
-			if($numrows==0)
-			{
+			if($numrows==0 && $lockShown != 1){
 				echo "<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Questions Added</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a question to this assessment.</p></div>";
 			}
 
-			if($Locked!=1 && $access==1){ include "question_button.php"; }
+			if(($Locked != 1 && $access == 1) || $creator == 1){ include "question_button.php"; }
+		}else{
+			echo "<div class='row' style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>You do not have overview access</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Only the owner and editors have the ability to see an assessment overview.</p></div>";
 		}
-		else
-		{
-			echo "<div class='row center-align'><div class='col s12'><h6>You do not have overview access to this assessment.</h6></div></div>";
-		}
-
 		$db->close();
-
 	}
 
 ?>

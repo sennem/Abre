@@ -225,8 +225,7 @@
 		$db->close();
 
 		if(!file_exists($portal_path_root . "/../$portal_private_root/Abre-Forms/")){
-			if(!mkdir($portal_path_root . "/../$portal_private_root/Abre-Forms/", 0775)){
-			}
+			mkdir($portal_path_root . "/../$portal_private_root/Abre-Forms/", 0775);
 		}
 
 		//Mark app as installed

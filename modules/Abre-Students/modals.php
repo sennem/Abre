@@ -91,6 +91,25 @@
 			</form>
 		</div>
 
+		<div id="giftedDetailsModal" class="modal modal-fixed-footer modal-mobile-full">
+			<div class="modal-content" style="padding: 0px !important;">
+				<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
+					<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Gifted Details</span></div>
+					<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
+				</div>
+				<div style='padding: 0px 24px 0px 24px;'>
+					<div class="row">
+						<div class="col s12">
+							<div id="giftedDetails"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<a class="modal-close waves-effect btn-flat white-text" style='margin-left:5px; background-color: <?php echo getSiteColor(); ?>'>Close</a>
+			</div>
+		</div>
+
 
 		<!-- Assessment Details Modal -->
 		<div id="assessmentlook" class="fullmodal modal modal-fixed-footer modal-mobile-full">
