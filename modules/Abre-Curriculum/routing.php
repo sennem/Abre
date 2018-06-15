@@ -22,7 +22,7 @@
   if($_SESSION['usertype'] == "staff")
   {
 		echo "
-		    'curriculum': function(name) {
+		    'curriculumSAMPLETOSEE': function(name) {
 			    $( '#navigation_top' ).hide();
 			    $( '#content_holder' ).hide();
 			    $( '#loader' ).show();

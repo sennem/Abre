@@ -24,8 +24,8 @@
 
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
-			<li class="tab col s3 tab_1 curriculummenu pointer" data="#curriculum"><a href="#curriculum" class='mdl-color-text--white'>My Courses</a></li>
-			<li class="tab col s3 tab_2 curriculummenu pointer" data="#curriculum/courses"><a href="#curriculum/courses" class='mdl-color-text--white'>All Courses</a></li>
+			<li class="tab col s3 tab_1 curriculummenu pointer" data="#curriculum"><a href="#curriculum" class='mdl-color-text--white'>My CoursesSAMPLETEST</a></li>
+			<li class="tab col s3 tab_2 curriculummenu pointer" data="#curriculum/courses"><a href="#curriculum/courses" class='mdl-color-text--white'>All CoursesSAMPLETEST</a></li>
 		</ul>
 	</div>
 
