@@ -35,13 +35,25 @@
 			<?php
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
+
+			<!--links to CSS Stylesheet for emojis && contains CSS for columns on emojis-->
 			<html>
 				<header>
+					<style>
+						.3col
+						{
+							-webkit-column-count: 3; /* Chrome, Safari, Opera */
+    					-moz-column-count: 3; /* Firefox */
+							column-count: 3;
+						}
+					</style>
 					<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 				</header>
 			</html>
+
 			<?php
 			echo '
+			<div class="3col">
 				<ul>
 					<li><i class="em em-smiley"></i></li>
 					<li><i class="em em-slightly_smiling_face"></i></li>
@@ -49,7 +61,8 @@
 					<li><i class="em em-angry"></i></li>
 					<li><i class="em em-anguished"></i></li>
 					<li><i class="em em-astonished"></i></li>
-				</ul>'
+				</ul>
+			</div>'
 
 					//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
 			?>
