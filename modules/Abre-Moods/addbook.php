@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -19,7 +19,7 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	
+
 ?>
 
 	<div class='fixed-action-btn buttonpin'>
@@ -28,8 +28,8 @@
 	</div>
 
 <script>
-	
-	$(function() 
+
+	$(function()
 	{
 		//Books Modal
 		$('.modal-addbook').leanModal(
