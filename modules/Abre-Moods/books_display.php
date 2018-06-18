@@ -30,28 +30,29 @@
 	?>
 
 	<div class='page_container'>
-	<div class='row'>
+		<div class='row'>
 
-	<?php
-		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div>";
-	?>
-	<html>
-		<header>
-			<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-		</header>
-	</html>
-	<?php
-	echo '<ul>
-			<li><i class="em em-smiley"></i></li>
-			<li><i class="em em-slightly_smiling_face"></i></li>
-			<li><i class="em em-cry"></i></li>
-			<li><i class="em em-angry"></i></li>
-			<li><i class="em em-anguished"></i></li>
-			<li><i class="em em-astonished"></i></li>
-		</ul>'
+			<?php
+				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
+			?>
+			<html>
+				<header>
+					<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+				</header>
+			</html>
+			<?php
+			echo '
+				<ul>
+					<li><i class="em em-smiley"></i></li>
+					<li><i class="em em-slightly_smiling_face"></i></li>
+					<li><i class="em em-cry"></i></li>
+					<li><i class="em em-angry"></i></li>
+					<li><i class="em em-anguished"></i></li>
+					<li><i class="em em-astonished"></i></li>
+				</ul>'
 
-			//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
-	?>
+					//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
+			?>
 
 		</div>
-		</div>
+	</div>
