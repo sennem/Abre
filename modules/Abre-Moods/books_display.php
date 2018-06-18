@@ -44,6 +44,14 @@
 						{
 							margin:35px;
 						}
+						ul
+						{
+							justify-content: center;
+						}
+						ul li
+						{
+							padding: 0 8px;
+						}
 					</style>
 					<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 				</header>
@@ -60,7 +68,7 @@
 			<?php
 			echo '
 			<div>
-				<ul text-align:center>
+				<ul>
 
 					<li>
 						<i id="EmojiSpacing" class="em em-laughing" onclick="testfunc()"></i>
