@@ -19,8 +19,8 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-
-	if(superadmin() && !isAppInstalled("Abre-Books"))
+	//findme
+	if(superadmin() && !isAppInstalled("Abre-Moods"))
 	{
 
 		//Create Books folder if one does not exist

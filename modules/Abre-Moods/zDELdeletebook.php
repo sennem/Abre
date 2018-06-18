@@ -16,13 +16,16 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
+//findme
+/*
+
 	//Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once('permissions.php');
 
 	$cloudsetting=constant("USE_GOOGLE_CLOUD");
-	if ($cloudsetting=="true") 
+	if ($cloudsetting=="true")
 		require(dirname(__FILE__). '/../../vendor/autoload.php');
 	use Google\Cloud\Storage\StorageClient;
 
@@ -65,8 +68,8 @@
 				if ($cloudsetting=="true") {
 					$storage = new StorageClient([
 						'projectId' => constant("GC_PROJECT")
-					]);	
-					$bucket = $storage->bucket(constant("GC_BUCKET"));			
+					]);
+					$bucket = $storage->bucket(constant("GC_BUCKET"));
 					//Delete epub
 					$cloud_book = "private_html/books/books/" . $Slug . '.epub';
 					$object = $bucket->object($cloud_book);
@@ -77,7 +80,7 @@
 					$object = $bucket->object($cloud_book);
 					$object->delete();
 				}
-				else {			
+				else {
 					//Delete epub
 					$oldfile = dirname(__FILE__) . "/../../../$portal_private_root/books/" . $Slug . '.epub';
 					unlink($oldfile);
@@ -119,3 +122,5 @@
 	}
 
 ?>
+
+*/

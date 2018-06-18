@@ -34,7 +34,7 @@
 				<div class="row">
 					<div class="input-field col s6">
 						<input id="bookcode" name="bookcode" type="text" maxlength="20" placeholder="Enter a Coupon" autocomplete="off" required>
-						<label class="active" for="bookcode">Enter a Coupon Code</label>
+						<label class="active" for="bookcode">Enter a Coupon Code Mood</label>
 					</div>
 				</div>
 			</div>
