@@ -38,7 +38,7 @@
 		//$sql = "SELECT Book_ID, ID FROM books_libraries WHERE User_ID='$userid' ORDER BY ID DESC";
 	//}
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoticon to encapsulate feelings.</p></div>";
-
+	<p>"please show up"</p>
 	<br>
 	<br>
 	<br>
