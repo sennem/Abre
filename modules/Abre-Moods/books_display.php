@@ -44,6 +44,11 @@
 						{
 							margin:35px;
 						}
+						#EmojiSpacingLeft
+						{
+							margin-left:40%;
+							margin-right:35px;
+						}
 						ul
 						{
 							justify-content: center;
@@ -71,17 +76,17 @@
 				<ul>
 
 					<li>
-						<i id="EmojiSpacing" class="em em-laughing" onclick="testfunc()"></i>
+						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-smiley" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc()"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacing" class="em em-weary" onclick="testfunc()"></i>
+						<i id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-cry" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc()"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacing" class="em em-expressionless" onclick="testfunc()"></i>
+						<i id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc()"></i>
 					</li>
