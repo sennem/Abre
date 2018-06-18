@@ -21,16 +21,16 @@
 
 	//findme
 		echo "
-		    'books': function(name) {
+		    'moods': function(name) {
 			    $('#navigation_top').hide();
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
-			    $('#titletext').text('Books');
+			    $('#titletext').text('Moods');
 			    document.title = 'Moods';
 					$('#content_holder').load('modules/".basename(__DIR__)."/books.php', function() { init_page(); });
 					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
-					ga('set', 'page', '/#books/');
+					ga('set', 'page', '/#moods/');
 					ga('send', 'pageview');";
 
 					if(CONSTANT('SITE_MODE') != 'DEMO'){
@@ -48,11 +48,11 @@
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
-			    $('#titletext').text('Books');
-			    document.title = 'Moods Inventory';
+			    $('#titletext').text('Moods');
+			    document.title = 'Moods History';
 					$('#content_holder').load('modules/".basename(__DIR__)."/inventory.php', function() { init_page(); });
 					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
-					ga('set', 'page', '/#books/inventory/');
+					ga('set', 'page', '/#moods/inventory/');
 					ga('send', 'pageview');
 
 					$('#navigation_top').show();
@@ -66,10 +66,10 @@
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
-			    $('#titletext').text('Books');
-			    document.title = 'Reader';
+			    $('#titletext').text('Moods');
+			    document.title = 'ReaderMood';
 					$('#content_holder').load('modules/".basename(__DIR__)."/reader.php?id='+name, function() { init_page(); back_button('#books'); });
-					ga('set', 'page', '/#books/reader/');
+					ga('set', 'page', '/#moods/reader/');
 					ga('send', 'pageview');
 		    },";
 ?>
