@@ -55,7 +55,7 @@
 			echo '
 			<div class="3col">
 				<ul>
-					<li><div text-align:left><i class="em em-smiley"></i></div> <div text-align:center><i class="em em-smiley"></i></div> <div text-align:right><i class="em em-smiley"></i></div></li>
+					<li><i class="em em-smiley"></i><i class="em em-smiley"></i><i class="em em-smiley"></i></li>
 					<li><i class="em em-slightly_smiling_face"></i></li>
 					<li><i class="em em-cry"></i></li>
 					<li><i class="em em-angry"></i></li>
