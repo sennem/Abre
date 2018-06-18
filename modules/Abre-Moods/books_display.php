@@ -51,16 +51,24 @@
 				</header>
 			</html>
 
+			<!-- make function for onclick -->
+			<script>
+				function testfunc()
+				{
+					alert("You selected an emoji");
+				}
+			</script>
+
 			<?php
 			echo '
 			<div class="3col">
 				<ul>
-					<li><i class="em em-smiley"></i><i class="em em-smiley"></i><i class="em em-smiley"></i></li>
-					<li><i class="em em-slightly_smiling_face"></i></li>
-					<li><i class="em em-cry"></i></li>
-					<li><i class="em em-angry"></i></li>
-					<li><i class="em em-anguished"></i></li>
-					<li><i class="em em-astonished"></i></li>
+					<li><i class="em em-smiley" onclick="testfunc()"></i><i class="em em-smiley"></i><i class="em em-smiley"></i></li>
+					<li><i class="em em-slightly_smiling_face" onclick="testfunc()"></i></li>
+					<li><i class="em em-cry" onclick="testfunc()"></i></li>
+					<li><i class="em em-angry" onclick="testfunc()"></i></li>
+					<li><i class="em em-anguished" onclick="testfunc()"></i></li>
+					<li><i class="em em-astonished" onclick="testfunc()"></i></li>
 
 				</ul>
 			</div>'
