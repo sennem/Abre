@@ -33,10 +33,17 @@
 	<div class='row'>
 
 	<?php
-			echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div>";
-			echo "<link href="\\https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" >;
-			echo "<i class="em em-angry"></i>";
-			/*<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> */";
+		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div>";
+	?>
+	<html>
+		<header>
+			<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+		</header>
+	</html>
+	<?php
+
+
+			//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
 	?>
 
 		</div>
