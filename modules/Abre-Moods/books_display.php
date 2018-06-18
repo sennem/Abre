@@ -16,8 +16,8 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-		//--findme--
-		/*
+		//--findme-- it got rid of thing
+
 
     //Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
@@ -166,5 +166,3 @@
 	});
 
 </script>
-
-*/
