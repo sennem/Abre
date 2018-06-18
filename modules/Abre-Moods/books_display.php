@@ -66,7 +66,29 @@
 			<script>
 				function testfunc()
 				{
-					alert("You selected an emoji");
+					alert('Function hit');
+					var mysql = require('mysql');
+
+					var con = mysql.createConnection({
+					  host: "localhost",
+					  user: "root",
+					  password: "killerm111",
+					  database: "abredb"
+					});
+
+					con.connect(function(err) {
+				  if (err)
+					{
+						throw err;
+					}
+				  console.log("Connected!");
+				  var sql = "INSERT INTO mood_table (Email, Feeling) VALUES ('blank@gmail.com', '0')";
+				  con.query(sql, function (err, result) {
+				    if (err) throw err;
+				    console.log("1 record inserted");
+				  });
+				});
+
 				}
 			</script>
 
