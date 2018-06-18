@@ -33,7 +33,7 @@
 	$version = $abre_version;
 	$repo = NULL;
 	$pageicon = "local_library";
-	$pagepath = "mood"; //findme doesnt seem to do anything
+	$pagepath = "books"; //findme doesnt seem to do anything
 
 	require_once('permissions.php');
 
