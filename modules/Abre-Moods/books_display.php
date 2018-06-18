@@ -62,33 +62,12 @@
 				</header>
 			</html>
 
-			<!-- make function for onclick -->
+
 			<script>
-				function testfunc()
+				function EnterMood(moodnumber)
 				{
-					alert('Function hit');
-					var mysql = require('mysql');
 
-					var con = mysql.createConnection({
-					  host: "localhost",
-					  user: "root",
-					  password: "killerm111",
-					  database: "abredb"
-					});
-
-					con.connect(function(err) {
-				  if (err)
-					{
-						throw err;
-					}
-				  console.log("Connected!");
-				  var sql = "INSERT INTO mood_table (Email, Feeling) VALUES ('blank@gmail.com', '0')";
-				  con.query(sql, function (err, result) {
-				    if (err) throw err;
-				    console.log("1 record inserted");
-				  });
-				});
-
+					//need help connecting to database and such
 				}
 			</script>
 
@@ -98,24 +77,31 @@
 				<ul>
 
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-smiley" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc()"></i>
+						<i type="submit" name="eone" id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
+						<i type="submit" name="etwo" id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
+						<i type="submit" name="ethree" id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2)"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-cry" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc()"></i>
+						<i type="submit" name="efour" id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc(3)"></i>
+						<i type="submit" name="efive" id="EmojiSpacing" class="em em-cry" onclick="testfunc(4)"></i>
+						<i type="submit" name="esix" id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc(5)"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc()"></i>
+						<i type="submit" name="eseven" id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc(6)"></i>
+						<i type="submit" name="eeight" id="EmojiSpacing" class="em em-grimacing" onclick="testfunc(7)"></i>
+						<i type="submit" name="enine" id="EmojiSpacing" class="em em-persevere" onclick="testfunc(8)"></i>
+					</li>
+					<li>
+						<input type="submit" name="submit" value="Click to"
 					</li>
 
 				</ul>
 			</div>'
 
+if(isset($_POST['eone']))
+{
+	<script>alert('works');</script>;
+}
 					//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
 			?>
 
