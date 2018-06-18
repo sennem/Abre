@@ -75,7 +75,7 @@
 
 			if(isset($_POST['eone']))
 			{
-				echo 'wrokinggggggg';
+				echo "<script type='text/javascript'>alert('woks');</script>";
 			}
 
 			echo '
