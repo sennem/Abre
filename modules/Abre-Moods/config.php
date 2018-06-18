@@ -28,8 +28,8 @@
 	$pageview = 1;
 	$drawerhidden = 0;
 	$pageorder = 2;
-	$pagetitle = "Books";
-	$description = "An ePub reader for digital books.";
+	$pagetitle = "Moods";
+	$description = "A place to record your moods.";
 	$version = $abre_version;
 	$repo = NULL;
 	$pageicon = "local_library";
