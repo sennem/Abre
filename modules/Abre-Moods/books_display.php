@@ -71,7 +71,12 @@
 				}
 			</script>-->
 
+
+
+
 			<?php
+
+			//LEFT-OFF: trying to save to database off a onclick. Look at bookmarks bar for possible solution with ajax
 
 			if(isset($_POST['eone']))
 			{
