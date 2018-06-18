@@ -16,6 +16,11 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
+
+		//--findme--
+		/*
+
+
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
@@ -41,3 +46,4 @@
 	});
 
 </script>
+*/

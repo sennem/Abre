@@ -29,8 +29,8 @@
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
 			<!--findme-->
-			<li class="tab col s3 tab_1 booksmenu pointer" data="#books"><a href="#books">My Moods</a></li>
-			<li class='tab col s3 tab_2 booksmenu pointer' data="#books/inventory"><a href='#books/inventory'>Inventory</a></li>
+			<li class="tab col s3 tab_1 booksmenu pointer" data="#books"><a href="#books">Mood Menu</a></li>
+			<li class='tab col s3 tab_2 booksmenu pointer' data="#books/inventory"><a href='#books/inventory'>History</a></li>
 		</ul>
 	</div>
 
