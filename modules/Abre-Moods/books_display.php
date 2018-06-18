@@ -28,54 +28,16 @@
 	require('permissions.php');
 
 	?>
+
 	<div class='page_container'>
 	<div class='row'>
+
 	<?php
-
-
-
-
 			echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div>";
-
-		?>
+			echo "<link href="\\https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet" >;
+			echo "<i class="em em-angry"></i>";
+			/*<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> */";
+	?>
 
 		</div>
 		</div>
-<!--
-<script>
-
-	$(function()
-	{
-
-		//Remove book from library
-		$(".removebook").unbind().click(function()
-		{
-			event.preventDefault();
-			var result = confirm("Want to remove the book?");
-			if (result) {
-				var address = $(this).find("a").attr("href");
-				$.ajax({
-					type: 'POST',
-					url: address,
-					data: '',
-				})
-
-				//Show the notification
-				.done(function(response) {
-					$( "#displaylibrary" ).load( "modules/<?php echo basename(__DIR__); ?>/books_display.php", function() {
-
-						//Register MDL Components
-						mdlregister();
-
-						var notification = document.querySelector('.mdl-js-snackbar');
-						var data = { message: response };
-						notification.MaterialSnackbar.showSnackbar(data);
-					});
-				})
-			}
-		});
-
-	});
-
-</script>
--->
