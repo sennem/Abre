@@ -26,7 +26,7 @@
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
 			    $('#titletext').text('Books');
-			    document.title = 'Books';
+			    document.title = 'Moods';
 					$('#content_holder').load('modules/".basename(__DIR__)."/books.php', function() { init_page(); });
 					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
 					ga('set', 'page', '/#books/');
@@ -46,7 +46,7 @@
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
 			    $('#titletext').text('Books');
-			    document.title = 'Books Inventory';
+			    document.title = 'Moods Memory';
 					$('#content_holder').load('modules/".basename(__DIR__)."/inventory.php', function() { init_page(); });
 					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
 					ga('set', 'page', '/#books/inventory/');
