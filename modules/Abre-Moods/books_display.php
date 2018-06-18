@@ -61,12 +61,22 @@
 			echo '
 			<div>
 				<ul>
-					<li><i id="EmojiSpacing" class="em em-smiley" onclick="testfunc()"></i><i id="EmojiSpacing" class="em em-smiley"></i><i id="EmojiSpacing" class="em em-smiley"></i></li>
-					<li><i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc()"></i></li>
-					<li><i id="EmojiSpacing" class="em em-cry" onclick="testfunc()"></i></li>
-					<li><i id="EmojiSpacing" class="em em-angry" onclick="testfunc()"></i></li>
-					<li><i id="EmojiSpacing" class="em em-anguished" onclick="testfunc()"></i></li>
-					<li><i id="EmojiSpacing" class="em em-astonished" onclick="testfunc()"></i></li>
+
+					<li>
+						<i id="EmojiSpacing" class="em em-laughing" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-smiley" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc()"></i>
+					</li>
+					<li>
+						<i id="EmojiSpacing" class="em em-weary" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-cry" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc()"></i>
+					</li>
+					<li>
+						<i id="EmojiSpacing" class="em em-expressionless" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-perservere" onclick="testfunc()"></i>
+					</li>
 
 				</ul>
 			</div>'
