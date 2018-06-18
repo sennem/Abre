@@ -77,7 +77,7 @@
 				<ul>
 
 					<li>
-						<i type="submit" name="eone" id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
+						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
 						<i type="submit" name="etwo" id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
 						<i type="submit" name="ethree" id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2)"></i>
 					</li>
