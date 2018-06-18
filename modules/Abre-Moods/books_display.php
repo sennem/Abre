@@ -77,7 +77,7 @@
 				<ul>
 
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
+						<i type="submit" name="eone" id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
 						<i type="submit" name="etwo" id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
 						<i type="submit" name="ethree" id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2)"></i>
 					</li>
@@ -98,6 +98,14 @@
 				</ul>
 			</div>'
 
+			//function RecordMood()
+			//{
+			//
+			//}
+			if(isset($_POST['eone']))
+			{
+				echo 'wrokinggggggg';
+			}
 					//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
 			?>
 
