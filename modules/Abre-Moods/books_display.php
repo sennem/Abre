@@ -72,6 +72,12 @@
 			</script>-->
 
 			<?php
+
+			if(isset($_POST['eone']))
+			{
+				echo 'wrokinggggggg';
+			}
+
 			echo '
 			<div>
 				<ul>
@@ -102,10 +108,7 @@
 			//{
 			//
 			//}
-			if(isset($_POST['eone']))
-			{
-				echo 'wrokinggggggg';
-			}
+
 					//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
 			?>
 
