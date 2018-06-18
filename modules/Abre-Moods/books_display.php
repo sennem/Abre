@@ -39,6 +39,7 @@
 			<!--links to CSS Stylesheet for emojis && contains CSS for columns on emojis-->
 			<html>
 				<header>
+					<!--change-->
 					<style>
 						#EmojiSpacing
 						{
