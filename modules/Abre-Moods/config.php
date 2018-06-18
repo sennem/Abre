@@ -33,7 +33,7 @@
 	$version = $abre_version;
 	$repo = NULL;
 	$pageicon = "local_library";
-	$pagepath = "books";
+	$pagepath = "mood"; //findme test change for website url
 
 	require_once('permissions.php');
 
