@@ -28,7 +28,7 @@
 	$pageview = 1;
 	$drawerhidden = 0;
 	$pageorder = 2;
-	$pagetitle = "Moods";
+	$pagetitle = "Moods"; //MARK: change leftside menu title
 	$description = "A place to record your moods.";
 	$version = $abre_version;
 	$repo = NULL;

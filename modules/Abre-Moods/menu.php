@@ -1,5 +1,5 @@
 <?php
-	
+
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -17,33 +17,34 @@
     */
 
 	//Required configuration files
-	require(dirname(__FILE__) . '/../../configuration.php'); 
+	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
-	
+
 ?>
-	
+
 <?php if($booksadmin==1 && $_SESSION['usertype']!='parent'){ ?>
 
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
-			<li class="tab col s3 tab_1 booksmenu pointer" data="#books"><a href="#books">My Books</a></li>
+			<!--findme-->
+			<li class="tab col s3 tab_1 booksmenu pointer" data="#books"><a href="#books">My Moods</a></li>
 			<li class='tab col s3 tab_2 booksmenu pointer' data="#books/inventory"><a href='#books/inventory'>Inventory</a></li>
 		</ul>
 	</div>
-	
+
 <?php } ?>
 
 
 <script>
-	
+
 	$(function()
-	{	
+	{
 		$( ".booksmenu" ).click(function()
 		{
 			window.open($(this).attr("data"), '_self');
-		});	
+		});
 	});
-	
+
 </script>

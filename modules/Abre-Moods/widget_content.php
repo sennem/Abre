@@ -24,7 +24,9 @@
 
 		echo "<hr class='widget_hr'>";
 		echo "<div class='widget_holder'>";
-			echo "<div class='widget_container widget_body' style='color:#666;'>Your Recent Books<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Books/widget_content.php' data-reload='true'>refresh</i></div>";
+		
+		//findme
+			echo "<div class='widget_container widget_body' style='color:#666;'>Your Recent Moods<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Books/widget_content.php' data-reload='true'>refresh</i></div>";
 		echo "</div>";
 
 		$count = 0;
