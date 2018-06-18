@@ -40,11 +40,9 @@
 			<html>
 				<header>
 					<style>
-						.3col
+						#EmojiSpacing
 						{
-							-webkit-column-count: 3; /* Chrome, Safari, Opera */
-    					-moz-column-count: 3; /* Firefox */
-							column-count: 3;
+							margin:35px;
 						}
 					</style>
 					<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
@@ -61,14 +59,14 @@
 
 			<?php
 			echo '
-			<div class="3col">
+			<div>
 				<ul>
-					<li><i class="em em-smiley" onclick="testfunc()"></i><i class="em em-smiley"></i><i class="em em-smiley"></i></li>
-					<li><i class="em em-slightly_smiling_face" onclick="testfunc()"></i></li>
-					<li><i class="em em-cry" onclick="testfunc()"></i></li>
-					<li><i class="em em-angry" onclick="testfunc()"></i></li>
-					<li><i class="em em-anguished" onclick="testfunc()"></i></li>
-					<li><i class="em em-astonished" onclick="testfunc()"></i></li>
+					<li><i id="EmojiSpacing" class="em em-smiley" onclick="testfunc()"></i><i id="EmojiSpacing" class="em em-smiley"></i><i id="EmojiSpacing" class="em em-smiley"></i></li>
+					<li><i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc()"></i></li>
+					<li><i id="EmojiSpacing" class="em em-cry" onclick="testfunc()"></i></li>
+					<li><i id="EmojiSpacing" class="em em-angry" onclick="testfunc()"></i></li>
+					<li><i id="EmojiSpacing" class="em em-anguished" onclick="testfunc()"></i></li>
+					<li><i id="EmojiSpacing" class="em em-astonished" onclick="testfunc()"></i></li>
 
 				</ul>
 			</div>'
