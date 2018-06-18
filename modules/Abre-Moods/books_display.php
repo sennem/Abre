@@ -60,7 +60,7 @@
 			<?php
 			echo '
 			<div>
-				<ul>
+				<ul text-align:center>
 
 					<li>
 						<i id="EmojiSpacing" class="em em-laughing" onclick="testfunc()"></i>
@@ -75,7 +75,7 @@
 					<li>
 						<i id="EmojiSpacing" class="em em-expressionless" onclick="testfunc()"></i>
 						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc()"></i>
-						<i id="EmojiSpacing" class="em em-perservere" onclick="testfunc()"></i>
+						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc()"></i>
 					</li>
 
 				</ul>
