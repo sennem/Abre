@@ -41,7 +41,7 @@
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
 
-	$moodhistory = array{10,10,10,10,10,10,10,10,10,10};
+	//$moodhistory = array{10,10,10,10,10,10,10,10,10,10};
 	//for (int $i=0; i<$totalrows;i++)
 	//{
 	//}
