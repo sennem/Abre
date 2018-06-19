@@ -43,7 +43,7 @@
 						function testfunc(emojivalue)
 						{
 							alert("You hit " + emojivalue + " emoji");
-							window.location.assign("db_submission.php");
+							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php");
 						}
 					</script>
 					<style>
