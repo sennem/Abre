@@ -43,7 +43,7 @@
 	$result=mysqli_query($con, $sql);
 
 	$row=mysqli_fetch_array($result);
-	//echo $row[0];
+	echo $row[0];
 	//echo $row[1];
 	//echo $row[2];
 	echo "Strikes again";
