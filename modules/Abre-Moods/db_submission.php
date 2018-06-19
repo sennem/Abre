@@ -10,27 +10,9 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
   //^^^ALL ABOVE WORKS^^
 
-  // Create connection
-  $conn = new mysqli($servername, $username, $password, $dbname);
-  // Check connection
-  //if ($conn->connect_error) {
-  //    die("Connection failed: " . $conn->connect_error);
-  //}
-  //else {
-  conn->close();
-  //}
-  /*
   $userid=finduseridcore($_SESSION['useremail']);
   $emojimood=$_GET['moodval'];
   $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','2018-11-11','$emojimood')";
-  if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully";
-  } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
-  }
-
   $conn->close();
 
-
-  */
 ?>
