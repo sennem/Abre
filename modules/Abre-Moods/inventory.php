@@ -46,6 +46,7 @@
 	echo $row[0];
 	echo $row[1];
 	echo $row[2];
+	echo "Strikes again";
 	//$countervar=0;
 	//while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	//{
