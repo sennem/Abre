@@ -54,28 +54,28 @@
 				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
 			}
 			else if ((($row[0])==1) || (($row[1])==1)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-smiley"></i>';
 			}
 			else if ((($row[0])==2) || (($row[1])==2)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-slightly_smiling_face"></i>';
 			}
 			else if ((($row[0])==3) || (($row[1])==3)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-weary"></i>';
 			}
 			else if ((($row[0])==4) || (($row[1])==4)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-cry"></i>';
 			}
 			else if ((($row[0])==5) || (($row[1])==5)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-slightly_frowning_face"></i>';
 			}
 			else if ((($row[0])==6) || (($row[1])==6)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-expressionless"></i>';
 			}
 			else if ((($row[0])==7) || (($row[1])==7)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-grimacing"></i>';
 			}
 			else if ((($row[0])==8) || (($row[1])==8)){
-				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+				echo '<i id="EmojiSpacingLeft" class="em em-persevere"></i>';
 			}
 			else {
 				echo 'nothing';
