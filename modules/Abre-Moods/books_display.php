@@ -63,15 +63,23 @@
 			</html>
 
 
-			<script>
+			<!--<script>
 				function testfunc(emojivalue)
 				{
 					alert("You hit " + emojivalue + " emoji");
-					
+
 				}
-			</script>
+			</script>-->
 
-
+			<?php
+				if (isset($_POST['eone']))
+				{
+					echo 'IT WORKS';
+				}
+				else {
+					echo 'NO WORK';
+				}
+			?>
 
 
 			<?php
@@ -80,8 +88,8 @@
 
 			echo '
 			<div>
+			<form method="post">
 				<ul>
-
 					<li>
 						<i type="submit" name="eone" id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
 						<i type="submit" name="etwo" id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
