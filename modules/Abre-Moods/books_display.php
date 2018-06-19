@@ -71,7 +71,17 @@
 				}
 			</script>-->
 
-
+			<?php
+			$countermark=1;
+				if (isset($_POST['eone']))
+				{
+					echo 'IT WORKS';
+				}
+				else {
+					$countermark=$countermark+1;
+					echo $countermark;
+				}
+			?>
 
 
 			<?php
@@ -100,7 +110,6 @@
 					<li>
 						<input type="submit" name="submit" value="Click to"
 					</li>
-
 				</ul>
 			</form>
 			</div>'
