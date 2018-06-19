@@ -12,7 +12,7 @@
 
   //$userid=finduseridcore($_SESSION['useremail']);
   $stmt = $db->stmt_init();
-  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','2018-11-11','3')";
+  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('marksenne000@gmail.com','2018-11-11','3')";
   $stmt->prepare($sql);
   $stmt->execute();
   $stmt->close();
