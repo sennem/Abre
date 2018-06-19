@@ -54,8 +54,9 @@
 	echo '<br>';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
-	    //echo ($row[0]);
-	    //echo ($row[1]);
+			echo '<br>';
+	    echo ($row[0]);
+	    echo ($row[1]);
 			if ((($row[0])==0) || (($row[1])==0))
 			{
 				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
