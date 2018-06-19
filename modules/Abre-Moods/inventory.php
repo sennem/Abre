@@ -43,17 +43,17 @@
 	$result=mysqli_query($con, $sql);
 
 	$row=mysqli_fetch_array($result);
-	echo $row[0];
+	//echo $row[0];
 	//echo $row[1];
 	//echo $row[2];
-	echo "Strikes again";
+	//echo "Strikes again";
 	//$countervar=0;
-	//while($row = mysqli_fetch_array($result, MYSQLI_NUM))
-	//{
-	 //   echo ($row[$countervar]);  // The number
-	  //  echo ($row[$countervar]);  // The customer
-		//	$countervar++;
-	//}
+	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+	{
+	    echo ($row[0]);  // The number
+	    echo ($row[1]);  // The customer
+			//$countervar++;
+	}
 	//$result2 = mysqli_query($con, $sql2);
 	//echo $result2[0];
 	$con->close();
