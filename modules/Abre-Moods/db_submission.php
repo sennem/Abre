@@ -4,14 +4,15 @@
   $password = "killerm111";
   $dbname = "abredb";
   $emojimood = $_GET['moodval'];
-  //$date = date('Y-m-d H:i:s');
+  $date = date('Y-m-d H:i:s');
+  echo $date;
   //$userid=finduseridcore($_SESSION['useremail']);
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
   $stmt = $db->stmt_init();
-  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('marksenne000@mgmail.com','2018-10-11','$emojimood')";
+  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('marksenne000@mgmail.com','$date','$emojimood')";
   $stmt->prepare($sql);
   $stmt->execute();
   $stmt->close();
