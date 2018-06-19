@@ -3,10 +3,9 @@
   $username = "root";
   $password = "killerm111";
   $dbname = "abredb";
-  $emojimood = $_GET['moodval'];
-  $date = date('Y-m-d H:i:s');
-  echo $date;
-  //$userid=finduseridcore($_SESSION['useremail']);
+  $emojimood = $_GET['moodval'];//works
+  $date = date('Y-m-d H:i:s');//works
+  $userid=finduseridcore($_SESSION['useremail']);
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
