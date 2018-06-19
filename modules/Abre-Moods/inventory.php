@@ -41,9 +41,11 @@
 
 	$sql="SELECT Feeling AS num FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
-	
+
 	$row=mysqli_fetch_array($result);
-	echo $row['num'];
+	echo $row[0];
+	echo $row[1];
+	echo $row[2];
 	//$countervar=0;
 	//while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	//{
