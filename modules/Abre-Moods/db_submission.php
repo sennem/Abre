@@ -8,10 +8,10 @@
   $password = "killerm111";
   $dbname = "abredb";
   $emojimood = $_GET['moodval'];
-  $date = date('Y-m-d H:i:s');
-  $userid=finduseridcore($_SESSION['useremail']);
+  //$date = date('Y-m-d H:i:s');
+  //$userid=finduseridcore($_SESSION['useremail']);
   $stmt = $db->stmt_init();
-  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','$date','$moodval')";
+  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('marksenne000@mgmail.com','2018-10-11','$moodval')";
   $stmt->prepare($sql);
   $stmt->execute();
   $stmt->close();
