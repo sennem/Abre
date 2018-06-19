@@ -42,7 +42,7 @@
 					<script>
 						function testfunc(emojivalue)
 						{
-							alert("You hit " + emojivalue + " emoji");
+							alert("Respone submitted");
 							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
 						}
 					</script>
@@ -95,11 +95,11 @@
 				</ul>
 			</div>'
 
-			$urldbvar=$_GET['dbchange'];
-			if ($urldbvar==1)
-			{
-				echo "<div style='padding:30px; text-align:center; width:100%;'><br><p style='font-size:16px; margin:20px 0 0 0;'>Respone submitted.</p></div>";
-			}
+			//$urldbvar=$_GET['dbchange'];
+			//if ($urldbvar==1)
+			//{
+			//	echo "<div style='padding:30px; text-align:center; width:100%;'><br><p style='font-size:16px; margin:20px 0 0 0;'>Respone submitted.</p></div>";
+			//}
 
 			?>
 

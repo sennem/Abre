@@ -6,7 +6,9 @@
   $emojimood = $_GET['moodval'];//works
   $datevar = date('Y-m-d H:i:s');//works
   //$userid=finduseridcore($_SESSION['useremail']);
-  echo ($_SESSION['useremail']);
+
+  //NEED: get session email working
+
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
@@ -17,6 +19,6 @@
   $stmt->execute();
   $stmt->close();
   $db->close();
-  //$conn->close(); <-- ERROR CAUSING
-
+  header("Location:http://localhost:8080/modules/Abre-Moods/books_display.php");
+  exit;
 ?>
