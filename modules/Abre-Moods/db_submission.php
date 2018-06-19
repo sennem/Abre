@@ -19,6 +19,6 @@
   $stmt->execute();
   $stmt->close();
   $db->close();
-  header("Location:http://localhost:8080/modules/Abre-Moods/books_display.php");
+  header("Location:http://localhost:8080/#books");
   exit;
 ?>
