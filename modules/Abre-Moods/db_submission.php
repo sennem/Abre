@@ -3,7 +3,8 @@
   $username = "root";
   $password = "killerm111";
   $dbname = "abredb";
-
+  $emojivaluetest = $_GET['moodval'];
+  echo $emojivaluetest;
   /*// Create connection
   $conn = new mysqli($servername, $username, $password, $dbname);
   // Check connection
