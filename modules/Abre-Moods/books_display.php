@@ -72,7 +72,7 @@
 
 			<?php
 
-			//LEFT-OFF: trying to save to database off a onclick. Look at bookmarks bar for possible solution with ajax
+
 
 			echo '
 			<div>
@@ -95,12 +95,12 @@
 				</ul>
 			</div>'
 
-			//function RecordMood()
-			//{
-			//
-			//}
+			$urldbvar=$_GET['dbchange'];
+			if ($urldbvar==1)
+			{
+				echo "<div style='padding:30px; text-align:center; width:100%;'><br><p style='font-size:16px; margin:20px 0 0 0;'>Respone submitted.</p></div>";
+			}
 
-					//<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>No Books in Library</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Click the '+' in the bottom right to add a book to your library.</p></div> ";
 			?>
 
 		</div>
