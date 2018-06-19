@@ -63,26 +63,13 @@
 			</html>
 
 
-			<!--<script>
+			<script>
 				function testfunc(emojivalue)
 				{
 					alert("You hit " + emojivalue + " emoji");
 
 				}
-			</script>-->
-
-			<?php
-			$countermark=1;
-				if (isset($_POST['eone']))
-				{
-					echo 'IT WORKS';
-				}
-				else {
-					$countermark=$countermark+1;
-					echo $countermark;
-				}
-			?>
-
+			</script>
 
 			<?php
 
@@ -90,28 +77,23 @@
 
 			echo '
 			<div>
-			<form method="post">
 				<ul>
 					<li>
-						<i type="submit" name="eone" id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
-						<i type="submit" name="etwo" id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
-						<i type="submit" name="ethree" id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2)"></i>
+						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
+						<i id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
+						<i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2)"></i>
 					</li>
 					<li>
-						<i type="submit" name="efour" id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc(3)"></i>
-						<i type="submit" name="efive" id="EmojiSpacing" class="em em-cry" onclick="testfunc(4)"></i>
-						<i type="submit" name="esix" id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc(5)"></i>
+						<i id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc(3)"></i>
+						<i id="EmojiSpacing" class="em em-cry" onclick="testfunc(4)"></i>
+						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc(5)"></i>
 					</li>
 					<li>
-						<i type="submit" name="eseven" id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc(6)"></i>
-						<i type="submit" name="eeight" id="EmojiSpacing" class="em em-grimacing" onclick="testfunc(7)"></i>
-						<i type="submit" name="enine" id="EmojiSpacing" class="em em-persevere" onclick="testfunc(8)"></i>
-					</li>
-					<li>
-						<input type="submit" name="submit" value="Click to"
+						<i id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc(6)"></i>
+						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc(7)"></i>
+						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc(8)"></i>
 					</li>
 				</ul>
-			</form>
 			</div>'
 
 			//function RecordMood()
