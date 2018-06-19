@@ -1,5 +1,5 @@
-<?php 
-	
+<?php
+
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -15,14 +15,15 @@
     * You should have received a copy of the Affero General Public License
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
-	
+
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once('permissions.php');
-	
+
 	if($pagerestrictions=="")
 	{
 		echo "<div id='displaybooks'>"; include "inventory_display.php"; echo "</div>";
+		echo 'HEre';
 	}
 ?>
