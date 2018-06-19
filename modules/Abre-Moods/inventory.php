@@ -38,10 +38,19 @@
 	$result = mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
 	echo $rows[0];
+	$con->close();
 
-	$sql = "SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$result = mysqli_query($con,$sql);
-	echo $result;
+echo('reach');
+	//$con=mysqli_connect("localhost","root","killerm111","abredb");
+	// Check connection
+	//if (mysqli_connect_errno())
+  //{
+  //	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  //}
+	//$sql = "SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	//$result = mysqli_query($con,$sql);
+	//echo $result;
+	//$con->close();
 
 	//echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
 	//this if keeps me displaying. (it doesnt pass the if test)
