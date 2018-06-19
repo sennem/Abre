@@ -42,7 +42,7 @@
 	$sql="SELECT Feeling FROM mood_table WHERE Email=\'marksenne000@gmail.com\'";
 	$result=mysqli_query($con, $sql);
 	$row=mysqli_fetch_array($result);
-	echo $row['Feeling'];
+	echo $row[Feeling];
 	//$countervar=0;
 	//while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	//{
