@@ -1,3 +1,11 @@
+
+<html>
+	<header>
+		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	</header>
+</html>
+
+
 <?php
 
 	/*
@@ -41,7 +49,7 @@
 	{
 	    //echo ($row[0]);
 	    //echo ($row[1]);
-			if (($row[0])==3)
+			if ((($row[0])==3) || (($row[1])==3))
 			{
 				echo '
 				<div>
@@ -53,7 +61,7 @@
 				</div>';
 			}
 			else {
-				echo 'nope';
+				echo 'nop';
 			}
 	}
 	$con->close();
