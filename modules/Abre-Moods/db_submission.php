@@ -18,6 +18,7 @@
   $stmt->prepare($sql);
   $stmt->execute();
   $stmt->close();
-  //$conn->close();
+  $db->close();
+  //$conn->close(); <-- ERROR CAUSING
 
 ?>
