@@ -48,7 +48,7 @@
 
 	$sql = "SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'"
 	$result = mysqli_query($con,$sql);
-	var_dump($results);
+	echo $result;
 
 
 	//this if keeps me displaying. (it doesnt pass the if test)
