@@ -46,7 +46,7 @@
 	//{
 	//}
 
-	$sql = "SELECT Feeling FROM mood_table WHERE Email=marksenne000";
+	$sql = "SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'"
 	$result = mysqli_query($con,$sql);
 	var_dump($results);
 
