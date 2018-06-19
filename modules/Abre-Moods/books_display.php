@@ -39,6 +39,13 @@
 			<!--links to CSS Stylesheet for emojis && contains CSS for columns on emojis-->
 			<html>
 				<header>
+					<script>
+						function testfunc(emojivalue)
+						{
+							alert("You hit " + emojivalue + " emoji");
+							window.location.assign("db_submission.php");
+						}
+					</script>
 					<style>
 						#EmojiSpacing
 						{
@@ -62,14 +69,6 @@
 				</header>
 			</html>
 
-
-			<script>
-				function testfunc(emojivalue)
-				{
-					alert("You hit " + emojivalue + " emoji");
-
-				}
-			</script>
 
 			<?php
 
