@@ -63,13 +63,15 @@
 			</html>
 
 
-			<!--<script>
-				function EnterMood(moodnumber)
+			<script>
+				function testfunc(emojivalue)
 				{
-
-					//need help connecting to database and such
+					alert("You hit " + emojivalue + " emoji");
+					<?php
+						echo "This workds yeahhhhhh";
+					?>
 				}
-			</script>-->
+			</script>
 
 
 
@@ -77,12 +79,6 @@
 			<?php
 
 			//LEFT-OFF: trying to save to database off a onclick. Look at bookmarks bar for possible solution with ajax
-			<script>
-				function testfunc(emojivalue)
-				{
-					alert("You hit " + emojivalue + " emoji");
-				}
-			</script>
 
 			echo '
 			<div>
