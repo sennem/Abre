@@ -38,6 +38,9 @@
 	$result = mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
 	echo $rows[0];
+	$sql2 = "SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$result2 = mysqli_query($con2, $sql2);
+	echo $result2;
 	$con->close();
 
 echo('reach');
