@@ -13,7 +13,7 @@
 
   $userid=finduseridcore($_SESSION['useremail']);
   $emojimood=$_GET['moodval'];
-  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','2018-10-10','$emojimood')";
+  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','2018-11-11','$emojimood')";
   if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
   } else {
