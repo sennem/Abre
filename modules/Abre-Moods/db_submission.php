@@ -5,7 +5,8 @@
   $dbname = "abredb";
   $emojimood = $_GET['moodval'];//works
   $datevar = date('Y-m-d H:i:s');//works
-  //$userid=finduseridcore($_SESSION['useremail']);
+  $userid=finduseridcore($_SESSION['useremail']);
+  echo $userid + 'ok';
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
