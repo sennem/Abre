@@ -49,19 +49,36 @@
 	{
 	    //echo ($row[0]);
 	    //echo ($row[1]);
-			if ((($row[0])==3) || (($row[1])==3))
+			if ((($row[0])==0) || (($row[1])==0))
 			{
-				echo '
-				<div>
-					<ul>
-						<li>
-							<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
-						</li>
-					</ul>
-				</div>';
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==1) || (($row[1])==1)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==2) || (($row[1])==2)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==3) || (($row[1])==3)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==4) || (($row[1])==4)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==5) || (($row[1])==5)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==6) || (($row[1])==6)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==7) || (($row[1])==7)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
+			}
+			else if ((($row[0])==8) || (($row[1])==8)){
+				echo '<i id="EmojiSpacingLeft" class="em em-laughing"></i>';
 			}
 			else {
-				echo 'nop';
+				echo 'nothing';
 			}
 	}
 	$con->close();
