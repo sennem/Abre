@@ -39,7 +39,7 @@
 	$rows = mysqli_fetch_row($result);
 	echo $rows[0];
 	$sql2 = "SELECT Feeling FROM mood_table WHERE Email=\'marksenne000@gmail.com\'";
-	$result2 = mysqli_query($con2, $sql2);
+	$result2 = mysqli_query($con, $sql2);
 	echo $result2[0];
 	$con->close();
 
