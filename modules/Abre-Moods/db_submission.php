@@ -11,13 +11,13 @@
   //^^^ALL ABOVE WORKS^^
 
   //$userid=finduseridcore($_SESSION['useremail']);
-  $userid=finduseridcore($_SESSION['useremail']);
+  //$userid=finduseridcore($_SESSION['useremail']);
   $stmt = $db->stmt_init();
-  echo $userid;
-  //$sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('marksenne000@gmail.com','2018-11-11','3')";
-  //$stmt->prepare($sql);
-  //$stmt->execute();
-  //$stmt->close();
-  //$conn->close();
+  //echo $userid;
+  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('marksenne000@gmail.com','2018-11-11','3')";
+  $stmt->prepare($sql);
+  $stmt->execute();
+  $stmt->close();
+  $conn->close();
 
 ?>
