@@ -20,10 +20,9 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once('permissions.php');
-
+	echo 'HEre';
 	if($pagerestrictions=="")
 	{
 		echo "<div id='displaybooks'>"; include "inventory_display.php"; echo "</div>";
-		echo 'HEre';
 	}
 ?>
