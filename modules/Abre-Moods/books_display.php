@@ -71,17 +71,7 @@
 				}
 			</script>-->
 
-			<?php
-			$countermark=1;
-				if (isset($_POST['eone']))
-				{
-					echo 'IT WORKS';
-				}
-				else {
-					$countermark=$countermark+1;
-					echo $countermark;
-				}
-			?>
+
 
 
 			<?php
@@ -112,6 +102,7 @@
 					</li>
 
 				</ul>
+			</form>
 			</div>'
 
 			//function RecordMood()
