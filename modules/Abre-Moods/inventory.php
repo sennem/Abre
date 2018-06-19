@@ -39,15 +39,17 @@
 	$rows = mysqli_fetch_row($result);
 	echo $rows[0];
 
-	$sql = "SELECT Feeling FROM mood_table WHERE Email=\'marksenne000@gmail.com\'";
-	$result = mysqli_query($con, $sql);
-	$countervar=0;
-	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
-	{
-	    echo ($row[$countervar]);  // The number
-	    echo ($row[$countervar]);  // The customer
-			$countervar++;
-	}
+	$sql="SELECT Feeling FROM mood_table WHERE Email=\'marksenne000@gmail.com\'";
+	$result=mysqli_query($con, $sql);
+	$row=mysqli_fetch_array($result);
+	echo $row['Feeling'];
+	//$countervar=0;
+	//while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+	//{
+	 //   echo ($row[$countervar]);  // The number
+	  //  echo ($row[$countervar]);  // The customer
+		//	$countervar++;
+	//}
 	//$result2 = mysqli_query($con, $sql2);
 	//echo $result2[0];
 	$con->close();
