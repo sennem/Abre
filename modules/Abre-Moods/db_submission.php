@@ -11,7 +11,7 @@
   //^^^ALL ABOVE WORKS^^
 
   //$userid=finduseridcore($_SESSION['useremail']);
-  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','2018-11-11','$emojimood')";
+  $sql="INSERT INTO mood_table (Email, Date, Feeling) VALUES ('$userid','2018-11-11','3')";
   $conn->close();
 
 ?>
