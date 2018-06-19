@@ -72,12 +72,14 @@
 			</script>-->
 
 			<?php
+			$countermark=1;
 				if (isset($_POST['eone']))
 				{
 					echo 'IT WORKS';
 				}
 				else {
-					echo 'NO WORK';
+					$countermark=$countermark+1;
+					echo $countermark;
 				}
 			?>
 
