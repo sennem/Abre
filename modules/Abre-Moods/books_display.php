@@ -67,9 +67,7 @@
 				function testfunc(emojivalue)
 				{
 					alert("You hit " + emojivalue + " emoji");
-					<?php
-						echo "This workds yeahhhhhh";
-					?>
+					
 				}
 			</script>
 
