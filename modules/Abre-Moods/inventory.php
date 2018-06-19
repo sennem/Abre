@@ -38,11 +38,17 @@
 	$result = mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
 	echo $rows[0];
+
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
-	//for (int $i=0; i<$totalrows;i++)
-	//{
-	//
-	//}
+
+	$moodhistory = array{10,10,10,10,10,10,10,10,10,10};
+	for (int $i=0; i<$totalrows;i++)
+	{
+	}
+
+	$sql = "SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$result = mysqli_query($con,$sql);
+	var_dump($results);
 
 
 	//this if keeps me displaying. (it doesnt pass the if test)
