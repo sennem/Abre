@@ -4,11 +4,11 @@
   $password = "killerm111";
   $dbname = "abredb";
   $emojimood = $_GET['moodval'];//works
-  //$datevar = date('Y-m-d H:i:s');//works
-  $datefix = date("Y-m-d H:i:s", strtotime('+3 hours'))
+  $datevar = date('Y-m-d H:i:s');//works
+  //$datefix = date('Y-m-d H:i:s', strtotime('+3 hours'))
   //$userid=finduseridcore($_SESSION['useremail']);
 
-  //NEED: get session email working
+  //NEED: get session email working && fix hour difference
 
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
