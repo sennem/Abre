@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
 
@@ -134,11 +134,10 @@
 				</ul>
 			</div>'
 
-			//$urldbvar=$_GET['dbchange'];
-			//if ($urldbvar==1)
-			//{
-			//	echo "<div style='padding:30px; text-align:center; width:100%;'><br><p style='font-size:16px; margin:20px 0 0 0;'>Respone submitted.</p></div>";
-			//}
+			//$sql="SELECT Feeling FROM TABLE WHERE ID = (SELECT MAX(ID) FROM TABLE)";
+			//$result=mysqli_query($con,$sql);
+			//echo $result;
+			//echo 'END';
 
 			?>
 
