@@ -10,7 +10,7 @@
 			.EmojiSpacingLeft
 			{
 				margin-left:40%;
-				margin-right:35px;
+				margin-right:70px;
 			}
 			ul
 			{
