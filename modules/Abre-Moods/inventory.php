@@ -72,7 +72,7 @@
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		echo '<br>';
-		echo ($row[0]); //the row with the actual data
+		//echo ($row[0]); //the row with the actual data
 		if ($row[0]==0)
 		{
 			echo '<i class="em em-laughing" ></i>';
