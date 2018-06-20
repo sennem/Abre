@@ -70,6 +70,7 @@
 	$resultdates=mysqli_query($con,$sqldates);
 	$rowss = array();
 	while($rowss[]=mysqli_fetch_array($resultdates));
+	echo $rowss[0]['Daterow'];
 	echo $rowss[1]['Daterow'];
 
 
