@@ -50,7 +50,7 @@
 	require_once('permissions.php');
 
 
-	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record1</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
+	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>1Record1</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
@@ -64,14 +64,14 @@
 	$numrows = mysqli_fetch_row($result);
 	echo $numrows[0];
 
-	$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
 	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultdates=mysqli_query($con,$sqldates);
-	while($row = mysqli_fetch_row($resultdates)) {
-	  $rows[]=$row;
+	while($rowr = mysqli_fetch_row($resultdates)) {
+	  $rowss[]=$rowr;
 	}
-	echo $rows;
+	echo $rowss;
 
 
 	//$row=mysqli_fetch_array($result);
