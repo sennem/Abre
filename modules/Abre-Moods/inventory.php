@@ -44,7 +44,7 @@
 
 	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
-	$row=mysqli_fetch_array($result);
+	//$row=mysqli_fetch_array($result);
 	echo '<br>';
 	echo $row;
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
