@@ -77,7 +77,7 @@
 	//$row=mysqli_fetch_array($result);
 	echo '<br>';
 	//echo $row;
-	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo '<br>';
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
