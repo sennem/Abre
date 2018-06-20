@@ -48,10 +48,10 @@
 	echo '<br>';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
-		  echo ($row[0]);
-			echo '<----row0';
-			echo ($row[1]);
-			echo '<----row1';
+		echo "ROW0";
+		echo ($row[0]);
+		echo "ROW1";
+		echo ($row[1]);
 	}
 	$con->close();
 
