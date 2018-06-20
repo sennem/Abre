@@ -40,6 +40,7 @@
 	echo '<br>';
 	echo 'END';
 	echo '<br>';
+	$con->close();
 	?>
 
 	<div class='page_container'>
