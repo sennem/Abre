@@ -78,19 +78,19 @@
 			<div>
 				<ul>
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0)"></i>
-						<i id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1)"></i>
-						<i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2)"></i>
+						<i id="EmojiSpacingLeft" class="em em-laughing" onclick="testfunc(0); alterdisp(0);"></i>
+						<i id="EmojiSpacing" class="em em-smiley" onclick="testfunc(1); alterdisp(1);"></i>
+						<i id="EmojiSpacing" class="em em-slightly_smiling_face" onclick="testfunc(2); alterdisp(2);"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc(3)"></i>
-						<i id="EmojiSpacing" class="em em-cry" onclick="testfunc(4)"></i>
-						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc(5)"></i>
+						<i id="EmojiSpacingLeft" class="em em-weary" onclick="testfunc(3); alterdisp(3);"></i>
+						<i id="EmojiSpacing" class="em em-cry" onclick="testfunc(4); alterdisp(4);"></i>
+						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc(5); alterdisp(5);"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc(6)"></i>
-						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc(7)"></i>
-						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc(8)"></i>
+						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc(6); alterdisp(6);"></i>
+						<i id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc(7); alterdisp(7);"></i>
+						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc(8); alterdisp(8);"></i>
 					</li>
 				</ul>
 			</div>'
