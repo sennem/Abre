@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>1Record1</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-
+	echo '1';
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
 	if (mysqli_connect_errno())
@@ -68,10 +68,9 @@
 	$result=mysqli_query($con, $sql);
 	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultdates=mysqli_query($con,$sqldates);
-	while($rowr = mysqli_fetch_row($resultdates)) {
-	  $rowss[]=$rowr;
-	}
-	echo $rowss;
+	$rowss = array();
+	while($rowss[]=mysqli_fetch_array($resultdates));
+	echo $rowss[1]['Daterow'];
 
 
 	//$row=mysqli_fetch_array($result);
