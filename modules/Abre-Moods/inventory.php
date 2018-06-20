@@ -97,28 +97,28 @@
 		{
 			echo '<i class="em em-weary EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==4)
+		if ($row[0][Feeling]==4)
 		{
 			echo '<i class="em em-cry EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==5)
+		if ($row[0][Feeling]==5)
 		{
 			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==6)
+		if ($row[0][Feeling]==6)
 		{
 			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==7)
+		if ($row[0][Feeling]==7)
 		{
 			echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==8)
+		if ($row[0][Feeling]==8)
 		{
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
 		}
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
-		echo $row[0]['Daterow'];
+
 	}
 	$con->close();
 
