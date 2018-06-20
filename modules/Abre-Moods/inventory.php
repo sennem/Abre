@@ -64,14 +64,14 @@
 	$numrows = mysqli_fetch_row($result);
 	echo $numrows[0];
 
-	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
-	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$resultdates=mysqli_query($con,$sqldates);
-	$rowss = array();
-	while($rowss[]=mysqli_fetch_array($resultdates));
-	echo $rowss[0]['Daterow'];
-	echo $rowss[1]['Daterow'];
+	//$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	//$resultdates=mysqli_query($con,$sqldates);
+	//$rowss = array();
+	//while($rowss[]=mysqli_fetch_array($resultdates));
+	//echo $rowss[0]['Daterow'];
+	//echo $rowss[1]['Daterow'];
 
 
 	//$row=mysqli_fetch_array($result);
@@ -81,35 +81,35 @@
 	{
 		echo '<br>';
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
-		if ($row[0]==0)
+		if ($row['Feeling']==0)
 		{
 			echo '<i class="em em-laughing EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==1)
+		if ($row[Feeling]==1)
 		{
 			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==2)
+		if ($row[Feeling]==2)
 		{
 			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==3)
+		if ($row[Feeling]==3)
 		{
 			echo '<i class="em em-weary EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==4)
+		if ($row[Feeling]==4)
 		{
 			echo '<i class="em em-cry EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==5)
+		if ($row[Feeling]==5)
 		{
 			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==6)
+		if ($row[Feeling]==6)
 		{
 			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0]==7)
+		if ($row[Feeling]==7)
 		{
 			echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> - ';
 		}
