@@ -88,8 +88,8 @@
 						<i id="EmojiSpacing" class="em em-slightly_frowning_face" onclick="testfunc(5); alterdisp(5);"></i>
 					</li>
 					<li>
-						<i id="EmojiSpacing" class="em em-grimacing" onclick="testfunc(6); alterdisp(6);"></i>
-						<i id="EmojiSpacingLeft" class="em em-expressionless" onclick="testfunc(7); alterdisp(7);"></i>
+						<i id="EmojiSpacingLeft" class="em em-grimacing" onclick="testfunc(6); alterdisp(6);"></i>
+						<i id="EmojiSpacing" class="em em-expressionless" onclick="testfunc(7); alterdisp(7);"></i>
 						<i id="EmojiSpacing" class="em em-persevere" onclick="testfunc(8); alterdisp(8);"></i>
 					</li>
 				</ul>
