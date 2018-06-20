@@ -48,9 +48,45 @@
 	echo '<br>';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
-		echo "row0>";
+		//echo "row0>";
+		echo '<br>';
 		echo ($row[0]);
-		echo "row1>";
+		if ($row[0]==0)
+		{
+			echo '<i class="em em-laughing" ></i>';
+		}
+		if ($row[0]==1)
+		{
+			echo '<i class="em em-smiley" ></i>';
+		}
+		if ($row[0]==2)
+		{
+			echo '<i class="em em-slightly_smiling_face" ></i>';
+		}
+		if ($row[0]==3)
+		{
+			echo '<i class="em em-weary" ></i>';
+		}
+		if ($row[0]==4)
+		{
+			echo '<i class="em em-cry" ></i>';
+		}
+		if ($row[0]==5)
+		{
+			echo '<i class="em em-slightly_frowning_face" ></i>';
+		}
+		if ($row[0]==6)
+		{
+			echo '<i class="em em-expressionless" ></i>';
+		}
+		if ($row[0]==7)
+		{
+			echo '<i class="em em-grimacing" ></i>';
+		}
+		if ($row[0]==8)
+		{
+			echo '<i class="em em-persevere" ></i>';
+		}
 		echo ($row[1]);
 	}
 	$con->close();
