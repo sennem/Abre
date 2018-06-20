@@ -81,19 +81,19 @@
 	{
 		echo '<br>';
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
-		if ($row['Feeling']==0)
+		if ($row[0]['Feeling']==0)
 		{
 			echo '<i class="em em-laughing EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==1)
+		if ($row[0][Feeling]==1)
 		{
 			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==2)
+		if ($row[0][Feeling]==2)
 		{
 			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[Feeling]==3)
+		if ($row[0][Feeling]==3)
 		{
 			echo '<i class="em em-weary EmojiSpacingLeft" ></i> - ';
 		}
