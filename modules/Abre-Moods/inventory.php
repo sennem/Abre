@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>1Record1</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '3';
+	echo '4';
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
 	if (mysqli_connect_errno())
@@ -118,7 +118,7 @@
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
 		}
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
-		echo $row[0]['Daterow'];
+		echo $row[1][Daterow];
 	}
 	$con->close();
 
