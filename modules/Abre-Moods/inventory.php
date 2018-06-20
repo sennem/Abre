@@ -30,17 +30,35 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 
-	//$con=mysqli_connect("localhost","root","killerm111","abredb");
-	$mysqli = new mysqli('localhost', 'root', 'killerm111', 'abredb');
+	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
-	//if (mysqli_connect_errno())
-  //{
-  //	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  //}
+	if (mysqli_connect_errno())
+  {
+  	echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
 
 	$sql = "SELECT COUNT(*) FROM mood_table";
-	$result = mysqli_query($sql);
-	$data = mysqli_fetch_assoc($result);
-	echo $data;
+	$result = mysqli_query($con,$sql);
+	$rows = mysqli_fetch_row($result);
+	echo $rows[0];
+
+	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$result=mysqli_query($con, $sql);
+	$row=mysqli_fetch_array($result);
+	echo '<br>';
+	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+	{
+		  echo ($row[0]);
+			echo ($row[1]);
+	}
+	$con->close();
+
+
+	//echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
+	//this if keeps me displaying. (it doesnt pass the if test)
+	//if($pagerestrictions=="")
+	//{
+	//	echo "<div id='displaybooks'>"; include "inventory_display.php"; echo "</div>";
+	//}
 
 ?>
