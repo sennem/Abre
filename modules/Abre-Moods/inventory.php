@@ -85,35 +85,35 @@
 		{
 			echo '<i class="em em-laughing EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==1)
+		if ($row[0]['Feeling']==1)
 		{
 			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==2)
+		if ($row[0]['Feeling']==2)
 		{
 			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==3)
+		if ($row[0]['Feeling']==3)
 		{
 			echo '<i class="em em-weary EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==4)
+		if ($row[0]['Feeling']==4)
 		{
 			echo '<i class="em em-cry EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==5)
+		if ($row[0]['Feeling']==5)
 		{
 			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==6)
+		if ($row[0]['Feeling']==6)
 		{
 			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==7)
+		if ($row[0]['Feeling']==7)
 		{
 			echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> - ';
 		}
-		if ($row[0][Feeling]==8)
+		if ($row[0]['Feeling']==8)
 		{
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
 		}
