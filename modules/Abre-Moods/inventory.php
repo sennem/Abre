@@ -89,9 +89,6 @@
 		}
 		echo ($row[1]); //just goes to next thing, effectively a counter
 	}
-	date_default_timezone_set('America/Indiana/Indianapolis');
-	$datetest = date('Y-m-d H:i:s');
-	echo $datetest;
 	$con->close();
 
 

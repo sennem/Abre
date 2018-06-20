@@ -4,6 +4,7 @@
   $password = "killerm111";
   $dbname = "abredb";
   $emojimood = $_GET['moodval'];//works
+  date_default_timezone_set('America/Indiana/Indianapolis');
   $datevar = date('Y-m-d H:i:s');//works
   //$datefix = date('Y-m-d H:i:s', strtotime('+3 hours'))
   //$userid=finduseridcore($_SESSION['useremail']);
