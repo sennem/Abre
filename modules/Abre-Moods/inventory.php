@@ -50,8 +50,8 @@
 	require_once('permissions.php');
 
 
-	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>1Record1</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '5';
+	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
+	//echo '5'; //testing to identify if the page is running off of new saved code
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
 	if (mysqli_connect_errno())
@@ -62,7 +62,7 @@
 	$sql = "SELECT COUNT(*) FROM mood_table";
 	$result = mysqli_query($con,$sql);
 	$numrows = mysqli_fetch_row($result);
-	echo $numrows[0];
+	//echo $numrows[0]; //outputs total number of rows in the data table
 
 	$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
