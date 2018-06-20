@@ -2,6 +2,25 @@
 <html>
 	<header>
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+		<style>
+			.EmojiSpacing
+			{
+				margin:35px;
+			}
+			.EmojiSpacingLeft
+			{
+				margin-left:40%;
+				margin-right:35px;
+			}
+			ul
+			{
+				justify-content: center;
+			}
+			ul li
+			{
+				padding: 0 8px;
+			}
+		</style>
 	</header>
 </html>
 
@@ -32,7 +51,6 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Recor</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-
 
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
