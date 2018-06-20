@@ -64,10 +64,10 @@
 	$rows = mysqli_fetch_row($result);
 	echo $rows[0];
 
-	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
-	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$resultdates=mysqli_query($con,$sqldates);
+	//$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	//$resultdates=mysqli_query($con,$sqldates);
 
 	//$row=mysqli_fetch_array($result);
 	echo '<br>';
