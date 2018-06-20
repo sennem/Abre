@@ -38,6 +38,7 @@
 	$result=mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
 	$con->close();
+	date_default_timezone_set('America/Indiana/Indianapolis');
 	?>
 
 
@@ -101,7 +102,11 @@
 						}
 						function resetdisp()
 						{
-
+							$datetest = date("H:i");
+							if ($datetest=="14:32")
+							{
+								echo 'timework';
+							}
 							//document.getElementById("emojizero").style.backgroundColor = "";
 							//document.getElementById("emojione").style.backgroundColor = "";
 							//document.getElementById("emojitwo").style.backgroundColor = "";
@@ -141,14 +146,7 @@
 		</script>
 
 			<?php
-			$datetest = date("H:i");
-			echo '<br>';
-			echo "A" . $datetest . "A";
-			echo '<br>';
-			if ($datetest=="11:30")
-			{
-				echo 'timework';
-			}
+
 			echo '
 			<div>
 				<ul>
