@@ -61,6 +61,7 @@
 						{
 							alert('running');
 							var emojivalue3 = '<?php echo $rows[0] ;?>';
+							alert('emojivalue3');
 							if (emojivalue3==0)
 							{
 								document.getElementById("emojizero").style.borderColor= "black";
