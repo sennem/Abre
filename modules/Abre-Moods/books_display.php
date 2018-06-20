@@ -59,9 +59,9 @@
 						}
 						function alterdisp()
 						{
-							alert('running');
+							//alert('running'); for testing
 							var emojivalue3 = '<?php echo $rows[0] ;?>';
-							alert(emojivalue3);
+							//alert(emojivalue3); for testing
 							if (emojivalue3==0)
 							{
 								document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
@@ -124,7 +124,7 @@
 			</html>
 
 		<script type="text/javascript">
-    	alterdisp();
+    	alterdisp(); //calls the func that "highlights" an emoji
 		</script>
 
 			<?php
