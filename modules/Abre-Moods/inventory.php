@@ -41,6 +41,6 @@
 	$sql = "SELECT COUNT(*) FROM mood_table";
 	$result = mysqli_query($sql);
 	$data = mysqli_fetch_assoc($result);
-	echo 'worked';
+	echo $data;
 
 ?>
