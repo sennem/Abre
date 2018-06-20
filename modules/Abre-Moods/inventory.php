@@ -46,6 +46,7 @@
 	$result=mysqli_query($con, $sql);
 	$row=mysqli_fetch_array($result);
 	echo '<br>';
+	echo '$row[0]';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		echo '<br>';
