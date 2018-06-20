@@ -64,39 +64,39 @@
 							alert(emojivalue3);
 							if (emojivalue3==0)
 							{
-								document.getElementById("emojizero").style.borderColor = "black";
+								document.getElementById("emojizero").style.backgroundColor = "red";
 							}
 							if (emojivalue3==1)
 							{
-								document.getElementById("emojione").style.borderColor = "black";
+								document.getElementById("emojione").style.backgroundColor = "red";
 							}
 							if (emojivalue3==2)
 							{
-								document.getElementById("emojitwo").style.borderColor = "black";
+								document.getElementById("emojitwo").style.backgroundColor = "red";
 							}
 							if (emojivalue3==3)
 							{
-								document.getElementById("emojithree").style.borderColor = "black";
+								document.getElementById("emojithree").style.backgroundColor = "red";
 							}
 							if (emojivalue3==4)
 							{
-								document.getElementById("emojifour").style.borderColor = "black";
+								document.getElementById("emojifour").style.backgroundColor = "red";
 							}
 							if (emojivalue3==5)
 							{
-								document.getElementById("emojifive").style.borderColor = "black";
+								document.getElementById("emojifive").style.backgroundColor = "red";
 							}
 							if (emojivalue3==6)
 							{
-								document.getElementById("emojisix").style.borderColor = "black";
+								document.getElementById("emojisix").style.backgroundColor = "red";
 							}
 							if (emojivalue3==7)
 							{
-								document.getElementById("emojiseven").style.borderColor = "black";
+								document.getElementById("emojiseven").style.backgroundColor = "red";
 							}
 							if (emojivalue3==8)
 							{
-								document.getElementById("emojieight").style.borderColor = "black";
+								document.getElementById("emojieight").style.backgroundColor = "red";
 							}
 						}
 					</script>
