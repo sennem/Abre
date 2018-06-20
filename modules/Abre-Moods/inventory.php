@@ -130,4 +130,7 @@
 	//	echo "<div id='displaybooks'>"; include "inventory_display.php"; echo "</div>";
 	//}
 
+
+	//LEFT OFF HERE -- code is in a txt doc on desktop look at it + notebook
+
 ?>
