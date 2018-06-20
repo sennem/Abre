@@ -57,7 +57,7 @@
 							alert("Respone submitted");
 							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
 						}
-						function alterdisp(emojivalue2)
+						/*function alterdisp(emojivalue2)
 						{
 							if (emojivalue2==0)
 							{
@@ -96,12 +96,45 @@
 								document.getElementById("emojieight").style.backgroundColor = "red";
 							}
 						}
+						*/
 						function alterdispreload()
 						{
-							var spge = '<?php echo $rows[0] ;?>';
-							if (spge==2)
+							var emojivalue3 = '<?php echo $rows[0] ;?>';
+							if (emojivalue3==0)
 							{
-								alert ('yup');
+								document.getElementById("emojizero").style.backgroundColor = "red";
+							}
+							if (emojivalue3==1)
+							{
+								document.getElementById("emojione").style.backgroundColor = "red";
+							}
+							if (emojivalue3==2)
+							{
+								document.getElementById("emojitwo").style.backgroundColor = "red";
+							}
+							if (emojivalue3==3)
+							{
+								document.getElementById("emojithree").style.backgroundColor = "red";
+							}
+							if (emojivalue3==4)
+							{
+								document.getElementById("emojifour").style.backgroundColor = "red";
+							}
+							if (emojivalue3==5)
+							{
+								document.getElementById("emojifive").style.backgroundColor = "red";
+							}
+							if (emojivalue3==6)
+							{
+								document.getElementById("emojisix").style.backgroundColor = "red";
+							}
+							if (emojivalue3==7)
+							{
+								document.getElementById("emojiseven").style.backgroundColor = "red";
+							}
+							if (emojivalue3==8)
+							{
+								document.getElementById("emojieight").style.backgroundColor = "red";
 							}
 						}
 					</script>
@@ -130,6 +163,7 @@
 
 		<script type="text/javascript">
     	alterdispreload();
+			alert('running');
 		</script>
 
 			<?php
