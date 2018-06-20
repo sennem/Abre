@@ -43,10 +43,25 @@
 	echo $rows[0];
 
 	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	//$result=mysqli_query($con, $sql);
-	$result=mysqlii_query($sql);
+	$result=mysqli_query($con, $sql);
 	//$row=mysqli_fetch_array($result);
-
+	$datas =array();
+	//if(mysqli_num_rows($result) > 0)
+	//{
+		while($row=mysqli_feth_assoc($result))
+		{
+			$datas=$row;
+		}
+		foreach ($datas[0] as $data)
+		{
+			echo $data;
+		}
+		foreach ($datas as $data)
+		{
+			echo $data['Feeling'];
+		}
+		echo 'END';
+	//}
 	/*echo '<br>';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
@@ -54,7 +69,7 @@
 			echo ($row[1]);
 	}*/
 	echo '<br>';
-	while($row = mysqli_fetch_array($result))
+	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		echo $row['Feeling'];
 			/*echo '<br>';
