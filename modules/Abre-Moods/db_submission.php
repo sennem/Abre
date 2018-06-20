@@ -21,6 +21,6 @@
   $stmt->execute();
   $stmt->close();
   $db->close();
-  header("Location:http://localhost:8080/#books?goingback=1");
+  header("Location:http://localhost:8080/#books/?goingback=1");
   exit;
 ?>
