@@ -118,7 +118,7 @@
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
 		}
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
-		echo $row[0][1];
+		echo $row['Daterow'];
 	}
 	$con->close();
 
