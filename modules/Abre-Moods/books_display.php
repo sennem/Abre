@@ -141,12 +141,14 @@
 		</script>
 
 			<?php
-			echo "The time is " . date("H:i");
-			if ((date("H:i:s"))=="11:28")
-			{
-				echo 'ajgnsdjklfgsjkdfg';
-			}
+			$datetest = date("H:i");
 			echo '<br>';
+			echo "A" . $datetest . "A";
+			echo '<br>';
+			if ($datetest=="11:30")
+			{
+				echo 'timework';
+			}
 			echo '
 			<div>
 				<ul>
