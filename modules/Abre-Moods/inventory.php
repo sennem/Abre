@@ -61,13 +61,18 @@
 
 	$sql = "SELECT COUNT(*) FROM mood_table";
 	$result = mysqli_query($con,$sql);
-	$rows = mysqli_fetch_row($result);
-	echo $rows[0];
+	$numrows = mysqli_fetch_row($result);
+	echo $numrows[0];
 
 	$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
-	//$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	//$resultdates=mysqli_query($con,$sqldates);
+	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$resultdates=mysqli_query($con,$sqldates);
+	while($row = mysqli_fetch_row($resultdates)) {
+	  $rows[]=$row;
+	}
+	echo $rows;
+
 
 	//$row=mysqli_fetch_array($result);
 	echo '<br>';
