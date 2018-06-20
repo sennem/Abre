@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>1Record1</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '1';
+	echo 'here';
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
 	if (mysqli_connect_errno())
@@ -64,19 +64,27 @@
 	$numrows = mysqli_fetch_row($result);
 	echo $numrows[0];
 
-	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sql="SELECT Feeling, Datefield FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
-	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$resultdates=mysqli_query($con,$sqldates);
-	$rowss = array();
-	while($rowss[]=mysqli_fetch_array($resultdates));
-	echo $rowss[1]['Daterow'];
+
+	//$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	//$resultdates=mysqli_query($con,$sqldates);
+	//$rowss = array();
+	//while($rowss[]=mysqli_fetch_array($resultdates));
+	//echo $rowss[1]['Daterow'];
+
+	$rowsall = array();
+	$while($rowsall[]=mysqli_fetch_array($result));
+	echo '<br>';
+	echo $rowsall[1]['Feeling'];
+	echo $rowsall[1]['Daterow'];
 
 
 	//$row=mysqli_fetch_array($result);
 	echo '<br>';
 	//echo $row;
-	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
+
+	/*while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		echo '<br>';
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
@@ -118,7 +126,7 @@
 		}
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
 		echo $row[0]['Daterow'];
-	}
+	}*/
 	$con->close();
 
 
