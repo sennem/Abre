@@ -99,7 +99,10 @@
 						function alterdispreload()
 						{
 							var spge = '<?php echo $rows[0] ;?>';
-							alert(spge);
+							if (spge==2)
+							{
+								alert ('yup');
+							}
 						}
 					</script>
 					<style>
