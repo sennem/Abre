@@ -78,39 +78,39 @@
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
 		if ($row[0]==0)
 		{
-			echo '<i class="em em-laughing EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-laughing EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==1)
 		{
-			echo '<i class="em em-smiley EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==2)
 		{
-			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==3)
 		{
-			echo '<i class="em em-weary EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-weary EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==4)
 		{
-			echo '<i class="em em-cry EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-cry EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==5)
 		{
-			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==6)
 		{
-			echo '<i class="em em-persevere EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==7)
 		{
-			echo '<i class="em em-grimacing EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> - ';
 		}
 		if ($row[0]==8)
 		{
-			echo '<i class="em em-expressionless EmojiSpacingLeft" > - </i>';
+			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
 		}
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
 		echo $resultdates['Daterow'];
