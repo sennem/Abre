@@ -99,6 +99,19 @@
 								document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
 							}
 						}
+						function resetdisp()
+						{
+
+							//document.getElementById("emojizero").style.backgroundColor = "";
+							//document.getElementById("emojione").style.backgroundColor = "";
+							//document.getElementById("emojitwo").style.backgroundColor = "";
+							//document.getElementById("emojithree").style.backgroundColor = "";
+							//document.getElementById("emojifour").style.backgroundColor = "";
+							//document.getElementById("emojifive").style.backgroundColor = "";
+							//document.getElementById("emojisix").style.backgroundColor = "";
+							//document.getElementById("emojiseven").style.backgroundColor = "";
+							//document.getElementById("emojieight").style.backgroundColor = "";
+						}
 					</script>
 					<style>
 						.EmojiSpacing
@@ -128,6 +141,12 @@
 		</script>
 
 			<?php
+			echo "The time is " . date("H:i");
+			if ((date("H:i:s"))=="2:27")
+			{
+				echo 'ajgnsdjklfgsjkdfg';
+			}
+			echo '<br>';
 			echo '
 			<div>
 				<ul>
@@ -150,6 +169,10 @@
 			</div>'
 
 			?>
+
+			<script type="text/javascript">
+	    	resetdisp(); //resets emoji highlight if end of day (beginning of new day)
+			</script>
 
 		</div>
 	</div>
