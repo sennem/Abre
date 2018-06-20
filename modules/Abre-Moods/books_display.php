@@ -38,7 +38,6 @@
 	$result=mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
 	$con->close();
-	echo $rows[0];
 	?>
 
 
@@ -97,6 +96,11 @@
 								document.getElementById("emojieight").style.backgroundColor = "red";
 							}
 						}
+						function alterdispreload()
+						{
+							var spge = '<?php echo $rows[0] ;?>';
+							alert(spge);
+						}
 					</script>
 					<style>
 						.EmojiSpacing
@@ -121,11 +125,11 @@
 				</header>
 			</html>
 
+		<script type="text/javascript">
+    	alterdispreload();
+		</script>
 
 			<?php
-
-
-
 			echo '
 			<div>
 				<ul>
