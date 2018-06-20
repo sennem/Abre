@@ -49,7 +49,9 @@
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		  echo ($row[0]);
+			echo '<----row0';
 			echo ($row[1]);
+			echo '<----row1';
 	}
 	$con->close();
 
