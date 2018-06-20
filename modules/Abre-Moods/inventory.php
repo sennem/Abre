@@ -54,7 +54,7 @@
 	echo '<br>';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
-		echo $rows;
+		echo $row['Feeling'];
 			/*echo '<br>';
 	    echo ($row[0]);
 	    echo ($row[1]);
