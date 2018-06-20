@@ -45,6 +45,45 @@
 							alert("Respone submitted");
 							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
 						}
+						function alterdisp(emojivalue2)
+						{
+							if (emojivalue2==0)
+							{
+								document.getElementById("emojizero").style.backgroundColor = "red";
+							}
+							if (emojivalue2==1)
+							{
+								document.getElementById("emojione").style.backgroundColor = "red";
+							}
+							if (emojivalue2==2)
+							{
+								document.getElementById("emojitwo").style.backgroundColor = "red";
+							}
+							if (emojivalue2==3)
+							{
+								document.getElementById("emojithree").style.backgroundColor = "red";
+							}
+							if (emojivalue2==4)
+							{
+								document.getElementById("emojifour").style.backgroundColor = "red";
+							}
+							if (emojivalue2==5)
+							{
+								document.getElementById("emojifive").style.backgroundColor = "red";
+							}
+							if (emojivalue2==6)
+							{
+								document.getElementById("emojisix").style.backgroundColor = "red";
+							}
+							if (emojivalue2==7)
+							{
+								document.getElementById("emojiseven").style.backgroundColor = "red";
+							}
+							if (emojivalue2==8)
+							{
+								document.getElementById("emojieight").style.backgroundColor = "red";
+							}
+						}
 					</script>
 					<style>
 						.EmojiSpacing
@@ -78,19 +117,19 @@
 			<div>
 				<ul>
 					<li>
-						<i class="em em-laughing EmojiSpacingLeft" onclick="testfunc(0); alterdisp(0);"></i>
-						<i class="em em-smiley EmojiSpacing" onclick="testfunc(1); alterdisp(1);"></i>
-						<i class="em em-slightly_smiling_face EmojiSpacing" onclick="testfunc(2); alterdisp(2);"></i>
+						<i id="emojizero" class="em em-laughing EmojiSpacingLeft" onclick="testfunc(0); alterdisp(0);"></i>
+						<i id="emojione" class="em em-smiley EmojiSpacing" onclick="testfunc(1); alterdisp(1);"></i>
+						<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" onclick="testfunc(2); alterdisp(2);"></i>
 					</li>
 					<li>
-						<i class="em em-weary EmojiSpacingLeft" onclick="testfunc(3); alterdisp(3);"></i>
-						<i class="em em-cry EmojiSpacing" onclick="testfunc(4); alterdisp(4);"></i>
-						<i class="em em-slightly_frowning_face EmojiSpacing" onclick="testfunc(5); alterdisp(5);"></i>
+						<i id="emojithree" class="em em-weary EmojiSpacingLeft" onclick="testfunc(3); alterdisp(3);"></i>
+						<i id="emojifour" class="em em-cry EmojiSpacing" onclick="testfunc(4); alterdisp(4);"></i>
+						<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" onclick="testfunc(5); alterdisp(5);"></i>
 					</li>
 					<li>
-						<i class="em em-persevere EmojiSpacingLeft" onclick="testfunc(6); alterdisp(6);"></i>
-						<i class="em em-grimacing EmojiSpacing" onclick="testfunc(7); alterdisp(7);"></i>
-						<i class="em em-expressionless EmojiSpacing" onclick="testfunc(8); alterdisp(8);"></i>
+						<i id="emojisix" class="em em-persevere EmojiSpacingLeft" onclick="testfunc(6); alterdisp(6);"></i>
+						<i id="emojiseven" class="em em-grimacing EmojiSpacing" onclick="testfunc(7); alterdisp(7);"></i>
+						<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8); alterdisp(8);"></i>
 					</li>
 				</ul>
 			</div>'
