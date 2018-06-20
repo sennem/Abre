@@ -61,7 +61,7 @@
 						{
 							alert('running');
 							var emojivalue3 = '<?php echo $rows[0] ;?>';
-							alert('emojivalue3');
+							alert(emojivalue3);
 							if (emojivalue3==0)
 							{
 								document.getElementById("emojizero").style.borderColor= "black";
@@ -132,19 +132,19 @@
 			<div>
 				<ul>
 					<li>
-						<i id="emojizero" class="em em-laughing EmojiSpacingLeft" onclick="testfunc(0); alterdisp(0);"></i>
-						<i id="emojione" class="em em-smiley EmojiSpacing" onclick="testfunc(1); alterdisp(1);"></i>
-						<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" onclick="testfunc(2); alterdisp(2);"></i>
+						<i id="emojizero" class="em em-laughing EmojiSpacingLeft" onclick="testfunc(0)"></i>
+						<i id="emojione" class="em em-smiley EmojiSpacing" onclick="testfunc(1)"></i>
+						<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" onclick="testfunc(2)"></i>
 					</li>
 					<li>
-						<i id="emojithree" class="em em-weary EmojiSpacingLeft" onclick="testfunc(3); alterdisp(3);"></i>
-						<i id="emojifour" class="em em-cry EmojiSpacing" onclick="testfunc(4); alterdisp(4);"></i>
-						<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" onclick="testfunc(5); alterdisp(5);"></i>
+						<i id="emojithree" class="em em-weary EmojiSpacingLeft" onclick="testfunc(3)"></i>
+						<i id="emojifour" class="em em-cry EmojiSpacing" onclick="testfunc(4)"></i>
+						<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" onclick="testfunc(5)"></i>
 					</li>
 					<li>
-						<i id="emojisix" class="em em-persevere EmojiSpacingLeft" onclick="testfunc(6); alterdisp(6);"></i>
-						<i id="emojiseven" class="em em-grimacing EmojiSpacing" onclick="testfunc(7); alterdisp(7);"></i>
-						<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8); alterdisp(8);"></i>
+						<i id="emojisix" class="em em-persevere EmojiSpacingLeft" onclick="testfunc(6)"></i>
+						<i id="emojiseven" class="em em-grimacing EmojiSpacing" onclick="testfunc(7)"></i>
+						<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8)"></i>
 					</li>
 				</ul>
 			</div>'
