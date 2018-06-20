@@ -57,84 +57,44 @@
 							alert("Respone submitted");
 							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
 						}
-						/*function alterdisp(emojivalue2)
-						{
-							if (emojivalue2==0)
-							{
-								document.getElementById("emojizero").style.backgroundColor = "red";
-							}
-							if (emojivalue2==1)
-							{
-								document.getElementById("emojione").style.backgroundColor = "red";
-							}
-							if (emojivalue2==2)
-							{
-								document.getElementById("emojitwo").style.backgroundColor = "red";
-							}
-							if (emojivalue2==3)
-							{
-								document.getElementById("emojithree").style.backgroundColor = "red";
-							}
-							if (emojivalue2==4)
-							{
-								document.getElementById("emojifour").style.backgroundColor = "red";
-							}
-							if (emojivalue2==5)
-							{
-								document.getElementById("emojifive").style.backgroundColor = "red";
-							}
-							if (emojivalue2==6)
-							{
-								document.getElementById("emojisix").style.backgroundColor = "red";
-							}
-							if (emojivalue2==7)
-							{
-								document.getElementById("emojiseven").style.backgroundColor = "red";
-							}
-							if (emojivalue2==8)
-							{
-								document.getElementById("emojieight").style.backgroundColor = "red";
-							}
-						}
-						*/
 						function alterdispreload()
 						{
 							var emojivalue3 = '<?php echo $rows[0] ;?>';
 							if (emojivalue3==0)
 							{
-								document.getElementById("emojizero").style.backgroundColor = "red";
+								document.getElementById("emojizero").style.borderColor= "black";
 							}
 							if (emojivalue3==1)
 							{
-								document.getElementById("emojione").style.backgroundColor = "red";
+								document.getElementById("emojione").style.borderColor= "black";
 							}
 							if (emojivalue3==2)
 							{
-								document.getElementById("emojitwo").style.backgroundColor = "red";
+								document.getElementById("emojitwo").style.borderColor= "black";
 							}
 							if (emojivalue3==3)
 							{
-								document.getElementById("emojithree").style.backgroundColor = "red";
+								document.getElementById("emojithree").borderColor= "black";
 							}
 							if (emojivalue3==4)
 							{
-								document.getElementById("emojifour").style.backgroundColor = "red";
+								document.getElementById("emojifour").borderColor= "black";
 							}
 							if (emojivalue3==5)
 							{
-								document.getElementById("emojifive").style.backgroundColor = "red";
+								document.getElementById("emojifive").style.borderColor= "black";
 							}
 							if (emojivalue3==6)
 							{
-								document.getElementById("emojisix").style.backgroundColor = "red";
+								document.getElementById("emojisix").style.borderColor= "black";
 							}
 							if (emojivalue3==7)
 							{
-								document.getElementById("emojiseven").style.backgroundColor = "red";
+								document.getElementById("emojiseven").style.borderColor= "black";
 							}
 							if (emojivalue3==8)
 							{
-								document.getElementById("emojieight").style.backgroundColor = "red";
+								document.getElementById("emojieight").style.borderColor= "black";
 							}
 						}
 					</script>
@@ -162,8 +122,7 @@
 			</html>
 
 		<script type="text/javascript">
-    	alterdispreload();
-			alert('running');
+    	alterdisp();
 		</script>
 
 			<?php
