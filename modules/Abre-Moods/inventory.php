@@ -50,7 +50,7 @@
 	require_once('permissions.php');
 
 
-	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Recor</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
+	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
@@ -66,9 +66,12 @@
 
 	$sql="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$result=mysqli_query($con, $sql);
+	$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$resultdates=mysqli_query($con,$sqldates);
+
 	//$row=mysqli_fetch_array($result);
 	echo '<br>';
-	echo $row;
+	//echo $row;
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		echo '<br>';
@@ -110,6 +113,7 @@
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i>';
 		}
 		echo ($row[1]); //just goes to next thing, effectively a counter
+
 	}
 	$con->close();
 
