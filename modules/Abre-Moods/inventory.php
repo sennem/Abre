@@ -77,7 +77,7 @@
 		}
 		if ($row[0]==6)
 		{
-			echo '<i class="em em-expressionless" ></i>';
+			echo '<i class="em em-persevere" ></i>';
 		}
 		if ($row[0]==7)
 		{
@@ -85,7 +85,7 @@
 		}
 		if ($row[0]==8)
 		{
-			echo '<i class="em em-persevere" ></i>';
+			echo '<i class="em em-expressionless" ></i>';
 		}
 		echo ($row[1]); //just goes to next thing, effectively a counter
 	}
