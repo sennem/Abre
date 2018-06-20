@@ -76,11 +76,11 @@
 							}
 							if (emojivalue3==3)
 							{
-								document.getElementById("emojithree").borderColor = "black";
+								document.getElementById("emojithree").style.borderColor = "black";
 							}
 							if (emojivalue3==4)
 							{
-								document.getElementById("emojifour").borderColor = "black";
+								document.getElementById("emojifour").style.borderColor = "black";
 							}
 							if (emojivalue3==5)
 							{
