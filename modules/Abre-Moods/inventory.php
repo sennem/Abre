@@ -75,7 +75,7 @@
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
 		if ($row[0]==0)
 		{
-			echo '<i class="em em-laughing" ></i>';
+			echo '<i class="em em-laughing EmojiSpacingLeft" ></i>';
 		}
 		if ($row[0]==1)
 		{
