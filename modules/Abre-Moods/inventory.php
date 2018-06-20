@@ -77,7 +77,7 @@
 	//$row=mysqli_fetch_array($result);
 	echo '<br>';
 	//echo $row;
-	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
+	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
 		echo '<br>';
 		//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
@@ -118,7 +118,7 @@
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
 		}
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
-		echo $row['Daterow'][1][2];
+		echo $row['Daterow'];
 	}
 	$con->close();
 
