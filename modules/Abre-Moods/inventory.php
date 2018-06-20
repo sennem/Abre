@@ -54,7 +54,8 @@
 	echo '<br>';
 	while($row = mysqli_fetch_array($result, MYSQLI_NUM))
 	{
-			echo '<br>';
+		echo $rows;
+			/*echo '<br>';
 	    echo ($row[0]);
 	    echo ($row[1]);
 			if ((($row[0])==0) || (($row[1])==0))
@@ -87,7 +88,7 @@
 			}
 			else {
 				echo 'nothing';
-			}
+			}*/
 	}
 	$con->close();
 
