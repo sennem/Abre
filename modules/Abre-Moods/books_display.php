@@ -142,7 +142,7 @@
 
 			<?php
 			echo "The time is " . date("H:i");
-			if ((date("H:i:s"))=="2:27")
+			if ((date("H:i:s"))=="11:28")
 			{
 				echo 'ajgnsdjklfgsjkdfg';
 			}
