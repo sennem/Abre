@@ -27,6 +27,19 @@
 	require_once('functions.php');
 	require('permissions.php');
 
+
+	$con=mysqli_connect("localhost","root","killerm111","abredb");
+	// Check connection
+	if (mysqli_connect_errno())
+	{
+		echo "Failed to connect to MySQL: " . mysqli_connect_error();
+	}
+	$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM TABLE)";
+	$result=mysqli_query($con,$sql);
+	echo $result;
+	echo '<br>';
+	echo 'END';
+	echo '<br>';
 	?>
 
 	<div class='page_container'>
@@ -133,11 +146,6 @@
 					</li>
 				</ul>
 			</div>'
-
-			//$sql="SELECT Feeling FROM TABLE WHERE ID = (SELECT MAX(ID) FROM TABLE)";
-			//$result=mysqli_query($con,$sql);
-			//echo $result;
-			//echo 'END';
 
 			?>
 
