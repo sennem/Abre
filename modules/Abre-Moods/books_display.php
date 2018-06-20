@@ -164,27 +164,34 @@
 			</div>'
 
 			?>
+
+
+
+
 <?php
-	date_default_timezone_set('America/Indiana/Indianapolis');
+//LEFT OFF HERE -- LOOK AT NOTES FOR UPDATE
+	/*date_default_timezone_set('America/Indiana/Indianapolis');
 	$datetest = date("H:i");
-	echo '<br>';
-	echo "A" . $datetest . "A";
-	echo '<br>';
-	if ($datetest=="14:38")
+	//echo '<br>';
+	//echo "A" . $datetest . "A";
+	//echo '<br>';
+	if ($datetest=="23:59")
 	{
-		echo 'timework';
+		echo '<script type="text/javascript">';
+    echo "resetdisp()";
+    echo "</script>";
 	}
 
 
-	if($value == 1) {
-   echo "<script>";
-   echo "alert('This is an alert from JavaScript!');";
-   echo "</script>";
-}
+	//if($value == 1) {
+   //echo "<script>";
+   //echo "alert('This is an alert from JavaScript!');";
+   //echo "</script>";
+	//}
 ?>
-			<script type="text/javascript">
-	    	resetdisp(); //resets emoji highlight if end of day (beginning of new day)
-			</script>
+			//<script type="text/javascript">
+	    	//resetdisp(); //resets emoji highlight if end of day (beginning of new day)
+			</script>*/
 
 		</div>
 	</div>
