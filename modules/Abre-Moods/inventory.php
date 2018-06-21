@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '26'; //testing to identify if the page is running off of new saved code
+	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -63,8 +63,8 @@
 	$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
 	$resultnumrows = mysqli_query($con,$sqlnumrows);
 	$numrows = mysqli_fetch_row($resultnumrows);
-	echo $numrows[0]; //outputs total number of rows in the data table
-	echo '<br>';
+	//echo $numrows[0]; //outputs total number of rows in the data table
+	//echo '<br>';
 
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
@@ -83,39 +83,39 @@
 		 echo '<br>';
 		 if($value==0)
 		 {
-			 	echo '<i class="em em-laughing EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==1)
 		 {
-			 	echo '<i class="em em-smiley EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==2)
 		 {
-			 	echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==3)
 		 {
-			 	echo '<i class="em em-weary EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==4)
 		 {
-			 	echo '<i class="em em-cry EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==5)
 		 {
-			 	echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==6)
 		 {
-			 	echo '<i class="em em-persevere EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==7)
 		 {
-			 	echo '<i class="em em-grimacing EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
 		 }
 		 if($value==8)
 		 {
-			 	echo '<i class="em em-expressionless EmojiSpacingLeft" ></i>';
+			 	echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
 		 }
 	}
 	echo '<br>';
