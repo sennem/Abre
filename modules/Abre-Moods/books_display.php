@@ -54,15 +54,11 @@
 	$currentday=date('d');
 	$currentday =25;
 	$currentmonth=date('m');
-	if($dateday!=$currentday)
+	/*if($dateday!=$currentday)
 	{
-		echo 'HIT II 1';
+		echo 'HIT IF 1';
 		echo "<script>";
-		//echo "resetdisp();";
-		echo '<script type="text/javascript">' .
-     'resetdisp();' .
-     '</script>';
-    //echo "document.getElementById('emojizero').style.backgroundColor = 'Red';";
+    echo "document.getElementById('emojizero').style.backgroundColor = 'Red';";
     echo "</script>";
 	}
 	elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
@@ -72,7 +68,7 @@
 		echo "resetdisp();";
 		echo "</script>";
 	}
-
+	*/
 
 	//$daystamp = strtotime($formatteddate);
 
@@ -205,11 +201,21 @@
 				</ul>
 			</div>'
 
-
-			//$checkdatecount = count($arrcheckdate);
-			//echo $checkdatecount;
-			//echo '<br>';
-			//echo '---';
+			echo '<br>';
+			if($dateday!=$currentday)
+			{
+				echo 'HIT IF 1';
+				echo "<script>";
+		    echo "document.getElementById('emojizero').style.backgroundColor = 'Red';";
+		    echo "</script>";
+			}
+			elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
+			{
+				echo 'HIT IF 1';
+				echo "<script>";
+				echo "resetdisp();";
+				echo "</script>";
+			}
 
 			?>
 
