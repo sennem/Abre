@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '24'; //testing to identify if the page is running off of new saved code
+	echo '25'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -93,9 +93,9 @@
 		$rowsfeeling[$counterfeeling]=$rowfeel;
 		$counterfeeling = $counterfeeling+1;
 	}
-	foreach($rowsfeeling as $feelingvalue)
+	foreach($rowsfeeling as $var=>$value)
 	{
-		print_r($feelingvalue);
+		 echo $value;
 	}
 	echo '<br>';
 	if ($rowsfeeling[2]['Feeling']==2)
