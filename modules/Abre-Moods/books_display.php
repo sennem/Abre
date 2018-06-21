@@ -48,10 +48,12 @@
 	}
 	echo "<br> Maxdate:" . $maxdate . "---";
 	date_default_timezone_set('America/Indiana/Indianapolis');
-	echo 'passedtz';
+	//echo 'passedtz';
 	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
-	echo 'passeddc';
-	//$dateday = $date->format('d');
+	//echo 'passeddc';
+	$dateday = $datecalc->format('d');
+	echo 'passed dd';
+	echo $dateday;
 
 	//$daystamp = strtotime($formatteddate);
 
