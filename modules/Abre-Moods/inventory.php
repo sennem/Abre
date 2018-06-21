@@ -71,7 +71,11 @@
 	{
 		$rowsfeeling[]=$rowfeeling;
 	}
-	echo $rowsfeeling[];
+	foreach ($rowsfeeling as $singlevalue)
+	{
+		echo $singlevalue;
+		echo '///';
+	}
 	echo '<br>';
 	echo 'endfeeltest';
 
