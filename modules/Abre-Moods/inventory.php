@@ -85,11 +85,13 @@
 	{
   echo 'NO RESULTS';
 	}
-	//---$counterfeeling=0;
+	$counterfeeling=0;
 	$rowsfeeling=array();
 	while($rowfeel=mysqli_fetch_row($resultfeeling))
 	{
-		$rowsfeeling()=$rowfeel;
+		echo $counterfeeling;
+		$rowsfeeling[$counterfeeling]=$rowfeel;
+		$counterfeeling = $counterfeeling+1;
 	}
 	foreach ($rowsfeeling as $rowfeel)
 	{
