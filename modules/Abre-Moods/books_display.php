@@ -56,12 +56,14 @@
 	$currentmonth=date('m');
 	if($dateday!=$currentday)
 	{
+		echo 'HIT IF 1';
 		echo "<script>";
     echo "resetdisp();";
     echo "</script>";
 	}
 	elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
 	{
+		echo 'HIT IF 1';
 		echo "<script>";
 		echo "resetdisp();";
 		echo "</script>";
