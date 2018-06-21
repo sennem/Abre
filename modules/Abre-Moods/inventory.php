@@ -101,7 +101,7 @@
 	{
 		echo 'can compare';
 	}else {
-		echo $rowsfeeling[0]['Feeling'] . '---firstpos';
+		echo $rowsfeeling[1]['Feeling'] . '---2pos';
 	}
 	echo '<br>';
 	var_dump($rowsfeeling);
