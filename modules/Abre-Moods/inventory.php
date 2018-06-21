@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '13'; //testing to identify if the page is running off of new saved code
+	echo '14'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -60,7 +60,7 @@
 	  printf("Connect failed: %s\n", mysqli_connect_error());
 	}
 
-	$array = array("2","7");
+	$array = array(2,7);
 
 	foreach($array as $value) {
   	print $value;
