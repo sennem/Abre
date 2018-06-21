@@ -51,7 +51,8 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '5'; //testing to identify if the page is running off of new saved code
+	echo '6'; //testing to identify if the page is running off of new saved code
+	echo '<br>';
 
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
 	$con = new mysqli("localhost","root","killerm111","abredb");
@@ -70,6 +71,7 @@
 	$resultnumrows = mysqli_query($con,$sqlnumrows);
 	$numrows = mysqli_fetch_row($resultnumrows);
 	echo $numrows[0]; //outputs total number of rows in the data table
+	echo '<br>';
 
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
@@ -86,8 +88,8 @@
 	}
 	foreach ($rowsfeeling as $singlevalue)
 	{
-		echo $singlevalue;
-		echo '///';
+		print $singlevalue;
+		print '///';
 	}
 	echo '<br>';
 	echo 'endfeeltest';
