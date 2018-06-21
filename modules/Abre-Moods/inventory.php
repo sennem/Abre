@@ -71,7 +71,7 @@
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
 	if (!$resultfeeling)
 	{
-  echo 'NO RESULTS';
+  	echo 'NO FEELING RESULTS';
 	}
 	$rowsfeeling=array();
 	while($rowfeeling = mysqli_fetch_array($resultfeeling))
@@ -121,16 +121,33 @@
 	echo '<br>';
 	echo 'endfeeltest';
 
-	//$sqldatebig ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	//$resultdatebig=mysqli_query($con, $sqlfeeling);
-	date_default_timezone_set('America/Indiana/Indianapolis');
+	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$resultdate=mysqli_query($con, $sqldate);
+	if (!resultdate)
+	{
+  	echo 'NO MOOD RESULTS';
+	}
+	$arrdates=array();
+	while($daterow = mysqli_fetch_array($resultdate))
+	{
+		$arrdates[]=$daterow['Daterow'];
+	}
+	foreach($arrdates as $value)
+	{
+		echo '<br>';
+		echo $value;
+	}
+
+
+
+	/*date_default_timezone_set('America/Indiana/Indianapolis');
 	$datevar = date('Y-m-d');
 	$date = DateTime::createFromFormat('Y-m-d', $datevar);
 	$formatteddate = $date->format('d');
 	echo $formatteddate;
-	//$daystamp = strtotime($formatteddate);
+	//$daystamp = strtotime($formatteddate);*/
 	echo '<br>';
-	echo '----';
+	echo '--';
 
 	//----------UNCOMMENT FOR PRIOR VERSION
 	/*
