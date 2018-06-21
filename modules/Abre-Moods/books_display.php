@@ -201,8 +201,7 @@
 				</ul>
 			</div>'
 
-			echo $dateday;
-			echo $currentday;
+			
 			//$checkdatecount = count($arrcheckdate);
 			//echo $checkdatecount;
 			//echo '<br>';
