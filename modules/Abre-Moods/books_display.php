@@ -34,29 +34,9 @@
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+	$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 	$result=mysqli_query($con,$sql);
-	//$rows = mysqli_fetch_row($result);
-	$arrrowresults=array();
-	while($rowrow = mysqli_fetch_array($result))
-	{
-		$arrrowresults[]=$rowrow['Daterow'];
-	}
-	foreach($arrrowresults as $value)
-	{
-		$maxdate = $value;
-	}
-	echo 'Value:' . $maxdate;
-	/*date_default_timezone_set('America/Indiana/Indianapolis');
-	$datevar = date('Y-m-d');
-	$date = DateTime::createFromFormat('Y-m-d', $datevar);
-	$formatteddate = $date->format('d');
-	echo $formatteddate;
-	//$daystamp = strtotime($formatteddate);*/
-
-	//echo '---';
-	//echo $rows;
-	//echo '---';
+	$rows = mysqli_fetch_row($result);
 	$con->close();
 	?>
 
@@ -75,7 +55,7 @@
 						function testfunc(emojivalue)
 						{
 							alert("Respone submitted");
-							//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
+							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
 						}
 						function alterdisp()
 						{
@@ -182,12 +162,6 @@
 					</li>
 				</ul>
 			</div>'
-
-
-			//$checkdatecount = count($arrcheckdate);
-			//echo $checkdatecount;
-			//echo '<br>';
-			//echo '---';
 
 			?>
 
