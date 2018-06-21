@@ -119,7 +119,7 @@
 		 }
 	}
 	echo '<br>';
-	echo 'endfeeltest';
+	echo 'test';
 
 	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultdate=mysqli_query($con, $sqldate);
