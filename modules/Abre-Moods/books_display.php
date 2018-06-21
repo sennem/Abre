@@ -46,7 +46,7 @@
 	{
 		$maxdate = $value;
 	}
-	echo "<br> Maxdate:" . $maxdate . "---";
+	//echo "<br> Maxdate:" . $maxdate . "---";
 	date_default_timezone_set('America/Indiana/Indianapolis');
 	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
 	$dateday = $datecalc->format('d');
