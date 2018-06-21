@@ -127,6 +127,7 @@
 	$datevar = date('Y-m-d');
 	$date = DateTime::createFromFormat('Y-m-d', $datevar);
 	$formatteddate = $date->format('d');
+	echo $formatteddate;
 	//$daystamp = strtotime($formatteddate);
 	echo '<br>';
 	echo '---';
