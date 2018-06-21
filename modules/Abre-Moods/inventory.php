@@ -78,7 +78,7 @@
 	{
 		$rowsfeeling[] = $rowfeeling['Feeling'];
 	}
-	foreach($rowsfeeling as $value)
+	/*foreach($rowsfeeling as $value)
 	{
 		 echo '<br>';
 		 if($value==0)
@@ -118,8 +118,7 @@
 			 	echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
 		 }
 	}
-	echo '<br>';
-	echo 'test';
+	*/
 
 	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultdate=mysqli_query($con, $sqldate);
@@ -132,14 +131,13 @@
 	{
 		$arrdates[]=$daterow['Daterow'];
 	}
-	foreach($arrdates as $value)
+	/*foreach($arrdates as $value)
 	{
 		echo '<br>';
 		echo $value;
-	}
+	}*/
 
-	echo '<br>';
-	echo '---begin loop---';
+
 	$arrlength = count($arrdates);
 	for($i=0;$i<$arrlength;$i++)
 	{
