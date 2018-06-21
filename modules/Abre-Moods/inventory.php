@@ -137,6 +137,22 @@
 		echo $value;
 	}*/
 
+	$sqltime = "SELECT Timerow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$resulttime=mysqli_query($con, $sqltime);
+	if (!resulttime)
+	{
+		echo 'NO TIME RESULTS';
+	}
+	$arrtimes=array();
+	while($timerow = mysqli_fetch_array($resulttime))
+	{
+		$arrtimes[]=$timerow['Timerow'];
+	}
+	/*foreach($arrtimes as $value)
+	{
+		echo '<br>';
+		echo $value;
+	}*/
 
 	$arrlength = count($arrdates);
 	for($i=0;$i<$arrlength;$i++)
@@ -179,6 +195,7 @@
 			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
 		}
 		echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
+		echo '  ' . $arrtimes[$i];
 	}
 
 
