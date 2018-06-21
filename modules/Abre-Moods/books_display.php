@@ -36,10 +36,20 @@
 	}
 	$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 	$result=mysqli_query($con,$sql);
-	$rows = mysqli_fetch_row($result);
-	echo '---';
-	echo $rows;
-	echo '---';
+	//$rows = mysqli_fetch_row($result);
+	$arrrowresults=array();
+	while($rowrow = mysqli_fetch_array($result))
+	{
+		$arrrowresults[]=$rowrow['Feeling'];
+	}
+	foreach($arrrowresults as $value)
+	{
+		echo '<br>';
+		echo $value;
+	}
+	//echo '---';
+	//echo $rows;
+	//echo '---';
 	$con->close();
 	?>
 
