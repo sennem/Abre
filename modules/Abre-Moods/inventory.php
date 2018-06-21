@@ -97,11 +97,11 @@
 		echo $singlevalue . '|||';
 	}
 	echo '<br>';
-	if ($rowsfeeling[0]==0)
+	if ($rowsfeeling[0]['Feeling']==0)
 	{
 		echo 'can compare';
 	}else {
-		echo $rowsfeeling[0] . '---firstpos';
+		echo $rowsfeeling[0]['Feeling'] . '---firstpos';
 	}
 	echo '<br>';
 	var_dump($rowsfeeling);
