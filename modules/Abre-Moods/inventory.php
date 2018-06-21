@@ -91,9 +91,9 @@
 	{
 		$rowsfeeling[]=$rowfeel;
 	}
-	foreach ($rowsfeeling as $singlevalue)
+	foreach ($rowsfeeling as $rowfeel)
 	{
-		echo $singlevalue . '|||';
+		echo $rowfeel . '|||';
 	}
 	echo '<br>';
 	if ($rowsfeeling[0]['Feeling']==5)
