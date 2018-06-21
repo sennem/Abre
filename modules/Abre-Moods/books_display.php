@@ -52,6 +52,7 @@
 	$dateday = $datecalc->format('d');
 	$datemonth=$datecalc->format('m');
 	$currentday=date('d');
+	$currentday =25;
 	$currentmonth=date('m');
 	if($dateday!=$currentday)
 	{
