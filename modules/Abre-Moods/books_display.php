@@ -51,7 +51,11 @@
 	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
 	$dateday = $datecalc->format('d');
 	$datemonth=$datecalc->format('m');
-	echo $datemonth;
+	$currentday=date('d');
+	$currentmonth=date('m');
+	echo "cday" . $currentday;
+	echo "cmonth" . $currentmonth;
+	//if($dateday!=)
 
 	//$daystamp = strtotime($formatteddate);
 
