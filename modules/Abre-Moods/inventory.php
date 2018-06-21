@@ -130,7 +130,7 @@
 	echo $formatteddate;
 	//$daystamp = strtotime($formatteddate);
 	echo '<br>';
-	echo '---';
+	echo '----';
 
 	//----------UNCOMMENT FOR PRIOR VERSION
 	/*
