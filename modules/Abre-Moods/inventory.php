@@ -64,19 +64,19 @@
 	$numrows = mysqli_fetch_row($result);
 	//echo $numrows[0]; //outputs total number of rows in the data table
 
-	$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$result=mysqli_query($con, $sql);
-	//$sqldates="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	//$resultdates=mysqli_query($con,$sqldates);
-	//$rowss = array();
-	//while($rowss[]=mysqli_fetch_array($resultdates));
-	//echo $rowss[0]['Daterow'];
-	//echo $rowss[1]['Daterow'];
-
-
-	//$row=mysqli_fetch_array($result);
+	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$result=mysqli_query($con, $sqlfeeling);
+	while($rowsfeeling=mysqli_fetch_row())
+	{
+		$rowsfeeling[]=$rowfeeling
+	}
+	return $rowsfeeling;
 	echo '<br>';
-	//echo $row;
+	echo 'endfeeltest';
+
+	//----------UNCOMMENT FOR PRIOR VERSION
+	/*
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
 	{
 		echo '<br>';
@@ -120,6 +120,8 @@
 		//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
 		echo "<i class='EmojiSpacing'></i>" . $row['Daterow'];
 	}
+	*/
+	//-------------
 	$con->close();
 
 
