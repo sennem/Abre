@@ -34,7 +34,7 @@
 	{
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
-	$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+	$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 	$result=mysqli_query($con,$sql);
 	//$rows = mysqli_fetch_row($result);
 	$arrrowresults=array();
@@ -45,7 +45,7 @@
 	foreach($arrrowresults as $value)
 	{
 		echo '<br>';
-		echo $value;
+		echo 'H'.$value;
 	}
 	//echo '---';
 	//echo $rows;
