@@ -51,18 +51,19 @@
 	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
 	$dateday = $datecalc->format('d');
 	$datemonth=$datecalc->format('m');
-	//$currentday=date('d');
-	$currentday=25;
+	$currentday=date('d');
 	$currentmonth=date('m');
 	if($dateday!=$currentday)
 	{
 		echo "<script>";
-    echo "alert('This is an alert from JavaScript!');";
+    echo "resetdisp();";
     echo "</script>";
 	}
 	elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
 	{
-
+		echo "<script>";
+		echo "resetdisp();";
+		echo "</script>";
 	}
 
 	//$daystamp = strtotime($formatteddate);
@@ -134,16 +135,16 @@
 						}
 						function resetdisp()
 						{
-
-							//document.getElementById("emojizero").style.backgroundColor = "";
-							//document.getElementById("emojione").style.backgroundColor = "";
-							//document.getElementById("emojitwo").style.backgroundColor = "";
-							//document.getElementById("emojithree").style.backgroundColor = "";
-							//document.getElementById("emojifour").style.backgroundColor = "";
-							//document.getElementById("emojifive").style.backgroundColor = "";
-							//document.getElementById("emojisix").style.backgroundColor = "";
-							//document.getElementById("emojiseven").style.backgroundColor = "";
-							//document.getElementById("emojieight").style.backgroundColor = "";
+							alert('hitresetdisp');
+							document.getElementById("emojizero").style.backgroundColor = "";
+							document.getElementById("emojione").style.backgroundColor = "";
+							document.getElementById("emojitwo").style.backgroundColor = "";
+							document.getElementById("emojithree").style.backgroundColor = "";
+							document.getElementById("emojifour").style.backgroundColor = "";
+							document.getElementById("emojifive").style.backgroundColor = "";
+							document.getElementById("emojisix").style.backgroundColor = "";
+							document.getElementById("emojiseven").style.backgroundColor = "";
+							document.getElementById("emojieight").style.backgroundColor = "";
 						}
 					</script>
 					<style>
