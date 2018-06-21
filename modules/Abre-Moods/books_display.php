@@ -48,8 +48,8 @@
 	}
 	date_default_timezone_set('America/Indiana/Indianapolis');
 	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
-	//$dateday = $date->format('d');
-	//echo 'DayValue:' . $formatteddate;
+	$dateday = $date->format('d');
+	echo 'DayValue:' . $dateday;
 	//$daystamp = strtotime($formatteddate);
 
 	//echo '---';
