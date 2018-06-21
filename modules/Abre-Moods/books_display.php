@@ -56,7 +56,7 @@
 	$currentmonth=date('m');
 	if($dateday!=$currentday)
 	{
-		echo 'HIT IF 1';
+		echo 'HIT IFF 1';
 		echo "<script>";
     echo "resetdisp();";
     echo "</script>";
@@ -139,15 +139,15 @@
 						function resetdisp()
 						{
 							alert('hitresetdisp');
-							document.getElementById("emojizero").style.backgroundColor = "";
-							document.getElementById("emojione").style.backgroundColor = "";
-							document.getElementById("emojitwo").style.backgroundColor = "";
-							document.getElementById("emojithree").style.backgroundColor = "";
-							document.getElementById("emojifour").style.backgroundColor = "";
-							document.getElementById("emojifive").style.backgroundColor = "";
-							document.getElementById("emojisix").style.backgroundColor = "";
-							document.getElementById("emojiseven").style.backgroundColor = "";
-							document.getElementById("emojieight").style.backgroundColor = "";
+							document.getElementById("emojizero").style.backgroundColor = "red";
+							document.getElementById("emojione").style.backgroundColor = "red";
+							document.getElementById("emojitwo").style.backgroundColor = "red";
+							document.getElementById("emojithree").style.backgroundColor = "red";
+							document.getElementById("emojifive").style.backgroundColor = "red";
+							document.getElementById("emojifour").style.backgroundColor = "red";
+							document.getElementById("emojiseven").style.backgroundColor = "red";
+							document.getElementById("emojisix").style.backgroundColor = "red";
+							document.getElementById("emojieight").style.backgroundColor = "red";
 						}
 					</script>
 					<style>
