@@ -85,20 +85,12 @@
 	{
   echo 'NO RESULTS';
 	}
-	$counterfeeling=0;
 	$rowsfeeling=array();
-	/*while($rowfeel=mysqli_fetch_row($resultfeeling))
-	{
-		$rowsfeeling[] = $rowfeel;
-		//echo $counterfeeling . '  ' . $rowfeel;
-		//$rowsfeeling[$counterfeeling]=$rowfeel;
-		//$counterfeeling = $counterfeeling+1;
-	}*/
 	while($rowfeeling = mysqli_fetch_array($resultfeeling))
 	{
 		$rowsfeeling[] = $rowfeeling['Feeling'];
 	}
-	foreach($rowsfeeling as $var=>$value)
+	foreach($rowsfeeling as $value)
 	{
 		 echo $value;
 	}
