@@ -126,7 +126,8 @@
 	date_default_timezone_set('America/Indiana/Indianapolis');
 	$datevar = date('Y-m-d');
 	$date = DateTime::createFromFormat('Y-m-d', $datevar);
-	echo $date->format('d/m/Y');
+	$formatteddate = $date->format('d');
+	//$daystamp = strtotime($formatteddate);
 	echo '<br>';
 	echo '---';
 
