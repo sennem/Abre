@@ -54,7 +54,7 @@
 	$currentday=date('d');
 	$currentday =25;
 	$currentmonth=date('m');
-	/*if($dateday!=$currentday)
+	if($dateday!=$currentday)
 	{
 		echo 'HIT IF 1';
 		echo "<script>";
@@ -68,7 +68,6 @@
 		echo "resetdisp();";
 		echo "</script>";
 	}
-	*/
 
 	//$daystamp = strtotime($formatteddate);
 
@@ -201,7 +200,11 @@
 				</ul>
 			</div>'
 
-			
+
+			//$checkdatecount = count($arrcheckdate);
+			//echo $checkdatecount;
+			//echo '<br>';
+			//echo '---';
 
 			?>
 
