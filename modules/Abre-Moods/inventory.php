@@ -138,13 +138,10 @@
 		echo $value;
 	}
 
-	for ($i=0;i<count($rowsfeeling);i++)
-	{
-		echo '<br>';
-		echo $rowsfeeling[$i];
-	}
+	echo '<br>';
+	echo $arrdates[1];
+	echo '---';
 
-	echo 'end for test';
 
 
 	/*date_default_timezone_set('America/Indiana/Indianapolis');
