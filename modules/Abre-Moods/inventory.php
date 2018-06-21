@@ -138,11 +138,13 @@
 		echo $value;
 	}
 
-	$a = array('green', 'red', 'yellow');
-	$b = array('avocado', 'apple', 'banana');
-	$c = array_combine($a, $b);
+	for ($i=0;i<count($rowsfeeling);i++)
+	{
+		echo '<br>';
+		echo $rowsfeeling[$i];
+	}
 
-	print_r($c);
+	echo 'end for test';
 
 
 	/*date_default_timezone_set('America/Indiana/Indianapolis');
