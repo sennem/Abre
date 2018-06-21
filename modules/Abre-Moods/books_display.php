@@ -44,10 +44,16 @@
 	}
 	foreach($arrrowresults as $value)
 	{
-		echo '<br>';
-		echo 'VALUE:';
-		echo $value;
+		$maxdate = $value;
 	}
+	echo 'Value:' . $maxdate;
+	/*date_default_timezone_set('America/Indiana/Indianapolis');
+	$datevar = date('Y-m-d');
+	$date = DateTime::createFromFormat('Y-m-d', $datevar);
+	$formatteddate = $date->format('d');
+	echo $formatteddate;
+	//$daystamp = strtotime($formatteddate);*/
+
 	//echo '---';
 	//echo $rows;
 	//echo '---';
