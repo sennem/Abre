@@ -80,7 +80,7 @@
 	}
 	foreach($rowsfeeling as $value)
 	{
-		 //echo $value;
+		 echo $value;
 		 if($value=0)
 		 {
 			 	echo '<i class="em em-laughing EmojiSpacingLeft" ></i>';
