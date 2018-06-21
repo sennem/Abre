@@ -166,14 +166,14 @@
 			$connection2=mysqli_connect("localhost","root","killerm111","abredb");
 			$sqlcheckdate = "SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 			$resultcheckdate =  mysqli_query($connection2, $sqlcheckdate);
-			while($checkdaterow=mysqli_fetch_array($resultcheckdate))
-			{
-				$arrcheckdate[]=$checkdaterow['Daterow'];
-			}
-			$checkdatecount = count($arrcheckdate);
-			echo $checkdatecount;
-			echo '<br>';
-			echo '---';
+			//while($checkdaterow=mysqli_fetch_array($resultcheckdate))
+			//{
+			//	$arrcheckdate[]=$checkdaterow['Daterow'];
+			//}
+			//$checkdatecount = count($arrcheckdate);
+			//echo $checkdatecount;
+			//echo '<br>';
+			//echo '---';
 
 			?>
 
