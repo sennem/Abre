@@ -96,7 +96,7 @@
 		echo $rowfeel . '|||';
 	}
 	echo '<br>';
-	if ($rowsfeeling[0]['Feeling']==5)
+	if ($rowsfeeling[1]['Feeling']==1)
 	{
 		echo 'can compare';
 	}else {
@@ -104,10 +104,6 @@
 	}
 	echo '<br>';
 	var_dump($rowsfeeling);
-	echo '<br>';
-	foreach ($rowsfeeling as $key => $arr) {
-    echo $rowsfeeling[$key]["Feeling"];
-	}
 	echo '<br>';
 	echo 'endfeeltest';
 
