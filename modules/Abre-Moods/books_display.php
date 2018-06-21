@@ -46,31 +46,13 @@
 	{
 		$maxdate = $value;
 	}
-	//echo "<br> Maxdate:" . $maxdate . "---";
-	date_default_timezone_set('America/Indiana/Indianapolis');
-	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
-	$dateday = $datecalc->format('d');
-	$datemonth=$datecalc->format('m');
-	$currentday=date('d');
-	$currentday =25;
-	$currentmonth=date('m');
-	/*if($dateday!=$currentday)
-	{
-		echo 'HIT IF 1';
-		echo "<script>";
-    echo "document.getElementById('emojizero').style.backgroundColor = 'Red';";
-    echo "</script>";
-	}
-	elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
-	{
-		echo 'HIT IF 1';
-		echo "<script>";
-		echo "resetdisp();";
-		echo "</script>";
-	}
-	*/
-
-	//$daystamp = strtotime($formatteddate);
+	echo 'Value:' . $maxdate;
+	/*date_default_timezone_set('America/Indiana/Indianapolis');
+	$datevar = date('Y-m-d');
+	$date = DateTime::createFromFormat('Y-m-d', $datevar);
+	$formatteddate = $date->format('d');
+	echo $formatteddate;
+	//$daystamp = strtotime($formatteddate);*/
 
 	//echo '---';
 	//echo $rows;
@@ -139,16 +121,16 @@
 						}
 						function resetdisp()
 						{
-							alert('hitresetdisp');
-							document.getElementById("emojizero").style.backgroundColor = "red";
-							document.getElementById("emojione").style.backgroundColor = "red";
-							document.getElementById("emojitwo").style.backgroundColor = "red";
-							document.getElementById("emojithree").style.backgroundColor = "red";
-							document.getElementById("emojifive").style.backgroundColor = "red";
-							document.getElementById("emojifour").style.backgroundColor = "red";
-							document.getElementById("emojiseven").style.backgroundColor = "red";
-							document.getElementById("emojisix").style.backgroundColor = "red";
-							document.getElementById("emojieight").style.backgroundColor = "red";
+
+							//document.getElementById("emojizero").style.backgroundColor = "";
+							//document.getElementById("emojione").style.backgroundColor = "";
+							//document.getElementById("emojitwo").style.backgroundColor = "";
+							//document.getElementById("emojithree").style.backgroundColor = "";
+							//document.getElementById("emojifour").style.backgroundColor = "";
+							//document.getElementById("emojifive").style.backgroundColor = "";
+							//document.getElementById("emojisix").style.backgroundColor = "";
+							//document.getElementById("emojiseven").style.backgroundColor = "";
+							//document.getElementById("emojieight").style.backgroundColor = "";
 						}
 					</script>
 					<style>
@@ -201,7 +183,7 @@
 				</ul>
 			</div>'
 
-			
+
 			//$checkdatecount = count($arrcheckdate);
 			//echo $checkdatecount;
 			//echo '<br>';
