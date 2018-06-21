@@ -74,19 +74,22 @@
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
-	$rowsfeeling=array();
-	$counterfeeling=0;
-	while($rowfeeling=mysqli_fetch_row())
+	//---$resultnumrows = $con->query($sqlfeeling);
+	if (!$resultfeeling)
 	{
-		$rowsfeeling[$counterfeeling]=$rowfeeling;
-		echo $counterfeeling . 'counterfeeling';
-		$counterfeeling=$counterfeeling+1;
+  echo 'NO RESULTS';
 	}
-	foreach ($rowsfeeling as $singlevalue)
+	//---$counterfeeling=0;
+	while($rowfeeling=mysqli_fetch_row($resultfeeling))
+	{
+		$rowsfeeling[]=$rowfeeling;
+		echo $rowfeeling . 'rf';
+	}
+	/*foreach ($rowsfeeling as $singlevalue)
 	{
 		echo $singlevalue;
 		echo '///';
-	}
+	}*/
 	echo '<br>';
 	echo 'endfeeltest';
 
