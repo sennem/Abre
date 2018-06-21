@@ -91,7 +91,7 @@
 	{
 		$rowsfeeling[]=$rowfeeling;
 	}
-	foreach ($rowsfeeling[8] as $singlevalue)
+	foreach ($rowsfeeling[7] as $singlevalue)
 	{
 		echo $singlevalue . '|||';
 	}
