@@ -142,6 +142,7 @@
 
 			<?php
 
+			phpinfo();
 			echo '
 			<div>
 				<ul>
