@@ -83,39 +83,39 @@
 		 //echo $value;
 		 if($value=0)
 		 {
-			 	<i class="em em-laughing EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-laughing EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=1)
 		 {
-			 	<i class="em em-smiley EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-smiley EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=2)
 		 {
-			 	<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=3)
 		 {
-			 	<i class="em em-weary EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-weary EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=4)
 		 {
-			 	<i class="em em-cry EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-cry EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=5)
 		 {
-			 	<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=6)
 		 {
-			 	<i class="em em-persevere EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-persevere EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=7)
 		 {
-			 	<i class="em em-grimacing EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-grimacing EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=0)
+		 if($value=8)
 		 {
-			 	<i class="em em-expressionless EmojiSpacingLeft" ></i>
+			 	echo '<i class="em em-expressionless EmojiSpacingLeft" ></i>';
 		 }
 	}
 	echo '<br>';
