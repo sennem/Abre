@@ -60,7 +60,7 @@
 	  printf("Connect failed: %s\n", mysqli_connect_error());
 	}
 
-	$array = array("Jonathan","Sampson");
+	$array = array("2","7");
 
 	foreach($array as $value) {
   	print $value;
