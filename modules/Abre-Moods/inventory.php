@@ -57,19 +57,8 @@
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
 	$con = new mysqli("localhost","root","killerm111","abredb");
 	if (mysqli_connect_errno()) {
-	  printf("Connect failed: %s\n", mysqli_connect_error());
+	  echo 'Connection Failed';
 	}
-
-
-	foreach($array as $value) {
-  	print $value;
-	}
-	//---Check connection
-	//if (mysqli_connect_errno())
-  //{
-  //	echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  //}
-	//---
 
 	$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
 	$resultnumrows = mysqli_query($con,$sqlnumrows);
@@ -80,7 +69,6 @@
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
-	//---$resultnumrows = $con->query($sqlfeeling);
 	if (!$resultfeeling)
 	{
   echo 'NO RESULTS';
@@ -92,17 +80,44 @@
 	}
 	foreach($rowsfeeling as $value)
 	{
-		 echo $value;
+		 //echo $value;
+		 if($value=0)
+		 {
+			 	<i class="em em-laughing EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-smiley EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-weary EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-cry EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-persevere EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-grimacing EmojiSpacingLeft" ></i>
+		 }
+		 if($value=0)
+		 {
+			 	<i class="em em-expressionless EmojiSpacingLeft" ></i>
+		 }
 	}
-	echo '<br>';
-	/*if ($rowsfeeling[2]['Feeling']==2)
-	{
-		echo 'can compare';
-	}else {
-		echo $rowsfeeling[1]['Feeling'] . '---2pos';
-	}*/
-	echo '<br>';
-	var_dump($rowsfeeling);
 	echo '<br>';
 	echo 'endfeeltest';
 
