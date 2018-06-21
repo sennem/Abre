@@ -139,8 +139,49 @@
 	}
 
 	echo '<br>';
-	echo $arrdates[5];
-	echo '---';
+	echo '---begin loop---';
+	$arrlength = count($arrdates);
+	for($i=0;$i<$arrlength;$i++)
+	{
+		echo '<br>';
+		if($rowsfeeling[$i]==0)
+		{
+			 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==1)
+		{
+			 echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==2)
+		{
+			 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==3)
+		{
+			 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==4)
+		{
+			 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==5)
+		{
+			 echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==6)
+		{
+			 echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==7)
+		{
+			 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==8)
+		{
+			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
+		}
+		echo $arrdates[$i];
+	}
 
 
 
@@ -151,7 +192,7 @@
 	echo $formatteddate;
 	//$daystamp = strtotime($formatteddate);*/
 	echo '<br>';
-	echo '--';
+	echo '--end loop';
 
 	//----------UNCOMMENT FOR PRIOR VERSION
 	/*
