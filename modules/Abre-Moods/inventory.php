@@ -123,8 +123,12 @@
 
 	//$sqldatebig ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	//$resultdatebig=mysqli_query($con, $sqlfeeling);
-	$date = DateTime::createFromFormat('d/m/Y', "24/04/2012");
+	date_default_timezone_set('America/Indiana/Indianapolis');
+	$datevar = date('Y-m-d');
+	$date = DateTime::createFromFormat('Y-m-d', $datevar);
 	echo $date->format('d/m/Y');
+	echo '<br>';
+	echo '---';
 
 	//----------UNCOMMENT FOR PRIOR VERSION
 	/*
