@@ -51,7 +51,7 @@
 
 
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	echo '7'; //testing to identify if the page is running off of new saved code
+	echo '8'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -92,6 +92,12 @@
 		echo $singlevalue . '|||';
 	}
 	echo '<br>';
+	if ($rowsfeeling[0]==0)
+	{
+		echo 'can compare';
+	}else {
+		echo $rowsfeeling[0] . '---firstpos';
+	}
 	echo 'endfeeltest';
 
 	//----------UNCOMMENT FOR PRIOR VERSION
