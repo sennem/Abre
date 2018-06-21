@@ -97,7 +97,7 @@
 		echo $singlevalue . '|||';
 	}
 	echo '<br>';
-	if ($rowsfeeling[0]['Feeling']==0)
+	if ($rowsfeeling[0]['Feeling']==5)
 	{
 		echo 'can compare';
 	}else {
