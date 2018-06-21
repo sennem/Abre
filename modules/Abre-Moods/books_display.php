@@ -37,6 +37,7 @@
 	$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 	$result=mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
+	
 	$con->close();
 	?>
 
@@ -163,14 +164,7 @@
 				</ul>
 			</div>'
 
-			$connection2=mysqli_connect("localhost","root","killerm111","abredb");
-			$sqlcheckdate = "SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-			$resultcheckdate = mysqli_query($connection2, $sqlcheckdate);
-			$arrcheckdate=array();
-			while($checkdaterow=mysqli_fetch_array($resultcheckdate))
-			{
-				$arrcheckdate[]=$checkdaterow['Daterow'];
-			}
+
 			//$checkdatecount = count($arrcheckdate);
 			//echo $checkdatecount;
 			//echo '<br>';
