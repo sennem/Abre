@@ -88,8 +88,7 @@
 	}
 	foreach ($rowsfeeling as $singlevalue)
 	{
-		print $singlevalue;
-		print '///';
+		echo $singlevalue . '|||';
 	}
 	echo '<br>';
 	echo 'endfeeltest';
