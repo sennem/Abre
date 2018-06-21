@@ -75,9 +75,12 @@
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
 	$rowsfeeling=array();
+	$counterfeeling=0;
 	while($rowfeeling=mysqli_fetch_row())
 	{
-		$rowsfeeling[]=$rowfeeling;
+		$rowsfeeling[$counterfeeling]=$rowfeeling;
+		echo $counterfeeling;
+		$counterfeeling=$counterfeeling+1;
 	}
 	foreach ($rowsfeeling as $singlevalue)
 	{
