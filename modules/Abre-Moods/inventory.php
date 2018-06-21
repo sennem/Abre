@@ -105,6 +105,10 @@
 	echo '<br>';
 	var_dump($rowsfeeling);
 	echo '<br>';
+	foreach ($rowsfeeling as $key => $arr) {
+    echo $rowsfeeling[$key]["Feeling"];
+	}
+	echo '<br>';
 	echo 'endfeeltest';
 
 	//----------UNCOMMENT FOR PRIOR VERSION
