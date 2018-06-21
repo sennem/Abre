@@ -46,13 +46,11 @@
 	{
 		$maxdate = $value;
 	}
-	echo 'Value:' . $maxdate;
-	/*date_default_timezone_set('America/Indiana/Indianapolis');
-	$datevar = date('Y-m-d');
-	$date = DateTime::createFromFormat('Y-m-d', $datevar);
-	$formatteddate = $date->format('d');
-	echo $formatteddate;
-	//$daystamp = strtotime($formatteddate);*/
+	date_default_timezone_set('America/Indiana/Indianapolis');
+	$datecalc = DateTime::createFromFormat('Y-m-d', maxdate);
+	$dateday = $date->format('d');
+	echo 'DayValue:' . $formatteddate;
+	//$daystamp = strtotime($formatteddate);
 
 	//echo '---';
 	//echo $rows;
