@@ -178,7 +178,7 @@
 		{
 			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
 		}
-		echo $arrdates[$i];
+		echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
 	}
 
 
@@ -189,8 +189,8 @@
 	$formatteddate = $date->format('d');
 	echo $formatteddate;
 	//$daystamp = strtotime($formatteddate);*/
-	echo '<br>';
-	echo '--end loop';
+
+
 
 	//----------UNCOMMENT FOR PRIOR VERSION
 	/*
