@@ -93,9 +93,9 @@
 		$rowsfeeling[$counterfeeling]=$rowfeel;
 		$counterfeeling = $counterfeeling+1;
 	}
-	foreach ($rowsfeeling as $rowfeel)
+	foreach($rowsfeeling as $feelingvalue)
 	{
-		echo $rowfeel . '|||';
+		echo $feelingvalue;
 	}
 	echo '<br>';
 	if ($rowsfeeling[2]['Feeling']==2)
