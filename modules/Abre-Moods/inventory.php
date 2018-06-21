@@ -138,6 +138,9 @@
 		echo $value;
 	}
 
+	$arremojidates = array_combine($rowsfeeling, $arrdates);
+	print_r($arremojidates);
+	echo '---please--'
 
 
 	/*date_default_timezone_set('America/Indiana/Indianapolis');
