@@ -69,6 +69,10 @@
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
+	$rowcount = mysqli_num_rows($resultfeeling);
+	echo '<br>'
+	echo $rowcount . 'ROWCOUNT';
+	echo '<br>';
 	if (!$resultfeeling)
 	{
   	echo 'NO FEELING RESULTS';
