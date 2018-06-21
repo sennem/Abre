@@ -138,9 +138,11 @@
 		echo $value;
 	}
 
-	$arremojidates = array_combine($rowsfeeling, $arrdates);
-	print_r($arremojidates);
-	echo '---please--'
+	$a = array('green', 'red', 'yellow');
+	$b = array('avocado', 'apple', 'banana');
+	$c = array_combine($a, $b);
+
+	print_r($c);
 
 
 	/*date_default_timezone_set('America/Indiana/Indianapolis');
