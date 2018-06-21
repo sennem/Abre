@@ -75,7 +75,7 @@
 						function testfunc(emojivalue)
 						{
 							alert("Respone submitted");
-							window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
+							//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
 						}
 						function alterdisp()
 						{
