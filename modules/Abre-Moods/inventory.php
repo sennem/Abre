@@ -79,7 +79,7 @@
 	while($rowfeeling=mysqli_fetch_row())
 	{
 		$rowsfeeling[$counterfeeling]=$rowfeeling;
-		echo $counterfeeling;
+		echo $counterfeeling . 'counterfeeling';
 		$counterfeeling=$counterfeeling+1;
 	}
 	foreach ($rowsfeeling as $singlevalue)
