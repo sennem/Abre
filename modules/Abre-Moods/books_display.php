@@ -56,9 +56,13 @@
 	$currentmonth=date('m');
 	if($dateday!=$currentday)
 	{
-		echo 'HIT IFFF 1';
+		echo 'HIT I 1';
 		echo "<script>";
-		echo "resetdisp();";
+		//echo "resetdisp();";
+		echo '<script type="text/javascript">',
+     'resetdisp();',
+     '</script>'
+;
     //echo "document.getElementById('emojizero').style.backgroundColor = 'Red';";
     echo "</script>";
 	}
