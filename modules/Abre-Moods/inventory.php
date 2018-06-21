@@ -60,7 +60,6 @@
 	  printf("Connect failed: %s\n", mysqli_connect_error());
 	}
 
-	$array = array(2,7);
 
 	foreach($array as $value) {
   	print $value;
@@ -92,7 +91,7 @@
 	{
 		$rowsfeeling[]=$rowfeeling;
 	}
-	foreach ($rowsfeeling[0]['Feeling'] as $singlevalue)
+	foreach ($rowsfeeling[0] as $singlevalue)
 	{
 		echo $singlevalue . '|||';
 	}
