@@ -56,9 +56,10 @@
 	$currentmonth=date('m');
 	if($dateday!=$currentday)
 	{
-		echo 'HIT IF 1';
+		echo 'HIT IFFF 1';
 		echo "<script>";
-    echo "document.getElementById('emojifive').style.backgroundColor = 'DeepSkyBlue';";
+		echo "resetdisp();";
+    //echo "document.getElementById('emojizero').style.backgroundColor = 'Red';";
     echo "</script>";
 	}
 	elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
@@ -68,6 +69,7 @@
 		echo "resetdisp();";
 		echo "</script>";
 	}
+
 
 	//$daystamp = strtotime($formatteddate);
 
