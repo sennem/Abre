@@ -37,7 +37,9 @@
 	$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 	$result=mysqli_query($con,$sql);
 	$rows = mysqli_fetch_row($result);
+	echo '---';
 	echo $rows;
+	echo '---';
 	$con->close();
 	?>
 
