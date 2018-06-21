@@ -71,7 +71,7 @@
 	{
 		$rowsfeeling[]=$rowfeeling;
 	}
-	return $rowsfeeling;
+	//return $rowsfeeling;
 	echo '<br>';
 	echo 'endfeeltest';
 
