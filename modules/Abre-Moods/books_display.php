@@ -165,6 +165,29 @@
 
 			?>
 
+			<?php
+				$con=mysqli_connect("localhost","root","killerm111","abredb");
+				$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+				$result=mysqli_query($con,$sql);
+				$arrrowresults=array();
+				while($rowrow = mysqli_fetch_array($result))
+				{
+					$arrrowresults[]=$rowrow['Daterow'];
+				}
+				foreach($arrrowresults as $value)
+				{
+					$maxdate = $value;
+				}
+				echo 'Value:' . $maxdate;
+
+				date_default_timezone_set('America/Indiana/Indianapolis');
+				$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
+				$dateday = $datecalc->format('d');
+				$datemonth=$datecalc->format('m');
+				$currentday=date('d');
+				$currentmonth=date('m')
+			?>
+
 
 
 
