@@ -121,6 +121,11 @@
 	echo '<br>';
 	echo 'endfeeltest';
 
+	//$sqldatebig ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	//$resultdatebig=mysqli_query($con, $sqlfeeling);
+	$date = DateTime::createFromFormat('d/m/Y', "24/04/2012");
+	echo $date->format('d/m/Y');
+
 	//----------UNCOMMENT FOR PRIOR VERSION
 	/*
 	while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
