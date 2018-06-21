@@ -69,9 +69,9 @@
 	$result=mysqli_query($con, $sqlfeeling);
 	while($rowsfeeling=mysqli_fetch_row())
 	{
-		$rowsfeeling[]=$rowfeeling
+		$rowsfeeling[]=$rowfeeling;
 	}
-	echo $rowsfeeling;
+	return $rowsfeeling;
 	echo '<br>';
 	echo 'endfeeltest';
 
