@@ -44,8 +44,8 @@
 	}
 	foreach($arrrowresults as $value)
 	{
-		echo '<br>';
-		echo 'VALUE:';
+		//echo '<br>';
+		//echo 'VALUE:';
 		echo $value;
 	}
 	//echo '---';
