@@ -87,24 +87,28 @@
 	}
 	$counterfeeling=0;
 	$rowsfeeling=array();
-	while($rowfeel=mysqli_fetch_row($resultfeeling))
+	/*while($rowfeel=mysqli_fetch_row($resultfeeling))
 	{
 		$rowsfeeling[] = $rowfeel;
 		//echo $counterfeeling . '  ' . $rowfeel;
 		//$rowsfeeling[$counterfeeling]=$rowfeel;
 		//$counterfeeling = $counterfeeling+1;
+	}*/
+	while($rowfeeling = mysqli_fetch_array($resultfeeling))
+	{
+		$rowsfeeling[] = $rowfeeling['Feeling'];
 	}
 	foreach($rowsfeeling as $var=>$value)
 	{
 		 echo $value;
 	}
 	echo '<br>';
-	if ($rowsfeeling[2]['Feeling']==2)
+	/*if ($rowsfeeling[2]['Feeling']==2)
 	{
 		echo 'can compare';
 	}else {
 		echo $rowsfeeling[1]['Feeling'] . '---2pos';
-	}
+	}*/
 	echo '<br>';
 	var_dump($rowsfeeling);
 	echo '<br>';
