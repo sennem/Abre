@@ -87,11 +87,11 @@
 	}
 	//---$counterfeeling=0;
 	//$rowsfeeling=array();
-	while($rowfeeling=mysqli_fetch_row($resultfeeling))
+	while($rowfeel=mysqli_fetch_row($resultfeeling))
 	{
-		$rowsfeeling[]=$rowfeeling;
+		$rowsfeeling[]=$rowfeel;
 	}
-	foreach ($rowsfeeling[] as $singlevalue)
+	foreach ($rowsfeeling as $singlevalue)
 	{
 		echo $singlevalue . '|||';
 	}
