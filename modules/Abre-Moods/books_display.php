@@ -40,12 +40,12 @@
 	$arrrowresults=array();
 	while($rowrow = mysqli_fetch_array($result))
 	{
-		$arrrowresults[]=$rowrow['Feeling'];
+		$arrrowresults[]=$rowrow['Daterow'];
 	}
 	foreach($arrrowresults as $value)
 	{
-		//echo '<br>';
-		//echo 'VALUE:';
+		echo '<br>';
+		echo 'VALUE:';
 		echo $value;
 	}
 	//echo '---';
