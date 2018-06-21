@@ -89,7 +89,7 @@
 	//$rowsfeeling=array();
 	while($rowfeel=mysqli_fetch_row($resultfeeling))
 	{
-		echo $counterfeeling;
+		echo $counterfeeling . '  ' . $rowfeel;
 		$rowsfeeling[$counterfeeling]=$rowfeel;
 		$counterfeeling = $counterfeeling+1;
 	}
