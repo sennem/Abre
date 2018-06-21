@@ -51,11 +51,19 @@
 	$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
 	$dateday = $datecalc->format('d');
 	$datemonth=$datecalc->format('m');
-	$currentday=date('d');
+	//$currentday=date('d');
+	$currentday=25;
 	$currentmonth=date('m');
-	echo "cday" . $currentday;
-	echo "cmonth" . $currentmonth;
-	//if($dateday!=)
+	if($dateday!=$currentday)
+	{
+		echo "<script>";
+    echo "alert('This is an alert from JavaScript!');";
+    echo "</script>";
+	}
+	elseif(($dateday==$currentday) && ($datemonth!=$currentmonth))
+	{
+
+	}
 
 	//$daystamp = strtotime($formatteddate);
 
