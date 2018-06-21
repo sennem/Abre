@@ -83,13 +83,12 @@
 	while($rowfeeling=mysqli_fetch_row($resultfeeling))
 	{
 		$rowsfeeling[]=$rowfeeling;
-		return $rowfeeling . 'rf';
 	}
-	/*foreach ($rowsfeeling as $singlevalue)
+	foreach ($rowsfeeling as $singlevalue)
 	{
 		echo $singlevalue;
 		echo '///';
-	}*/
+	}
 	echo '<br>';
 	echo 'endfeeltest';
 
