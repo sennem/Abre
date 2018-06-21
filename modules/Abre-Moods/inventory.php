@@ -74,6 +74,7 @@
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
+	$rowsfeeling=array();
 	while($rowfeeling=mysqli_fetch_row())
 	{
 		$rowsfeeling[]=$rowfeeling;
