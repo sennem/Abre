@@ -81,39 +81,39 @@
 	foreach($rowsfeeling as $value)
 	{
 		 echo $value;
-		 if($value=0)
+		 if($value==0)
 		 {
 			 	echo '<i class="em em-laughing EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=1)
+		 if($value==1)
 		 {
 			 	echo '<i class="em em-smiley EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=2)
+		 if($value==2)
 		 {
 			 	echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=3)
+		 if($value==3)
 		 {
 			 	echo '<i class="em em-weary EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=4)
+		 if($value==4)
 		 {
 			 	echo '<i class="em em-cry EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=5)
+		 if($value==5)
 		 {
 			 	echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=6)
+		 if($value==6)
 		 {
 			 	echo '<i class="em em-persevere EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=7)
+		 if($value==7)
 		 {
 			 	echo '<i class="em em-grimacing EmojiSpacingLeft" ></i>';
 		 }
-		 if($value=8)
+		 if($value==8)
 		 {
 			 	echo '<i class="em em-expressionless EmojiSpacingLeft" ></i>';
 		 }
