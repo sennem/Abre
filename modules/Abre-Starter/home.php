@@ -26,27 +26,27 @@
 <div class='page_container mdl-shadow--4dp'>
 	<div class='page'>
 		<div class='row'>
-			<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Weclome!</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Look below to discover a club.</p></div>
+			<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Weclome!</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Amazing Events Below</p></div>
 		</div>
 		<!-- below should be cards -->
 		<div class='row'>
 			<div class='row'>
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
-					<h4 class='center-align'>Running Club</h4>
+					<h4 class='center-align'>Football Game</h4>
 					<div class="mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper cardclick pointer" style="height:200px; background-image: url(https://openclipart.org/download/216274/1427059148.svg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;"></div>
 					<div class='mdl-card__actions'>
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
-					<h4 class='center-align'>Abre Club</h4>
+					<h4 class='center-align'>Volleyball Game</h4>
 					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("https://s3.us-east-2.amazonaws.com/abreio/2017/07/Abre_Primary_Logo.png"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
 					<div class='mdl-card__actions'>
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
-					<h4 class='center-align'>Hack Club</h4>
+					<h4 class='center-align'>Hack Camp</h4>
 					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("https://pbs.twimg.com/profile_images/894062448407433217/ig5-H5ef.jpg"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
 					<div class='mdl-card__actions'>
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
@@ -111,6 +111,33 @@
 		</div>
 		<!-- more rows go here -->
 	</div>
+
+	<div class='page'>
+			<div class='row'>
+				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
+					<h4 class='center-align'>Running Club</h4>
+					<div class="mdl-card__media mdl-color--grey-100 mdl-card--expand valign-wrapper cardclick pointer" style="height:200px; background-image: url(https://openclipart.org/download/216274/1427059148.svg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;"></div>
+					<div class='mdl-card__actions'>
+						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
+					</div>
+				</div>
+				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
+					<h4 class='center-align'>Abre Club</h4>
+					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("https://s3.us-east-2.amazonaws.com/abreio/2017/07/Abre_Primary_Logo.png"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
+					<div class='mdl-card__actions'>
+						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
+					</div>
+				</div>
+				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
+					<h4 class='center-align'>Hack Club</h4>
+					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("https://pbs.twimg.com/profile_images/894062448407433217/ig5-H5ef.jpg"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
+					<div class='mdl-card__actions'>
+						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
+					</div>
+				</div>
+			</div>
+			<br/>
+		</div>
 </div>
 
 <!-- club creator button -->
