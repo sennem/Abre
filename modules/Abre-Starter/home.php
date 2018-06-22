@@ -29,7 +29,7 @@
 			<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Weclome!</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Amazing Events Below</p></div>
 		</div>
 		<!-- below should be cards -->
-		<div class='row'>
+		<!--<div class='row'>-->
 			<div class='row'>
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
 					<h4 class='center-align'>Event One</h4>
@@ -69,7 +69,7 @@
 				<!-- end -->
 			</div>
 			<br/>
-		</div>
+	<!--</div> -->
 		<!-- second row of clubs -->
 		<div class='row'>
 			<div class= 'row'>
