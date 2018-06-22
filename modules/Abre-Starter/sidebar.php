@@ -8,7 +8,7 @@
 						<tbody>
 							<tr class="classlink pointer" data="#students/2004INC/2">
 								<td width="50px">
-									<div style="padding:5px; text-align:center; background-image:url(https://masonhackclub.com/images/staff/mark.jpg); color:#fff; width:30px; height:30px; border-radius: 15px;">2</div>
+									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/mark.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">2</div>
 								</td>
 								<td>ALGEBRA I</td>
 							</tr>
