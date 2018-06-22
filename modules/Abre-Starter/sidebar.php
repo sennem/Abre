@@ -1,4 +1,4 @@
-
+<form>
 <div class="col l4 s12">
 	<div class="row">
 		<div class="col s12">
@@ -44,3 +44,4 @@
 		</div>
 	</div>
 </div>
+</form>
