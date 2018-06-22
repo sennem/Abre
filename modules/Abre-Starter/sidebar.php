@@ -8,26 +8,26 @@
 						<tbody>
 							<tr class="classlink pointer" data="#students/2004INC/2">
 								<td width="50px">
-									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/annie.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">2</div>
+									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/will.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">2</div>
 								</td>
-								<td>ALGEBRA I</td>
+								<td>Will Mechler</td>
 							</tr>
 							<tr class="classlink pointer" data="#students/2004INC/1">
 								<td width="50px">
-									<div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">3</div>
+									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/annie.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">3</div>
 								</td>
-								<td>ALGEBRA II</td>
+								<td>Annie Wang</td>
 							</tr>
 							<tr class="classlink pointer" data="#students/2008INC/3">
 								<td width="50px">
-									<div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">4</div></td>
-									<td>GEOMETRY S2</td>
+									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/mark.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">4</div></td>
+									<td>Mark Senne</td>
 							</tr>
 							<tr class="classlink pointer" data="#students/2008INC/2">
 								<td width="50px">
-									<div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">5</div>
+									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/dalton.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">5</div>
 								</td>
-								<td>GEOMETRY S2</td>
+								<td>Dalton Craven</td>
 							</tr>
 					<!--<tr class="classlink pointer" data="#students/2008INC/1">
 						<td width="50px"><div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">7</div></td><td>GEOMETRY S2</td></tr>
