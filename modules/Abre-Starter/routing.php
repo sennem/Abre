@@ -20,6 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
 		if($_SESSION['usertype'] == "staff"){
+			//event
 			echo "
 				'starter': function()
 				{
