@@ -45,27 +45,27 @@
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
-				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
+			<!--	<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
 					<h4 class='center-align'>Event Three</h4>
 					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("http://media2.fdncms.com/thecoast/imager/classic-lan-party/u/zoom/3748195/url-7.jpeg"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
 					<div class='mdl-card__actions'>
-						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
+						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php //echo getSiteColor() ?>;'>Link to Homepage</a>
+					</div>
+				</div> -->
+				<!-- start -->
+				<div class="col l4 m12 s12">
+					<div class="mdl-shadow--2dp" style="background-color:#fff; padding:30px 35px 15px 35px;">
+						<div class="center-align"><img src="/modules/Abre-Students/image.php?student=593883152" class="circle" style="width:100px; height:100px;">
+						</div>
+						<h4 class="center-align">Hedy Delawder</h4>
+						<p class="center-align">Hamilton High School<br>ID: <span id="studentid">593883152</span></p>
+						<hr><h5>Student Information</h5><p><b>Birthday:</b> 8/21/02<br><b>Gender:</b> Female<br><b>Grade:</b> 10<br><b>IEP Status:</b> N<br><b>Gifted Status:</b> N<br><b>ELL Status:</b> S<br><b>Email:</b> <span>No Associated Email</span><br></p>
+						<hr>
+						<h5>Guardian Contacts</h5>
+						<b>Primary Contact</b>
+						<p>Renee Delawder<br>No Email Listed</p>
 					</div>
 				</div>
-				<!-- start -->
-<div class="col l4 m12 s12">
-	<div class="mdl-shadow--2dp" style="background-color:#fff; padding:30px 35px 15px 35px;">
-		<div class="center-align"><img src="/modules/Abre-Students/image.php?student=593883152" class="circle" style="width:100px; height:100px;">
-		</div>
-		<h4 class="center-align">Hedy Delawder</h4>
-		<p class="center-align">Hamilton High School<br>ID: <span id="studentid">593883152</span></p>
-		<hr><h5>Student Information</h5><p><b>Birthday:</b> 8/21/02<br><b>Gender:</b> Female<br><b>Grade:</b> 10<br><b>IEP Status:</b> N<br><b>Gifted Status:</b> N<br><b>ELL Status:</b> S<br><b>Email:</b> <span>No Associated Email</span><br></p>
-		<hr>
-		<h5>Guardian Contacts</h5>
-		<b>Primary Contact</b>
-		<p>Renee Delawder<br>No Email Listed</p>
-	</div>
-</div>
 				<!-- end -->
 			</div>
 			<br/>
