@@ -68,6 +68,7 @@
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
+				<?php require(dirname(__FILE__) . '/../../modules/Abre-Starter/calendar.php');?>
 			</div>
 			<br/>
 		</div>
@@ -88,7 +89,6 @@
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
-				<?php require(dirname(__FILE__) . '/../../modules/Abre-Starter/calendar.php');?>
 			</div>
 			<br/>
 		</div>
