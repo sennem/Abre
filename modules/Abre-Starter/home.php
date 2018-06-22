@@ -89,12 +89,12 @@
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
-			</div>
-			<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left; width: 250px'>
-				<h4 class='center-align'>Event Five</h4>
-				<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url(https://irp-cdn.multiscreensite.com/19d36af0/dms3rep/multi/mobile/drama%20club-300x260.jpg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
-				<div class='mdl-card__actions'>
-					<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
+				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left; width: 250px'>
+					<h4 class='center-align'>Event Five</h4>
+					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url(https://irp-cdn.multiscreensite.com/19d36af0/dms3rep/multi/mobile/drama%20club-300x260.jpg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
+					<div class='mdl-card__actions'>
+						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
+					</div>
 				</div>
 			</div>
 			<br/>
