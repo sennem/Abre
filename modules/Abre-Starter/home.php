@@ -19,7 +19,6 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-	require(dirname(__FILE__) . '/../../modules/Abre-Starter/sidebar.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 //	<!-- hello world -->
 ?>
@@ -48,19 +47,7 @@
 					</div>
 				</div>
 
-				<div class="col l4 m12 s12">
-					<div class="mdl-shadow--2dp" style="background-color:#fff; padding:30px 35px 15px 35px;">
-						<div class="center-align"><img src="/modules/Abre-Students/image.php?student=593883152" class="circle" style="width:100px; height:100px;">
-						</div>
-						<h4 class="center-align">Hedy Delawder</h4>
-						<p class="center-align">Hamilton High School<br>ID: <span id="studentid">593883152</span></p>
-						<hr><h5>Student Information</h5><p><b>Birthday:</b> 8/21/02<br><b>Gender:</b> Female<br><b>Grade:</b> 10<br><b>IEP Status:</b> N<br><b>Gifted Status:</b> N<br><b>ELL Status:</b> S<br><b>Email:</b> <span>No Associated Email</span><br></p>
-						<hr>
-						<h5>Guardian Contacts</h5>
-						<b>Primary Contact</b>
-						<p>Renee Delawder<br>No Email Listed</p>
-					</div>
-				</div>
+		<?php require(dirname(__FILE__) . '/../../modules/Abre-Starter/sidebar.php');?>
 				<!-- end -->
 			</div>
 			<br/>
