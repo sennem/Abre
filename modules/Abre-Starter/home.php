@@ -39,7 +39,7 @@
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
-				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left; width: 1500px'>
+				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left; width: 150px'>
 					<h4 class='center-align'>Event Two</h4>
 					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("https://www.ffwd.org/wp-content/uploads/12391785_1077834235600931_1299484106104597636_n.png"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
 					<div class='mdl-card__actions'>
