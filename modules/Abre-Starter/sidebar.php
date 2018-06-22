@@ -1,6 +1,3 @@
-<?php
-require(dirname(__FILE__) . '/../../Abre-Starter/.php');
-?>
 
 <div class="col l4 s12">
 	<div class="row">
