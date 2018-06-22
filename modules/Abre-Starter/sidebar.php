@@ -9,11 +9,11 @@
 					<td width="50px"><div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">4</div></td><td>GEOMETRY S2</td></tr><tr class="classlink pointer" data="#students/2008INC/2"><td width="50px">
 						<div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">5</div>
 					</td><td>GEOMETRY S2</td></tr>
-					<tr class="classlink pointer" data="#students/2008INC/1">
+			<!--		<tr class="classlink pointer" data="#students/2008INC/1">
 						<td width="50px"><div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">7</div></td><td>GEOMETRY S2</td></tr>
 						<tr class="classlink pointer" data="#students/1/60">
 							<td width="50px"><div style="padding:5px; text-align:center; background-color:#2B2D4A; color:#fff; width:30px; height:30px; border-radius: 15px;">9</div></td>
-							<td>ADVISORY PERIOD</td>
+							<td>ADVISORY PERIOD</td> -->
 						</tr>
 					</tbody>
 				</table>
