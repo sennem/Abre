@@ -22,7 +22,7 @@
 								<td width="50px">
 									<div style="padding:5px; text-align:center; background-image:url('https://masonhackclub.com/images/staff/mark.jpg'); color:#fff; width:30px; height:30px; border-radius: 15px;">4</div></td>
 									<td>Mark Senne</td>
-									<td><input type="checkbox" name="follow" value="MarkSenne">Follow</td>
+									<td><input type="checkbox" name="follow" value="MarkSenne" checked>Follow</td>
 							</tr>
 							<tr class="classlink pointer" data="#students/2008INC/2">
 								<td width="50px">
