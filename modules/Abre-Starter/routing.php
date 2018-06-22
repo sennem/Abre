@@ -19,8 +19,6 @@
     //Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
-		if($_SESSION['usertype'] == "staff"){
-			//event
 			echo "
 				'starter': function()
 				{
@@ -42,5 +40,5 @@
 					$('#content_holder').load('modules/".basename(__DIR__)."/elements.php', function() { init_page(); });
 					$( '#modal_holder' ).load( 'modules/".basename(__DIR__)."/modals.php' );
 				},";
-		}
+		
 ?>

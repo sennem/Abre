@@ -20,20 +20,15 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 
-	if(superadmin()){
-		//Check for installation
-		activateApp("Abre-Starter");
-		require('installer.php');
-	}
 
 	$pageview=1;
 	$drawerhidden=1;
 	$pageorder=10;
-	$pagetitle="Event";
-	$description="Get suggested events.";
-	$version="0.0.1";
+	$pagetitle="Starter";
+	$description="A simple Hello World starter app template.";
+	$version="0.0.5";
 	$repo="abreio/Abre-Starter";
-	$pageicon="code"; //use material design
-	$pagepath="starter"; //event
-	//require_once('permissions.php');
+	$pageicon="code";
+	$pagepath="starter";
+	require_once('permissions.php');
 ?>
