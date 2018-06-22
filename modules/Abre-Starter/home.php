@@ -19,6 +19,7 @@
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../Abre-Starter/sidebar.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 //	<!-- hello world -->
 ?>
@@ -114,15 +115,3 @@
 </div>
 
 <script src="/modules/Abre-Clubs/button_club.js"></script>
-© 2018 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Help
-Contact GitHub
-API
-Training
-Shop
-Blog
-About
