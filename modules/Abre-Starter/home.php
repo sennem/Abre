@@ -29,7 +29,8 @@
 			<div style='padding:56px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Weclome!</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Amazing Events Below</p></div>
 		</div>
 		<!-- below should be cards -->
-		<!--<div class='row'>-->
+
+		<!-- first row of events-->
 			<div class='row'>
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
 					<h4 class='center-align'>Event One</h4>
@@ -45,14 +46,7 @@
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
 				</div>
-			<!--	<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
-					<h4 class='center-align'>Event Three</h4>
-					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url("http://media2.fdncms.com/thecoast/imager/classic-lan-party/u/zoom/3748195/url-7.jpeg"); <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
-					<div class='mdl-card__actions'>
-						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php //echo getSiteColor() ?>;'>Link to Homepage</a>
-					</div>
-				</div> -->
-				<!-- start -->
+
 				<div class="col l4 m12 s12">
 					<div class="mdl-shadow--2dp" style="background-color:#fff; padding:30px 35px 15px 35px;">
 						<div class="center-align"><img src="/modules/Abre-Students/image.php?student=593883152" class="circle" style="width:100px; height:100px;">
@@ -69,8 +63,7 @@
 				<!-- end -->
 			</div>
 			<br/>
-	<!--</div> -->
-		<!-- second row of clubs -->
+		<!-- second row of events -->
 		<div class='row'>
 			<div class= 'row'>
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
@@ -83,13 +76,6 @@
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
 					<h4 class='center-align'>Event Five</h4>
 					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url(https://irp-cdn.multiscreensite.com/19d36af0/dms3rep/multi/mobile/drama%20club-300x260.jpg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
-					<div class='mdl-card__actions'>
-						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
-					</div>
-				</div>
-				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
-					<h4 class='center-align'>Event Six</h4>
-					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url(https://www.nhs.us/assets/images/nhs/NHS_header_logo.png); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
 					<div class='mdl-card__actions'>
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
@@ -110,13 +96,6 @@
 				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
 					<h4 class='center-align'>Event Eight</h4>
 					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url(https://i.ytimg.com/vi/uYs4c9AawmE/maxresdefault.jpg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
-					<div class='mdl-card__actions'>
-						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
-					</div>
-				</div>
-				<div class='mdl-card mdl-shadow--2dp card_stream hoverable' style='float:left;'>
-					<h4 class='center-align'>Event Nine</h4>
-					<div class='mdl-card__media mdl-color--grey-100 mdl-card--expand cardclick pointer' style='height:200px; background-image: url(https://pbs.twimg.com/profile_images/814420266583400449/GBz31NqB.jpg); background-color: <?php echo getSiteColor() ?> !important; overflow:hidden;'></div>
 					<div class='mdl-card__actions'>
 						<a class='mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect' href='#' style='color:<?php echo getSiteColor() ?>;'>Link to Homepage</a>
 					</div>
