@@ -255,16 +255,18 @@
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
-				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Suubmit!">
+				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submit!">
 			</form>
 		</div>
 
 		<div class='row'>
 			<img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">
-			<img src="https://masonhackclub.com/images/staff/annie.jpg" width="80" height="80" alt="Annie">
+			<img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie">
 			<img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton">
 			<img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan">
 			<img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will">
+			<img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott">
+			<img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram">
 		</div>
 
 <?php
