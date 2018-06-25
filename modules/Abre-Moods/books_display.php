@@ -259,6 +259,10 @@
 
 		<div class='row'>
 			<img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">
+			<img src="https://masonhackclub.com/images/staff/annie.jpg" width="80" height="80" alt="Annie">
+			<img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton">
+			<img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan">
+			<img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will">
 		</div>
 
 <?php
