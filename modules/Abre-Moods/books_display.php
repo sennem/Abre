@@ -139,6 +139,7 @@
 			</html>
 
 		<script type="text/javascript">
+			alert("hitting this");
     	alterdisp(); //calls the func that "highlights" an emoji
 		</script>
 
