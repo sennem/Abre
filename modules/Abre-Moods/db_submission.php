@@ -17,7 +17,8 @@
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
   $stmt = $db->stmt_init();
-  $sql="INSERT INTO mood_table (Email, Daterow, Timerow, Feeling) VALUES ('marksenne000@gmail.com','$datevar', '$timevar', '$emojimood')";
+  $email=$_SESSION['useremail'];
+  $sql="INSERT INTO mood_table (Email, Daterow, Timerow, Feeling) VALUES ('$email','$datevar', '$timevar', '$emojimood')";
   $stmt->prepare($sql);
   $stmt->execute();
   $stmt->close();
