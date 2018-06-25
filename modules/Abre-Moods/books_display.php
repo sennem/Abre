@@ -123,7 +123,7 @@
 						}
 						.EmojiSize
 						{
-							font-size: 150%;
+							//font-size: 150%;
 						}
 						ul
 						{
