@@ -167,7 +167,7 @@
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
 		$dbday = $dbdate->format('d'); //works //for testing
 		$dbmonth = $dbdate->format('m'); //works //for testing
-		if(($dbday >= ($cday-3)) && ($dbmonth == $cmonth))
+		if(($dbday >= ($cday-4)) && ($dbmonth == $cmonth)) //show feelings for the last 5 days
 		{
 			echo '<br>';
 			if($rowsfeeling[$i]==0)
