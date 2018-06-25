@@ -27,7 +27,8 @@
 	require_once('functions.php');
 	require('permissions.php');
 
-
+	if ($pagerestrictions=="")
+	{
 	$con=mysqli_connect("localhost","root","killerm111","abredb");
 	// Check connection
 	if (mysqli_connect_errno())
@@ -45,7 +46,7 @@
 		<div class='row'>
 
 			<?php
-				echo '8';
+				echo '9';
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
@@ -223,3 +224,6 @@
 
 		</div>
 	</div>
+<?php
+}
+?>
