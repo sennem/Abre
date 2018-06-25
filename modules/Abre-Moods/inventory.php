@@ -52,7 +52,7 @@
 	require_once('permissions.php');
 
 
-	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Reeecord</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
+	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
@@ -159,9 +159,9 @@
 	$arrlength = count($arrdates);
 	date_default_timezone_set('America/Indiana/Indianapolis');
 	$getdate = date('Y-m-d');//works
-	//$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-	//$cday = $cdate->format('d');
-	//$cmonth = $cmonth->format('m');
+	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+	$cday = $cdate->format('d'); //works //for testing
+	$cmonth = $cdate->format('m'); //works //for testing
 	for($i=0;$i<$arrlength;$i++)
 	{
 		echo '<br>';
