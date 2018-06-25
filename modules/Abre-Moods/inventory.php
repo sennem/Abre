@@ -52,7 +52,7 @@
 	require_once('permissions.php');
 
 
-	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
+	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Reecord</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
@@ -165,11 +165,11 @@
 	for($i=0;$i<$arrlength;$i++)
 	{
 		echo '<br>';
-		$dbdate = DateTime::createFromFormat('Y-m-d', $arrtimes[$i]);
-		$dbday = $dbdate->format('d');
-		$dbmonth= $dbdate->format('m');
-		if(($dbday >= ($cday-6)) && ($dbmonth == $cmonth))
-		{
+		//$dbdate = DateTime::createFromFormat('Y-m-d', $arrtimes[$i]);
+		//$dbday = $dbdate->format('d');
+		//$dbmonth= $dbdate->format('m');
+		//if(($dbday >= ($cday-6)) && ($dbmonth == $cmonth))
+		//{
 			if($rowsfeeling[$i]==0)
 			{
 				 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
@@ -208,7 +208,7 @@
 			}
 			echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
 			echo '  ' . $arrtimes[$i];
-		}
+		//}
 	}
 
 
