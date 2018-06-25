@@ -237,8 +237,8 @@
 	<div class='page_container'>
 		<div class='row'>
 			<form method='POST'>
-				<select name='SelectClass'>
-						<option value='0'>Option 0</option>
+				<select name='SelectClass' style="text-align:right">
+						<option value='0'>Option zero</option>
 						<option value='1'>Option 1</option>
 						<option value='2'>Option 2</option>
 				</select>
