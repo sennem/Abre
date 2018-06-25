@@ -179,10 +179,10 @@
 					$maxdate = $value;
 				}
 				echo 'Vvvalue=' . $maxdate;
-
+				echo '<br>';
 				$date = DateTime::createFromFormat('Y-m-d', $maxdate);
-				echo $date->format('d');
-
+				echo $date->format('d'); //works
+				echo '<br>';
 			?>
 
 
