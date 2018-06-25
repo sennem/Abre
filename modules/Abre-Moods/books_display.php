@@ -236,8 +236,8 @@
 
 	<div class='page_container'>
 		<div class='row'>
-			<form method='post'>
-				<select class='col l3 s6' name='SelectClass'>
+			<form method='POST'>
+				<select name='SelectClass'>
 						<option value='0'>Option 0</option>
 						<option value='1'>Option 1</option>
 						<option value='2'>Option 2</option>
