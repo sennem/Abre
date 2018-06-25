@@ -45,7 +45,7 @@
 		<div class='row'>
 
 			<?php
-				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
+				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mod Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
 			<!--links to CSS Stylesheet for emojis && contains CSS for columns on emojis-->
@@ -64,39 +64,57 @@
 							//alert(emojivalue3); for testing
 							if (emojivalue3==0)
 							{
-								document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==1)
 							{
-								document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojione").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==2)
 							{
-								document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojitwo").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==3)
 							{
-								document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojithree").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==4)
 							{
-								document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojifour").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==5)
 							{
-								document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojifive").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==6)
 							{
-								document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojisix").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==7)
 							{
-								document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojiseven").style.border = "thick solid #0000FF";
+}
 							}
 							if (emojivalue3==8)
 							{
-								document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojieight").style.border = "thick solid #0000FF";
+}
 							}
 						}
 						function resetdisp()
