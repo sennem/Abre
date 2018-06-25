@@ -45,6 +45,7 @@
 		<div class='row'>
 
 			<?php
+				echo '1';
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
@@ -59,7 +60,7 @@
 						}
 						function alterdisp()
 						{
-							alert('running'); 
+							alert('running');
 							var emojivalue3 = '<?php echo $rows[0] ;?>';
 							//alert(emojivalue3); for testing
 							if (emojivalue3==0)
