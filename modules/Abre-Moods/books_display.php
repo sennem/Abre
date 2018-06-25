@@ -45,7 +45,7 @@
 		<div class='row'>
 
 			<?php
-				echo '3';
+				echo '4';
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>M0od Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
@@ -66,47 +66,47 @@
 							if (emojivalue3==0)
 							{
 								//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojizero").style.border = "solid black";
+								document.getElementById("emojizero").style.border = "solid thin black";
 							}
 							if (emojivalue3==1)
 							{
 								//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojione").style.border = "solid black";
+								document.getElementById("emojione").style.border = "solid thin black";
 							}
 							if (emojivalue3==2)
 							{
 								//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojitwo").style.border = "solid black";
+								document.getElementById("emojitwo").style.border = "solid thin black";
 							}
 							if (emojivalue3==3)
 							{
 								//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojithree").style.border = "solid black";
+								document.getElementById("emojithree").style.border = "solid thin black";
 							}
 							if (emojivalue3==4)
 							{
 								//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojifour").style.border = "solid black";
+								document.getElementById("emojifour").style.border = "solid thin black";
 							}
 							if (emojivalue3==5)
 							{
 								//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojifive").style.border = "solid black";
+								document.getElementById("emojifive").style.border = "solid thin black";
 							}
 							if (emojivalue3==6)
 							{
 								//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojisix").style.border = "solid black";
+								document.getElementById("emojisix").style.border = "solid thin black";
 							}
 							if (emojivalue3==7)
 							{
 								//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojiseven").style.border = "solid black";
+								document.getElementById("emojiseven").style.border = "solid thin black";
 							}
 							if (emojivalue3==8)
 							{
 								//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
-								document.getElementById("emojieight").style.border = "solid black";
+								document.getElementById("emojieight").style.border = "solid thin black";
 							}
 						}
 						function resetdisp()
@@ -127,13 +127,11 @@
 						.EmojiSpacing
 						{
 							font-size: 150%;
-							border-width: thin;
 							margin:35px;
 						}
 						.EmojiSpacingLeft
 						{
 							font-size: 150%;
-							border-width: thin;
 							margin-left:40%;
 							margin-right:35px;
 						}
