@@ -184,12 +184,11 @@
 				echo $dbdate->format('d'); //works
 				echo $dbdate->format('m'); //works
 				date_default_timezone_set('America/Indiana/Indianapolis');
-				$cdate = date('Y-m-d');//works
-				echo 'hitaftermakedate';
-				echo $cdate->format('d'); 
-				echo 'hit after cdatday';
+				$getdate = date('Y-m-d');//works
+				$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+				echo $cdate->format('d');
 				echo $cdate->format('m');
-				echo 'hit after cdate month';
+
 				if (($dbdate->format('d')) != 26)
 				{
 					echo '<br>';
