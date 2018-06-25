@@ -25,20 +25,9 @@
 				    $('#navigation_top').hide();
 				    $('#content_holder').hide();
 				    $('#loader').show();
-				    $('#titletext').text('Starter');
-				    document.title = 'Starter';
+				    $('#titletext').text('Event');
+				    document.title = 'Event';
 					$('#content_holder').load('modules/".basename(__DIR__)."/home.php', function() { init_page(); });
-					$( '#modal_holder' ).load( 'modules/".basename(__DIR__)."/modals.php' );
-			  },
-				'starter/elements': function()
-				{
-						$('#navigation_top').hide();
-						$('#content_holder').hide();
-						$('#loader').show();
-						$('#titletext').text('Starter');
-						document.title = 'Starter';
-					$('#content_holder').load('modules/".basename(__DIR__)."/elements.php', function() { init_page(); });
-					$( '#modal_holder' ).load( 'modules/".basename(__DIR__)."/modals.php' );
-				},";
+			  }";
 
 ?>
