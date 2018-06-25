@@ -237,7 +237,7 @@
 		img
 		{
 			border-radius: 50%;
-			margin: 35px;
+			/*margin: 35px;*/
 		}
 	</style>
 
