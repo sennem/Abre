@@ -52,7 +52,7 @@
 	require_once('permissions.php');
 
 
-	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Recorrd</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
+	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
@@ -168,7 +168,7 @@
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
 		$dbday = $dbdate->format('d'); //works //for testing
 		$dbmonth = $dbdate->format('m'); //works //for testing
-		if(($dbday >= ($cday-6)) && ($dbmonth == $cmonth))
+		if(($dbday >= ($cday-3)) && ($dbmonth == $cmonth))
 		{
 			if($rowsfeeling[$i]==0)
 			{
