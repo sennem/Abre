@@ -55,7 +55,7 @@
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
-
+	$email = $_SESSION['useremail'];
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
 	$con = new mysqli("localhost","root","killerm111","abredb");
 	if (mysqli_connect_errno()) {
@@ -69,7 +69,7 @@
 	//echo '<br>';
 
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='$email'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
 	if (!$resultfeeling)
 	{
@@ -122,7 +122,7 @@
 	}
 	*/
 
-	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='$email'";
 	$resultdate=mysqli_query($con, $sqldate);
 	if (!resultdate)
 	{
@@ -139,7 +139,7 @@
 		echo $value;
 	}*/
 
-	$sqltime = "SELECT Timerow FROM mood_table WHERE Email='marksenne000@gmail.com'";
+	$sqltime = "SELECT Timerow FROM mood_table WHERE Email='$email'";
 	$resulttime=mysqli_query($con, $sqltime);
 	if (!resulttime)
 	{
