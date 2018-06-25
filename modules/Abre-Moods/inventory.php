@@ -164,12 +164,12 @@
 	$cmonth = $cdate->format('m'); //works //for testing
 	for($i=0;$i<$arrlength;$i++)
 	{
-		echo '<br>';
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
 		$dbday = $dbdate->format('d'); //works //for testing
 		$dbmonth = $dbdate->format('m'); //works //for testing
 		if(($dbday >= ($cday-3)) && ($dbmonth == $cmonth))
 		{
+			echo '<br>';
 			if($rowsfeeling[$i]==0)
 			{
 				 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
