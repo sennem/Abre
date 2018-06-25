@@ -183,7 +183,8 @@
 				$date = DateTime::createFromFormat('Y-m-d', $maxdate);
 				echo $date->format('d'); //works
 				echo '<br>';
-
+				echo $date->format('m'); //works
+				echo '<br>';
 				if (($date->format('d')) != 26)
 				{
 					echo '<br>';
