@@ -101,16 +101,16 @@
 						}
 						function resetdisp()
 						{
-							alert("I am an alert box!");
-							//document.getElementById("emojizero").style.backgroundColor = "";
-							//document.getElementById("emojione").style.backgroundColor = "";
-							//document.getElementById("emojitwo").style.backgroundColor = "";
-							//document.getElementById("emojithree").style.backgroundColor = "";
-							//document.getElementById("emojifour").style.backgroundColor = "";
-							//document.getElementById("emojifive").style.backgroundColor = "";
-							//document.getElementById("emojisix").style.backgroundColor = "";
-							//document.getElementById("emojiseven").style.backgroundColor = "";
-							//document.getElementById("emojieight").style.backgroundColor = "";
+							alert("PLEASE WORK!");
+							document.getElementById("emojizero").style.backgroundColor = "";
+							document.getElementById("emojione").style.backgroundColor = "";
+							document.getElementById("emojitwo").style.backgroundColor = "";
+							document.getElementById("emojithree").style.backgroundColor = "";
+							document.getElementById("emojifour").style.backgroundColor = "";
+							document.getElementById("emojifive").style.backgroundColor = "";
+							document.getElementById("emojisix").style.backgroundColor = "";
+							document.getElementById("emojiseven").style.backgroundColor = "";
+							document.getElementById("emojieight").style.backgroundColor = "";
 						}
 					</script>
 					<style>
@@ -200,6 +200,10 @@
 				elseif ((($dbdate->format('d')) == ($cdate->format('d'))) && (($dbdate->format('m')) != ($cdate->format('m'))))
 				{
 					//same day but different month
+					echo '<script type="text/javascript">',
+     			'resetdisp();',
+     			'</script>'
+		 			;
 				}
 			?>
 
