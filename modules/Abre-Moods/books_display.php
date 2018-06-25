@@ -101,7 +101,7 @@
 						}
 						function resetdisp()
 						{
-
+							alert("I am an alert box!");
 							//document.getElementById("emojizero").style.backgroundColor = "";
 							//document.getElementById("emojione").style.backgroundColor = "";
 							//document.getElementById("emojitwo").style.backgroundColor = "";
@@ -178,7 +178,7 @@
 				{
 					$maxdate = $value;
 				}
-				echo 'Value=' . $maxdate;
+				echo 'Vvalue=' . $maxdate;
 				echo '<br>';
 				$dbdate = DateTime::createFromFormat('Y-m-d', $maxdate);
 				echo $dbdate->format('d'); //works
@@ -186,16 +186,20 @@
 				date_default_timezone_set('America/Indiana/Indianapolis');
 				$getdate = date('Y-m-d');//works
 				$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-				echo $cdate->format('d');
-				echo $cdate->format('m');
+				echo $cdate->format('d'); //works
+				echo $cdate->format('m'); //works
 
-				if (($dbdate->format('d')) != 26)
+				if (($dbdate->format('d')) != ($cdate->format('d')))
 				{
-					echo '<br>';
-					echo 'Not the 26th';
+					//not the same day
+					echo '<script type="text/javascript">',
+     			'resetdisp();',
+     			'</script>'
+		 			;
 				}
-				else {
-					echo 'is the 26th';
+				elseif ((($dbdate->format('d')) == ($cdate->format('d'))) && (($dbdate->format('m')) != ($cdate->format('m'))))
+				{
+					//same day but different month
 				}
 			?>
 
