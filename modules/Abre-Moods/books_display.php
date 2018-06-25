@@ -264,9 +264,12 @@
 			<img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie">
 			<img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton">
 			<img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan">
+		</div>
+		<div class='row'>
 			<img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will">
 			<img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott">
 			<img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram">
+			<img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan">
 		</div>
 
 <?php
