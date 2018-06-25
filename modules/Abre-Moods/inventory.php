@@ -166,8 +166,8 @@
 	{
 		echo '<br>';
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
-		//$dbday = $dbdate->format('d');
-		//$dbmonth= $dbdate->format('m');
+		$dbday = $dbdate->format('d'); //works //for testing
+		$dbmonth = $dbdate->format('m'); //works //for testing
 		//if(($dbday >= ($cday-6)) && ($dbmonth == $cmonth))
 		//{
 			if($rowsfeeling[$i]==0)
