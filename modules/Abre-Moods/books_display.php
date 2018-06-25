@@ -236,15 +236,22 @@
 
 	<div class='page_container'>
 		<div class='row'>
-			<form method='POST'>
-				<select name='SelectClass' style="text-align:right">
-						<option value='0' style="text-align:right">Option ero</option>
-						<option value='1' style="text-align:right">Option 1</option>
-						<option value='2' style="text-align:right">Option 2</option>
-				</select>
-				<input type='submit' value="Submit!">
-			</form>
-
+			<table>
+				<tr>
+					<td></td>
+					<td></td>
+					<td>
+						<form method='POST'>
+							<select name='SelectClass'>
+									<option value='0'>Option 0</option>
+									<option value='1'>Option 1</option>
+									<option value='2'>Option 2</option>
+							</select>
+							<input type='submit' value="Submit!">
+						</form>
+					</td>
+				<tr>
+			</table>
 <?php
 	}
 ?>
