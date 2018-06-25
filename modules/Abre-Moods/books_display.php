@@ -160,9 +160,9 @@
 						<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing EmojiSize" onclick="testfunc(5)"></i>
 					</li>
 					<li>
-						<i id="emojisix" class="em em-persevere EmojiSpacingLeft " onclick="testfunc(6)"></i>
-						<i id="emojiseven" class="em em-grimacing EmojiSpacing " onclick="testfunc(7)"></i>
-						<i id="emojieight" class="em em-expressionless EmojiSpacing " onclick="testfunc(8)"></i>
+						<i id="emojisix" class="em em-persevere EmojiSpacingLeft EmojiSize" onclick="testfunc(6)"></i>
+						<i id="emojiseven" class="em em-grimacing EmojiSpacing EmojiSize" onclick="testfunc(7)"></i>
+						<i id="emojieight" class="em em-expressionless EmojiSpacing EmojiSize" onclick="testfunc(8)"></i>
 					</li>
 				</ul>
 			</div>'
