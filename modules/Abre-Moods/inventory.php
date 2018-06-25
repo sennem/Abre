@@ -206,7 +206,8 @@
 			{
 				 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
 			}
-			echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
+			//echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
+			echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
 			echo '  ' . $arrtimes[$i];
 		}
 	}
