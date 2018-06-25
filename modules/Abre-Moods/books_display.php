@@ -238,8 +238,8 @@
 		<div class='row'>
 			<table>
             <tr>
-                <td></td>
-								<td></td>
+                <td>' '</td>
+								<td>' '</td>
                   <td>
                       <select>
                         <option value="volvo">Volvo</option>
@@ -250,8 +250,8 @@
                   </td>
             </tr>
             <tr>
-                <td></td>
-								<td></td>
+                <td>' '</td>
+								<td>' '</td>
                 <td>
                     <select>
                       <option value="volvo">Volvo</option>
