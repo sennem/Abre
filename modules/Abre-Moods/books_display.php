@@ -180,8 +180,8 @@
 				}
 				echo 'Value=' . $maxdate;
 
-				$date = DateTime::createFromFormat('j-M-Y', '$maxdate');
-				echo $date->format('Y-m-d');
+				$date = DateTime::createFromFormat('Y-m-d', $maxdate);
+				echo $date->format('d-m-Y');
 
 			?>
 
