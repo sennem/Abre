@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-
+	$pagerestrictions="staff";
 	if ($pagerestrictions=="")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -224,6 +224,27 @@
 
 			</div>
 		</div>
+
+
 <?php
-}
+	}
+	else
+	{
+
+
+?>
+
+	<div class='page_container'>
+		<div class='row'>
+			<form method='post'>
+				<select class='col l3 s6' name='SelectClass'>
+						<option value='0'>Option 0</option>
+						<option value='1'>Option 1</option>
+						<option value='2'>Option 2</option>
+				</select>
+				<input type='submit' value="Submit!">
+			</form>
+
+<?php
+	}
 ?>
