@@ -127,11 +127,13 @@
 						.EmojiSpacing
 						{
 							font-size: 150%;
+							border-width: thin;
 							margin:35px;
 						}
 						.EmojiSpacingLeft
 						{
 							font-size: 150%;
+							border-width: thin;
 							margin-left:40%;
 							margin-right:35px;
 						}
