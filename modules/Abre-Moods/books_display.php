@@ -178,16 +178,16 @@
 				{
 					$maxdate = $value;
 				}
-				echo 'Vvalue=' . $maxdate;
-				echo '<br>';
+				//echo 'Vvalue=' . $maxdate; //for testing
+				//echo '<br>'; //for testing
 				$dbdate = DateTime::createFromFormat('Y-m-d', $maxdate);
-				echo $dbdate->format('d'); //works
-				echo $dbdate->format('m'); //works
+				//echo $dbdate->format('d'); //works //for testing
+				//echo $dbdate->format('m'); //works //for testing
 				date_default_timezone_set('America/Indiana/Indianapolis');
-				$getdate = date('Y-m-d');//works
+				$getdate = date('Y-m-d');//works //for testing
 				$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-				echo $cdate->format('d'); //works
-				echo $cdate->format('m'); //works
+				//echo $cdate->format('d'); //works //for testing
+				//echo $cdate->format('m'); //works //for testing
 
 				if (($dbdate->format('d')) != ($cdate->format('d')))
 				{
