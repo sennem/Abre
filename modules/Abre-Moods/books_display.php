@@ -64,39 +64,47 @@
 							//alert(emojivalue3); for testing
 							if (emojivalue3==0)
 							{
-								document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==1)
 							{
-								document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==2)
 							{
-								document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==3)
 							{
-								document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==4)
 							{
-								document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==5)
 							{
-								document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
-							}
+								//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							if (emojivalue3==6)
 							{
-								document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==7)
 							{
-								document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 							if (emojivalue3==8)
 							{
-								document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
+								//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
+								document.getElementById("emojizero").style.border="solid black";
 							}
 						}
 						function resetdisp()
