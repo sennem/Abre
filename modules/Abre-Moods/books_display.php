@@ -45,7 +45,6 @@
 		<div class='row'>
 
 			<?php
-				echo '1';
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
@@ -60,7 +59,7 @@
 						}
 						function alterdisp()
 						{
-							alert('running');
+							//alert('running'); for testing
 							var emojivalue3 = '<?php echo $rows[0] ;?>';
 							//alert(emojivalue3); for testing
 							if (emojivalue3==0)
@@ -86,6 +85,7 @@
 							if (emojivalue3==5)
 							{
 								document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
+							}
 							if (emojivalue3==6)
 							{
 								document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
@@ -101,6 +101,7 @@
 						}
 						function resetdisp()
 						{
+							alert("PLEASE WORK!");
 							document.getElementById("emojizero").style.backgroundColor = "";
 							document.getElementById("emojione").style.backgroundColor = "";
 							document.getElementById("emojitwo").style.backgroundColor = "";
@@ -122,10 +123,6 @@
 							margin-left:40%;
 							margin-right:35px;
 						}
-						.EmojiSize
-						{
-							//font-size: 150%;
-						}
 						ul
 						{
 							justify-content: center;
@@ -140,7 +137,6 @@
 			</html>
 
 		<script type="text/javascript">
-			alert("hitting this");
     	alterdisp(); //calls the func that "highlights" an emoji
 		</script>
 
