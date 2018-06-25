@@ -157,49 +157,59 @@
 	}*/
 
 	$arrlength = count($arrdates);
+	date_default_timezone_set('America/Indiana/Indianapolis');
+	$getdate = date('Y-m-d');//works
+	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+	$cday = $cdate->format('d');
+	$cmonth = $cmonth->format('m');
 	for($i=0;$i<$arrlength;$i++)
 	{
 		echo '<br>';
-		if($rowsfeeling[$i]==0)
+		$dbdate = DateTime::createFromFormat('Y-m-d', $arrtimes[$i]);
+		$dbday = $dbdate->format('d');
+		$dbmonth= $dbdate->format('m');
+		if(($dbday >= ($cday-6)) && ($dbmonth == $cmonth))
 		{
-			 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
+			if($rowsfeeling[$i]==0)
+			{
+				 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==1)
+			{
+				 echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==2)
+			{
+				 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==3)
+			{
+				 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==4)
+			{
+				 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==5)
+			{
+				 echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==6)
+			{
+				 echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==7)
+			{
+				 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$i]==8)
+			{
+				 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
+			}
+			echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
+			echo '  ' . $arrtimes[$i];
 		}
-		if($rowsfeeling[$i]==1)
-		{
-			 echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==2)
-		{
-			 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==3)
-		{
-			 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==4)
-		{
-			 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==5)
-		{
-			 echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==6)
-		{
-			 echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==7)
-		{
-			 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$i]==8)
-		{
-			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
-		}
-		echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
-		echo '  ' . $arrtimes[$i];
 	}
-
 
 
 	/*date_default_timezone_set('America/Indiana/Indianapolis');

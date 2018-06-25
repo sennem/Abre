@@ -46,7 +46,7 @@
 
 			<?php
 				echo '4';
-				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>M0od Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
+				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
 			<!--links to CSS Stylesheet for emojis && contains CSS for columns on emojis-->
@@ -196,7 +196,7 @@
 				//echo $dbdate->format('d'); //works //for testing
 				//echo $dbdate->format('m'); //works //for testing
 				date_default_timezone_set('America/Indiana/Indianapolis');
-				$getdate = date('Y-m-d');//works //for testing
+				$getdate = date('Y-m-d');//works 
 				$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
 				//echo $cdate->format('d'); //works //for testing
 				//echo $cdate->format('m'); //works //for testing
@@ -218,9 +218,6 @@
 		 			;
 				}
 			?>
-
-
-
 
 
 
