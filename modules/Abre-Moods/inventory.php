@@ -5,12 +5,10 @@
 		<style>
 			.EmojiSpacing
 			{
-				font-size: 150%;
 				margin:35px;
 			}
 			.EmojiSpacingLeft
 			{
-				font-size: 150%;
 				margin-left:40%;
 				margin-right:70px;
 			}
@@ -55,7 +53,7 @@
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
-	$email = $_SESSION['useremail'];
+
 	//---$con=mysqli_connect("localhost","root","killerm111","abredb");
 	$con = new mysqli("localhost","root","killerm111","abredb");
 	if (mysqli_connect_errno()) {
@@ -69,7 +67,7 @@
 	//echo '<br>';
 
 	//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
-	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='$email'";
+	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
 	if (!$resultfeeling)
 	{
@@ -122,7 +120,7 @@
 	}
 	*/
 
-	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='$email'";
+	$sqldate ="SELECT Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resultdate=mysqli_query($con, $sqldate);
 	if (!resultdate)
 	{
@@ -139,7 +137,7 @@
 		echo $value;
 	}*/
 
-	$sqltime = "SELECT Timerow FROM mood_table WHERE Email='$email'";
+	$sqltime = "SELECT Timerow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 	$resulttime=mysqli_query($con, $sqltime);
 	if (!resulttime)
 	{
@@ -157,60 +155,49 @@
 	}*/
 
 	$arrlength = count($arrdates);
-	date_default_timezone_set('America/Indiana/Indianapolis');
-	$getdate = date('Y-m-d');//works
-	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-	$cday = $cdate->format('d'); //works //for testing
-	$cmonth = $cdate->format('m'); //works //for testing
 	for($i=0;$i<$arrlength;$i++)
 	{
-		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
-		$dbday = $dbdate->format('d'); //works //for testing
-		$dbmonth = $dbdate->format('m'); //works //for testing
-		if(($dbday >= ($cday-4)) && ($dbmonth == $cmonth)) //show feelings for the last 5 days
+		echo '<br>';
+		if($rowsfeeling[$i]==0)
 		{
-			echo '<br>';
-			if($rowsfeeling[$i]==0)
-			{
-				 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==1)
-			{
-				 echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==2)
-			{
-				 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==3)
-			{
-				 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==4)
-			{
-				 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==5)
-			{
-				 echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==6)
-			{
-				 echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==7)
-			{
-				 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
-			}
-			if($rowsfeeling[$i]==8)
-			{
-				 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
-			}
-			//echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
-			echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
-			echo '  at  ' . $arrtimes[$i];
+			 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
 		}
+		if($rowsfeeling[$i]==1)
+		{
+			 echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==2)
+		{
+			 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==3)
+		{
+			 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==4)
+		{
+			 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==5)
+		{
+			 echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==6)
+		{
+			 echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==7)
+		{
+			 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
+		}
+		if($rowsfeeling[$i]==8)
+		{
+			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
+		}
+		echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
+		echo '  ' . $arrtimes[$i];
 	}
+
 
 
 	/*date_default_timezone_set('America/Indiana/Indianapolis');
