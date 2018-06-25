@@ -127,7 +127,7 @@
 		<form id="form-addstreamcomment" method="post" action="modules/stream/comment_add.php">
 			<div class="modal-content" id="modal-content-section" style="padding: 0px !important;">
 				<div class="row" style='background-color: <?php echo getSiteColor(); ?>; padding: 24px;'>
-					<div class='col s11'><span class="truncate" style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;">Read Post</span></div>
+					<div class='col s11'><span class="truncate" id='readStreamTitle' style="color: #fff; font-weight: 500; font-size: 24px; line-height: 26px;"></span></div>
 					<div class='col s1 right-align'><a class="modal-close"><i class='material-icons' style='color: #fff;'>clear</i></a></div>
 				</div>
 				<div style='padding: 0px 24px 0px 24px;'>
@@ -270,6 +270,8 @@
    		</form>
  	</div>
 
+<script src='core/tinymce/js/tinymce/tinymce.min.js'></script>
+
 <script>
 
 	$(function(){
@@ -280,7 +282,7 @@
 		//Start TinyMCE
 		tinymce.init({
 			selector: '.wysiwyg', branding: false, height:200, menubar:false, resize: false, statusbar: false, autoresize_min_height: 200, autoresize_max_height: 400,
-			content_css : "/core/css/tinymce.0.0.5.css?" + new Date().getTime(),
+			content_css : "/core/css/tinymce.0.0.6.css?" + new Date().getTime(),
 			oninit : "setPlainText",
 			plugins: 'paste print preview fullpage autolink fullscreen image link media template codesample charmap hr nonbreaking toc insertdatetime advlist lists textcolor imagetools contextmenu textpattern autoresize',
 			toolbar: 'bold italic underline link | numlist bullist | media | removeformat',
