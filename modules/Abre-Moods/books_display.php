@@ -178,11 +178,17 @@
 				{
 					$maxdate = $value;
 				}
-				echo 'Vvvalue=' . $maxdate;
+				echo 'Value=' . $maxdate;
 				echo '<br>';
 				$date = DateTime::createFromFormat('Y-m-d', $maxdate);
 				echo $date->format('d'); //works
 				echo '<br>';
+
+				if (($date->format('d')) != 26)
+				{
+					echo '<br>';
+					echo 'Not the 26th';
+				}
 			?>
 
 
