@@ -32,7 +32,7 @@
 	$description = "A place to record your moods.";
 	$version = $abre_version;
 	$repo = NULL;
-	$pageicon = "local_library";
+	$pageicon = "mood";
 	$pagepath = "books"; //findme doesnt seem to do anything
 
 	require_once('permissions.php');
