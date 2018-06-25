@@ -178,18 +178,12 @@
 				{
 					$maxdate = $value;
 				}
-				echo 'Vvalue=' . $maxdate;
+				echo 'Vvvalue=' . $maxdate;
+				echo '<br>';
 
-				date_default_timezone_set('America/Indiana/Indianapolis');
-				$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
-				$dateday = $datecalc->format('d');
-				$datemonth=$datecalc->format('m');
-				$currentday=date('d');
-				$currentmonth=date('m')
-				//echo '   Dbday=' . $dateday;
-				//echo 'Dbmonth=' . $datemonth;
-				echo '   Cday=' . $currentday;
-				echo '   Cmonth=' . $currentmonth;
+				$date = DateTime::createFromFormat('j-M-Y', $maxdate);
+				echo $date->format('Y-m-d');
+				echo '---';
 
 			?>
 
