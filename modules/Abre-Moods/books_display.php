@@ -185,12 +185,18 @@
 				echo $dbdate->format('m'); //works
 				date_default_timezone_set('America/Indiana/Indianapolis');
 				$cdate = date('Y-m-d');//works
-				echo $cdate->format('d'); //works
-				echo $cdate->format('m'); //works
+				echo 'hitaftermakedate';
+				echo $cdate->format('d'); 
+				echo 'hit after cdatday';
+				echo $cdate->format('m');
+				echo 'hit after cdate month';
 				if (($dbdate->format('d')) != 26)
 				{
 					echo '<br>';
 					echo 'Not the 26th';
+				}
+				else {
+					echo 'is the 26th';
 				}
 			?>
 
