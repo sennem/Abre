@@ -178,11 +178,12 @@
 				{
 					$maxdate = $value;
 				}
-				echo 'Vvvalue=' . $maxdate;
+				echo 'Vvvvalue=' . $maxdate;
 				echo '<br>';
 
 				$date = DateTime::createFromFormat('j-M-Y', $maxdate);
 				echo $date->format('Y-m-d');
+				echo '<br>';
 				echo '---';
 
 			?>
