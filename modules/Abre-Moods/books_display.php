@@ -187,9 +187,9 @@
 				$currentday=date('d');
 				$currentmonth=date('m')
 				//echo '   Dbday=' . $dateday;
-				echo 'Dbmonth=' . $datemonth;
-				//echo '   Cday=' . $currentday;
-				//echo '   Cmonth=' . $currentmonth;
+				//echo 'Dbmonth=' . $datemonth;
+				echo '   Cday=' . $currentday;
+				echo '   Cmonth=' . $currentmonth;
 
 			?>
 
