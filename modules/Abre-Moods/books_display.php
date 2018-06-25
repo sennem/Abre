@@ -238,18 +238,20 @@
 		<div class='row'>
 			<table>
             <tr>
-                <td>Some text</td>
-                    <td>
-                        <select>
-                          <option value="volvo">Volvo</option>
-                          <option value="saab">Saab</option>
-                          <option value="mercedes">Mercedes</option>
-                          <option value="audi">Audi</option>
-                        </select>
-                    </td>
+                <td></td>
+								<td></td>
+                  <td>
+                      <select>
+                        <option value="volvo">Volvo</option>
+                        <option value="saab">Saab</option>
+                        <option value="mercedes">Mercedes</option>
+                        <option value="audi">Audi</option>
+                      </select>
+                  </td>
             </tr>
             <tr>
-                <td>abc</td>
+                <td></td>
+								<td></td>
                 <td>
                     <select>
                       <option value="volvo">Volvo</option>
