@@ -238,9 +238,9 @@
 		<div class='row'>
 			<form method='POST'>
 				<select name='SelectClass' style="text-align:right">
-						<option value='0'>Option zero</option>
-						<option value='1'>Option 1</option>
-						<option value='2'>Option 2</option>
+						<option value='0' style="text-align:right">Option ero</option>
+						<option value='1' style="text-align:right">Option 1</option>
+						<option value='2' style="text-align:right">Option 2</option>
 				</select>
 				<input type='submit' value="Submit!">
 			</form>
