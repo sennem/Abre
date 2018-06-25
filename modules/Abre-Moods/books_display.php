@@ -233,6 +233,12 @@
 
 
 ?>
+	<style>
+		img
+		{
+			border-radius: 50%;
+		}
+	</style>
 
 	<div class='page_container'>
 		<div class='row'>
@@ -249,8 +255,9 @@
 				<input type='submit' value="Submit!">
 			</form>
 		</div>
+
 		<div class='row'>
-			Test
+			<img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">
 		</div>
 
 <?php
