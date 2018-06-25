@@ -244,7 +244,7 @@
 	<div class='page_container'>
 		<div class='row'>
 			<form method='POST'>
-				<select name='SelectClass'>
+				<select name='ClassPeriodSelection'>
 						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
 						<option value='3'>Period 3</option>
@@ -255,22 +255,24 @@
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
-				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submit!">
+				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submiit!">
 			</form>
 		</div>
 
-		<div class='row'>
-			<img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">
-			<img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie">
-			<img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton">
-			<img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan">
-		</div>
-		<div class='row'>
-			<img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will">
-			<img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott">
-			<img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram">
-			<img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan">
-		</div>
+		<table>
+			<tr>
+				<td><img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark"></td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie"></td>
+				<td><img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton"></td>
+				<td><img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan"></td>
+			</tr>
+			<tr>
+				<td><img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will"></td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott"></td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram"></td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan"></td>
+			</tr>
+		</table>
 
 <?php
 	}
