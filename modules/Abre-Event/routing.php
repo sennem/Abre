@@ -20,7 +20,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
 			echo "
-				'starter': function()
+				'Event': function()
 				{
 				    $('#navigation_top').hide();
 				    $('#content_holder').hide();
