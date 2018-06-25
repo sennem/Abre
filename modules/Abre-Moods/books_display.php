@@ -180,12 +180,14 @@
 				}
 				echo 'Value=' . $maxdate;
 				echo '<br>';
-				$date = DateTime::createFromFormat('Y-m-d', $maxdate);
-				echo $date->format('d'); //works
-				echo '<br>';
-				echo $date->format('m'); //works
-				echo '<br>';
-				if (($date->format('d')) != 26)
+				$dbdate = DateTime::createFromFormat('Y-m-d', $maxdate);
+				echo $dbdate->format('d'); //works
+				echo $dbdate->format('m'); //works
+				date_default_timezone_set('America/Indiana/Indianapolis');
+				$cdate = date('Y-m-d');//works
+				echo $cdate->format('d'); //works
+				echo $cdate->format('m'); //works
+				if (($dbdate->format('d')) != 26)
 				{
 					echo '<br>';
 					echo 'Not the 26th';
