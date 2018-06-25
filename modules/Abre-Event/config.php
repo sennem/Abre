@@ -24,11 +24,11 @@
 	$pageview=1;
 	$drawerhidden=1;
 	$pageorder=10;
-	$pagetitle="Starter";
-	$description="A simple Hello World starter app template.";
+	$pagetitle="Event";
+	$description="Get informed on events youb may be interested in.";
 	$version="0.0.5";
-	$repo="abreio/Abre-Starter";
+	$repo="abreio/Abre-Event";
 	$pageicon="code";
-	$pagepath="starter";
-	require_once('permissions.php');
+	$pagepath="event";
+	//require_once('permissions.php');
 ?>
