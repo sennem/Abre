@@ -157,11 +157,11 @@
 	}*/
 
 	$arrlength = count($arrdates);
-	date_default_timezone_set('America/Indiana/Indianapolis');
-	$getdate = date('Y-m-d');//works
-	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-	$cday = $cdate->format('d');
-	$cmonth = $cmonth->format('m');
+	//date_default_timezone_set('America/Indiana/Indianapolis');
+	//$getdate = date('Y-m-d');//works
+	//$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+	//$cday = $cdate->format('d');
+	//$cmonth = $cmonth->format('m');
 	for($i=0;$i<$arrlength;$i++)
 	{
 		echo '<br>';
