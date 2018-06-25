@@ -45,7 +45,7 @@
 		<div class='row'>
 
 			<?php
-				echo '1';
+				echo '2';
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>M0od Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
@@ -126,12 +126,12 @@
 					<style>
 						.EmojiSpacing
 						{
-							/*font-size: 150%;*/
+							font-size: 150%;
 							margin:35px;
 						}
 						.EmojiSpacingLeft
 						{
-							/*font-size: 150%;*/
+							font-size: 150%;
 							margin-left:40%;
 							margin-right:35px;
 						}
