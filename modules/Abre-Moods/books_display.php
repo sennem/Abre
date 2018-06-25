@@ -244,7 +244,7 @@
 						<option value='4'>Period 4</option>
 						<option value='5'>Period 5</option>
 						<option value='6'>Period 6</option>
-						<optoin value='7'>Period 7</option>
+						<option value='7'>Period 7</option>
 				</select>
 				<input type='submit' value="Submit!">
 			</form>
