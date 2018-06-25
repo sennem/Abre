@@ -178,7 +178,7 @@
 				{
 					$maxdate = $value;
 				}
-				echo 'Value:' . $maxdate;
+				echo '   Value=' . $maxdate;
 
 				date_default_timezone_set('America/Indiana/Indianapolis');
 				$datecalc = DateTime::createFromFormat('Y-m-d', $maxdate);
@@ -186,6 +186,11 @@
 				$datemonth=$datecalc->format('m');
 				$currentday=date('d');
 				$currentmonth=date('m')
+				echo '   Dbday=' . $dateday;
+				echo '   Dbmonth=' . $datemonth;
+				echo '   Cday=' . $currentday;
+				echo '   Cmonth=' . $currentmonth;
+
 			?>
 
 
