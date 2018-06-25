@@ -253,7 +253,9 @@
 						<option value='6'>Period 6</option>
 						<option value='7'>Period 7</option>
 				</select>
-				<input type='submit' value="Submit!">
+				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
+
+				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Suubmit!">
 			</form>
 		</div>
 
