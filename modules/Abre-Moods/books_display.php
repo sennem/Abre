@@ -236,32 +236,15 @@
 
 	<div class='page_container'>
 		<div class='row'>
-			<table>
-            <tr>
-                <td>f</td>
-								<td>f</td>
-                  <td>
-                      <select>
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                      </select>
-                  </td>
-            </tr>
-            <tr>
-                <td>' '</td>
-								<td>' '</td>
-                <td>
-                    <select>
-                      <option value="volvo">Volvo</option>
-                      <option value="saab">Saab</option>
-                      <option value="mercedes">Mercedes</option>
-                      <option value="audi">Audi</option>
-                    </select>
-                </td>
-            </tr>
-        </table>
+			<form method='POST'>
+				<select name='SelectClass'>
+						<option value='0'>Option 0</option>
+						<option value='1'>Option 1</option>
+						<option value='2'>Option 2</option>
+				</select>
+				<input type='submit' value="Submit!">
+			</form>
+
 <?php
 	}
 ?>
