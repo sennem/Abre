@@ -45,7 +45,8 @@
 		<div class='row'>
 
 			<?php
-				echo '4';
+				echo '5';
+				echo $_SESSION['useremail'];
 				echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 			?>
 
@@ -196,7 +197,7 @@
 				//echo $dbdate->format('d'); //works //for testing
 				//echo $dbdate->format('m'); //works //for testing
 				date_default_timezone_set('America/Indiana/Indianapolis');
-				$getdate = date('Y-m-d');//works 
+				$getdate = date('Y-m-d');//works
 				$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
 				//echo $cdate->format('d'); //works //for testing
 				//echo $cdate->format('m'); //works //for testing
