@@ -238,12 +238,20 @@
 		<div class='row'>
 			<form method='POST'>
 				<select name='SelectClass'>
-						<option value='0'>Option 0</option>
-						<option value='1'>Option 1</option>
-						<option value='2'>Option 2</option>
+						<option value='1'>Period 1</option>
+						<option value='2'>Period 2</option>
+						<option value='3'>Period 3</option>
+						<option value='4'>Period 4</option>
+						<option value='5'>Period 5</option>
+						<option value='6'>Period 6</option>
+						<optoin value='7'>Period 7</option>
 				</select>
 				<input type='submit' value="Submit!">
 			</form>
+		</div>
+		<div class='row'>
+			Test
+		</div>
 
 <?php
 	}
