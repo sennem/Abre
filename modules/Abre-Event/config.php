@@ -1,5 +1,7 @@
+<?php
+
 	/*
-	* Copyright (C) 2016-2018 Abre.io Inc.
+	* Copyright (C) 2016-2017 Abre.io LLC
 	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the Affero General Public License version 3
@@ -14,8 +16,19 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-    .mce-container textarea{ display:inline-block!important; }
-    .mce-content-body{ font-family: 'Roboto', 'Helvetica', sans-serif; padding:0 10px 10px}
-    .mce-content-body p{ margin:25px 0 }
-    .mce-content-body ol,.mce-content-body ul{ margin-left:10px; list-style-position:outside; margin-bottom:20px }
-    .mce-content-body ol li,.mce-content-body ul li{ margin-left:10px; margin-bottom:10px; }
+	//Required configuration files
+	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+
+
+	$pageview=1;
+	$drawerhidden=1;
+	$pageorder=10;
+	$pagetitle="Starter";
+	$description="A simple Hello World starter app template.";
+	$version="0.0.5";
+	$repo="abreio/Abre-Starter";
+	$pageicon="code";
+	$pagepath="starter";
+	require_once('permissions.php');
+?>

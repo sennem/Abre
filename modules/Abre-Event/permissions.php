@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	* Copyright (C) 2016-2018 Abre.io Inc.
+	* Copyright (C) 2016-2017 Abre.io LLC
 	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the Affero General Public License version 3
@@ -18,15 +18,15 @@
 
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	$librarybookid=mysqli_real_escape_string($db, $_GET["librarybookid"]);
-	$stmtrecord = $db->prepare("DELETE from books_libraries where ID = ?");
-	$stmtrecord->bind_param("i",$librarybookid);
-	$stmtrecord->execute();
-	$stmtrecord->close();
-	$db->close();
-	//findme
-	echo "The mood has been removed.";
+	//Check for Admin Authentication
+	$drawerhidden = 1;
+	$pagerestrictions = "";
 
+	if($_SESSION['usertype'] == 'staff'){
+		$drawerhidden=0;
+		$pagerestrictions="";
+	}
 ?>

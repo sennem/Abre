@@ -1,7 +1,7 @@
 <?php
 
 	/*
-	* Copyright (C) 2016-2018 Abre.io Inc.
+	* Copyright (C) 2016-2017 Abre.io LLC
 	*
 	* This program is free software: you can redistribute it and/or modify
     * it under the terms of the Affero General Public License version 3
@@ -18,11 +18,11 @@
 
 	//Required configuration files
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
+	require_once('permissions.php');
 
+	if($pagerestrictions == ""){
+
+	}
 ?>
-
-	<div class='fixed-action-btn buttonpin'>
-		<a class='modal-uploadbook btn-floating btn-large waves-effect waves-light' style='background-color: <?php echo getSiteColor(); ?>' id='uploadbook_button' data-position='left' href='#uploadbook'><i class='large material-icons'>file_upload</i></a>
-		<div class="mdl-tooltip mdl-tooltip--left" for="uploadbook_button">Upload Book</div>
-	</div>
