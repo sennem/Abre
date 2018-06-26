@@ -328,6 +328,11 @@
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
 		}
+		function setperiod()
+		{
+			document.getElementById("ClassPeriodSelection").value = <?php echo $period ?>;
+			alert(<?php echo $period ?>);
+		}
 	</script>
 
 	<div class='page_container'>
