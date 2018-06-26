@@ -230,10 +230,6 @@
 	}
 	else
 	{
-		echo '<script type="text/javascript">',
-		'setperiod();',
-		'</script>'
-		;
 		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
 		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 		$email='teacher1@gmail.com';
@@ -373,5 +369,9 @@
 		</table>
 
 <?php
+	echo '<script type="text/javascript">',
+	'setperiod();',
+	'</script>'
+	;
 	}
 ?>
