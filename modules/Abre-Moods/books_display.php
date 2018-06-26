@@ -250,6 +250,7 @@
 		{
 			$roomnum = $value;
 		}
+		$conroomnum->close();
 		echo $roomnum;
 ?>
 	<style>
@@ -263,6 +264,7 @@
 		function changeperiod()
 		{
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
+			alert('mhm');
 		}
 	</script>
 
