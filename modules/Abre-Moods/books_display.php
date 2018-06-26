@@ -252,6 +252,8 @@
 		}
 		$conroomnum->close();
 		echo $roomnum;
+		$period=$_GET['periodnumber'];
+		echo $period;
 ?>
 	<style>
 		img
@@ -264,7 +266,7 @@
 		function changeperiod()
 		{
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			alert('mhm');
+			window.location.assign("http://localhost:8080/modules/Abre-Moods/books_display.php?periodnumber=" + periodnum);
 		}
 	</script>
 
