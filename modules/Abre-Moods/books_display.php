@@ -1,5 +1,5 @@
 <?php
-	$periodnumberplease = $_SESSION['periodsession'];
+
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -230,7 +230,6 @@
 	}
 	else
 	{
-		//set session room num
 		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
 		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 		$email='teacher1@gmail.com';
@@ -251,8 +250,69 @@
 			$roomnum = $value;
 		}
 		$conroomnum->close();
-		echo $roomnum;
-		echo '-|-';
+
+		$conperiod=mysqli_connect("localhost","root","killerm111","abredb");
+		$sqlperiod="SELECT periodnum FROM temp_hold_periodnum";
+		$periodresult=mysqli_query($conperiod,$sqlperiod);
+		$arrperiodresults=array();
+		while($rowperiod = mysqli_fetch_array($periodresult))
+		{
+			$arrperiodresults[]=$rowperiod['periodnum'];
+		}
+		foreach($arrperiodresults as $value)
+		{
+			$period = $value;
+		}
+		$conperiod->close();
+
+
+		$confname=mysqli_connect("localhost","root","killerm111","abredb");
+		if ($period==1)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period1 = '$roomnum'";
+		}
+		elseif ($period==2)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period2 = '$roomnum'";
+		}
+		elseif ($period==3)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period3 = '$roomnum'";
+		}
+		elseif ($period==4)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period4 = '$roomnum'";
+		}
+		elseif ($period==5)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period5 = '$roomnum'";
+		}
+		elseif ($period==6)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period6 = '$roomnum'";
+		}
+		elseif ($period==7)
+		{
+			$sqlfname="SELECT Fname FROM student_schedule WHERE Period7 = '$roomnum'";
+		}
+		$fnameresult=mysqli_query($confname,$sqlfname);
+		$arrfnameresults=array();
+		while($rowfname = mysqli_fetch_array($fnameresult))
+		{
+			$arrfnameresults[]=$rowfname['Fname'];
+		}
+		foreach($arrfnameresults as $value)
+		{
+			$fname = $value;
+		}
+		$conperiod->close();
+
+		echo $roomnum . " roomnum";
+		echo '<br>';
+		echo $period . " period";
+		echo '<br>';
+		echo $fname . " fname";
+		echo '<br>';
 ?>
 	<style>
 		img
