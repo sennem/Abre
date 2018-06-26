@@ -266,6 +266,7 @@
 	<script>
 		function changeperiod()
 		{
+			alert('yup');
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/books_display.php?periodnumber=" + periodnum);
 		}
