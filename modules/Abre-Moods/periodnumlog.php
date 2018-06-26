@@ -3,24 +3,20 @@
   $username = "root";
   $password = "killerm111";
   $dbname = "abredb";
-  $periodnum = $_GET['periodurl'];//works
+  $periodnumget = $_GET['periodurl'];//works
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-  $stmt = $db->stmt_init();
-  $sql="DELETE FROM temp_hold_periodnum";
-  $stmt->prepare($sql);
-  $stmt->execute();
-  $stmt->close();
-  $db->close();
+  // Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-  $stmt = $db->stmt_init();
-  $sql="INSERT INTO temp_hold_periodnum (periodnum) VALUES ('$periodnum')";
-  $stmt->prepare($sql);
-  $stmt->execute();
-  $stmt->close();
-  $db->close();
+// sql to delete a record
+$sql = "DELETE FROM temp_hold_periodnum";
+$conn->query($sql);
+$sql = "INSERT INTO temp_hold_periodnum (periodnum) VALUES ('$periodnumget')";
+$conn->query($sql);
+$conn->close();
   header("Location:http://localhost:8080/#books");
   exit;
 ?>
