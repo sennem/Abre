@@ -230,8 +230,27 @@
 	}
 	else
 	{
-
-
+		//set session room num
+		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
+		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
+		$email='teacher1@gmail.com';
+		// Check connection
+		if (mysqli_connect_errno())
+		{
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+		}
+		$sqlroomnum="SELECT Roomnum FROM teacher_data WHERE Email='$email'";
+		$roomnumresult=mysqli_query($conroomnum,$sqlroomnum);
+		$arrroomnumresults=array();
+		while($rowroomnum = mysqli_fetch_array($roomnumresult))
+		{
+			$arrroomnumresults[]=$rowroomnum['Roomnum'];
+		}
+		foreach($arrroomnumresults as $value)
+		{
+			$roomnum = $value;
+		}
+		echo $roomnum;
 ?>
 	<style>
 		img
@@ -244,7 +263,7 @@
 		function changeperiod()
 		{
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			alert(periodnum);
+			alert('updated');
 		}
 	</script>
 
