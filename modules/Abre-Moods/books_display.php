@@ -349,11 +349,12 @@
 		echo '<br>';
 		echo $lname . "lname";
 		echo '<br>';
-		echo $picurl . "picurl";
+		echo $picurl . "picuurl";
 		echo '<br>';
+		echo '<img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php echo $fname . " " . $lname; ?>';
 ?>
 
-	<img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php echo $fname . ' ' . $lname; ?>
+	<!--<img src="<?php //echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php //echo $fname . ' ' . $lname; ?> -->
 	<style>
 		img
 		{
@@ -415,4 +416,30 @@
 	'</script>'
 	;
 	}
+?>
+
+
+<?php
+	/*$j=0;
+	$objcounter=0;
+	echo '<table>';
+	echo '<tr>';
+	while (j<200)
+	{
+		if(thearray[$j] != "")
+		{
+			if($objcounter=4)
+			{
+				echo '</tr>';
+				echo '<tr>';
+				$objcounter=0;
+			}
+			echo '<td> <img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php echo $fname . " " . $lname; ?> </td>';
+			$objcounter=$objcounter+1;
+		}
+		else
+		{
+			break;
+		}
+	}*/
 ?>
