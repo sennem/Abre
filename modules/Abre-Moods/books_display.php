@@ -349,7 +349,7 @@
 		echo '<br>';
 		echo $lname . "lname";
 		echo '<br>';
-		echo $picurl . "picuurl";
+		echo $picurl . "picurl";
 		echo '<br>';
 		echo '<img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> ';
 		echo '<br>';
