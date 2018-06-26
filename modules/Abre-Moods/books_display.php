@@ -243,14 +243,15 @@
 	<script>
 		function changeperiod()
 		{
-			alert(document.getElementById("ClassPeriodSelection").value);
+			var periodnum=document.getElementById("ClassPeriodSelection").value;
+			alert(periodnum);
 		}
 	</script>
 
 	<div class='page_container'>
 		<div class='row'>
 			<!--<form method='POST'>-->
-				<select name='ClassPeriodSelection' onchange='changeperiod()'>
+				<select id='ClassPeriodSelection' onchange='changeperiod()'>
 						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
 						<option value='3'>Period 3</option>
