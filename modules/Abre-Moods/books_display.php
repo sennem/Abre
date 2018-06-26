@@ -313,7 +313,7 @@
 
 		echo $roomnum . "roomnum";
 		echo '<br>';
-		echo $period . "period";
+		echo $period . pperiod";
 		echo '<br>';
 		echo $fname . "fname";
 		echo '<br>';
