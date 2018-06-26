@@ -422,14 +422,14 @@
 
 
 <?php
-	/*echo '<br>';
+	echo '<br>';
 	echo 'tryyyyy';
 	echo '<br>';
 	$j=0;
 	$objcounter=0;
 	echo '<table>';
 	echo '<tr>';
-	while (j<200)
+	while ($j<200)
 	{
 		if($arrpicresults[$j] != "")
 		{
@@ -446,9 +446,10 @@
 		{
 			break;
 		}
+		$j=$j+1;
 	}
 
 	echo '<br>';
 	echo 'overr';
-	*/
+
 ?>
