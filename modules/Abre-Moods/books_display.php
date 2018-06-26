@@ -349,11 +349,11 @@
 		echo '<br>';
 		echo $lname . "lname";
 		echo '<br>';
-		echo $picurl . "picurlll";
+		echo $picurl . "picurl";
 		echo '<br>';
-		echo '<img src="'.$picurl.'" width="80" height="80" alt="Mark"> ';
-		echo '<br>';
-		echo '---';
+		echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' . " " . '.$lname.' </td>';
+		//echo '<br>';
+		//echo '---';
 ?>
 
 	<!--<img src="<?php //echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php //echo $fname . ' ' . $lname; ?> -->
@@ -436,7 +436,7 @@
 				echo '<tr>';
 				$objcounter=0;
 			}
-			echo '<td> <img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php echo $fname . " " . $lname; ?> </td>';
+			echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' . " " . '.$lname.' </td>';
 			$objcounter=$objcounter+1;
 		}
 		else
