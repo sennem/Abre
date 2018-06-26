@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="staff";
+	$pagerestrictions="staff"; //so i can load the "other page"
 	if ($pagerestrictions=="")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -240,11 +240,19 @@
 			margin-bottom: 20px;
 		}
 	</style>
+	<script>
+		function changeperiod()
+		{
+			alert('running changeperiod');
+			var periodnum = document.getElementById('ClassPeriodSelection').value;
+			alert (periodnum);
+		}
+	</script>
 
 	<div class='page_container'>
 		<div class='row'>
-			<form method='POST'>
-				<select name='ClassPeriodSelection'>
+			<!--<form method='POST'>-->
+				<select name='ClassPeriodSelection' onchange='changeperiod()'>
 						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
 						<option value='3'>Period 3</option>
@@ -255,8 +263,8 @@
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
-				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submit!">
-			</form>
+				<!--<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submit!">
+			</form>-->
 		</div>
 
 		<table>
