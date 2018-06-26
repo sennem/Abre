@@ -1,5 +1,5 @@
 <?php
-
+	$periodnumberplease = $_SESSION['periodsession'];
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -230,7 +230,6 @@
 	}
 	else
 	{
-		echo $_SESSION['period'];
 		//set session room num
 		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
 		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
@@ -253,10 +252,9 @@
 		}
 		$conroomnum->close();
 		echo $roomnum;
-		echo '--|';
-		$period=$_SESSION['period'];
-		echo $period;
-		echo '|--';
+		echo "||";
+		echo $periodnumberplease;
+		echo "||";
 ?>
 	<style>
 		img
