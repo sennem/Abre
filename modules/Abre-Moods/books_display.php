@@ -351,7 +351,7 @@
 		echo '<br>';
 		echo $picurl . "picurl";
 		echo '<br>';
-		echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
+		//echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
 		//echo '<br>';
 		//echo '---';
 ?>
@@ -422,13 +422,16 @@
 
 
 <?php
-	/*$j=0;
+	echo '<br>';
+	echo 'tryyyyy';
+	echo '<br>';
+	$j=0;
 	$objcounter=0;
 	echo '<table>';
 	echo '<tr>';
 	while (j<200)
 	{
-		if(thearray[$j] != "")
+		if($arrpicresults[$j] != "")
 		{
 			if($objcounter=4)
 			{
@@ -436,12 +439,15 @@
 				echo '<tr>';
 				$objcounter=0;
 			}
-			echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' . " " . '.$lname.' </td>';
+			echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="No Result">  '.$fname.' '.$lname.' </td>';
 			$objcounter=$objcounter+1;
 		}
 		else
 		{
 			break;
 		}
-	}*/
+	}
+
+	echo '<br>';
+	echo 'overr';
 ?>
