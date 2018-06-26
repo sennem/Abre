@@ -237,7 +237,7 @@
 		img
 		{
 			border-radius: 50%;
-			/*margin: 35px;*/
+			margin-bottom: 20px;
 		}
 	</style>
 
@@ -255,7 +255,7 @@
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
-				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submiiit!">
+				<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submit!">
 			</form>
 		</div>
 
