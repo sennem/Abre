@@ -331,7 +331,8 @@
 		function setperiod()
 		{
 			alert('running');
-			document.getElementById("ClassPeriodSelection").value = <?php echo $period ?>;
+			alert('<?php echo $period; ?>');
+			document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";
 		}
 	</script>
 
