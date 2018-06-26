@@ -423,7 +423,7 @@
 
 <?php
 	echo '<br>';
-	echo 'try';
+	echo 'tryyy';
 	echo '<br>';
 	$j=0;
 	$objcounter=0;
@@ -433,7 +433,7 @@
 	{
 		if($arrpicresults[$j] != "")
 		{
-			if($objcounter=4)
+			if($objcounter==4)
 			{
 				echo 'hitobj';
 				echo '</tr>';
