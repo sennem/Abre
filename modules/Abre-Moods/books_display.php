@@ -245,7 +245,7 @@
 		{
 			alert('running changeperiod');
 			var periodnum = document.getElementById('ClassPeriodSelection').value;
-			alert (periodnum);
+			alert('periodnum');
 		}
 	</script>
 
