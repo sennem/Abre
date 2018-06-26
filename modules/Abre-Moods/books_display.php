@@ -228,22 +228,6 @@
 
 <?php
 	}
-?>
-<script>
-	function changeperiod()
-	{
-		alert('8');
-		var periodnum=document.getElementById("ClassPeriodSelection").value;
-		window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
-	}
-	function setperiod()
-	{
-		document.getElementById("ClassPeriodSelection").value = <?php echo $period ?>;
-		alert(<?php echo $period ?>);
-	}
-</script>
-
-<?php
 	else
 	{
 		echo '<script type="text/javascript">',
@@ -341,19 +325,19 @@
 			margin-bottom: 20px;
 		}
 	</style>
-	<!--<script>
+	<script>
 		function changeperiod()
 		{
-			alert('7');
+			alert('8');
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
 		}
 		function setperiod()
 		{
 			document.getElementById("ClassPeriodSelection").value = <?php echo $period ?>;
-			alert(<?php echo $period ?>);
+			alert('running');
 		}
-	</script>-->
+	</script>
 
 	<div class='page_container'>
 		<div class='row'>
