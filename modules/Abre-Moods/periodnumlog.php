@@ -9,6 +9,13 @@
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
   $stmt = $db->stmt_init();
+  $sql="DELETE FROM temp_hold_periodnum";
+  $stmt->prepare($sql);
+  $stmt->execute();
+  $stmt->close();
+  $db->close();
+
+  $stmt = $db->stmt_init();
   $sql="INSERT INTO temp_hold_periodnum (periodnum) VALUES ('$periodnum')";
   $stmt->prepare($sql);
   $stmt->execute();
