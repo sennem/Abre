@@ -252,7 +252,7 @@
 		}
 		$conroomnum->close();
 		echo $roomnum;
-		echo '-|-|-|';
+		echo '-|-';
 ?>
 	<style>
 		img
@@ -266,7 +266,7 @@
 		{
 			alert('2');
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodnumber=" + periodnum);
+			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
 		}
 	</script>
 
