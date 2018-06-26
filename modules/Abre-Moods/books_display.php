@@ -330,7 +330,7 @@
 		}
 		function setperiod()
 		{
-			alert('running');
+			alert('runniong');
 			alert('<?php echo $period; ?>');
 			document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";
 		}
