@@ -328,14 +328,14 @@
 	<script>
 		function changeperiod()
 		{
-			alert('8');
+			alert('9');
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
 		}
 		function setperiod()
 		{
-			document.getElementById("ClassPeriodSelection").value = <?php echo $period ?>;
 			alert('running');
+			document.getElementById("ClassPeriodSelection").value = <?php echo $period ?>;
 		}
 	</script>
 
