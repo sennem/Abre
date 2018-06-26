@@ -264,7 +264,7 @@
 	<script>
 		function changeperiod()
 		{
-			alert('4');
+			alert('7');
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
 		}
