@@ -266,52 +266,90 @@
 		$conperiod->close();
 
 
-		$confname=mysqli_connect("localhost","root","killerm111","abredb");
+		$conname=mysqli_connect("localhost","root","killerm111","abredb");
 		if ($period==1)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period1 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period1 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period1 = '$roomnum'";
 		}
 		elseif ($period==2)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period2 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period2 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period2 = '$roomnum'";
 		}
 		elseif ($period==3)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period3 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period3 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period3 = '$roomnum'";
 		}
 		elseif ($period==4)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period4 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period4 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period4 = '$roomnum'";
 		}
 		elseif ($period==5)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period5 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period5 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period5 = '$roomnum'";
 		}
 		elseif ($period==6)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period6 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period6 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period6 = '$roomnum'";
 		}
 		elseif ($period==7)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period7 = '$roomnum'";
+			$sqllname="SELECT Lname FROM students_schedule WHERE Period7 = '$roomnum'";
+			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period7 = '$roomnum'";
 		}
-		$fnameresult=mysqli_query($confname,$sqlfname);
+		$fnameresult=mysqli_query($conname,$sqlfname);
+		$lnameresult=mysqli_query($conname,$sqllname);
+		$picresult=mysqli_query($conname,$sqlpic);
 		$arrfnameresults=array();
+		$arrlnameresults=array();
+		$arrpicresults=array();
 		while($rowfname = mysqli_fetch_array($fnameresult))
 		{
 			$arrfnameresults[]=$rowfname['Fname'];
 		}
+		while($rowlname = mysqli_fetch_array($lnameresult))
+		{
+			$arrlnameresults[]=$rowlname['Lname'];
+		}
+		while($rowpic = mysqli_fetch_array($picresult))
+		{
+			$arrpicresults[]=$rowpic['ImgUrl'];
+		}
 		foreach($arrfnameresults as $value)
 		{
-			$fname = $value;
+			$fname = $value; //change when mutliple people, this just gets one (the last) result
 		}
-		$conperiod->close();
+		foreach($arrlnameresults as $value)
+		{
+			$lname = $value; //change when mutliple people, this just gets one (the last) result
+		}
+		foreach($arrpicresults as $value)
+		{
+			$picurl = $value; //change when mutliple people, this just gets one (the last) result
+		}
+		$conname->close();
 
 		echo $roomnum . "roomnum";
 		echo '<br>';
 		echo $period ."pperiod";
 		echo '<br>';
 		echo $fname . "fname";
+		echo '<br>';
+		echo $lname . "lname";
+		echo '<br>';
+		echo $picurl . "picurl";
 		echo '<br>';
 ?>
 	<style>
@@ -324,14 +362,14 @@
 	<script>
 		function changeperiod()
 		{
-			alert('9');
+			alert('9'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
 		}
 		function setperiod()
 		{
-			alert('runniong');
-			alert('<?php echo $period; ?>');
+			//alert('runniong');
+			//alert('<?php //echo $period; ?>');
 			document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";
 		}
 	</script>
@@ -354,7 +392,7 @@
 			</form>-->
 		</div>
 
-		<table>
+		<!--<table>
 			<tr>
 				<td><img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">Mark Senne</td>
 				<td><img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie">Annie Wang</td>
@@ -367,7 +405,7 @@
 				<td><img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram">Vikram Depak</td>
 				<td><img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan">Alan Guo</td>
 			</tr>
-		</table>
+		</table>-->
 
 <?php
 	echo '<script type="text/javascript">',
