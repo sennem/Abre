@@ -343,7 +343,7 @@
 
 		echo $roomnum . "roomnum";
 		echo '<br>';
-		echo $period ."pperiod";
+		echo $period ."period";
 		echo '<br>';
 		echo $fname . "fname";
 		echo '<br>';
@@ -351,6 +351,7 @@
 		echo '<br>';
 		echo $picurl . "picurl";
 		echo '<br>';
+		<img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> "<?php echo $fname . ' ' . $lname ?>" </td>
 ?>
 	<style>
 		img
