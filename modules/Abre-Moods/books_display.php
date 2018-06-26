@@ -263,7 +263,7 @@
 		function changeperiod()
 		{
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			alert('updated');
+			alert('updateed');
 		}
 	</script>
 
