@@ -440,7 +440,7 @@
 				echo '<tr>';
 				$objcounter=0;
 			}
-			echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$fname.' '.$lname.' </td>';
+			echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnamersults[$j].' </td>';
 			$objcounter=$objcounter+1;
 		}
 		else
