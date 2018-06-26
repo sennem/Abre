@@ -252,9 +252,7 @@
 		}
 		$conroomnum->close();
 		echo $roomnum;
-		echo "||";
-		echo $periodnumberplease;
-		echo "||";
+		echo '-|-|-|';
 ?>
 	<style>
 		img

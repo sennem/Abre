@@ -59,14 +59,15 @@
 					});
 		    },
 		    'books/?:name': function(name) {
-			    $('#navigation_top').hide();
+					$('#navigation_top').hide();
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
 			    $('#titletext').text('Books');
-			    document.title = 'Reader';
-					$('#content_holder').load('modules/".basename(__DIR__)."/reader.php?id='+name, function() { init_page(); back_button('#books'); });
-					ga('set', 'page', '/#books/reader/');
-					ga('send', 'pageview');
+			    document.title = 'Moods';
+					$('#content_holder').load('modules/".basename(__DIR__)."/books.php', function() { init_page(); });
+					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
+					ga('set', 'page', '/#books/');
+					ga('send', 'pageview');";
 		    },";
 ?>
