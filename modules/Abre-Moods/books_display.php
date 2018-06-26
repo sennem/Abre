@@ -351,8 +351,8 @@
 		echo '<br>';
 		echo $picurl . "picurl";
 		echo '<br>';
-		<img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark">
 ?>
+<img src="<?php echo $picurl; ?>" width="80" height="80" alt="Mark"> "<?php echo $fname; ?>"
 	<style>
 		img
 		{
