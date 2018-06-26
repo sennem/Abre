@@ -351,7 +351,7 @@
 		echo '<br>';
 		echo $picurl . "picurl";
 		echo '<br>';
-		echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' . " " . '.$lname.' </td>';
+		echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
 		//echo '<br>';
 		//echo '---';
 ?>
