@@ -241,8 +241,15 @@
 		}
 		$sqlroomnum="SELECT Roomnum FROM teacher_data WHERE Email='$email'";
 		$roomnumresult=mysqli_query($conroomnum,$sqlroomnum);
-		$roomnum = mysqli_fetch_row($roomnumresult);
-		$con->close();
+		$arrroomnumresults=array();
+		while($rowroomnum = mysqli_fetch_array($roomnumresult))
+		{
+			$arrroomnumresults[]=$rowroomnum['Roomnum'];
+		}
+		foreach($arrroomnumresults as $value)
+		{
+			$roomnum = $value;
+		}
 		echo $roomnum;
 ?>
 	<style>
