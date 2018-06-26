@@ -349,9 +349,9 @@
 		echo '<br>';
 		echo $lname . "lname";
 		echo '<br>';
-		echo $picurl . "picurrl";
+		echo $picurl . "picurlll";
 		echo '<br>';
-		echo '<img src="$picurl" width="80" height="80" alt="Mark"> ';
+		echo '<img src="'.$picurl.'" width="80" height="80" alt="Mark"> ';
 		echo '<br>';
 		echo '---';
 ?>
