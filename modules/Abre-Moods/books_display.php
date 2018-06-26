@@ -230,6 +230,7 @@
 	}
 	else
 	{
+		echo $_SESSION['period'];
 		//set session room num
 		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
 		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
