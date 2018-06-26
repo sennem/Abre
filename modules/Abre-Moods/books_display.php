@@ -269,31 +269,31 @@
 		$confname=mysqli_connect("localhost","root","killerm111","abredb");
 		if ($period==1)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period1 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period1 = '$roomnum'";
 		}
 		elseif ($period==2)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period2 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period2 = '$roomnum'";
 		}
 		elseif ($period==3)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period3 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period3 = '$roomnum'";
 		}
 		elseif ($period==4)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period4 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period4 = '$roomnum'";
 		}
 		elseif ($period==5)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period5 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period5 = '$roomnum'";
 		}
 		elseif ($period==6)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period6 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period6 = '$roomnum'";
 		}
 		elseif ($period==7)
 		{
-			$sqlfname="SELECT Fname FROM student_schedule WHERE Period7 = '$roomnum'";
+			$sqlfname="SELECT Fname FROM students_schedule WHERE Period7 = '$roomnum'";
 		}
 		$fnameresult=mysqli_query($confname,$sqlfname);
 		$arrfnameresults=array();
@@ -307,11 +307,11 @@
 		}
 		$conperiod->close();
 
-		echo $roomnum . " roomnum";
+		echo $roomnum . "roomnum";
 		echo '<br>';
-		echo $period . " period";
+		echo $period . "period";
 		echo '<br>';
-		echo $fname . " fname";
+		echo $fname . "fname";
 		echo '<br>';
 ?>
 	<style>
