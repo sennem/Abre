@@ -253,10 +253,10 @@
 		}
 		$conroomnum->close();
 		echo $roomnum;
-		echo '---|';
-		$period=$_GET['periodnumber'];
+		echo '--|';
+		$period=$_SESSION['period'];
 		echo $period;
-		echo '|---';
+		echo '|--';
 ?>
 	<style>
 		img
