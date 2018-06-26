@@ -261,16 +261,16 @@
 
 		<table>
 			<tr>
-				<td><img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark"></td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie"></td>
-				<td><img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton"></td>
-				<td><img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan"></td>
+				<td><img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">Mark Senne</td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie">Annie Wang</td>
+				<td><img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton">Dalton Craven</td>
+				<td><img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan">Megan Cui</td>
 			</tr>
 			<tr>
-				<td><img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will"></td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott"></td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram"></td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan"></td>
+				<td><img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will">Will Mechler</td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott">Scott Shepherd</td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram">Vikram Depak</td>
+				<td><img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan">Alan Guo</td>
 			</tr>
 		</table>
 
