@@ -233,7 +233,7 @@
 		//set session room num
 		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
 		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
-		$email='teacher2@gmail.com';
+		$email='teacher1@gmail.com';
 		// Check connection
 		if (mysqli_connect_errno())
 		{
