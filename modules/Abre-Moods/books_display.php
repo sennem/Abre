@@ -448,8 +448,9 @@
 		}
 		$j=$j+1;
 	}
-
+	echo '</tr>';
+	echo '</table>';
 	echo '<br>';
-	echo 'overr';
+	echo 'overrrr';
 
 ?>
