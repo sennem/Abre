@@ -51,9 +51,9 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 	require_once('get_mood_data.php'); //get array data
+	$pagerestrictions = "staff";
 
-	$pagerestrictions = "";
-	if ($pagerestrictions!="")
+	if ($pagerestrictions!="staff")
 	{
 		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 		//echo '26'; //testing to identify if the page is running off of new saved code
@@ -274,80 +274,72 @@
 		</header>
 	</html>
 
-	<?php
-		
 
-		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View mood breakdown.</p></div>";
-		echo '<br>';
-		//----------------
-		echo 	"<div class='content-grid mdl-grid'>";
+		<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
+		<br>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:70%'></i>:".$countzero."</span>";
-				echo "</div>";
-			echo "</div>";
+		<div class='content-grid mdl-grid'>
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:70%'></i>:<?php echo $countzero; ?></span>
+				</div>
+			</div>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:70%'></i>:".$countone."</span>";
-				echo "</div>";
-			echo "</div>";
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:70%'></i>:<?php echo $countone; ?></span>
+				</div>
+			</div>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:70%'></i>:".$counttwo."</span>";
-				echo "</div>";
-			echo "</div>";
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:70%'></i>:<?php echo $counttwo; ?></span>
+				</div>
+			</div>
+		</div>
 
-		echo "</div>";
-		//--------------------------
-		echo 	"<div class='content-grid mdl-grid'>";
+		<div class='content-grid mdl-grid'>
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:70%'></i>:<?php echo $countthree; ?></span>
+				</div>
+			</div>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:70%'></i>:".$countthree."</span>";
-				echo "</div>";
-			echo "</div>";
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:70%'></i>:<?php echo $countfour; ?></span>
+				</div>
+			</div>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:70%'></i>:".$countfour."</span>";
-				echo "</div>";
-			echo "</div>";
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:70%'></i>:<?php echo $countfive; ?></span>
+				</div>
+			</div>
+		</div>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:70%'></i>:".$countfive."</span>";
-				echo "</div>";
-			echo "</div>";
+		<div class='content-grid mdl-grid'>
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:70%'></i>:<?php echo $countsix; ?></span>
+				</div>
+			</div>
 
-		echo "</div>";
-		//----------------------------------
-		echo 	"<div class='content-grid mdl-grid'>";
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:70%'></i>:<?php echo $countseven; ?></span>
+				</div>
+			</div>
 
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:70%'></i>:".$countsix."</span>";
-				echo "</div>";
-			echo "</div>";
-
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:70%'></i>:".$countseven."</span>";
-				echo "</div>";
-			echo "</div>";
-
-			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:70%'></i>:".$counteight."</span>";
-				echo "</div>";
-			echo "</div>";
-
-		echo "</div>";
-
-		//-------------------
+			<div class='mdl-cell'>
+				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
+					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:70%'></i>:<?php echo $counteight; ?></span>
+				</div>
+			</div>
+		</div>
+<?php
 	}
+
 
 	//echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
 	//this if keeps me displaying. (it doesnt pass the if test)

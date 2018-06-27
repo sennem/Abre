@@ -256,8 +256,8 @@
 		}
 	</script>
 
-	<div class='page_container'>
-		<div class='row'>
+	<!--<div class='page_container'>-->
+		<!--<div class='row'>-->
 			<!--<form method='POST'>-->
 				<select id='ClassPeriodSelection' onchange='changeperiod()'>
 						<option value='1'>Period 1</option>
@@ -272,7 +272,7 @@
 
 				<!--<input class='waves-effect waves-light btn' style='background-color: <?php //echo getSiteColor() ?>' type='submit' value="Submit!">
 			</form>-->
-		</div>
+		<!--</div>-->
 
 		<!--<table>
 			<tr>
@@ -306,6 +306,7 @@
 	echo '<br>';
 	$j=0;
 	$objcounter=0;
+	echo '<div class="page_container">';
 	echo '<table>';
 	echo '<tr>';
 	while ($j<200)
@@ -365,6 +366,7 @@
 	}
 	echo '</tr>';
 	echo '</table>';
+	echo '</div>';
 	echo '<br>';
 
 ?>
