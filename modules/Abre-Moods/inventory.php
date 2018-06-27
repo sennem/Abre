@@ -269,23 +269,23 @@
 
 		echo 	"<div class='row'>";
 
-			echo "<div class='col m6 s12'>";
+			//echo "<div class='col m6 s12'>";
 				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
 					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
 				echo "</div>";
-			echo "</div>";
+			//echo "</div>";
 
-			echo "<div class='col m6 s12'>";
+			//echo "<div class='col m6 s12'>";
 				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
 					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
 				echo "</div>";
-			echo "</div>";
+			//echo "</div>";
 
-			echo "<div class='col m6 s12'>";
+			//echo "<div class='col m6 s12'>";
 				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
 					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
 				echo "</div>";
-			echo "</div>";
+			//echo "</div>";
 
 		echo "</div>";
 	}
