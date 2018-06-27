@@ -155,6 +155,63 @@
 	}
 	$conname->close();
 
+	//loop through to get totals for Emojis
+	$c=0;
+	$countzero=0;
+	$countone=0;
+	$counttwo=0;
+	$countthree=0;
+	$countfour=0;
+	$countfive=0;
+	$countsix=0;
+	$countseven=0;
+	$counteight=0;
+	while($arrmoodresults[$c]!="")
+	{
+		if ($arrmoodresults[$c]==0)
+		{
+			$countzero=$countzero+1;
+		}
+		elseif ($arrmoodresults[$c]==1)
+		{
+			$countone=$countone+1;
+		}
+		elseif ($arrmoodresults[$c]==2)
+		{
+			$counttwo=$counttwo+1;
+		}
+		elseif ($arrmoodresults[$c]==3)
+		{
+			$countthree=$countthree+1;
+		}
+		elseif ($arrmoodresults[$c]==4)
+		{
+			$countfour=$countfour+1;
+		}
+		elseif ($arrmoodresults[$c]==5)
+		{
+			$countfive=$countfive+1;
+		}
+		elseif ($arrmoodresults[$c]==6)
+		{
+			$countsix=$countsix+1;
+		}
+		elseif ($arrmoodresults[$c]==7)
+		{
+			$countseven=$countseven+1;
+		}
+		elseif ($arrmoodresults[$c]==8)
+		{
+			$counteight=$counteight+1;
+		}
+		$c=$c+1;
+	}
+
+	//maybe get percents and such
+	//$numpeople=$c;
+	//$percentzero=$cou
+
+
 /*	echo $roomnum . "roomnum";
 	echo '<br>';
 	echo $period ."period";
