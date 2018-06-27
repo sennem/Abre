@@ -12,10 +12,12 @@
   $conn = new mysqli($servername, $username, $password, $dbname);
 
   // sql to delete a record
-  $sql = "DELETE FROM temp_hold_periodnum";
+  /*$sql = "DELETE FROM temp_hold_periodnum";
   $conn->query($sql);
   $sql = "INSERT INTO temp_hold_periodnum (periodnum) VALUES ('$periodnumget')";
-  $conn->query($sql);
+  $conn->query($sql);*/
+  
+  //$sql="UPDATE teacher_data SET PeriodSelection='$periodnumget' WHERE "
   $conn->close();
   header("Location:http://localhost:8080/#books");
   exit;
