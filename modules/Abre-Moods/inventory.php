@@ -50,7 +50,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
-	$pagerestrictions = "load teacher";
+	$pagerestrictions = "";
 	if ($pagerestrictions!="")
 	{
 		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
