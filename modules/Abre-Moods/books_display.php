@@ -391,7 +391,7 @@
 						<option value='4'>Period 4</option>
 						<option value='5'>Period 5</option>
 						<option value='6'>Period 6</option>
-						<option value='7'>Perriod 7</option>
+						<option value='7'>Period 7</option>
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 

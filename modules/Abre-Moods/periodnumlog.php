@@ -4,6 +4,11 @@
   $password = "killerm111";
   $dbname = "abredb";
   $periodnumget = $_GET['periodurl'];//works
+  $emailget = $_GET['emailurl'];
+  $roomget = $_GET['roomurl'];
+  echo $emailget;
+  echo '<br>';
+  echo $roomget;
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
@@ -16,10 +21,10 @@
   $conn->query($sql);
   $sql = "INSERT INTO temp_hold_periodnum (periodnum) VALUES ('$periodnumget')";
   $conn->query($sql);*/
-  
+
   //$sql="UPDATE teacher_data SET PeriodSelection='$periodnumget' WHERE "
   $conn->close();
-  header("Location:http://localhost:8080/#books");
+  //header("Location:http://localhost:8080/#books");
   exit;
   //all works
 ?>
