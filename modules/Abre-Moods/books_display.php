@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="staff"; //so i can load the "other page"
+	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
 	if ($pagerestrictions=="")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -329,19 +329,19 @@
 		}
 		foreach($arrfnameresults as $value)
 		{
-			$fname = $value; //change when mutliple people, this just gets one (the last) result
+			$fname = $value; //testing to see the most recent/last result
 		}
 		foreach($arrlnameresults as $value)
 		{
-			$lname = $value; //change when mutliple people, this just gets one (the last) result
+			$lname = $value; //testing to see the most recent/last result
 		}
 		foreach($arrpicresults as $value)
 		{
-			$picurl = $value; //change when mutliple people, this just gets one (the last) result
+			$picurl = $value; //testing to see the most recent/last result
 		}
 		$conname->close();
 
-		echo $roomnum . "roomnum";
+		/*echo $roomnum . "roomnum";
 		echo '<br>';
 		echo $period ."period";
 		echo '<br>';
@@ -350,7 +350,9 @@
 		echo $lname . "lname";
 		echo '<br>';
 		echo $picurl . "picurl";
-		echo '<br>';
+		echo '<br>';*/ //for testing retrieved data
+
+		//for testing display of information
 		//echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
 		//echo '<br>';
 		//echo '---';
@@ -367,9 +369,9 @@
 	<script>
 		function changeperiod()
 		{
-			alert('9'); //testing
+			alert('1'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum);
+			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + <?php echo $email; ?> + "&roomurl=" + <?php echo $roomnum; ?>);
 		}
 		function setperiod()
 		{
@@ -393,7 +395,7 @@
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
-				<!--<input class='waves-effect waves-light btn' style='background-color: <?php echo getSiteColor() ?>' type='submit' value="Submit!">
+				<!--<input class='waves-effect waves-light btn' style='background-color: <?php //echo getSiteColor() ?>' type='submit' value="Submit!">
 			</form>-->
 		</div>
 
