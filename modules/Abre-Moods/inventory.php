@@ -275,7 +275,7 @@
 	</html>
 
 	<?php
-
+		
 		//loop through to get totals for Emojis
 		$c=0;
 		$countzero=0;
@@ -328,7 +328,7 @@
 			$c=$c+1;
 		}
 
-		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Sumary</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View mood breakdown.</p></div>";
+		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View mood breakdown.</p></div>";
 		echo '<br>';
 		//----------------
 		echo 	"<div class='content-grid mdl-grid'>";
