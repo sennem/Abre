@@ -385,7 +385,7 @@
 		<div class='row'>
 			<!--<form method='POST'>-->
 				<select id='ClassPeriodSelection' onchange='changeperiod()'>
-						<option value='1'>Peeriod 1</option>
+						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
 						<option value='3'>Period 3</option>
 						<option value='4'>Period 4</option>
@@ -425,8 +425,6 @@
 
 <?php
 	echo '<br>';
-	echo 'tryyy';
-	echo '<br>';
 	$j=0;
 	$objcounter=0;
 	echo '<table>';
@@ -454,6 +452,5 @@
 	echo '</tr>';
 	echo '</table>';
 	echo '<br>';
-	echo 'overrrr';
 
 ?>
