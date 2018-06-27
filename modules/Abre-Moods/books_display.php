@@ -445,7 +445,6 @@
 	</header>
 </html>
 <?php
-echo '------adsads------';
 	echo '<br>';
 	$j=0;
 	$objcounter=0;
