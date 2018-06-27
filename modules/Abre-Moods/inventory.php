@@ -267,24 +267,26 @@
 		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Suummary</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View mood breakdown.</p></div>";
 		echo '<br>';
 
-		echo 	"<div class='row'>";
+		//echo 	"<div class='row'>";
+		echo 	"<div class='content-grid mdl-grid'>";
 
-			echo "<div class='col m6 s12'>"; //seems to make columns
-				//echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+			//echo "<div class='col m6 s12'>"; //seems to make columns
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
 					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
-				//echo "</div>";
+				echo "</div>";
 			echo "</div>";
 
-			echo "<div class='col m6 s12'>";
-				//echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
 					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
-				//echo "</div>";
+				echo "</div>";
 			echo "</div>";
 
-			echo "<div class='col m6 s12'>";
-				//echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
 					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
-				//echo "</div>";
+				echo "</div>";
 			echo "</div>";
 
 		echo "</div>";
