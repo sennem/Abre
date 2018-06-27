@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	//$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
+	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
 	if ($pagerestrictions=="")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -272,49 +272,58 @@
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period1 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period1 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period1 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period1 = '$roomnum'";
 		}
 		elseif ($period==2)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period2 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period2 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period2 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period2 = '$roomnum'";
 		}
 		elseif ($period==3)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period3 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period3 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period3 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period3 = '$roomnum'";
 		}
 		elseif ($period==4)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period4 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period4 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period4 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period4 = '$roomnum'";
 		}
 		elseif ($period==5)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period5 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period5 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period5 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period5 = '$roomnum'";
 		}
 		elseif ($period==6)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period6 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period6 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period6 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period6 = '$roomnum'";
 		}
 		elseif ($period==7)
 		{
 			$sqlfname="SELECT Fname FROM students_schedule WHERE Period7 = '$roomnum'";
 			$sqllname="SELECT Lname FROM students_schedule WHERE Period7 = '$roomnum'";
 			$sqlpic="SELECT ImgUrl FROM students_schedule WHERE Period7 = '$roomnum'";
+			$sqlmood="SELECT RecentFeeling FROM students_schedule WHERE Period7 = '$roomnum'";
 		}
 		$fnameresult=mysqli_query($conname,$sqlfname);
 		$lnameresult=mysqli_query($conname,$sqllname);
 		$picresult=mysqli_query($conname,$sqlpic);
+		$moodresult=mysqli_query($conname,$sqlmood);
 		$arrfnameresults=array();
 		$arrlnameresults=array();
 		$arrpicresults=array();
+		$arrmoodresults=array();
 		while($rowfname = mysqli_fetch_array($fnameresult))
 		{
 			$arrfnameresults[]=$rowfname['Fname'];
@@ -327,6 +336,10 @@
 		{
 			$arrpicresults[]=$rowpic['ImgUrl'];
 		}
+		while($rowmood = mysqli_fetch_array($moodresult))
+		{
+			$arrmoodresults[]=$rowmood['RecentFeeling'];
+		}
 		foreach($arrfnameresults as $value)
 		{
 			$fname = $value; //testing to see the most recent/last result
@@ -338,6 +351,10 @@
 		foreach($arrpicresults as $value)
 		{
 			$picurl = $value; //testing to see the most recent/last result
+		}
+		foreach($arrmoodresults as $value)
+		{
+			$mood = $value; //testing to see the most recent/last result
 		}
 		$conname->close();
 
@@ -369,7 +386,7 @@
 	<script>
 		function changeperiod()
 		{
-			alert('1'); //testing
+			alert('2'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>");
 		}
@@ -422,7 +439,11 @@
 	}
 ?>
 
-
+<html>
+	<header>
+		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	</header>
+</html>
 <?php
 	echo '<br>';
 	$j=0;
@@ -439,7 +460,43 @@
 				echo '<tr>';
 				$objcounter=0;
 			}
-			echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
+			if ($arrmoodresults[$j]==0)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-laughing"></i></td>';
+			}
+			if ($arrmoodresults[$j]==1)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-smiley"></i></td>';
+			}
+			if ($arrmoodresults[$j]==2)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_smiling_face"></i></td>';
+			}
+			if ($arrmoodresults[$j]==3)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-weary"></i></td>';
+			}
+			if ($arrmoodresults[$j]==4)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-cry"></i></td>';
+			}
+			if ($arrmoodresults[$j]==5)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_frowning_face"></i></td>';
+			}
+			if ($arrmoodresults[$j]==6)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-persevere"></i></td>';
+			}
+			if ($arrmoodresults[$j]==7)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-grimacing"></i></td>';
+			}
+			if ($arrmoodresults[$j]==8)
+			{
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-expressionless"></i></td>';
+			}
+			//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
 			$objcounter=$objcounter+1;
 		}
 		else
