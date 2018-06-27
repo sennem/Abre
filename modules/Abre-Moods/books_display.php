@@ -252,12 +252,12 @@
 		$conroomnum->close();
 
 		$conperiod=mysqli_connect("localhost","root","killerm111","abredb");
-		$sqlperiod="SELECT periodnum FROM temp_hold_periodnum";
+		$sqlperiod="SELECT PeriodSelection FROM teacher_data WHERE Email='$email' AND Roomnum='$roomnum'";
 		$periodresult=mysqli_query($conperiod,$sqlperiod);
 		$arrperiodresults=array();
 		while($rowperiod = mysqli_fetch_array($periodresult))
 		{
-			$arrperiodresults[]=$rowperiod['periodnum'];
+			$arrperiodresults[]=$rowperiod['PeriodSelection'];
 		}
 		foreach($arrperiodresults as $value)
 		{
@@ -385,7 +385,7 @@
 		<div class='row'>
 			<!--<form method='POST'>-->
 				<select id='ClassPeriodSelection' onchange='changeperiod()'>
-						<option value='1'>Period 1</option>
+						<option value='1'>Peeriod 1</option>
 						<option value='2'>Period 2</option>
 						<option value='3'>Period 3</option>
 						<option value='4'>Period 4</option>
