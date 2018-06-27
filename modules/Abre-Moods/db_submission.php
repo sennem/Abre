@@ -21,6 +21,9 @@
   $sql="INSERT INTO mood_table (Email, Daterow, Timerow, Feeling) VALUES ('$email','$datevar', '$timevar', '$emojimood')";
   $stmt->prepare($sql);
   $stmt->execute();
+  $sql="UPDATE students_schedule SET RecentFeeling ='$emojimood' WHERE Email='$email'";
+  $stmt->prepare($sql);
+  $stmt->execute();
   $stmt->close();
   $db->close();
   header("Location:http://localhost:8080/#books");
