@@ -435,7 +435,6 @@
 		{
 			if($objcounter==4)
 			{
-				echo 'hitobj';
 				echo '</tr>';
 				echo '<tr>';
 				$objcounter=0;
