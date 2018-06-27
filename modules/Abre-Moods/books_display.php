@@ -386,7 +386,7 @@
 	<script>
 		function changeperiod()
 		{
-			alert('2'); //testing
+			//alert('2'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>");
 		}
