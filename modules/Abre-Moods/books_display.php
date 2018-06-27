@@ -371,7 +371,7 @@
 		{
 			alert('1'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + <?php echo $email; ?> + "&roomurl=" + <?php echo $roomnum; ?>);
+			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>");
 		}
 		function setperiod()
 		{
@@ -391,7 +391,7 @@
 						<option value='4'>Period 4</option>
 						<option value='5'>Period 5</option>
 						<option value='6'>Period 6</option>
-						<option value='7'>Period 7</option>
+						<option value='7'>Perriod 7</option>
 				</select>
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
