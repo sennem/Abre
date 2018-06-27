@@ -50,6 +50,8 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
+	require_once('books_display.php'); //get array data
+
 	$pagerestrictions = "";
 	if ($pagerestrictions!="")
 	{
@@ -264,32 +266,138 @@
 	}
 	else
 	{
-		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Suummary</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View mood breakdown.</p></div>";
-		echo '<br>';
+	?>
 
-		//echo 	"<div class='row'>";
+	<html>
+		<header>
+			<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+		</header>
+	</html>
+
+	<?php
+
+		//loop through to get totals for Emojis
+		$c=0;
+		$countzero=0;
+		$countone=0;
+		$counttwo=0;
+		$countthree=0;
+		$countfour=0;
+		$countfive=0;
+		$countsix=0;
+		$countseven=0;
+		$counteight=0;
+		while($arrmoodresults[$c]!="")
+		{
+			if ($arrmoodresults[$c]==0)
+			{
+				$countzero=$countzero+1;
+			}
+			elseif ($arrmoodresults[$c]==1)
+			{
+				$countone=$countone+1;
+			}
+			elseif ($arrmoodresults[$c]==2)
+			{
+				$counttwo=$counttwo+1;
+			}
+			elseif ($arrmoodresults[$c]==3)
+			{
+				$countthree=$countthree+1;
+			}
+			elseif ($arrmoodresults[$c]==4)
+			{
+				$countfour=$countfour+1;
+			}
+			elseif ($arrmoodresults[$c]==5)
+			{
+				$countfive=$countfive+1;
+			}
+			elseif ($arrmoodresults[$c]==6)
+			{
+				$countsix=$countsix+1;
+			}
+			elseif ($arrmoodresults[$c]==7)
+			{
+				$countseven=$countseven+1;
+			}
+			elseif ($arrmoodresults[$c]==8)
+			{
+				$counteight=$counteight+1;
+			}
+			$c=$c+1;
+		}
+
+		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Sumary</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View mood breakdown.</p></div>";
+		echo '<br>';
+		//----------------
 		echo 	"<div class='content-grid mdl-grid'>";
 
-			//echo "<div class='col m6 s12'>"; //seems to make columns
 			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:70%'></i>:".$countzero."</span>";
 				echo "</div>";
 			echo "</div>";
 
 			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:70%'></i>:".$countone."</span>";
 				echo "</div>";
 			echo "</div>";
 
 			echo "<div class='mdl-cell'>";
-				echo "<div class='mdl-card mdl-shadow--2dp' style='width:45%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
-					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'>Testing</span>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:70%'></i>:".$counttwo."</span>";
 				echo "</div>";
 			echo "</div>";
 
 		echo "</div>";
+		//--------------------------
+		echo 	"<div class='content-grid mdl-grid'>";
+
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:70%'></i>:".$countthree."</span>";
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:70%'></i>:".$countfour."</span>";
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:70%'></i>:".$countfive."</span>";
+				echo "</div>";
+			echo "</div>";
+
+		echo "</div>";
+		//----------------------------------
+		echo 	"<div class='content-grid mdl-grid'>";
+
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:70%'></i>:".$countsix."</span>";
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:70%'></i>:".$countseven."</span>";
+				echo "</div>";
+			echo "</div>";
+
+			echo "<div class='mdl-cell'>";
+				echo "<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:10px; background-color:#2B2D4A'>";
+					echo "<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:70%'></i>:".$counteight."</span>";
+				echo "</div>";
+			echo "</div>";
+
+		echo "</div>";
+
+		//-------------------
 	}
 
 	//echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
