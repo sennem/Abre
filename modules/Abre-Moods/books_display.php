@@ -230,6 +230,8 @@
 	}
 	else
 	{
+		require_once('get_mood_data.php');
+		/*
 		$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
 		//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 		$email='teacher1@gmail.com';
@@ -358,7 +360,7 @@
 		}
 		$conname->close();
 
-		/*echo $roomnum . "roomnum";
+		echo $roomnum . "roomnum";
 		echo '<br>';
 		echo $period ."period";
 		echo '<br>';
@@ -373,6 +375,7 @@
 		//echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
 		//echo '<br>';
 		//echo '---';
+
 ?>
 
 	<!--<img src="<?php //echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php //echo $fname . ' ' . $lname; ?> -->

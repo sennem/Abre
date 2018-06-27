@@ -50,7 +50,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
-	require_once('books_display.php'); //get array data
+	require_once('get_mood_data.php'); //get array data
 
 	$pagerestrictions = "";
 	if ($pagerestrictions!="")
