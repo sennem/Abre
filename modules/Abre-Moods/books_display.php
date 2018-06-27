@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	//$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
+	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
 	if ($pagerestrictions=="")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -462,39 +462,39 @@
 			}
 			if ($arrmoodresults[$j]==0)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-laughing"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-laughing" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==1)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-smiley"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-smiley" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==2)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_smiling_face"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==3)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-weary"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-weary" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==4)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-cry"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-cry" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==5)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_frowning_face"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==6)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-persevere"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-persevere" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==7)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-grimacing"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-grimacing" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==8)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-expressionless"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-expressionless" style="font-size:200%"></i></td>';
 			}
 			//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
 			$objcounter=$objcounter+1;
