@@ -23,7 +23,8 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
 	if(isAppActive("Abre-Books")){
-		DisplayWidget('Abre-Books','local_library','Books','#E91E63', $portal_root.'/#books', false);
+		//function DisplayWidget($path,$icon,$title,$color,$url,$newtab)
+		DisplayWidget('Abre-Books','local_library','Moods','#E91E63', $portal_root.'/#books', false);
 	}
 
 ?>

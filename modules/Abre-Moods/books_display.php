@@ -256,9 +256,7 @@
 		}
 	</script>
 
-	<!--<div class='page_container'>-->
-		<!--<div class='row'>-->
-			<!--<form method='POST'>-->
+	<!--<div class='page_container' style='background-color:#2B2D4A'>-->
 				<select id='ClassPeriodSelection' onchange='changeperiod()'>
 						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
@@ -268,6 +266,7 @@
 						<option value='6'>Period 6</option>
 						<option value='7'>Period 7</option>
 				</select>
+		<!--</div>-->
 				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
 				<!--<input class='waves-effect waves-light btn' style='background-color: <?php //echo getSiteColor() ?>' type='submit' value="Submit!">
@@ -290,6 +289,7 @@
 		</table>-->
 
 <?php
+	echo '<br>';
 	echo '<script type="text/javascript">',
 	'setperiod();',
 	'</script>'
@@ -302,11 +302,13 @@
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	</header>
 </html>
+<div class="mdl-shadow--16dp" style="background-color:#2B2D4A"
 <?php
-	echo '<br>';
+	//echo '<br>';
 	$j=0;
 	$objcounter=0;
-	echo '<div class="page_container">';
+	//echo '<div class="mdl-shadow--16dp" style="background-color:#2B2D4A">';
+	echo '<br>';
 	echo '<table>';
 	echo '<tr>';
 	while ($j<200)
@@ -321,39 +323,39 @@
 			}
 			if ($arrmoodresults[$j]==0)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-laughing" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-laughing" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==1)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-smiley" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-smiley" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==2)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==3)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-weary" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-weary" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==4)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-cry" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-cry" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==5)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==6)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-persevere" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-persevere" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==7)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-grimacing" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-grimacing" style="font-size:200%"></i></td>';
 			}
 			if ($arrmoodresults[$j]==8)
 			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' <i class="em em-expressionless" style="font-size:200%"></i></td>';
+				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-expressionless" style="font-size:200%"></i></td>';
 			}
 			//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
 			$objcounter=$objcounter+1;
@@ -366,7 +368,7 @@
 	}
 	echo '</tr>';
 	echo '</table>';
-	echo '</div>';
+	//echo '</div>';
 	echo '<br>';
 
 ?>

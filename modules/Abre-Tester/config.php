@@ -22,18 +22,18 @@
 
 	if(superadmin()){
 		//Check for installation
-		activateApp("Abre-Starter");
+		activateApp("Abre-Tester");
 		require('installer.php');
 	}
 
 	$pageview=1;
 	$drawerhidden=1;
 	$pageorder=10;
-	$pagetitle="Starter";
-	$description="A simple Hello World starter app template.";
-	$version="0.0.5";
-	$repo="abreio/Abre-Starter";
+	$pagetitle="Tester";
+	$description="A simple Hello World tester app template.";
+	$version="0.0.6";
+	$repo="abreio/Abre-Tester";
 	$pageicon="code";
-	$pagepath="starter";
+	$pagepath="tester";
 	require_once('permissions.php');
 ?>
