@@ -26,6 +26,6 @@
   $stmt->execute();
   $stmt->close();
   $db->close();
-  header("Location:http://localhost:8080/#books");
+  header("Location:http://localhost:8080/#moods");
   exit;
 ?>
