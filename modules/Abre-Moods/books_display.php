@@ -26,8 +26,8 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
-	if ($pagerestrictions=="")
+	$pagerestrictions="nope"; //so i can load the "other page" (teacher version)
+	if ($pagerestrictions=="student")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
 		// Check connection
@@ -46,7 +46,6 @@
 			<div class='row'>
 
 				<?php
-					echo '10';
 					echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 				?>
 
@@ -112,7 +111,6 @@
 							}
 							function resetdisp()
 							{
-								alert("PLEASE WORK!");
 								document.getElementById("emojizero").style.backgroundColor = "";
 								document.getElementById("emojione").style.backgroundColor = "";
 								document.getElementById("emojitwo").style.backgroundColor = "";

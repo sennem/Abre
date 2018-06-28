@@ -33,7 +33,7 @@
 	$version = $abre_version; //the version number (4.5.9)
 	$repo = NULL;
 	$pageicon = "mood";
-	$pagepath = "books"; //findme doesnt seem to do anything
+	$pagepath = "moods"; //findme doesnt seem to do anything
 
 	require_once('permissions.php');
 

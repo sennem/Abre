@@ -22,20 +22,32 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
 
+	$testentry=1;
 ?>
 
-<?php if($booksadmin==1 && $_SESSION['usertype']!='parent'){ ?>
+<?php if($_SESSION['usertype']=='staff' && $testentry==0){ ?>
 
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
 			<!--findme-->
-			<li class="tab col s3 tab_1 booksmenu pointer" data="#books"><a href="#books">Mood Menu</a></li>
-			<li class='tab col s3 tab_2 booksmenu pointer' data="#books/inventory"><a href='#books/inventory'>History</a></li>
+			<li class="tab col s3 tab_1 booksmenu pointer" data="#moods"><a href="#moods">Roster</a></li>
+			<li class='tab col s3 tab_2 booksmenu pointer' data="#moods/inventory"><a href='#moods/inventory'>Details</a></li>
 		</ul>
 	</div>
 
 <?php } ?>
 
+<?php if($_SESSION['usertype']=='student' || $testentry==1){ ?>
+
+    <div class="col s12">
+		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
+			<!--findme-->
+			<li class="tab col s3 tab_1 booksmenu pointer" data="#moods"><a href="#moods">Menu</a></li>
+			<li class='tab col s3 tab_2 booksmenu pointer' data="#moods/inventory"><a href='#moods/inventory'>History</a></li>
+		</ul>
+	</div>
+
+<?php } ?>
 
 <script>
 

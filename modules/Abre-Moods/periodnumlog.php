@@ -22,7 +22,7 @@
   $sql="UPDATE teacher_data SET PeriodSelection='$periodnumget' WHERE Email='$emailget' AND Roomnum='$roomget'";
   $conn->query($sql);
   $conn->close();
-  header("Location:http://localhost:8080/#books");
+  header("Location:http://localhost:8080/#moods");
   exit;
   //all works
 ?>

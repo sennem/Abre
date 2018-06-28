@@ -20,16 +20,16 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 
 		echo "
-		    'books': function(name) {
+		    'moods': function(name) {
 			    $('#navigation_top').hide();
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
-			    $('#titletext').text('Books');
+			    $('#titletext').text('Moods');
 			    document.title = 'Moods';
 					$('#content_holder').load('modules/".basename(__DIR__)."/books.php', function() { init_page(); });
 					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
-					ga('set', 'page', '/#books/');
+					ga('set', 'page', '/#moods/');
 					ga('send', 'pageview');";
 
 					if(CONSTANT('SITE_MODE') != 'DEMO'){
@@ -40,16 +40,15 @@
 						});";
 					}
 		    echo "},
-		    'books/inventory': function(name) {
+		    'moods/inventory': function(name) {
 			    $('#navigation_top').hide();
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
-			    $('#titletext').text('Books');
+			    $('#titletext').text('Moods');
 			    document.title = 'Moods Memory';
 					$('#content_holder').load('modules/".basename(__DIR__)."/inventory.php', function() { init_page(); });
-					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
-					ga('set', 'page', '/#books/inventory/');
+					ga('set', 'page', '/#moods/inventory/');
 					ga('send', 'pageview');
 
 					$('#navigation_top').show();
@@ -57,16 +56,5 @@
 						$('#navigation_top').show();
 						$('.tab_2').addClass('tabmenuover');
 					});
-		    },
-		    'books/?:name': function(name) {
-			    $('#navigation_top').hide();
-			    $('#content_holder').hide();
-			    $('.tooltipped').tooltip('remove');
-			    $('#loader').show();
-			    $('#titletext').text('Books');
-			    document.title = 'Reader';
-					$('#content_holder').load('modules/".basename(__DIR__)."/reader.php?id='+name, function() { init_page(); back_button('#books'); });
-					ga('set', 'page', '/#books/reader/');
-					ga('send', 'pageview');
 		    },";
 ?>
