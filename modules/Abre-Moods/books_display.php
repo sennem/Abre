@@ -172,7 +172,7 @@
 							<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8)"></i>
 						</li>
 					</ul>
-				</div>'
+				</div>';
 
 				?>
 

@@ -22,9 +22,9 @@
   require_once(dirname(__FILE__) . '/../../modules/stream/functions.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 
-	if(isAppActive("Abre-Books")){
+	if(isAppActive("Abre-Moods")){
 		//function DisplayWidget($path,$icon,$title,$color,$url,$newtab)
-		DisplayWidget('Abre-Books','local_library','Moods','#E91E63', $portal_root.'/#books', false);
+		DisplayWidget('Abre-Moods','mood','Moods','#E91E63', $portal_root.'/#moods', false);
 	}
 
 ?>
