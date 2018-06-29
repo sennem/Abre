@@ -159,12 +159,64 @@
 		}*/
 
 		$arrlength = count($arrdates);
+    $maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
 		date_default_timezone_set('America/Indiana/Indianapolis');
 		$getdate = date('Y-m-d');//works
 		$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
 		$cday = $cdate->format('d'); //works //for testing
 		$cmonth = $cdate->format('m'); //works //for testing
     $outputcounter=0;
+    while ($outputcounter<5)
+    {
+      $dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
+			$dbday = $dbdate->format('d'); //works //for testing
+			$dbmonth = $dbdate->format('m'); //works //for testing
+      if(($dbday >= ($cday-4)) && ($dbmonth == $cmonth)) //show feelings for the last 5 days
+			{
+        $outputcounter=$outputcounter+1;
+				echo '<br>';
+				if($rowsfeeling[$maxlength]==0)
+				{
+					 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==1)
+				{
+					 echo '<i class="em em-smiley EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==2)
+				{
+					 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==3)
+				{
+					 echo '<i class="em em-weary EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==4)
+				{
+					 echo '<i class="em em-cry EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==5)
+				{
+					 echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==6)
+				{
+					 echo '<i class="em em-persevere EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==7)
+				{
+					 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				if($rowsfeeling[$maxlength]==8)
+				{
+					 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+				}
+				echo "<i class='EmojiSpacing'></i>" . "<sup style='font-size: 100%'>" . $dbdate->format('l') . "</sup>";
+        echo '  <sup style="font-size: 100%">at</sup>  ' . '<sup style="font-size: 100%">' . $arrtimes[$maxlength] . '</sup>';
+        $maxlength=$maxlength-1; //go down to the next most recent entry
+      }
+    }
+    /*
 		for($i=0;$i<$arrlength;$i++)
 		{
       if ($outputcounter>=5)
@@ -218,7 +270,7 @@
 				echo '  <sup style="font-size: 100%">at</sup>  ' . '<sup style="font-size: 100%">' . $arrtimes[$i] . '</sup>';
 			}
 		}
-
+    */
 		$con->close();
 		echo '<br>';
     echo '<br>';
