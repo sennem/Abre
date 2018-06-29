@@ -4,6 +4,7 @@
   $password = "killerm111";
   $dbname = "abredb";
   $emojimood = $_GET['moodval'];//works
+  $widgetbool = $_GET['widget'];
   date_default_timezone_set('America/Indiana/Indianapolis');
   $datevar = date('Y-m-d');//works
   $timevar = date("H:i");
@@ -16,16 +17,27 @@
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-  $stmt = $db->stmt_init();
   $email=$_SESSION['useremail'];
-  $sql="INSERT INTO mood_table (Email, Daterow, Timerow, Feeling) VALUES ('$email','$datevar', '$timevar', '$emojimood')";
-  $stmt->prepare($sql);
-  $stmt->execute();
-  $sql="UPDATE students_schedule SET RecentFeeling ='$emojimood' WHERE Email='$email'";
-  $stmt->prepare($sql);
-  $stmt->execute();
-  $stmt->close();
+
+  $stmt1 = $db->stmt_init();
+  $sql1="INSERT INTO mood_table (Email, Daterow, Timerow, Feeling) VALUES ('$email','$datevar', '$timevar', '$emojimood')";
+  $stmt1->prepare($sql1);
+  $stmt1->execute();
+  $stmt1->close();
+
+  $stmt2 = $db->stmt_init();
+  $sql2="UPDATE students_schedule SET RecentFeeling ='$emojimood' WHERE Email='$email'";
+  $stmt2->prepare($sql2);
+  $stmt2->execute();
+  $stmt2->close();
   $db->close();
-  header("Location:http://localhost:8080/#moods");
+  if ($widgetbool==0)
+  {
+    header("Location:http://localhost:8080/#moods");
+  }
+  else
+  {
+    header("Location:http://localhost:8080/");
+  }
   exit;
 ?>

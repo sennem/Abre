@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="nope"; //so i can load the "other page" (teacher version)
+	$pagerestrictions="student"; //so i can load the "other page" (teacher version)
 	if ($pagerestrictions=="student")
 	{
 		$con=mysqli_connect("localhost","root","killerm111","abredb");
@@ -56,7 +56,7 @@
 							function testfunc(emojivalue)
 							{
 								alert("Respone submitted");
-								window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue);
+								window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 0);
 							}
 							function alterdisp()
 							{

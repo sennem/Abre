@@ -1,5 +1,4 @@
 <?php
-
 	/*
 	* Copyright (C) 2016-2018 Abre.io Inc.
 	*
@@ -21,40 +20,29 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_google_login.php');
   require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
   //require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+
 ?>
 
-<html>
-	<header>
-		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-	</header>
-</html>
 
 <?php
 		echo "<hr class='widget_hr'>";
 		echo "<div class='widget_holder'>";
-			echo "<div class='widget_container widget_body' style='color:#666;'>Select Mood<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_content.php' data-reload='true'>refresh</i></div>";
+			echo "<div class='widget_container widget_body' style='color:#666;'>Select Mood<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_menu_or_roster.php' data-reload='true'>menu</i></div>";
+			echo "<div class='widget_container widget_body' style='color:#666;'>View History<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_history_or_details.php' data-reload='true'>history</i></div>";
 		echo "</div>";
+?>
 
-		echo '
-		<div>
-			<ul>
-				<li>
-					<i id="emojizero" class="em em-laughing EmojiSpacingLeft" ></i>
-					<i id="emojione" class="em em-smiley EmojiSpacing" ></i>
-					<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" ></i>
-				</li>
-				<li>
-					<i id="emojithree" class="em em-weary EmojiSpacingLeft" ></i>
-					<i id="emojifour" class="em em-cry EmojiSpacing" ></i>
-					<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" ></i>
-				</li>
-				<li>
-					<i id="emojisix" class="em em-persevere EmojiSpacingLeft" ></i>
-					<i id="emojiseven" class="em em-grimacing EmojiSpacing" ></i>
-					<i id="emojieight" class="em em-expressionless EmojiSpacing" ></i>
-				</li>
-			</ul>
-		</div>';
+<!--<div class="col s12">
+<ul class="tabs_2" style='background-color: <?php //echo getSiteColor(); ?>'>
+	<li class="tab col s3 tab_1 booksmenu pointer" ><a href="" >Menu</a></li>
+	<li class='tab col s3 tab_2 booksmenu pointer' ><a href="" >History</a></li>
+</ul>
+</div>-->
 
-
+<?php
+	echo '<br>';
+	//if ($widgetchoice==1)
+	//{
+	//require('widget_menu_or_roster.php');
+	//}
 ?>

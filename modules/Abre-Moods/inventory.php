@@ -51,7 +51,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 	require_once('get_mood_data.php'); //get array data
-	$pagerestrictions = "nope";
+	$pagerestrictions = "student";
 
 	if ($pagerestrictions=="student")
 	{
