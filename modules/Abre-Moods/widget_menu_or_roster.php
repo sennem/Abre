@@ -1,6 +1,7 @@
 <?php
-$pagerestrictions=="student";
-if ($pagerestrictions=="staff")
+$pagerestrictions="student";
+//if($_SESSION['usertype'] == "staff")
+if ($pagerestrictions=="student")
 {
   //--------------
   echo "<hr class='widget_hr'>";
@@ -33,11 +34,13 @@ if ($pagerestrictions=="staff")
   			{
   				margin-left:10%;
   				margin-top:5%;
-  				margin-bottom:5%
+  				margin-bottom:5%;
+          font-size: 150%;
   			}
   			.EmojiSpacingLeft
   			{
-  				margin-left:25%;
+  				margin-left:22%;
+          font-size: 150%;
   			}
   			ul
   			{

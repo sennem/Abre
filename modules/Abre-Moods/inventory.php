@@ -51,8 +51,8 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('permissions.php');
 	require_once('get_mood_data.php'); //get array data
-	$pagerestrictions = "student";
-
+	$pagerestrictions = "staff";
+	//if($_SESSION['usertype'] == "student")
 	if ($pagerestrictions=="student")
 	{
 		echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
@@ -71,7 +71,6 @@
 		//echo $numrows[0]; //outputs total number of rows in the data table
 		//echo '<br>';
 
-		//---$sql="SELECT Feeling, Daterow FROM mood_table WHERE Email='marksenne000@gmail.com'";
 		$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='$email'";
 		$resultfeeling=mysqli_query($con, $sqlfeeling);
 		if (!$resultfeeling)
@@ -159,17 +158,17 @@
 			echo $value;
 		}*/
 
-		$arrlength = count($arrdates);
-		date_default_timezone_set('America/Indiana/Indianapolis');
-		$getdate = date('Y-m-d');//works
+		$arrlength = count($arrdates); //determines size of array called arrdates
+		date_default_timezone_set('America/Indiana/Indianapolis'); //set timezome
+		$getdate = date('Y-m-d');
 		$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-		$cday = $cdate->format('d'); //works //for testing
-		$cmonth = $cdate->format('m'); //works //for testing
+		$cday = $cdate->format('d'); //get current day value
+		$cmonth = $cdate->format('m'); //get current month value
 		for($i=0;$i<$arrlength;$i++)
 		{
 			$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
-			$dbday = $dbdate->format('d'); //works //for testing
-			$dbmonth = $dbdate->format('m'); //works //for testing
+			$dbday = $dbdate->format('d'); //get the day value of the db's date
+			$dbmonth = $dbdate->format('m'); //get the month value of the db's date
 			if(($dbday >= ($cday-4)) && ($dbmonth == $cmonth)) //show feelings for the last 5 days
 			{
 				echo '<br>';
@@ -212,6 +211,7 @@
 				//echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
 				echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
 				echo '  at  ' . $arrtimes[$i];
+				echo "<div style='margin-left: 37%; margin-top: 5px; height: 5px; background-color: #3e4066; width: 30%'></div>";
 			}
 		}
 
@@ -268,78 +268,78 @@
 	}
 	else
 	{
-	?>
+		?>
 
-	<html>
-		<header>
-			<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-		</header>
-	</html>
+		<html>
+			<header>
+				<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+			</header>
+		</html>
 
+			<!-- make cards for each emoji % show number of each in the desired class-->
+			<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
+			<br>
 
-		<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
-		<br>
+			<div class='content-grid mdl-grid'>
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:70%'></i>:<?php echo $countzero; ?></span>
+					</div>
+				</div>
 
-		<div class='content-grid mdl-grid'>
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:70%'></i>:<?php echo $countzero; ?></span>
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:70%'></i>:<?php echo $countone; ?></span>
+					</div>
+				</div>
+
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:70%'></i>:<?php echo $counttwo; ?></span>
+					</div>
 				</div>
 			</div>
 
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:70%'></i>:<?php echo $countone; ?></span>
+			<div class='content-grid mdl-grid'>
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:70%'></i>:<?php echo $countthree; ?></span>
+					</div>
+				</div>
+
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:70%'></i>:<sub style="font-size: 100%;"><?php echo $countfour; ?><sub></span>
+					</div>
+				</div>
+
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:70%'></i>:<?php echo $countfive; ?></span>
+					</div>
 				</div>
 			</div>
 
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:70%'></i>:<?php echo $counttwo; ?></span>
+			<div class='content-grid mdl-grid'>
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:70%'></i>:<?php echo $countsix; ?></span>
+					</div>
 				</div>
-			</div>
-		</div>
 
-		<div class='content-grid mdl-grid'>
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:70%'></i>:<?php echo $countthree; ?></span>
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:70%'></i>:<?php echo $countseven; ?></span>
+					</div>
 				</div>
-			</div>
 
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:70%'></i>:<?php echo $countfour; ?></span>
+				<div class='mdl-cell'>
+					<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
+						<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:70%'></i>:<?php echo $counteight; ?></span>
+					</div>
 				</div>
 			</div>
-
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:70%'></i>:<?php echo $countfive; ?></span>
-				</div>
-			</div>
-		</div>
-
-		<div class='content-grid mdl-grid'>
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:70%'></i>:<?php echo $countsix; ?></span>
-				</div>
-			</div>
-
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:70%'></i>:<?php echo $countseven; ?></span>
-				</div>
-			</div>
-
-			<div class='mdl-cell'>
-				<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#2B2D4A'>
-					<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:70%'></i>:<?php echo $counteight; ?></span>
-				</div>
-			</div>
-		</div>
-<?php
+			<?php
 	}
 
 

@@ -22,6 +22,9 @@
 			function testing1(){
 				alert('hit test 1');
 			}
+			function testing2(){
+				alert('hit test 2');
+			}
   	</script>
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 		<style>
@@ -67,26 +70,26 @@
     */
 
 	//Required configuration files
-	//reaches
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
-	//reaches
 	require(dirname(__FILE__) . '/../../configuration.php');
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
-	//reaches
 	require_once('permissions.php');
-//reaches
     //--------------
     echo "<hr class='widget_hr'>";
     echo "<div class='widget_holder'>";
       echo "<div class='widget_container widget_body' style='color:#666;'>Go Back<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_content.php' data-reload='true'>arrow_back</i></div>";
 		echo "</div>";
     //--------------
-		//reaches
-$pagerestrictions="student";
-//reaches
-if ($pagerestrictions=="student")
+
+$pagerestictions="student";
+//if($_SESSION['usertype'] == "student")
+//echo $pagerestictions;
+if ($pagerestictions=="student")
 {
-	//reaches
+	//echo '<script type="text/javascript">',
+	//'testing1();',
+	//'</script>'
+	//;
 		$email = $_SESSION['useremail']; //works
 		//---$con=mysqli_connect("localhost","root","password","abredb");
 		$con = new mysqli("localhost","root","password","abredb");
@@ -160,6 +163,7 @@ if ($pagerestrictions=="student")
 			//echo '<br />';
 			if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth))
 			{
+				echo "<div>";
 				if($rowsfeeling[$maxlength]==0){
 					 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
 				}
@@ -190,6 +194,8 @@ if ($pagerestrictions=="student")
 				echo "<i class='EmojiSpacing'></i>" . "<sup style='font-size: 100%'>" . $dbdate->format('l') . "</sup>";
         echo '  <sup style="font-size: 100%">at</sup>  ' . '<sup style="font-size: 100%">' . $arrtimes[$maxlength] . '</sup>';
 				$maxlength--;
+
+				//<sup> because it helps make the text and such appear on same level; it is a workaround
 	  	}
 			$outputcounter++;
 
@@ -197,6 +203,10 @@ if ($pagerestrictions=="student")
 }
 else
 {
+	//echo '<script type="text/javascript">',
+	//'testing2();',
+	//'</script>'
+	//;
 	require('get_mood_data.php'); //get array data
   ?>
   <?php

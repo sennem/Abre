@@ -26,7 +26,8 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="student"; //so i can load the "other page" (teacher version)
+	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
+	//if($_SESSION['usertype'] == "student")
 	if ($pagerestrictions=="student")
 	{
 		$con=mysqli_connect("localhost","root","password","abredb");
@@ -62,50 +63,41 @@
 							{
 								//alert('running'); for testing
 								var emojivalue3 = '<?php echo $rows[0] ;?>';
-								//alert(emojivalue3); for testing
+
 								if (emojivalue3==0)
 								{
-									//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojizero").style.border = "solid thin black";
 								}
 								if (emojivalue3==1)
 								{
-									//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojione").style.border = "solid thin black";
 								}
 								if (emojivalue3==2)
 								{
-									//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojitwo").style.border = "solid thin black";
 								}
 								if (emojivalue3==3)
 								{
-									//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojithree").style.border = "solid thin black";
 								}
 								if (emojivalue3==4)
 								{
-									//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojifour").style.border = "solid thin black";
 								}
 								if (emojivalue3==5)
 								{
-									//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojifive").style.border = "solid thin black";
 								}
 								if (emojivalue3==6)
 								{
-									//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojisix").style.border = "solid thin black";
 								}
 								if (emojivalue3==7)
 								{
-									//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojiseven").style.border = "solid thin black";
 								}
 								if (emojivalue3==8)
 								{
-									//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
 									document.getElementById("emojieight").style.border = "solid thin black";
 								}
 							}
@@ -231,7 +223,7 @@
 		require_once('get_mood_data.php');
 ?>
 
-	<!--<img src="<?php //echo $picurl; ?>" width="80" height="80" alt="Mark"> <?php //echo $fname . ' ' . $lname; ?> -->
+
 	<style>
 		img
 		{
@@ -242,19 +234,15 @@
 	<script>
 		function changeperiod()
 		{
-			//alert('2'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
 			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>" + "&fromwidget=" + 0);
 		}
 		function setperiod()
 		{
-			//alert('runniong');
-			//alert('<?php //echo $period; ?>');
 			document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";
 		}
 	</script>
 
-	<!--<div class='page_container' style='background-color:#2B2D4A'>-->
 				<select id='ClassPeriodSelection' onchange='changeperiod()'>
 						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
@@ -299,19 +287,20 @@
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	</header>
 </html>
-<div class="mdl-shadow--16dp" style="background-color:#2B2D4A"
+<div class="mdl-shadow--16dp" style="background-color:#3e4066">
 <?php
-	//echo '<br>';
 	$j=0;
 	$objcounter=0;
-	//echo '<div class="mdl-shadow--16dp" style="background-color:#2B2D4A">';
 	echo '<br>';
 	echo '<table>';
 	echo '<tr>';
+
+	//displays all returned students and their info
 	while ($j<200)
 	{
 		if($arrpicresults[$j] != "")
 		{
+			//done to only allow 4 people in a row, then it automatically makes a new row
 			if($objcounter==4)
 			{
 				echo '</tr>';
@@ -365,7 +354,7 @@
 	}
 	echo '</tr>';
 	echo '</table>';
-	//echo '</div>';
+	echo '</div>';
 	echo '<br>';
 
 ?>
