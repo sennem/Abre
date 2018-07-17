@@ -1,11 +1,12 @@
 <?php
   $servername = "localhost";
   $username = "root";
-  $password = "killerm111";
+  $password = "password";
   $dbname = "abredb";
   $periodnumget = $_GET['periodurl'];//works
   $emailget = $_GET['emailurl'];//works
   $roomget = $_GET['roomurl'];//works
+  $iswidget= $_GET['fromwidget'];
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
@@ -22,7 +23,15 @@
   $sql="UPDATE teacher_data SET PeriodSelection='$periodnumget' WHERE Email='$emailget' AND Roomnum='$roomget'";
   $conn->query($sql);
   $conn->close();
-  header("Location:http://localhost:8080/#moods");
+  if($iswidget==0)
+  {
+    header("Location:http://localhost:8080/#moods");
+  }
+  elseif($iswidget==1)
+  {
+    header("Location:http://localhost:8080/");
+  }
+
   exit;
   //all works
 ?>

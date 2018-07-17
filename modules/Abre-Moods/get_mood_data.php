@@ -27,7 +27,7 @@
 	require_once('functions.php');
 	require('permissions.php');
 
-	$conroomnum=mysqli_connect("localhost","root","killerm111","abredb");
+	$conroomnum=mysqli_connect("localhost","root","password","abredb");
 	//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 	$email='teacher1@gmail.com';
 	// Check connection
@@ -48,7 +48,7 @@
 	}
 	$conroomnum->close();
 
-	$conperiod=mysqli_connect("localhost","root","killerm111","abredb");
+	$conperiod=mysqli_connect("localhost","root","password","abredb");
 	$sqlperiod="SELECT PeriodSelection FROM teacher_data WHERE Email='$email' AND Roomnum='$roomnum'";
 	$periodresult=mysqli_query($conperiod,$sqlperiod);
 	$arrperiodresults=array();
@@ -63,7 +63,7 @@
 	$conperiod->close();
 
 
-	$conname=mysqli_connect("localhost","root","killerm111","abredb");
+	$conname=mysqli_connect("localhost","root","password","abredb");
 	if ($period==1)
 	{
 		$sqlfname="SELECT Fname FROM students_schedule WHERE Period1 = '$roomnum'";
@@ -166,46 +166,65 @@
 	$countsix=0;
 	$countseven=0;
 	$counteight=0;
+	$counthappy=0;
+	$countsad=0;
+	$countother=0;
 	while($arrmoodresults[$c]!="")
 	{
 		if ($arrmoodresults[$c]==0)
 		{
 			$countzero=$countzero+1;
+			$counthappy=$counthappy+1;
 		}
 		elseif ($arrmoodresults[$c]==1)
 		{
 			$countone=$countone+1;
+			$counthappy=$counthappy+1;
 		}
 		elseif ($arrmoodresults[$c]==2)
 		{
 			$counttwo=$counttwo+1;
+			$counthappy=$counthappy+1;
 		}
 		elseif ($arrmoodresults[$c]==3)
 		{
 			$countthree=$countthree+1;
+			$countsad=$countsad+1;
 		}
 		elseif ($arrmoodresults[$c]==4)
 		{
 			$countfour=$countfour+1;
+			$countsad=$countsad+1;
 		}
 		elseif ($arrmoodresults[$c]==5)
 		{
 			$countfive=$countfive+1;
+			$countsad=$countsad+1;
 		}
 		elseif ($arrmoodresults[$c]==6)
 		{
 			$countsix=$countsix+1;
+			$countother=$countother+1;
 		}
 		elseif ($arrmoodresults[$c]==7)
 		{
 			$countseven=$countseven+1;
+			$countother=$countother+1;
 		}
 		elseif ($arrmoodresults[$c]==8)
 		{
 			$counteight=$counteight+1;
+			$countother=$countother+1;
 		}
 		$c=$c+1;
 	}
+	$studentcount=$c;
+
+	$percenthappy=(round((float)$counthappy/(float)$studentcount)) *100;
+
+	$percentsad=(round((float)$countsad/(float)$studentcount)) *100;
+
+	$percentother=(round((float)$countother/(float)$studentcount)) *100;
 
 	//maybe get percents and such
 	//$numpeople=$c;
@@ -227,3 +246,5 @@
 	//echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
 	//echo '<br>';
 	//echo '---';
+
+	?>

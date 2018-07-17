@@ -37,7 +37,7 @@
 
 <?php } ?>
 
-<?php if($_SESSION['usertype']=='student' || $testentry==1){ ?>
+<?php if($_SESSION['usertype']=='staff' || $testentry==1){ ?>
 
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>

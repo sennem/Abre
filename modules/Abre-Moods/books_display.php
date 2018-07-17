@@ -29,7 +29,7 @@
 	$pagerestrictions="student"; //so i can load the "other page" (teacher version)
 	if ($pagerestrictions=="student")
 	{
-		$con=mysqli_connect("localhost","root","killerm111","abredb");
+		$con=mysqli_connect("localhost","root","password","abredb");
 		// Check connection
 		if (mysqli_connect_errno())
 		{
@@ -111,15 +111,15 @@
 							}
 							function resetdisp()
 							{
-								document.getElementById("emojizero").style.backgroundColor = "";
-								document.getElementById("emojione").style.backgroundColor = "";
-								document.getElementById("emojitwo").style.backgroundColor = "";
-								document.getElementById("emojithree").style.backgroundColor = "";
-								document.getElementById("emojifour").style.backgroundColor = "";
-								document.getElementById("emojifive").style.backgroundColor = "";
-								document.getElementById("emojisix").style.backgroundColor = "";
-								document.getElementById("emojiseven").style.backgroundColor = "";
-								document.getElementById("emojieight").style.backgroundColor = "";
+								document.getElementById("emojizero").style.border = "";
+								document.getElementById("emojione").style.border = "";
+								document.getElementById("emojitwo").style.border = "";
+								document.getElementById("emojithree").style.border = "";
+								document.getElementById("emojifour").style.border = "";
+								document.getElementById("emojifive").style.border = "";
+								document.getElementById("emojisix").style.border = "";
+								document.getElementById("emojiseven").style.border = "";
+								document.getElementById("emojieight").style.border = "";
 							}
 						</script>
 						<style>
@@ -177,7 +177,7 @@
 				?>
 
 				<?php
-					$con=mysqli_connect("localhost","root","killerm111","abredb");
+					$con=mysqli_connect("localhost","root","password","abredb");
 					$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 					$result=mysqli_query($con,$sql);
 					$arrrowresults=array();
@@ -244,7 +244,7 @@
 		{
 			//alert('2'); //testing
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>");
+			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>" + "&fromwidget=" + 0);
 		}
 		function setperiod()
 		{
@@ -265,7 +265,6 @@
 						<option value='7'>Period 7</option>
 				</select>
 		<!--</div>-->
-				<!-- LOOK INTO USING ONCHANGE IN SELECT TAG -->
 
 				<!--<input class='waves-effect waves-light btn' style='background-color: <?php //echo getSiteColor() ?>' type='submit' value="Submit!">
 			</form>-->

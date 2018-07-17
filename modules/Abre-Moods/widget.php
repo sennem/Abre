@@ -24,7 +24,7 @@
 
 	if(isAppActive("Abre-Moods")){
 		//function DisplayWidget($path,$icon,$title,$color,$url,$newtab)
-		DisplayWidget('Abre-Moods','mood','Moods','#a9ed2a', $portal_root.'/#moods', false);
+		DisplayWidget('Abre-Moods','mood','Mood','#a9ed2a', $portal_root.'/#moods', false);
 	}
 
 ?>
