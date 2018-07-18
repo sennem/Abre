@@ -81,7 +81,7 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="student";
+$pagerestictions="staff";
 //if($_SESSION['usertype'] == "student")
 //echo $pagerestictions;
 if ($pagerestictions=="student")

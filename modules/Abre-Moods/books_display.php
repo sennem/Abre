@@ -61,7 +61,6 @@
 							}
 							function alterdisp()
 							{
-								//alert('running'); for testing
 								var emojivalue3 = '<?php echo $rows[0] ;?>';
 
 								if (emojivalue3==0)

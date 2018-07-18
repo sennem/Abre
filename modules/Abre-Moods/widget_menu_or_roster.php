@@ -1,5 +1,5 @@
 <?php
-$pagerestrictions="student";
+$pagerestrictions="staff";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
 {
