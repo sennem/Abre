@@ -225,6 +225,18 @@ else
   			function testing1(){
   				alert('hit test 1');
   			}
+        function updateProfile(){
+            // Create a variable to refer to our request object:
+            var xmlhttp;
+
+            if (window.XMLHttpRequest){
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }else{
+                // code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+        }
     	</script>
   		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   		<style>
@@ -252,6 +264,12 @@ else
           /*the color thing is messing up, wont change from what it is (it's not even DeepSkyBlue)*/
         }
   		</style>
+      <script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous">
+      </script>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   	</head>
   </html>
 
@@ -260,14 +278,15 @@ else
 	'setperiod();',
 	'</script>'
 	;
+  ?>
+  <hr class='widget_hr'>
+  <div class='widget_holder'>
+    <div class='widget_container widget_body' style='color:#666;'>Go Back<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_content.php' data-reload='true'>arrow_back</i></div>
+  </div>
 
-  echo "<hr class='widget_hr'>";
-  echo "<div class='widget_holder'>";
-    echo "<div class='widget_container widget_body' style='color:#666;'>Go Back<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_content.php' data-reload='true'>arrow_back</i></div>";
-  echo "</div>";
-
-  echo'<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <select class="mdl-textfield__input" id="Period" name="Period" onchange="changeperiod()">
+  <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <!--<select class="mdl-textfield__input" id="Period" name="Period" onchange="changeperiod()">-->
+    <select class="mdl-textfield__input" id="SelPeriod" name="Period">
       <option></option>
       <option value="1">Period 1</option>
       <option value="2">Period 2</option>
@@ -277,9 +296,45 @@ else
       <option value="6">Period 6</option>
       <option value="7">Period 7</option>
     </select>
-  </div>';
+  </div>
+<div id="update" ></div>
+<div id="holderthingy" ></div>
+<?php
+echo '<script type="text/javascript">',
+'setperiod();',
+'</script>'
+;
+?>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#SelPeriod").change(function(){
+      var periodnumj=document.getElementById("SelPeriod").value;
+      var emailj= "<?php echo $email; ?>";
+      var roomnumj= "<?php echo $roomnum; ?>";
+      $("#update").load("/modules/Abre-Moods/test.php?periodurlj="+periodnumj+"&emailurlj="+emailj+"&roomurlj="+roomnumj);
+      //$.ajax({
+      //  url: '/modules/Abre-Moods/get_mood_data.php',
+      //  success: function(data) {
+      //    alert('Directory created');
+      //  }
+      //});
+      $("#holderthingy").load("/modules/Abre-Moods/get_mood_data.php");
+      alert("num: " + "<?php echo $numstudents; ?>");
+    });
+  });
 
-  echo "<br />";
+  //$.ajax({
+  //        url: "periodnumlog.aspx?answer=5",
+  //        success: function(data){
+  //            alert(data)
+  //          }
+  //      });
+  alert("outside " + "<?php echo $numstudents; ?>");
+</script>
+
+
+  <br />
+  <?php
   $numstudents = count($arrfnameresults);
   $numstudents--;
   $counter=0;
@@ -325,8 +380,11 @@ else
     }
 
     //echo "<br />";
-
-
+    ?>
+  <script>
+    alert('see if 2 time');
+  </script>
+<?php
     $counter++;
   }
   echo "</table>";

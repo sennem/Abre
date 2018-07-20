@@ -247,4 +247,5 @@
 	//echo '<br>';
 	//echo '---';
 
+	echo json_encode(array($period, $roomnum, $percenthappy, $percentsad, $percentother, $arrfnameresults, $arrlnameresults, $arrmoodresults, $arrpicresults));
 	?>

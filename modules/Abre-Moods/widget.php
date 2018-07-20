@@ -24,7 +24,7 @@
 
 	if(isAppActive("Abre-Moods")){
 		//function DisplayWidget($path,$icon,$title,$color,$url,$newtab)
-		DisplayWidget('Abre-Moods','mood','Mood','#3e4066', $portal_root.'/#moods', false);
+		DisplayWidget('Abre-Moods','mood','Mod','#3e4066', $portal_root.'/#moods', false);
 		//greenish color #a9ed2a
 	}
 
