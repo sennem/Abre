@@ -1,7 +1,7 @@
 <?php
-  $periodnum = $_GET['periodurl'];
-  $email = $_GET['emailurl'];
-  $room = $_GET['roomurl'];
+  $periodnum = $_POST['periodurl'];
+  $email = $_POST['emailurl'];
+  $room = $_POST['roomurl'];
 
   $servername = "localhost";
   $username = "root";
@@ -24,6 +24,5 @@
   $sql="UPDATE teacher_data SET PeriodSelection='$periodnum' WHERE Email='$email' AND Roomnum='$room'";
   $conn->query($sql);
   $conn->close();
-  header("Location:http://localhost:8080/#moods");
 
 ?>

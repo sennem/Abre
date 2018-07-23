@@ -27,6 +27,10 @@
 	require_once('functions.php');
 	require('permissions.php');
 
+	?>
+		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+	<?php
+	$widgetid=$_POST['widgetid'];
 	$conroomnum=mysqli_connect("localhost","root","password","abredb");
 	//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 	$email='teacher1@gmail.com';
@@ -64,6 +68,7 @@
 
 
 	$conname=mysqli_connect("localhost","root","password","abredb");
+
 	if ($period==1)
 	{
 		$sqlfname="SELECT Fname FROM students_schedule WHERE Period1 = '$roomnum'";
@@ -220,11 +225,11 @@
 	}
 	$studentcount=$c;
 
-	$percenthappy=(round((float)$counthappy/(float)$studentcount)) *100;
+	$percenthappy=((float)$counthappy/(float)$studentcount) *100;
 
-	$percentsad=(round((float)$countsad/(float)$studentcount)) *100;
+	$percentsad=((float)$countsad/(float)$studentcount) *100;
 
-	$percentother=(round((float)$countother/(float)$studentcount)) *100;
+	$percentother=((float)$countother/(float)$studentcount) *100;
 
 	//maybe get percents and such
 	//$numpeople=$c;
@@ -246,6 +251,75 @@
 	//echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
 	//echo '<br>';
 	//echo '---';
+	/*$myObj->period=$period;
+	$myObj->roomnumber=$roomnum;
+	$myObj->percenthappy=$percenthappy;
+	$myObj->percentsad=$percentsad;
+	$myObj->percentother=$percentother;
+	$myObj->arrfname=$arrfnameresults;
+	$myObj->arrlname=$arrlnameresults;
+	$myObj->arrmood=$arrmoodresults;
+	$myObj->arrpics=$arrpicresults;
+	json_encode(array($period, $roomnum, $percenthappy, $percentsad, $percentother, $arrfnameresults, $arrlnameresults, $arrmoodresults, $arrpicresults));
+	*/
+	if ($widgetid==1){
+		$numstudents = count($arrfnameresults);
+	  $numstudents--;
+	  $counter=0;
+	  echo "<div style='margin-left: 30px;'>";
+	  echo "<table style='width:80%'>";
+	  while($counter<=$numstudents)
+	  {
+	    if($arrmoodresults[$counter]==0)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;' />" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-laughing EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==1)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-smiley EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==2)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_smiling_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==3)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-weary EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==4)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-cry EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==5)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==6)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-persevere EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==7)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-grimacing EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
+	    if($arrmoodresults[$counter]==8)
+	    {
+	      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
+	    }
 
-	echo json_encode(array($period, $roomnum, $percenthappy, $percentsad, $percentother, $arrfnameresults, $arrlnameresults, $arrmoodresults, $arrpicresults));
+
+	    $counter++;
+	  }
+	  echo "</table>";
+	  echo "</div>";
+	}
+	elseif($widgetid==2){
+	  echo '<i class="em em-laughing EmojiSpacing" style="margin-left:15%"></i> <i class="em em-smiley EmojiSpacing"></i> <i class="em em-slightly_smiling_face EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percenthappy . '</span>' . '%';
+	  echo '<br>';
+	  echo '<i class="em em-weary EmojiSpacing" style="margin-left:15%"></i> <i class="em em-cry EmojiSpacing"></i> <i class="em em-slightly_frowning_face EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percentsad . '</span>' . '%';
+	  echo '<br>';
+	  echo '<i class="em em-persevere EmojiSpacing" style="margin-left:15%"></i> <i class="em em-grimacing EmojiSpacing"></i> <i class="em em-expressionless EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percentother . '</span>' . '%';
+	  echo '<br>';
+	  echo '<br>';
+	}
 	?>

@@ -215,8 +215,9 @@ else
 	'</script>'
 	;
 
+
   echo'<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <select class="mdl-textfield__input" id="Period" name="Period" onchange="changeperiod()">
+    <select class="mdl-textfield__input" id="Period" name="Period" >
       <option></option>
       <option value="1">Period 1</option>
       <option value="2">Period 2</option>
@@ -228,6 +229,28 @@ else
     </select>
   </div>';
 
+	echo'<div id="overviewdiv"></div>';
+	?>
+	<script type="text/javascript">
+	$(document).ready(function(){
+			$("#Period").change(function(){
+				var periodnumj=document.getElementById("Period").value;
+				var emailj= "<?php echo $email; ?>";
+				var roomnumj= "<?php echo $roomnum; ?>";
+				var widget=2;
+			$.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
+				.done(function( data ) {
+					$.post( "/modules/Abre-Moods/get_mood_data.php", {widgetid: widget})
+						.done(function( data ) {
+							$("#overviewdiv").html(data);
+				});
+			});
+		});
+	});
+
+	</script>
+	<?php
+/*
   echo '<i class="em em-laughing EmojiSpacing" style="margin-left:15%"></i> <i class="em em-smiley EmojiSpacing"></i> <i class="em em-slightly_smiling_face EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percenthappy . '</span>' . '%';
   echo '<br>';
   echo '<i class="em em-weary EmojiSpacing" style="margin-left:15%"></i> <i class="em em-cry EmojiSpacing"></i> <i class="em em-slightly_frowning_face EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percentsad . '</span>' . '%';
@@ -235,6 +258,7 @@ else
   echo '<i class="em em-persevere EmojiSpacing" style="margin-left:15%"></i> <i class="em em-grimacing EmojiSpacing"></i> <i class="em em-expressionless EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percentother . '</span>' . '%';
   echo '<br>';
   echo '<br>';
+	*/
 }
 
 ?>

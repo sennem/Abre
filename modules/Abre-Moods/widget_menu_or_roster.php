@@ -225,18 +225,7 @@ else
   			function testing1(){
   				alert('hit test 1');
   			}
-        function updateProfile(){
-            // Create a variable to refer to our request object:
-            var xmlhttp;
 
-            if (window.XMLHttpRequest){
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }else{
-                // code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-        }
     	</script>
   		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   		<style>
@@ -297,8 +286,8 @@ else
       <option value="7">Period 7</option>
     </select>
   </div>
-<div id="update" ></div>
-<div id="holderthingy" ></div>
+<br />
+<div id="rosterdiv" ></div>
 <?php
 echo '<script type="text/javascript">',
 'setperiod();',
@@ -306,38 +295,31 @@ echo '<script type="text/javascript">',
 ;
 ?>
 <script type="text/javascript">
-  $(document).ready(function(){
+$(document).ready(function(){
     $("#SelPeriod").change(function(){
       var periodnumj=document.getElementById("SelPeriod").value;
       var emailj= "<?php echo $email; ?>";
       var roomnumj= "<?php echo $roomnum; ?>";
-      $("#update").load("/modules/Abre-Moods/test.php?periodurlj="+periodnumj+"&emailurlj="+emailj+"&roomurlj="+roomnumj);
-      //$.ajax({
-      //  url: '/modules/Abre-Moods/get_mood_data.php',
-      //  success: function(data) {
-      //    alert('Directory created');
-      //  }
-      //});
-      $("#holderthingy").load("/modules/Abre-Moods/get_mood_data.php");
-      alert("num: " + "<?php echo $numstudents; ?>");
+      var widget=1;
+    $.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
+      .done(function( data ) {
+        $.post( "/modules/Abre-Moods/get_mood_data.php", {widgetid: widget})
+          .done(function( data ) {
+            $("#rosterdiv").html(data);
+      });
     });
   });
+});
 
-  //$.ajax({
-  //        url: "periodnumlog.aspx?answer=5",
-  //        success: function(data){
-  //            alert(data)
-  //          }
-  //      });
-  alert("outside " + "<?php echo $numstudents; ?>");
 </script>
 
 
-  <br />
+  <!--<br />-->
   <?php
-  $numstudents = count($arrfnameresults);
+  /*$numstudents = count($arrfnameresults);
   $numstudents--;
   $counter=0;
+  echo "<div id='rosterdiv'>";
   echo "<div style='margin-left: 30px;'>";
   echo "<table style='width:80%'>";
   while($counter<=$numstudents)
@@ -379,15 +361,11 @@ echo '<script type="text/javascript">',
       echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
     }
 
-    //echo "<br />";
-    ?>
-  <script>
-    alert('see if 2 time');
-  </script>
-<?php
+
     $counter++;
   }
   echo "</table>";
   echo "</div>";
+  echo "</div>";*/
 }
 ?>
