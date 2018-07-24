@@ -231,37 +231,7 @@
 
 	$percentother=((float)$countother/(float)$studentcount) *100;
 
-	//maybe get percents and such
-	//$numpeople=$c;
-	//$percentzero=$cou
 
-
-/*	echo $roomnum . "roomnum";
-	echo '<br>';
-	echo $period ."period";
-	echo '<br>';
-	echo $fname . "fname";
-	echo '<br>';
-	echo $lname . "lname";
-	echo '<br>';
-	echo $picurl . "picurl";
-	echo '<br>';*/ //for testing retrieved data
-
-	//for testing display of information
-	//echo '<td> <img src="'.$picurl.'" width="80" height="80" alt="Mark">  '.$fname.' '.$lname.' </td>';
-	//echo '<br>';
-	//echo '---';
-	/*$myObj->period=$period;
-	$myObj->roomnumber=$roomnum;
-	$myObj->percenthappy=$percenthappy;
-	$myObj->percentsad=$percentsad;
-	$myObj->percentother=$percentother;
-	$myObj->arrfname=$arrfnameresults;
-	$myObj->arrlname=$arrlnameresults;
-	$myObj->arrmood=$arrmoodresults;
-	$myObj->arrpics=$arrpicresults;
-	json_encode(array($period, $roomnum, $percenthappy, $percentsad, $percentother, $arrfnameresults, $arrlnameresults, $arrmoodresults, $arrpicresults));
-	*/
 	if ($widgetid==1){
 		$numstudents = count($arrfnameresults);
 	  $numstudents--;
@@ -322,4 +292,75 @@
 	  echo '<br>';
 	  echo '<br>';
 	}
+	elseif($widgetid==3){
+		$j=0;
+		$objcounter=0;
+		echo '<br>';
+		echo '<table>';
+		echo '<tr>';
+
+		//displays all returned students and their info
+		while ($j<200)
+		{
+			if($arrpicresults[$j] != "")
+			{
+				//done to only allow 4 people in a row, then it automatically makes a new row
+				if($objcounter==4)
+				{
+					echo '</tr>';
+					echo '<tr>';
+					$objcounter=0;
+				}
+				if ($arrmoodresults[$j]==0)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-laughing" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==1)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-smiley" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==2)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==3)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-weary" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==4)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-cry" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==5)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==6)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-persevere" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==7)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-grimacing" style="font-size:200%"></i></td>';
+				}
+				if ($arrmoodresults[$j]==8)
+				{
+					echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-expressionless" style="font-size:200%"></i></td>';
+				}
+				//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
+				$objcounter=$objcounter+1;
+			}
+			else
+			{
+				break;
+			}
+			$j=$j+1;
+		}
+		echo '</tr>';
+		echo '</table>';
+		echo '</div>';
+		echo '<br>';
+
+	}
+	
 	?>

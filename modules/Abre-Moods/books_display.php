@@ -26,7 +26,7 @@
 	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
+	$pagerestrictions="student"; //so i can load the "other page" (teacher version)
 	//if($_SESSION['usertype'] == "student")
 	if ($pagerestrictions=="student")
 	{
@@ -114,7 +114,7 @@
 							}
 						</script>
 						<style>
-							.EmojiSpacing
+							/*.EmojiSpacing
 							{
 								font-size: 200%;
 								margin:35px;
@@ -132,6 +132,30 @@
 							ul li
 							{
 								padding: 0 8px;
+							}*/
+							/*---------------------*/
+							.grid {
+							  display: flex;                       /* establish flex container */
+							  flex-wrap: wrap;                     /* enable flex items to wrap */
+							  justify-content: space-around;
+
+							}
+							.cell {
+							  flex: 0 0 32%;                       /* don't grow, don't shrink, width */
+							  height: 100px;
+								width: 100px;
+							  margin-bottom: 15px;
+							  background-color: #3e4066;
+							}
+							.cell:nth-child(3n) {
+							  background-color: #3e4066;
+							}
+							.centercell{
+								text-align: center;
+							}
+							.emojistyle{
+								margin-top: 30px;
+								font-size: 200%;
 							}
 						</style>
 						<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
@@ -144,7 +168,7 @@
 
 				<?php
 
-				echo '
+				/*echo '
 				<div>
 					<ul>
 						<li>
@@ -163,9 +187,19 @@
 							<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8)"></i>
 						</li>
 					</ul>
-				</div>';
-
+				</div>';*/
 				?>
+				<div class="grid">
+				  <div class="cell centercell"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
+				  <div class="cell centercell"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
+				  <div class="cell centercell"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div>
+				  <div class="cell centercell"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
+				  <div class="cell centercell"><i id="emojifour" class="em em-cry emojistyle" onclick="testfunc(4)"></i></div>
+				  <div class="cell centercell"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div>
+				  <div class="cell centercell"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
+				  <div class="cell centercell"><i id="emojiseven" class="em em-grimacing emojistyle" onclick="testfunc(7)"></i></div>
+				  <div class="cell centercell"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div>
+				</div>
 
 				<?php
 					$con=mysqli_connect("localhost","root","password","abredb");
@@ -231,6 +265,7 @@
 		}
 	</style>
 	<script>
+	alert('hit staff');
 		function changeperiod()
 		{
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
@@ -242,7 +277,8 @@
 		}
 	</script>
 
-				<select id='ClassPeriodSelection' onchange='changeperiod()'>
+				<select id='ClassPeriodSelection' >
+						<option value='0'>*select an option*</option>
 						<option value='1'>Period 1</option>
 						<option value='2'>Period 2</option>
 						<option value='3'>Period 3</option>
@@ -251,6 +287,7 @@
 						<option value='6'>Period 6</option>
 						<option value='7'>Period 7</option>
 				</select>
+
 		<!--</div>-->
 
 				<!--<input class='waves-effect waves-light btn' style='background-color: <?php //echo getSiteColor() ?>' type='submit' value="Submit!">
@@ -272,23 +309,41 @@
 			</tr>
 		</table>-->
 
-<?php
-	echo '<br>';
-	echo '<script type="text/javascript">',
-	'setperiod();',
-	'</script>'
-	;
-	}
-?>
+<br />
+<script>
+	document.getElementById('ClassPeriodSelection').value=0;
+</script>
 
 <html>
 	<header>
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	</header>
 </html>
-<div class="mdl-shadow--16dp" style="background-color:#3e4066">
+
+<div class="mdl-shadow--16dp" id="bigrosterdiv" style="background-color:#3e4066">
+	<script type="text/javascript">
+	$(document).ready(function(){
+			$("#ClassPeriodSelection").change(function(){
+				var periodnumj=document.getElementById("ClassPeriodSelection").value;
+				var emailj= "<?php echo $email; ?>";
+				var roomnumj= "<?php echo $roomnum; ?>";
+				var widget=3;
+			$.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
+				.done(function( data ) {
+					$.post( "/modules/Abre-Moods/get_mood_data.php", {widgetid: widget})
+						.done(function( data ) {
+							$("#bigrosterdiv").html(data);
+				});
+			});
+		});
+	});
+
+	</script>
 <?php
-	$j=0;
+		echo '</div>';
+		echo '<br>';
+	}
+	/*$j=0;
 	$objcounter=0;
 	echo '<br>';
 	echo '<table>';
@@ -355,5 +410,5 @@
 	echo '</table>';
 	echo '</div>';
 	echo '<br>';
-
+	*/
 ?>

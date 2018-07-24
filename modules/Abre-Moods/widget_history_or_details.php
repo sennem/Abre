@@ -218,7 +218,7 @@ else
 
   echo'<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <select class="mdl-textfield__input" id="Period" name="Period" >
-      <option></option>
+      <option>*select a period*</option>
       <option value="1">Period 1</option>
       <option value="2">Period 2</option>
       <option value="3">Period 3</option>
