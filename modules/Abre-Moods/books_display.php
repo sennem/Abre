@@ -155,7 +155,7 @@
 							}
 							.emojistyle{
 								margin-top: 30px;
-								font-size: 200%;
+								font-size: 240%;
 							}
 						</style>
 						<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">

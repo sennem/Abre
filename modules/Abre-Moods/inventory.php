@@ -35,9 +35,9 @@
 		margin-bottom: 15px;
 		background-color: #3e4066;
 	}
-	.cell:nth-child(3n) {
+	/*.cell:nth-child(3n) {
 		background-color: red;
-	}
+	}*/
 	.centercell{
 		text-align: center;
 	}
