@@ -371,7 +371,7 @@ else
 		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:50%'></i>:<?php echo $countzero; ?></span>
 	</div>
 	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:50%'></i>:<?php echo $countone; ?></span>
+		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:50%'></i>:<?php echo $countone; ?></span>
 	</div>
 	<div class="cell centercell">
 		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:50%'></i>:<?php echo $counttwo; ?></span>

@@ -137,15 +137,16 @@
 							.grid {
 							  display: flex;                       /* establish flex container */
 							  flex-wrap: wrap;                     /* enable flex items to wrap */
-							  justify-content: space-around;
+							  justify-content: center;
 
 							}
 							.cell {
-							  flex: 0 0 32%;                       /* don't grow, don't shrink, width */
+							  flex: 0 0 15%;                       /* don't grow, don't shrink, width */
 							  height: 100px;
 								width: 100px;
 							  margin-bottom: 15px;
 							  background-color: #3e4066;
+								margin-right: 15px;
 							}
 							.cell:nth-child(3n) {
 							  background-color: #3e4066;
@@ -190,15 +191,15 @@
 				</div>';*/
 				?>
 				<div class="grid">
-				  <div class="cell centercell"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
+				  <span style="display: inline;"><div class="cell centercell"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
 				  <div class="cell centercell"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
-				  <div class="cell centercell"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div>
-				  <div class="cell centercell"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
+				  <div class="cell centercell"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
 				  <div class="cell centercell"><i id="emojifour" class="em em-cry emojistyle" onclick="testfunc(4)"></i></div>
-				  <div class="cell centercell"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div>
-				  <div class="cell centercell"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
+				  <div class="cell centercell"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
 				  <div class="cell centercell"><i id="emojiseven" class="em em-grimacing emojistyle" onclick="testfunc(7)"></i></div>
-				  <div class="cell centercell"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div>
+				  <div class="cell centercell"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div></span>
 				</div>
 
 				<?php
