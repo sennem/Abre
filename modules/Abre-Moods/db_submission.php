@@ -1,8 +1,5 @@
 <?php
-  $servername = "localhost";
-  $username = "root";
-  $password = "password";
-  $dbname = "abredb";
+
   //$emojimood = $_GET['moodval'];
   //$widgetbool = $_GET['widget'];
   $emojimood = $_POST['moodval'];

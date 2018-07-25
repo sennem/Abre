@@ -81,8 +81,7 @@ if ($pagerestrictions=="student")
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
-	$email = $_SESSION['useremail']; //works
-	//---$con=mysqli_connect("localhost","root","password","abredb");
+	$email = $_SESSION['useremail']; 
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';

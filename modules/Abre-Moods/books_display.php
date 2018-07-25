@@ -30,7 +30,6 @@
 	//if($_SESSION['usertype'] == "student")
 	if ($pagerestrictions=="student")
 	{
-		//$con=mysqli_connect("localhost","root","password","abredb");
 		$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 		// Check connection
 		if (mysqli_connect_errno())

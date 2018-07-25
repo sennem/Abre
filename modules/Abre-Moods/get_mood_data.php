@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
 
@@ -31,7 +31,7 @@
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	<?php
 	$widgetid=$_POST['widgetid'];
-	$conroomnum=mysqli_connect("localhost","root","password","abredb");
+	$conroomnum=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 	$email='teacher1@gmail.com';
 	// Check connection
@@ -52,7 +52,7 @@
 	}
 	$conroomnum->close();
 
-	$conperiod=mysqli_connect("localhost","root","password","abredb");
+	$conperiod=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	$sqlperiod="SELECT PeriodSelection FROM teacher_data WHERE Email='$email' AND Roomnum='$roomnum'";
 	$periodresult=mysqli_query($conperiod,$sqlperiod);
 	$arrperiodresults=array();
@@ -67,7 +67,7 @@
 	$conperiod->close();
 
 
-	$conname=mysqli_connect("localhost","root","password","abredb");
+	$conname=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 
 	if ($period==1)
 	{
@@ -362,5 +362,5 @@
 		echo '<br>';
 
 	}
-	
+
 	?>
