@@ -228,16 +228,13 @@
 					{
 						$maxdate = $value;
 					}
-					//echo 'Vvalue=' . $maxdate; //for testing
-					//echo '<br>'; //for testing
+
 					$dbdate = DateTime::createFromFormat('Y-m-d', $maxdate);
-					//echo $dbdate->format('d'); //works //for testing
-					//echo $dbdate->format('m'); //works //for testing
+
 					date_default_timezone_set('America/Indiana/Indianapolis');
 					$getdate = date('Y-m-d');//works
 					$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-					//echo $cdate->format('d'); //works //for testing
-					//echo $cdate->format('m'); //works //for testing
+
 
 					if (($dbdate->format('d')) != ($cdate->format('d')))
 					{
@@ -301,26 +298,7 @@
 						<option value='7'>Period 7</option>
 				</select>
 
-		<!--</div>-->
 
-				<!--<input class='waves-effect waves-light btn' style='background-color: <?php //echo getSiteColor() ?>' type='submit' value="Submit!">
-			</form>-->
-		<!--</div>-->
-
-		<!--<table>
-			<tr>
-				<td><img src="https://masonhackclub.com/images/staff/mark.jpg" width="80" height="80" alt="Mark">Mark Senne</td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/annie-wang.jpg" width="80" height="80" alt="Annie">Annie Wang</td>
-				<td><img src="https://masonhackclub.com/images/staff/dalton.jpg" width="80" height="80" alt="Dalton">Dalton Craven</td>
-				<td><img src="https://masonhackclub.com/images/staff/megan.jpg" width="80" height="80" alt="Megan">Megan Cui</td>
-			</tr>
-			<tr>
-				<td><img src="https://masonhackclub.com/images/staff/will.jpg" width="80" height="80" alt="Will">Will Mechler</td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/scott-shepherd.jpg" width="80" height="80" alt="Scott">Scott Shepherd</td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/vikram-deepak.jpg" width="80" height="80" alt="Vikram">Vikram Depak</td>
-				<td><img src="https://cincyhacks.com/assets/images/staff/alan-guo.jpg" width="80" height="80" alt="Alan">Alan Guo</td>
-			</tr>
-		</table>-->
 
 <br />
 <script>
@@ -356,72 +334,5 @@
 		echo '</div>';
 		echo '<br>';
 	}
-	/*$j=0;
-	$objcounter=0;
-	echo '<br>';
-	echo '<table>';
-	echo '<tr>';
 
-	//displays all returned students and their info
-	while ($j<200)
-	{
-		if($arrpicresults[$j] != "")
-		{
-			//done to only allow 4 people in a row, then it automatically makes a new row
-			if($objcounter==4)
-			{
-				echo '</tr>';
-				echo '<tr>';
-				$objcounter=0;
-			}
-			if ($arrmoodresults[$j]==0)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-laughing" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==1)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-smiley" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==2)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==3)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-weary" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==4)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-cry" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==5)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==6)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-persevere" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==7)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-grimacing" style="font-size:200%"></i></td>';
-			}
-			if ($arrmoodresults[$j]==8)
-			{
-				echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result"><span style="font-weight:bold">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-expressionless" style="font-size:200%"></i></td>';
-			}
-			//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
-			$objcounter=$objcounter+1;
-		}
-		else
-		{
-			break;
-		}
-		$j=$j+1;
-	}
-	echo '</tr>';
-	echo '</table>';
-	echo '</div>';
-	echo '<br>';
-	*/
 ?>
