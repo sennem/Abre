@@ -14,7 +14,7 @@ if ($pagerestrictions=="student")
   echo "</div>";
   //--------------
 
-  $con=mysqli_connect("localhost","root","password","abredb");
+  $con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
   // Check connection
   if (mysqli_connect_errno())
   {
@@ -159,7 +159,7 @@ if ($pagerestrictions=="student")
 
 
   <?php
-  	$con=mysqli_connect("localhost","root","password","abredb");
+  	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
   	$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
   	$result=mysqli_query($con,$sql);
   	$arrrowresults=array();

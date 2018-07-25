@@ -9,14 +9,10 @@
     <script>
   		function changeperiod()
   		{
-  			//alert('2'); //testing
   			var periodnum=document.getElementById("Period").value;
   			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>" + "&fromwidget=" + 1);
   		}
   		function setperiod()
-  		{
-  			//alert('runniong');
-  			//alert('<?php //echo $period; ?>');
   			document.getElementById("Period").value = "<?php echo $period; ?>";
   		}
 			function testing1(){
@@ -86,13 +82,9 @@ $pagerestictions="staff";
 //echo $pagerestictions;
 if ($pagerestictions=="student")
 {
-	//echo '<script type="text/javascript">',
-	//'testing1();',
-	//'</script>'
-	//;
 		$email = $_SESSION['useremail']; //works
 		//---$con=mysqli_connect("localhost","root","password","abredb");
-		$con = new mysqli("localhost","root","password","abredb");
+		$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 		if (mysqli_connect_errno()) {
 		  echo 'Connection Failed';
 		}
@@ -210,15 +202,19 @@ else
 	require('get_mood_data.php'); //get array data
   ?>
   <?php
+	//echo '<script type="text/javascript">',
+	//'setperiod();',
+	//'</script>'
+	//;
 	echo '<script type="text/javascript">',
-	'setperiod();',
+	'document.getElementById("Period").value=0;',
 	'</script>'
 	;
 
 
   echo'<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
     <select class="mdl-textfield__input" id="Period" name="Period" >
-      <option>*select a period*</option>
+      <option value="0">*select a period*</option>
       <option value="1">Period 1</option>
       <option value="2">Period 2</option>
       <option value="3">Period 3</option>

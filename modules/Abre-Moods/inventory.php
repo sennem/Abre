@@ -83,7 +83,7 @@ if ($pagerestrictions=="student")
 	echo '<br>';
 	$email = $_SESSION['useremail']; //works
 	//---$con=mysqli_connect("localhost","root","password","abredb");
-	$con = new mysqli("localhost","root","password","abredb");
+	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';
 	}
