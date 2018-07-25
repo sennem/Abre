@@ -1,5 +1,6 @@
 <?php
-$pagerestrictions="staff";
+require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+$pagerestrictions="student";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
 {
@@ -53,15 +54,10 @@ if ($pagerestrictions=="student")
   		</style>
 
   		<script>
-  			function testfunc(emojivalue)
-  			{
-  				alert("Respone submitted");
-  				window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 1);
-  			}
-  			function alterdisp()
+  			function alterdisp(emojival)
   			{
   				//alert('running'); for testing
-  				var emojivalue3 = '<?php echo $rows[0] ;?>';
+  				var emojivalue3 = emojival;
   				//alert(emojivalue3); for testing
   				if (emojivalue3==0)
   				{
@@ -109,6 +105,7 @@ if ($pagerestrictions=="student")
   					document.getElementById("emojieight").style.border = "solid thin black";
   				}
   			}
+
   			function resetdisp()
   			{
   				document.getElementById("emojizero").style.border = "";
@@ -121,6 +118,19 @@ if ($pagerestrictions=="student")
   				document.getElementById("emojiseven").style.border = "";
   				document.getElementById("emojieight").style.border = "";
   			}
+
+        function testfunc(emojivalue)
+  			{
+  				alert("Respone submitted");
+  				//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 1);
+          $(document).ready(function(){
+              $.post( "/modules/Abre-Moods/db_submission.php", { moodval: emojivalue})
+                .done(function( data ) {
+                  resetdisp();
+                  alterdisp(emojivalue);
+              });
+          });
+        }
   		</script>
 
 
@@ -128,7 +138,8 @@ if ($pagerestrictions=="student")
   </html>
 
   <script type="text/javascript">
-  	alterdisp(); //calls the func that "highlights" an emoji
+    var adparam=("<?php echo $rows[0]; ?>");
+  	alterdisp(adparam); //calls the func that "highlights" an emoji
   </script>
 
   <?php

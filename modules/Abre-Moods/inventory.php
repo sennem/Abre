@@ -74,7 +74,7 @@ require(dirname(__FILE__) . '/../../configuration.php');
 //require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('permissions.php');
 require_once('get_mood_data.php'); //get array data
-$pagerestrictions = "staff";
+$pagerestrictions = "student";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestrictions=="student")
 {
@@ -182,6 +182,7 @@ echo $value;
 }*/
 
 $arrlength = count($arrdates); //determines size of array called arrdates
+$maxlength=$arrlength-1;
 date_default_timezone_set('America/Indiana/Indianapolis'); //set timezome
 $getdate = date('Y-m-d');
 $cdate = DateTime::createFromFormat('Y-m-d', $getdate);
@@ -189,52 +190,53 @@ $cday = $cdate->format('d'); //get current day value
 $cmonth = $cdate->format('m'); //get current month value
 for($i=0;$i<$arrlength;$i++)
 {
-	$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$i]);
+	$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
 	$dbday = $dbdate->format('d'); //get the day value of the db's date
 	$dbmonth = $dbdate->format('m'); //get the month value of the db's date
 	if(($dbday >= ($cday-4)) && ($dbmonth == $cmonth)) //show feelings for the last 5 days
 	{
 		echo '<br>';
-		if($rowsfeeling[$i]==0)
+		if($rowsfeeling[$maxlength]==0)
 		{
 			echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==1)
+		if($rowsfeeling[$maxlength]==1)
 		{
 			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==2)
+		if($rowsfeeling[$maxlength]==2)
 		{
 			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==3)
+		if($rowsfeeling[$maxlength]==3)
 		{
 			echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==4)
+		if($rowsfeeling[$maxlength]==4)
 		{
 			echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==5)
+		if($rowsfeeling[$maxlength]==5)
 		{
 			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==6)
+		if($rowsfeeling[$maxlength]==6)
 		{
 			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==7)
+		if($rowsfeeling[$maxlength]==7)
 		{
 			echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
 		}
-		if($rowsfeeling[$i]==8)
+		if($rowsfeeling[$maxlength]==8)
 		{
 			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
 		}
 		//echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
 		echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
-		echo '  at  ' . $arrtimes[$i];
+		echo '  at  ' . $arrtimes[$maxlength];
 		echo "<div style='margin-left: 37%; margin-top: 5px; height: 5px; background-color: #3e4066; width: 30%'></div>";
+		$maxlength=$maxlength-1;
 	}
 }
 

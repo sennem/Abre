@@ -77,13 +77,12 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="staff";
+$pagerestictions="student";
 //if($_SESSION['usertype'] == "student")
 //echo $pagerestictions;
 if ($pagerestictions=="student")
 {
 		$email = $_SESSION['useremail']; //works
-		//---$con=mysqli_connect("localhost","root","password","abredb");
 		$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 		if (mysqli_connect_errno()) {
 		  echo 'Connection Failed';

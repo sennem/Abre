@@ -21,7 +21,7 @@
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 	require_once('permissions.php');
-	$pagerestrictions="staff";
+	$pagerestrictions="student";
 ?>
 
 <?php //if($_SESSION['usertype']=='staff'){ ?>

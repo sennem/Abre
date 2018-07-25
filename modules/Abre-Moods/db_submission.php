@@ -3,8 +3,15 @@
   $username = "root";
   $password = "password";
   $dbname = "abredb";
-  $emojimood = $_GET['moodval'];//works
-  $widgetbool = $_GET['widget'];
+  //$emojimood = $_GET['moodval'];
+  //$widgetbool = $_GET['widget'];
+  $emojimood = $_POST['moodval'];
+  $widgetbool = $_POST['widget'];
+  ?>
+  <script>
+    alert('<?php echo $widgetbool; ?>');
+  </script>
+  <?php
   date_default_timezone_set('America/Indiana/Indianapolis');
   $datevar = date('Y-m-d');//works
   $timevar = date("H:i");
@@ -31,6 +38,7 @@
   $stmt2->execute();
   $stmt2->close();
   $db->close();
+
   if ($widgetbool==0)
   {
     header("Location:http://localhost:8080/#moods");
@@ -39,5 +47,5 @@
   {
     header("Location:http://localhost:8080/");
   }
-  exit;
+  echo $widgetbool;
 ?>

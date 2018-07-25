@@ -23,7 +23,7 @@
 	require(dirname(__FILE__) . '/../../configuration.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 	require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
-	//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
 	$pagerestrictions="student"; //so i can load the "other page" (teacher version)
@@ -55,14 +55,9 @@
 				<html>
 					<header>
 						<script>
-							function testfunc(emojivalue)
+							function alterdisp(emojival)
 							{
-								alert("Respone submitted");
-								window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 0);
-							}
-							function alterdisp()
-							{
-								var emojivalue3 = '<?php echo $rows[0] ;?>';
+								var emojivalue3=emojival;
 
 								if (emojivalue3==0)
 								{
@@ -94,13 +89,14 @@
 								}
 								if (emojivalue3==7)
 								{
-									document.getElementById("emojiseven").style.border = "solid thin black";
+									document.getElemenById("emojiseven").style.border = "solid thin black";
 								}
 								if (emojivalue3==8)
 								{
 									document.getElementById("emojieight").style.border = "solid thin black";
 								}
 							}
+
 							function resetdisp()
 							{
 								document.getElementById("emojizero").style.border = "";
@@ -112,6 +108,19 @@
 								document.getElementById("emojisix").style.border = "";
 								document.getElementById("emojiseven").style.border = "";
 								document.getElementById("emojieight").style.border = "";
+							}
+
+							function testfunc(emojivalue)
+							{
+								alert("Respone submitted");
+								//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 0);
+								$(document).ready(function(){
+										$.post( "/modules/Abre-Moods/db_submission.php", { moodval: emojivalue})
+											.done(function( data ) {
+												resetdisp();
+												alterdisp(emojivalue);
+										});
+								});
 							}
 						</script>
 						<style>
@@ -165,7 +174,11 @@
 				</html>
 
 			<script type="text/javascript">
-	    	alterdisp(); //calls the func that "highlights" an emoji
+	    	//alterdisp(); //calls the func that "highlights" an emoji
+			</script>
+			<script type="text/javascript">
+				var adparam=("<?php echo $rows[0]; ?>");
+				alterdisp(adparam); //calls the func that "highlights" an emoji
 			</script>
 
 				<?php
@@ -267,7 +280,6 @@
 		}
 	</style>
 	<script>
-	alert('hit staff');
 		function changeperiod()
 		{
 			var periodnum=document.getElementById("ClassPeriodSelection").value;
