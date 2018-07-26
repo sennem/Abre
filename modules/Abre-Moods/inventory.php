@@ -81,7 +81,7 @@ if ($pagerestrictions=="student")
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
-	$email = $_SESSION['useremail']; 
+	$email = $_SESSION['useremail'];
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';
@@ -234,7 +234,7 @@ for($i=0;$i<$arrlength;$i++)
 		//echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
 		echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
 		echo '  at  ' . $arrtimes[$maxlength];
-		echo "<div style='margin-left: 37%; margin-top: 5px; height: 5px; background-color: #3e4066; width: 30%'></div>";
+		echo "<div style='margin-left: 37%; margin-top: 5px; height: 5px; background-color: #3e4066; width: 30%; border-radius: 25px;'></div>";
 		$maxlength=$maxlength-1;
 	}
 }

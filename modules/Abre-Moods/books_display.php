@@ -36,7 +36,12 @@
 		{
 			echo "Failed to connect to MySQL: " . mysqli_connect_error();
 		}
-		$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+		$email = $_SESSION['useremail'];
+
+		//$sql ="SELECT RecentFeeling FROM students_schedule WHERE Email='$email'";
+		$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
+		//$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+		//$sql="SELECT RecentFeeling FROM student_schedule WHERE Email='$email'";
 		$result=mysqli_query($con,$sql);
 		$rows = mysqli_fetch_row($result);
 		$con->close();
@@ -57,43 +62,124 @@
 							function alterdisp(emojival)
 							{
 								var emojivalue3=emojival;
-
+								//alert("em3=" + emojivalue3 + " em=" + emojival);
 								if (emojivalue3==0)
-								{
-									document.getElementById("emojizero").style.border = "solid thin black";
-								}
-								if (emojivalue3==1)
-								{
-									document.getElementById("emojione").style.border = "solid thin black";
-								}
-								if (emojivalue3==2)
-								{
-									document.getElementById("emojitwo").style.border = "solid thin black";
-								}
-								if (emojivalue3==3)
-								{
-									document.getElementById("emojithree").style.border = "solid thin black";
-								}
-								if (emojivalue3==4)
-								{
-									document.getElementById("emojifour").style.border = "solid thin black";
-								}
-								if (emojivalue3==5)
-								{
-									document.getElementById("emojifive").style.border = "solid thin black";
-								}
-								if (emojivalue3==6)
-								{
-									document.getElementById("emojisix").style.border = "solid thin black";
-								}
-								if (emojivalue3==7)
-								{
-									document.getElemenById("emojiseven").style.border = "solid thin black";
-								}
-								if (emojivalue3==8)
-								{
-									document.getElementById("emojieight").style.border = "solid thin black";
-								}
+			  				{
+			  					//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojizero").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==1)
+			  				{
+			  					//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojione").style.border = "solid thin black";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==2)
+			  				{
+			  					//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojitwo").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==3)
+			  				{
+			  					//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojithree").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==4)
+			  				{
+			  					//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojifour").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==5)
+			  				{
+			  					//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojifive").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==6)
+			  				{
+			  					//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojisix").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==7)
+			  				{
+			  					//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojiseven").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			            document.getElementById("emojieight").style.border = "";
+			  				}
+			  				if (emojivalue3==8)
+			  				{
+			  					//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
+			  					document.getElementById("emojieight").style.border = "solid thin black";
+			            document.getElementById("emojione").style.border = "";
+			            document.getElementById("emojitwo").style.border = "";
+			            document.getElementById("emojithree").style.border = "";
+			            document.getElementById("emojifour").style.border = "";
+			            document.getElementById("emojifive").style.border = "";
+			            document.getElementById("emojisix").style.border = "";
+			            document.getElementById("emojiseven").style.border = "";
+			            document.getElementById("emojizero").style.border = "";
+			  				}
 							}
 
 							function resetdisp()
@@ -167,6 +253,9 @@
 								margin-top: 30px;
 								font-size: 240%;
 							}
+							.br50{
+								border-radius: 50%;
+							}
 						</style>
 						<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 					</header>
@@ -204,21 +293,24 @@
 				</div>';*/
 				?>
 				<div class="grid">
-				  <span style="display: inline;"><div class="cell centercell"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
-				  <div class="cell centercell"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
-				  <div class="cell centercell"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div></span>
-				  <span style="display: inline;"><div class="cell centercell"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
-				  <div class="cell centercell"><i id="emojifour" class="em em-cry emojistyle" onclick="testfunc(4)"></i></div>
-				  <div class="cell centercell"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div></span>
-				  <span style="display: inline;"><div class="cell centercell"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
-				  <div class="cell centercell"><i id="emojiseven" class="em em-grimacing emojistyle" onclick="testfunc(7)"></i></div>
-				  <div class="cell centercell"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell br50"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
+				  <div class="cell centercell br50"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
+				  <div class="cell centercell br50"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell br50"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
+				  <div class="cell centercell br50"><i id="emojifour" class="em em-cry emojistyle" onclick="testfunc(4)"></i></div>
+				  <div class="cell centercell br50"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell br50"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
+				  <div class="cell centercell br50"><i id="emojiseven" class="em em-grimacing emojistyle" onclick="testfunc(7)"></i></div>
+				  <div class="cell centercell br50"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div></span>
 				</div>
 
 				<?php
+					$email = $_SESSION['useremail'];
 					$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
-					$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+					//$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
+					$sql="SELECT * FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.Daterow = (SELECT MAX(mt2.Daterow) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
 					$result=mysqli_query($con,$sql);
+					$con->close();
 					$arrrowresults=array();
 					while($rowrow = mysqli_fetch_array($result))
 					{

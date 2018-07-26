@@ -36,7 +36,7 @@
   $stmt2->close();
   $db->close();
 
-  if ($widgetbool==0)
+  /*if ($widgetbool==0)
   {
     header("Location:http://localhost:8080/#moods");
   }
@@ -44,5 +44,5 @@
   {
     header("Location:http://localhost:8080/");
   }
-  echo $widgetbool;
+  echo $widgetbool;*/
 ?>
