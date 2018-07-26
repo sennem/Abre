@@ -46,7 +46,9 @@
 		$rows = mysqli_fetch_row($result);
 		$con->close();
 		?>
-
+		<script>
+	    alert('widgetfq=' + '<?php echo $rows[0]; ?>');
+	  </script>
 
 		<div class='page_container'>
 			<div class='row'>

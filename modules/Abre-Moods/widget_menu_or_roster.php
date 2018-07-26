@@ -1,5 +1,10 @@
 <?php
+require(dirname(__FILE__) . '/../../configuration.php');
+require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
+require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
+require_once('functions.php');
+require('permissions.php');
 $pagerestrictions="student";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
@@ -31,6 +36,9 @@ if ($pagerestrictions=="student")
   $rows = mysqli_fetch_row($result);
   $con->close();
   ?>
+  <script>
+    alert('widgetfq=' + '<?php echo $rows[0]; ?>');
+  </script>
 
   <html>
   	<header>
