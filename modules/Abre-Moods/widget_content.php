@@ -25,7 +25,7 @@
 
 
 <?php
-$pagerestrictions="student";
+$pagerestrictions="staff";
 	//if($_SESSION['usertype']=="student")
 	if($pagerestrictions=="student")
 	{

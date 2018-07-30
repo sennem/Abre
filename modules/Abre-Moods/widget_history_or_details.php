@@ -1,6 +1,6 @@
 
 <?php
-	require('get_mood_data.php');
+	//require('get_mood_data.php');
 	//reaches
 ?>
 
@@ -77,120 +77,121 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="student";
+$pagerestictions="staff";
 //if($_SESSION['usertype'] == "student")
 //echo $pagerestictions;
 if ($pagerestictions=="student")
 {
-		$email = $_SESSION['useremail']; //works
-		$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
-		if (mysqli_connect_errno()) {
-		  echo 'Connection Failed';
-		}
-		$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
-		$resultnumrows = mysqli_query($con,$sqlnumrows);
-		$numrows = mysqli_fetch_row($resultnumrows);
+	$email = $_SESSION['useremail']; //works
+	$studentid=1;
+	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+	if (mysqli_connect_errno()) {
+		echo 'Connection Failed';
+	}
+	$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
+	$resultnumrows = mysqli_query($con,$sqlnumrows);
+	$numrows = mysqli_fetch_row($resultnumrows);
 
-		$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='$email'";
-		$resultfeeling=mysqli_query($con, $sqlfeeling);
+	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE StudentID='$studentid'";
+	$resultfeeling=mysqli_query($con, $sqlfeeling);
 
-		if (!$resultfeeling)
+	if (!$resultfeeling)
+	{
+		echo 'NO FEELING RESULTS';
+	}
+	$rowsfeeling=array();
+	while($rowfeeling = mysqli_fetch_array($resultfeeling))
+	{
+		$rowsfeeling[] = $rowfeeling['Feeling'];
+	}
+	//no issue
+	$sqldate ="SELECT Daterow FROM mood_table WHERE StudentID='$studentid'";
+	$resultdate=mysqli_query($con, $sqldate);
+	if (!resultdate)
+	{
+		echo 'NO MOOD RESULTS';
+	}
+	$arrdates=array();
+	while($daterow = mysqli_fetch_array($resultdate))
+	{
+		$arrdates[]=$daterow['Daterow'];
+	}
+	//no issue
+
+	//--
+
+	$sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
+	$resulttime=mysqli_query($con, $sqltime);
+	if (!resulttime)
+	{
+		echo 'NO TIME RESULTS';
+	}
+	$arrtimes=array();
+	while($timerow = mysqli_fetch_array($resulttime))
+	{
+		$arrtimes[]=$timerow['Timerow'];
+	}
+
+
+	//-------------
+
+	$arrlength = count($arrdates);
+	$maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
+	date_default_timezone_set('America/Indiana/Indianapolis');
+	$getdate = date('Y-m-d');//works
+	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+	$cday = $cdate->format('d'); //works //for testing
+	$cmonth = $cdate->format('m'); //works //for testing
+	$outputcounter=0;
+	$falsecounter=0;
+	//-------------
+	while ($outputcounter<5 && $falsecounter<5)
+	{
+		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
+		$dbday = $dbdate->format('d'); //works //for testing
+		$dbmonth = $dbdate->format('m'); //works //for testing
+		//echo "max=" . $maxlength;
+		//echo "rsfeeling=" . $rowsfeeling[$maxlength];
+		//echo '<br />';
+		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth))
 		{
-	  	echo 'NO FEELING RESULTS';
-		}
-		$rowsfeeling=array();
-		while($rowfeeling = mysqli_fetch_array($resultfeeling))
-		{
-			$rowsfeeling[] = $rowfeeling['Feeling'];
-		}
-		//no issue
-		$sqldate ="SELECT Daterow FROM mood_table WHERE Email='$email'";
-		$resultdate=mysqli_query($con, $sqldate);
-		if (!resultdate)
-		{
-	  	echo 'NO MOOD RESULTS';
-		}
-		$arrdates=array();
-		while($daterow = mysqli_fetch_array($resultdate))
-		{
-			$arrdates[]=$daterow['Daterow'];
-		}
-		//no issue
+			echo "<div>";
+			if($rowsfeeling[$maxlength]==0){
+				 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==1){
+				echo '<i class="em em-smiley EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==2){
+				 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==3){
+				 echo '<i class="em em-weary EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==4){
+				 echo '<i class="em em-cry EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==5){
+				echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==6){
+				echo '<i class="em em-persevere EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==7){
+				 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			if($rowsfeeling[$maxlength]==8){
+				 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+			}
+			echo "<i class='EmojiSpacing'></i>" . "<sup style='font-size: 100%'>" . $dbdate->format('l') . "</sup>";
+			echo '  <sup style="font-size: 100%">at</sup>  ' . '<sup style="font-size: 100%">' . $arrtimes[$maxlength] . '</sup>';
+			$maxlength--;
 
-		//--
-
-		$sqltime = "SELECT Timerow FROM mood_table WHERE Email='$email'";
-		$resulttime=mysqli_query($con, $sqltime);
-		if (!resulttime)
-		{
-			echo 'NO TIME RESULTS';
+			//<sup> because it helps make the text and such appear on same level; it is a workaround
 		}
-		$arrtimes=array();
-		while($timerow = mysqli_fetch_array($resulttime))
-		{
-			$arrtimes[]=$timerow['Timerow'];
-		}
+		$outputcounter++;
 
-
-		//-------------
-
-		$arrlength = count($arrdates);
-    $maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
-		date_default_timezone_set('America/Indiana/Indianapolis');
-		$getdate = date('Y-m-d');//works
-		$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-		$cday = $cdate->format('d'); //works //for testing
-		$cmonth = $cdate->format('m'); //works //for testing
-    $outputcounter=0;
-		$falsecounter=0;
-		//-------------
-		while ($outputcounter<5 && $falsecounter<5)
-	  {
-			$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
-		 	$dbday = $dbdate->format('d'); //works //for testing
-		 	$dbmonth = $dbdate->format('m'); //works //for testing
-			//echo "max=" . $maxlength;
-			//echo "rsfeeling=" . $rowsfeeling[$maxlength];
-			//echo '<br />';
-			if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth))
-			{
-				echo "<div>";
-				if($rowsfeeling[$maxlength]==0){
-					 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==1){
-					echo '<i class="em em-smiley EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==2){
-					 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==3){
-					 echo '<i class="em em-weary EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==4){
-					 echo '<i class="em em-cry EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==5){
-					echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==6){
-					echo '<i class="em em-persevere EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==7){
-					 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				if($rowsfeeling[$maxlength]==8){
-					 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
-				}
-				echo "<i class='EmojiSpacing'></i>" . "<sup style='font-size: 100%'>" . $dbdate->format('l') . "</sup>";
-        echo '  <sup style="font-size: 100%">at</sup>  ' . '<sup style="font-size: 100%">' . $arrtimes[$maxlength] . '</sup>';
-				$maxlength--;
-
-				//<sup> because it helps make the text and such appear on same level; it is a workaround
-	  	}
-			$outputcounter++;
-
-		}
+	}
 }
 else
 {
@@ -198,7 +199,7 @@ else
 	//'testing2();',
 	//'</script>'
 	//;
-	require('get_mood_data.php'); //get array data
+	//require('get_mood_data.php'); //get array data
   ?>
   <?php
 	//echo '<script type="text/javascript">',
@@ -230,15 +231,11 @@ else
 	$(document).ready(function(){
 			$("#Period").change(function(){
 				var periodnumj=document.getElementById("Period").value;
-				var emailj= "<?php echo $email; ?>";
-				var roomnumj= "<?php echo $roomnum; ?>";
 				var widget=2;
-			$.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
-				.done(function( data ) {
-					$.post( "/modules/Abre-Moods/get_mood_data.php", {widgetid: widget})
-						.done(function( data ) {
-							$("#overviewdiv").html(data);
-				});
+				var id=109;
+				$.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
+					.done(function( data ) {
+						$("#overviewdiv").html(data);
 			});
 		});
 	});

@@ -34,6 +34,7 @@
 		width: 100px;
 		margin-bottom: 15px;
 		background-color: #3e4066;
+		border-radius: 25px;
 	}
 	/*.cell:nth-child(3n) {
 		background-color: red;
@@ -73,15 +74,15 @@ require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
 //require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('permissions.php');
-require_once('get_mood_data.php'); //get array data
-$pagerestrictions = "student";
+//require_once('get_mood_data.php'); //get array data
+$pagerestrictions = "staff";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestrictions=="student")
 {
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
-	$email = $_SESSION['useremail'];
+	/*$email = $_SESSION['useremail'];
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';
@@ -103,7 +104,9 @@ if ($pagerestrictions=="student")
 	while($rowfeeling = mysqli_fetch_array($resultfeeling))
 	{
 		$rowsfeeling[] = $rowfeeling['Feeling'];
-	}
+	}*/
+
+
 	/*foreach($rowsfeeling as $value)
 	{
 	echo '<br>';
@@ -111,74 +114,8 @@ if ($pagerestrictions=="student")
 	{
 	echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
 }
-if($value==1)
-{
-echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
-}
-if($value==2)
-{
-echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
-}
-if($value==3)
-{
-echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
-}
-if($value==4)
-{
-echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
-}
-if($value==5)
-{
-echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
-}
-if($value==6)
-{
-echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
-}
-if($value==7)
-{
-echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
-}
-if($value==8)
-{
-echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
-}
-}
-*/
 
-$sqldate ="SELECT Daterow FROM mood_table WHERE Email='$email'";
-$resultdate=mysqli_query($con, $sqldate);
-if (!resultdate)
-{
-	echo 'NO MOOD RESULTS';
-}
-$arrdates=array();
-while($daterow = mysqli_fetch_array($resultdate))
-{
-	$arrdates[]=$daterow['Daterow'];
-}
-/*foreach($arrdates as $value)
-{
-echo '<br>';
-echo $value;
-}*/
 
-$sqltime = "SELECT Timerow FROM mood_table WHERE Email='$email'";
-$resulttime=mysqli_query($con, $sqltime);
-if (!resulttime)
-{
-	echo 'NO TIME RESULTS';
-}
-$arrtimes=array();
-while($timerow = mysqli_fetch_array($resulttime))
-{
-	$arrtimes[]=$timerow['Timerow'];
-}
-/*foreach($arrtimes as $value)
-{
-echo '<br>';
-echo $value;
-}*/
 
 $arrlength = count($arrdates); //determines size of array called arrdates
 $maxlength=$arrlength-1;
@@ -286,7 +223,122 @@ echo "<i class='EmojiSpacing'></i>" . $row['Daterow'];
 }
 */
 //-------------
-$con->close();
+
+
+
+$email = $_SESSION['useremail']; //works
+$studentid=1;
+$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+if (mysqli_connect_errno()) {
+	echo 'Connection Failed';
+}
+$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
+$resultnumrows = mysqli_query($con,$sqlnumrows);
+$numrows = mysqli_fetch_row($resultnumrows);
+
+$sqlfeeling ="SELECT Feeling FROM mood_table WHERE StudentID='$studentid'";
+$resultfeeling=mysqli_query($con, $sqlfeeling);
+
+if (!$resultfeeling)
+{
+	echo 'NO FEELING RESULTS';
+}
+$rowsfeeling=array();
+while($rowfeeling = mysqli_fetch_array($resultfeeling))
+{
+	$rowsfeeling[] = $rowfeeling['Feeling'];
+}
+//no issue
+$sqldate ="SELECT Daterow FROM mood_table WHERE StudentID='$studentid'";
+$resultdate=mysqli_query($con, $sqldate);
+if (!resultdate)
+{
+	echo 'NO MOOD RESULTS';
+}
+$arrdates=array();
+while($daterow = mysqli_fetch_array($resultdate))
+{
+	$arrdates[]=$daterow['Daterow'];
+}
+//no issue
+
+//--
+
+$sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
+$resulttime=mysqli_query($con, $sqltime);
+if (!resulttime)
+{
+	echo 'NO TIME RESULTS';
+}
+$arrtimes=array();
+while($timerow = mysqli_fetch_array($resulttime))
+{
+	$arrtimes[]=$timerow['Timerow'];
+}
+
+
+//-------------
+
+$arrlength = count($arrdates);
+$maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
+date_default_timezone_set('America/Indiana/Indianapolis');
+$getdate = date('Y-m-d');//works
+$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+$cday = $cdate->format('d'); //works //for testing
+$cmonth = $cdate->format('m'); //works //for testing
+$outputcounter=0;
+$falsecounter=0;
+//-------------
+while ($outputcounter<5 && $falsecounter<5)
+{
+	$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
+	$dbday = $dbdate->format('d'); //works //for testing
+	$dbmonth = $dbdate->format('m'); //works //for testing
+	//echo "max=" . $maxlength;
+	//echo "rsfeeling=" . $rowsfeeling[$maxlength];
+	//echo '<br />';
+	if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth))
+	{
+		echo "<div>";
+		if($rowsfeeling[$maxlength]==0){
+			 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==1){
+			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==2){
+			 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==3){
+			 echo '<i class="em em-weary EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==4){
+			 echo '<i class="em em-cry EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==5){
+			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==6){
+			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==7){
+			 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		if($rowsfeeling[$maxlength]==8){
+			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> <sup style="font-size: 100%">-</sup>';
+		}
+		echo "<i class='EmojiSpacing'></i>" . "<sup style='font-size: 100%'>" . $dbdate->format('l') . "</sup>";
+		echo '  <sup style="font-size: 100%">at</sup>  ' . '<sup style="font-size: 100%">' . $arrtimes[$maxlength] . '</sup>';
+		echo ' <br />';
+		echo ' <br />';
+		$maxlength--;
+
+		//<sup> because it helps make the text and such appear on same level; it is a workaround
+	}
+	$outputcounter++;
+
+}
+
 echo '<br>';
 echo '<div style="padding-top:30px; text-align:center; width:100%;"><footer style="background-color: #2B2D4A"><p style="font-size: 8px">Abre</p></footer></div>';
 }
@@ -364,7 +416,40 @@ else
 </div>
 </div>-->
 
-<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
+<select id='ClassPeriodSelectionInv2' >
+		<option value='0'>*select an option*</option>
+		<option value='1'>Period 1</option>
+		<option value='2'>Period 2</option>
+		<option value='3'>Period 3</option>
+		<option value='4'>Period 4</option>
+		<option value='5'>Period 5</option>
+		<option value='6'>Period 6</option>
+		<option value='7'>Period 7</option>
+</select>
+
+<script>
+	document.getElementById('ClassPeriodSelectionInv2').value=0;
+</script>
+
+<br />
+<div id="PageEmojiTotals"></div>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+		$("#ClassPeriodSelectionInv2").change(function(){
+			var periodnumj=document.getElementById("ClassPeriodSelectionInv2").value;
+			var widget=4;
+			var id=109;
+			$.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
+				.done(function( data ) {
+					$("#PageEmojiTotals").html(data);
+		});
+	});
+});
+
+</script>
+<!--<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
 <br />
 <br />
 <div class="grid">
@@ -395,7 +480,7 @@ else
 	<div class="cell centercell">
 		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:50%'></i>:<?php echo $counteight; ?></span>
 	</div>
-</div>
+</div>-->
 <?php
 }
 

@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('functions.php');
 require('permissions.php');
-$pagerestrictions="student";
+$pagerestrictions="staff";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
 {
@@ -27,9 +27,9 @@ if ($pagerestrictions=="student")
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
   $email = $_SESSION['useremail'];
-
+  $studentid=1;
   //$sql ="SELECT RecentFeeling FROM students_schedule WHERE Email='$email'";
-  $sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
+  $sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
   //$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
   //$sql="SELECT RecentFeeling FROM student_schedule WHERE Email='$email'";
   $result=mysqli_query($con,$sql);
@@ -71,6 +71,7 @@ if ($pagerestrictions=="student")
   			{
   				//alert('running'); for testing
   				var emojivalue3 = emojival;
+          alert('emojivalue3=' +emojivalue3);
   				//alert(emojivalue3); for testing
   				if (emojivalue3==0)
   				{
@@ -165,6 +166,7 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==7)
   				{
+            alert('hit 7');
   					//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojiseven").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
@@ -178,6 +180,7 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==8)
   				{
+            alert('hit 8');
   					//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojieight").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
@@ -207,10 +210,12 @@ if ($pagerestrictions=="student")
         function testfunc(emojivalue)
   			{
   				alert("Respone submitted");
+          var studentid="<?php echo $studentid; ?>";
   				//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 1);
           $(document).ready(function(){
-              $.post( "/modules/Abre-Moods/db_submission.php", { moodval: emojivalue})
+              $.post( "/modules/Abre-Moods/db_submission.php", { moodval: emojivalue, stuid: studentid})
                 .done(function( data ) {
+                  alert(data);
                   resetdisp();
                   alterdisp(emojivalue);
               });
@@ -224,6 +229,7 @@ if ($pagerestrictions=="student")
 
   <script type="text/javascript">
     var adparam=("<?php echo $rows[0]; ?>");
+    alert('adparam=' + adparam);
     alterdisp(adparam);
   </script>
 
@@ -301,7 +307,7 @@ if ($pagerestrictions=="student")
 }
 else
 {
-  require("get_mood_data.php");
+  //require("get_mood_data.php");
   ?>
 
   <html>
@@ -398,9 +404,10 @@ $(document).ready(function(){
       var emailj= "<?php echo $email; ?>";
       var roomnumj= "<?php echo $roomnum; ?>";
       var widget=1;
+      var id=109;
     $.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
       .done(function( data ) {
-        $.post( "/modules/Abre-Moods/get_mood_data.php", {widgetid: widget})
+        $.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
           .done(function( data ) {
             $("#rosterdiv").html(data);
       });

@@ -31,6 +31,8 @@
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 	<?php
 	$widgetid=$_POST['widgetid'];
+	$period=$_POST['periodsel'];
+
 	$conroomnum=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	//$email=$_SESSION['useremail'];   USE THIS FOR ACTUAL THING, THIS IS TO GET THE LOGIN EMAIL FROM TEACHER
 	$email='teacher1@gmail.com';
@@ -52,7 +54,7 @@
 	}
 	$conroomnum->close();
 
-	$conperiod=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+	/*$conperiod=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	$sqlperiod="SELECT PeriodSelection FROM teacher_data WHERE Email='$email' AND Roomnum='$roomnum'";
 	$periodresult=mysqli_query($conperiod,$sqlperiod);
 	$arrperiodresults=array();
@@ -64,7 +66,7 @@
 	{
 		$period = $value;
 	}
-	$conperiod->close();
+	$conperiod->close();*/
 
 
 	$conname=mysqli_connect($db_host,$db_user,$db_password,$db_name);
