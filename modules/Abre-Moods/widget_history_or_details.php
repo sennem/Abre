@@ -1,8 +1,4 @@
 
-<?php
-	//require('get_mood_data.php');
-	//reaches
-?>
 
 <html>
 	<header>
@@ -29,10 +25,20 @@
 				margin-left: 15%;
         margin-right: 5%;
         margin-bottom: 5%;
+				margin-top: 5%;
 			}
       .EmojiSpacing
 			{
 				margin: 5%;
+			}
+			.TSpacing{
+				padding: 5%;
+			}
+			.TSpacingLeft{
+				padding-left: 15%;
+				padding-right: 5%;
+				padding-bottom: 5%;
+				padding-top: 5%;
 			}
 			ul
 			{
@@ -195,17 +201,7 @@ if ($pagerestictions=="student")
 }
 else
 {
-	//echo '<script type="text/javascript">',
-	//'testing2();',
-	//'</script>'
-	//;
-	//require('get_mood_data.php'); //get array data
-  ?>
-  <?php
-	//echo '<script type="text/javascript">',
-	//'setperiod();',
-	//'</script>'
-	//;
+
 	echo '<script type="text/javascript">',
 	'document.getElementById("Period").value=0;',
 	'</script>'

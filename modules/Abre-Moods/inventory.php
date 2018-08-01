@@ -74,7 +74,6 @@ require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
 //require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('permissions.php');
-//require_once('get_mood_data.php'); //get array data
 $pagerestrictions = "staff";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestrictions=="student")
@@ -82,149 +81,6 @@ if ($pagerestrictions=="student")
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
-	/*$email = $_SESSION['useremail'];
-	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
-	if (mysqli_connect_errno()) {
-		echo 'Connection Failed';
-	}
-
-	$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
-	$resultnumrows = mysqli_query($con,$sqlnumrows);
-	$numrows = mysqli_fetch_row($resultnumrows);
-	//echo $numrows[0]; //outputs total number of rows in the data table
-	//echo '<br>';
-
-	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE Email='$email'";
-	$resultfeeling=mysqli_query($con, $sqlfeeling);
-	if (!$resultfeeling)
-	{
-		echo 'NO FEELING RESULTS';
-	}
-	$rowsfeeling=array();
-	while($rowfeeling = mysqli_fetch_array($resultfeeling))
-	{
-		$rowsfeeling[] = $rowfeeling['Feeling'];
-	}*/
-
-
-	/*foreach($rowsfeeling as $value)
-	{
-	echo '<br>';
-	if($value==0)
-	{
-	echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
-}
-
-
-
-$arrlength = count($arrdates); //determines size of array called arrdates
-$maxlength=$arrlength-1;
-date_default_timezone_set('America/Indiana/Indianapolis'); //set timezome
-$getdate = date('Y-m-d');
-$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-$cday = $cdate->format('d'); //get current day value
-$cmonth = $cdate->format('m'); //get current month value
-for($i=0;$i<$arrlength;$i++)
-{
-	$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
-	$dbday = $dbdate->format('d'); //get the day value of the db's date
-	$dbmonth = $dbdate->format('m'); //get the month value of the db's date
-	if(($dbday >= ($cday-4)) && ($dbmonth == $cmonth)) //show feelings for the last 5 days
-	{
-		echo '<br>';
-		if($rowsfeeling[$maxlength]==0)
-		{
-			echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==1)
-		{
-			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==2)
-		{
-			echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==3)
-		{
-			echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==4)
-		{
-			echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==5)
-		{
-			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==6)
-		{
-			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==7)
-		{
-			echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==8)
-		{
-			echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
-		}
-		//echo "<i class='EmojiSpacing'></i>" . $arrdates[$i];
-		echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
-		echo '  at  ' . $arrtimes[$maxlength];
-		echo "<div style='margin-left: 37%; margin-top: 5px; height: 5px; background-color: #3e4066; width: 30%; border-radius: 25px;'></div>";
-		$maxlength=$maxlength-1;
-	}
-}
-
-//----------UNCOMMENT FOR PRIOR VERSION
-/*
-while($row = mysqli_fetch_array($result, MYSQLI_BOTH))
-{
-echo '<br>';
-//echo ($row[0]); //the row with the actual data //can remove (want to as it shows the numbers if ran)
-if ($row[0]['Feeling']==0)
-{
-echo '<i class="em em-laughing EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==1)
-{
-echo '<i class="em em-smiley EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==2)
-{
-echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==3)
-{
-echo '<i class="em em-weary EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==4)
-{
-echo '<i class="em em-cry EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==5)
-{
-echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==6)
-{
-echo '<i class="em em-persevere EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==7)
-{
-echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> - ';
-}
-if ($row[0]['Feeling']==8)
-{
-echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> - ';
-}
-//echo ($row[1]); //just goes to next thing, effectively a counter //or maybe dont need??
-echo "<i class='EmojiSpacing'></i>" . $row['Daterow'];
-}
-*/
-//-------------
-
-
 
 $email = $_SESSION['useremail']; //works
 $studentid=1;
@@ -347,93 +203,29 @@ else
 	?>
 
 	<html>
-	<header>
-		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-	</header>
+		<head>
+			<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+		</head>
+
+
+		<select id='ClassPeriodSelectionInv2' >
+				<option value='0'>*select an option*</option>
+				<option value='1'>Period 1</option>
+				<option value='2'>Period 2</option>
+				<option value='3'>Period 3</option>
+				<option value='4'>Period 4</option>
+				<option value='5'>Period 5</option>
+				<option value='6'>Period 6</option>
+				<option value='7'>Period 7</option>
+		</select>
 	</html>
-
-	<!-- make cards for each emoji % show number of each in the desired class-->
-	<!--<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
-	<br>-->
-
-	<!--<div class='content-grid mdl-grid'>
-	<div class='mdl-cell'>
-	<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-	<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:70%'></i>:<?php //echo $countzero; ?></span>
-</div>
-</div>
-
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:70%'></i>:<?php //echo $countone; ?></span>
-</div>
-</div>
-
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; height: 70%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:70%'></i>:<?php //echo $counttwo; ?></span>
-</div>
-</div>
-</div>
-
-<div class='content-grid mdl-grid'>
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:70%'></i>:<?php //echo $countthree; ?></span>
-</div>
-</div>
-
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:70%'></i>:<sub style="font-size: 100%;"><?php //echo $countfour; ?><sub></span>
-</div>
-</div>
-
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:70%'></i>:<?php //echo $countfive; ?></span>
-</div>
-</div>
-</div>
-
-<div class='content-grid mdl-grid'>
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:70%'></i>:<?php //echo $countsix; ?></span>
-</div>
-</div>
-
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:70%'></i>:<?php //echo $countseven; ?></span>
-</div>
-</div>
-
-<div class='mdl-cell'>
-<div class='mdl-card mdl-shadow--2dp' style='width:100%; color:#fff; padding-top:45px; margin-bottom:5px; background-color:#3e4066'>
-<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:70%'></i>:<?php //echo $counteight; ?></span>
-</div>
-</div>
-</div>-->
-
-<select id='ClassPeriodSelectionInv2' >
-		<option value='0'>*select an option*</option>
-		<option value='1'>Period 1</option>
-		<option value='2'>Period 2</option>
-		<option value='3'>Period 3</option>
-		<option value='4'>Period 4</option>
-		<option value='5'>Period 5</option>
-		<option value='6'>Period 6</option>
-		<option value='7'>Period 7</option>
-</select>
-
-<script>
-	document.getElementById('ClassPeriodSelectionInv2').value=0;
-</script>
-
-<br />
-<div id="PageEmojiTotals"></div>
-
+	<script>
+		document.getElementById('ClassPeriodSelectionInv2').value=0;
+	</script>
+	<html>
+		<br />
+		<div id="PageEmojiTotals"></div>
+	</html>
 
 <script type="text/javascript">
 $(document).ready(function(){
@@ -449,50 +241,6 @@ $(document).ready(function(){
 });
 
 </script>
-<!--<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Summary</span></div>
-<br />
-<br />
-<div class="grid">
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-laughing' style='font-size:50%'></i>:<?php echo $countzero; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-smiley' style='font-size:50%'></i>:<?php echo $countone; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_smiling_face' style='font-size:50%'></i>:<?php echo $counttwo; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-weary' style='font-size:50%'></i>:<?php echo $countthree; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-cry' style='font-size:50%'></i>:<?php echo $countfour; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-slightly_frowning_face' style='font-size:50%'></i>:<?php echo $countfive; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-persevere' style='font-size:50%'></i>:<?php echo $countsix; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-grimacing' style='font-size:50%'></i>:<?php echo $countseven; ?></span>
-	</div>
-	<div class="cell centercell">
-		<span class='center-align truncate' style='font-size:70px; line-height:80px;'><i class='em em-expressionless' style='font-size:50%'></i>:<?php echo $counteight; ?></span>
-	</div>
-</div>-->
 <?php
-}
-
-
-//echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood History</span><br><p style='font-size:16px; margin:20px 0 0 0;'>View your modd history here.</p></div>";
-//this if keeps me displaying. (it doesnt pass the if test)
-//if($pagerestrictions=="")
-//{
-//	echo "<div id='displaybooks'>"; include "inventory_display.php"; echo "</div>";
-//}
-
-
-//LEFT OFF HERE -- code is in a txt doc on desktop look at it + notebook
-
+	}
 ?>

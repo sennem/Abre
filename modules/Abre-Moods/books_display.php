@@ -359,7 +359,6 @@
 	}
 	else
 	{
-		require_once('get_mood_data.php');
 ?>
 
 
@@ -368,6 +367,8 @@
 		{
 			border-radius: 50%;
 			margin-bottom: 20px;
+			height: 30px;
+			width: auto;
 		}
 	</style>
 	<script>

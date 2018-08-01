@@ -307,7 +307,6 @@ if ($pagerestrictions=="student")
 }
 else
 {
-  //require("get_mood_data.php");
   ?>
 
   <html>
@@ -354,6 +353,12 @@ else
         {
           border-bottom: 5px solid DeepSkyBlue;
           /*the color thing is messing up, wont change from what it is (it's not even DeepSkyBlue)*/
+        }
+        .w_img{
+          border-radius: 50%;
+    			height: 50px;
+    			width: auto;
+          margin-right: 10px;
         }
   		</style>
       <script
