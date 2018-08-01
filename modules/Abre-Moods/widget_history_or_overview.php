@@ -72,12 +72,12 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="staff";
+$pagerestictions="student";
 //if($_SESSION['usertype'] == "student")
 //echo $pagerestictions;
 if ($pagerestictions=="student")
 {
-	$email = $_SESSION['useremail']; //works
+	$email = $_SESSION['useremail'];
 	$studentid=1;
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
@@ -99,7 +99,7 @@ if ($pagerestictions=="student")
 	{
 		$rowsfeeling[] = $rowfeeling['Feeling'];
 	}
-	//no issue
+
 	$sqldate ="SELECT Daterow FROM mood_table WHERE StudentID='$studentid'";
 	$resultdate=mysqli_query($con, $sqldate);
 	if (!resultdate)
@@ -111,9 +111,6 @@ if ($pagerestictions=="student")
 	{
 		$arrdates[]=$daterow['Daterow'];
 	}
-	//no issue
-
-	//--
 
 	$sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
 	$resulttime=mysqli_query($con, $sqltime);
@@ -142,13 +139,11 @@ if ($pagerestictions=="student")
 	//-------------
 	while ($outputcounter<5 && $falsecounter<5)
 	{
+		//output 5 most recenet moods over the last 5 days
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
-		$dbday = $dbdate->format('d'); //works //for testing
-		$dbmonth = $dbdate->format('m'); //works //for testing
-		//echo "max=" . $maxlength;
-		//echo "rsfeeling=" . $rowsfeeling[$maxlength];
-		//echo '<br />';
-		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth))
+		$dbday = $dbdate->format('d');
+		$dbmonth = $dbdate->format('m');
+		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth)) //---------------------NEED YEAR CHECK------------------
 		{
 			echo "<div>";
 			if($rowsfeeling[$maxlength]==0){
@@ -182,7 +177,6 @@ if ($pagerestictions=="student")
 			echo '  at  ' . $arrtimes[$maxlength];
 			$maxlength--;
 
-			//<sup> because it helps make the text and such appear on same level; it is a workaround
 		}
 		$outputcounter++;
 
@@ -227,15 +221,7 @@ else
 
 	</script>
 	<?php
-/*
-  echo '<i class="em em-laughing EmojiSpacing" style="margin-left:15%"></i> <i class="em em-smiley EmojiSpacing"></i> <i class="em em-slightly_smiling_face EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percenthappy . '</span>' . '%';
-  echo '<br>';
-  echo '<i class="em em-weary EmojiSpacing" style="margin-left:15%"></i> <i class="em em-cry EmojiSpacing"></i> <i class="em em-slightly_frowning_face EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percentsad . '</span>' . '%';
-  echo '<br>';
-  echo '<i class="em em-persevere EmojiSpacing" style="margin-left:15%"></i> <i class="em em-grimacing EmojiSpacing"></i> <i class="em em-expressionless EmojiSpacing"></i>:' . '<span style="margin-left: 5%">' . $percentother . '</span>' . '%';
-  echo '<br>';
-  echo '<br>';
-	*/
+
 }
 
 ?>

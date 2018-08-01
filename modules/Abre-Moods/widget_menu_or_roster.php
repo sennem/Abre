@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('functions.php');
 require('permissions.php');
-$pagerestrictions="staff";
+$pagerestrictions="student";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
 {
@@ -13,10 +13,6 @@ if ($pagerestrictions=="student")
   echo "<hr class='widget_hr'>";
   echo "<div class='widget_holder'>";
     echo "<div class='widget_container widget_body' style='color:#666;'>Go Back<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_content.php' data-reload='true'>arrow_back</i></div>";
-    //echo '---';
-    //echo $widgetchoice;
-    //echo '---';
-
   echo "</div>";
   //--------------
 
@@ -27,18 +23,12 @@ if ($pagerestrictions=="student")
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
   $email = $_SESSION['useremail'];
-  $studentid=1;
-  //$sql ="SELECT RecentFeeling FROM students_schedule WHERE Email='$email'";
+  $studentid=1; //---------------------CANT BE HARDCODED----------------------
   $sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
-  //$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
-  //$sql="SELECT RecentFeeling FROM student_schedule WHERE Email='$email'";
   $result=mysqli_query($con,$sql);
   $rows = mysqli_fetch_row($result);
   $con->close();
   ?>
-  <script>
-    alert('widgetfq=' + '<?php echo $rows[0]; ?>');
-  </script>
 
   <html>
   	<header>
@@ -69,13 +59,9 @@ if ($pagerestrictions=="student")
   		<script>
   			function alterdisp(emojival)
   			{
-  				//alert('running'); for testing
   				var emojivalue3 = emojival;
-          alert('emojivalue3=' +emojivalue3);
-  				//alert(emojivalue3); for testing
   				if (emojivalue3==0)
   				{
-  					//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojizero").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -88,7 +74,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==1)
   				{
-  					//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojione").style.border = "solid thin black";
             document.getElementById("emojizero").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -101,7 +86,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==2)
   				{
-  					//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojitwo").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojizero").style.border = "";
@@ -114,7 +98,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==3)
   				{
-  					//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojithree").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -127,7 +110,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==4)
   				{
-  					//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojifour").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -140,7 +122,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==5)
   				{
-  					//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojifive").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -153,7 +134,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==6)
   				{
-  					//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojisix").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -166,8 +146,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==7)
   				{
-            alert('hit 7');
-  					//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojiseven").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -180,8 +158,6 @@ if ($pagerestrictions=="student")
   				}
   				if (emojivalue3==8)
   				{
-            alert('hit 8');
-  					//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
   					document.getElementById("emojieight").style.border = "solid thin black";
             document.getElementById("emojione").style.border = "";
             document.getElementById("emojitwo").style.border = "";
@@ -207,14 +183,13 @@ if ($pagerestrictions=="student")
   				document.getElementById("emojieight").style.border = "";
   			}
 
-        function testfunc(emojivalue)
+        function submitandupdate(emojivalue)
   			{
-  				alert("Respone submitted");
+  				alert("Respone submitted");submitandupdate
           var studentid="<?php echo $studentid; ?>";
           $(document).ready(function(){
               $.post( "/modules/Abre-Moods/mood_table_submission.php", { moodval: emojivalue, stuid: studentid})
                 .done(function( data ) {
-                  alert(data);
                   resetdisp();
                   alterdisp(emojivalue);
               });
@@ -228,7 +203,6 @@ if ($pagerestrictions=="student")
 
   <script type="text/javascript">
     var adparam=("<?php echo $rows[0]; ?>");
-    alert('adparam=' + adparam);
     alterdisp(adparam);
   </script>
 
@@ -238,19 +212,19 @@ if ($pagerestrictions=="student")
   		<div>
   			<ul>
   				<li>
-  				<i id="emojizero" class="em em-laughing EmojiSpacingLeft" onclick="testfunc(0)"></i>
-  				<i id="emojione" class="em em-smiley EmojiSpacing" onclick="testfunc(1)"></i>
-  				<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" onclick="testfunc(2)"></i>
+  				<i id="emojizero" class="em em-laughing EmojiSpacingLeft" onclick="submitandupdate(0)"></i>
+  				<i id="emojione" class="em em-smiley EmojiSpacing" onclick="submitandupdate(1)"></i>
+  				<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" onclick="submitandupdate(2)"></i>
   			</li>
   			<li>
-  				<i id="emojithree" class="em em-weary EmojiSpacingLeft" onclick="testfunc(3)"></i>
-  				<i id="emojifour" class="em em-cry EmojiSpacing" onclick="testfunc(4)"></i>
-  				<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" onclick="testfunc(5)"></i>
+  				<i id="emojithree" class="em em-weary EmojiSpacingLeft" onclick="submitandupdate(3)"></i>
+  				<i id="emojifour" class="em em-cry EmojiSpacing" onclick="submitandupdate(4)"></i>
+  				<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" onclick="submitandupdate(5)"></i>
   			</li>
   			<li>
-  				<i id="emojisix" class="em em-persevere EmojiSpacingLeft" onclick="testfunc(6)"></i>
-  				<i id="emojiseven" class="em em-grimacing EmojiSpacing" onclick="testfunc(7)"></i>
-  				<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8)"></i>
+  				<i id="emojisix" class="em em-persevere EmojiSpacingLeft" onclick="submitandupdate(6)"></i>
+  				<i id="emojiseven" class="em em-grimacing EmojiSpacing" onclick="submitandupdate(7)"></i>
+  				<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="submitandupdate(8)"></i>
   				</li>
   			</ul>
   		</div>';
@@ -273,16 +247,10 @@ if ($pagerestrictions=="student")
   	{
   		$maxdate = $value;
   	}
-  	//echo 'Vvalue=' . $maxdate; //for testing
-  	//echo '<br>'; //for testing
   	$dbdate = DateTime::createFromFormat('Y-m-d', $maxdate);
-  	//echo $dbdate->format('d'); //works //for testing
-  	//echo $dbdate->format('m'); //works //for testing
   	date_default_timezone_set('America/Indiana/Indianapolis');
   	$getdate = date('Y-m-d');//works
   	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-  	//echo $cdate->format('d'); //works //for testing
-  	//echo $cdate->format('m'); //works //for testing
 
   	if (($dbdate->format('d')) != ($cdate->format('d')))
   	{
@@ -313,8 +281,6 @@ else
       <script>
     		function setperiod()
     		{
-    			//alert('runniong');
-    			//alert('<?php //echo $period; ?>');
     			document.getElementById("Period").value = "<?php echo $period; ?>";
     		}
 
@@ -342,7 +308,6 @@ else
         tr
         {
           border-bottom: 5px solid DeepSkyBlue;
-          /*the color thing is messing up, wont change from what it is (it's not even DeepSkyBlue)*/
         }
         .w_img{
           border-radius: 50%;
@@ -383,84 +348,32 @@ else
       <option value="7">Period 7</option>
     </select>
   </div>
-<br />
-<div id="rosterdiv" ></div>
+  <br />
+  <div id="rosterdiv" ></div>
 <?php
-echo '<script type="text/javascript">',
-'setperiod();',
-'</script>'
-;
+  echo '<script type="text/javascript">',
+  'setperiod();',
+  '</script>'
+  ;
 ?>
-<script type="text/javascript">
-$(document).ready(function(){
-    $("#SelPeriod").change(function(){
-      var periodnumj=document.getElementById("SelPeriod").value;
-      var emailj= "<?php echo $email; ?>";
-      var roomnumj= "<?php echo $roomnum; ?>";
-      var location=1;
-      var id=109;
-      $.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
-        .done(function( data ) {
-          $("#rosterdiv").html(data);
-      });
+  <script type="text/javascript">
+  $(document).ready(function(){
+      $("#SelPeriod").change(function(){
+        var periodnumj=document.getElementById("SelPeriod").value;
+        var emailj= "<?php echo $email; ?>";
+        var roomnumj= "<?php echo $roomnum; ?>";
+        var location=1;
+        var id=109;
+        $.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
+          .done(function( data ) {
+            $("#rosterdiv").html(data);
+        });
+    });
   });
-});
 
-</script>
-
-
-  <!--<br />-->
-  <?php
-  /*$numstudents = count($arrfnameresults);
-  $numstudents--;
-  $counter=0;
-  echo "<div id='rosterdiv'>";
-  echo "<div style='margin-left: 30px;'>";
-  echo "<table style='width:80%'>";
-  while($counter<=$numstudents)
-  {
-    if($arrmoodresults[$counter]==0)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;' />" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-laughing EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==1)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-smiley EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==2)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_smiling_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==3)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-weary EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==4)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-cry EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==5)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==6)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-persevere EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==7)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-grimacing EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
-    if($arrmoodresults[$counter]==8)
-    {
-      echo "<tr>" . "<td>". "<img src='" . $arrpicresults[$counter] . "' width='35' height='35' style='border-radius: 50%;'/>" . "</td>" . "<td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
-    }
+  </script>
 
 
-    $counter++;
-  }
-  echo "</table>";
-  echo "</div>";
-  echo "</div>";*/
+<?php
 }
 ?>

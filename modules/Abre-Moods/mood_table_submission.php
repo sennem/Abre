@@ -9,7 +9,7 @@
   $timevar = date("H:i");
 
 
-  //$userid=finduseridcore($_SESSION['useremail']);
+  //$userid=finduseridcore($_SESSION['useremail']); <-- need for "launch" version
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');

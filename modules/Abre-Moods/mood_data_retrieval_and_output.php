@@ -68,11 +68,9 @@
 		$lastid = $value; //testing to see the most recent/last result
 	}
 	$conname->close();
-	//-----------------------------------------------
 
 	//-----------------------------------------------
-
-
+	//-----------------------------------------------
 
 	if ($locationid==1){ //roster widget
 		$numstudents = count($arrfnameresults);
@@ -82,16 +80,19 @@
 	  echo "<table style='width:80%'>";
 	  while($counter<=$numstudents)
 	  {
+			//cycle through applicable studnetids to get images for said student
 			$studentid=$arridresults[$counter];
 			$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 			$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
 			$result=mysqli_query($con,$sql);
 			$rows = mysqli_fetch_row($result);
+			//gets the encoded picture from database
 			$sqlp = "SELECT Value From abre_vendorlink_sis_studentpictures WHERE StudentID = '$studentid'";
 			$resultp=mysqli_query($con,$sqlp);
 			$picsr = mysqli_fetch_row($resultp);
 			$picdecode=base64_decode($picsr[0]);
 			$con->close();
+			//depending on mood, output the information
 			if ($rows[0]==0){
 				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-laughing EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
@@ -151,6 +152,7 @@
 			$result=mysqli_query($con,$sql);
 			$rows = mysqli_fetch_row($result);
 			$con->close();
+			//depending on mood, update counters
 			if ($rows[0]==0){
 				$countzero++;
 				$counthappy++;
@@ -196,6 +198,7 @@
 		$percentsad=((float)$countsad/(float)$emojicount) *100;
 
 		$percentother=((float)$countother/(float)$emojicount) *100;
+		//output percents for each mood group (happy, sad, other)
 		echo '<div style="text-align: center;" > <table style="margin-left: 12px;">';
 			echo '<tr><td><i class="em em-laughing EmojiSpacingLeft" style="margin-left:15%"></i> <i class="em em-smiley EmojiSpacing"></i> <i class="em em-slightly_smiling_face EmojiSpacing"></i>:</td>' . '<td><span >' . $percenthappy . '</span>' . '%</td></tr>';
 
@@ -212,7 +215,7 @@
 	elseif($locationid==3) //roster page
 	{
 		$j=0;
-		$objcounter=0;
+		$objcounter=0; //counts the number of students in a row
 		echo '<br>';
 		echo '<table>';
 		echo '<tr>';
@@ -239,6 +242,7 @@
 					echo '<tr>';
 					$objcounter=0;
 				}
+				//depending on mood, output the studnet info
 				if ($rows[0]==0)
 				{
 					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-laughing" style="font-size:200%"></i></td>';
@@ -314,6 +318,7 @@
 			$result=mysqli_query($con,$sql);
 			$rows = mysqli_fetch_row($result);
 			$con->close();
+			//depending on the mood, update counters
 			if ($rows[0]==0){
 				$countzero++;
 				$counthappy++;
@@ -360,6 +365,7 @@
 
 		$percentother=((float)$countother/(float)$studentcount) *100;
 
+		//output the number of each mood selected by students in a certain period (NOT pecentages)
 		echo "
 		<br />
 		<br />

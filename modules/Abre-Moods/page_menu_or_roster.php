@@ -25,7 +25,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="staff";
+	$pagerestrictions="student";
 	//if($_SESSION['usertype'] == "student")
 	if ($pagerestrictions=="student")
 	{
@@ -42,9 +42,6 @@
 		$rows = mysqli_fetch_row($result);
 		$con->close();
 		?>
-		<script>
-	    alert('widgetfq=' + '<?php echo $rows[0]; ?>');
-	  </script>
 
 		<div class='page_container'>
 			<div class='row'>
@@ -301,63 +298,64 @@
 ?>
 
 
-	<style>
-		img
-		{
-			border-radius: 50%;
-			margin-bottom: 20px;
-			height: 80px;
-			width: auto;
-		}
-	</style>
-	<script>
-		function setperiod()
-		{
-			document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";
-		}
-	</script>
+		<style>
+			img
+			{
+				border-radius: 50%;
+				margin-bottom: 20px;
+				height: 80px;
+				width: auto;
+			}
+		</style>
+		<script>
+			function setperiod()
+			{
+				document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";
+			}
+		</script>
 
-				<select id='ClassPeriodSelection' >
-						<option value='0'>*select an option*</option>
-						<option value='1'>Period 1</option>
-						<option value='2'>Period 2</option>
-						<option value='3'>Period 3</option>
-						<option value='4'>Period 4</option>
-						<option value='5'>Period 5</option>
-						<option value='6'>Period 6</option>
-						<option value='7'>Period 7</option>
-				</select>
+		<select id='ClassPeriodSelection' >
+				<option value='0'>*select an option*</option>
+				<option value='1'>Period 1</option>
+				<option value='2'>Period 2</option>
+				<option value='3'>Period 3</option>
+				<option value='4'>Period 4</option>
+				<option value='5'>Period 5</option>
+				<option value='6'>Period 6</option>
+				<option value='7'>Period 7</option>
+		</select>
 
 
 
-<br />
-<script>
-	document.getElementById('ClassPeriodSelection').value=0;
-</script>
+		<br />
+		<script>
+			document.getElementById('ClassPeriodSelection').value=0;
+		</script>
 
-<html>
-	<header>
-		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-	</header>
-</html>
+		<html>
+			<header>
+				<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+			</header>
+		</html>
 
-<div class="mdl-shadow--16dp" id="bigrosterdiv" style="background-color:#3e4066">
-	<script type="text/javascript">
-	$(document).ready(function(){
-			$("#ClassPeriodSelection").change(function(){
-				var periodnumj=document.getElementById("ClassPeriodSelection").value;
-				var emailj= "<?php echo $email; ?>";
-				var roomnumj= "<?php echo $roomnum; ?>";
-				var location=3;
-				var id=109;
-				$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
-					.done(function( data ) {
-						$("#bigrosterdiv").html(data);
+		<div class="mdl-shadow--16dp" id="bigrosterdiv" style="background-color:#3e4066">
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+					$("#ClassPeriodSelection").change(function(){
+						var periodnumj=document.getElementById("ClassPeriodSelection").value;
+						var emailj= "<?php echo $email; ?>";
+						var roomnumj= "<?php echo $roomnum; ?>";
+						var location=3;
+						var id=109;
+						$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
+							.done(function( data ) {
+								$("#bigrosterdiv").html(data);
+						});
 				});
-		});
-	});
+			});
+		</script>
 
-	</script>
 <?php
 		echo '</div>';
 		echo '<br>';

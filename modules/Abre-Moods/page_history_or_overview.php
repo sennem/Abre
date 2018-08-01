@@ -73,126 +73,124 @@
 require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
 require_once('permissions.php');
-$pagerestrictions = "staff";
-//if($_SESSION['usertype'] == "student")
+$pagerestrictions = "student";
+//if($_SESSION['usertype'] == "student") <-- need in "launch" version
 if ($pagerestrictions=="student")
 {
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	echo '<br>';
 
-$email = $_SESSION['useremail'];
-$studentid=1;
-$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
-if (mysqli_connect_errno()) {
-	echo 'Connection Failed';
-}
-$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
-$resultnumrows = mysqli_query($con,$sqlnumrows);
-$numrows = mysqli_fetch_row($resultnumrows);
+	$email = $_SESSION['useremail'];
+	$studentid=1;
+	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+	if (mysqli_connect_errno()) {
+		echo 'Connection Failed';
+	}
+	$sqlnumrows = "SELECT COUNT(*) FROM mood_table";
+	$resultnumrows = mysqli_query($con,$sqlnumrows);
+	$numrows = mysqli_fetch_row($resultnumrows);
 
-$sqlfeeling ="SELECT Feeling FROM mood_table WHERE StudentID='$studentid'";
-$resultfeeling=mysqli_query($con, $sqlfeeling);
+	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE StudentID='$studentid'";
+	$resultfeeling=mysqli_query($con, $sqlfeeling);
 
-if (!$resultfeeling)
-{
-	echo 'NO FEELING RESULTS';
-}
-$rowsfeeling=array();
-while($rowfeeling = mysqli_fetch_array($resultfeeling))
-{
-	$rowsfeeling[] = $rowfeeling['Feeling'];
-}
-//no issue
-$sqldate ="SELECT Daterow FROM mood_table WHERE StudentID='$studentid'";
-$resultdate=mysqli_query($con, $sqldate);
-if (!resultdate)
-{
-	echo 'NO MOOD RESULTS';
-}
-$arrdates=array();
-while($daterow = mysqli_fetch_array($resultdate))
-{
-	$arrdates[]=$daterow['Daterow'];
-}
-
-
-
-$sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
-$resulttime=mysqli_query($con, $sqltime);
-if (!resulttime)
-{
-	echo 'NO TIME RESULTS';
-}
-$arrtimes=array();
-while($timerow = mysqli_fetch_array($resulttime))
-{
-	$arrtimes[]=$timerow['Timerow'];
-}
-
-
-//-------------
-
-$arrlength = count($arrdates);
-$maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
-date_default_timezone_set('America/Indiana/Indianapolis');
-$getdate = date('Y-m-d');//works
-$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-$cday = $cdate->format('d'); //works //for testing
-$cmonth = $cdate->format('m'); //works //for testing
-$outputcounter=0;
-$falsecounter=0;
-//-------------
-while ($outputcounter<5 && $falsecounter<5)
-{
-	$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
-	$dbday = $dbdate->format('d'); //works //for testing
-	$dbmonth = $dbdate->format('m'); //works //for testing
-	//echo "max=" . $maxlength;
-	//echo "rsfeeling=" . $rowsfeeling[$maxlength];
-	//echo '<br />';
-	if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth))
+	if (!$resultfeeling)
 	{
-		echo "<div>";
-		if($rowsfeeling[$maxlength]==0){
-			 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
+		echo 'NO FEELING RESULTS';
+	}
+	$rowsfeeling=array();
+	while($rowfeeling = mysqli_fetch_array($resultfeeling))
+	{
+		$rowsfeeling[] = $rowfeeling['Feeling'];
+	}
+	//no issue
+	$sqldate ="SELECT Daterow FROM mood_table WHERE StudentID='$studentid'";
+	$resultdate=mysqli_query($con, $sqldate);
+	if (!resultdate)
+	{
+		echo 'NO MOOD RESULTS';
+	}
+	$arrdates=array();
+	while($daterow = mysqli_fetch_array($resultdate))
+	{
+		$arrdates[]=$daterow['Daterow'];
+	}
+
+
+
+	$sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
+	$resulttime=mysqli_query($con, $sqltime);
+	if (!resulttime)
+	{
+		echo 'NO TIME RESULTS';
+	}
+	$arrtimes=array();
+	while($timerow = mysqli_fetch_array($resulttime))
+	{
+		$arrtimes[]=$timerow['Timerow'];
+	}
+
+
+	//-------------
+
+	$arrlength = count($arrdates);
+	$maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
+	date_default_timezone_set('America/Indiana/Indianapolis');
+	$getdate = date('Y-m-d');
+	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
+	$cday = $cdate->format('d');
+	$cmonth = $cdate->format('m');
+	$outputcounter=0;
+	$falsecounter=0;
+	//-------------
+	while ($outputcounter<5 && $falsecounter<5)
+	{
+		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
+		$dbday = $dbdate->format('d');
+		$dbmonth = $dbdate->format('m');
+		//output 5 most recent moods within the last 5 days (and in the same month)
+		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth)) //---------------------NEED YEAR CHECK------------------
+		{
+			echo "<div>";
+			if($rowsfeeling[$maxlength]==0){
+				 echo '<i class="em em-laughing EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==1){
+				echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==2){
+				 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==3){
+				 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==4){
+				 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==5){
+				echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==6){
+				echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==7){
+				 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
+			}
+			if($rowsfeeling[$maxlength]==8){
+				 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
+			}
+			echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
+			echo '  at  ' . $arrtimes[$maxlength];
+			echo ' <br />';
+			echo ' <br />';
+			$maxlength--;
+
 		}
-		if($rowsfeeling[$maxlength]==1){
-			echo '<i class="em em-smiley EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==2){
-			 echo '<i class="em em-slightly_smiling_face EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==3){
-			 echo '<i class="em em-weary EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==4){
-			 echo '<i class="em em-cry EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==5){
-			echo '<i class="em em-slightly_frowning_face EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==6){
-			echo '<i class="em em-persevere EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==7){
-			 echo '<i class="em em-grimacing EmojiSpacingLeft" ></i> -';
-		}
-		if($rowsfeeling[$maxlength]==8){
-			 echo '<i class="em em-expressionless EmojiSpacingLeft" ></i> -';
-		}
-		echo "<i class='EmojiSpacing'></i>" . $dbdate->format('l');
-		echo '  at  ' . $arrtimes[$maxlength];
-		echo ' <br />';
-		echo ' <br />';
-		$maxlength--;
+		$outputcounter++;
 
 	}
-	$outputcounter++;
 
-}
-
-echo '<br>';
-echo '<div style="padding-top:30px; text-align:center; width:100%;"><footer style="background-color: #2B2D4A"><p style="font-size: 8px">Abre</p></footer></div>';
+	echo '<br>';
+	echo '<div style="padding-top:30px; text-align:center; width:100%;"><footer style="background-color: #2B2D4A"><p style="font-size: 8px">Mark Senne</p></footer></div>';
 }
 else
 {
@@ -228,7 +226,7 @@ $(document).ready(function(){
 		$("#ClassPeriodSelectionInv2").change(function(){
 			var periodnumj=document.getElementById("ClassPeriodSelectionInv2").value;
 			var location=4;
-			var id=109;
+			var id=109; //-----------------------------------------NEED THIS STAFFID STUFF TO BE AUTOMATED--------------------------------
 			$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 				.done(function( data ) {
 					$("#PageEmojiTotals").html(data);

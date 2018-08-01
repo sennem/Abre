@@ -25,7 +25,8 @@
 
 
 <?php
-$pagerestrictions="staff";
+	//different icons and text for staff vs students
+	$pagerestrictions="student";
 	//if($_SESSION['usertype']=="student")
 	if($pagerestrictions=="student")
 	{
