@@ -68,133 +68,133 @@
 								if (emojivalue3==0)
 			  				{
 			  					//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojizero").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojizerodiv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==1)
 			  				{
 			  					//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojione").style.border = "solid thin black";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojionediv").style.border = "solid 5px black";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==2)
 			  				{
 			  					//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojitwo").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojitwodiv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==3)
 			  				{
 			  					//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojithree").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojithreediv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==4)
 			  				{
 			  					//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojifour").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojifourdiv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==5)
 			  				{
 			  					//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojifive").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojifivediv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==6)
 			  				{
 			  					//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojisix").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojisixdiv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==7)
 			  				{
 			  					//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojiseven").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
-			            document.getElementById("emojieight").style.border = "";
+			  					document.getElementById("emojisevendiv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
+			            document.getElementById("emojieightdiv").style.border = "";
 			  				}
 			  				if (emojivalue3==8)
 			  				{
 			  					//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
-			  					document.getElementById("emojieight").style.border = "solid thin black";
-			            document.getElementById("emojione").style.border = "";
-			            document.getElementById("emojitwo").style.border = "";
-			            document.getElementById("emojithree").style.border = "";
-			            document.getElementById("emojifour").style.border = "";
-			            document.getElementById("emojifive").style.border = "";
-			            document.getElementById("emojisix").style.border = "";
-			            document.getElementById("emojiseven").style.border = "";
-			            document.getElementById("emojizero").style.border = "";
+			  					document.getElementById("emojieightdiv").style.border = "solid 5px black";
+			            document.getElementById("emojionediv").style.border = "";
+			            document.getElementById("emojitwodiv").style.border = "";
+			            document.getElementById("emojithreediv").style.border = "";
+			            document.getElementById("emojifourdiv").style.border = "";
+			            document.getElementById("emojifivediv").style.border = "";
+			            document.getElementById("emojisixdiv").style.border = "";
+			            document.getElementById("emojisevendiv").style.border = "";
+			            document.getElementById("emojizerodiv").style.border = "";
 			  				}
 							}
 
 							function resetdisp()
 							{
-								document.getElementById("emojizero").style.border = "";
-								document.getElementById("emojione").style.border = "";
-								document.getElementById("emojitwo").style.border = "";
-								document.getElementById("emojithree").style.border = "";
-								document.getElementById("emojifour").style.border = "";
-								document.getElementById("emojifive").style.border = "";
-								document.getElementById("emojisix").style.border = "";
-								document.getElementById("emojiseven").style.border = "";
-								document.getElementById("emojieight").style.border = "";
+								document.getElementById("emojizerodiv").style.border = "";
+								document.getElementById("emojionediv").style.border = "";
+								document.getElementById("emojitwodiv").style.border = "";
+								document.getElementById("emojithreediv").style.border = "";
+								document.getElementById("emojifourdiv").style.border = "";
+								document.getElementById("emojifivediv").style.border = "";
+								document.getElementById("emojisixdiv").style.border = "";
+								document.getElementById("emojisevendiv").style.border = "";
+								document.getElementById("emojieightdiv").style.border = "";
 							}
 
 							function testfunc(emojivalue)
@@ -296,15 +296,15 @@
 				</div>';*/
 				?>
 				<div class="grid">
-				  <span style="display: inline;"><div class="cell centercell br50"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
-				  <div class="cell centercell br50"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
-				  <div class="cell centercell br50"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div></span>
-				  <span style="display: inline;"><div class="cell centercell br50"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
-				  <div class="cell centercell br50"><i id="emojifour" class="em em-cry emojistyle" onclick="testfunc(4)"></i></div>
-				  <div class="cell centercell br50"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div></span>
-				  <span style="display: inline;"><div class="cell centercell br50"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
-				  <div class="cell centercell br50"><i id="emojiseven" class="em em-grimacing emojistyle" onclick="testfunc(7)"></i></div>
-				  <div class="cell centercell br50"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell br50" id="emojizerodiv"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
+				  <div class="cell centercell br50" id="emojionediv"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
+				  <div class="cell centercell br50" id="emojitwodiv"><i id="emojitwo" class="em em-slightly_smiling_face emojistyle" onclick="testfunc(2)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell br50" id="emojithreediv"><i id="emojithree" class="em em-weary emojistyle" onclick="testfunc(3)"></i></div>
+				  <div class="cell centercell br50" id="emojifourdiv"><i id="emojifour" class="em em-cry emojistyle" onclick="testfunc(4)"></i></div>
+				  <div class="cell centercell br50" id="emojifivediv"><i id="emojifive" class="em em-slightly_frowning_face emojistyle" onclick="testfunc(5)"></i></div></span>
+				  <span style="display: inline;"><div class="cell centercell br50" id="emojisixdiv"><i id="emojisix" class="em em-persevere emojistyle" onclick="testfunc(6)"></i></div>
+				  <div class="cell centercell br50" id="emojisevendiv"><i id="emojiseven" class="em em-grimacing emojistyle" onclick="testfunc(7)"></i></div>
+				  <div class="cell centercell br50" id="emojieightdiv"><i id="emojieight" class="em em-expressionless emojistyle" onclick="testfunc(8)"></i></div></span>
 				</div>
 
 				<?php
@@ -367,7 +367,7 @@
 		{
 			border-radius: 50%;
 			margin-bottom: 20px;
-			height: 30px;
+			height: 80px;
 			width: auto;
 		}
 	</style>

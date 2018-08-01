@@ -77,7 +77,7 @@
 
 
 
-	if ($widgetid==1){
+	if ($widgetid==1){ //roster widget
 		$numstudents = count($arrfnameresults);
 	  $numstudents--;
 	  $counter=0;
@@ -94,33 +94,34 @@
 			$sqlp = "SELECT Value From abre_vendorlink_sis_studentpictures WHERE StudentID = '$studentid'";
 			$resultp=mysqli_query($con,$sqlp);
 			$picsr = mysqli_fetch_row($resultp);
+			$picdecode=base64_decode($picsr[0]);
 			$con->close();
 			if ($rows[0]==0){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-laughing EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-laughing EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==1){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-smiley EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-smiley EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==2){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_smiling_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_smiling_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==3){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-weary EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-weary EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==4){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-cry EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-cry EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==5){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-slightly_frowning_face EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==6){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-persevere EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-persevere EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==7){
-				echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-grimacing EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-grimacing EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 			if ($rows[0]==8){
-				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picsr[0] . "'/>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-expressionless EmojiSpacing" ></i>' . '</td>' . '</tr>';
+				 echo "<tr>" . "<td>" . "<img class='w_img' src='" . $picdecode . "'/>" . "</td><td>" . $arrfnameresults[$counter] . '</td>' . ' ' . '<td>' . $arrlnameresults[$counter] . '</td>' . ' ' . '<td>' . '<span style="margin-left: 15%">-</span>' . '</td>' . '<td style="text-align: right">' . '<i class="em em-expressionless EmojiSpacing" ></i>' . '</td>' . '</tr>';
 			}
 	    $counter++;
 	  }
@@ -130,7 +131,7 @@
 
 
 	}
-	elseif($widgetid==2)
+	elseif($widgetid==2) //overview widget (percents)
 	{
 
 		$counter=0;
@@ -212,7 +213,7 @@
 
 
 	}
-	elseif($widgetid==3)
+	elseif($widgetid==3) //roster page
 	{
 		$j=0;
 		$objcounter=0;
@@ -234,6 +235,7 @@
 				$sqlp = "SELECT Value From abre_vendorlink_sis_studentpictures WHERE StudentID = '$studentid'";
 				$resultp=mysqli_query($con,$sqlp);
 				$picsr = mysqli_fetch_row($resultp);
+				$picdecode=base64_decode($picsr[0]);
 				//print_r($picsr);
 				$con->close();
 				//done to only allow 4 people in a row, then it automatically makes a new row
@@ -245,39 +247,39 @@
 				}
 				if ($rows[0]==0)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-laughing" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-laughing" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==1)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-smiley" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-smiley" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==2)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_smiling_face" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==3)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-weary" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-weary" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==4)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-cry" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-cry" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==5)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-slightly_frowning_face" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==6)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-persevere" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-persevere" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==7)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-grimacing" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-grimacing" style="font-size:200%"></i></td>';
 				}
 				if ($rows[0]==8)
 				{
-					echo '<td><img style="margin-top: 15px;" src="' . $picsr[0] . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-expressionless" style="font-size:200%"></i></td>';
+					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-expressionless" style="font-size:200%"></i></td>';
 				}
 				//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
 				$objcounter=$objcounter+1;
@@ -296,7 +298,7 @@
 
 
 	}
-	elseif($widgetid==4)
+	elseif($widgetid==4) //overview page (counts)
 	{
 		$counter=0;
 		$countzero=0;
