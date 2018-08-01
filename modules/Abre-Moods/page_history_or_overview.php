@@ -231,9 +231,9 @@ else
 $(document).ready(function(){
 		$("#ClassPeriodSelectionInv2").change(function(){
 			var periodnumj=document.getElementById("ClassPeriodSelectionInv2").value;
-			var widget=4;
+			var location=4;
 			var id=109;
-			$.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
+			$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 				.done(function( data ) {
 					$("#PageEmojiTotals").html(data);
 		});

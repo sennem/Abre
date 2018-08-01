@@ -27,7 +27,7 @@
 			    $('#loader').show();
 			    $('#titletext').text('Moods');
 			    document.title = 'Moods';
-					$('#content_holder').load('modules/".basename(__DIR__)."/books.php', function() { init_page(); });
+					$('#content_holder').load('modules/".basename(__DIR__)."/page_menu_or_roster.php', function() { init_page(); });
 					$('#modal_holder').load('modules/".basename(__DIR__)."/modals.php');
 					ga('set', 'page', '/#moods/');
 					ga('send', 'pageview');";
@@ -40,15 +40,15 @@
 						});";
 					}
 		    echo "},
-		    'moods/inventory': function(name) {
+		    'moods/details': function(name) {
 			    $('#navigation_top').hide();
 			    $('#content_holder').hide();
 			    $('.tooltipped').tooltip('remove');
 			    $('#loader').show();
 			    $('#titletext').text('Moods');
 			    document.title = 'Moods Memory';
-					$('#content_holder').load('modules/".basename(__DIR__)."/inventory.php', function() { init_page(); });
-					ga('set', 'page', '/#moods/inventory/');
+					$('#content_holder').load('modules/".basename(__DIR__)."/page_history_or_overview.php', function() { init_page(); });
+					ga('set', 'page', '/#moods/details/');
 					ga('send', 'pageview');
 
 					$('#navigation_top').show();

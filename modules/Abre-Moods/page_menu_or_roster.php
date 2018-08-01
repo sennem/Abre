@@ -201,9 +201,8 @@
 							{
 								alert("Respone submitted");
 								var studentid = "<?php echo $studentid; ?>";
-								//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 0);
 								$(document).ready(function(){
-										$.post( "/modules/Abre-Moods/db_submission.php", { moodval: emojivalue, stuid: studentid})
+										$.post( "/modules/Abre-Moods/mood_table_submission.php", { moodval: emojivalue, stuid: studentid})
 											.done(function( data ) {
 												resetdisp();
 												alterdisp(emojivalue);
@@ -414,15 +413,12 @@
 				var periodnumj=document.getElementById("ClassPeriodSelection").value;
 				var emailj= "<?php echo $email; ?>";
 				var roomnumj= "<?php echo $roomnum; ?>";
-				var widget=3;
+				var location=3;
 				var id=109;
-			$.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
-				.done(function( data ) {
-					$.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
-						.done(function( data ) {
-							$("#bigrosterdiv").html(data);
+				$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
+					.done(function( data ) {
+						$("#bigrosterdiv").html(data);
 				});
-			});
 		});
 	});
 

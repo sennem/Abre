@@ -3,20 +3,9 @@
 <html>
 	<header>
     <script>
-  		function changeperiod()
-  		{
-  			var periodnum=document.getElementById("Period").value;
-  			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>" + "&fromwidget=" + 1);
-  		}
   		function setperiod()
   			document.getElementById("Period").value = "<?php echo $period; ?>";
   		}
-			function testing1(){
-				alert('hit test 1');
-			}
-			function testing2(){
-				alert('hit test 2');
-			}
   	</script>
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 		<style>
@@ -227,9 +216,9 @@ else
 	$(document).ready(function(){
 			$("#Period").change(function(){
 				var periodnumj=document.getElementById("Period").value;
-				var widget=2;
+				var location=2;
 				var id=109;
-				$.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
+				$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 					.done(function( data ) {
 						$("#overviewdiv").html(data);
 			});

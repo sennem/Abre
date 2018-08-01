@@ -32,7 +32,7 @@
 		<script>alert('hello');</script>
 	<?php
 	//-----------------------------------------------
-	$widgetid=$_POST['widgetid'];
+	$locationid=$_POST['locationid'];
 	$period=$_POST['periodsel'];
 	$staffid=$_POST['staffid'];
 	$conname=mysqli_connect($db_host,$db_user,$db_password,$db_name);
@@ -77,7 +77,7 @@
 
 
 
-	if ($widgetid==1){ //roster widget
+	if ($locationid==1){ //roster widget
 		$numstudents = count($arrfnameresults);
 	  $numstudents--;
 	  $counter=0;
@@ -131,7 +131,7 @@
 
 
 	}
-	elseif($widgetid==2) //overview widget (percents)
+	elseif($locationid==2) //overview widget (percents)
 	{
 
 		$counter=0;
@@ -213,7 +213,7 @@
 
 
 	}
-	elseif($widgetid==3) //roster page
+	elseif($locationid==3) //roster page
 	{
 		$j=0;
 		$objcounter=0;
@@ -298,7 +298,7 @@
 
 
 	}
-	elseif($widgetid==4) //overview page (counts)
+	elseif($locationid==4) //overview page (counts)
 	{
 		$counter=0;
 		$countzero=0;

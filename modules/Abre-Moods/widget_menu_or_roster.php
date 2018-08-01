@@ -211,9 +211,8 @@ if ($pagerestrictions=="student")
   			{
   				alert("Respone submitted");
           var studentid="<?php echo $studentid; ?>";
-  				//window.location.assign("http://localhost:8080/modules/Abre-Moods/db_submission.php?moodval=" + emojivalue + "&widget=" + 1);
           $(document).ready(function(){
-              $.post( "/modules/Abre-Moods/db_submission.php", { moodval: emojivalue, stuid: studentid})
+              $.post( "/modules/Abre-Moods/mood_table_submission.php", { moodval: emojivalue, stuid: studentid})
                 .done(function( data ) {
                   alert(data);
                   resetdisp();
@@ -312,21 +311,12 @@ else
   <html>
   	<head>
       <script>
-    		function changeperiod()
-    		{
-    			//alert('2'); //testing
-    			var periodnum=document.getElementById("Period").value;
-    			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>" + "&fromwidget=" + 1);
-    		}
     		function setperiod()
     		{
     			//alert('runniong');
     			//alert('<?php //echo $period; ?>');
     			document.getElementById("Period").value = "<?php echo $period; ?>";
     		}
-  			function testing1(){
-  				alert('hit test 1');
-  			}
 
     	</script>
   		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
@@ -382,7 +372,6 @@ else
   </div>
 
   <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-    <!--<select class="mdl-textfield__input" id="Period" name="Period" onchange="changeperiod()">-->
     <select class="mdl-textfield__input" id="SelPeriod" name="Period">
       <option>*select a period*</option>
       <option value="1">Period 1</option>
@@ -408,15 +397,12 @@ $(document).ready(function(){
       var periodnumj=document.getElementById("SelPeriod").value;
       var emailj= "<?php echo $email; ?>";
       var roomnumj= "<?php echo $roomnum; ?>";
-      var widget=1;
+      var location=1;
       var id=109;
-    $.post( "/modules/Abre-Moods/periodnumlogwidget.php", { periodurl: periodnumj, emailurl: emailj, roomurl: roomnumj, fromwidget: widget})
-      .done(function( data ) {
-        $.post( "/modules/Abre-Moods/DUP_get_mood_data.php", {widgetid: widget, periodsel: periodnumj, staffid: id})
-          .done(function( data ) {
-            $("#rosterdiv").html(data);
+      $.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
+        .done(function( data ) {
+          $("#rosterdiv").html(data);
       });
-    });
   });
 });
 

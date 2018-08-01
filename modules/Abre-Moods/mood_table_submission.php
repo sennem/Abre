@@ -10,10 +10,9 @@
   date_default_timezone_set('America/Indiana/Indianapolis');
   $datevar = date('Y-m-d');//works
   $timevar = date("H:i");
-  //$datefix = date('Y-m-d H:i:s', strtotime('+3 hours'))
+
+  
   //$userid=finduseridcore($_SESSION['useremail']);
-
-
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
   require_once(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
@@ -25,20 +24,4 @@
   $stmt1->execute();
   $stmt1->close();
 
-  /*$stmt2 = $db->stmt_init();
-  $sql2="UPDATE students_schedule SET RecentFeeling ='$emojimood' WHERE Email='$email'";
-  $stmt2->prepare($sql2);
-  $stmt2->execute();
-  $stmt2->close();
-  $db->close();*/
-  echo "email=" . $email . " datevar=" . $datevar . " timevar=" .$timevar . "emojimood=" . $emojimood . "stuid=" . $studentid;
-  /*if ($widgetbool==0)
-  {
-    header("Location:http://localhost:8080/#moods");
-  }
-  else
-  {
-    header("Location:http://localhost:8080/");
-  }
-  echo $widgetbool;*/
 ?>
