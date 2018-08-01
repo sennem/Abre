@@ -1,9 +1,6 @@
 <?php
 
-  //$emojimood = $_GET['moodval'];
-  //$widgetbool = $_GET['widget'];
   $emojimood = $_POST['moodval'];
-  //$widgetbool = $_POST['widget'];
   $studentid = $_POST['stuid'];
   ?>
   <?php
@@ -11,7 +8,7 @@
   $datevar = date('Y-m-d');//works
   $timevar = date("H:i");
 
-  
+
   //$userid=finduseridcore($_SESSION['useremail']);
   //Required configuration files
   require_once(dirname(__FILE__) . '/../../core/abre_verification.php');

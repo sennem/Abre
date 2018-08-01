@@ -16,8 +16,6 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-		//--findme-- it got rid of thing
-
 
     //Required configuration files
 	require(dirname(__FILE__) . '/../../configuration.php');
@@ -29,7 +27,6 @@
 
 	?>
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
-		<script>alert('hello');</script>
 	<?php
 	//-----------------------------------------------
 	$locationid=$_POST['locationid'];
@@ -90,7 +87,6 @@
 			$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
 			$result=mysqli_query($con,$sql);
 			$rows = mysqli_fetch_row($result);
-			//print_r($rows);
 			$sqlp = "SELECT Value From abre_vendorlink_sis_studentpictures WHERE StudentID = '$studentid'";
 			$resultp=mysqli_query($con,$sqlp);
 			$picsr = mysqli_fetch_row($resultp);
@@ -202,12 +198,12 @@
 		$percentother=((float)$countother/(float)$emojicount) *100;
 		echo '<div style="text-align: center;" > <table style="margin-left: 12px;">';
 			echo '<tr><td><i class="em em-laughing EmojiSpacingLeft" style="margin-left:15%"></i> <i class="em em-smiley EmojiSpacing"></i> <i class="em em-slightly_smiling_face EmojiSpacing"></i>:</td>' . '<td><span >' . $percenthappy . '</span>' . '%</td></tr>';
-		  //echo '<br>';
+
 		  echo '<tr><td><i class="em em-weary EmojiSpacingLeft" style="margin-left:15%"></i> <i class="em em-cry EmojiSpacing"></i> <i class="em em-slightly_frowning_face EmojiSpacing"></i>:</td>' . '<td><span >' . $percentsad . '</span>' . '%</td></tr>';
-		  //echo '<br>';
+
 		  echo '<tr><td><i class="em em-persevere EmojiSpacingLeft" style="margin-left:15%"></i> <i class="em em-grimacing EmojiSpacing"></i> <i class="em em-expressionless EmojiSpacing"></i>:</td>' . '<td><span >' . $percentother . '</span>' . '%</td></tr>';
-		  echo '</table><br>';
-		  //echo '<br>';
+		echo '</table><br>';
+
 		echo '</div>';
 
 
@@ -231,12 +227,10 @@
 				$sqlf="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
 				$resultf=mysqli_query($con,$sqlf);
 				$rows = mysqli_fetch_row($resultf);
-				//$sqlp = "SELECT picture From directory WHERE email=(SELECT Email FROM abre_students WHERE StudentID = '$studentid') ";
 				$sqlp = "SELECT Value From abre_vendorlink_sis_studentpictures WHERE StudentID = '$studentid'";
 				$resultp=mysqli_query($con,$sqlp);
 				$picsr = mysqli_fetch_row($resultp);
 				$picdecode=base64_decode($picsr[0]);
-				//print_r($picsr);
 				$con->close();
 				//done to only allow 4 people in a row, then it automatically makes a new row
 				if($objcounter==4)
@@ -281,7 +275,6 @@
 				{
 					echo '<td><img style="margin-top: 15px;" src="' . $picdecode . '" /><span style="font-weight:bold; margin-right: 15px;">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </span><i class="em em-expressionless" style="font-size:200%"></i></td>';
 				}
-				//echo '<td> <img src="'.$arrpicresults[$j].'" width="80" height="80" alt="No Result">  '.$arrfnameresults[$j].' '.$arrlnameresults[$j].' </td>';
 				$objcounter=$objcounter+1;
 			}
 			else

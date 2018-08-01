@@ -28,12 +28,12 @@
 	$pageview = 1;
 	$drawerhidden = 0;
 	$pageorder = 2;
-	$pagetitle = "Moods"; //MARK: change leftside menu title
+	$pagetitle = "Moods"; 
 	$description = "A place to record your moods."; //changes the description in the store
 	$version = $abre_version; //the version number (4.5.9)
 	$repo = NULL;
 	$pageicon = "mood";
-	$pagepath = "moods"; //findme doesnt seem to do anything
+	$pagepath = "moods";
 
 	require_once('permissions.php');
 

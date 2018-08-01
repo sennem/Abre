@@ -16,7 +16,6 @@
     * version 3 along with this program.  If not, see https://www.gnu.org/licenses/agpl-3.0.en.html.
     */
 
-		//--findme-- it got rid of thing
 
 
     //Required configuration files
@@ -26,7 +25,7 @@
 	require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 	require_once('functions.php');
 	require('permissions.php');
-	$pagerestrictions="staff"; //so i can load the "other page" (teacher version)
+	$pagerestrictions="staff";
 	//if($_SESSION['usertype'] == "student")
 	if ($pagerestrictions=="student")
 	{
@@ -38,10 +37,7 @@
 		}
 		$email = $_SESSION['useremail'];
 		$studentid=1;
-		//$sql ="SELECT RecentFeeling FROM students_schedule WHERE Email='$email'";
 		$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
-		//$sql="SELECT Feeling FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
-		//$sql="SELECT RecentFeeling FROM student_schedule WHERE Email='$email'";
 		$result=mysqli_query($con,$sql);
 		$rows = mysqli_fetch_row($result);
 		$con->close();
@@ -57,17 +53,15 @@
 					echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Mood Menu</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Select an emoji that encapsulates your mood.</p></div>";
 				?>
 
-				<!--links to CSS Stylesheet for emojis && contains CSS for columns on emojis-->
+
 				<html>
 					<header>
 						<script>
 							function alterdisp(emojival)
 							{
 								var emojivalue3=emojival;
-								//alert("em3=" + emojivalue3 + " em=" + emojival);
 								if (emojivalue3==0)
 			  				{
-			  					//document.getElementById("emojizero").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojizerodiv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -80,7 +74,6 @@
 			  				}
 			  				if (emojivalue3==1)
 			  				{
-			  					//document.getElementById("emojione").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojionediv").style.border = "solid 5px black";
 			            document.getElementById("emojizerodiv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -93,7 +86,6 @@
 			  				}
 			  				if (emojivalue3==2)
 			  				{
-			  					//document.getElementById("emojitwo").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojitwodiv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojizerodiv").style.border = "";
@@ -106,7 +98,6 @@
 			  				}
 			  				if (emojivalue3==3)
 			  				{
-			  					//document.getElementById("emojithree").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojithreediv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -119,7 +110,6 @@
 			  				}
 			  				if (emojivalue3==4)
 			  				{
-			  					//document.getElementById("emojifour").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojifourdiv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -132,7 +122,6 @@
 			  				}
 			  				if (emojivalue3==5)
 			  				{
-			  					//document.getElementById("emojifive").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojifivediv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -145,7 +134,6 @@
 			  				}
 			  				if (emojivalue3==6)
 			  				{
-			  					//document.getElementById("emojisix").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojisixdiv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -158,7 +146,6 @@
 			  				}
 			  				if (emojivalue3==7)
 			  				{
-			  					//document.getElementById("emojiseven").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojisevendiv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -171,7 +158,6 @@
 			  				}
 			  				if (emojivalue3==8)
 			  				{
-			  					//document.getElementById("emojieight").style.backgroundColor = "DeepSkyBlue";
 			  					document.getElementById("emojieightdiv").style.border = "solid 5px black";
 			            document.getElementById("emojionediv").style.border = "";
 			            document.getElementById("emojitwodiv").style.border = "";
@@ -186,6 +172,7 @@
 
 							function resetdisp()
 							{
+								//yes, I realize this function is kinda redundant cause of what I have in alterdisp func but....
 								document.getElementById("emojizerodiv").style.border = "";
 								document.getElementById("emojionediv").style.border = "";
 								document.getElementById("emojitwodiv").style.border = "";
@@ -211,26 +198,6 @@
 							}
 						</script>
 						<style>
-							/*.EmojiSpacing
-							{
-								font-size: 200%;
-								margin:35px;
-							}
-							.EmojiSpacingLeft
-							{
-								font-size: 200%;
-								margin-left:40%;
-								margin-right:35px;
-							}
-							ul
-							{
-								justify-content: center;
-							}
-							ul li
-							{
-								padding: 0 8px;
-							}*/
-							/*---------------------*/
 							.grid {
 							  display: flex;                       /* establish flex container */
 							  flex-wrap: wrap;                     /* enable flex items to wrap */
@@ -246,7 +213,7 @@
 								margin-right: 15px;
 							}
 							/*.cell:nth-child(3n) {
-							  background-color: #3e4066;
+							  //alters third cell. Not used for anything but it's something I find interesting
 							}*/
 							.centercell{
 								text-align: center;
@@ -264,36 +231,10 @@
 				</html>
 
 			<script type="text/javascript">
-	    	//alterdisp(); //calls the func that "highlights" an emoji
-			</script>
-			<script type="text/javascript">
 				var adparam=("<?php echo $rows[0]; ?>");
 				alterdisp(adparam); //calls the func that "highlights" an emoji
 			</script>
 
-				<?php
-
-				/*echo '
-				<div>
-					<ul>
-						<li>
-							<i id="emojizero" class="em em-laughing EmojiSpacingLeft" onclick="testfunc(0)"></i>
-							<i id="emojione" class="em em-smiley EmojiSpacing" onclick="testfunc(1)"></i>
-							<i id="emojitwo" class="em em-slightly_smiling_face EmojiSpacing" onclick="testfunc(2)"></i>
-						</li>
-						<li>
-							<i id="emojithree" class="em em-weary EmojiSpacingLeft" onclick="testfunc(3)"></i>
-							<i id="emojifour" class="em em-cry EmojiSpacing" onclick="testfunc(4)"></i>
-							<i id="emojifive" class="em em-slightly_frowning_face EmojiSpacing" onclick="testfunc(5)"></i>
-						</li>
-						<li>
-							<i id="emojisix" class="em em-persevere EmojiSpacingLeft" onclick="testfunc(6)"></i>
-							<i id="emojiseven" class="em em-grimacing EmojiSpacing" onclick="testfunc(7)"></i>
-							<i id="emojieight" class="em em-expressionless EmojiSpacing" onclick="testfunc(8)"></i>
-						</li>
-					</ul>
-				</div>';*/
-				?>
 				<div class="grid">
 				  <span style="display: inline;"><div class="cell centercell br50" id="emojizerodiv"><i id="emojizero" class="em em-laughing emojistyle" onclick="testfunc(0)"></i></div>
 				  <div class="cell centercell br50" id="emojionediv"><i id="emojione" class="em em-smiley emojistyle" onclick="testfunc(1)"></i></div>
@@ -309,7 +250,6 @@
 				<?php
 					$email = $_SESSION['useremail'];
 					$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
-					//$sql="SELECT Daterow FROM mood_table WHERE ID = (SELECT MAX(ID) FROM mood_table)";
 					$sql="SELECT * FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.Daterow = (SELECT MAX(mt2.Daterow) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
 					$result=mysqli_query($con,$sql);
 					$con->close();
@@ -332,7 +272,7 @@
 
 					if (($dbdate->format('d')) != ($cdate->format('d')))
 					{
-						//not the same day
+						//not the same day (erase visual selection)
 						echo '<script type="text/javascript">',
 	     			'resetdisp();',
 	     			'</script>'
@@ -340,7 +280,7 @@
 					}
 					elseif ((($dbdate->format('d')) == ($cdate->format('d'))) && (($dbdate->format('m')) != ($cdate->format('m'))))
 					{
-						//same day but different month
+						//same day but different month (erase visual selection)
 						echo '<script type="text/javascript">',
 	     			'resetdisp();',
 	     			'</script>'
@@ -371,11 +311,6 @@
 		}
 	</style>
 	<script>
-		function changeperiod()
-		{
-			var periodnum=document.getElementById("ClassPeriodSelection").value;
-			window.location.assign("http://localhost:8080/modules/Abre-Moods/periodnumlog.php?periodurl=" + periodnum + "&emailurl=" + "<?php echo $email; ?>" + "&roomurl=" + "<?php echo $roomnum; ?>" + "&fromwidget=" + 0);
-		}
 		function setperiod()
 		{
 			document.getElementById("ClassPeriodSelection").value = "<?php echo $period; ?>";

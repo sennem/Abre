@@ -72,17 +72,15 @@
 //Required configuration files
 require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
-//require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('permissions.php');
 $pagerestrictions = "staff";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestrictions=="student")
 {
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
-	//echo '26'; //testing to identify if the page is running off of new saved code
 	echo '<br>';
 
-$email = $_SESSION['useremail']; //works
+$email = $_SESSION['useremail'];
 $studentid=1;
 $con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 if (mysqli_connect_errno()) {
@@ -116,9 +114,8 @@ while($daterow = mysqli_fetch_array($resultdate))
 {
 	$arrdates[]=$daterow['Daterow'];
 }
-//no issue
 
-//--
+
 
 $sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
 $resulttime=mysqli_query($con, $sqltime);
@@ -189,7 +186,6 @@ while ($outputcounter<5 && $falsecounter<5)
 		echo ' <br />';
 		$maxlength--;
 
-		//<sup> because it helps make the text and such appear on same level; it is a workaround
 	}
 	$outputcounter++;
 

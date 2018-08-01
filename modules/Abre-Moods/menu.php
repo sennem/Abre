@@ -28,7 +28,6 @@
 <?php if($pagerestrictions=="staff"){ ?>
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
-			<!--findme-->
 			<li class="tab col s3 tab_1 booksmenu pointer" data="#moods"><a href="#moods">Roster</a></li>
 			<li class='tab col s3 tab_2 booksmenu pointer' data="#moods/details"><a href='#moods/details'>Summary</a></li>
 		</ul>
@@ -40,7 +39,6 @@
 <?php if($pagerestrictions=="student"){ ?>
     <div class="col s12">
 		<ul class="tabs_2" style='background-color: <?php echo getSiteColor(); ?>'>
-			<!--findme-->
 			<li class="tab col s3 tab_1 booksmenu pointer" data="#moods"><a href="#moods">Menu</a></li>
 			<li class='tab col s3 tab_2 booksmenu pointer' data="#moods/details"><a href='#moods/details'>History</a></li>
 		</ul>
