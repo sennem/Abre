@@ -2,11 +2,6 @@
 
 <html>
 	<header>
-    <script>
-  		function setperiod()
-  			document.getElementById("Period").value = "<?php echo $period; ?>";
-  		}
-  	</script>
 		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
 		<style>
 			.EmojiSpacingLeft
@@ -72,9 +67,8 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="student";
+$pagerestictions="staff";
 //if($_SESSION['usertype'] == "student")
-//echo $pagerestictions;
 if ($pagerestictions=="student")
 {
 	$email = $_SESSION['useremail'];
@@ -184,7 +178,7 @@ if ($pagerestictions=="student")
 }
 else
 {
-
+	//set period selection to = "*select a period*"
 	echo '<script type="text/javascript">',
 	'document.getElementById("Period").value=0;',
 	'</script>'

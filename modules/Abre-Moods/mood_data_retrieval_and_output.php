@@ -83,6 +83,7 @@
 			//cycle through applicable studnetids to get images for said student
 			$studentid=$arridresults[$counter];
 			$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+			//get most recent feeling entry from a certain student (based on studentID)
 			$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
 			$result=mysqli_query($con,$sql);
 			$rows = mysqli_fetch_row($result);
@@ -148,6 +149,7 @@
 		{
 			$studentid=$arridresults[$counter];
 			$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+			//get most recent feeling/mood entry for a student
 			$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
 			$result=mysqli_query($con,$sql);
 			$rows = mysqli_fetch_row($result);

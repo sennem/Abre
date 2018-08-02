@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('functions.php');
 require('permissions.php');
-$pagerestrictions="student";
+$pagerestrictions="staff";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
 {
@@ -57,7 +57,7 @@ if ($pagerestrictions=="student")
   		</style>
 
   		<script>
-  			function alterdisp(emojival)
+  			function alterdisp(emojival) //makes the black border ring around selected mood
   			{
   				var emojivalue3 = emojival;
   				if (emojivalue3==0)
@@ -170,7 +170,7 @@ if ($pagerestrictions=="student")
   				}
   			}
 
-  			function resetdisp()
+  			function resetdisp() //gets rid of the black border ring around selected mood
   			{
   				document.getElementById("emojizero").style.border = "";
   				document.getElementById("emojione").style.border = "";
@@ -183,7 +183,7 @@ if ($pagerestrictions=="student")
   				document.getElementById("emojieight").style.border = "";
   			}
 
-        function submitandupdate(emojivalue)
+        function submitandupdate(emojivalue) //logs the user's new mood selection and refreshes/updates the GUI
   			{
   				alert("Respone submitted");submitandupdate
           var studentid="<?php echo $studentid; ?>";
@@ -202,12 +202,14 @@ if ($pagerestrictions=="student")
   </html>
 
   <script type="text/javascript">
+  //getting the most recent mood selection and sending it as adparam to alterdisp function to "highlight" it on GUI
     var adparam=("<?php echo $rows[0]; ?>");
     alterdisp(adparam);
   </script>
 
   <?php
 
+      //the mood menu
   		echo '
   		<div>
   			<ul>
@@ -236,6 +238,8 @@ if ($pagerestrictions=="student")
   <?php
     $email = $_SESSION['useremail'];
   	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
+    //get the date from most recent entry of a certain student
+    //alter this to work with studentid instead of email
   	$sql="SELECT * FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.Daterow = (SELECT MAX(mt2.Daterow) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
   	$result=mysqli_query($con,$sql);
   	$arrrowresults=array();
@@ -254,7 +258,7 @@ if ($pagerestrictions=="student")
 
   	if (($dbdate->format('d')) != ($cdate->format('d')))
   	{
-  		//not the same day
+  		//not the same day (erase "highlight" on menu)
   		echo '<script type="text/javascript">',
   		'resetdisp();',
   		'</script>'
@@ -262,7 +266,7 @@ if ($pagerestrictions=="student")
   	}
   	elseif ((($dbdate->format('d')) == ($cdate->format('d'))) && (($dbdate->format('m')) != ($cdate->format('m'))))
   	{
-  		//same day but different month
+  		//same day but different month (erase "highlight" on menu)
   		echo '<script type="text/javascript">',
   		'resetdisp();',
   		'</script>'
@@ -278,13 +282,6 @@ else
 
   <html>
   	<head>
-      <script>
-    		function setperiod()
-    		{
-    			document.getElementById("Period").value = "<?php echo $period; ?>";
-    		}
-
-    	</script>
   		<link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
   		<style>
   			.EmojiSpacingLeft
@@ -325,12 +322,7 @@ else
   	</head>
   </html>
 
-  <?php
-  echo '<script type="text/javascript">',
-	'setperiod();',
-	'</script>'
-	;
-  ?>
+
   <hr class='widget_hr'>
   <div class='widget_holder'>
     <div class='widget_container widget_body' style='color:#666;'>Go Back<i class='right material-icons widget_holder_refresh pointer' data-path='/modules/Abre-Moods/widget_content.php' data-reload='true'>arrow_back</i></div>
@@ -350,12 +342,7 @@ else
   </div>
   <br />
   <div id="rosterdiv" ></div>
-<?php
-  echo '<script type="text/javascript">',
-  'setperiod();',
-  '</script>'
-  ;
-?>
+
   <script type="text/javascript">
   $(document).ready(function(){
       $("#SelPeriod").change(function(){
@@ -363,7 +350,7 @@ else
         var emailj= "<?php echo $email; ?>";
         var roomnumj= "<?php echo $roomnum; ?>";
         var location=1;
-        var id=109;
+        var id=109; //NEEDS TO CHANGE (cant be hardcoded) <-- this is staffid
         $.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
           .done(function( data ) {
             $("#rosterdiv").html(data);

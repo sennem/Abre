@@ -73,7 +73,7 @@
 require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
 require_once('permissions.php');
-$pagerestrictions = "student";
+$pagerestrictions = "staff";
 //if($_SESSION['usertype'] == "student") <-- need in "launch" version
 if ($pagerestrictions=="student")
 {
@@ -81,7 +81,7 @@ if ($pagerestrictions=="student")
 	echo '<br>';
 
 	$email = $_SESSION['useremail'];
-	$studentid=1;
+	$studentid=1; //---------------------CANT BE HARDCODED (needs to be changed)----------------
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';
@@ -90,6 +90,7 @@ if ($pagerestrictions=="student")
 	$resultnumrows = mysqli_query($con,$sqlnumrows);
 	$numrows = mysqli_fetch_row($resultnumrows);
 
+	//------------Get the all mood selections for a certain student------------
 	$sqlfeeling ="SELECT Feeling FROM mood_table WHERE StudentID='$studentid'";
 	$resultfeeling=mysqli_query($con, $sqlfeeling);
 
@@ -102,7 +103,7 @@ if ($pagerestrictions=="student")
 	{
 		$rowsfeeling[] = $rowfeeling['Feeling'];
 	}
-	//no issue
+	//get the dates of mood selections
 	$sqldate ="SELECT Daterow FROM mood_table WHERE StudentID='$studentid'";
 	$resultdate=mysqli_query($con, $sqldate);
 	if (!resultdate)
@@ -116,7 +117,7 @@ if ($pagerestrictions=="student")
 	}
 
 
-
+//get the time of mood selections
 	$sqltime = "SELECT Timerow FROM mood_table WHERE StudentID='$studentid'";
 	$resulttime=mysqli_query($con, $sqltime);
 	if (!resulttime)
@@ -140,9 +141,8 @@ if ($pagerestrictions=="student")
 	$cday = $cdate->format('d');
 	$cmonth = $cdate->format('m');
 	$outputcounter=0;
-	$falsecounter=0;
 	//-------------
-	while ($outputcounter<5 && $falsecounter<5)
+	while ($outputcounter<5)
 	{
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
 		$dbday = $dbdate->format('d');
@@ -226,7 +226,7 @@ $(document).ready(function(){
 		$("#ClassPeriodSelectionInv2").change(function(){
 			var periodnumj=document.getElementById("ClassPeriodSelectionInv2").value;
 			var location=4;
-			var id=109; //-----------------------------------------NEED THIS STAFFID STUFF TO BE AUTOMATED--------------------------------
+			var id=109; //-----------------------------------------NEED THIS STAFFID STUFF TO BE AUTOMATED (not hardcoded)--------------------------------
 			$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 				.done(function( data ) {
 					$("#PageEmojiTotals").html(data);
