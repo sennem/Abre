@@ -67,7 +67,7 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="staff";
+$pagerestictions="student";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestictions=="student")
 {
@@ -124,10 +124,12 @@ if ($pagerestictions=="student")
 	$arrlength = count($arrdates);
 	$maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
 	date_default_timezone_set('America/Indiana/Indianapolis');
-	$getdate = date('Y-m-d');//works
+	$getdate = date('Y-m-d');
+	//get the current year, month, and day to compare to database dates
 	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
-	$cday = $cdate->format('d'); //works //for testing
-	$cmonth = $cdate->format('m'); //works //for testing
+	$cday = $cdate->format('d');
+	$cmonth = $cdate->format('m');
+	$cyear = $cdate->format('Y');
 	$outputcounter=0;
 	$falsecounter=0;
 	//-------------
@@ -137,7 +139,9 @@ if ($pagerestictions=="student")
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
 		$dbday = $dbdate->format('d');
 		$dbmonth = $dbdate->format('m');
-		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth)) //---------------------NEED YEAR CHECK------------------
+		$dbyear = $dbdate->format('Y');
+		//output 5 most recent moods within the last 5 days (and in the same month and year)
+		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth) && ($dbyear==$cyear))
 		{
 			echo "<div>";
 			if($rowsfeeling[$maxlength]==0){

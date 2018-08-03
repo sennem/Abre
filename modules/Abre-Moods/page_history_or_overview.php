@@ -73,7 +73,7 @@
 require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
 require_once('permissions.php');
-$pagerestrictions = "staff";
+$pagerestrictions = "student";
 //if($_SESSION['usertype'] == "student") <-- need in "launch" version
 if ($pagerestrictions=="student")
 {
@@ -140,6 +140,7 @@ if ($pagerestrictions=="student")
 	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
 	$cday = $cdate->format('d');
 	$cmonth = $cdate->format('m');
+	$cyear = $cdate->format('Y');
 	$outputcounter=0;
 	//-------------
 	while ($outputcounter<5)
@@ -147,8 +148,9 @@ if ($pagerestrictions=="student")
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
 		$dbday = $dbdate->format('d');
 		$dbmonth = $dbdate->format('m');
-		//output 5 most recent moods within the last 5 days (and in the same month)
-		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth)) //---------------------NEED YEAR CHECK------------------
+		$dbyear = $dbdate->format('Y');
+		//output 5 most recent moods within the last 5 days (and in the same month and year)
+		if (($dbday >= ($cday-4)) && ($dbmonth==$cmonth) && ($dbyear==$cyear))
 		{
 			echo "<div>";
 			if($rowsfeeling[$maxlength]==0){

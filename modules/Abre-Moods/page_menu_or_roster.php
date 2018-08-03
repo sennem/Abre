@@ -25,7 +25,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('functions.php');
 require('permissions.php');
-$pagerestrictions="staff";
+$pagerestrictions="student";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestrictions=="student") //this is the student view ()
 {
