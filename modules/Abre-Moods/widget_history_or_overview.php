@@ -67,12 +67,12 @@
 		echo "</div>";
     //--------------
 
-$pagerestictions="student";
+$pagerestictions="staff";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestictions=="student")
 {
 	$email = $_SESSION['useremail'];
-	$studentid=1;
+	$studentid=1; //HARDCODED STUDENT ID
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';
@@ -209,7 +209,7 @@ else
 			$("#Period").change(function(){
 				var periodnumj=document.getElementById("Period").value;
 				var location=2;
-				var id=109;
+				var id=109; //HARDCODED STAFF ID
 				$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 					.done(function( data ) {
 						$("#overviewdiv").html(data);

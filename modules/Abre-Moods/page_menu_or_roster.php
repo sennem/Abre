@@ -25,7 +25,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('functions.php');
 require('permissions.php');
-$pagerestrictions="student";
+$pagerestrictions="staff";
 //if($_SESSION['usertype'] == "student")
 if ($pagerestrictions=="student") //this is the student view ()
 {
@@ -36,7 +36,7 @@ if ($pagerestrictions=="student") //this is the student view ()
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 	$email = $_SESSION['useremail'];
-	$studentid=1; //-----------------------CANT BE HARDCODED (needs to be changed)-----------------------
+	$studentid=1; //HARDCODED STUDENT ID
 	//get the most recent feeling/mood entry for a certain student
 	$sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.Email = '$email' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.Email = mt1.Email)";
 	$result=mysqli_query($con,$sql);
@@ -349,8 +349,8 @@ else
 							var periodnumj=document.getElementById("ClassPeriodSelection").value;
 							var emailj= "<?php echo $email; ?>";
 							var roomnumj= "<?php echo $roomnum; ?>";
-							var location=3;
-							var id=109;
+							var location=3; //tells mood_data_retrieval_and_output what code to run depending on where the code is displayed (widget, page, staff, student)
+							var id=109; //HARDCODED STAFF ID
 							$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 							.done(function( data ) {
 								$("#bigrosterdiv").html(data);

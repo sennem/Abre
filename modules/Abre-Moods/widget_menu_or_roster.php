@@ -5,7 +5,7 @@ require_once(dirname(__FILE__) . '/../../core/abre_functions.php');
 require(dirname(__FILE__) . '/../../core/abre_dbconnect.php');
 require_once('functions.php');
 require('permissions.php');
-$pagerestrictions="student";
+$pagerestrictions="staff";
 //if($_SESSION['usertype'] == "staff")
 if ($pagerestrictions=="student")
 {
@@ -23,7 +23,7 @@ if ($pagerestrictions=="student")
     echo "Failed to connect to MySQL: " . mysqli_connect_error();
   }
   $email = $_SESSION['useremail'];
-  $studentid=1; //---------------------CANT BE HARDCODED----------------------
+  $studentid=1; //HARDCODED STUDENT ID
   $sql="SELECT Feeling FROM mood_table mt1 WHERE mt1.StudentID = '$studentid' AND mt1.ID = (SELECT MAX(mt2.ID) FROM mood_table mt2 WHERE mt2.StudentID = mt1.StudentID)";
   $result=mysqli_query($con,$sql);
   $rows = mysqli_fetch_row($result);
@@ -350,7 +350,7 @@ else
         var emailj= "<?php echo $email; ?>";
         var roomnumj= "<?php echo $roomnum; ?>";
         var location=1;
-        var id=109; //NEEDS TO CHANGE (cant be hardcoded) <-- this is staffid
+        var id=109; //HARDCODED STAFF ID
         $.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
           .done(function( data ) {
             $("#rosterdiv").html(data);

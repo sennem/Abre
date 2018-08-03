@@ -73,15 +73,15 @@
 require_once(dirname(__FILE__) . '/../../core/abre_verification.php');
 require(dirname(__FILE__) . '/../../configuration.php');
 require_once('permissions.php');
-$pagerestrictions = "student";
+$pagerestrictions = "staff"; //for testing
 //if($_SESSION['usertype'] == "student") <-- need in "launch" version
-if ($pagerestrictions=="student")
+if ($pagerestrictions=="student") //run code meant for students
 {
 	echo "<div style='padding:30px; text-align:center; width:100%;'><span style='font-size: 22px; font-weight:700'>Record</span><br><p style='font-size:16px; margin:20px 0 0 0;'>Here you see your mood history.</p></div>";
 	echo '<br>';
 
 	$email = $_SESSION['useremail'];
-	$studentid=1; //---------------------CANT BE HARDCODED (needs to be changed)----------------
+	$studentid=1; //HARDCODED STUDENT ID
 	$con=mysqli_connect($db_host,$db_user,$db_password,$db_name);
 	if (mysqli_connect_errno()) {
 		echo 'Connection Failed';
@@ -137,14 +137,17 @@ if ($pagerestrictions=="student")
 	$maxlength=$arrlength-1; //holds the last position able to be printed as arrays start at zero (so one less than what the count is is the pos of the last value)
 	date_default_timezone_set('America/Indiana/Indianapolis');
 	$getdate = date('Y-m-d');
+	//gets the current date to compare againt dates in database
 	$cdate = DateTime::createFromFormat('Y-m-d', $getdate);
 	$cday = $cdate->format('d');
 	$cmonth = $cdate->format('m');
 	$cyear = $cdate->format('Y');
 	$outputcounter=0;
 	//-------------
+	//output the 5 most recent moods within the last 5 days
 	while ($outputcounter<5)
 	{
+		//database dates
 		$dbdate = DateTime::createFromFormat('Y-m-d', $arrdates[$maxlength]);
 		$dbday = $dbdate->format('d');
 		$dbmonth = $dbdate->format('m');
@@ -192,7 +195,7 @@ if ($pagerestrictions=="student")
 	}
 
 	echo '<br>';
-	echo '<div style="padding-top:30px; text-align:center; width:100%;"><footer style="background-color: #2B2D4A"><p style="font-size: 8px">Mark Senne</p></footer></div>';
+	echo '<div style="padding-top:30px; text-align:center; width:100%;"><footer style="background-color: #2B2D4A"><p style="font-size: 8px">Abre</p></footer></div>';
 }
 else
 {
@@ -228,7 +231,7 @@ $(document).ready(function(){
 		$("#ClassPeriodSelectionInv2").change(function(){
 			var periodnumj=document.getElementById("ClassPeriodSelectionInv2").value;
 			var location=4;
-			var id=109; //-----------------------------------------NEED THIS STAFFID STUFF TO BE AUTOMATED (not hardcoded)--------------------------------
+			var id=109; //HARDCODED STAFF ID
 			$.post( "/modules/Abre-Moods/mood_data_retrieval_and_output.php", {locationid: location, periodsel: periodnumj, staffid: id})
 				.done(function( data ) {
 					$("#PageEmojiTotals").html(data);
